@@ -1,0 +1,25 @@
+﻿@using System.Linq;
+
+@using AutoRest.Swift;
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.EnumTypeSwift>
+@{
+    var constants = Model.Constants.Keys.OrderBy(v => v);
+    var modelName = CodeNamerSwift.Instance.CamelCase(Model.Name);
+    var modelPhrase = Model.Name.FixedValue.ToPhrase();
+}
+
+@WrapComment("// ", Model.Documentation)
+@EmptyLine
+@if (constants.Any())
+{
+@:enum @Model.Name: string
+
+@:(
+@foreach (var c in constants)
+{
+@:@WrapComment("// ", string.Format("{0} specifies the {1} state for {2}.", CodeNamerSwift.Instance.GetEnumMemberName(c), c.ToPhrase(), modelPhrase))
+@:    case @(CodeNamerSwift.Instance.GetEnumMemberName(c)) = "@(Model.Constants[c])"
+}
+@:)
+}

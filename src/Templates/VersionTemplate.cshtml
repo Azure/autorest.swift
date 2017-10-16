@@ -1,0 +1,26 @@
+﻿@using AutoRest.Swift
+@using AutoRest.Core.Model
+@using AutoRest.Swift.Templates
+@using AutoRest.Swift.Model
+@using AutoRest.Core.Utilities
+@using System.Linq
+@using System.Collections.Generic;
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.CodeModelSwift>
+package @Model.Namespace
+@EmptyLine
+@Header("// ")
+
+@EmptyLine
+
+@EmptyLine
+// UserAgent returns the UserAgent string to use when sending http.Requests.
+func UserAgent() string {
+    return "@(Model.UserAgent)"
+}
+
+@EmptyLine
+// Version returns the semantic version (see http://semver.org) of the client.
+func Version() string {
+  return "@(Model.Version)"
+}
