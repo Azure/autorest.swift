@@ -12,17 +12,14 @@ namespace AutoRest.Swift.Model
     /// <summary>
     /// Defines a synthetic type used to hold an array or dictionary method response.
     /// </summary>
-    public class DictionaryTypeSwift : DictionaryType
+    public class DictionaryTypeSwift : DictionaryType, IVariableType
     {
         // if value type can be implicitly null
         // then don't emit it as a pointer type.
-        private string FieldNameFormat => ValueType.CanBeNull()
-                                ? "map[string]{0}"
-                                : "map[string]*{0}";
+        private string FieldNameFormat => "[String:{0}]";
 
         public DictionaryTypeSwift()
         {
-            Name.OnGet += value => string.Format(CultureInfo.InvariantCulture, FieldNameFormat, ValueType.Name);
         }
 
         /// <summary>
@@ -65,6 +62,44 @@ namespace AutoRest.Swift.Model
         public override int GetHashCode()
         {
             return ValueType.GetHashCode();
+        }
+
+        public string DecodeTypeDeclaration
+        {
+            get
+            {
+                if (ValueType is IVariableType)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).DecodeTypeDeclaration);
+                }
+
+                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name); ;
+            }
+        }
+
+        public string VariableTypeDeclaration
+        {
+            get
+            {
+                if (ValueType is IVariableType)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).VariableTypeDeclaration);
+                }
+
+                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name); ;
+            }
+        }
+
+        public string VariableName
+        {
+            get
+            {
+                return SwiftNameHelper.convertToVariableName(this.Name);
+            }
         }
     }
 }

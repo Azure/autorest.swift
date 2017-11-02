@@ -6,6 +6,7 @@ using AutoRest.Core.Model;
 using AutoRest.Swift.Model;
 using AutoRest.Swift.Templates;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,30 +49,40 @@ namespace AutoRest.Swift
             // flatten some types (but not all depending on type).  then during client generation
             // the validation codegen needs to know if a type was flattened so it can generate
             // the correct code, so we need to generate models before clients.
-
-            // Models
-            /*var modelsTemplate = new ModelsTemplate
+            //Protocols
+            foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                Model = codeModel
-            };
-
-            await Write(modelsTemplate, "test.swift");
-            */
+                var modelProtocolTemplate = new ModelProtocolTemplate { Model = modelType };
+                await Write(modelProtocolTemplate, Path.Combine("protocols", $"{modelType.Name}Protocol{ImplementationFileExtension}"));
+            }
 
             //Models
             foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name}{ImplementationFileExtension}"));
+                var modelTemplate = new DataModelTemplate { Model = modelType };
+                await Write(modelTemplate, Path.Combine("data", $"{modelType.Name}{ImplementationFileExtension}"));
             }
-
+            
             // Enums
             foreach (EnumTypeSwift enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("models", $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                await Write(enumTemplate, Path.Combine("data", $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
             }
 
+            // Context
+            foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
+            {
+                foreach (var method in methodGroup.Methods)
+                {
+                    var methodContextTemplate = new MethodContextTemplate
+                    {
+                        Model = (MethodSwift)method
+                    };
+
+                    await Write(methodContextTemplate, Path.Combine("context", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
+                }
+            }
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
@@ -79,34 +90,16 @@ namespace AutoRest.Swift
                 Model = codeModel
             };
 
-            await Write(serviceClientTemplate, FormatFileName("client"));
-
-            // by convention the methods in the method group with an empty
-            // name go into the client template so skip them here.
-            HashSet<string> ReservedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-            {
-                "models",
-                "client",
-                "version",
-            };
-
+            await Write(serviceClientTemplate, $"{codeModel.ServiceName}{ImplementationFileExtension}");
             foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
             {
-                if (ReservedFiles.Contains(methodGroup.Name.Value))
-                {
-                    methodGroup.Name += "group";
-                }
-                ReservedFiles.Add(methodGroup.Name);
                 var methodGroupTemplate = new MethodGroupTemplate
                 {
                     Model = methodGroup
                 };
-                await Write(methodGroupTemplate, FormatFileName(methodGroup.Name).ToLowerInvariant());
-            }
 
-            // Version
-            var versionTemplate = new VersionTemplate { Model = codeModel };
-            await Write(versionTemplate, FormatFileName("version"));
+                //await Write(methodGroupTemplate, FormatFileName(methodGroup.Name).ToLowerInvariant());
+            }
         }
 
         private string FormatFileName(string fileName)

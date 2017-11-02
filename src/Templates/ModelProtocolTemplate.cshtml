@@ -1,0 +1,14 @@
+﻿@using AutoRest.Swift
+@using AutoRest.Core.Model
+@using AutoRest.Swift.Model
+@using AutoRest.Swift.Templates
+@using AutoRest.Core.Utilities
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
+
+@WrapComment("// ", string.Format("{0}Protocol is {1}", Model.Name, Model.Documentation.ToSentence()))
+
+protocol @(Model.Name)Protocol : Codable {
+    @(Model.Fields(true)) 
+}
+    

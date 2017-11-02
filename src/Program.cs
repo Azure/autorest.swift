@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
@@ -22,6 +23,7 @@ namespace AutoRest.Swift
                 connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "swift" });
                 connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, plugin, sessionId).Process());
                 connection.DispatchNotification("Shutdown", connection.Stop);
+
 
                 // wait for something to do.
                 connection.GetAwaiter().GetResult();
@@ -53,6 +55,10 @@ namespace AutoRest.Swift
 
         protected override async Task<bool> ProcessInternal()
         {
+            //if (System.Diagnostics.Debugger.IsAttached == false) System.Diagnostics.Debugger.Launch();
+            //System.Diagnostics.Debugger.Break();
+
+
             var files = await ListInputs();
             if (files.Length != 1)
             {
@@ -60,7 +66,7 @@ namespace AutoRest.Swift
             }
             var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
             var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
-
+            
             // build settings
             var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
             

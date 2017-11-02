@@ -10,12 +10,34 @@ namespace AutoRest.Swift.Model
     {
         public PropertySwift()
         {
-
+            Name.OnGet += value =>
+            {
+                return value;
+            };
         }
 
-        public string JsonTag(bool omitEmpty = true)
+        public string VariableName
         {
-            return string.Format("`json:\"{0}{1}\"`", SerializedName, omitEmpty ? ",omitempty" : "");
+            get
+            {
+                return SwiftNameHelper.convertToVariableName(this.Name);
+            }
+        }
+
+        public string VariableTypeDeclaration
+        {
+            get
+            {
+                return this.ModelType.Name;
+            }
+        }
+
+        public string DecodeTypeDeclaration
+        {
+            get
+            {
+                return this.ModelType.Name;
+            }
         }
     }
 }

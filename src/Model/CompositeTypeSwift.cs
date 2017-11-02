@@ -14,7 +14,7 @@ namespace AutoRest.Swift.Model
     /// <summary>
     /// Defines a synthesized composite type that wraps a primary type, array, or dictionary method response.
     /// </summary>
-    public class CompositeTypeSwift : CompositeType
+    public class CompositeTypeSwift : CompositeType, IVariableType
     {
         private bool _wrapper;
 
@@ -42,6 +42,20 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string InterfaceOutput
+        {
+            get
+            {
+                CompositeTypeSwift baseType = (CompositeTypeSwift)this.BaseModelType;
+                if(baseType != null)
+                {
+                    return $"{this.Name}Protocol, {baseType.InterfaceOutput}";
+                }
+
+                return $"{this.Name}Protocol";
+            }
+        }
+
         public bool HasPolymorphicFields
         {
             get
@@ -50,8 +64,8 @@ namespace AutoRest.Swift.Model
                         // polymorphic composite
                         (p.ModelType is CompositeType && (p.ModelType as CompositeTypeSwift).IsPolymorphic) ||
                         // polymorphic array
-                        (p.ModelType is SequenceType && (p.ModelType as SequenceTypeSwift).ElementType is CompositeType &&
-                            ((p.ModelType as SequenceTypeSwift).ElementType as CompositeType).IsPolymorphic));
+                        (p.ModelType is SequenceType && (p.ModelType as ArrayTypeSwift).ElementType is CompositeType &&
+                            ((p.ModelType as ArrayTypeSwift).ElementType as CompositeType).IsPolymorphic));
             }
         }
 
@@ -71,11 +85,6 @@ namespace AutoRest.Swift.Model
 
         public CompositeTypeSwift(IModelType wrappedType)
         {
-            if (!wrappedType.ShouldBeSyntheticType())
-            {
-                throw new ArgumentException("{0} is not a valid type for SyntheticType", wrappedType.ToString());
-            }
-
             // gosdk: Ensure the generated name does not collide with existing type names
             BaseType = wrappedType;
 
@@ -87,7 +96,7 @@ namespace AutoRest.Swift.Model
                 switch (type)
                 {
                     case KnownPrimaryType.Object:
-                        Name += "SetObject";
+                        Name += "AnyObject";
                         break;
 
                     case KnownPrimaryType.Boolean:
@@ -95,7 +104,7 @@ namespace AutoRest.Swift.Model
                         break;
 
                     case KnownPrimaryType.Double:
-                        Name += "Float64";
+                        Name += "Double";
                         break;
 
                     case KnownPrimaryType.Int:
@@ -106,18 +115,10 @@ namespace AutoRest.Swift.Model
                         Name += "Int64";
                         break;
 
-                    case KnownPrimaryType.Stream:
-                        Name += "ReadCloser";
-                        break;
-
                     default:
                         Name += type.ToString();
                         break;
                 }
-            }
-            else if (elementType is EnumType)
-            {
-                Name += "String";
             }
             else
             {
@@ -181,7 +182,6 @@ namespace AutoRest.Swift.Model
         public override Property Add(Property item)
         {
             var property = base.Add(item) as PropertySwift;
-            AddPolymorphicPropertyIfNecessary();
             return property;
         }
 
@@ -192,18 +192,6 @@ namespace AutoRest.Swift.Model
         public void AddImports(HashSet<string> imports)
         {
             Properties.ForEach(p => p.ModelType.AddImports(imports));
-            if (BaseIsPolymorphic && !IsPolymorphic)
-            {
-                imports.Add("\"encoding/json\"");
-                imports.Add("\"errors\"");
-            }
-        }
-
-        public string AddHTTPResponse()
-        {
-            return (IsResponseType || IsWrapperType) ?
-                "autorest.Response `json:\"-\"`\n" :
-                null;
         }
 
         public bool IsPolymorphicResponse() {
@@ -214,58 +202,130 @@ namespace AutoRest.Swift.Model
             return IsPolymorphic && IsResponseType;
         }
 
-        public string Fields()
+        public string Fields(bool forInterface = false)
         {
             AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
-
             if (BaseModelType != null)
             {
-                indented.Append(((CompositeTypeSwift)BaseModelType).Fields());
+                indented.Append(((CompositeTypeSwift)BaseModelType).Fields(forInterface));
             }
 
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var enumType = property.ModelType as EnumTypeSwift;
+                var modelType = property.ModelType;
+                var modelDeclaration = modelType.Name;
+                if (modelType is IVariableType)
+                {
+                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration;
+                }
+
+                var enumType = modelType as EnumTypeSwift;
+                var output = string.Empty;
+                var propName = property.Name.RawValue;
                 if (enumType != null && enumType.IsNamed)
                 {
-                    indented.AppendFormat("{0} {1} {2}\n",
-                                    property.Name,
-                                    enumType.Name,
-                                    property.JsonTag());
+                    output = string.Format("var {0}: {1}",
+                                    propName,
+                                    enumType.Name);
 
                 }
-                else if (property.ModelType is DictionaryType)
+                //TODO: need to handle flatten property case.
+                else
                 {
-                    indented.AppendFormat("{0} *{1} {2}\n", property.Name, (property.ModelType as DictionaryTypeSwift).Name, property.JsonTag());
+                    output = string.Format("var {0}: {1}", propName, modelDeclaration);
                 }
-                else if (property.ModelType.PrimaryType(KnownPrimaryType.Object))
+
+                if (forInterface)
                 {
-                    // TODO: I don't think this is the best way to handle object types
-                    indented.AppendFormat("{0} *{1} {2}\n", property.Name, property.ModelType.Name, property.JsonTag());
+                    output += " { get set }\n";
+                }else
+                {
+                    output += "\n";
                 }
-                else if (property.ShouldBeFlattened())
+
+                indented.Append(output);
+            }
+
+            return indented.ToString();
+        }
+
+        public string FieldEnumValuesForCodable()
+        {
+            AddPolymorphicPropertyIfNecessary();
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEnumValuesForCodable());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = property.Name.RawValue;
+                var serializeName = property.SerializedName;
+                indented.Append($"case {propName} = \"{serializeName}\"\r\n");
+            }
+
+            return indented.ToString();
+        }
+
+        public string FieldEncodingString()
+        {
+            AddPolymorphicPropertyIfNecessary();
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEncodingString());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = property.Name.RawValue;
+                var modelType = property.ModelType;
+                var modelDeclaration = modelType.Name;
+                var serializeName = property.SerializedName;
+                if (modelType is IVariableType)
                 {
-                    // embed as an anonymous struct.  note that the ordering of this clause is
-                    // important, i.e. we don't want to flatten primary types like dictionaries.
-                    indented.AppendFormat("*{0} {1}\n", property.ModelType.Name, property.JsonTag());
-                    property.Extensions[SwaggerExtensions.FlattenOriginalTypeName] = Name;
-                }
-                else if (property.ModelType is CompositeType && (property.ModelType as CompositeTypeSwift).IsPolymorphic)
-                {
-                    indented.AppendFormat("{0} {1} {2}\n", property.Name, property.ModelType.Name, property.JsonTag());
+                    indented.Append($"try container.encode({modelDeclaration} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
                 }
                 else
                 {
-                    // NextLinks might have differences in casing, but they need to be consistent
-                    if (property.Name.EqualsIgnoreCase(NextLink))
-                    {
-                        property.Name = NextLink;
-                    }
-                    indented.AppendFormat("{0} *{1} {2}\n", property.Name, property.ModelType.Name, property.JsonTag());
+                    indented.Append($"try container.encode({modelDeclaration}, forKey: .{serializeName})\r\n");
                 }
+            }
+
+            return indented.ToString();
+        }
+
+        public string FieldDecodingString()
+        {
+            AddPolymorphicPropertyIfNecessary();
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldDecodingString());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = property.Name.RawValue;
+                var modelType = property.ModelType;
+                var modelDeclaration = modelType.Name;
+                var serializeName = property.SerializedName;
+                if (modelType is IVariableType)
+                {
+                    modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
+                }
+
+                indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{serializeName})\r\n");
             }
 
             return indented.ToString();
@@ -277,7 +337,7 @@ namespace AutoRest.Swift.Model
 
         public IModelType GetElementType(IModelType type)
         {
-            if (type is SequenceTypeSwift)
+            if (type is ArrayTypeSwift)
             {
                 Name += "List";
                 return GetElementType((type as SequenceType).ElementType);
@@ -298,6 +358,30 @@ namespace AutoRest.Swift.Model
         public void SetName(string name)
         {
             Name = name;
+        }
+
+        public string VariableTypeDeclaration
+        {
+            get
+            {
+                return this.Name + "Protocol";
+            }
+        }
+
+        public string DecodeTypeDeclaration
+        {
+            get
+            {
+                return this.Name;
+            }
+        }
+
+        public string VariableName
+        {
+            get
+            {
+                return SwiftNameHelper.convertToVariableName(this.Name);
+            }
         }
     }
 }

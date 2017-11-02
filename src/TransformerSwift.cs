@@ -34,7 +34,6 @@ namespace AutoRest.Swift
 
             SwaggerExtensions.ProcessGlobalParameters(cmg);
             // Add the current package name as a reserved keyword
-            CodeNamerSwift.Instance.ReserveNamespace(cm.Namespace);
             FixStutteringTypeNames(cmg);
             TransformEnumTypes(cmg);
             TransformModelTypes(cmg);
@@ -309,7 +308,7 @@ namespace AutoRest.Swift
                         }
                         else if (exported is Method)
                         {
-                            (exported as Method).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Method");
+                            (exported as Method).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "");
                         }
                     });
             }

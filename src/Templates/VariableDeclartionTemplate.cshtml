@@ -1,0 +1,9 @@
+﻿@using AutoRest.Swift
+@using AutoRest.Core.Model
+@using AutoRest.Swift.Templates
+@using AutoRest.Swift.Model
+@using AutoRest.Core.Utilities
+@using System.Linq
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.IVariableType>
+@($"var {this.Model.VariableName}: {this.Model.VariableTypeDeclaration}");        

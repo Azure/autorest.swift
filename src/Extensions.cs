@@ -321,9 +321,9 @@ namespace AutoRest.Swift
             {
                 return (type as PrimaryTypeSwift).GetEmptyCheck(valueReference, asEmpty);
             }
-            else if (type is SequenceTypeSwift)
+            else if (type is ArrayTypeSwift)
             {
-                return (type as SequenceTypeSwift).GetEmptyCheck(valueReference, asEmpty);
+                return (type as ArrayTypeSwift).GetEmptyCheck(valueReference, asEmpty);
             }
             else if (type is DictionaryTypeSwift)
             {
@@ -356,9 +356,9 @@ namespace AutoRest.Swift
             {
                 (type as PrimaryTypeSwift).AddImports(imports);
             }
-            else if (type is SequenceTypeSwift)
+            else if (type is ArrayTypeSwift)
             {
-                (type as SequenceTypeSwift).AddImports(imports);
+                (type as ArrayTypeSwift).AddImports(imports);
             }
         }
 

@@ -13,6 +13,7 @@ namespace AutoRest.Swift.Model
 {
     public class MethodGroupSwift : MethodGroup
     {
+        private string variableName;
         public string ClientName { get; private set; }
         public string Documentation { get; private set; }
         public string PackageName { get; private set; }
@@ -21,11 +22,7 @@ namespace AutoRest.Swift.Model
         public bool IsCustomBaseUri
             => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
-        public string GlobalParameters;
-        public string HelperGlobalParameters;
-        public string GlobalDefaultParameters;
-        public string HelperGlobalDefaultParameters;
-        public string ConstGlobalDefaultParameters;
+        public List<PropertySwift> GlobalParameters;
         public IEnumerable<string> Imports { get; private set; }
 
         public MethodGroupSwift(string name) : base(name)
@@ -53,8 +50,8 @@ namespace AutoRest.Swift.Model
             ClientName = string.IsNullOrEmpty(Name)
                             ? cmg.BaseClient
                             : TypeName.Value.IsNamePlural(cmg.Namespace)
-                                             ? Name + "Client"
-                                             : (Name + "Client").TrimPackageName(cmg.Namespace);
+                                             ? Name.Value
+                                             : (Name.Value).TrimPackageName(cmg.Namespace);
 
             Documentation = string.Format("{0} is the {1} ", ClientName,
                                     string.IsNullOrEmpty(cmg.Documentation)
@@ -64,40 +61,29 @@ namespace AutoRest.Swift.Model
             PackageName = cmg.Namespace;
             BaseClient = cmg.BaseClient;
             GlobalParameters = cmg.GlobalParameters;
-            HelperGlobalParameters = cmg.HelperGlobalParameters;
-            GlobalDefaultParameters = cmg.GlobalDefaultParameters;
-            HelperGlobalDefaultParameters = cmg.HelperGlobalDefaultParameters;
-            ConstGlobalDefaultParameters = cmg.ConstGlobalDefaultParameters;
-
-
-
+            
             //Imports
             var imports = new HashSet<string>();
             imports.UnionWith(CodeNamerSwift.Instance.AutorestImports);
-            imports.UnionWith(CodeNamerSwift.Instance.StandardImports);
+        }
 
-            cmg.Methods.Where(m => m.Group.Value == Name)
-                .ForEach(m =>
-                {
-                    var mg = m as MethodSwift;
-                    if ((CodeModel as CodeModelSwift).ShouldValidate && !mg.ParameterValidations.IsNullOrEmpty())
-                    {
-                        imports.UnionWith(CodeNamerSwift.Instance.ValidationImport);
-                    }
-                    mg.ParametersGo.ForEach(p => p.AddImports(imports));
-                    if (mg.HasReturnValue() && !mg.ReturnValue().Body.PrimaryType(KnownPrimaryType.Stream))
-                    {
-                        mg.ReturnType.Body.AddImports(imports);
-                    }
-                });
-
-            foreach (var p in cmg.Properties)
+        internal string VariableName
+        {
+            get
             {
-                p.ModelType.AddImports(imports);
-            }
+                //ok if race causes more than one call to pass.  Will be set to same value.
+                if (string.IsNullOrWhiteSpace(this.variableName))
+                {
+                    this.variableName = SwiftNameHelper.convertToVariableName(this.Name);
+                }
 
-            imports.OrderBy(i => i);
-            Imports = imports;
+                return this.variableName;
+            }
+        }
+
+        public string VariableDeclartionSyntax()
+        {
+            return $"var {this.VariableName}: {this.Name}";
         }
     }
 }

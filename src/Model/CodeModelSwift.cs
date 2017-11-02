@@ -33,24 +33,7 @@ namespace AutoRest.Swift.Model
             Version = FormatVersion(Settings.Instance.PackageVersion);
         }
 
-        public override string Namespace
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(base.Namespace))
-                {
-                    return base.Namespace;
-                }
-
-                return base.Namespace.ToLowerInvariant();
-            }
-            set
-            {
-                base.Namespace = value;
-            }
-        }
-
-        public string ServiceName => CodeNamer.Instance.PascalCase(Namespace ?? string.Empty);
+        public string ServiceName => CodeNamer.Instance.PascalCase(Name ?? string.Empty);
 
         public string GetDocumentation()
         {
@@ -98,10 +81,6 @@ namespace AutoRest.Swift.Model
                     .ForEach(mt =>
                     {
                         mt.AddImports(imports);
-                        if (NextMethodUndefined.Any())
-                        {
-                            imports.UnionWith(CodeNamerSwift.Instance.PageableImports);
-                        }
                     });
                 return imports.OrderBy(i => i);
             }
@@ -111,124 +90,14 @@ namespace AutoRest.Swift.Model
 
         public bool ShouldValidate => (bool)AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("client-side-validation").Result;
 
-        public string GlobalParameters
+        public List<PropertySwift> GlobalParameters
         {
             get
             {
-                var declarations = new List<string>();
-                foreach (var p in Properties)
+                return this.Properties.Where(p =>
                 {
-                    if (!p.SerializedName.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
-                        declarations.Add(
-                                string.Format(
-                                        (p.IsRequired || p.ModelType.CanBeEmpty() ? "{0} {1}" : "{0} *{1}"),
-                                         p.Name.Value.ToSentence(), p.ModelType.Name));
-                    }
-                }
-                return string.Join(", ", declarations);
-            }
-        }
-
-        public string HelperGlobalParameters
-        {
-            get
-            {
-                var invocationParams = new List<string>();
-                foreach (var p in Properties)
-                {
-                    if (!p.SerializedName.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
-                        invocationParams.Add(p.Name.Value.ToSentence());
-                    }
-                }
-                return string.Join(", ", invocationParams);
-            }
-        }
-        public string GlobalDefaultParameters
-        {
-            get
-            {
-                var declarations = new List<string>();
-                foreach (var p in Properties)
-                {
-                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
-                        declarations.Add(
-                                string.Format(
-                                        (p.IsRequired || p.ModelType.CanBeEmpty() ? "{0} {1}" : "{0} *{1}"),
-                                         p.Name.Value.ToSentence(), p.ModelType.Name.Value.ToSentence()));
-                    }
-                }
-                return string.Join(", ", declarations);
-            }
-        }
-
-        public string HelperGlobalDefaultParameters
-        {
-            get
-            {
-                var invocationParams = new List<string>();
-                foreach (var p in Properties)
-                {
-                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
-                        invocationParams.Add("Default" + p.Name.Value);
-                    }
-                }
-                return string.Join(", ", invocationParams);
-            }
-        }
-
-        public string ConstGlobalDefaultParameters
-        {
-            get
-            {
-                var constDeclaration = new List<string>();
-                foreach (var p in Properties)
-                {
-                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
-                        constDeclaration.Add(string.Format("// Default{0} is the default value for {1}\nDefault{0} = {2}",
-                            p.Name.Value,
-                            p.Name.Value.ToPhrase(),
-                            p.DefaultValue.Value));
-                    }
-                }
-                return string.Join("\n", constDeclaration);
-            }
-        }
-
-
-        public string AllGlobalParameters
-        {
-            get
-            {
-                if (GlobalParameters.IsNullOrEmpty())
-                {
-                    return GlobalDefaultParameters;
-                }
-                if (GlobalDefaultParameters.IsNullOrEmpty())
-                {
-                    return GlobalParameters;
-                }
-                return string.Join(", ", new string[] { GlobalParameters, GlobalDefaultParameters });
-            }
-        }
-
-        public string HelperAllGlobalParameters
-        {
-            get
-            {
-                if (HelperGlobalParameters.IsNullOrEmpty())
-                {
-                    return HelperGlobalDefaultParameters;
-                }
-                if (HelperGlobalDefaultParameters.IsNullOrEmpty())
-                {
-                    return HelperGlobalParameters;
-                }
-                return string.Join(", ", new string[] { HelperGlobalParameters, HelperGlobalDefaultParameters });
+                    return !p.SerializedName.IsApiVersion();
+                }).Select((p) => { return (PropertySwift)p; }).ToList();
             }
         }
 
@@ -237,7 +106,9 @@ namespace AutoRest.Swift.Model
             get
             {
                 // client methods are the ones with no method group
-                return Methods.Cast<MethodSwift>().Where(m => string.IsNullOrEmpty(m.MethodGroup.Name));
+                return Methods.Cast<MethodSwift>()
+                    .Where(m => string.IsNullOrEmpty(m.MethodGroup.Name))
+                    .OrderBy(m => m.Name.Value);
             }
         }
 
@@ -246,10 +117,9 @@ namespace AutoRest.Swift.Model
         /// whitespace, 
         public static string FormatVersion(string version)
         {
-
             if (string.IsNullOrWhiteSpace(version))
             {
-                return "0.0.0";
+                return "0.0.1";
             }
 
             var semVerMatch = semVerPattern.Match(version);

@@ -25,7 +25,7 @@ namespace AutoRest.Swift
                   new Factory<Property, PropertySwift>(),
                   new Factory<Parameter, ParameterSwift>(),
                   new Factory<DictionaryType, DictionaryTypeSwift>(),
-                  new Factory<SequenceType, SequenceTypeSwift>(),
+                  new Factory<SequenceType, ArrayTypeSwift>(),
                   new Factory<MethodGroup, MethodGroupSwift>(),
                   new Factory<EnumType, EnumTypeSwift>(),
                   new Factory<PrimaryType, PrimaryTypeSwift>()

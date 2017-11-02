@@ -71,78 +71,51 @@ namespace AutoRest.Swift.Model
                 {
                     case KnownPrimaryType.Base64Url:
                         // TODO: add support
-                        return "string";
-
-                    case KnownPrimaryType.ByteArray:
-                        return "[]byte";
+                        return "String";
 
                     case KnownPrimaryType.Boolean:
-                        return "bool";
+                        return "Bool";
 
                     case KnownPrimaryType.Date:
-                        return "date.Date";
+                        return "Int32";
 
                     case KnownPrimaryType.DateTime:
-                        return "date.Time";
+                        return "Int32";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "date.TimeRFC1123";
+                        return "Int32";
 
                     case KnownPrimaryType.Double:
-                        return "float64";
+                        return "Double";
 
                     case KnownPrimaryType.Decimal:
-                        return "decimal.Decimal";
+                        return "Decimal";
 
                     case KnownPrimaryType.Int:
-                        return "int32";
+                        return "Int32";
 
                     case KnownPrimaryType.Long:
-                        return "int64";
-
-                    case KnownPrimaryType.Stream:
-                        return "io.ReadCloser";
+                        return "Int64";
 
                     case KnownPrimaryType.String:
-                        return "string";
+                        return "String";
 
                     case KnownPrimaryType.TimeSpan:
-                        return "string";
+                        return "Int64";
 
                     case KnownPrimaryType.Object:
                         // TODO: is this the correct way to support object types?
-                        return "map[string]interface{}";
+                        return "[String: String]";
 
                     case KnownPrimaryType.UnixTime:
-                        return "date.UnixTime";
+                        return "Int64";
 
                     case KnownPrimaryType.Uuid:
-                        return "uuid.UUID";
+                        return "NSUUID";
 
                 }
-                throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
-            }
-        }
 
-        public string GetEmptyCheck(string valueReference, bool asEmpty)
-        {
-            if (this.PrimaryType(KnownPrimaryType.ByteArray))
-            {
-                return string.Format(asEmpty
-                                        ? "{0} == nil || len({0}) == 0"
-                                        : "{0} != nil && len({0}) > 0", valueReference);
-            }
-            else if (this.PrimaryType(KnownPrimaryType.String))
-            {
-                return string.Format(asEmpty
-                                        ? "len({0}) == 0"
-                                        : "len({0}) > 0", valueReference);
-            }
-            else
-            {
-                return string.Format(asEmpty
-                                        ? "{0} == nil"
-                                        : "{0} != nil", valueReference);
+                throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
             }
         }
 

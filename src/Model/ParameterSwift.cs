@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AutoRest.Swift.Model
 {
-    public class ParameterSwift : Parameter
+    public class ParameterSwift : Parameter, IVariableType
     {
         public const string APIVersionName = "APIVersion";
         public ParameterSwift()
@@ -38,24 +38,6 @@ namespace AutoRest.Swift.Model
         public string AddToMap(string mapVariable)
         {
             return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap());
-        }
-
-        public string GetParameterName()
-        {
-            string retval;
-            if (IsAPIVersion)
-            {
-                retval = APIVersionName;
-            }
-            else if (IsClientProperty)
-            {
-                retval = "client." + Name.Value.Capitalize();
-            }
-            else
-            {
-                retval = Name.Value;
-            }
-            return retval;
         }
 
         public override bool IsClientProperty => base.IsClientProperty == true && !IsAPIVersion;
@@ -110,158 +92,29 @@ namespace AutoRest.Swift.Model
                     : $"{s}",
                 value);
         }
-    }
 
-    public static class ParameterGoExtensions
-    {
-        /// <summary>
-        /// Return a Go map of required parameters.
-        // Refactor -> Generator
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="mapVariable"></param>
-        /// <returns></returns>
-        public static string BuildParameterMap(this IEnumerable<ParameterSwift> parameters, string mapVariable)
+        public string VariableName
         {
-            var builder = new StringBuilder();
-
-            builder.Append(mapVariable);
-            builder.Append(" := map[string]interface{} {");
-
-            if (parameters.Count() > 0)
+            get
             {
-                builder.AppendLine();
-                var indented = new IndentedStringBuilder("  ");
-                parameters
-                    .Where(p => p.IsRequired)
-                    .OrderBy(p => p.SerializedName.ToString())
-                    .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap()));
-                builder.Append(indented);
+                return SwiftNameHelper.convertToVariableName(this.Name);
             }
-            builder.AppendLine("}");
-            return builder.ToString();
         }
 
-        /// <summary>
-        /// Return list of parameters for specified location passed in an argument.
-        /// Refactor -> Probably CodeModeltransformer, but even with 5 references, the other mkethods are not used anywhere
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="location"></param>
-        /// <returns></returns>
-        public static IEnumerable<ParameterSwift> ByLocation(this IEnumerable<ParameterSwift> parameters, ParameterLocation location)
+        public string VariableTypeDeclaration
         {
-            return parameters
-                .Where(p => p.Location == location);
-        }
-
-        /// <summary>
-        /// Return list of retuired parameters for specified location passed in an argument.
-        /// Refactor -> CodeModelTransformer, still, 3 erefences, but no one uses the other methods.
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="location"></param>
-        /// <returns></returns>
-        public static IEnumerable<ParameterSwift> ByLocationAsRequired(this IEnumerable<ParameterSwift> parameters, ParameterLocation location, bool isRequired)
-        {
-            return parameters
-                .Where(p => p.Location == location && p.IsRequired == isRequired);
-        }
-
-        /// <summary>
-        /// Return list of parameters as per their location in request.
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public static ParameterSwift BodyParameter(this IEnumerable<ParameterSwift> parameters)
-        {
-            var bodyParameters = parameters.ByLocation(ParameterLocation.Body);
-            return bodyParameters.Any()
-                    ? bodyParameters.First()
-                    : null;
-        }
-
-        public static IEnumerable<ParameterSwift> FormDataParameters(this IEnumerable<ParameterSwift> parameters)
-        {
-            return parameters.ByLocation(ParameterLocation.FormData);
-        }
-
-        public static IEnumerable<ParameterSwift> HeaderParameters(this IEnumerable<ParameterSwift> parameters)
-        {
-            return parameters.ByLocation(ParameterLocation.Header);
-        }
-
-        public static IEnumerable<ParameterSwift> HeaderParameters(this IEnumerable<ParameterSwift> parameters, bool isRequired)
-        {
-            return parameters.ByLocationAsRequired(ParameterLocation.Header, isRequired);
-        }
-
-        public static IEnumerable<ParameterSwift> URLParameters(this IEnumerable<ParameterSwift> parameters)
-        {
-            var urlParams = new List<ParameterSwift>();
-            foreach (ParameterSwift p in parameters.ByLocation(ParameterLocation.Path))
+            get
             {
-                if (p.Method.CodeModel.BaseUrl.Contains(p.SerializedName))
-                {
-                    urlParams.Add(p);
-                }
+                return this.ModelType.Name;
             }
-            return urlParams;
         }
 
-        public static IEnumerable<ParameterSwift> PathParameters(this IEnumerable<ParameterSwift> parameters)
+        public string DecodeTypeDeclaration
         {
-            var pathParams = new List<ParameterSwift>();
-            foreach (ParameterSwift p in parameters.ByLocation(ParameterLocation.Path))
+            get
             {
-                if (!p.Method.CodeModel.BaseUrl.Contains(p.SerializedName))
-                {
-                    pathParams.Add(p);
-                }
+                return this.ModelType.Name;
             }
-            return pathParams;
-        }
-
-        public static IEnumerable<ParameterSwift> QueryParameters(this IEnumerable<ParameterSwift> parameters)
-        {
-            return parameters.ByLocation(ParameterLocation.Query);
-        }
-
-        public static IEnumerable<ParameterSwift> QueryParameters(this IEnumerable<ParameterSwift> parameters, bool isRequired)
-        {
-            return parameters.ByLocationAsRequired(ParameterLocation.Query, isRequired);
-        }
-
-        public static string Validate(this IEnumerable<ParameterSwift> parameters, HttpMethod method)
-        {
-            List<string> v = new List<string>();
-            HashSet<string> ancestors = new HashSet<string>();
-
-            foreach (var p in parameters)
-            {
-                if (p.IsAPIVersion)
-                {
-                    continue;
-                }
-
-                var name = !p.IsClientProperty
-                        ? p.Name.Value
-                        : "client." + p.Name.Value.Capitalize();
-
-                List<string> x = new List<string>();
-                if (p.ModelType is CompositeType)
-                {
-                    ancestors.Add(p.ModelType.Name);
-                    x.AddRange(p.ValidateCompositeType(name, method, ancestors));
-                    ancestors.Remove(p.ModelType.Name);
-                }
-                else
-                    x.AddRange(p.ValidateType(name, method));
-
-                if (x.Count != 0)
-                    v.Add($"{{ TargetValue: {name},\n Constraints: []validation.Constraint{{{string.Join(",\n", x)}}}}}");
-            }
-            return string.Join(",\n", v);
         }
     }
 }

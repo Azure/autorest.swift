@@ -38,8 +38,14 @@ namespace AutoRest.Swift.Model
             NextAlreadyDefined = true;
         }
 
+        public string ContextModelName
+        {
+            get { return this.Name + "Context";  }
+        }
+
         internal void Transform(CodeModelSwift cmg)
         {
+            
             Owner = (MethodGroup as MethodGroupSwift).ClientName;
             PackageName = cmg.Namespace;
             NextAlreadyDefined = NextMethodExists(cmg.Methods.Cast<MethodSwift>());
@@ -80,56 +86,11 @@ namespace AutoRest.Swift.Model
 
         public string MethodSignature => $"{Name}({MethodParametersSignature})";
         
-        public string MethodParametersSignatureComplete
-        {
-            get
-            {     
-                var signature = new StringBuilder("(");
-                signature.Append(MethodParametersSignature);
-                if (!IsLongRunningOperation())
-                {
-                    if (MethodParametersSignature.Length > 0)
-                    {
-                        signature.Append( ", ");
-                    }
-                    signature.Append("cancel <-chan struct{}");
-                }
-                signature.Append(")");
-                return signature.ToString();
-            }
-        }
-
-        public string MethodReturnSignatureComplete
-        {
-            get
-            {
-                var signature = new StringBuilder("(<-chan ");
-                signature.Append((ListElement.ModelType as SequenceTypeSwift).GetElement);
-                signature.Append(", <-chan error)");
-                return signature.ToString();
-            }
-        }
-
         public string ParametersDocumentation
         {
             get
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (var parameter in LocalParameters)
-                {
-                    if (!string.IsNullOrEmpty(parameter.Documentation))
-                    {
-                        sb.Append(parameter.Name);
-                        sb.Append(" is ");
-                        sb.Append(parameter.Documentation.FixedValue.ToSentence());
-                        sb.Append(" ");
-                    }
-                    if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
-                    {
-                        sb.Append(parameter.Name);
-                        sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
-                    }
-                }
                 return sb.ToString();
             }
         }
@@ -139,11 +100,9 @@ namespace AutoRest.Swift.Model
             get
             {
                 var body = ReturnType.Body as CompositeTypeSwift;
-                return body.Properties.Where(p => p.ModelType is SequenceTypeSwift).FirstOrDefault() as PropertySwift;
+                return body.Properties.Where(p => p.ModelType is ArrayTypeSwift).FirstOrDefault() as PropertySwift;
             }
         }
-
-        public string ListCompleteMethodName => $"{Name}Complete";
 
         /// <summary>
         /// Generate the method parameter declaration.
@@ -153,16 +112,6 @@ namespace AutoRest.Swift.Model
             get
             {
                 List<string> declarations = new List<string>();
-                LocalParameters
-                    .ForEach(p => declarations.Add(string.Format(
-                                                        p.IsRequired || p.ModelType.CanBeEmpty()
-                                                            ? "{0} {1}"
-                                                            : "{0} *{1}", p.Name, p.ModelType.Name)));
-                //for Cancelation channel option for long-running operations
-                if (IsLongRunningOperation())
-                {
-                    declarations.Add("cancel <-chan struct{}");
-                }
                 return string.Join(", ", declarations);
             }
         }
@@ -186,7 +135,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return HasReturnValue() ? ReturnValue().Body.Name.ToString() : "autorest.Response";
+                return HasReturnValue() ?
+                    ((ReturnValue().Body is IVariableType) ? 
+                        ((IVariableType)ReturnValue().Body).VariableTypeDeclaration 
+                            : ReturnValue().Body.Name.ToString()) 
+                        : "Void";
             }
         }
 
@@ -198,246 +151,43 @@ namespace AutoRest.Swift.Model
         public string MethodReturnSignature(bool helper)
         {
             var retValType = MethodReturnType;
-            var retVal = $"result {retValType}";
-            var errVal = "err error";
-
-            // for LROs return the response types via a channel.
-            // only do this for the "real" API; for "helper" methods
-            // i.e. preparer/sender/responder don't use a channel.
-            if (!helper && ReturnViaChannel)
-            {
-                retVal = $"<-chan {retValType}";
-                errVal = "<-chan error";
-            }
-
-            return $"{retVal}, {errVal}";
+            return $"{retValType}";
         }
 
-        public string NextMethodName => $"{Name}NextResults";
-
-        public string PreparerMethodName => $"{Name}Preparer";
-
-        public string SenderMethodName => $"{Name}Sender";
-
-        public string ResponderMethodName => $"{Name}Responder";
-
-        public string HelperInvocationParameters(bool complete)
-        {
-            List<string> invocationParams = new List<string>();
-            foreach (ParameterSwift p in LocalParameters)
-            {
-                if (p.Name.EqualsIgnoreCase("nextlink") && complete)
-                {
-                    invocationParams.Add(string.Format("*list.{0}", NextLink));
-                }
-                else
-                {
-                    invocationParams.Add(p.Name);
-                }
-            }
-            if (IsLongRunningOperation())
-            {
-                invocationParams.Add("cancel");
-            }
-            return string.Join(", ", invocationParams);
-        }
-
-        /// <summary>
-        /// Return the parameters as they appear in the method signature excluding global parameters.
-        /// </summary>
-        public IEnumerable<ParameterSwift> LocalParameters
+        public IReadOnlyList<ParameterSwift> URLParameters
         {
             get
             {
-                return
-                    Parameters.Cast<ParameterSwift>().Where(
-                        p => p != null && p.IsMethodArgument && !string.IsNullOrWhiteSpace(p.Name))
-                                .OrderBy(item => !item.IsRequired);
+                return Parameters.Where(x => { return x.Location == ParameterLocation.Path; })
+                    .Select(x => { return (ParameterSwift)x; }).ToList();
             }
         }
 
-        public IEnumerable<ParameterSwift> ParametersGo => Parameters.Cast<ParameterSwift>();
-
-        public string ParameterValidations => ParametersGo.Validate(HttpMethod);
-
-        public ParameterSwift BodyParameter => ParametersGo.BodyParameter();
-
-        public IEnumerable<ParameterSwift> FormDataParameters => ParametersGo.FormDataParameters();
-
-        public IEnumerable<ParameterSwift> HeaderParameters => ParametersGo.HeaderParameters();
-
-        public IEnumerable<ParameterSwift> OptionalHeaderParameters => ParametersGo.HeaderParameters(false);
-
-        public IEnumerable<ParameterSwift> URLParameters => ParametersGo.URLParameters();
-
-        public string URLMap => URLParameters.BuildParameterMap("urlParameters");
-
-        public IEnumerable<ParameterSwift> PathParameters => ParametersGo.PathParameters();
-
-        public string PathMap => PathParameters.BuildParameterMap("pathParameters");
-
-        public IEnumerable<ParameterSwift> QueryParameters => ParametersGo.QueryParameters();
-
-        public IEnumerable<ParameterSwift> OptionalQueryParameters => ParametersGo.QueryParameters(false);
-
-        public string QueryMap => QueryParameters.BuildParameterMap("queryParameters");
-
-        public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters");
-
-        public List<string> ResponseCodes
+        public IReadOnlyList<ParameterSwift> QueryParameters
         {
             get
             {
-                var codes = new List<string>();
-                // Refactor -> CodeModelTransformer
-                // Actually, this is the kind of stuff that would be better in the core...
-                if (!Responses.ContainsKey(HttpStatusCode.OK))
-                {
-                    codes.Add(CodeNamerSwift.Instance.StatusCodeToGoString[HttpStatusCode.OK]);
-                }
-                // Refactor -> generator
-                foreach (var sc in Responses.Keys)
-                {
-                    codes.Add(CodeNamerSwift.Instance.StatusCodeToGoString[sc]);
-                }
-                return codes;
+                return Parameters.Where(x => { return x.Location == ParameterLocation.Query; })
+                    .Select(x => { return (ParameterSwift)x; }).ToList();
             }
         }
 
-        public List<string> PrepareDecorators
+        public ParameterSwift BodyParameter
         {
             get
             {
-                var decorators = new List<string>();
-
-                if (BodyParameter != null && !BodyParameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
-                {
-                    decorators.Add("autorest.AsJSON()");
-                }
-
-                decorators.Add(HTTPMethodDecorator);
-                if (!this.IsCustomBaseUri)
-                {
-                    decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
-                }
-                else
-                {
-                    decorators.Add(string.Format("autorest.WithCustomBaseURL(\"{0}\", urlParameters)", CodeModel.BaseUrl));
-                }
-
-                decorators.Add(string.Format(PathParameters.Any()
-                            ? "autorest.WithPathParameters(\"{0}\",pathParameters)"
-                            : "autorest.WithPath(\"{0}\")",
-                        Url));
-
-                if (BodyParameter != null && BodyParameter.IsRequired)
-                {
-                    decorators.Add(string.Format(BodyParameter.ModelType.PrimaryType(KnownPrimaryType.Stream) && BodyParameter.Location == ParameterLocation.Body
-                                        ? "autorest.WithFile({0})"
-                                        : "autorest.WithJSON({0})",
-                                BodyParameter.Name));
-                }
-
-                if (QueryParameters.Any())
-                {
-                    decorators.Add("autorest.WithQueryParameters(queryParameters)");
-                }
-
-                if (FormDataParameters.Any())
-                {
-                    decorators.Add(
-                        FormDataParameters.Any(p => p.ModelType.PrimaryType(KnownPrimaryType.Stream))
-                            ? "autorest.WithMultiPartFormData(formDataParameters)"
-                            : "autorest.WithFormData(autorest.MapToValues(formDataParameters))"
-                        );
-                }
-
-                if (HeaderParameters.Any())
-                {
-                    foreach (var param in Parameters.Where(p => p.IsRequired && p.Location == ParameterLocation.Header))
-                    {
-                        if (param.IsClientProperty)
-                        {
-                            decorators.Add(string.Format("autorest.WithHeader(\"{0}\",client.{1})", param.SerializedName, param.Name.ToPascalCase().ToString()));
-                        }
-                        else
-                        {
-                            decorators.Add(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))", param.SerializedName, param.Name.ToString()));
-                        }
-                    }
-                }
-
-                return decorators;
+                return Parameters.Where(x => { return x.Location == ParameterLocation.Body; })
+                    .Select(x => { return (ParameterSwift)x; }).FirstOrDefault();
             }
         }
 
-        public string HTTPMethodDecorator
+        public string ServiceModelName
         {
             get
             {
-                switch (HttpMethod)
-                {
-                    case HttpMethod.Delete: return "autorest.AsDelete()";
-                    case HttpMethod.Get: return "autorest.AsGet()";
-                    case HttpMethod.Head: return "autorest.AsHead()";
-                    case HttpMethod.Options: return "autorest.AsOptions()";
-                    case HttpMethod.Patch: return "autorest.AsPatch()";
-                    case HttpMethod.Post: return "autorest.AsPost()";
-                    case HttpMethod.Put: return "autorest.AsPut()";
-                    default:
-                        throw new ArgumentException(string.Format("The HTTP verb {0} is not supported by the Go SDK", HttpMethod));
-                }
+                return ((CodeModelSwift)this.CodeModel).ServiceName;
             }
         }
-
-        public List<string> RespondDecorators
-        {
-            get
-            {
-                var decorators = new List<string>();
-                decorators.Add("client.ByInspecting()");
-                decorators.Add(string.Format("azure.WithErrorUnlessStatusCode({0})", string.Join(",", ResponseCodes.ToArray())));
-
-                if (HasReturnValue() && !ReturnValue().Body.IsStreamType())
-                {
-                    if (((CompositeTypeSwift)ReturnValue().Body).IsWrapperType && !((CompositeTypeSwift)ReturnValue().Body).HasPolymorphicFields)
-                    {
-                        decorators.Add("autorest.ByUnmarshallingJSON(&result.Value)");
-                    }
-                    else
-                    {
-                        decorators.Add("autorest.ByUnmarshallingJSON(&result)");
-                    }
-                }
-
-                if (!HasReturnValue() || !ReturnValue().Body.IsStreamType())
-                {
-                    decorators.Add("autorest.ByClosing()");
-                }
-                return decorators;
-            }
-        }
-
-        public string Response
-        {
-            get
-            {
-                return HasReturnValue()
-                    ? "result.Response = autorest.Response{Response: resp}"
-                    : "result.Response = resp";
-            }
-        }
-
-        public string AutorestError(string phase, string response = null, string parameter = null)
-        {
-            return !string.IsNullOrEmpty(parameter)
-                        ? string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", nil , \"{3}\'{4}\'\")", PackageName, Owner, Name, phase, parameter)
-                        : string.IsNullOrEmpty(response)
-                                 ? string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", nil , \"{3}\")", PackageName, Owner, Name, phase)
-                                 : string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", {3}, \"{4}\")", PackageName, Owner, Name, response, phase);
-        }
-
-        public string ValidationError => $"validation.NewErrorWithValidationError(err, \"{PackageName}.{Owner}\",\"{Name}\")";
 
         /// <summary>
         /// Check if method has a return response.
@@ -455,6 +205,28 @@ namespace AutoRest.Swift.Model
         public Response ReturnValue()
         {
             return ReturnType ?? DefaultResponse;
+        }
+
+        /// <summary>
+        /// Return response object for the method.
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnTypeDeclaration()
+        {
+            if (this.HasReturnValue())
+            {
+                if(this.ReturnType.Body is IVariableType)
+                {
+                    return ((IVariableType)this.ReturnType.Body).VariableTypeDeclaration;
+                }else
+                {
+                    return this.ReturnType.Body.Name;
+                }
+            }
+            else
+            {
+                return "Void";
+            }
         }
 
         /// <summary>
