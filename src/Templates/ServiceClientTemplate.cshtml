@@ -1,0 +1,65 @@
+﻿@using AutoRest.Swift
+@using AutoRest.Core.Model
+@using AutoRest.Swift.Templates
+@using AutoRest.Swift.Model
+@using AutoRest.Core.Utilities
+@using System.Linq
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.CodeModelSwift>
+@{
+    var imports = Model.ClientImports;
+    var modelName = CodeNamerSwift.Instance.CamelCase(Model.Name);
+}
+@WrapComment("// ", Model.GetDocumentation())
+@Header("// ")
+@EmptyLine
+@WrapComment("// ", Model.ClientDocumentation)
+class @(Model.ServiceName) {
+    @EmptyLine
+    let userAgent = "@(Model.UserAgent)"
+    let version = @(Model.Version)
+@if(!Model.IsCustomBaseUri)
+{
+    @:// DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
+    @:let baseURI = "@Model.BaseUrl"
+}
+
+@foreach (var property in Model.GlobalParameters)
+{
+    @:@(Include(new PropertyDeclartionTemplate(), property))
+}
+
+@foreach (var mg in Model.MethodGroups)
+{
+    @:@(((MethodGroupSwift)mg).VariableDeclartionSyntax())
+}
+
+    @EmptyLine
+    @WrapComment("// ", string.Format("NewWithBaseURI creates an instance of the {0} client.", Model.BaseClient))
+    init(@(!this.Model.IsCustomBaseUri ? "baseURI: String," : " "
+        )   @for(int i = 0; i < Model.GlobalParameters.Count; i++) {
+            var p = Model.GlobalParameters[i];
+ @:@($"{(i == 0 ? "" : ",")}{p.VariableName}: {p.ModelType.DeclarationName}"
+    ) 
+}) {
+        self.baseURI =  baseURI
+            @foreach (var p in Model.GlobalParameters)
+            {
+                if (p.DefaultValue.FixedValue.IsNullOrEmpty())
+                {
+        @:@(string.Format("self.{0} = {1}", p.VariableName, p.Name.Value.ToSentence()))
+                    }
+                    else
+                    {
+        @:@(string.Format("self.{0} = {1}", p.VariableName, p.Name.Value.ToPascalCase()))
+                    }
+                }
+    }
+
+@EmptyLine
+@foreach (var method in Model.ClientMethods)
+{
+    @:@(Include(new MethodTemplate(), method))
+    @:@EmptyLine
+}
+}
