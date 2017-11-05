@@ -71,47 +71,47 @@ namespace AutoRest.Swift.Model
                 {
                     case KnownPrimaryType.Base64Url:
                         // TODO: add support
-                        return "String";
+                        return "String?";
 
                     case KnownPrimaryType.Boolean:
-                        return "Bool";
+                        return "Bool?";
 
                     case KnownPrimaryType.Date:
-                        return "Int32";
+                        return "Int32?";
 
                     case KnownPrimaryType.DateTime:
-                        return "Int32";
+                        return "Int32?";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "Int32";
+                        return "Int32?";
 
                     case KnownPrimaryType.Double:
-                        return "Double";
+                        return "Double?";
 
                     case KnownPrimaryType.Decimal:
-                        return "Decimal";
+                        return "Decimal?";
 
                     case KnownPrimaryType.Int:
-                        return "Int32";
+                        return "Int32?";
 
                     case KnownPrimaryType.Long:
-                        return "Int64";
+                        return "Int64?";
 
                     case KnownPrimaryType.String:
-                        return "String";
+                        return "String?";
 
                     case KnownPrimaryType.TimeSpan:
-                        return "Int64";
+                        return "Int64?";
 
                     case KnownPrimaryType.Object:
                         // TODO: is this the correct way to support object types?
-                        return "[String: String]";
+                        return "[String: String?]?";
 
                     case KnownPrimaryType.UnixTime:
-                        return "Int64";
+                        return "Int64?";
 
                     case KnownPrimaryType.Uuid:
-                        return "NSUUID";
+                        return "NSUUID?";
 
                 }
 

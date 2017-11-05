@@ -75,7 +75,7 @@ namespace AutoRest.Swift.Model
                 }
 
                 return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name); ;
+                        this.ValueType.Name + "?"); ;
             }
         }
 
@@ -90,7 +90,7 @@ namespace AutoRest.Swift.Model
                 }
 
                 return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name); ;
+                        this.ValueType.Name + "?"); ;
             }
         }
 

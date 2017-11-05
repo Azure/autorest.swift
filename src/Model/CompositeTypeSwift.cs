@@ -292,11 +292,11 @@ namespace AutoRest.Swift.Model
                 var serializeName = property.SerializedName;
                 if (modelType is IVariableType)
                 {
-                    indented.Append($"try container.encode({modelDeclaration} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
+                    indented.Append($"try container.encode({serializeName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
                 }
                 else
                 {
-                    indented.Append($"try container.encode({modelDeclaration}, forKey: .{serializeName})\r\n");
+                    indented.Append($"try container.encode({serializeName}, forKey: .{serializeName})\r\n");
                 }
             }
 
@@ -353,8 +353,6 @@ namespace AutoRest.Swift.Model
             }
         }
 
-        public string PreparerMethodName => $"{Name}Preparer";
-
         public void SetName(string name)
         {
             Name = name;
@@ -364,7 +362,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "Protocol";
+                return this.Name + "Protocol?";
             }
         }
 
@@ -372,7 +370,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name;
+                return this.Name + "?";
             }
         }
 

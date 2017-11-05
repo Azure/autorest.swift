@@ -28,6 +28,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
+                if (this.ModelType is IVariableType)
+                {
+                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
+                }
+
                 return this.ModelType.Name;
             }
         }
@@ -36,6 +41,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
+                if (this.ModelType is IVariableType)
+                {
+                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
+                }
+
                 return this.ModelType.Name;
             }
         }
