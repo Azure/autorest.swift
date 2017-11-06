@@ -202,14 +202,14 @@ namespace AutoRest.Swift.Model
             return IsPolymorphic && IsResponseType;
         }
 
-        public string Fields(bool forInterface = false)
+        public string FieldsAsString(bool forInterface = false)
         {
             AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
             if (BaseModelType != null)
             {
-                indented.Append(((CompositeTypeSwift)BaseModelType).Fields(forInterface));
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldsAsString(forInterface));
             }
 
             // Emit each property, except for named Enumerated types, as a pointer to the type

@@ -6,9 +6,14 @@
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
 
-@WrapComment("// ", string.Format("{0}Protocol is {1}", Model.Name, Model.Documentation.ToSentence()))
-
-protocol @(Model.Name)Protocol : Codable {
-    @(Model.FieldsAsString(true)) 
+class @(Model.Name)Test : XCTestCase {
+    func testModel() {
+        var model = @(Model.Name)
+@foreach (var property in Model.Properties) {
+<text>
+        model.@(property.Name) = nil
+</text>
 }
-    
+
+    }
+}

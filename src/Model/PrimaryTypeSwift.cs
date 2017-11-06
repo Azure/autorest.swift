@@ -27,42 +27,6 @@ namespace AutoRest.Swift.Model
             };
         }
 
-        /// <summary>
-        /// Add imports for primary type.
-        /// </summary>
-        /// <param name="imports"></param>
-        public void AddImports(HashSet<string> imports)
-        {
-            if (!string.IsNullOrWhiteSpace(Import))
-                imports.Add(Import);
-        }
-
-        public virtual string Import
-        {
-            get
-            {
-                switch (KnownPrimaryType)
-                {
-                    case KnownPrimaryType.Date:
-                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
-                    case KnownPrimaryType.DateTimeRfc1123:
-                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
-                    case KnownPrimaryType.DateTime:
-                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
-                    case KnownPrimaryType.Decimal:
-                        return GetImportLine(package: "github.com/shopspring/decimal");
-                    case KnownPrimaryType.Stream:
-                        return GetImportLine(package: "io");
-                    case KnownPrimaryType.UnixTime:
-                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
-                    case KnownPrimaryType.Uuid:
-                        return GetImportLine(package: "github.com/satori/go.uuid", alias: "uuid");
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
-
         public virtual string ImplementationName
         {
             get

@@ -62,7 +62,14 @@ namespace AutoRest.Swift
                 var modelTemplate = new DataModelTemplate { Model = modelType };
                 await Write(modelTemplate, Path.Combine("data", $"{modelType.Name}{ImplementationFileExtension}"));
             }
-            
+
+            //Model Tests
+            foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
+            {
+                var modelTemplate = new DataModelTestTemplate { Model = modelType };
+                await Write(modelTemplate, Path.Combine("tests", $"{modelType.Name}Test{ImplementationFileExtension}"));
+            }
+
             // Enums
             foreach (EnumTypeSwift enumType in cm.EnumTypes)
             {
