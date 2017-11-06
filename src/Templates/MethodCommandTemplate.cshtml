@@ -15,9 +15,9 @@ class @(Model.CommandModelName) {
     var method = "@(Model.HttpMethod)"
     var isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
     let path = "@(Model.Url)"
-    private var pathParameters = [String: AnyObject]()
-    private var queryParameters = [String: AnyObject]()
-    private var headerParameters = [String: AnyObject]()
+    private var pathParameters = [String: String]()
+    private var queryParameters = [String: String]()
+    private var headerParameters = [String: String]()
 @for (var i = 0; i < Model.URLParameters.Count; i++)
 {
     @EmptyLine
@@ -25,10 +25,10 @@ class @(Model.CommandModelName) {
     <text>
     var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") {
         set {
-            pathParameters["@($"{param.VariableName}")"] = newValue as? AnyObject
+            pathParameters["@($"{param.VariableName}")"] = String(newValue!)
         }
         get {
-            return pathParameters["@($"{param.VariableName}")"] as! @($"{param.VariableTypeDeclaration}")
+            return @($"{param.VariableTypeDeclaration}")(pathParameters["@($"{param.VariableName}")"])
         }
     }
     </text>
@@ -39,10 +39,10 @@ class @(Model.CommandModelName) {
 <text>
     var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") {
         set {
-            queryParameters["@($"{param.VariableName}")"] = newValue as? AnyObject
+            queryParameters["@($"{param.VariableName}")"] = String(newValue!)
         }
         get {
-            return queryParameters["@($"{param.VariableName}")"] as! @($"{param.VariableTypeDeclaration}")
+            return @($"{param.VariableTypeDeclaration}")(queryParameters["@($"{param.VariableName}")"])
         }
      }
 </text>
@@ -54,31 +54,43 @@ class @(Model.CommandModelName) {
     <text>
     var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") {
         set {
-            headerParameters["@($"{param.VariableName}")"] = newValue as? AnyObject
+            headerParameters["@($"{param.VariableName}")"] = String(newValue!)
         }
         get {
-            return headerParameters["@($"{param.VariableName}")"] as! @($"{param.VariableTypeDeclaration}")
+            return @($"{param.VariableTypeDeclaration}")(headerParameters["@($"{param.VariableName}")"])
         }
     }
     </text>
 }
 
-@if(Model.BodyParameter != null) {
+@if (Model.BodyParameter != null)
+{
     var param = Model.BodyParameter;
     @EmptyLine
-<text>
-    var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}") 
-</text>    
+    <text>
+    var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}")
+    </text>
 }
+@EmptyLine
+    var returnFunc : { (decoder: Decoder, jsonData: String) -> 
+@if (!"void".Equals(Model.ReturnTypeDeclaration(), StringComparison.OrdinalIgnoreCase))
+{
+<text>
+        return try decoder.decode(@(Model.ReturnTypeDeclaration()).self, jsonData)
+</text>
+}else
+{
+<text>
+        return nil
+</text>
+}
+    }
 @EmptyLine
     init(client: @(Model.ServiceModelName)) {
         self.client = client
     }
-@EmptyLine
+    @EmptyLine
     func execute() -> @($"{Model.ReturnTypeDeclaration()}") {
-        @if(!"void".Equals(Model.ReturnTypeDeclaration(), StringComparison.OrdinalIgnoreCase))
-        {
-            @("return nil")
-        }
+        return self.client.execute<@($"{Model.ReturnTypeDeclaration()}")>(self, @(Model.BodyParameter != null ? $"{Model.BodyParameter.VariableName}" : "nil"))
     }
 }
