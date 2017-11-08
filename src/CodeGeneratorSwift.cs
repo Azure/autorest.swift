@@ -62,7 +62,14 @@ namespace AutoRest.Swift
                 var modelTemplate = new DataModelTemplate { Model = modelType };
                 await Write(modelTemplate, Path.Combine("data", $"{modelType.Name}{ImplementationFileExtension}"));
             }
-            
+
+            //Model Tests
+            foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
+            {
+                var modelTemplate = new DataModelTestTemplate { Model = modelType };
+                await Write(modelTemplate, Path.Combine("tests", $"{modelType.Name}Test{ImplementationFileExtension}"));
+            }
+
             // Enums
             foreach (EnumTypeSwift enumType in cm.EnumTypes)
             {
@@ -70,17 +77,17 @@ namespace AutoRest.Swift
                 await Write(enumTemplate, Path.Combine("data", $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
             }
 
-            // Context
+            // Command
             foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
             {
                 foreach (var method in methodGroup.Methods)
                 {
-                    var methodContextTemplate = new MethodContextTemplate
+                    var methodContextTemplate = new MethodCommandTemplate
                     {
                         Model = (MethodSwift)method
                     };
 
-                    await Write(methodContextTemplate, Path.Combine("context", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
+                    await Write(methodContextTemplate, Path.Combine("commands", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
                 }
             }
 

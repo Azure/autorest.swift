@@ -36,10 +36,10 @@ namespace AutoRest.Swift.Model
             {
                 if (ElementType is IVariableType)
                 {
-                    return $"[{((IVariableType)ElementType).VariableTypeDeclaration}]";
+                    return $"[{((IVariableType)ElementType).VariableTypeDeclaration}]?";
                 }
 
-                return $"[{ElementType.Name}]";
+                return $"[{ElementType.Name}?]?";
             }
         }
 
@@ -49,10 +49,10 @@ namespace AutoRest.Swift.Model
             {
                 if (ElementType is IVariableType)
                 {
-                    return $"[{((IVariableType)ElementType).DecodeTypeDeclaration}]";
+                    return $"[{((IVariableType)ElementType).DecodeTypeDeclaration}]?";
                 }
 
-                return $"[{ElementType.Name}]";
+                return $"[{ElementType.Name}]?";
             }
         }
 

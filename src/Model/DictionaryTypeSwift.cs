@@ -71,11 +71,11 @@ namespace AutoRest.Swift.Model
                 if (ValueType is IVariableType)
                 {
                     return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        ((IVariableType)ValueType).DecodeTypeDeclaration);
+                        ((IVariableType)ValueType).DecodeTypeDeclaration) + "?";;
                 }
 
                 return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name); ;
+                        this.ValueType.Name) + "?";;
             }
         }
 
@@ -86,11 +86,11 @@ namespace AutoRest.Swift.Model
                 if (ValueType is IVariableType)
                 {
                     return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        ((IVariableType)ValueType).VariableTypeDeclaration);
+                        ((IVariableType)ValueType).VariableTypeDeclaration) + "?";
                 }
 
                 return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name); ;
+                        this.ValueType.Name) + "?"; ;
             }
         }
 

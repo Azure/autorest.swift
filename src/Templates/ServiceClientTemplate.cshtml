@@ -17,21 +17,16 @@
 class @(Model.ServiceName) {
     @EmptyLine
     let userAgent = "@(Model.UserAgent)"
-    let version = @(Model.Version)
+    let version = "@(Model.Version)"
 @if(!Model.IsCustomBaseUri)
 {
     @:// DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
-    @:let baseURI = "@Model.BaseUrl"
+    @:var baseURI = "@Model.BaseUrl"
 }
 
 @foreach (var property in Model.GlobalParameters)
 {
     @:@(Include(new PropertyDeclartionTemplate(), property))
-}
-
-@foreach (var mg in Model.MethodGroups)
-{
-    @:@(((MethodGroupSwift)mg).VariableDeclartionSyntax())
 }
 
     @EmptyLine

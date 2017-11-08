@@ -202,14 +202,14 @@ namespace AutoRest.Swift.Model
             return IsPolymorphic && IsResponseType;
         }
 
-        public string Fields(bool forInterface = false)
+        public string FieldsAsString(bool forInterface = false)
         {
             AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
             if (BaseModelType != null)
             {
-                indented.Append(((CompositeTypeSwift)BaseModelType).Fields(forInterface));
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldsAsString(forInterface));
             }
 
             // Emit each property, except for named Enumerated types, as a pointer to the type
@@ -222,22 +222,15 @@ namespace AutoRest.Swift.Model
                     modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration;
                 }
 
-                var enumType = modelType as EnumTypeSwift;
                 var output = string.Empty;
                 var propName = property.Name.RawValue;
-                if (enumType != null && enumType.IsNamed)
-                {
-                    output = string.Format("var {0}: {1}",
-                                    propName,
-                                    enumType.Name);
-
-                }
+                var modifier = forInterface ? "" : "public";
                 //TODO: need to handle flatten property case.
-                else
-                {
-                    output = string.Format("var {0}: {1}", propName, modelDeclaration);
-                }
-
+                output = string.Format("{2} var {0}: {1}", 
+                    propName,
+                    modelDeclaration,
+                    modifier);
+            
                 if (forInterface)
                 {
                     output += " { get set }\n";
@@ -290,13 +283,14 @@ namespace AutoRest.Swift.Model
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
                 var serializeName = property.SerializedName;
-                if (modelType is IVariableType)
+                if (modelType is IVariableType && 
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
-                    indented.Append($"try container.encode({modelDeclaration} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
+                    indented.Append($"try container.encode({serializeName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
                 }
                 else
                 {
-                    indented.Append($"try container.encode({modelDeclaration}, forKey: .{serializeName})\r\n");
+                    indented.Append($"try container.encode({serializeName}, forKey: .{serializeName})\r\n");
                 }
             }
 
@@ -320,12 +314,34 @@ namespace AutoRest.Swift.Model
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
                 var serializeName = property.SerializedName;
-                if (modelType is IVariableType)
+                if (modelType is IVariableType && 
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
                     modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
                 }
 
                 indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{serializeName})\r\n");
+            }
+
+            return indented.ToString();
+        }
+
+        public string FieldsForTest()
+        {
+            AddPolymorphicPropertyIfNecessary();
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldsForTest());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = property.Name.RawValue;
+                var serializeName = property.SerializedName;
+                indented.Append($"model.{propName} = nil\r\n");
             }
 
             return indented.ToString();
@@ -353,8 +369,6 @@ namespace AutoRest.Swift.Model
             }
         }
 
-        public string PreparerMethodName => $"{Name}Preparer";
-
         public void SetName(string name)
         {
             Name = name;
@@ -364,7 +378,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "Protocol";
+                return this.Name + "Protocol?";
             }
         }
 
@@ -372,7 +386,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name;
+                return this.Name + "?";
             }
         }
 

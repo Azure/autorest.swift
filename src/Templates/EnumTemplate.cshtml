@@ -13,7 +13,7 @@
 @EmptyLine
 @if (constants.Any())
 {
-@:enum @Model.Name: String, Codable
+@:public enum @Model.Name: String, Codable
 @:{
 @foreach (var c in constants)
 {

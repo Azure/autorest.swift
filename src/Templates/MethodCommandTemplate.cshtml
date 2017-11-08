@@ -1,0 +1,85 @@
+﻿@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
+@using System;
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Swift
+@using AutoRest.Swift.Model
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.MethodSwift>
+
+@WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
+class @(Model.CommandModelName) {
+    var client: @Model.ServiceModelName
+    var method = "@(Model.HttpMethod)"
+    var isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
+    let path = "@(Model.Url)"
+    private var pathParameters = [String: String]()
+    private var queryParameters = [String: String]()
+    private var headerParameters = [String: String]()
+@for (var i = 0; i < Model.URLParameters.Count; i++)
+{
+    var param = Model.URLParameters[i];
+    <text>
+    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    </text>
+}
+
+@for(var i = 0; i < Model.QueryParameters.Count; i++) {
+    var param = Model.QueryParameters[i];
+<text>
+    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+</text>
+}
+
+@for (var i = 0; i < Model.HeaderParameters.Count; i++)
+{
+    @EmptyLine
+    var param = Model.HeaderParameters[i];
+    <text>
+    var @($"{param.VariableName}") : String {
+        set {
+            headerParameters["@($"{param.VariableName}")"] = newValue
+        }
+        get {
+            return headerParameters["@($"{param.VariableName}")"]
+        }
+    }
+    </text>
+}
+
+@if (Model.BodyParameter != null)
+{
+    var param = Model.BodyParameter;
+    <text>
+    var body :  @($"{param.VariableTypeDeclaration}")
+    </text>
+}
+@EmptyLine
+    init(client: @(Model.ServiceModelName)) {
+        self.client = client
+    }
+    @EmptyLine
+    func execute() -> @($"{Model.ReturnTypeDeclaration()}") {
+    @EmptyLine
+@for(var i = 0; i < Model.URLParameters.Count; i++) {
+    var param = Model.URLParameters[i];
+    <text>
+        if self.@($"{param.VariableName}") != nil { pathParameters["@($"{param.VariableName}")"] = String(describing: self.@($"{param.VariableName}")) }
+    </text>
+}
+@for(var i = 0; i < Model.QueryParameters.Count; i++) {
+    var param = Model.QueryParameters[i];
+    <text>
+        if self.@($"{param.VariableName}") != nil { queryParameters["@($"{param.VariableName}")"] = String(describing: self.@($"{param.VariableName}")) }
+    </text>
+}
+@if(!"void".Equals(Model.ReturnTypeDeclaration(), StringComparison.OrdinalIgnoreCase)) {
+    <text>
+        return nil
+        //return self.client.execute<@($"{Model.ReturnTypeDeclaration()}")>(self, body))
+    </text>
+}
+    }
+}

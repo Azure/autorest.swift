@@ -1,0 +1,25 @@
+﻿@using AutoRest.Swift
+@using AutoRest.Core.Model
+@using AutoRest.Swift.Model
+@using AutoRest.Swift.Templates
+@using AutoRest.Core.Utilities
+
+@inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
+import XCTest
+import Foundation
+@@testable import storage
+
+class @(Model.Name)Test : XCTestCase {
+    func testModel() {
+        var model = @(Model.Name)()
+        @(Model.FieldsForTest())
+
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(model)
+            print(jsonData)
+        } catch _ {
+            print("Error");
+        }
+    }
+}

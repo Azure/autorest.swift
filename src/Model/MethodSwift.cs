@@ -38,9 +38,9 @@ namespace AutoRest.Swift.Model
             NextAlreadyDefined = true;
         }
 
-        public string ContextModelName
+        public string CommandModelName
         {
-            get { return this.Name + "Context";  }
+            get { return this.MethodGroup.Name + this.Name + "Command";  }
         }
 
         internal void Transform(CodeModelSwift cmg)
@@ -168,6 +168,15 @@ namespace AutoRest.Swift.Model
             get
             {
                 return Parameters.Where(x => { return x.Location == ParameterLocation.Query; })
+                    .Select(x => { return (ParameterSwift)x; }).ToList();
+            }
+        }
+
+        public IReadOnlyList<ParameterSwift> HeaderParameters
+        {
+            get
+            {
+                return Parameters.Where(x => { return x.Location == ParameterLocation.Header; })
                     .Select(x => { return (ParameterSwift)x; }).ToList();
             }
         }
