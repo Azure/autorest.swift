@@ -52,7 +52,7 @@ namespace AutoRest.Swift.Model
                     return $"[{((IVariableType)ElementType).DecodeTypeDeclaration}]?";
                 }
 
-                return $"[{ElementType.Name}?]?";
+                return $"[{ElementType.Name}]?";
             }
         }
 

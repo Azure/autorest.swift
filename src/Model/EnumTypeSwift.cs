@@ -8,7 +8,7 @@ using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swift.Model
 {
-    public class EnumTypeSwift : EnumType
+    public class EnumTypeSwift : EnumType, IVariableType
     {
         public bool HasUniqueNames { get; set; }
 
@@ -51,5 +51,29 @@ namespace AutoRest.Swift.Model
         }
 
         public string Documentation { get; set; }
+
+        public string DecodeTypeDeclaration
+        {
+            get
+            {
+                return this.Name + "?";
+            }
+        }
+
+        public string VariableTypeDeclaration
+        {
+            get
+            {
+                return this.Name + "?";
+            }
+        }
+
+        public string VariableName
+        {
+            get
+            {
+                return SwiftNameHelper.convertToVariableName(this.Name);
+            }
+        }
     }
 }

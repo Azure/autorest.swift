@@ -5,15 +5,21 @@
 @using AutoRest.Core.Utilities
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
+import XCTest
+import Foundation
+@@testable import storage
 
 class @(Model.Name)Test : XCTestCase {
     func testModel() {
-        var model = @(Model.Name)
-@foreach (var property in Model.Properties) {
-<text>
-        model.@(property.Name) = nil
-</text>
-}
+        var model = @(Model.Name)()
+        @(Model.FieldsForTest())
 
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(model)
+            print(jsonData)
+        } catch _ {
+            print("Error");
+        }
     }
 }
