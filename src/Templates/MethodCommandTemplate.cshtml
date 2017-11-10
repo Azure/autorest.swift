@@ -11,7 +11,7 @@
 import Foundation
 import azureSwiftRuntime
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
-class @(Model.CommandModelName) : BaseCommand {
+public class @(Model.CommandModelName) : BaseCommand {
 @for (var i = 0; i < Model.URLParameters.Count; i++)
 {
     var param = Model.URLParameters[i];
@@ -72,7 +72,7 @@ class @(Model.CommandModelName) : BaseCommand {
         self.path = "@(Model.Url)"
     }
 @EmptyLine
-    override func preCall()  {
+    public override func preCall()  {
 @for(var i = 0; i < Model.URLParameters.Count; i++) {
     var param = Model.URLParameters[i];
     <text>
@@ -102,7 +102,7 @@ class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.BodyParameter;
     <text>
-    override func encodeBody() throws -> Data? {
+    public override func encodeBody() throws -> Data? {
         let jsonEncoder = JSONEncoder()
         let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration}"))
         return jsonData
@@ -113,7 +113,7 @@ class @(Model.CommandModelName) : BaseCommand {
 @if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
 {
     <text>
-    override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
+    public override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
         return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: jsonString)
     }
 
