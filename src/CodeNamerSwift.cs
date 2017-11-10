@@ -97,5 +97,11 @@ namespace AutoRest.Swift
                     : name + attachment
                 : name;
         }
+
+        public override string GetEnumMemberName(string member) {
+            string retVal = SwiftNameHelper.convertToValidSwiftTypeName(base.GetEnumMemberName(member));
+            retVal = retVal.Replace(" ", "");
+            return retVal;
+        }
     }
 }

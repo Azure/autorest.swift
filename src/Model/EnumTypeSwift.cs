@@ -60,6 +60,14 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                return this.Name + "?";
+            }
+        }
+
         public string VariableTypeDeclaration
         {
             get

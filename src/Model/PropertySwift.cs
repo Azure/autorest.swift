@@ -49,5 +49,18 @@ namespace AutoRest.Swift.Model
                 return this.ModelType.Name;
             }
         }
+
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                if (this.ModelType is IVariableType)
+                {
+                    return ((IVariableType)this.ModelType).EncodeTypeDeclaration;
+                }
+
+                return this.ModelType.Name;
+            }
+        }
     }
 }

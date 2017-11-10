@@ -56,6 +56,19 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                if (ElementType is IVariableType)
+                {
+                    return $"[{((IVariableType)ElementType).EncodeTypeDeclaration}]?";
+                }
+
+                return $"[{ElementType.Name}]?";
+            }
+        }
+
         public string VariableName
         {
             get

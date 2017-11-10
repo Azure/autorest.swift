@@ -6,8 +6,9 @@
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
 
-@WrapComment("// ", string.Format("{0}Protocol is {1}", Model.Name, Model.Documentation.ToSentence()))
+import Foundation
 
+@WrapComment("// ", string.Format("{0}Protocol is {1}", Model.Name, Model.Documentation.ToSentence()))
 public protocol @(Model.Name)Protocol : Codable {
     @(Model.FieldsAsString(true)) 
 }

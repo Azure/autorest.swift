@@ -9,6 +9,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Parsing;
 using AutoRest.Core.Utilities;
 using Microsoft.Perks.JsonRPC;
+using AutoRest.Swift.Model;
 
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
@@ -94,7 +95,14 @@ namespace AutoRest.Swift
             // process
             var plugin = (IAnyPlugin)new AutoRest.Swift.PluginSwift();
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-            
+            var testnamespace = await GetValue("testnamespace");
+            if (testnamespace != null)
+            {
+                CompositeTypeSwift.TestNamespace = testnamespace;
+            }
+            else {
+                CompositeTypeSwift.TestNamespace = "unkown";
+            }
             using (plugin.Activate())
             {
                 Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);

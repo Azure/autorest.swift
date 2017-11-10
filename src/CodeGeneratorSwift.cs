@@ -67,7 +67,7 @@ namespace AutoRest.Swift
             foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new DataModelTestTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("tests", $"{modelType.Name}Test{ImplementationFileExtension}"));
+                //await Write(modelTemplate, Path.Combine("tests", $"{modelType.Name}Test{ImplementationFileExtension}"));
             }
 
             // Enums
@@ -97,7 +97,7 @@ namespace AutoRest.Swift
                 Model = codeModel
             };
 
-            await Write(serviceClientTemplate, $"{codeModel.ServiceName}{ImplementationFileExtension}");
+            //await Write(serviceClientTemplate, $"{codeModel.ServiceName}{ImplementationFileExtension}");
             foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
             {
                 var methodGroupTemplate = new MethodGroupTemplate

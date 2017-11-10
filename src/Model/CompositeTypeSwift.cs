@@ -16,6 +16,8 @@ namespace AutoRest.Swift.Model
     /// </summary>
     public class CompositeTypeSwift : CompositeType, IVariableType
     {
+        public static string TestNamespace { get; set; }
+
         private bool _wrapper;
 
         // True if the type is returned by a method
@@ -223,7 +225,7 @@ namespace AutoRest.Swift.Model
                 }
 
                 var output = string.Empty;
-                var propName = property.Name.RawValue;
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var modifier = forInterface ? "" : "public";
                 //TODO: need to handle flatten property case.
                 output = string.Format("{2} var {0}: {1}", 
@@ -258,7 +260,7 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = property.Name.RawValue;
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var serializeName = property.SerializedName;
                 indented.Append($"case {propName} = \"{serializeName}\"\r\n");
             }
@@ -279,18 +281,20 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = property.Name.RawValue;
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
-                var serializeName = property.SerializedName;
+                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
+                    !(modelType is EnumType) && 
+                    !(modelType is DictionaryType) && 
                     !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
-                    indented.Append($"try container.encode({serializeName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})\r\n");
+                    indented.Append($"if self.{serializeName} != nil {{try container.encode({serializeName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})}}\r\n");
                 }
                 else
                 {
-                    indented.Append($"try container.encode({serializeName}, forKey: .{serializeName})\r\n");
+                    indented.Append($"if self.{serializeName} != nil {{try container.encode({serializeName}, forKey: .{serializeName})}}\r\n");
                 }
             }
 
@@ -310,17 +314,19 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = property.Name.RawValue;
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
-                var serializeName = property.SerializedName;
+                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
                     !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
                     modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
                 }
 
-                indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{serializeName})\r\n");
+                indented.Append($"if container.contains(.{serializeName}) {{\r\n");
+                indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{serializeName})\r\n");
+                indented.Append($"}}\r\n");
             }
 
             return indented.ToString();
@@ -339,9 +345,38 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = property.Name.RawValue;
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var serializeName = property.SerializedName;
                 indented.Append($"model.{propName} = nil\r\n");
+            }
+
+            return indented.ToString();
+        }
+
+        public string FieldsForValidation()
+        {
+            AddPolymorphicPropertyIfNecessary();
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldsForValidation());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var modelType = property.ModelType;
+                var modelDeclaration = modelType.Name;
+                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
+                if (modelType is IVariableType && 
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                {
+                }
+                else
+                {
+                }
             }
 
             return indented.ToString();
@@ -379,6 +414,14 @@ namespace AutoRest.Swift.Model
             get
             {
                 return this.Name + "Protocol?";
+            }
+        }
+
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                return this.Name + "?";
             }
         }
 

@@ -114,13 +114,26 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                if (this.ModelType is IVariableType)
+                {
+                    return ((IVariableType)this.ModelType).EncodeTypeDeclaration;
+                }
+
+                return this.ModelType.Name;
+            }
+        }
+
         public string DecodeTypeDeclaration
         {
             get
             {
                 if (this.ModelType is IVariableType)
                 {
-                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
+                    return ((IVariableType)this.ModelType).DecodeTypeDeclaration;
                 }
 
                 return this.ModelType.Name;
