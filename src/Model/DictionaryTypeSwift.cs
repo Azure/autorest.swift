@@ -79,6 +79,21 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string EncodeTypeDeclaration
+        {
+            get
+            {
+                if (ValueType is IVariableType)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).EncodeTypeDeclaration) + "?";;
+                }
+
+                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name) + "?";;
+            }
+        }
+
         public string VariableTypeDeclaration
         {
             get

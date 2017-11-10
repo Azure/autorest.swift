@@ -144,6 +144,21 @@ namespace AutoRest.Swift.Model
         }
 
         /// <summary>
+        /// Gets the return type name for this method.
+        /// </summary>
+        public string MethodReturnTypeDecodable
+        {
+            get
+            {
+                return HasReturnValue() ?
+                    ((ReturnValue().Body is IVariableType) ? 
+                        ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration 
+                            : ReturnValue().Body.Name.ToString()) 
+                        : "Void";
+            }
+        }
+
+        /// <summary>
         /// Returns the method return signature for this method (e.g. "foo, bar").
         /// </summary>
         /// <param name="helper">Indicates if this method is a helper method (i.e. preparer/sender/responder).</param>
@@ -354,6 +369,14 @@ namespace AutoRest.Swift.Model
                     }
                 }
                 return null;
+            }
+        }
+
+        public string ApiVersion 
+        {
+            get 
+            {
+                return this.CodeModel.ApiVersion ?? "";
             }
         }
     }

@@ -41,13 +41,13 @@ namespace AutoRest.Swift.Model
                         return "Bool?";
 
                     case KnownPrimaryType.Date:
-                        return "Int32?";
+                        return "String?";
 
                     case KnownPrimaryType.DateTime:
-                        return "Int32?";
+                        return "String?";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "Int32?";
+                        return "String?";
 
                     case KnownPrimaryType.Double:
                         return "Double?";
@@ -76,6 +76,9 @@ namespace AutoRest.Swift.Model
 
                     case KnownPrimaryType.Uuid:
                         return "NSUUID?";
+
+                    case KnownPrimaryType.Stream:
+                        return "NSData?";
 
                 }
 

@@ -10,5 +10,6 @@ namespace AutoRest.Swift.Model
         string VariableTypeDeclaration { get; }
         string VariableName { get; }
         string DecodeTypeDeclaration { get; }
+        string EncodeTypeDeclaration { get; }
     }
 }
