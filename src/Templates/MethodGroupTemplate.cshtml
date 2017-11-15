@@ -16,10 +16,12 @@
 @Header("// ")
 @EmptyLine
 @WrapComment("// ", Model.Documentation)
-class @(Model.ClientName) : @(Model.BaseClient) {
+import Foundation
+import azureSwiftRuntime
+struct @(Model.Name) {
 @foreach (var method in methods)
 {
-    @:@(Include(new MethodTemplate(), method))
+    @:@(Include(new MethodCommandTemplate(), method))
     @:@EmptyLine
 }
 }

@@ -34,10 +34,10 @@ namespace AutoRest.Swift
 
             SwaggerExtensions.ProcessGlobalParameters(cmg);
             // Add the current package name as a reserved keyword
-            FixStutteringTypeNames(cmg);
             TransformEnumTypes(cmg);
             TransformModelTypes(cmg);
             TransformMethods(cmg);
+            AppendTypeSpecifier(cmg);
             AzureExtensions.ProcessParameterizedHost(cmg);
 
             return cmg;
@@ -51,7 +51,6 @@ namespace AutoRest.Swift
             {
                 foreach (var property in mt.Properties)
                 {
-                    // gosdk: For now, inherit Enumerated type names from the composite type field name
                     if (property.ModelType is EnumTypeSwift)
                     {
                         var enumType = property.ModelType as EnumTypeSwift;
@@ -63,7 +62,7 @@ namespace AutoRest.Swift
                     }
                 }
             }
-
+ 
             // And add any others with a defined name and value list (but not already located)
             foreach (var mt in cmg.ModelTypes)
             {
@@ -77,48 +76,6 @@ namespace AutoRest.Swift
                 };
             }
 
-            // Add discriminators
-            foreach (var mt in cmg.ModelTypes)
-            {
-                if (mt.IsPolymorphic)
-                {
-                    var values  = new List<EnumValue>();
-                    foreach (var dt in (mt as CompositeTypeSwift).DerivedTypes)
-                    {
-                        var ev = new EnumValue();
-                        ev.Name =  string.Format("{0}{1}", CodeNamerSwift.Instance.GetTypeName(mt.PolymorphicDiscriminator),
-                            CodeNamerSwift.Instance.GetTypeName(dt.SerializedName));
-                        ev.SerializedName = dt.SerializedName;
-                        values.Add(ev);
-                    }
-                    bool nameAlreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
-                    bool alreadyExists = nameAlreadyExists;
-                    if (nameAlreadyExists)
-                    {
-                        (mt as CompositeTypeSwift).DiscriminatorEnum = cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));                        
-                        var existingValues = new List<string>();
-                        foreach (var v in cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Values)
-                        {
-                            existingValues.Add(v.SerializedName);
-                        }
-                        foreach (var v in values)
-                        {
-                            if (!existingValues.Any(ev => ev.Equals(v.SerializedName)))
-                            {
-                                alreadyExists = false;
-                            }
-                        }
-                    }
-                    if (!alreadyExists)
-                    {
-                        (mt as CompositeTypeSwift).DiscriminatorEnum = cmg.Add(New<EnumType>(new{
-                            Name = nameAlreadyExists ? string.Format("{0}{1}", mt.PolymorphicDiscriminator, mt.Name) :  mt.PolymorphicDiscriminator,
-                            Values = values,
-                    })); 
-                    }
-                }
-            }
-
             // now normalize the names
             // NOTE: this must be done after all enum types have been accounted for
             foreach (var enumType in cmg.EnumTypes)
@@ -129,7 +86,7 @@ namespace AutoRest.Swift
                     v.Name = CodeNamer.Instance.GetEnumMemberName(v.Name);
                 }
             }
-
+ 
             // Ensure all enumerated type values have the simplest possible unique names
             // -- The code assumes that all public type names are unique within the client and that the values
             //    of an enumerated type are unique within that type. To safely promote the enumerated value name
@@ -156,7 +113,7 @@ namespace AutoRest.Swift
                         topLevelNames.UnionWith(em.Values.Select(ev => ev.Name).ToList());
                     }
                 });
-
+ 
             // add documentation comment if there aren't any
             cmg.EnumTypes.Cast<EnumTypeSwift>()
                 .ForEach(em =>
@@ -270,48 +227,36 @@ namespace AutoRest.Swift
             }
         }
 
-        private void FixStutteringTypeNames(CodeModelSwift cmg)
+        private void AppendTypeSpecifier(CodeModelSwift cmg)
         {
-            // Trim the package name from exported types; append a suitable qualifier, if needed, to avoid conflicts.
             var exportedTypes = new HashSet<object>();
             exportedTypes.UnionWith(cmg.EnumTypes);
             exportedTypes.UnionWith(cmg.Methods);
             exportedTypes.UnionWith(cmg.ModelTypes);
 
-            var stutteringTypes = exportedTypes
-                                    .Where(exported =>
-                                        (exported is IModelType && (exported as IModelType).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.OrdinalIgnoreCase)) ||
-                                        (exported is Method && (exported as Method).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.OrdinalIgnoreCase)));
+            exportedTypes.ForEach(exported =>
+                {
+                    var name = exported is IModelType
+                                    ? (exported as IModelType).Name
+                                    : (exported as Method).Name;
 
-            if (stutteringTypes.Any())
-            {
-                Logger.Instance.Log(Category.Warning, string.Format(CultureInfo.InvariantCulture, Resources.NamesStutter, stutteringTypes.Count()));
-                stutteringTypes.ForEach(exported =>
+                    name = name.Value.TrimPackageName(cmg.Namespace);
+
+                    var nameInUse = exportedTypes
+                                        .Any(et => (et is IModelType && (et as IModelType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
+                    if (exported is EnumType)
                     {
-                        var name = exported is IModelType
-                                        ? (exported as IModelType).Name
-                                        : (exported as Method).Name;
-
-                        Logger.Instance.Log(Category.Warning, string.Format(CultureInfo.InvariantCulture, Resources.StutteringName, name));
-
-                        name = name.Value.TrimPackageName(cmg.Namespace);
-
-                        var nameInUse = exportedTypes
-                                            .Any(et => (et is IModelType && (et as IModelType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
-                        if (exported is EnumType)
-                        {
-                            (exported as EnumType).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Enum");
-                        }
-                        else if (exported is CompositeType)
-                        {
-                            (exported as CompositeType).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Type");
-                        }
-                        else if (exported is Method)
-                        {
-                            (exported as Method).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "");
-                        }
-                    });
-            }
+                        (exported as EnumType).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Enum");
+                    }
+                    else if (exported is CompositeType)
+                    {
+                        (exported as CompositeType).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Type");
+                    }
+                    else if (exported is Method)
+                    {
+                        (exported as Method).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "");
+                    }
+                });
         }
     }
 }

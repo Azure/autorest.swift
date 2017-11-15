@@ -8,8 +8,6 @@
 @using AutoRest.Swift.Model
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.MethodSwift>
-import Foundation
-import azureSwiftRuntime
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
 public class @(Model.CommandModelName) : BaseCommand {
 @for (var i = 0; i < Model.URLParameters.Count; i++)

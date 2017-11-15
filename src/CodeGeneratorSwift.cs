@@ -87,7 +87,7 @@ namespace AutoRest.Swift
                         Model = (MethodSwift)method
                     };
 
-                    await Write(methodContextTemplate, Path.Combine("commands", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
+                    //await Write(methodContextTemplate, Path.Combine("commands", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace AutoRest.Swift
                     Model = methodGroup
                 };
 
-                //await Write(methodGroupTemplate, FormatFileName(methodGroup.Name).ToLowerInvariant());
+                await Write(methodGroupTemplate, Path.Combine("commands", FormatFileName(methodGroup.Name).ToLowerInvariant()));
             }
         }
 
