@@ -62,7 +62,28 @@ namespace AutoRest.Swift
                     }
                 }
             }
- 
+
+            // fix up any enum types that are missing a name.
+            // NOTE: this must be done before the next code block
+            foreach (var method in cmg.Methods)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    if (parameter.ModelType is EnumTypeSwift)
+                    {
+                        var enumType = parameter.ModelType as EnumTypeSwift;
+
+                        if (!enumType.IsNamed)
+                        {
+                            var typeName = SwiftNameHelper.convertToValidSwiftTypeName(parameter.Name);
+                            enumType.SetName($"{method.Name}{typeName}");
+                            enumType.UnNamedEnumRelatedType = new EnumTypeSwift(enumType);
+                            cmg.Add(enumType.UnNamedEnumRelatedType);
+                    }
+                    }
+                }
+            }
+
             // And add any others with a defined name and value list (but not already located)
             foreach (var mt in cmg.ModelTypes)
             {
@@ -71,10 +92,12 @@ namespace AutoRest.Swift
                 {
                     if (!cmg.EnumTypes.Any(etm => etm.Equals(p.ModelType)))
                     {
-                        cmg.Add(new EnumTypeSwift(p.ModelType as EnumType));
+                        ((EnumTypeSwift)p.ModelType).UnNamedEnumRelatedType = new EnumTypeSwift(p.ModelType as EnumType);
+                        cmg.Add(((EnumTypeSwift)p.ModelType).UnNamedEnumRelatedType);
                     }
                 };
             }
+
 
             // now normalize the names
             // NOTE: this must be done after all enum types have been accounted for
@@ -118,6 +141,11 @@ namespace AutoRest.Swift
             cmg.EnumTypes.Cast<EnumTypeSwift>()
                 .ForEach(em =>
                 {
+                    if (em.Name.Equals("enum"))
+                    {
+                        em.Name.FixedValue = em.ClassName;
+                    }
+
                     if (string.IsNullOrEmpty(em.Documentation))
                     {
                         em.Documentation = string.Format("{0} enumerates the values for {1}.", em.Name, em.Name.FixedValue.ToPhrase());
@@ -226,7 +254,7 @@ namespace AutoRest.Swift
                     name = name.Value.TrimPackageName(cmg.Namespace);
 
                     var nameInUse = exportedTypes
-                                        .Any(et => (et is IModelType && (et as IModelType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
+                                        .Any(et => (et != exported && et is IModelType && (et as IModelType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
                     if (exported is EnumType)
                     {
                         (exported as EnumType).Name.FixedValue = CodeNamerSwift.AttachTypeName(name, cmg.Namespace, nameInUse, "Enum");

@@ -100,9 +100,9 @@ namespace AutoRest.Swift
         /// <returns>The formatted string</returns>
         public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
         {
-            //if(reservedWords.Contains(name)) {
-               // name = "_" + name;
-            //}
+            if(reservedWords.Contains(name)) {
+                name = name + "Enum";
+            }
 
             name = nameInUse
                 ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)

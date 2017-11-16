@@ -39,14 +39,14 @@ public class @(Model.CommandModelName) : BaseCommand {
     public var @($"{param.VariableName}") : String? {
         set {
             if newValue != nil {
-                headerParameters["@($"{param.VariableName}")"] = newValue!
+                headerParameters["@($"{param.SerializedName}")"] = newValue!
             }else {
-                headerParameters["@($"{param.VariableName}")"] = nil
+                headerParameters["@($"{param.SerializedName}")"] = nil
             }
         }
         get {
-            if headerParameters.contains(where: { $0.key == "@($"{param.VariableName}")" }) {
-                return headerParameters["@($"{param.VariableName}")"]
+            if headerParameters.contains(where: { $0.key == "@($"{param.SerializedName}")" }) {
+                return headerParameters["@($"{param.SerializedName}")"]
             }else {
                 return nil
             }
@@ -81,12 +81,12 @@ public class @(Model.CommandModelName) : BaseCommand {
 @for(var i = 0; i < Model.URLParameters.Count; i++) {
     var param = Model.URLParameters[i];
     <text>
-        if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.VariableName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
+        if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
     </text>
 }
 @for(var i = 0; i < Model.QueryParameters.Count; i++) {
     var param = Model.QueryParameters[i];
-    var parameterKey = param.VariableName;
+    var parameterKey = param.SerializedName;
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
         parameterKey = "api-version";
     }

@@ -261,7 +261,7 @@ namespace AutoRest.Swift.Model
             foreach (var property in properties)
             {
                 var propName = SwiftNameHelper.convertToVariableName(property.Name.RawValue);
-                var serializeName = SwiftNameHelper.convertToVariableName(property.SerializedName);
+                var serializeName = property.SerializedName;
                 indented.Append($"case {propName} = \"{serializeName}\"\r\n");
             }
 

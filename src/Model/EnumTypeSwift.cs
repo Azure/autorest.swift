@@ -12,14 +12,12 @@ namespace AutoRest.Swift.Model
     {
         public bool HasUniqueNames { get; set; }
 
+        public EnumTypeSwift UnNamedEnumRelatedType { get; set; }
+
         public EnumTypeSwift()
         {
             // the default value for unnamed enums is "enum"
             Name.OnGet += (v) => {
-                if(v != null && !v.EndsWith("Enum")) {
-                    v = v + "Enum";
-                }
-
                 return v == "enum" ? "string" : v;
             };
 
@@ -55,6 +53,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
+                if(this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.DecodeTypeDeclaration;
+                }
+
                 return this.Name.FixedValue + "?";
             }
         }
@@ -63,6 +66,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.EncodeTypeDeclaration;
+                }
+
                 return this.Name.FixedValue + "?";
             }
         }
@@ -71,6 +79,11 @@ namespace AutoRest.Swift.Model
         {
             get
             {
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.VariableTypeDeclaration;
+                }
+
                 return this.Name.FixedValue + "?";
             }
         }
