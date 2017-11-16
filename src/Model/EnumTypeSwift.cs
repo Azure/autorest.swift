@@ -15,7 +15,13 @@ namespace AutoRest.Swift.Model
         public EnumTypeSwift()
         {
             // the default value for unnamed enums is "enum"
-            Name.OnGet += v => v == "enum" ? "string" : v;
+            Name.OnGet += (v) => {
+                if(v != null && !v.EndsWith("Enum")) {
+                    v = v + "Enum";
+                }
+
+                return v == "enum" ? "string" : v;
+            };
 
             // Assume members have unique names
             HasUniqueNames = true;
@@ -24,13 +30,6 @@ namespace AutoRest.Swift.Model
         public EnumTypeSwift(EnumType source) : this()
         {
             this.LoadFrom(source);
-        }
-
-        public string GetEmptyCheck(string valueReference, bool asEmpty)
-        {
-            return string.Format(asEmpty
-                                    ? "len(string({0})) == 0"
-                                    : "len(string({0})) > 0", valueReference);
         }
 
         public bool IsNamed => Name != "string" && Values.Any();
@@ -56,7 +55,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                return this.Name.FixedValue + "?";
             }
         }
 
@@ -64,7 +63,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                return this.Name.FixedValue + "?";
             }
         }
 
@@ -72,7 +71,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                return this.Name.FixedValue + "?";
             }
         }
 

@@ -14,6 +14,10 @@ namespace AutoRest.Swift.Model
                 name = name.Substring(0, 1).ToLower() + name.Substring(1);
             }
 
+            if(name.Equals("body", StringComparison.OrdinalIgnoreCase)) {
+                name = "_body";
+            }
+
             return name;
         }
 

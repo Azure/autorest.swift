@@ -100,17 +100,19 @@ namespace AutoRest.Swift
         /// <returns>The formatted string</returns>
         public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
         {
-            Logger.Instance.Log(Category.Warning, "AttachTypeName: " + name);
+            //if(reservedWords.Contains(name)) {
+               // name = "_" + name;
+            //}
 
-            if(reservedWords.Contains(name)) {
-                //name = "_" + name;
-            }
-
-            return nameInUse
+            name = nameInUse
                 ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
                     ? name
                     : name + attachment
                 : name;
+
+            Logger.Instance.Log(Category.Warning, "AttachTypeName: " + name);
+
+            return name;
         }
 
         public override string GetEnumMemberName(string member) {

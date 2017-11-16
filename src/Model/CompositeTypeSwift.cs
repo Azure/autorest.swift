@@ -225,7 +225,7 @@ namespace AutoRest.Swift.Model
                 }
 
                 var output = string.Empty;
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = SwiftNameHelper.convertToVariableName(property.Name.RawValue);
                 var modifier = forInterface ? "" : "public";
                 //TODO: need to handle flatten property case.
                 output = string.Format("{2} var {0}: {1}", 
@@ -260,8 +260,8 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
-                var serializeName = property.SerializedName;
+                var propName = SwiftNameHelper.convertToVariableName(property.Name.RawValue);
+                var serializeName = SwiftNameHelper.convertToVariableName(property.SerializedName);
                 indented.Append($"case {propName} = \"{serializeName}\"\r\n");
             }
 
@@ -314,10 +314,10 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = SwiftNameHelper.convertToVariableName(property.Name.RawValue);
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
-                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
+                var serializeName = SwiftNameHelper.convertToVariableName(property.SerializedName);
                 if (modelType is IVariableType && 
                     !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {

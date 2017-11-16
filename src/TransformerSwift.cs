@@ -146,7 +146,6 @@ namespace AutoRest.Swift
             }
 
             // Find all methods that returned paged results
-
             cmg.Methods.Cast<MethodSwift>()
                 .Where(m => m.IsPageable).ToList()
                 .ForEach(m =>
@@ -207,22 +206,6 @@ namespace AutoRest.Swift
                 foreach (var parameter in method.Parameters)
                 {
                     parameter.Name = scope.GetVariableName(parameter.Name);
-                }
-
-                // fix up method return types
-                if (method.ReturnType.Body.ShouldBeSyntheticType())
-                {
-                    var ctg = new CompositeTypeSwift(method.ReturnType.Body);
-                    if (wrapperTypes.ContainsKey(ctg.Name))
-                    {
-                        method.ReturnType = new Response(wrapperTypes[ctg.Name], method.ReturnType.Headers);
-                    }
-                    else
-                    {
-                        wrapperTypes.Add(ctg.Name, ctg);
-                        cmg.Add(ctg);
-                        method.ReturnType = new Response(ctg, method.ReturnType.Headers);
-                    }
                 }
             }
         }

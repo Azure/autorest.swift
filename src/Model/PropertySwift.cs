@@ -6,7 +6,7 @@ using AutoRest.Core.Model;
 
 namespace AutoRest.Swift.Model
 {
-    public class PropertySwift : Property
+    public class PropertySwift : Property, IVariableType
     {
         public PropertySwift()
         {
