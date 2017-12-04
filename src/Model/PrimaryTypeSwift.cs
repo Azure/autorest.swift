@@ -78,7 +78,8 @@ namespace AutoRest.Swift.Model
                         return "NSUUID?";
 
                     case KnownPrimaryType.Stream:
-                        return "NSData?";
+                        //return "NSData?";
+                        return "String?";
 
                 }
 

@@ -10,8 +10,12 @@ namespace AutoRest.Swift.Model
         {
             if (!string.IsNullOrWhiteSpace(name) && name.Length > 1)
             {
-                name = name.Replace(" ", "");
+                name = name.Replace(" ", "").Replace("-", "");
                 name = name.Substring(0, 1).ToLower() + name.Substring(1);
+            }
+
+            if(name.Equals("body", StringComparison.OrdinalIgnoreCase)) {
+                name = "_body";
             }
 
             return name;
@@ -19,9 +23,11 @@ namespace AutoRest.Swift.Model
 
         internal static string convertToValidSwiftTypeName(string name)
         {
-            if (!string.IsNullOrWhiteSpace(name) && name.Length > 0)
+            if (!string.IsNullOrWhiteSpace(name) && name.Length > 1)
             {
-                name = name.Replace(" ", "");
+                name = name.Replace(" ", "").Replace("-", "");
+                name = name.Substring(0, 1).ToUpper() + name.Substring(1);
+
             }
 
             return name;

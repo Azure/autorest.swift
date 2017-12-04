@@ -8,15 +8,13 @@
 @using AutoRest.Swift.Model
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.MethodSwift>
-import Foundation
-import azureSwiftRuntime
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
-class @(Model.CommandModelName) : BaseCommand {
+public class @(Model.CommandModelName) : BaseCommand {
 @for (var i = 0; i < Model.URLParameters.Count; i++)
 {
     var param = Model.URLParameters[i];
     <text>
-    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
     </text>
 }
 
@@ -24,11 +22,11 @@ class @(Model.CommandModelName) : BaseCommand {
     var param = Model.QueryParameters[i];
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
 <text>
-    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") = "@($"{Model.ApiVersion}")"
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") = "@($"{Model.ApiVersion}")"
 </text>
     }else {
 <text>
-    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
 </text>
     }
 }
@@ -38,17 +36,17 @@ class @(Model.CommandModelName) : BaseCommand {
     @EmptyLine
     var param = Model.HeaderParameters[i];
     <text>
-    var @($"{param.VariableName}") : String? {
+    public var @($"{param.VariableName}") : String? {
         set {
             if newValue != nil {
-                headerParameters["@($"{param.VariableName}")"] = newValue!
+                headerParameters["@($"{param.SerializedName}")"] = newValue!
             }else {
-                headerParameters["@($"{param.VariableName}")"] = nil
+                headerParameters["@($"{param.SerializedName}")"] = nil
             }
         }
         get {
-            if headerParameters.contains(where: { $0.key == "@($"{param.VariableName}")" }) {
-                return headerParameters["@($"{param.VariableName}")"]
+            if headerParameters.contains(where: { $0.key == "@($"{param.SerializedName}")" }) {
+                return headerParameters["@($"{param.SerializedName}")"]
             }else {
                 return nil
             }
@@ -61,27 +59,34 @@ class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.BodyParameter;
     <text>
-    var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}")
     </text>
 }
 @EmptyLine
-    override init() {
+    public init(test:String) {
+        super.init()
+        self.method = "@(Model.HttpMethod)"
+        self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
+        self.path = "@(Model.Url)"
+    }
+
+    public override init() {
         super.init()
         self.method = "@(Model.HttpMethod)"
         self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
         self.path = "@(Model.Url)"
     }
 @EmptyLine
-    override func preCall()  {
+    public override func preCall()  {
 @for(var i = 0; i < Model.URLParameters.Count; i++) {
     var param = Model.URLParameters[i];
     <text>
-        if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.VariableName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
+        if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
     </text>
 }
 @for(var i = 0; i < Model.QueryParameters.Count; i++) {
     var param = Model.QueryParameters[i];
-    var parameterKey = param.VariableName;
+    var parameterKey = param.SerializedName;
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
         parameterKey = "api-version";
     }
@@ -102,7 +107,7 @@ class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.BodyParameter;
     <text>
-    override func encodeBody() throws -> Data? {
+    public override func encodeBody() throws -> Data? {
         let jsonEncoder = JSONEncoder()
         let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration}"))
         return jsonData
@@ -113,7 +118,7 @@ class @(Model.CommandModelName) : BaseCommand {
 @if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
 {
     <text>
-    override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
+    public override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
         return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: jsonString)
     }
 

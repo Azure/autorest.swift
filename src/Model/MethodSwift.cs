@@ -40,7 +40,7 @@ namespace AutoRest.Swift.Model
 
         public string CommandModelName
         {
-            get { return this.MethodGroup.Name + this.Name + "Command";  }
+            get { return  this.Name + "Command";  }
         }
 
         internal void Transform(CodeModelSwift cmg)

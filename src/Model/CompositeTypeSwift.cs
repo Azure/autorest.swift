@@ -225,7 +225,7 @@ namespace AutoRest.Swift.Model
                 }
 
                 var output = string.Empty;
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = property.VariableName;
                 var modifier = forInterface ? "" : "public";
                 //TODO: need to handle flatten property case.
                 output = string.Format("{2} var {0}: {1}", 
@@ -260,7 +260,7 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = property.VariableName;
                 var serializeName = property.SerializedName;
                 indented.Append($"case {propName} = \"{serializeName}\"\r\n");
             }
@@ -281,20 +281,18 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = property.VariableName;
                 var modelType = property.ModelType;
-                var modelDeclaration = modelType.Name;
-                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
                     !(modelType is EnumType) && 
                     !(modelType is DictionaryType) && 
                     !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
-                    indented.Append($"if self.{serializeName} != nil {{try container.encode({serializeName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{serializeName})}}\r\n");
+                    indented.Append($"if self.{propName} != nil {{try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{propName})}}\r\n");
                 }
                 else
                 {
-                    indented.Append($"if self.{serializeName} != nil {{try container.encode({serializeName}, forKey: .{serializeName})}}\r\n");
+                    indented.Append($"if self.{propName} != nil {{try container.encode({propName}, forKey: .{propName})}}\r\n");
                 }
             }
 
@@ -314,18 +312,17 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = property.VariableName;
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
-                var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
                     !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
                 {
                     modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
                 }
 
-                indented.Append($"if container.contains(.{serializeName}) {{\r\n");
-                indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{serializeName})\r\n");
+                indented.Append($"if container.contains(.{propName}) {{\r\n");
+                indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
                 indented.Append($"}}\r\n");
             }
 
@@ -345,7 +342,7 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
-                var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
+                var propName = property.VariableName;
                 var serializeName = property.SerializedName;
                 indented.Append($"model.{propName} = nil\r\n");
             }
@@ -421,7 +418,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                return this.TypeName + "?";
             }
         }
 
@@ -429,7 +426,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                return this.TypeName + "?";
             }
         }
 
@@ -438,6 +435,12 @@ namespace AutoRest.Swift.Model
             get
             {
                 return SwiftNameHelper.convertToVariableName(this.Name);
+            }
+        }
+
+        public string TypeName {
+            get {
+                return this.Name + "Data";
             }
         }
     }

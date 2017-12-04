@@ -7,7 +7,7 @@
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
 import Foundation
 
-public struct @(Model.Name) : @(Model.InterfaceOutput) {
+public struct @(Model.TypeName) : @(Model.InterfaceOutput) {
     @(Model.FieldsAsString())
 @EmptyLine
     enum CodingKeys: String, CodingKey {

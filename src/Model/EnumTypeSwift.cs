@@ -12,10 +12,14 @@ namespace AutoRest.Swift.Model
     {
         public bool HasUniqueNames { get; set; }
 
+        public EnumTypeSwift UnNamedEnumRelatedType { get; set; }
+
         public EnumTypeSwift()
         {
             // the default value for unnamed enums is "enum"
-            Name.OnGet += v => v == "enum" ? "string" : v;
+            Name.OnGet += (v) => {
+                return v == "enum" ? "string" : v;
+            };
 
             // Assume members have unique names
             HasUniqueNames = true;
@@ -24,13 +28,6 @@ namespace AutoRest.Swift.Model
         public EnumTypeSwift(EnumType source) : this()
         {
             this.LoadFrom(source);
-        }
-
-        public string GetEmptyCheck(string valueReference, bool asEmpty)
-        {
-            return string.Format(asEmpty
-                                    ? "len(string({0})) == 0"
-                                    : "len(string({0})) > 0", valueReference);
         }
 
         public bool IsNamed => Name != "string" && Values.Any();
@@ -56,7 +53,12 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                if(this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.DecodeTypeDeclaration;
+                }
+
+                return this.Name.FixedValue + "?";
             }
         }
 
@@ -64,7 +66,12 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.EncodeTypeDeclaration;
+                }
+
+                return this.Name.FixedValue + "?";
             }
         }
 
@@ -72,7 +79,25 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                return this.Name + "?";
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.VariableTypeDeclaration;
+                }
+
+                return this.Name.FixedValue + "?";
+            }
+        }
+
+        public string TypeName
+        {
+            get
+            {
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.TypeName;
+                }
+
+                return this.Name.FixedValue;
             }
         }
 

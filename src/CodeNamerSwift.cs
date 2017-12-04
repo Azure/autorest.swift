@@ -9,6 +9,7 @@ using System.Net;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
+using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Swift.Model;
 using System.Text;
@@ -79,10 +80,18 @@ namespace AutoRest.Swift
                                                             "NewWithoutDefaults",
                                                         };
 
+        public static HashSet<string> reservedWords = new HashSet<string>(new string[] {
+                                                            "class","break","as","associativity","AnyObject","Any","String","Dictionary","Set","Array",
+                                                            "deinit","case","dynamicType","convenience","enum","continue","false","dynamic extension",
+                                                            "default","is","didSet","func","do","nil","final","import","else","self","get","init","fallthrough",
+                                                            "Self","infixvinternal","for","super","inout","let","if","true","lazy","operator","in","__COLUMN__",
+                                                            "left","private","return","__FILE__","mutating protocol","switch","__FUNCTION__","none","public",
+                                                            "where","__LINE__","nonmutating","static","while","optional","struct","override","subscript","postfix",
+                                                            "typealias","precedence","var","prefix","Protocol","required","right","set","Type","unowned","weak"
+        }, StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
-        /// Formats a string to work around golint name stuttering
-        /// Refactor -> CodeModelTransformer
+        /// Formats a string
         /// </summary>
         /// <param name="name"></param>
         /// <param name="packageName"></param>
@@ -91,11 +100,19 @@ namespace AutoRest.Swift
         /// <returns>The formatted string</returns>
         public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
         {
-            return nameInUse
+            if(reservedWords.Contains(name)) {
+                name = name + "Enum";
+            }
+
+            name = nameInUse
                 ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
                     ? name
                     : name + attachment
                 : name;
+
+            Logger.Instance.Log(Category.Warning, "AttachTypeName: " + name);
+
+            return name;
         }
 
         public override string GetEnumMemberName(string member) {
