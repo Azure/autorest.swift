@@ -38,7 +38,6 @@ namespace AutoRest.Swift
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-
             var codeModel = cm as CodeModelSwift;
             if (codeModel == null)
             {
@@ -98,8 +97,13 @@ namespace AutoRest.Swift
             };
 
             //await Write(serviceClientTemplate, $"{codeModel.ServiceName}{ImplementationFileExtension}");
-            foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
+            foreach (var methodGroup in codeModel.MethodGroups)
             {
+                if(string.IsNullOrWhiteSpace(methodGroup.Name))
+                {
+                    methodGroup.Name = "Service";
+                }
+
                 var methodGroupTemplate = new MethodGroupTemplate
                 {
                     Model = methodGroup
