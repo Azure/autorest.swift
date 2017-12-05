@@ -59,7 +59,7 @@ namespace AutoRest.Swift
             foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new DataModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("data", $"{modelType.Name}{ImplementationFileExtension}"));
+                await Write(modelTemplate, Path.Combine("data", $"{modelType.TypeName}{ImplementationFileExtension}"));
             }
 
             //Model Tests

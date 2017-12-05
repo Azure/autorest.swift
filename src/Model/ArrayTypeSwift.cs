@@ -12,24 +12,6 @@ namespace AutoRest.Swift.Model
         {
         }
 
-        /// <summary>
-        /// Add imports for sequence type.
-        /// </summary>
-        /// <param name="imports"></param>
-        public void AddImports(HashSet<string> imports)
-        {
-            ElementType.AddImports(imports);
-        }
-
-        public string GetElement => $"{ElementType.Name}";
-
-        public string GetEmptyCheck(string valueReference, bool asEmpty)
-        {
-            return string.Format(asEmpty
-                                   ? "{0} == nil || len({0}) == 0"
-                                   : "{0} != nil && len({0}) > 0", valueReference);
-        }
-            
         public string VariableTypeDeclaration
         {
             get

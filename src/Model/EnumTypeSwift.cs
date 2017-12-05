@@ -88,6 +88,19 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string TypeName
+        {
+            get
+            {
+                if (this.UnNamedEnumRelatedType != null)
+                {
+                    return this.UnNamedEnumRelatedType.TypeName;
+                }
+
+                return this.Name.FixedValue;
+            }
+        }
+
         public string VariableName
         {
             get
