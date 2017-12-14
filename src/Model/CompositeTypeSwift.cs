@@ -58,6 +58,20 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string BaseTypeInterfaceForProtocol
+        {
+            get
+            {
+                CompositeTypeSwift baseType = (CompositeTypeSwift)this.BaseModelType;
+                if(baseType != null)
+                {
+                    return $"{baseType.InterfaceOutput}";
+                }
+
+                return $"Codable";
+            }
+        }
+
         public bool HasPolymorphicFields
         {
             get
@@ -209,7 +223,7 @@ namespace AutoRest.Swift.Model
             AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
-            if (BaseModelType != null)
+            if (BaseModelType != null && !forInterface)
             {
                 indented.Append(((CompositeTypeSwift)BaseModelType).FieldsAsString(forInterface));
             }
