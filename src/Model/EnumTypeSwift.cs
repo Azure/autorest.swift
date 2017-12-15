@@ -25,6 +25,8 @@ namespace AutoRest.Swift.Model
             HasUniqueNames = true;
         }
 
+        public bool IsRequired { get; set; }
+
         public EnumTypeSwift(EnumType source) : this()
         {
             this.LoadFrom(source);
@@ -49,55 +51,50 @@ namespace AutoRest.Swift.Model
 
         public string Documentation { get; set; }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
+            var retVal = this.Name.FixedValue;
+            if (this.UnNamedEnumRelatedType != null)
             {
-                if(this.UnNamedEnumRelatedType != null)
-                {
-                    return this.UnNamedEnumRelatedType.DecodeTypeDeclaration;
-                }
-
-                return this.Name.FixedValue + "?";
+                retVal = this.UnNamedEnumRelatedType.DecodeTypeDeclaration(isRequired);
             }
+
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
+            var retVal = this.Name.FixedValue;
+            if (this.UnNamedEnumRelatedType != null)
             {
-                if (this.UnNamedEnumRelatedType != null)
-                {
-                    return this.UnNamedEnumRelatedType.EncodeTypeDeclaration;
-                }
-
-                return this.Name.FixedValue + "?";
+                retVal = this.UnNamedEnumRelatedType.EncodeTypeDeclaration(isRequired);
             }
+
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string VariableTypeDeclaration
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
+            var retVal = this.Name.FixedValue;
+            if (this.UnNamedEnumRelatedType != null)
             {
-                if (this.UnNamedEnumRelatedType != null)
-                {
-                    return this.UnNamedEnumRelatedType.VariableTypeDeclaration;
-                }
-
-                return this.Name.FixedValue + "?";
+                retVal = this.UnNamedEnumRelatedType.VariableTypeDeclaration(isRequired);
             }
+
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
         public string TypeName
         {
             get
             {
+                var retVal = this.Name.FixedValue;
                 if (this.UnNamedEnumRelatedType != null)
                 {
-                    return this.UnNamedEnumRelatedType.TypeName;
+                    retVal = this.UnNamedEnumRelatedType.TypeName;
                 }
 
-                return this.Name.FixedValue;
+                return retVal;
             }
         }
 

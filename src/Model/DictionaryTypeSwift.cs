@@ -22,6 +22,8 @@ namespace AutoRest.Swift.Model
         {
         }
 
+        public bool IsRequired { get; set; }
+
         /// <summary>
         /// Add imports for dictionary type.
         /// </summary>
@@ -64,49 +66,43 @@ namespace AutoRest.Swift.Model
             return ValueType.GetHashCode();
         }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
+                var retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name);
                 if (ValueType is IVariableType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        ((IVariableType)ValueType).DecodeTypeDeclaration) + "?";;
+                    retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).DecodeTypeDeclaration(isRequired));
                 }
 
-                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name) + "?";;
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
+                var retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name);
                 if (ValueType is IVariableType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        ((IVariableType)ValueType).EncodeTypeDeclaration) + "?";;
+                    retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).EncodeTypeDeclaration(isRequired));
                 }
 
-                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name) + "?";;
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string VariableTypeDeclaration
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
-            {
+                var retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        this.ValueType.Name);
                 if (ValueType is IVariableType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        ((IVariableType)ValueType).VariableTypeDeclaration) + "?";
+                    retVal = string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
+                        ((IVariableType)ValueType).VariableTypeDeclaration(isRequired));
                 }
 
-                return string.Format(CultureInfo.InvariantCulture, FieldNameFormat,
-                        this.ValueType.Name) + "?"; ;
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
         public string VariableName

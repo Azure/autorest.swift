@@ -235,7 +235,7 @@ namespace AutoRest.Swift.Model
                 var modelDeclaration = modelType.Name;
                 if (modelType is IVariableType)
                 {
-                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration;
+                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration(property.IsRequired);
                 }
 
                 var output = string.Empty;
@@ -297,16 +297,31 @@ namespace AutoRest.Swift.Model
             {
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
-                if (modelType is IVariableType && 
-                    !(modelType is EnumType) && 
-                    !(modelType is DictionaryType) && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                if (modelType is IVariableType &&
+                    !(modelType is EnumType) &&
+                    !(modelType is DictionaryType) &&
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
                 {
-                    indented.Append($"if self.{propName} != nil {{try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{propName})}}\r\n");
+                    if (property.IsRequired)
+                    {
+                        indented.Append($"try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)}, forKey: .{propName})\r\n");
+                    }
+                    else
+                    {
+                        indented.Append($"if self.{propName} != nil {{try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)}, forKey: .{propName})}}\r\n");
+                    }
                 }
                 else
                 {
-                    indented.Append($"if self.{propName} != nil {{try container.encode({propName}, forKey: .{propName})}}\r\n");
+                    if (property.IsRequired)
+                    {
+                        indented.Append($"try container.encode({propName}, forKey: .{propName})\r\n");
+                    }
+                    else
+                    {
+                        indented.Append($"if self.{propName} != nil {{try container.encode({propName}, forKey: .{propName})}}\r\n");
+                    }
+                    
                 }
             }
 
@@ -330,14 +345,21 @@ namespace AutoRest.Swift.Model
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
                 if (modelType is IVariableType && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
                 {
-                    modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
+                    modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired);
                 }
 
-                indented.Append($"if container.contains(.{propName}) {{\r\n");
-                indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
-                indented.Append($"}}\r\n");
+                if (property.IsRequired)
+                {
+                    indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                }
+                else
+                {
+                    indented.Append($"if container.contains(.{propName}) {{\r\n");
+                    indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    indented.Append($"}}\r\n");
+                }
             }
 
             return indented.ToString();
@@ -382,7 +404,7 @@ namespace AutoRest.Swift.Model
                 var modelDeclaration = modelType.Name;
                 var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
                 {
                 }
                 else
@@ -420,28 +442,21 @@ namespace AutoRest.Swift.Model
             Name = name;
         }
 
-        public string VariableTypeDeclaration
+        public bool IsRequired { get; set; }
+
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.Name + "Protocol?";
-            }
+            return SwiftNameHelper.getTypeName(this.Name + "Protocol", isRequired);
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.TypeName + "?";
-            }
+                return SwiftNameHelper.getTypeName(this.TypeName, isRequired);
         }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.TypeName + "?";
-            }
+            return SwiftNameHelper.getTypeName(this.TypeName, isRequired);
         }
 
         public string VariableName

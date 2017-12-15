@@ -29,43 +29,37 @@ namespace AutoRest.Swift.Model
             }
         }
 
-        public string VariableTypeDeclaration
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                if(this.ModelType is IVariableType)
-                {
-                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
-                }
-
-                return this.ModelType.Name;
-            }
-        }
-
-        public string EncodeTypeDeclaration
-        {
-            get
-            {
+                var retVal = this.ModelType.Name;
                 if (this.ModelType is IVariableType)
                 {
-                    return ((IVariableType)this.ModelType).EncodeTypeDeclaration;
+                    retVal = ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
                 }
 
-                return this.ModelType.Name;
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string DecodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
+                var retVal = this.ModelType.Name;
                 if (this.ModelType is IVariableType)
                 {
-                    return ((IVariableType)this.ModelType).DecodeTypeDeclaration;
+                    retVal = ((IVariableType)this.ModelType).EncodeTypeDeclaration(isRequired);
                 }
 
-                return this.ModelType.Name;
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
+        }
+
+        public string DecodeTypeDeclaration(bool isRequired)
+        {
+                var retVal = this.ModelType.Name;
+                if (this.ModelType is IVariableType)
+                {
+                    retVal = ((IVariableType)this.ModelType).DecodeTypeDeclaration(isRequired);
+                }
+
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
     }
 }

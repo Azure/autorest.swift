@@ -7,9 +7,12 @@ namespace AutoRest.Swift.Model
 {
     public interface IVariableType
     {
-        string VariableTypeDeclaration { get; }
+        string VariableTypeDeclaration(bool isRequired);
+
         string VariableName { get; }
-        string DecodeTypeDeclaration { get; }
-        string EncodeTypeDeclaration { get; }
+
+        string DecodeTypeDeclaration(bool isRequired);
+
+        string EncodeTypeDeclaration(bool isRequired);
     }
 }

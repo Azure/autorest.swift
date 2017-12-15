@@ -14,7 +14,7 @@ public class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.URLParameters[i];
     <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}")
     </text>
 }
 
@@ -22,11 +22,11 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.QueryParameters[i];
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
 <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") = "@($"{Model.ApiVersion}")"
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}") = "@($"{Model.ApiVersion}")"
 </text>
     }else {
 <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}")
 </text>
     }
 }
@@ -59,7 +59,7 @@ public class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.BodyParameter;
     <text>
-    public var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration(param.IsRequired)}")
     </text>
 }
 @EmptyLine
@@ -109,7 +109,7 @@ public class @(Model.CommandModelName) : BaseCommand {
     <text>
     public override func encodeBody() throws -> Data? {
         let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration}"))
+        let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration(param.IsRequired)}"))
         return jsonData
     }
     </text>

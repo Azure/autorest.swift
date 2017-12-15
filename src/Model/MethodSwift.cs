@@ -137,7 +137,7 @@ namespace AutoRest.Swift.Model
             {
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
-                        ((IVariableType)ReturnValue().Body).VariableTypeDeclaration 
+                        ((IVariableType)ReturnValue().Body).VariableTypeDeclaration(false)
                             : ReturnValue().Body.Name.ToString()) 
                         : "Void";
             }
@@ -152,7 +152,7 @@ namespace AutoRest.Swift.Model
             {
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
-                        ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration 
+                        ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration(false) 
                             : ReturnValue().Body.Name.ToString()) 
                         : "Void";
             }
@@ -241,7 +241,7 @@ namespace AutoRest.Swift.Model
             {
                 if(this.ReturnType.Body is IVariableType)
                 {
-                    return ((IVariableType)this.ReturnType.Body).VariableTypeDeclaration;
+                    return ((IVariableType)this.ReturnType.Body).VariableTypeDeclaration(false);
                 }else
                 {
                     return this.ReturnType.Body.Name;

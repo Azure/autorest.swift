@@ -24,43 +24,34 @@ namespace AutoRest.Swift.Model
             }
         }
 
-        public string VariableTypeDeclaration
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
+            if (this.ModelType is IVariableType)
             {
-                if (this.ModelType is IVariableType)
-                {
-                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
-                }
-
-                return this.ModelType.Name;
+                return ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
             }
+
+            return this.ModelType.Name;
         }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
+            if (this.ModelType is IVariableType)
             {
-                if (this.ModelType is IVariableType)
-                {
-                    return ((IVariableType)this.ModelType).VariableTypeDeclaration;
-                }
-
-                return this.ModelType.Name;
+                return ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
             }
+
+            return this.ModelType.Name;
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
+            if (this.ModelType is IVariableType)
             {
-                if (this.ModelType is IVariableType)
-                {
-                    return ((IVariableType)this.ModelType).EncodeTypeDeclaration;
-                }
-
-                return this.ModelType.Name;
+                return ((IVariableType)this.ModelType).EncodeTypeDeclaration(isRequired);
             }
+
+            return this.ModelType.Name;
         }
     }
 }
