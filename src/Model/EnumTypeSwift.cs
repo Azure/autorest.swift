@@ -56,7 +56,7 @@ namespace AutoRest.Swift.Model
             var retVal = this.Name.FixedValue;
             if (this.UnNamedEnumRelatedType != null)
             {
-                retVal = this.UnNamedEnumRelatedType.DecodeTypeDeclaration(isRequired);
+                return this.UnNamedEnumRelatedType.DecodeTypeDeclaration(isRequired);
             }
 
             return SwiftNameHelper.getTypeName(retVal, isRequired);
@@ -67,7 +67,7 @@ namespace AutoRest.Swift.Model
             var retVal = this.Name.FixedValue;
             if (this.UnNamedEnumRelatedType != null)
             {
-                retVal = this.UnNamedEnumRelatedType.EncodeTypeDeclaration(isRequired);
+                return this.UnNamedEnumRelatedType.EncodeTypeDeclaration(isRequired);
             }
 
             return SwiftNameHelper.getTypeName(retVal, isRequired);
@@ -78,7 +78,7 @@ namespace AutoRest.Swift.Model
             var retVal = this.Name.FixedValue;
             if (this.UnNamedEnumRelatedType != null)
             {
-                retVal = this.UnNamedEnumRelatedType.VariableTypeDeclaration(isRequired);
+                return this.UnNamedEnumRelatedType.VariableTypeDeclaration(isRequired);
             }
 
             return SwiftNameHelper.getTypeName(retVal, isRequired);
@@ -91,7 +91,7 @@ namespace AutoRest.Swift.Model
                 var retVal = this.Name.FixedValue;
                 if (this.UnNamedEnumRelatedType != null)
                 {
-                    retVal = this.UnNamedEnumRelatedType.TypeName;
+                    return this.UnNamedEnumRelatedType.TypeName;
                 }
 
                 return retVal;

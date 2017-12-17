@@ -34,7 +34,7 @@ namespace AutoRest.Swift.Model
                 var retVal = this.ModelType.Name;
                 if (this.ModelType is IVariableType)
                 {
-                    retVal = ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
+                    return ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
                 }
 
                 return SwiftNameHelper.getTypeName(retVal, isRequired);
@@ -45,7 +45,7 @@ namespace AutoRest.Swift.Model
                 var retVal = this.ModelType.Name;
                 if (this.ModelType is IVariableType)
                 {
-                    retVal = ((IVariableType)this.ModelType).EncodeTypeDeclaration(isRequired);
+                    return ((IVariableType)this.ModelType).EncodeTypeDeclaration(isRequired);
                 }
 
                 return SwiftNameHelper.getTypeName(retVal, isRequired);
@@ -56,7 +56,7 @@ namespace AutoRest.Swift.Model
                 var retVal = this.ModelType.Name;
                 if (this.ModelType is IVariableType)
                 {
-                    retVal = ((IVariableType)this.ModelType).DecodeTypeDeclaration(isRequired);
+                    return ((IVariableType)this.ModelType).DecodeTypeDeclaration(isRequired);
                 }
 
                 return SwiftNameHelper.getTypeName(retVal, isRequired);

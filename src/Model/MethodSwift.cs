@@ -231,6 +231,22 @@ namespace AutoRest.Swift.Model
             return ReturnType ?? DefaultResponse;
         }
 
+        public bool IsBodyParameterTypeAnEnum() {
+            if(this.BodyParameter == null) {
+                return false;
+            }
+
+            return this.BodyParameter.ModelType is EnumType;
+        }
+
+        public bool IsReturnTypeAnEnum() {
+            if(!this.HasReturnValue()) {
+                return false;
+            }
+
+            return this.ReturnType.Body is EnumType;
+        }
+
         /// <summary>
         /// Return response object for the method.
         /// </summary>
@@ -378,6 +394,15 @@ namespace AutoRest.Swift.Model
             {
                 return this.CodeModel.ApiVersion ?? "";
             }
+        }
+
+        /// <summary>
+        /// Gets the execute command name.
+        /// </summary>
+        /// <returns>The execute command name</returns>
+        public string GetExecuteCommandName()
+        {
+            return this.IsLongRunningOperation() ? "executeAsyncLRO" : "executeAsync";
         }
     }
 }
