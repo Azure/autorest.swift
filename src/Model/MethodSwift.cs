@@ -270,6 +270,22 @@ namespace AutoRest.Swift.Model
         }
 
         /// <summary>
+        /// Return initial response type.
+        /// </summary>
+        /// <returns></returns>
+        public string ResponseContentType()
+        {
+            if (this.ResponseContentTypes.Length == 0)
+            {
+                return this.RequestContentType;
+            }
+            else
+            {
+                return this.ResponseContentTypes[0];
+            }
+        }
+
+        /// <summary>
         /// Checks if method has pageable extension (x-ms-pageable) enabled.  
         /// </summary>
         /// <returns></returns>

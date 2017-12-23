@@ -68,6 +68,7 @@ public class @(Model.CommandModelName) : BaseCommand {
         self.method = "@(Model.HttpMethod)"
         self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
         self.path = "@(Model.Url)"
+        self.headerParameters = ["Content-Type":"@(Model.RequestContentType)"]
     }
 @EmptyLine
     public override func preCall()  {
@@ -90,9 +91,9 @@ public class @(Model.CommandModelName) : BaseCommand {
 @if (Model.BodyParameter != null)
 {
     var param = Model.BodyParameter;
-    <text>
+<text>
     self.body = @($"{param.VariableName}")
-    </text>
+</text>
 }
 }
 @EmptyLine
@@ -100,9 +101,7 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.BodyParameter;
     <text>
     public override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(@($"{param.VariableName}").rawValue))
-        return jsonData
+        return Data = (@($"{param.VariableName}").rawValue.data(using: String.Encoding.utf8))!
     }
     </text>
 }else if (Model.BodyParameter != null)
@@ -110,9 +109,14 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.BodyParameter;
     <text>
     public override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration(param.IsRequired)}"))
-        return jsonData
+        let contentType = "@(Model.RequestContentType)"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let encoder = try CoderFactory.encoder(for: mimeType)
+            let encodedValue = try encoder.encode(@($"{param.VariableName}"))
+            return encodedValue
+        }
+
+        throw DecodeError.unknownMimeType
     }
     </text>
 }
@@ -120,9 +124,14 @@ public class @(Model.CommandModelName) : BaseCommand {
 @if(Model.IsReturnTypeAnEnum()) {
     <text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let decoder = JSONDecoder()
-        let rawVal =  try decoder.decode(String.self, from: data)
-        return @($"{Model.MethodReturnTypeDecodable}")(rawValue: rawVal)
+        let contentType = "@(Model.ResponseContentType())"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let decoder = try CoderFactory.decoder(for: mimeType)
+            let rawVal =  try decoder.decode(String.self, from: data)
+            return @($"{Model.MethodReturnTypeDecodable}")(rawValue: rawVal)
+        }
+
+        throw DecodeError.unknownMimeType
     }
 
     public func execute(client: RuntimeClient, 
@@ -138,8 +147,13 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
 {
     <text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let decoder = JSONDecoder()
-        return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: data)
+        let contentType = "@(Model.ResponseContentType())"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let decoder = try CoderFactory.decoder(for: mimeType)
+            return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: data)
+        }
+
+        throw DecodeError.unknownMimeType
     }
 
     public func execute(client: RuntimeClient, 
