@@ -14,7 +14,7 @@ public class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.URLParameters[i];
     <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}")
     </text>
 }
 
@@ -22,11 +22,11 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.QueryParameters[i];
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
 <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}") = "@($"{Model.ApiVersion}")"
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}") = "@($"{Model.ApiVersion}")"
 </text>
     }else {
 <text>
-    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}")
 </text>
     }
 }
@@ -59,22 +59,16 @@ public class @(Model.CommandModelName) : BaseCommand {
 {
     var param = Model.BodyParameter;
     <text>
-    public var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration}")
+    public var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration(false)}")
     </text>
 }
 @EmptyLine
-    public init(test:String) {
-        super.init()
-        self.method = "@(Model.HttpMethod)"
-        self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
-        self.path = "@(Model.Url)"
-    }
-
     public override init() {
         super.init()
         self.method = "@(Model.HttpMethod)"
         self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
         self.path = "@(Model.Url)"
+        self.headerParameters = ["Content-Type":"@(Model.RequestContentType)"]
     }
 @EmptyLine
     public override func preCall()  {
@@ -83,7 +77,7 @@ public class @(Model.CommandModelName) : BaseCommand {
     <text>
         if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
     </text>
-}
+    }
 @for(var i = 0; i < Model.QueryParameters.Count; i++) {
     var param = Model.QueryParameters[i];
     var parameterKey = param.SerializedName;
@@ -97,39 +91,87 @@ public class @(Model.CommandModelName) : BaseCommand {
 @if (Model.BodyParameter != null)
 {
     var param = Model.BodyParameter;
-    <text>
-        self.body = @($"{param.VariableName}")
-    </text>
+<text>
+    self.body = @($"{param.VariableName}")
+</text>
 }
 }
 @EmptyLine
-@if (Model.BodyParameter != null)
+@if (Model.IsBodyParameterTypeAnEnum()) {
+    var param = Model.BodyParameter;
+    <text>
+    public override func encodeBody() throws -> Data? {
+        return Data = (@($"{param.VariableName}").rawValue.data(using: String.Encoding.utf8))!
+    }
+    </text>
+}else if (Model.BodyParameter != null)
 {
     var param = Model.BodyParameter;
     <text>
     public override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(@($"{param.VariableName}") as! @($"{param.EncodeTypeDeclaration}"))
-        return jsonData
+        let contentType = "@(Model.RequestContentType)"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let encoder = try CoderFactory.encoder(for: mimeType)
+            let encodedValue = try encoder.encode(@($"{param.VariableName}"))
+            return encodedValue
+        }
+
+        throw DecodeError.unknownMimeType
     }
     </text>
 }
 @EmptyLine
-@if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
-{
+@if(Model.IsReturnTypeAnEnum()) {
     <text>
-    public override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
-        return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: jsonString)
+    public override func returnFunc(data: Data) throws -> Decodable? {
+        let contentType = "@(Model.ResponseContentType())"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let decoder = try CoderFactory.decoder(for: mimeType)
+            let rawVal =  try decoder.decode(String.self, from: data)
+            return @($"{Model.MethodReturnTypeDecodable}")(rawValue: rawVal)
+        }
+
+        throw DecodeError.unknownMimeType
     }
 
-    public func execute(client: RuntimeClient) throws -> @($"{Model.MethodReturnType}") {
-        return try client.execute(command: self) as! @($"{Model.MethodReturnType}")
+    public func execute(client: RuntimeClient, 
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) throws -> Void {
+        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (decodable: Decodable?, error: Error?) -> Void in
+            completionHandler(decodable as! @($"{Model.MethodReturnType}"), error)
+        } 
+    }    
+    </text>
+}
+else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
+{
+    <text>
+    public override func returnFunc(data: Data) throws -> Decodable? {
+        let contentType = "@(Model.ResponseContentType())"
+        if let mimeType = MimeType.getType(forStr: contentType) {
+            let decoder = try CoderFactory.decoder(for: mimeType)
+            return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: data)
+        }
+
+        throw DecodeError.unknownMimeType
+    }
+
+    public func execute(client: RuntimeClient, 
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) throws -> Void {
+        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (decodable: Decodable?, error: Error?) -> Void in
+            completionHandler(decodable as! @($"{Model.MethodReturnType}"), error)
+        } 
     }
     </text>
 }else {
     <text>
-    public func execute(client: RuntimeClient) throws -> Decodable? {
-        return try client.execute(command: self)
+    public func execute(client: RuntimeClient,
+        completionHandler: @@escaping (Error?) -> Void) throws -> Void {
+        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (decodable: Decodable?, error: Error?) -> Void in
+            completionHandler(error)
+        } 
     }
     </text>
 }

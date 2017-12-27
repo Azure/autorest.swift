@@ -12,43 +12,37 @@ namespace AutoRest.Swift.Model
         {
         }
 
-        public string VariableTypeDeclaration
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
-            {
+                var retVal = $"[{ElementType.Name}]";
                 if (ElementType is IVariableType)
                 {
-                    return $"[{((IVariableType)ElementType).VariableTypeDeclaration}]?";
+                    retVal = $"[{((IVariableType)ElementType).VariableTypeDeclaration(isRequired)}]";
                 }
 
-                return $"[{ElementType.Name}?]?";
-            }
+                return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
+            var retVal = $"[{ElementType.Name}]";
+            if (ElementType is IVariableType)
             {
-                if (ElementType is IVariableType)
-                {
-                    return $"[{((IVariableType)ElementType).DecodeTypeDeclaration}]?";
-                }
-
-                return $"[{ElementType.Name}]?";
+                retVal = $"[{((IVariableType)ElementType).DecodeTypeDeclaration(isRequired)}]";
             }
+
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
+            var retVal = $"[{ElementType.Name}]";
+            if (ElementType is IVariableType)
             {
-                if (ElementType is IVariableType)
-                {
-                    return $"[{((IVariableType)ElementType).EncodeTypeDeclaration}]?";
-                }
-
-                return $"[{ElementType.Name}]?";
+                retVal = $"[{((IVariableType)ElementType).EncodeTypeDeclaration(isRequired)}]";
             }
+
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
         public string VariableName

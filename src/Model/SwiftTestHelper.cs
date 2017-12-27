@@ -11,7 +11,7 @@ namespace AutoRest.Swift.Model
         {
             if (type is CompositeType)
             {
-                return ((IVariableType)type).VariableTypeDeclaration + "()";
+                return ((IVariableType)type).VariableTypeDeclaration(false) + "()";
             }
             else if (type is PrimaryType)
             {

@@ -95,8 +95,8 @@ namespace AutoRest.Swift
             {
                 Model = codeModel
             };
+            await Write(serviceClientTemplate, Path.Combine("commands",  FormatFileName("DataFactory")));
 
-            //await Write(serviceClientTemplate, $"{codeModel.ServiceName}{ImplementationFileExtension}");
             foreach (var methodGroup in codeModel.MethodGroups)
             {
                 if(string.IsNullOrWhiteSpace(methodGroup.Name))
@@ -109,7 +109,7 @@ namespace AutoRest.Swift
                     Model = methodGroup
                 };
 
-                await Write(methodGroupTemplate, Path.Combine("commands", FormatFileName(methodGroup.Name).ToLowerInvariant()));
+                await Write(methodGroupTemplate, Path.Combine("commands", FormatFileName(methodGroup.Name)));
             }
         }
 

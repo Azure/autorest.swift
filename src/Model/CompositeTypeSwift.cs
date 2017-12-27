@@ -58,6 +58,20 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public string BaseTypeInterfaceForProtocol
+        {
+            get
+            {
+                CompositeTypeSwift baseType = (CompositeTypeSwift)this.BaseModelType;
+                if(baseType != null)
+                {
+                    return $"{baseType.InterfaceOutput}";
+                }
+
+                return $"Codable";
+            }
+        }
+
         public bool HasPolymorphicFields
         {
             get
@@ -209,7 +223,7 @@ namespace AutoRest.Swift.Model
             AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
-            if (BaseModelType != null)
+            if (BaseModelType != null && !forInterface)
             {
                 indented.Append(((CompositeTypeSwift)BaseModelType).FieldsAsString(forInterface));
             }
@@ -218,10 +232,14 @@ namespace AutoRest.Swift.Model
             foreach (var property in properties)
             {
                 var modelType = property.ModelType;
+                if(modelType is PrimaryTypeSwift) {
+                    ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
+                }
+
                 var modelDeclaration = modelType.Name;
                 if (modelType is IVariableType)
                 {
-                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration;
+                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration(property.IsRequired);
                 }
 
                 var output = string.Empty;
@@ -283,16 +301,35 @@ namespace AutoRest.Swift.Model
             {
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
-                if (modelType is IVariableType && 
-                    !(modelType is EnumType) && 
-                    !(modelType is DictionaryType) && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                if(modelType is PrimaryTypeSwift) {
+                    ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
+                }
+
+                if (modelType is IVariableType &&
+                    !(modelType is EnumType) &&
+                    !(modelType is DictionaryType) &&
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
                 {
-                    indented.Append($"if self.{propName} != nil {{try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration}, forKey: .{propName})}}\r\n");
+                    if (property.IsRequired)
+                    {
+                        indented.Append($"try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)}, forKey: .{propName})\r\n");
+                    }
+                    else
+                    {
+                        indented.Append($"if self.{propName} != nil {{try container.encode({propName} as! {((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)}, forKey: .{propName})}}\r\n");
+                    }
                 }
                 else
                 {
-                    indented.Append($"if self.{propName} != nil {{try container.encode({propName}, forKey: .{propName})}}\r\n");
+                    if (property.IsRequired)
+                    {
+                        indented.Append($"try container.encode({propName}, forKey: .{propName})\r\n");
+                    }
+                    else
+                    {
+                        indented.Append($"if self.{propName} != nil {{try container.encode({propName}, forKey: .{propName})}}\r\n");
+                    }
+                    
                 }
             }
 
@@ -314,16 +351,27 @@ namespace AutoRest.Swift.Model
             {
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
-                var modelDeclaration = modelType.Name;
-                if (modelType is IVariableType && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
-                {
-                    modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration;
+                if(modelType is PrimaryTypeSwift) {
+                    ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
                 }
 
-                indented.Append($"if container.contains(.{propName}) {{\r\n");
-                indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
-                indented.Append($"}}\r\n");
+                var modelDeclaration = modelType.Name;
+                if (modelType is IVariableType && 
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
+                {
+                    modelDeclaration = ((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired);
+                }
+
+                if (property.IsRequired)
+                {
+                    indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                }
+                else
+                {
+                    indented.Append($"if container.contains(.{propName}) {{\r\n");
+                    indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    indented.Append($"}}\r\n");
+                }
             }
 
             return indented.ToString();
@@ -368,7 +416,7 @@ namespace AutoRest.Swift.Model
                 var modelDeclaration = modelType.Name;
                 var serializeName = SwiftNameHelper.convertToValidSwiftTypeName(property.SerializedName);
                 if (modelType is IVariableType && 
-                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration))
+                    !string.IsNullOrEmpty(((IVariableType)modelType).DecodeTypeDeclaration(property.IsRequired)))
                 {
                 }
                 else
@@ -406,28 +454,21 @@ namespace AutoRest.Swift.Model
             Name = name;
         }
 
-        public string VariableTypeDeclaration
+        public bool IsRequired { get; set; }
+
+        public string VariableTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.Name + "Protocol?";
-            }
+            return SwiftNameHelper.getTypeName(this.Name + "Protocol", isRequired);
         }
 
-        public string EncodeTypeDeclaration
+        public string EncodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.TypeName + "?";
-            }
+                return SwiftNameHelper.getTypeName(this.TypeName, isRequired);
         }
 
-        public string DecodeTypeDeclaration
+        public string DecodeTypeDeclaration(bool isRequired)
         {
-            get
-            {
-                return this.TypeName + "?";
-            }
+            return SwiftNameHelper.getTypeName(this.TypeName, isRequired);
         }
 
         public string VariableName
@@ -442,6 +483,82 @@ namespace AutoRest.Swift.Model
             get {
                 return this.Name + "Data";
             }
+        }
+
+        public bool HasRequiredFields {
+            get {
+                return this.Properties.Where(x => x.IsRequired).Count() > 0;
+            }
+        }
+
+        public string RequiredPropertiesForInitParameters(bool forMethodCall = false)
+        {
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEncodingString());
+            }
+
+            var seperator = "";
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var modelType = property.ModelType;
+                if(modelType is PrimaryTypeSwift) {
+                    ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
+                }
+
+                var modelDeclaration = modelType.Name;
+                if (modelType is IVariableType)
+                {
+                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration(property.IsRequired);
+                }
+
+
+                var output = string.Empty;
+                var propName = property.VariableName;
+
+                if (property.IsRequired)
+                {
+                    if(forMethodCall) {
+                        indented.Append($"{seperator}{propName}: {propName}");
+                    }else {
+                        indented.Append($"{seperator}{propName}: {modelDeclaration}");
+                    }
+
+                    seperator = ", ";
+                }
+            }
+
+            return indented.ToString();
+        }
+
+        public string RequiredPropertiesSettersForInitParameters()
+        {
+            var indented = new IndentedStringBuilder("    ");
+            var properties = Properties.Cast<PropertySwift>().ToList();
+            if (BaseModelType != null)
+            {
+                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEncodingString());
+            }
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var propName = property.VariableName;
+                var modelType = property.ModelType;
+                if(modelType is PrimaryTypeSwift) {
+                    ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
+                }
+
+                if (property.IsRequired)
+                {
+                    indented.Append($"self.{propName} = {propName}\r\n");
+                }
+            }
+
+            return indented.ToString();
         }
     }
 }

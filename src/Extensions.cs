@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Swift.Model;
 using System;

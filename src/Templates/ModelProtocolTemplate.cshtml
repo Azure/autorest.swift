@@ -5,11 +5,12 @@
 @using AutoRest.Core.Utilities
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
-
+@Header("// ")
 import Foundation
 
 @WrapComment("// ", string.Format("{0}Protocol is {1}", Model.Name, Model.Documentation.ToSentence()))
-public protocol @(Model.Name)Protocol : Codable {
+public protocol @(Model.Name)Protocol : @(Model.BaseTypeInterfaceForProtocol) {
     @(Model.FieldsAsString(true)) 
 }
+
     

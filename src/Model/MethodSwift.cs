@@ -137,7 +137,7 @@ namespace AutoRest.Swift.Model
             {
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
-                        ((IVariableType)ReturnValue().Body).VariableTypeDeclaration 
+                        ((IVariableType)ReturnValue().Body).VariableTypeDeclaration(false)
                             : ReturnValue().Body.Name.ToString()) 
                         : "Void";
             }
@@ -152,7 +152,7 @@ namespace AutoRest.Swift.Model
             {
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
-                        ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration 
+                        ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration(false) 
                             : ReturnValue().Body.Name.ToString()) 
                         : "Void";
             }
@@ -231,6 +231,22 @@ namespace AutoRest.Swift.Model
             return ReturnType ?? DefaultResponse;
         }
 
+        public bool IsBodyParameterTypeAnEnum() {
+            if(this.BodyParameter == null) {
+                return false;
+            }
+
+            return this.BodyParameter.ModelType is EnumType;
+        }
+
+        public bool IsReturnTypeAnEnum() {
+            if(!this.HasReturnValue()) {
+                return false;
+            }
+
+            return this.ReturnType.Body is EnumType;
+        }
+
         /// <summary>
         /// Return response object for the method.
         /// </summary>
@@ -241,7 +257,7 @@ namespace AutoRest.Swift.Model
             {
                 if(this.ReturnType.Body is IVariableType)
                 {
-                    return ((IVariableType)this.ReturnType.Body).VariableTypeDeclaration;
+                    return ((IVariableType)this.ReturnType.Body).VariableTypeDeclaration(false);
                 }else
                 {
                     return this.ReturnType.Body.Name;
@@ -250,6 +266,22 @@ namespace AutoRest.Swift.Model
             else
             {
                 return "Void";
+            }
+        }
+
+        /// <summary>
+        /// Return initial response type.
+        /// </summary>
+        /// <returns></returns>
+        public string ResponseContentType()
+        {
+            if (this.ResponseContentTypes.Length == 0)
+            {
+                return this.RequestContentType;
+            }
+            else
+            {
+                return this.ResponseContentTypes[0];
             }
         }
 
@@ -378,6 +410,15 @@ namespace AutoRest.Swift.Model
             {
                 return this.CodeModel.ApiVersion ?? "";
             }
+        }
+
+        /// <summary>
+        /// Gets the execute command name.
+        /// </summary>
+        /// <returns>The execute command name</returns>
+        public string GetExecuteCommandName()
+        {
+            return this.IsLongRunningOperation() ? "executeAsyncLRO" : "executeAsync";
         }
     }
 }

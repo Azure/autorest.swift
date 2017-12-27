@@ -32,5 +32,10 @@ namespace AutoRest.Swift.Model
 
             return name;
         }
+
+        internal static string getTypeName(string name, bool isRequired)
+        {
+            return name + (isRequired ? "" : "?");
+        }
     }
 }
