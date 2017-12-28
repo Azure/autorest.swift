@@ -22,6 +22,12 @@ public struct @(Model.TypeName) : @(Model.InterfaceOutput) {
   }
 @EmptyLine
 </text>
+}else {
+<text>
+  public init()  {
+  }
+@EmptyLine
+</text>
 }
 
   public init(from decoder: Decoder) throws {
@@ -43,4 +49,12 @@ extension DataFactory {
   }
 }
 </text>
+}else {
+<text>
+extension DataFactory {
+  public static func create@(Model.Name)Protocol() -> @(Model.Name)Protocol {
+    return @(Model.TypeName)()
+  }
+}
+</text>  
 }
