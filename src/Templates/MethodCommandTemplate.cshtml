@@ -99,17 +99,17 @@ public class @(Model.CommandModelName) : BaseCommand {
 @EmptyLine
 @if (Model.IsBodyParameterTypeAnEnum()) {
     var param = Model.BodyParameter;
-    <text>
+<text>
     public override func encodeBody() throws -> Data? {
         return Data = (@($"{param.VariableName}").rawValue.data(using: String.Encoding.utf8))!
     }
-    </text>
+</text>
 }else if (Model.BodyParameter != null)
 {
     var param = Model.BodyParameter;
     <text>
     public override func encodeBody() throws -> Data? {
-        let contentType = "@(Model.RequestContentType)"
+        let contentType = "@(Model.EncodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let encoder = try CoderFactory.encoder(for: mimeType)
             let encodedValue = try encoder.encode(@($"{param.VariableName}"))
@@ -118,13 +118,13 @@ public class @(Model.CommandModelName) : BaseCommand {
 
         throw DecodeError.unknownMimeType
     }
-    </text>
+</text>
 }
 @EmptyLine
 @if(Model.IsReturnTypeAnEnum()) {
-    <text>
+<text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let contentType = "@(Model.ResponseContentType())"
+        let contentType = "@(Model.DecodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let decoder = try CoderFactory.decoder(for: mimeType)
             let rawVal =  try decoder.decode(String.self, from: data)
@@ -141,13 +141,13 @@ public class @(Model.CommandModelName) : BaseCommand {
             completionHandler(result, error)
         } 
     }    
-    </text>
+</text>
 }
 else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
 {
-    <text>
+<text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let contentType = "@(Model.ResponseContentType())"
+        let contentType = "@(Model.DecodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let decoder = try CoderFactory.decoder(for: mimeType)
             return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: data)
@@ -160,12 +160,12 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
         completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
             (result: @($"{Model.MethodReturnTypeDecodable}"), error: Error?) in
-            completionHandler(result!, error)
+            completionHandler(result, error)
         } 
     }
-    </text>
+</text>
 }else {
-    <text>
+<text>
     public func execute(client: RuntimeClient,
         completionHandler: @@escaping (Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
@@ -173,6 +173,6 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
             completionHandler(error)
         } 
     }
-    </text>
+</text>
 }
 }
