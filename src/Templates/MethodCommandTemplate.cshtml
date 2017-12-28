@@ -135,10 +135,10 @@ public class @(Model.CommandModelName) : BaseCommand {
     }
 
     public func execute(client: RuntimeClient, 
-        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) throws -> Void {
-        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
-            (decodable: Decodable?, error: Error?) -> Void in
-            completionHandler(decodable as! @($"{Model.MethodReturnType}"), error)
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
+        client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (decodable, error) in
+            completionHandler(decodable!, error)
         } 
     }    
     </text>
@@ -157,19 +157,19 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
     }
 
     public func execute(client: RuntimeClient, 
-        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) throws -> Void {
-        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
-            (decodable: Decodable?, error: Error?) -> Void in
-            completionHandler(decodable as! @($"{Model.MethodReturnType}"), error)
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
+        client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (decodable, error) in
+            completionHandler(decodable!, error)
         } 
     }
     </text>
 }else {
     <text>
     public func execute(client: RuntimeClient,
-        completionHandler: @@escaping (Error?) -> Void) throws -> Void {
-        return try client.@($"{Model.GetExecuteCommandName()}")(command: self) {
-            (decodable: Decodable?, error: Error?) -> Void in
+        completionHandler: @@escaping (Error?) -> Void) -> Void {
+        return client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (error) in
             completionHandler(error)
         } 
     }

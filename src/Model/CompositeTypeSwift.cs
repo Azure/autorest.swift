@@ -65,7 +65,7 @@ namespace AutoRest.Swift.Model
                 CompositeTypeSwift baseType = (CompositeTypeSwift)this.BaseModelType;
                 if(baseType != null)
                 {
-                    return $"{baseType.InterfaceOutput}";
+                    return $"{baseType.Name}Protocol";
                 }
 
                 return $"Codable";
@@ -232,6 +232,10 @@ namespace AutoRest.Swift.Model
             foreach (var property in properties)
             {
                 var modelType = property.ModelType;
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 if(modelType is PrimaryTypeSwift) {
                     ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
                 }
@@ -299,6 +303,10 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
                 if(modelType is PrimaryTypeSwift) {
@@ -349,6 +357,10 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
                 if(modelType is PrimaryTypeSwift) {
@@ -387,9 +399,12 @@ namespace AutoRest.Swift.Model
                 indented.Append(((CompositeTypeSwift)BaseModelType).FieldsForTest());
             }
 
-            // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var propName = property.VariableName;
                 var serializeName = property.SerializedName;
                 indented.Append($"model.{propName} = nil\r\n");
@@ -411,6 +426,10 @@ namespace AutoRest.Swift.Model
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var propName = SwiftNameHelper.convertToValidSwiftTypeName(property.Name.RawValue);
                 var modelType = property.ModelType;
                 var modelDeclaration = modelType.Name;
@@ -495,15 +514,20 @@ namespace AutoRest.Swift.Model
         {
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertySwift>().ToList();
+            var seperator = "";
             if (BaseModelType != null)
             {
-                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEncodingString());
+                indented.Append(((CompositeTypeSwift)BaseModelType).RequiredPropertiesForInitParameters(forMethodCall));
+                seperator = ", ";
             }
 
-            var seperator = "";
             // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var modelType = property.ModelType;
                 if(modelType is PrimaryTypeSwift) {
                     ((PrimaryTypeSwift)modelType).IsRequired = property.IsRequired;
@@ -540,12 +564,15 @@ namespace AutoRest.Swift.Model
             var properties = Properties.Cast<PropertySwift>().ToList();
             if (BaseModelType != null)
             {
-                indented.Append(((CompositeTypeSwift)BaseModelType).FieldEncodingString());
+                indented.Append(((CompositeTypeSwift)BaseModelType).RequiredPropertiesSettersForInitParameters());
             }
 
-            // Emit each property, except for named Enumerated types, as a pointer to the type
             foreach (var property in properties)
             {
+                if(property.IsPolymorphicDiscriminator) {
+                    continue;
+                }
+
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
                 if(modelType is PrimaryTypeSwift) {

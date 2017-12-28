@@ -83,6 +83,8 @@ namespace AutoRest.Swift.Model
                     case KnownPrimaryType.Stream:
                         //return "NSData?";
                         return "String";
+                    case KnownPrimaryType.ByteArray:
+                        return "[UInt8]";
 
                 }
 
