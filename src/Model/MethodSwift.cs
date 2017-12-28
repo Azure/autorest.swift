@@ -420,5 +420,25 @@ namespace AutoRest.Swift.Model
         {
             return this.IsLongRunningOperation() ? "executeAsyncLRO" : "executeAsync";
         }
+
+        public string EncodeMimeType 
+        {
+            get 
+            {
+                var mimeType = this.RequestContentType;   
+                return mimeType.IndexOf(';') > 0 ? 
+                    mimeType.Substring(0, mimeType.IndexOf(';')) : mimeType;
+            }
+        }
+
+        public string DecodeMimeType 
+        {
+            get 
+            {
+                var mimeType = this.ResponseContentType();   
+                return mimeType.IndexOf(';') > 0 ? 
+                    mimeType.Substring(0, mimeType.IndexOf(';')) : mimeType;
+            }
+        }
     }
 }

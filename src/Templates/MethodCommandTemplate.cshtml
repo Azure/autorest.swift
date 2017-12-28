@@ -109,7 +109,7 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.BodyParameter;
     <text>
     public override func encodeBody() throws -> Data? {
-        let contentType = "@(Model.RequestContentType)"
+        let contentType = "@(Model.EncodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let encoder = try CoderFactory.encoder(for: mimeType)
             let encodedValue = try encoder.encode(@($"{param.VariableName}"))
@@ -124,7 +124,7 @@ public class @(Model.CommandModelName) : BaseCommand {
 @if(Model.IsReturnTypeAnEnum()) {
 <text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let contentType = "@(Model.ResponseContentType())"
+        let contentType = "@(Model.DecodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let decoder = try CoderFactory.decoder(for: mimeType)
             let rawVal =  try decoder.decode(String.self, from: data)
@@ -147,7 +147,7 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
 {
 <text>
     public override func returnFunc(data: Data) throws -> Decodable? {
-        let contentType = "@(Model.ResponseContentType())"
+        let contentType = "@(Model.DecodeMimeType)"
         if let mimeType = MimeType.getType(forStr: contentType) {
             let decoder = try CoderFactory.decoder(for: mimeType)
             return try decoder.decode(@($"{Model.MethodReturnTypeDecodable}").self, from: data)
@@ -160,7 +160,7 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
         completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
             (result: @($"{Model.MethodReturnTypeDecodable}"), error: Error?) in
-            completionHandler(result!, error)
+            completionHandler(result, error)
         } 
     }
 </text>
