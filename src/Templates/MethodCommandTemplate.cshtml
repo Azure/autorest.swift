@@ -137,8 +137,8 @@ public class @(Model.CommandModelName) : BaseCommand {
     public func execute(client: RuntimeClient, 
         completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
-            (decodable, error) in
-            completionHandler(decodable!, error)
+            (result: @($"{Model.MethodReturnTypeDecodable}"), error: Error?) in
+            completionHandler(result, error)
         } 
     }    
     </text>
@@ -159,8 +159,8 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
     public func execute(client: RuntimeClient, 
         completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
-            (decodable, error) in
-            completionHandler(decodable!, error)
+            (result: @($"{Model.MethodReturnTypeDecodable}"), error: Error?) in
+            completionHandler(result!, error)
         } 
     }
     </text>
@@ -168,7 +168,7 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
     <text>
     public func execute(client: RuntimeClient,
         completionHandler: @@escaping (Error?) -> Void) -> Void {
-        return client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+        client.@($"{Model.GetExecuteCommandName()}")(command: self) {
             (error) in
             completionHandler(error)
         } 
