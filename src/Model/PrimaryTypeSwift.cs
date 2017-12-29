@@ -44,13 +44,13 @@ namespace AutoRest.Swift.Model
                         return "Bool";
 
                     case KnownPrimaryType.Date:
-                        return "String";
+                        return "Date";
 
                     case KnownPrimaryType.DateTime:
-                        return "String";
+                        return "Date";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "String";
+                        return "Date";
 
                     case KnownPrimaryType.Double:
                         return "Double";
@@ -68,21 +68,21 @@ namespace AutoRest.Swift.Model
                         return "String";
 
                     case KnownPrimaryType.TimeSpan:
-                        return "Int64";
+                        return "String";
 
                     case KnownPrimaryType.Object:
                         // TODO: is this the correct way to support object types?
                         return "[String: String?]";
 
                     case KnownPrimaryType.UnixTime:
-                        return "Int64";
+                        return "String";
 
                     case KnownPrimaryType.Uuid:
                         return "NSUUID";
 
                     case KnownPrimaryType.Stream:
-                        //return "NSData?";
-                        return "String";
+                        return "NSData";
+
                     case KnownPrimaryType.ByteArray:
                         return "[UInt8]";
 
