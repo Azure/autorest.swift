@@ -8,8 +8,55 @@
 @using AutoRest.Swift.Model
 
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.MethodSwift>
+import Foundation
+import azureSwiftRuntime
+
+public protocol @(Model.GroupName)@(Model.Name)  {
+    var headerParameters: [String: String] { get set }
+@for (var i = 0; i < Model.URLParameters.Count; i++)
+{
+    var param = Model.URLParameters[i];
+    <text>
+    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}") { get set }
+    </text>
+}
+@for(var i = 0; i < Model.QueryParameters.Count; i++) {
+    var param = Model.QueryParameters[i];
+<text>
+    var @($"{param.VariableName}") : @($"{param.VariableTypeDeclaration(param.IsRequired)}") { get set }
+</text>
+}
+@for (var i = 0; i < Model.HeaderParameters.Count; i++)
+{
+    var param = Model.HeaderParameters[i];
+<text>
+    var @($"{param.VariableName}") : String?  { get set }
+</text>
+}
+@if (Model.BodyParameter != null)
+{
+    var param = Model.BodyParameter;
+<text>
+    var @($"{param.VariableName}") :  @($"{param.VariableTypeDeclaration(false)}")  { get set }
+</text>
+}
+@if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
+{
+<text>
+    func execute(client: RuntimeClient, 
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void ;
+</text>
+}else {
+<text>
+    func execute(client: RuntimeClient,
+        completionHandler: @@escaping (Error?) -> Void) -> Void;
+</text>
+}
+}
+@EmptyLine
+extension Commands.@(Model.GroupName) {
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
-public class @(Model.CommandModelName) : BaseCommand {
+internal class @(Model.CommandModelName) : BaseCommand, @(Model.GroupName)@(Model.Name) {
 @for (var i = 0; i < Model.URLParameters.Count; i++)
 {
     var param = Model.URLParameters[i];
@@ -63,8 +110,24 @@ public class @(Model.CommandModelName) : BaseCommand {
     </text>
 }
 @EmptyLine
+@if(!Model.HasRequiredPropertiesForInitParameters()) {
+<text>
     public override init() {
+</text>
+
+}else {
+<text>
+    public init(@(Model.RequiredPropertiesForInitParameters())) {
+        @(Model.RequiredPropertiesSettersForInitParameters())
+</text>
+}
         super.init()
+@if(Model.IsCustomBaseUri) 
+{
+<text>
+        self.baseUrl = "@(Model.CodeModel.BaseUrl)"
+</text>
+}
         self.method = "@(Model.HttpMethod)"
         self.isLongRunningOperation = @(Model.IsLongRunningOperation() ? "true" : "false")
         self.path = "@(Model.Url)"
@@ -74,19 +137,32 @@ public class @(Model.CommandModelName) : BaseCommand {
     public override func preCall()  {
 @for(var i = 0; i < Model.URLParameters.Count; i++) {
     var param = Model.URLParameters[i];
-    <text>
+    @if(param.IsRequired) {
+<text>
+        self.pathParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}"))
+</text>
+
+    }else {
+<text>
         if self.@($"{param.VariableName}") != nil { pathParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
-    </text>
+</text>
     }
+}
 @for(var i = 0; i < Model.QueryParameters.Count; i++) {
     var param = Model.QueryParameters[i];
     var parameterKey = param.SerializedName;
     if("apiversion".Equals(param.VariableName, StringComparison.OrdinalIgnoreCase)) {
         parameterKey = "api-version";
     }
-    <text>
-        if self.@($"{param.VariableName}") != nil { queryParameters["@($"{parameterKey}")"] = String(describing: self.@($"{param.VariableName}")!) }
-    </text>
+    @if(param.IsRequired) {
+<text>
+        self.queryParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}"))
+</text>
+    }else {
+<text>
+        if self.@($"{param.VariableName}") != nil { queryParameters["{@($"{param.SerializedName}")}"] = String(describing: self.@($"{param.VariableName}")!) }
+</text>
+    }
 }       
 @if (Model.BodyParameter != null)
 {
@@ -101,10 +177,18 @@ public class @(Model.CommandModelName) : BaseCommand {
     var param = Model.BodyParameter;
 <text>
     public override func encodeBody() throws -> Data? {
-        return Data = (@($"{param.VariableName}").rawValue.data(using: String.Encoding.utf8))!
+        return (@($"{param.VariableName}").rawValue.data(using: String.Encoding.utf8))!
     }
 </text>
-}else if (Model.BodyParameter != null)
+} else if (Model.IsBodyParameterTypeNSData()) {
+    var param = Model.BodyParameter;
+<text>
+    public override func encodeBody() throws -> Data? {
+        return self.@($"{param.VariableName}") 
+    }
+</text>
+}
+else if (Model.BodyParameter != null)
 {
     var param = Model.BodyParameter;
     <text>
@@ -121,7 +205,8 @@ public class @(Model.CommandModelName) : BaseCommand {
 </text>
 }
 @EmptyLine
-@if(Model.IsReturnTypeAnEnum()) {
+@if(Model.IsReturnTypeAnEnum()) 
+{
 <text>
     public override func returnFunc(data: Data) throws -> Decodable? {
         let contentType = "@(Model.DecodeMimeType)"
@@ -143,6 +228,23 @@ public class @(Model.CommandModelName) : BaseCommand {
     }    
 </text>
 }
+else if(Model.IsReturnTypeData()) 
+{
+<text>
+    public override func returnFunc(data: Data) throws -> Decodable? {
+        return DataWrapper(data: data);
+    }
+
+    public func execute(client: RuntimeClient, 
+        completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
+        client.@($"{Model.GetExecuteCommandName()}")(command: self) {
+            (result: DataWrapper?, error: Error?) in
+            let data = result?.data as Data?
+            completionHandler(data!, error)
+        } 
+    }    
+</text>
+}
 else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCase))
 {
 <text>
@@ -160,7 +262,7 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
         completionHandler: @@escaping (@($"{Model.MethodReturnType}"), Error?) -> Void) -> Void {
         client.@($"{Model.GetExecuteCommandName()}")(command: self) {
             (result: @($"{Model.MethodReturnTypeDecodable}"), error: Error?) in
-            completionHandler(result, error)
+            completionHandler(result@(Model.IsReturnTypeOptional ? "" : "!"), error)
         } 
     }
 </text>
@@ -174,5 +276,6 @@ else if (!"void".Equals(Model.MethodReturnType, StringComparison.OrdinalIgnoreCa
         } 
     }
 </text>
+}
 }
 }

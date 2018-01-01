@@ -8,7 +8,7 @@
 @Header("// ")
 import Foundation
 
-public struct @(Model.TypeName) : @(Model.InterfaceOutput) {
+internal struct @(Model.TypeName) : @(Model.InterfaceOutput) {
     @(Model.FieldsAsString())
 @EmptyLine
     enum CodingKeys: String, CodingKey {

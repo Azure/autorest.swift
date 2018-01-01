@@ -241,7 +241,11 @@ namespace AutoRest.Swift.Model
                 }
 
                 var modelDeclaration = modelType.Name;
-                if (modelType is IVariableType)
+                if(modelType is PrimaryTypeSwift) 
+                {
+                    modelDeclaration = SwiftNameHelper.getTypeName(modelType.Name, property.IsRequired);
+                }
+                else if (modelType is IVariableType)
                 {
                     modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration(property.IsRequired);
                 }
@@ -252,7 +256,7 @@ namespace AutoRest.Swift.Model
                 //TODO: need to handle flatten property case.
                 output = string.Format("{2} var {0}: {1}", 
                     propName,
-                    modelDeclaration,
+                    modelDeclaration, 
                     modifier);
             
                 if (forInterface)

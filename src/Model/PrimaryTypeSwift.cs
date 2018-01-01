@@ -17,7 +17,7 @@ namespace AutoRest.Swift.Model
         {
             Name.OnGet += v =>
             {
-                return ImplementationName + (IsRequired ? "" : "?");
+                return ImplementationName;
             };
         }
 
@@ -81,7 +81,7 @@ namespace AutoRest.Swift.Model
                         return "NSUUID";
 
                     case KnownPrimaryType.Stream:
-                        return "NSData";
+                        return "Data";
 
                     case KnownPrimaryType.ByteArray:
                         return "[UInt8]";
