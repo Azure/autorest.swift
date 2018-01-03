@@ -336,7 +336,7 @@ namespace AutoRest.Swift.Model
         /// </summary>
         /// <returns></returns>
 
-        public bool IsPageable => !string.IsNullOrEmpty(NextLink);
+        public bool IsPageable => HasNextLink;
 
         public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
@@ -420,6 +420,26 @@ namespace AutoRest.Swift.Model
                     } is invalid in Swagger. It should be boolean.";
 
                 throw new InvalidOperationException(message);
+            }
+        }
+
+        public bool HasNextLink
+        {
+            get
+            {
+                // Note:
+                // Methods can be paged, even if "nextLinkName" is null
+                // Paged method just means a method returns an array
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (pageableExtension != null)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
             }
         }
 

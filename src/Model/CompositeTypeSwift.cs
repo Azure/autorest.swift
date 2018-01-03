@@ -333,7 +333,10 @@ namespace AutoRest.Swift.Model
                 }
                 else
                 {
-                    if (property.IsRequired)
+                    if(modelType is PrimaryTypeSwift &&
+                        "Date".Equals(modelType.Name)) {
+                        this.SetEncodeDate(propName, property, indented);
+                    }else if (property.IsRequired)
                     {
                         indented.Append($"try container.encode({propName}, forKey: .{propName})\r\n");
                     }
@@ -380,12 +383,22 @@ namespace AutoRest.Swift.Model
 
                 if (property.IsRequired)
                 {
-                    indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    if(modelType is PrimaryTypeSwift &&
+                        "Date".Equals(modelType.Name)) {
+                        this.SetDecodeDate(propName, property, indented);
+                    }else {
+                        indented.Append($"{propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    }
                 }
                 else
                 {
                     indented.Append($"if container.contains(.{propName}) {{\r\n");
-                    indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    if(modelType is PrimaryTypeSwift &&
+                        "Date".Equals(modelType.Name)) {
+                        this.SetDecodeDate(propName, property, indented);
+                    }else {
+                        indented.Append($"    {propName} = try container.decode({modelDeclaration}.self, forKey: .{propName})\r\n");
+                    }
                     indented.Append($"}}\r\n");
                 }
             }
@@ -590,6 +603,69 @@ namespace AutoRest.Swift.Model
             }
 
             return indented.ToString();
+        }
+
+        public void SetDecodeDate(String propName, PropertySwift property, IndentedStringBuilder indented) {
+            var modelType = property.ModelType as PrimaryTypeSwift;
+            var formatString = String.Empty;
+            if(modelType != null) {
+                switch (modelType.KnownPrimaryType)
+                {
+                    case KnownPrimaryType.Date:
+                        formatString = "date";
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        formatString = "dateTime";
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        formatString = "dateTimeRfc1123";
+                        break;
+                    default:
+                        throw new Exception("Date format unknown");
+                }
+
+                indented.Append($"    {propName} = DateConverter.fromString(dateStr: (try container.decode(String?.self, forKey: .{propName})), format: .{formatString})" + 
+                    (property.IsRequired ? "!" : "") + "\r\n");
+                return;
+            }
+
+            throw new Exception("Date format unknown");
+        }
+
+        public void SetEncodeDate(String propName, PropertySwift property, IndentedStringBuilder indented) {
+            var modelType = property.ModelType as PrimaryTypeSwift;
+            var formatString = String.Empty;
+            if(modelType != null) {
+                switch (modelType.KnownPrimaryType)
+                {
+                    case KnownPrimaryType.Date:
+                        formatString = "date";
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        formatString = "dateTime";
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        formatString = "dateTimeRfc1123";
+                        break;
+                    default:
+                        throw new Exception("Date format unknown");
+                }
+
+                if (property.IsRequired)
+                {
+                    indented.Append($"try container.encode(DateConverter.toString(date: self.{propName}, format: .{formatString}), forKey: .{propName})\r\n");
+                }
+                else
+                {
+                    indented.Append($"if self.{propName} != nil {{\r\n");
+                    indented.Append($"    try container.encode(DateConverter.toString(date: self.{propName}!, format: .{formatString}), forKey: .{propName})\r\n");
+                    indented.Append($"}}\r\n");
+                }
+
+                return;
+            }
+
+            throw new Exception("Date format unknown");
         }
     }
 }
