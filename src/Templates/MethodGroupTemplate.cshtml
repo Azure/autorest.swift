@@ -18,11 +18,16 @@
 @WrapComment("// ", Model.Documentation)
 import Foundation
 import azureSwiftRuntime
-struct @(Model.Name) {
+extension Commands {
+public struct @(Model.Name) {
 @foreach (var method in methods)
 {
-    @:@(Include(new MethodCommandTemplate(), method))
-    @:@EmptyLine
+    var swiftMethod = method as MethodSwift;
+<text>
+    public static func @(swiftMethod.Name)(@(swiftMethod.RequiredPropertiesForInitParameters())) -> @(swiftMethod.CommandProtocolName) { 
+        return @(swiftMethod.CommandModelName)(@(swiftMethod.RequiredPropertiesForInitParameters(true))) 
+    }
+</text>
 }
 }
-
+}

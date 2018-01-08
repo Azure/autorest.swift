@@ -43,6 +43,16 @@ namespace AutoRest.Swift.Model
             get { return  this.Name + "Command";  }
         }
 
+        public string CommandProtocolName
+        {
+            get { return  this.MethodGroup.Name + this.Name;  }
+        }
+
+        public string GroupName 
+        {
+            get { return this.MethodGroup.Name; }
+        }
+
         internal void Transform(CodeModelSwift cmg)
         {
             
@@ -138,7 +148,7 @@ namespace AutoRest.Swift.Model
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
                         ((IVariableType)ReturnValue().Body).VariableTypeDeclaration(false)
-                            : ReturnValue().Body.Name.ToString()) 
+                            : SwiftNameHelper.getTypeName(ReturnValue().Body.Name.ToString(), false))
                         : "Void";
             }
         }
@@ -153,7 +163,7 @@ namespace AutoRest.Swift.Model
                 return HasReturnValue() ?
                     ((ReturnValue().Body is IVariableType) ? 
                         ((IVariableType)ReturnValue().Body).DecodeTypeDeclaration(false) 
-                            : ReturnValue().Body.Name.ToString()) 
+                            : SwiftNameHelper.getTypeName(ReturnValue().Body.Name.ToString(), false))
                         : "Void";
             }
         }
@@ -205,6 +215,22 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public IReadOnlyList<ParameterSwift> AllParameters
+        {
+            get
+            {
+                List<ParameterSwift> allParameters = new List<ParameterSwift>();
+                allParameters.AddRange(this.URLParameters);
+                allParameters.AddRange(this.QueryParameters);
+                allParameters.AddRange(this.HeaderParameters);
+                if(this.BodyParameter != null) {
+                    allParameters.Add(this.BodyParameter);
+                }
+
+                return allParameters;
+            }
+        }
+
         public string ServiceModelName
         {
             get
@@ -239,12 +265,32 @@ namespace AutoRest.Swift.Model
             return this.BodyParameter.ModelType is EnumType;
         }
 
+        public bool IsBodyParameterTypeNSData() {
+            if(this.BodyParameter == null) {
+                return false;
+            }
+
+            return this.BodyParameter.ModelType is PrimaryTypeSwift &&
+                (this.BodyParameter.ModelType as PrimaryTypeSwift).KnownPrimaryType == 
+                KnownPrimaryType.Stream;
+        }
+
         public bool IsReturnTypeAnEnum() {
             if(!this.HasReturnValue()) {
                 return false;
             }
 
             return this.ReturnType.Body is EnumType;
+        }
+
+        public bool IsReturnTypeData() {
+            if(!this.HasReturnValue()) {
+                return false;
+            }
+
+            return this.ReturnType.Body is PrimaryTypeSwift &&
+                (this.ReturnType.Body as PrimaryTypeSwift).KnownPrimaryType == 
+                KnownPrimaryType.Stream;
         }
 
         /// <summary>
@@ -290,7 +336,7 @@ namespace AutoRest.Swift.Model
         /// </summary>
         /// <returns></returns>
 
-        public bool IsPageable => !string.IsNullOrEmpty(NextLink);
+        public bool IsPageable => HasNextLink;
 
         public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
@@ -377,6 +423,26 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public bool HasNextLink
+        {
+            get
+            {
+                // Note:
+                // Methods can be paged, even if "nextLinkName" is null
+                // Paged method just means a method returns an array
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (pageableExtension != null)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         /// <summary>
         /// Add NextLink attribute for pageable extension for the method.
         /// </summary>
@@ -425,6 +491,11 @@ namespace AutoRest.Swift.Model
         {
             get 
             {
+                if(this.BodyParameter != null &&
+                    (this.MethodReturnTypeDecodable == "NSData" ||
+                    this.MethodReturnTypeDecodable == "NSData?")) {
+                        return "application/octet-stream";
+                }
                 var mimeType = this.RequestContentType;   
                 return mimeType.IndexOf(';') > 0 ? 
                     mimeType.Substring(0, mimeType.IndexOf(';')) : mimeType;
@@ -435,10 +506,103 @@ namespace AutoRest.Swift.Model
         {
             get 
             {
+                if( HasReturnValue() &&
+                    (this.MethodReturnTypeDecodable == "NSData" ||
+                    this.MethodReturnTypeDecodable == "NSData?")) {
+                    return "application/octet-stream";
+                }
+
                 var mimeType = this.ResponseContentType();   
                 return mimeType.IndexOf(';') > 0 ? 
                     mimeType.Substring(0, mimeType.IndexOf(';')) : mimeType;
             }
+        }
+
+        public bool IsReturnTypeOptional {
+            get {
+                return this.MethodReturnType.EndsWith("?");
+            }
+        }
+
+        public string RequiredPropertiesForInitParameters(bool forMethodCall = false)
+        {
+            var indented = new IndentedStringBuilder("    ");
+            var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
+            properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            if(this.BodyParameter != null) {
+                properties.Add(this.BodyParameter);
+            }
+            
+            var seperator = "";
+
+            // Emit each property, except for named Enumerated types, as a pointer to the type
+            foreach (var property in properties)
+            {
+                var modelType = property.ModelType;
+                var modelDeclaration = modelType.Name;
+                if (modelType is IVariableType)
+                {
+                    modelDeclaration = ((IVariableType)modelType).VariableTypeDeclaration(property.IsRequired);
+                }
+
+
+                var output = string.Empty;
+                var propName = property.VariableName;
+
+                if (property.IsRequired)
+                {
+                    if(forMethodCall) {
+                        indented.Append($"{seperator}{propName}: {propName}");
+                    }else {
+                        indented.Append($"{seperator}{propName}: {modelDeclaration}");
+                    }
+
+                    seperator = ", ";
+                }
+            }
+
+            return indented.ToString();
+        }
+
+        public bool HasRequiredPropertiesForInitParameters()
+        {
+            var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
+            properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            if(this.BodyParameter != null) {
+                properties.Add(this.BodyParameter);
+            }
+            
+            foreach (var property in properties)
+            {
+                if (property.IsRequired)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public string RequiredPropertiesSettersForInitParameters()
+        {
+            var indented = new IndentedStringBuilder("    ");
+            var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
+            properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            if(this.BodyParameter != null) {
+                properties.Add(this.BodyParameter);
+            }
+
+            foreach (var property in properties)
+            {
+                var propName = property.VariableName;
+                var modelType = property.ModelType;
+                if (property.IsRequired)
+                {
+                    indented.Append($"self.{propName} = {propName}\r\n");
+                }
+            }
+
+            return indented.ToString();
         }
     }
 }

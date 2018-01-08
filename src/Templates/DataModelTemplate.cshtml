@@ -7,8 +7,9 @@
 @inherits AutoRest.Core.Template<AutoRest.Swift.Model.CompositeTypeSwift>
 @Header("// ")
 import Foundation
+import azureSwiftRuntime
 
-public struct @(Model.TypeName) : @(Model.InterfaceOutput) {
+internal struct @(Model.TypeName) : @(Model.InterfaceOutput) {
     @(Model.FieldsAsString())
 @EmptyLine
     enum CodingKeys: String, CodingKey {
@@ -33,6 +34,12 @@ public struct @(Model.TypeName) : @(Model.InterfaceOutput) {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     @(Model.FieldDecodingString())
+    if var pageDecoder = decoder as? PageDecoder  {
+      if pageDecoder.isPagedData,
+        let nextLinkName = pageDecoder.nextLinkName {
+          pageDecoder.nextLink = try UnknownCodingKey.decodeStringForKey(decoder: decoder, keyForDecode: nextLinkName)
+      }
+    }
   }
 @EmptyLine
   public func encode(to encoder: Encoder) throws {

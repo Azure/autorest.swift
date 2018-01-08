@@ -31,7 +31,7 @@ namespace AutoRest.Swift.Model
                 return ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
             }
 
-            return this.ModelType.Name;
+            return SwiftNameHelper.getTypeName(this.ModelType.Name, isRequired);
         }
 
         public string DecodeTypeDeclaration(bool isRequired)
@@ -41,7 +41,7 @@ namespace AutoRest.Swift.Model
                 return ((IVariableType)this.ModelType).VariableTypeDeclaration(isRequired);
             }
 
-            return this.ModelType.Name;
+            return SwiftNameHelper.getTypeName(this.ModelType.Name, isRequired);
         }
 
         public string EncodeTypeDeclaration(bool isRequired)
@@ -51,7 +51,7 @@ namespace AutoRest.Swift.Model
                 return ((IVariableType)this.ModelType).EncodeTypeDeclaration(isRequired);
             }
 
-            return this.ModelType.Name;
+            return SwiftNameHelper.getTypeName(this.ModelType.Name, isRequired);
         }
     }
 }

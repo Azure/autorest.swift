@@ -88,7 +88,7 @@ namespace AutoRest.Swift
                                                             "left","private","return","__FILE__","mutating protocol","switch","__FUNCTION__","none","public",
                                                             "where","__LINE__","nonmutating","static","while","optional","struct","override","subscript","postfix",
                                                             "typealias","precedence","var","prefix","Protocol","required","right","set","Type","unowned","weak"
-        }, StringComparer.OrdinalIgnoreCase);
+        });
 
         /// <summary>
         /// Formats a string
@@ -109,8 +109,6 @@ namespace AutoRest.Swift
                     ? name
                     : name + attachment
                 : name;
-
-            Logger.Instance.Log(Category.Warning, "AttachTypeName: " + name);
 
             return name;
         }
