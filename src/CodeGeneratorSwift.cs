@@ -73,12 +73,18 @@ namespace AutoRest.Swift
             foreach (EnumTypeSwift enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("data", $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                await Write(enumTemplate, Path.Combine("data", $"{enumTemplate.Model.Name}Enum{ImplementationFileExtension}"));
             }
 
             // Command
-            foreach (var methodGroup in codeModel.MethodGroups.Where(mg => !string.IsNullOrEmpty(mg.Name)))
+            foreach (var methodGroup in codeModel.MethodGroups)
             {
+                if(string.IsNullOrWhiteSpace(methodGroup.Name))
+                {
+                    methodGroup.Name = "Service";
+                }
+
+
                 foreach (var method in methodGroup.Methods)
                 {
                     var methodContextTemplate = new MethodCommandTemplate
@@ -96,6 +102,15 @@ namespace AutoRest.Swift
                 Model = codeModel
             };
             await Write(serviceClientTemplate, Path.Combine("commands",  FormatFileName("DataFactory")));
+
+            // Package.swift
+            if(!string.IsNullOrWhiteSpace(CodeModelSwift.FrameworkName)) {
+                var packageTemplate = new PackageTemplate
+                {
+                    Model = codeModel
+                };
+                await Write(packageTemplate, "Package.swift");
+            }
 
             foreach (var methodGroup in codeModel.MethodGroups)
             {

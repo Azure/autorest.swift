@@ -10,16 +10,14 @@ import Foundation
 import azureSwiftRuntime
 
 internal struct @(Model.TypeName) : @(Model.InterfaceOutput) {
-    @(Model.FieldsAsString())
+    @(Model.FieldWriter.FieldsAsString())
 @EmptyLine
-    enum CodingKeys: String, CodingKey {
-        @(Model.FieldEnumValuesForCodable())
-    }
+        @(Model.FieldWriter.FieldEnumValuesForCodable(true))
 @EmptyLine
 @if (Model.HasRequiredFields) {
 <text>
-  public init(@(Model.RequiredPropertiesForInitParameters()))  {
-    @(Model.RequiredPropertiesSettersForInitParameters())
+  public init(@(Model.FieldWriter.RequiredPropertiesForInitParameters()))  {
+    @(Model.FieldWriter.RequiredPropertiesSettersForInitParameters())
   }
 @EmptyLine
 </text>
@@ -32,8 +30,12 @@ internal struct @(Model.TypeName) : @(Model.InterfaceOutput) {
 }
 
   public init(from decoder: Decoder) throws {
+  @if (Model.HasCodingKeys) {
+  <text>
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    @(Model.FieldDecodingString())
+  </text>
+    }
+    @(Model.FieldWriter.FieldDecodingString())
     if var pageDecoder = decoder as? PageDecoder  {
       if pageDecoder.isPagedData,
         let nextLinkName = pageDecoder.nextLinkName {
@@ -43,16 +45,20 @@ internal struct @(Model.TypeName) : @(Model.InterfaceOutput) {
   }
 @EmptyLine
   public func encode(to encoder: Encoder) throws {
+@if (Model.HasCodingKeys) {
+<text>  
     var container = encoder.container(keyedBy: CodingKeys.self)
-    @(Model.FieldEncodingString())
+    @(Model.FieldWriter.FieldEncodingString())
+</text>
+}
   }
 }
 @EmptyLine
 @if (Model.HasRequiredFields) {
 <text>
 extension DataFactory {
-  public static func create@(Model.Name)Protocol(@(Model.RequiredPropertiesForInitParameters())) -> @(Model.Name)Protocol {
-    return @(Model.TypeName)(@(Model.RequiredPropertiesForInitParameters(true)))
+  public static func create@(Model.Name)Protocol(@(Model.FieldWriter.RequiredPropertiesForInitParameters())) -> @(Model.Name)Protocol {
+    return @(Model.TypeName)(@(Model.FieldWriter.RequiredPropertiesForInitParameters(true)))
   }
 }
 </text>

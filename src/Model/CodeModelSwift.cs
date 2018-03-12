@@ -15,7 +15,6 @@ namespace AutoRest.Swift.Model
 {
     public class CodeModelSwift : CodeModel
     {
-
         private static readonly Regex semVerPattern = new Regex(@"^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
         public string Version { get; }
         public string UserAgent
@@ -26,6 +25,8 @@ namespace AutoRest.Swift.Model
             }
         }
 
+        public static string FrameworkName { get; set; }
+        
         public CodeModelSwift()
         {
             NextMethodUndefined = new List<IModelType>();
@@ -51,7 +52,7 @@ namespace AutoRest.Swift.Model
                 var imports = new HashSet<string>();
                 imports.UnionWith(CodeNamerSwift.Instance.AutorestImports);
                 var clientMg = MethodGroups.Where(mg => string.IsNullOrEmpty(mg.Name)).FirstOrDefault();
-                if (clientMg != null)
+                if (clientMg != null && clientMg.Imports != null)
                 {
                     imports.UnionWith(clientMg.Imports);
                 }
@@ -66,25 +67,6 @@ namespace AutoRest.Swift.Model
         // NextMethodUndefined is used to keep track of those models which are returned by paged methods,
         // but the next method is not defined in the service client, so these models need a preparer.
         public List<IModelType> NextMethodUndefined { get; }
-
-        public IEnumerable<string> ModelImports
-        {
-            get
-            {
-                // Create an ordered union of the imports each model requires
-                var imports = new HashSet<string>();
-                if (ModelTypes != null && ModelTypes.Cast<CompositeTypeSwift>().Any(mtm => mtm.IsResponseType || mtm.IsWrapperType))
-                {
-                    imports.Add(PrimaryTypeSwift.GetImportLine("github.com/Azure/go-autorest/autorest"));
-                }
-                ModelTypes.Cast<CompositeTypeSwift>()
-                    .ForEach(mt =>
-                    {
-                        mt.AddImports(imports);
-                    });
-                return imports.OrderBy(i => i);
-            }
-        }
 
         public virtual IEnumerable<MethodGroupSwift> MethodGroups => Operations.Cast<MethodGroupSwift>();
 

@@ -103,6 +103,16 @@ namespace AutoRest.Swift
             else {
                 CompositeTypeSwift.TestNamespace = "unkown";
             }
+
+            var frameworkName = await GetValue("frameworkName");
+            if (frameworkName != null)
+            {
+                CodeModelSwift.FrameworkName = frameworkName;
+            }
+            else {
+                CodeModelSwift.FrameworkName = "unknown";
+            }
+
             using (plugin.Activate())
             {
                 Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);

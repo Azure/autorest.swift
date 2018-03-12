@@ -14,13 +14,13 @@ namespace AutoRest.Swift.Model
 
         public string VariableTypeDeclaration(bool isRequired)
         {
-                var retVal = $"[{ElementType.Name}]";
-                if (ElementType is IVariableType)
-                {
-                    retVal = $"[{((IVariableType)ElementType).VariableTypeDeclaration(isRequired)}]";
-                }
+            var retVal = $"[{ElementType.Name}]";
+            if (ElementType is IVariableType)
+            {
+                retVal = $"[{((IVariableType)ElementType).VariableTypeDeclaration(isRequired)}]";
+            }
 
-                return SwiftNameHelper.getTypeName(retVal, isRequired);
+            return SwiftNameHelper.getTypeName(retVal, isRequired);
         }
 
         public string DecodeTypeDeclaration(bool isRequired)
