@@ -82,12 +82,13 @@ namespace AutoRest.Swift
 
         public static HashSet<string> reservedWords = new HashSet<string>(new string[] {
                                                             "class","break","as","associativity","AnyObject","Any","String","Dictionary","Set","Array",
-                                                            "deinit","case","dynamicType","convenience","enum","continue","false","dynamic extension",
+                                                            "deinit","case","dynamicType","convenience","enum","continue","false","dynamic extension", "extension",
                                                             "default","is","didSet","func","do","nil","final","import","else","self","get","init","fallthrough",
                                                             "Self","infixvinternal","for","super","inout","let","if","true","lazy","operator","in","__COLUMN__",
                                                             "left","private","return","__FILE__","mutating protocol","switch","__FUNCTION__","none","public",
                                                             "where","__LINE__","nonmutating","static","while","optional","struct","override","subscript","postfix",
-                                                            "typealias","precedence","var","prefix","Protocol","required","right","set","Type","unowned","weak"
+                                                            "typealias","precedence","var","prefix","protocol","required","right","set","Type","unowned","weak",
+                                                            "nextLink"
         });
 
         /// <summary>

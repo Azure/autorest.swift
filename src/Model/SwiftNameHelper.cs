@@ -6,6 +6,7 @@ namespace AutoRest.Swift.Model
 {
     internal static class SwiftNameHelper
     {
+
         internal static string convertToVariableName(string name)
         {
             if (!string.IsNullOrWhiteSpace(name) && name.Length > 1)
@@ -18,6 +19,10 @@ namespace AutoRest.Swift.Model
                 name = "_body";
             }
 
+            if(CodeNamerSwift.reservedWords.Contains(name)) {
+                name = "_" + name;
+            }
+            
             return name;
         }
 
@@ -26,10 +31,15 @@ namespace AutoRest.Swift.Model
             if (!string.IsNullOrWhiteSpace(name) && name.Length > 1)
             {
                 name = name.Replace(" ", "").Replace("-", "");
+                
                 name = name.Substring(0, 1).ToUpper() + name.Substring(1);
 
             }
 
+            if(CodeNamerSwift.reservedWords.Contains(name)) {
+                name = "_" + name;
+            }
+            
             return name;
         }
 

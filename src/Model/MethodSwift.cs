@@ -492,8 +492,8 @@ namespace AutoRest.Swift.Model
             get 
             {
                 if(this.BodyParameter != null &&
-                    (this.MethodReturnTypeDecodable == "NSData" ||
-                    this.MethodReturnTypeDecodable == "NSData?")) {
+                    (this.MethodReturnTypeDecodable == "Data" ||
+                    this.MethodReturnTypeDecodable == "Data?")) {
                         return "application/octet-stream";
                 }
                 var mimeType = this.RequestContentType;   
@@ -507,8 +507,8 @@ namespace AutoRest.Swift.Model
             get 
             {
                 if( HasReturnValue() &&
-                    (this.MethodReturnTypeDecodable == "NSData" ||
-                    this.MethodReturnTypeDecodable == "NSData?")) {
+                    (this.MethodReturnTypeDecodable == "Data" ||
+                    this.MethodReturnTypeDecodable == "Data?")) {
                     return "application/octet-stream";
                 }
 
@@ -529,6 +529,7 @@ namespace AutoRest.Swift.Model
             var indented = new IndentedStringBuilder("    ");
             var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
             properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            properties.AddRange(this.HeaderParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
             if(this.BodyParameter != null) {
                 properties.Add(this.BodyParameter);
             }
@@ -549,7 +550,9 @@ namespace AutoRest.Swift.Model
                 var output = string.Empty;
                 var propName = property.VariableName;
 
-                if (property.IsRequired)
+                if (property.IsRequired &&
+                    (!propName.Equals("apiVersion") ||
+                    property.Location != ParameterLocation.Query))
                 {
                     if(forMethodCall) {
                         indented.Append($"{seperator}{propName}: {propName}");
@@ -568,13 +571,17 @@ namespace AutoRest.Swift.Model
         {
             var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
             properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            properties.AddRange(this.HeaderParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
             if(this.BodyParameter != null) {
                 properties.Add(this.BodyParameter);
             }
             
             foreach (var property in properties)
             {
-                if (property.IsRequired)
+                var propName = property.VariableName;
+                if (property.IsRequired &&
+                    (!propName.Equals("apiVersion") ||
+                    property.Location != ParameterLocation.Query))
                 {
                     return true;
                 }
@@ -588,6 +595,7 @@ namespace AutoRest.Swift.Model
             var indented = new IndentedStringBuilder("    ");
             var properties = this.URLParameters.Cast<AutoRest.Swift.Model.ParameterSwift>().ToList();
             properties.AddRange(this.QueryParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
+            properties.AddRange(this.HeaderParameters.Cast<AutoRest.Swift.Model.ParameterSwift>());
             if(this.BodyParameter != null) {
                 properties.Add(this.BodyParameter);
             }
@@ -596,7 +604,9 @@ namespace AutoRest.Swift.Model
             {
                 var propName = property.VariableName;
                 var modelType = property.ModelType;
-                if (property.IsRequired)
+                if (property.IsRequired &&
+                    (!propName.Equals("apiVersion") ||
+                    property.Location != ParameterLocation.Query))
                 {
                     indented.Append($"self.{propName} = {propName}\r\n");
                 }

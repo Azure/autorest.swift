@@ -53,7 +53,7 @@ namespace AutoRest.Swift.Model
 
         public string DecodeTypeDeclaration(bool isRequired)
         {
-            var retVal = this.Name.FixedValue;
+            var retVal = this.IsNamed ? this.Name.FixedValue + "Enum" : "String";
             if (this.UnNamedEnumRelatedType != null)
             {
                 return this.UnNamedEnumRelatedType.DecodeTypeDeclaration(isRequired);
@@ -64,7 +64,7 @@ namespace AutoRest.Swift.Model
 
         public string EncodeTypeDeclaration(bool isRequired)
         {
-            var retVal = this.Name.FixedValue;
+            var retVal = this.IsNamed ? this.Name.FixedValue+ "Enum" : "String";
             if (this.UnNamedEnumRelatedType != null)
             {
                 return this.UnNamedEnumRelatedType.EncodeTypeDeclaration(isRequired);
@@ -75,7 +75,7 @@ namespace AutoRest.Swift.Model
 
         public string VariableTypeDeclaration(bool isRequired)
         {
-            var retVal = this.Name.FixedValue;
+            var retVal = this.IsNamed ? this.Name.FixedValue+ "Enum" : "String";
             if (this.UnNamedEnumRelatedType != null)
             {
                 return this.UnNamedEnumRelatedType.VariableTypeDeclaration(isRequired);
@@ -88,7 +88,7 @@ namespace AutoRest.Swift.Model
         {
             get
             {
-                var retVal = this.Name.FixedValue;
+                var retVal = this.IsNamed ? this.Name.FixedValue + "Enum" : "String";
                 if (this.UnNamedEnumRelatedType != null)
                 {
                     return this.UnNamedEnumRelatedType.TypeName;
