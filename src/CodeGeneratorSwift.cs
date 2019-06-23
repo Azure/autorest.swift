@@ -52,14 +52,18 @@ namespace AutoRest.Swift
             foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelProtocolTemplate = new ModelProtocolTemplate { Model = modelType };
-                await Write(modelProtocolTemplate, Path.Combine("protocols", $"{modelType.Name}Protocol{ImplementationFileExtension}"));
+                await Write(modelProtocolTemplate, Path.Combine(
+                    this.SourceFilePath("protocols"),
+                    $"{modelType.Name}Protocol{ImplementationFileExtension}"));
             }
 
             //Models
             foreach (CompositeTypeSwift modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new DataModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("data", $"{modelType.TypeName}{ImplementationFileExtension}"));
+                await Write(modelTemplate, Path.Combine(
+                    this.SourceFilePath("data"),
+                    $"{modelType.TypeName}{ImplementationFileExtension}"));
             }
 
             //Model Tests
@@ -73,13 +77,15 @@ namespace AutoRest.Swift
             foreach (EnumTypeSwift enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("data", $"{enumTemplate.Model.Name}Enum{ImplementationFileExtension}"));
+                await Write(enumTemplate, Path.Combine(
+                    this.SourceFilePath("data"),
+                    $"{enumTemplate.Model.Name}Enum{ImplementationFileExtension}"));
             }
 
             // Command
             foreach (var methodGroup in codeModel.MethodGroups)
             {
-                if(string.IsNullOrWhiteSpace(methodGroup.Name))
+                if (string.IsNullOrWhiteSpace(methodGroup.Name))
                 {
                     methodGroup.Name = "Service";
                 }
@@ -92,7 +98,9 @@ namespace AutoRest.Swift
                         Model = (MethodSwift)method
                     };
 
-                    await Write(methodContextTemplate, Path.Combine("commands", $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
+                    await Write(methodContextTemplate, Path.Combine(
+                        this.SourceFilePath("commands"),
+                        $"{methodGroup.Name + method.Name}{ImplementationFileExtension}"));
                 }
             }
 
@@ -101,10 +109,13 @@ namespace AutoRest.Swift
             {
                 Model = codeModel
             };
-            await Write(serviceClientTemplate, Path.Combine("commands",  FormatFileName("DataFactory")));
+            await Write(serviceClientTemplate, Path.Combine(
+                this.SourceFilePath("commands"),
+                FormatFileName("DataFactory")));
 
             // Package.swift
-            if(!string.IsNullOrWhiteSpace(CodeModelSwift.FrameworkName)) {
+            if (!string.IsNullOrWhiteSpace(CodeModelSwift.FrameworkName))
+            {
                 var packageTemplate = new PackageTemplate
                 {
                     Model = codeModel
@@ -114,7 +125,7 @@ namespace AutoRest.Swift
 
             foreach (var methodGroup in codeModel.MethodGroups)
             {
-                if(string.IsNullOrWhiteSpace(methodGroup.Name))
+                if (string.IsNullOrWhiteSpace(methodGroup.Name))
                 {
                     methodGroup.Name = "Service";
                 }
@@ -124,13 +135,20 @@ namespace AutoRest.Swift
                     Model = methodGroup
                 };
 
-                await Write(methodGroupTemplate, Path.Combine("commands", FormatFileName(methodGroup.Name)));
+                await Write(methodGroupTemplate, Path.Combine(
+                    this.SourceFilePath("commands"),
+                    FormatFileName(methodGroup.Name)));
             }
         }
 
         private string FormatFileName(string fileName)
         {
             return $"{fileName}{ImplementationFileExtension}";
+        }
+
+        private string SourceFilePath(string dirName)
+        {
+            return Path.Combine("Sources", CodeModelSwift.FrameworkName, dirName);
         }
     }
 }
