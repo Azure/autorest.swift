@@ -256,10 +256,10 @@ else
             let contentType = "@(Model.EncodeMimeType)"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let encoder = try CoderFactory.encoder(for: mimeType)
-                let encodedValue = try encoder.encode(@($"{param.VariableName}") as! @(param.DecodeTypeDeclaration(param.IsRequired)))
+                let encodedValue = try encoder.encode(@($"{param.VariableName}") as? @(param.DecodeTypeDeclaration(param.IsRequired)))
                 return encodedValue
             }
-            
+
             throw DecodeError.unknownMimeType
         }
 </text>

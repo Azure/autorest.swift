@@ -17,11 +17,12 @@ namespace AutoRest.Swift
 {
     public class Program : NewPlugin
     {
-        public static int Main(string[] args )
+        public static int Main(string[] args)
         {
-            if(args != null && args.Length > 0 && args[0] == "--server") {
+            if (args != null && args.Length > 0 && args[0] == "--server")
+            {
                 var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
-                connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "swift" });
+                connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new[] { "swift" });
                 connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, plugin, sessionId).Process());
                 connection.DispatchNotification("Shutdown", connection.Stop);
 
@@ -44,7 +45,7 @@ namespace AutoRest.Swift
             try
             {
                 return (T)Convert.ChangeType(
-                    codeModel.CodeGenExtensions[name], 
+                    codeModel.CodeGenExtensions[name],
                     typeof(T).GenericTypeArguments.Length == 0 ? typeof(T) : typeof(T).GenericTypeArguments[0] // un-nullable
                 );
             }
@@ -67,10 +68,10 @@ namespace AutoRest.Swift
             }
             var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
             var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
-            
+
             // build settings
             var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
-            
+
             new Settings
             {
                 Namespace = await GetValue("namespace"),
@@ -79,11 +80,10 @@ namespace AutoRest.Swift
                 AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
                 Host = this
             };
+
             var header = await GetValue("license-header");
-            if (header != null)
-            {
-                Settings.Instance.Header = header;
-            }
+            Settings.Instance.Header = header ?? Settings.Instance.Header;
+
             Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(codeModelT, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
             Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(codeModelT, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
             Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(codeModelT, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
@@ -96,22 +96,9 @@ namespace AutoRest.Swift
             var plugin = (IAnyPlugin)new AutoRest.Swift.PluginSwift();
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             var testnamespace = await GetValue("testnamespace");
-            if (testnamespace != null)
-            {
-                CompositeTypeSwift.TestNamespace = testnamespace;
-            }
-            else {
-                CompositeTypeSwift.TestNamespace = "unkown";
-            }
-
-            var frameworkName = await GetValue("frameworkName");
-            if (frameworkName != null)
-            {
-                CodeModelSwift.FrameworkName = frameworkName;
-            }
-            else {
-                CodeModelSwift.FrameworkName = "unknown";
-            }
+            CompositeTypeSwift.TestNamespace = testnamespace ?? "unkown";
+            var frameworkName = await GetValue("frameworkname");
+            CodeModelSwift.FrameworkName = frameworkName ?? "unkown";
 
             using (plugin.Activate())
             {
