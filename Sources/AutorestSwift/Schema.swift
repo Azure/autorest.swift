@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Schema: CodeModelProperty {
+public struct Schema: CodeModelProperty, GroupSchemaAllOf {
     public let properties: SchemaProperties
 
     public let defaultProperties = [String]()

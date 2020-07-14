@@ -36,7 +36,7 @@ public struct SchemasProperties: CodeModelPropertyBundle {
     public let strings: [StringSchema]?
 
     /// UnixTime
-    public let unixTimes: [UnitTimeSchema]?
+    public let unixTimes: [UnixTimeSchema]?
 
     /// an array of bytes
     public let byteArrays: [ByteArraySchema]?
