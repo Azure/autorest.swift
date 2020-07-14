@@ -19,8 +19,8 @@ public struct ByteArraySchema: CodeModelProperty {
 }
 
 public enum ByteArrayFormat: String {
-    case base64url = "base64url"
-    case byte = "byte"
+    case base64url
+    case byte
 }
 
 public struct ByteArraySchemaProperties: CodeModelPropertyBundle {

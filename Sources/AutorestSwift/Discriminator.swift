@@ -18,7 +18,7 @@ public struct Discriminator: CodeModelProperty {
 public struct DiscriminatorProperties: CodeModelPropertyBundle {
     public let property: Property
 
-    public let immediate: ComplexSchema
+    public let immediate: Dictionary<ComplexSchema, Codable>
     
-    public let all: ComplexSchema
+    public let all: Dictionary<ComplexSchema, Codable>
 }

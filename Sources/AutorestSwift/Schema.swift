@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TOOD: Revisit adding GroupSchemaAllOf protocol to Schema after clarificaiton with Azure Engineering team.
 public struct Schema: CodeModelProperty, GroupSchemaAllOf {
     public let properties: SchemaProperties
 

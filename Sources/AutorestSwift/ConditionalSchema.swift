@@ -26,5 +26,5 @@ public struct ConditionalSchemaProperties: CodeModelPropertyBundle {
     public let conditions: [ConditionalValue]
     
     /// the source value that drives the target value (property or parameter)
-    public let sourceValue: [Value]
+    public let sourceValue: Value
 }

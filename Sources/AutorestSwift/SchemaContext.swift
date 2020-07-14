@@ -8,7 +8,7 @@
 import Foundation
 
 public enum SchemaContext: String {
-    case exception = "exception"
-    case input = "input"
-    case output = "output"
+    case exception
+    case input
+    case output
 }

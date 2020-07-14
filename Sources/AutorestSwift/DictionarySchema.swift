@@ -23,5 +23,5 @@ public struct DictionarySchemaProperties: CodeModelPropertyBundle {
     public let elementType: Schema
     
     /// if elements in the dictionary should be nullable
-    public let nullableItems: Bool
+    public let nullableItems: Bool?
 }

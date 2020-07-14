@@ -19,8 +19,8 @@ public struct DateTimeSchema: CodeModelProperty {
 }
 
 public enum DateTimeFormat: String {
-    case date_time = "date-time"
-    case date_time_rfc1123 = "date-time-rfc1123"
+    case dateTime = "date-time"
+    case dateTimeRfc1123 = "date-time-rfc1123"
 }
 
 public struct DateTimeSchemaProperties: CodeModelPropertyBundle {

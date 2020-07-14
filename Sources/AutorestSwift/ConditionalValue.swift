@@ -21,10 +21,10 @@ public struct ConditionalValueProperties: CodeModelPropertyBundle {
     public let language: Language
 
     /// the actual value
-    public let target: ValueString
+    public let target: StringOrNumberOrBoolean
     
     /// the source value
-    public let source: ValueString
+    public let source: StringOrNumberOrBoolean
     
     /// Additional metadata extensions dictionary
     public let extensions: Dictionary<AnyHashable, Codable>?

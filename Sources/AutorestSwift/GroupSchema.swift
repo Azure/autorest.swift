@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TOOD: Revisit this protocol after clarificaiton with Azure Engineering team.
 public protocol GroupSchemaAllOf {}
 
 public struct GroupSchema: CodeModelProperty {

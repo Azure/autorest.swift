@@ -20,7 +20,7 @@ public struct NumberSchema: CodeModelProperty {
 
 public struct NumberSchemaProperties: CodeModelPropertyBundle {
     /// precision (# of bits?) of the number
-    public let precision: Int?
+    public let precision: Int
 
     /// if present, the number must be an exact multiple of this value
     public let multipleOf: Int?

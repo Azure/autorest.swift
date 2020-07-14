@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Represents  deprecation information for a given aspect
+/// an individual choice in a ChoiceSchema
 public struct ChoiceValue: CodeModelProperty {
     public let properties: ChoiceValueProperties
 
@@ -16,10 +16,10 @@ public struct ChoiceValue: CodeModelProperty {
     public let additionalProperties = false
 }
 
-public enum ValueString: String {
-    case string = "string"
-    case number = "number"
-    case boolean = "boolean"
+public enum StringOrNumberOrBoolean {
+    case string(String)
+    case int(Int)
+    case bool(Bool)
 }
 
 public struct ChoiceValueProperties: CodeModelPropertyBundle {
@@ -27,7 +27,7 @@ public struct ChoiceValueProperties: CodeModelPropertyBundle {
     public let language: Language
 
     /// the actual value
-    public let value: ValueString
+    public let value: StringOrNumberOrBoolean
     
     /// Additional metadata extensions dictionary
     public let extensions: Dictionary<AnyHashable, Codable>?

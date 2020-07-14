@@ -21,7 +21,7 @@ public struct ConstantValueProperties: CodeModelPropertyBundle {
     public let language: Language
 
     /// the actual constant value to use
-    public let value: Any
+    public let value: String
     
     /// Additional metadata extensions dictionary
     public let extensions: Dictionary<AnyHashable, Codable>?
