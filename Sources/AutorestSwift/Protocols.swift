@@ -9,12 +9,11 @@ import Foundation
 
 /// Custom extensible metadata for individual protocols (ie, HTTP, etc)
 public struct Protocols: Codable {
-    // TODO: Uncomment to slow enable YAML decoding
-//    public let http: Protocol?
-//
-//    public let amqp: Protocol?
-//
-//    public let mqtt: Protocol?
-//
-//    public let jsonrpc: Protocol?
+    public let http: Protocol?
+
+    public let amqp: Protocol?
+
+    public let mqtt: Protocol?
+
+    public let jsonrpc: Protocol?
 }
