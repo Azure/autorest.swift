@@ -8,18 +8,11 @@
 import Foundation
 
 /// Represents  deprecation information for a given aspect
-public struct Deprecation: CodeModelProperty {
-    public let properties: DeprecationProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct DeprecationProperties: CodeModelPropertyBundle {
+public struct Deprecation: Codable {
     /// The reason why this aspect
     public let message: String
 
     /// The api versions that this deprecation is applicable to.
     public let apiVersions: [ApiVersion]
 }
+

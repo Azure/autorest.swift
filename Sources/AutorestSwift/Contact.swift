@@ -8,15 +8,7 @@
 import Foundation
 
 /// Contact information
-public struct Contact: CodeModelProperty {
-    public let properties: ContactProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct ContactProperties: CodeModelPropertyBundle {
+public struct Contact: Codable {
     /// contact name
     public let name: String?
 
@@ -27,5 +19,6 @@ public struct ContactProperties: CodeModelPropertyBundle {
     public let email: String?
 
     /// additional metadata extensions dictionary
-    public let extensions: Dictionary<AnyHashable, Codable>?
+    // TODO: Not Codeable
+    // public let extensions: Dictionary<AnyHashable, Codable>?
 }

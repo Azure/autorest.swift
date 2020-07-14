@@ -7,15 +7,7 @@
 
 import Foundation
 
-public struct Schema: CodeModelProperty {
-    public let properties: SchemaProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct SchemaProperties: CodeModelPropertyBundle {
+public struct Schema: Codable {
     /// Per-language information for Schema
     public let language: Languages
 
@@ -50,5 +42,6 @@ public struct SchemaProperties: CodeModelPropertyBundle {
     public let `protocol`: Protocols
 
     /// Additional metadata extensions dictionary
-    public let extensions: Dictionary<AnyHashable, Codable>?
+    // TODO: Not Codeable
+    // public let extensions: Dictionary<AnyHashable, Codable>?
 }

@@ -8,15 +8,7 @@
 import Foundation
 
 /// The bare-minimum fields for per-language metadata on a given aspect
-public struct Language: CodeModelProperty {
-    public let properties: LanguageProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct LanguageProperties: CodeModelPropertyBundle {
+public struct Language: Codable {
     /// name used in actual implementation
     public let name: String
 

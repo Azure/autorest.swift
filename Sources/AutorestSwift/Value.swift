@@ -8,15 +8,7 @@
 import Foundation
 
 /// Common base interface for properties, parameters and the like.
-public struct Value: CodeModelProperty {
-    public let properties: ValueProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct ValueProperties: CodeModelPropertyBundle {
+public struct Value: Codable {
     /// the schema of this Value
     public let schema: Schema
 
@@ -54,5 +46,6 @@ public struct ValueProperties: CodeModelPropertyBundle {
     public let `protocol`: Protocols
 
     /// Additional metadata extensions dictionary
-    public let extensions: Dictionary<AnyHashable, Codable>?
+    // TODO: Not Codeable
+    // public let extensions: Dictionary<AnyHashable, Codable>?
 }
