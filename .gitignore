@@ -296,3 +296,4 @@ package/
 *.tgz
 src/obj/
 *.log
+IDEFindNavigatorScopes.plist
