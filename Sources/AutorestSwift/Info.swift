@@ -8,16 +8,7 @@
 import Foundation
 
 /// Code model information
-public struct Info: CodeModelProperty {
-    public let properties: InfoProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct InfoProperties: CodeModelPropertyBundle {
-
+public struct Info: Codable {
     /// the title of this service
     public let title: String
 
@@ -37,5 +28,6 @@ public struct InfoProperties: CodeModelPropertyBundle {
     public let externalDocs: ExternalDocumentation?
 
     /// additional metadata extensions dictionary
-    public let extensions: Dictionary<AnyHashable, Codable>?
+    // TODO: Not Codeable
+    // public let extensions: Dictionary<AnyHashable, Codable>?
 }

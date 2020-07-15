@@ -8,15 +8,7 @@
 import Foundation
 
 /// Custom extensible metadata for individual serialization formats
-public struct SerializationFormats: CodeModelProperty {
-    public let properties: SerializationFormatsProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public struct SerializationFormatsProperties: CodeModelPropertyBundle {
+public struct SerializationFormats: Codable {
     public let json: SerializationFormat?
 
     public let xml: XmlSerializationFormat?

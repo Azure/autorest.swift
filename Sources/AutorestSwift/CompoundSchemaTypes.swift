@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum CompoundSchemaTypes: String {
+public enum CompoundSchemaTypes: String, Codable {
     case or
     case xor
 }

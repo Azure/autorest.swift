@@ -5,9 +5,9 @@ guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .
 let url = documentsUrl.appendingPathComponent("code-model-v4-no-tags.yaml")
 do {
     let yamlString = try String(contentsOf: url)
-    if let object = try Yams.load(yaml: yamlString) as? Dictionary<String, Any> {
-        print(object as AnyObject)
-    }
+    let decoder = YAMLDecoder()
+    let model = try decoder.decode(CodeModel.self, from: yamlString)
+    print(model)
 } catch {
     print(error)
 }

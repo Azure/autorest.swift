@@ -11,21 +11,14 @@ import Foundation
 /// options:
 /// - prepend a dash or append a plus to indicate a range (ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )
 /// - semver-range style (ie, '^1.0.0' or '~1.0.0' )
-public struct ApiVersion: CodeModelProperty {
-    public let properties: ApiVersionProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
-
-public enum ApiVersionRange: String {
-    case plus = "+"
-    case minus = "-"
-}
-public struct ApiVersionProperties: CodeModelPropertyBundle {
+public struct ApiVersion: Codable {
     /// The actual API version string used in the API
     public let version: String
 
     public let range: ApiVersionRange?
+}
+
+public enum ApiVersionRange: String, Codable {
+    case plus = "+"
+    case minus = "-"
 }

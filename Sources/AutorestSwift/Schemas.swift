@@ -9,14 +9,6 @@ import Foundation
 
 /// The full set of schemas for a given service, categorized into convenient collections.
 public struct Schemas: CodeModelProperty {
-    public var properties: SchemasProperties
-
-    public var defaultProperties = [String]()
-
-    public var additionalProperties = false
-}
-
-public struct SchemasProperties: CodeModelPropertyBundle {
     /// a collection of items
     public let arrays: [ArraySchema]?
 

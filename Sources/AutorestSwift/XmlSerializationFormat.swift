@@ -7,17 +7,7 @@
 
 import Foundation
 
-public struct XmlSerializationFormat: CodeModelProperty {
-    public let properties: XmlSerializationFormatProperties
-
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-
-    public let allOf: [SerializationFormat]
-}
-
-public struct XmlSerializationFormatProperties: CodeModelPropertyBundle {
+public struct XmlSerializationFormat: Codable {
     public let name: String?
 
     public let namespace: String?
@@ -27,4 +17,7 @@ public struct XmlSerializationFormatProperties: CodeModelPropertyBundle {
     public let attribute: Bool
 
     public let wrapped: Bool
+
+    // TODO: Apply allOf
+    // public let allOf: [SerializationFormat]
 }

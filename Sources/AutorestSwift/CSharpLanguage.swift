@@ -7,8 +7,4 @@
 
 import Foundation
 
-public struct CSharpLanguage: CodeModelProperty {
-    public let defaultProperties = [String]()
-
-    public let additionalProperties = false
-}
+public struct CSharpLanguage: Codable {}
