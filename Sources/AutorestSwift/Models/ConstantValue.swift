@@ -10,7 +10,7 @@ import Foundation
 /// a container for the actual constant value
 public struct ConstantValue: Codable {
     /// per-language information for this value
-    public let language: Language
+    public let language: Language?
 
     /// the actual constant value to use
     public let value: String
