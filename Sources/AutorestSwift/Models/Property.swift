@@ -16,7 +16,7 @@ public struct Property: Codable {
     public let serializedName: String
 
     // when a property is flattened, the property will be the set of serialized names to get to that target property.\n\nIf flattenedName is present, then this property is a flattened property.\n\n(ie, ['properties','name'] )
-    public let flattenedNames: [String]
+    public let flattenedNames: [String]?
 
     // if this property is used as a discriminator for a polymorphic type
     public let isDiscriminator: Bool?

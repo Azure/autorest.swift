@@ -7,7 +7,13 @@ do {
     let yamlString = try String(contentsOf: url)
     let decoder = YAMLDecoder()
     let model = try decoder.decode(CodeModel.self, from: yamlString)
-    print(model)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let jsonData = try encoder.encode(model)
+
+    if let jsonString = String(data: jsonData, encoding: .utf8) {
+      print(jsonString)
+    }
 } catch {
     print(error)
 }

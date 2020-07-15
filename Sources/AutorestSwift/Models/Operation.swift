@@ -43,10 +43,10 @@ public struct Operation: Codable {
     public let externalDocs: ExternalDocumentation?
 
     /// per-language information for this aspect
-    public let languages: Languages
+    public let language: Languages
 
     /// per-protocol information for this aspect
-    public let protocols: Protocols
+    public let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
     // TODO: Not Codable

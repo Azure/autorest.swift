@@ -13,6 +13,11 @@ public struct OperationGroup: Codable {
 
     public let operations: [Operation]
 
+    enum CodingKeys: String, CodingKey {
+        case operations
+        case key = "$key"
+    }
+    
     // TODO: Apply allOf
     // public let allOf: [Metadata]?
 }
