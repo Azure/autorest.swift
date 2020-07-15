@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a Char value
-public struct CharSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias CharSchema = PrimitiveSchema

@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a ODataQuery value
-public struct ODataQuerySchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [Schema]
-}
+public typealias ODataQuerySchema = Schema

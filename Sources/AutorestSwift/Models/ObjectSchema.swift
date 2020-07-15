@@ -7,11 +7,10 @@
 
 import Foundation
 
-// TODO: Revisit this protocol after clarificaiton with Azure Engineering team.
-public protocol ObjectSchemaAllOf {}
+public typealias ObjectSchema = Compose3<ObjectSchemaProperty, ComplexSchema, SchemaUsage>
 
 /// a schema that represents a type with child properties.
-public struct ObjectSchema: Codable {
+public struct ObjectSchemaProperty: Codable {
     /// the property of the polymorphic descriminator for this type, if there is one
     public let discriminator: Discriminator?
 
@@ -29,7 +28,4 @@ public struct ObjectSchema: Codable {
     public let children: Relations?
 
     public let discriminatorValue: String?
-
-    // TODO: Apply allOf
-    // public let allOf: [ObjectSchemaAllOf]
 }

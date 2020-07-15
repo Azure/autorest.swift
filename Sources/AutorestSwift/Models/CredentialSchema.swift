@@ -7,8 +7,11 @@
 
 import Foundation
 
+
+public typealias CredentialSchema = Compose<CredentialSchemaProperty, PrimitiveSchema>
+
 /// a schema that represents a credential value
-public struct CredentialSchema: Codable {
+public struct CredentialSchemaProperty: Codable {
     /// the maximum length of the string
     public let maxLength: Int?
 
@@ -17,7 +20,4 @@ public struct CredentialSchema: Codable {
 
     /// a regular expression that the string must be validated against
     public let pattern: String?
-
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
 }

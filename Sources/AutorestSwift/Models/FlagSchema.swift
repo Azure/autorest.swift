@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct FlagSchema: Codable {
+public typealias FlagSchema = Compose<FlagSchemaProperty, ValueSchema>
+
+public struct FlagSchemaProperty: Codable {
     /// the possible choices for in the set
     public let choices: [FlagValue]
 
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

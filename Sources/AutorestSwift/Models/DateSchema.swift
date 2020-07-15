@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a Date value
-public struct DateSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias DateSchema = PrimitiveSchema

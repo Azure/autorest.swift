@@ -12,11 +12,10 @@ public enum DateTimeFormat: String, Codable {
     case dateTimeRfc1123 = "date-time-rfc1123"
 }
 
+public typealias DateTimeSchema = Compose<DateTimeSchemaProperty, PrimitiveSchema>
+
 /// a schema that represents a DateTime value
-public struct DateTimeSchema: Codable {
+public struct DateTimeSchemaProperty: Codable {
     /// date-time format
     public let format: DateTimeFormat
-
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
 }

@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias OperationGroup = Compose<OperationGroupProperty, Metadata>
+
 /// An operation group represents a container around set of operations
-public struct OperationGroup: Codable {
+public struct OperationGroupProperty: Codable {
     public let key: String
 
     public let operations: [Operation]
@@ -17,7 +19,4 @@ public struct OperationGroup: Codable {
         case operations
         case key = "$key"
     }
-    
-    // TODO: Apply allOf
-    // public let allOf: [Metadata]?
 }

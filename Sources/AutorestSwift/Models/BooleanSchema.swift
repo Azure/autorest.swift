@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema types that are non-object or complex types
-public struct BooleanSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias BooleanSchema = PrimitiveSchema

@@ -7,8 +7,7 @@
 
 import Foundation
 
-// TODO: Revisit adding GroupSchemaAllOf, ObjectSchemaAllOf protocol to Schema after clarificaiton with Azure Engineering team.
-public struct SchemaUsage: Codable, ObjectSchemaAllOf, GroupSchemaAllOf {
+public struct SchemaUsage: Codable {
     /// contexts in which the schema is used
     public let usage: [SchemaContext]
 

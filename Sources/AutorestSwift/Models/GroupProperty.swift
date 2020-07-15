@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct GroupProperty: Codable {
+public typealias GroupProperty = Compose<GroupPropertyBundle, Property>
+
+public struct GroupPropertyBundle: Codable {
     public let originalParameter: [Parameter]
 
-    // TODO: Apply allOf
-    // public let allOf: [Property]
 }

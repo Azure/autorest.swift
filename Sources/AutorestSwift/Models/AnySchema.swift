@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema types that are any types
-public struct AnySchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [Schema]
-}
+public typealias AnySchema = Schema

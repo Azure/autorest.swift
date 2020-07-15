@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias UriSchema = Compose<UriSchemaProperty, PrimitiveSchema>
+
 /// a schema that represents a Uri value
-public struct UriSchema: Codable {
+public struct UriSchemaProperty: Codable {
     /// the maximum length of the string
     public let maxLength: Int?
 
@@ -17,7 +19,4 @@ public struct UriSchema: Codable {
 
     /// a regular expression that the string must be validated against
     public let pattern: String?
-
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
 }

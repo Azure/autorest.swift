@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias StringSchema = Compose<StringSchemaProperty, PrimitiveSchema>
+
 /// a schema that represents a string value
-public struct StringSchema: Codable {
+public struct StringSchemaProperty: Codable {
     /// the maximum length of the string
     public let maxLength: Int?
 
@@ -17,7 +19,4 @@ public struct StringSchema: Codable {
 
     /// a regular expression that the string must be validated against
     public let pattern: String?
-
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
 }

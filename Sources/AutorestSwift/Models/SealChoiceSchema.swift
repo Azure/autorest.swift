@@ -7,14 +7,14 @@
 
 import Foundation
 
+
+public typealias SealedChoiceSchema = Compose<SealedChoiceSchemaProperty, ValueSchema>
+
 /// a schema that represents a choice of several values (ie, an 'enum')
-public struct SealedChoiceSchema: Codable {
+public struct SealedChoiceSchemaProperty: Codable {
     /// the primitive type for the choices
     public let choiceType: PrimitiveSchema
 
     /// the possible choices for in the set
     public let choices: [ChoiceValue]
-
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

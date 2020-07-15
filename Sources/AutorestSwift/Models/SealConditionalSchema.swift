@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias SealedConditionalSchema = Compose<SealedConditionalSchemaProperty, ValueSchema>
+
 /// a schema that represents a value dependent on another (not overridable)
-public struct SealedConditionalSchema: Codable {
+public struct SealedConditionalSchemaProperty: Codable {
     /// the primitive type for the conditional
     public let conditionalType: PrimitiveSchema
 
@@ -17,7 +19,4 @@ public struct SealedConditionalSchema: Codable {
 
     /// the source value that drives the target value
     public let sourceValue: [Value]
-
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

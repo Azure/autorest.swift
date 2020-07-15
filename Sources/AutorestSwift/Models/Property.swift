@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias Property = Compose<PropertyBundle, Value>
+
 // a property is a child value in an object
-public struct Property: Codable {
+public struct PropertyBundle: Codable {
     // if the property is marked read-only (ie, not intended to be sent to the service)
     public let readOnly: Bool?
 
@@ -20,7 +22,4 @@ public struct Property: Codable {
 
     // if this property is used as a discriminator for a polymorphic type
     public let isDiscriminator: Bool?
-
-    // TODO: Apply allOf
-    // public let allOf: [Value]
 }

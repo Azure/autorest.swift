@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a Uuid value
-public struct UuidSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias UuidSchema = PrimitiveSchema
