@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: Revisit adding GroupSchemaAllOf protocol to Schema after clarificaiton with Azure Engineering team.
 public struct Schema: Codable {
     /// Per-language information for Schema
     public let language: Languages
