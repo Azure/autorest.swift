@@ -11,7 +11,9 @@ do {
     encoder.outputFormatting = .prettyPrinted
     let jsonData = try encoder.encode(model)
 
-    print(String(data: jsonData, encoding: .utf8)!)
+    if let jsonString = String(data: jsonData, encoding: .utf8) {
+      print(jsonString)
+    }
 } catch {
     print(error)
 }
