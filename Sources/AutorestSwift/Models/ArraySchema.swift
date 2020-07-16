@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias ArraySchema = Compose<ArraySchemaProperty, ValueSchema>
+
 /// a Schema that represents and array of values
-public struct ArraySchema: Codable {
+public struct ArraySchemaProperty: Codable {
     /// elementType of the array
     public let elementType: Schema
 
@@ -23,7 +25,4 @@ public struct ArraySchema: Codable {
 
     /// if elements in the array should be nullable
     public let nullableItems: Bool?
-
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

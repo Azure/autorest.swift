@@ -7,8 +7,11 @@
 
 import Foundation
 
+
+public typealias NumberSchema = Compose<NumberSchemaProperty, PrimitiveSchema>
+
 /// a schema that represents a Number value
-public struct NumberSchema: Codable {
+public struct NumberSchemaProperty: Codable {
     /// precision (# of bits?) of the number
     public let precision: Int
 
@@ -26,8 +29,5 @@ public struct NumberSchema: Codable {
 
     /// if present, the value must be higher than minimum
     public let exclusiveMinimum: Bool?
-
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
 }
 

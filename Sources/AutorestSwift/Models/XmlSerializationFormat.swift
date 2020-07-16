@@ -7,7 +7,9 @@
 
 import Foundation
 
-public struct XmlSerializationFormat: Codable {
+public typealias XmlSerializationFormat = Compose<XmlSerializationFormatProperty, SerializationFormat>
+
+public struct XmlSerializationFormatProperty: Codable {
     public let name: String?
 
     public let namespace: String?
@@ -17,7 +19,4 @@ public struct XmlSerializationFormat: Codable {
     public let attribute: Bool
 
     public let wrapped: Bool
-
-    // TODO: Apply allOf
-    // public let allOf: [SerializationFormat]
 }

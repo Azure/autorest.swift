@@ -7,12 +7,8 @@
 
 import Foundation
 
-// TODO: Revisit this protocol after clarificaiton with Azure Engineering team.
-public protocol GroupSchemaAllOf {}
+public typealias GroupSchema = Compose3<GroupSchemaProperty, Schema, SchemaUsage>
 
-public struct GroupSchema: Codable {
+public struct GroupSchemaProperty: Codable {
     public let properties: [GroupProperty]
-
-    // TODO: Apply allOf
-    // public let allOf: [GroupSchemaAllOf]
 }

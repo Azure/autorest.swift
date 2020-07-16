@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a boolean value
-public struct BinarySchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [Schema]
-}
+public typealias BinarySchema = Schema

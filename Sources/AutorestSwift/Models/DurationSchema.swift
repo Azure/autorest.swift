@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a Duration value
-public struct DurationSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias DurationSchema = PrimitiveSchema

@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema types that are primitive language values
-public struct PrimitiveSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
-}
+public typealias PrimitiveSchema = ValueSchema

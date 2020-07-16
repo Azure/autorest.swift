@@ -12,11 +12,10 @@ public enum ByteArrayFormat: String, Codable {
     case byte
 }
 
+public typealias ByteArraySchema = Compose<ByteArraySchemaProperty, ValueSchema>
+
 /// a schema that represents a ByteArray value
-public struct ByteArraySchema: Codable {
+public struct ByteArraySchemaProperty: Codable {
     /// date-time format
     public let format: ByteArrayFormat
-
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

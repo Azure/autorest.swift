@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias Parameter = Compose<ParameterProperty, Value>
+
 /// A definition of an discrete input for an operation
-public struct Parameter: Codable {
+public struct ParameterProperty: Codable {
     /// suggested implementation location for this parameter
     public let implementation: ImplementationLocation?
 
@@ -18,7 +20,4 @@ public struct Parameter: Codable {
     /// when a parameter is grouped into another, this will tell where the parameter got grouped into
     // FIXME: Recursive cycle
     //public let groupedBy: Parameter?
-
-    // TODO: Apply allOf
-    // public let allOf: [Value]?
 }

@@ -8,7 +8,4 @@
 import Foundation
 
 /// a schema that represents a UnixTime value
-public struct UnixTimeSchema: Codable {
-    // TODO: Apply allOf
-    // public let allOf: [PrimitiveSchema]
-}
+public typealias UnixTimeSchema = PrimitiveSchema

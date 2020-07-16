@@ -7,8 +7,10 @@
 
 import Foundation
 
+public typealias ConditionalSchema = Compose<ConditionalSchemaProperty, ValueSchema>
+
 /// a schema that represents a value dependent on another
-public struct ConditionalSchema: Codable {
+public struct ConditionalSchemaProperty: Codable {
     /// the primitive type for the conditional
     public let conditionalType: PrimitiveSchema
 
@@ -18,6 +20,4 @@ public struct ConditionalSchema: Codable {
     /// the source value that drives the target value (property or parameter)
     public let sourceValue: Value
 
-    // TODO: Apply allOf
-    // public let allOf: [ValueSchema]
 }

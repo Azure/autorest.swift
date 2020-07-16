@@ -7,8 +7,4 @@
 
 import Foundation
 
-/// a response from a service.
-public struct Response: Codable {
-    // TODO: Apply allOf
-    // public let allOf = [Metadata]
-}
+public typealias Response = Metadata
