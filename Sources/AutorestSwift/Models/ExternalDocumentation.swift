@@ -1,6 +1,6 @@
 //
 //  ExternalDocumentation.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/10/20.
 //
@@ -15,6 +15,6 @@ public struct ExternalDocumentation: Codable {
     public let url: String
 
     /// Additional metadata extensions dictionary
-        // TODO: Not Codable
+    // TODO: Not Codable
     // public let extensions: Dictionary<AnyHashable, Codable>?
 }

@@ -1,12 +1,11 @@
 //
 //  SealedChoiceSchema.swift
-//  
+//
 //
 //  Created by Sam Cheung on 2020-07-13.
 //
 
 import Foundation
-
 
 public typealias SealedChoiceSchema = Compose<SealedChoiceSchemaProperty, ValueSchema>
 

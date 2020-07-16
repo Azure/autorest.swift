@@ -1,6 +1,6 @@
 //
 //  ArraySchema.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/13/20.
 //

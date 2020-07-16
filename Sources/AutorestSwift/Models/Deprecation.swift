@@ -1,6 +1,6 @@
 //
 //  Deprecation.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/10/20.
 //
@@ -15,4 +15,3 @@ public struct Deprecation: Codable {
     /// The api versions that this deprecation is applicable to.
     public let apiVersions: [ApiVersion]
 }
-

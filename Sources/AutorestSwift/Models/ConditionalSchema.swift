@@ -1,6 +1,6 @@
 //
 //  ConditionalSchema.swift
-//  
+//
 //
 //  Created by Sam Cheung on 2020-07-13.
 //
@@ -19,5 +19,4 @@ public struct ConditionalSchemaProperty: Codable {
 
     /// the source value that drives the target value (property or parameter)
     public let sourceValue: Value
-
 }

@@ -1,6 +1,6 @@
 //
 //  Operation.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/14/20.
 //
@@ -25,7 +25,7 @@ public struct Operation: Codable {
     public let exceptions: [Response]?
 
     /// the apiVersion to use for a given profile name
-    public let profile: Dictionary<String, ApiVersion>?
+    public let profile: [String: ApiVersion]?
 
     /// a short description
     public let summary: String?

@@ -1,6 +1,6 @@
 //
 //  Parameter.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/9/20.
 //
@@ -19,5 +19,5 @@ public struct ParameterProperty: Codable {
 
     /// when a parameter is grouped into another, this will tell where the parameter got grouped into
     // FIXME: Recursive cycle
-    //public let groupedBy: Parameter?
+    // public let groupedBy: Parameter?
 }

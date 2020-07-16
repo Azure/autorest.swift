@@ -1,9 +1,8 @@
-  
 //
 //  Compose.swift
 //
 //
-// This file is taken from https://github.com/acecilia/Compose 
+// This file is taken from https://github.com/acecilia/Compose
 // Compose is licensed under the MIT license. See LICENSE for more info.
 //
 
@@ -42,7 +41,7 @@ public struct Compose<Element1, Element2> {
     }
 }
 
-// MARK - Conformances
+// MARK: - Conformances
 
 extension Compose: Encodable where Element1: Encodable, Element2: Encodable {
     public func encode(to encoder: Encoder) throws {
@@ -60,22 +59,25 @@ extension Compose: Decodable where Element1: Decodable, Element2: Decodable {
     }
 }
 
-extension Compose: Equatable where Element1: Equatable, Element2: Equatable { }
+extension Compose: Equatable where Element1: Equatable, Element2: Equatable {}
 
-extension Compose: Hashable where Element1: Hashable, Element2: Hashable { }
+extension Compose: Hashable where Element1: Hashable, Element2: Hashable {}
 
-extension Compose: Error where Element1: Error, Element2: Error { }
+extension Compose: Error where Element1: Error, Element2: Error {}
 
 extension Compose: LocalizedError where Element1: LocalizedError, Element2: LocalizedError {
     public var errorDescription: String? {
         [_element1.errorDescription, _element2.errorDescription].filterAndJoin()
     }
+
     public var failureReason: String? {
         [_element1.failureReason, _element2.failureReason].filterAndJoin()
     }
+
     public var recoverySuggestion: String? {
         [_element1.recoverySuggestion, _element2.recoverySuggestion].filterAndJoin()
     }
+
     public var helpAnchor: String? {
         [_element1.helpAnchor, _element2.helpAnchor].filterAndJoin()
     }
@@ -87,7 +89,7 @@ private extension Array where Element == String? {
     }
 }
 
-// MARK - typealiases for composition with multiple types
+// MARK: - typealiases for composition with multiple types
 
 public typealias Compose3<T1, T2, T3> =
     Compose<T1, Compose<T2, T3>>

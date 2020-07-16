@@ -1,6 +1,6 @@
 //
 //  SchemaUsage.swift
-//  
+//
 //
 //  Created by Sam Cheung on 2020-07-13.
 //
@@ -14,4 +14,3 @@ public struct SchemaUsage: Codable {
     /// Known media types in which this schema can be serialized
     public let serializationFormats: [KnownMediaType]
 }
-

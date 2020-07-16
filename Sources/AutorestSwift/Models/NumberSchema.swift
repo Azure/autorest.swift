@@ -1,12 +1,11 @@
 //
 //  NumberSchema.swift
-//  
+//
 //
 //  Created by Sam Cheung on 2020-07-13.
 //
 
 import Foundation
-
 
 public typealias NumberSchema = Compose<NumberSchemaProperty, PrimitiveSchema>
 
@@ -30,4 +29,3 @@ public struct NumberSchemaProperty: Codable {
     /// if present, the value must be higher than minimum
     public let exclusiveMinimum: Bool?
 }
-
