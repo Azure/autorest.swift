@@ -1,3 +1,12 @@
+  
+//
+//  Compose.swift
+//
+//
+// This file is taken from https://github.com/acecilia/Compose 
+// Compose is licensed under the MIT license. See LICENSE for more info.
+//
+
 import Foundation
 
 @dynamicMemberLookup
