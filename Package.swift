@@ -15,9 +15,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "AutorestSwift",
-            dependencies: ["Yams"]),
+            dependencies: ["Yams"]
+        ),
         .testTarget(
             name: "AutorestSwiftTests",
-            dependencies: ["AutorestSwift", "Yams"]),
-    ]
+            dependencies: ["AutorestSwift", "Yams"]
+        )
+    ],
+    swiftLanguageVersions: [.v5]
 )
