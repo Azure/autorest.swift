@@ -7,4 +7,12 @@
 
 import Foundation
 
-public typealias Response = Metadata
+public protocol ResponseInterface: MetadataInterface {}
+
+public struct Response: ResponseInterface {
+    /// per-language information for this aspect
+    public let language: Languages
+
+    /// per-protocol information for this aspect
+    public let `protocol`: Protocols
+}

@@ -19,10 +19,10 @@ public struct Operation: Codable {
     public let requests: [Request]?
 
     /// responses that indicate a successful call
-    public let responses: [Response]?
+    public let responses: [ResponseInterface]?
 
     /// responses that indicate a failed call
-    public let exceptions: [Response]?
+    public let exceptions: [ResponseInterface]?
 
     /// the apiVersion to use for a given profile name
     public let profile: [String: ApiVersion]?
@@ -51,4 +51,51 @@ public struct Operation: Codable {
     /// additional metadata extensions dictionary
     // TODO: Not Codable
     // public let extensions: Dictionary<AnyHashable, Codable>?
+
+    public enum CodingKeys: String, CodingKey {
+        case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
+            deprecated,
+            origin, externalDocs, language, `protocol`
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        // TODO: Extract this logic to ResponseInterface extension
+        responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
+            (try? container.decode([Response].self, forKey: .responses))
+
+        exceptions = (try? container.decode([SchemaResponse].self, forKey: .exceptions)) ??
+            (try? container.decode([Response].self, forKey: .exceptions))
+
+        parameters = try? container.decode([Parameter].self, forKey: .parameters)
+        signatureParameters = try? container.decode([Parameter].self, forKey: .signatureParameters)
+        requests = try? container.decode([Request].self, forKey: .requests)
+        profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
+        summary = try? container.decode(String.self, forKey: .summary)
+        apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
+        deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
+        origin = try? container.decode(String.self, forKey: .origin)
+        externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
+        language = try container.decode(Languages.self, forKey: .language)
+        `protocol` = try container.decode(Protocols.self, forKey: .protocol)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try? container.encode(parameters, forKey: .parameters)
+        try? container.encode(signatureParameters, forKey: .signatureParameters)
+        try? container.encode(requests, forKey: .requests)
+        try? container.encode(responses as? [SchemaResponse], forKey: .responses)
+        try? container.encode(exceptions as? [SchemaResponse], forKey: .exceptions)
+        try? container.encode(profile, forKey: .profile)
+        try? container.encode(summary, forKey: .summary)
+        try? container.encode(apiVersions, forKey: .apiVersions)
+        try? container.encode(deprecated, forKey: .deprecated)
+        try? container.encode(origin, forKey: .origin)
+        try? container.encode(externalDocs, forKey: .externalDocs)
+        try container.encode(language, forKey: .language)
+        try container.encode(`protocol`, forKey: .protocol)
+    }
 }
