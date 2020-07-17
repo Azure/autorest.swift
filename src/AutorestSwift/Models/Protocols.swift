@@ -31,13 +31,21 @@ public struct Protocols: Codable {
             (try? container.decode(HttpModel.self, forKey: .http))
         // TODO: Finish implementation
         amqp = nil
-        self.mqtt = nil
-        self.jsonrpc = nil
+        mqtt = nil
+        jsonrpc = nil
     }
 
     public func encode(to encoder: Encoder) throws {
-        // TODO: Finish implementation
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(http as? HttpParameter, forKey: .http)
+        if http is HttpWithBodyRequest {
+            try container.encode(http as? HttpWithBodyRequest, forKey: .http)
+        } else if http is HttpParameter {
+            try container.encode(http as? HttpParameter, forKey: .http)
+        } else if http is HttpResponse {
+            try container.encode(http as? HttpResponse, forKey: .http)
+        } else if http is HttpModel {
+            try container.encode(http as? HttpModel, forKey: .http)
+        }
+        // TODO: Finish implementation
     }
 }
