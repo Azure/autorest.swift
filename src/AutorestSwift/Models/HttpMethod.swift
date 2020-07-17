@@ -1,6 +1,6 @@
 //
 //  HttpMethod.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/17/20.
 //

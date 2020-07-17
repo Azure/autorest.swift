@@ -1,6 +1,6 @@
 //
 //  SerializationStyle.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/16/20.
 //

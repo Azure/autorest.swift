@@ -1,6 +1,6 @@
 //
 //  SchemaResponse.swift
-//  
+//
 //
 //  Created by Travis Prescott on 7/17/20.
 //
@@ -23,5 +23,3 @@ public struct SchemaResponse: ResponseInterface {
     /// per-protocol information for this aspect
     public let `protocol`: Protocols
 }
-
-

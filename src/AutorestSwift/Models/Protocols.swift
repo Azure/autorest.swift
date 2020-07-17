@@ -30,8 +30,8 @@ public struct Protocols: Codable {
             (try? container.decode(HttpModel.self, forKey: .http))
         // TODO: Finish implementation
         amqp = nil
-        mqtt = nil
-        jsonrpc = nil
+        self.mqtt = nil
+        self.jsonrpc = nil
     }
 
     public func encode(to encoder: Encoder) throws {
