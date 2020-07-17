@@ -25,7 +25,8 @@ public struct Protocols: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        http = (try? container.decode(HttpParameter.self, forKey: .http)) ??
+        http = (try? container.decode(HttpWithBodyRequest.self, forKey: .http)) ??
+            (try? container.decode(HttpParameter.self, forKey: .http)) ??
             (try? container.decode(HttpResponse.self, forKey: .http)) ??
             (try? container.decode(HttpModel.self, forKey: .http))
         // TODO: Finish implementation
