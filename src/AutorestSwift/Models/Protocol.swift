@@ -8,5 +8,4 @@
 import Foundation
 
 /// the bare-minimum fields for per-protocol metadata on a given aspect
-public protocol CodeModelProtocol: Codable {
-}
+public protocol CodeModelProtocol: Codable {}
