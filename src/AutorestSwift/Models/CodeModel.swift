@@ -13,7 +13,7 @@ public struct CodeModel: Codable {
 
     public let schema = "http://json-schema.org/draft-07/schema#"
 
-    //  let info: Info
+    let info: Info
     let schemas: Schemas
     let operationGroups: [OperationGroup]
     let globalParameters: [Parameter]?
