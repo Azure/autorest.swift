@@ -7,10 +7,8 @@
 
 import Foundation
 
-typealias HttpParameter = Protocol<HttpParameterProperties>
-
 /// extended metadata for HTTP operation parameters
-public class HttpParameterProperties: Codable {
+public class HttpParameter: ProtocolInterface {
     /// the location that this parameter is placed in the http request
     public let `in`: ParameterLocation
 

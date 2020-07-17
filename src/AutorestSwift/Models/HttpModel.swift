@@ -7,10 +7,8 @@
 
 import Foundation
 
-typealias HttpModel = Protocol<HttpModelProperties>
-
 /// code model metadata for HTTP protocol
-public class HttpModelProperties: Codable {
+public class HttpModel: ProtocolInterface {
     /// a collection of security requirements for the service
     public let security: [SecurityRequirement]
 }
