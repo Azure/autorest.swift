@@ -13,13 +13,13 @@ public struct CodeModel: Codable {
 
     public let schema = "http://json-schema.org/draft-07/schema#"
 
-    let info: Info
-    let schemas: Schemas
+    //  let info: Info
+    // let schemas: Schemas
     let operationGroups: [OperationGroup]
-    let globalParameters: [Parameter]?
-    let security: Security
-    let language: Languages
-    let `protocol`: Protocols
+    //  let globalParameters: [Parameter]?
+    //  let security: Security
+    //  let language: Languages
+    //  let `protocol`: Protocols
     // TODO: Not Codable
     // let extensions: Dictionary<AnyHashable, Codable>?
 }
