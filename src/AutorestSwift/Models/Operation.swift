@@ -84,17 +84,25 @@ public struct Operation: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try? container.encode(parameters, forKey: .parameters)
-        try? container.encode(signatureParameters, forKey: .signatureParameters)
-        try? container.encode(requests, forKey: .requests)
-        try? container.encode(responses as? [SchemaResponse], forKey: .responses)
-        try? container.encode(exceptions as? [SchemaResponse], forKey: .exceptions)
-        try? container.encode(profile, forKey: .profile)
-        try? container.encode(summary, forKey: .summary)
-        try? container.encode(apiVersions, forKey: .apiVersions)
-        try? container.encode(deprecated, forKey: .deprecated)
-        try? container.encode(origin, forKey: .origin)
-        try? container.encode(externalDocs, forKey: .externalDocs)
+        try container.encode(parameters, forKey: .parameters)
+        try container.encode(signatureParameters, forKey: .signatureParameters)
+        try container.encode(requests, forKey: .requests)
+        if responses is [SchemaResponse] {
+            try container.encode(responses as? [SchemaResponse], forKey: .responses)
+        } else if responses is [Response] {
+            try container.encode(responses as? [Response], forKey: .responses)
+        }
+        if exceptions is [SchemaResponse] {
+            try container.encode(responses as? [SchemaResponse], forKey: .exceptions)
+        } else if responses is [Response] {
+            try container.encode(responses as? [Response], forKey: .exceptions)
+        }
+        try container.encode(profile, forKey: .profile)
+        try container.encode(summary, forKey: .summary)
+        try container.encode(apiVersions, forKey: .apiVersions)
+        try container.encode(deprecated, forKey: .deprecated)
+        try container.encode(origin, forKey: .origin)
+        try container.encode(externalDocs, forKey: .externalDocs)
         try container.encode(language, forKey: .language)
         try container.encode(`protocol`, forKey: .protocol)
     }
