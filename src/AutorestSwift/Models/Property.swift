@@ -71,9 +71,9 @@ public struct Property: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         if let arrayschema = try? container.decode(ArraySchema.self, forKey: .schema) {
-            schema = arrayschema;
+            self.schema = arrayschema
         } else {
-            schema = try container.decode(Schema.self, forKey: .schema)
+            self.schema = try container.decode(Schema.self, forKey: .schema)
         }
 
         self.readOnly = try? container.decode(Bool.self, forKey: .readOnly)

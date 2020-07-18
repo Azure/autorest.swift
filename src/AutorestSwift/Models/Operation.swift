@@ -97,8 +97,8 @@ public struct Operation: Codable {
         } else if responses is [Response] {
             try container.encode(responses as? [Response], forKey: .exceptions)
         }
-        try container.encode(profile, forKey: .profile)
-        try container.encode(summary, forKey: .summary)
+        if profile != nil { try container.encode(profile, forKey: .profile) }
+        if summary != nil { try container.encode(summary, forKey: .summary) }
         try container.encode(apiVersions, forKey: .apiVersions)
         if deprecated != nil { try container.encode(deprecated, forKey: .deprecated) }
         if origin != nil { try container.encode(origin, forKey: .origin) }

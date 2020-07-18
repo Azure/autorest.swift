@@ -18,4 +18,6 @@ public struct Language: Codable {
     public let summary: String?
 
     public let serializedName: String?
+
+    public let namespace: String?
 }

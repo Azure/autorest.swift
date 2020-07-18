@@ -19,7 +19,6 @@ public protocol SchemaInterface: Codable {
     var origin: String? { get }
     var externalDocs: ExternalDocumentation? { get }
     var `protocol`: Protocols { get }
-
     var properties: [Property]? { get }
 }
 
