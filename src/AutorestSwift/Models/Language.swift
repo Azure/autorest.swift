@@ -14,4 +14,8 @@ public struct Language: Codable {
 
     /// description text - describes this node.
     public let description: String
+
+    public let summary: String?
+
+    public let serializedName: String?
 }
