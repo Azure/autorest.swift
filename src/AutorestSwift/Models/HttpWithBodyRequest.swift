@@ -23,8 +23,6 @@ public class HttpWithBodyRequest: HttpRequest {
     // sets of HTTP headers grouped together into a single schema
     public let headerGroups: [GroupSchema]?
 
-    // MARK: allOf HttpRequest
-
     /*
         /// A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.
         public let path: String
