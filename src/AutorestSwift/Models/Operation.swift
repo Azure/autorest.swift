@@ -97,12 +97,12 @@ public struct Operation: Codable {
         } else if responses is [Response] {
             try container.encode(responses as? [Response], forKey: .exceptions)
         }
-        try container.encode(profile, forKey: .profile)
-        try container.encode(summary, forKey: .summary)
+        if profile != nil { try container.encode(profile, forKey: .profile) }
+        if summary != nil { try container.encode(summary, forKey: .summary) }
         try container.encode(apiVersions, forKey: .apiVersions)
-        try container.encode(deprecated, forKey: .deprecated)
-        try container.encode(origin, forKey: .origin)
-        try container.encode(externalDocs, forKey: .externalDocs)
+        if deprecated != nil { try container.encode(deprecated, forKey: .deprecated) }
+        if origin != nil { try container.encode(origin, forKey: .origin) }
+        if externalDocs != nil { try container.encode(externalDocs, forKey: .externalDocs) }
         try container.encode(language, forKey: .language)
         try container.encode(`protocol`, forKey: .protocol)
     }
