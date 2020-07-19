@@ -16,7 +16,7 @@ import Foundation
 /// an individual choice in a ChoiceSchema
 public struct ChoiceValue: Codable {
     /// per-language information for this value
-    public let language: Language
+    public let language: Languages
 
     /// the actual value
     // TODO: Resolve question about enum
