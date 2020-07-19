@@ -7,22 +7,7 @@
 
 import Foundation
 
-public protocol SchemaInterface: Codable {
-    var language: Languages { get }
-    var type: AllSchemaTypes { get }
-    var summary: String? { get }
-    var example: String? { get }
-    var defaultValue: String? { get }
-    var serialization: SerializationFormats? { get }
-    var apiVersions: [ApiVersion]? { get }
-    var deprecated: Deprecation? { get }
-    var origin: String? { get }
-    var externalDocs: ExternalDocumentation? { get }
-    var `protocol`: Protocols { get }
-    var properties: [Property]? { get }
-}
-
-public struct Schema: Codable, SchemaInterface {
+public class Schema: Codable {
     /// Per-language information for Schema
     public let language: Languages
 
