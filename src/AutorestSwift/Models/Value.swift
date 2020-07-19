@@ -8,9 +8,9 @@
 import Foundation
 
 /// Common base interface for properties, parameters and the like.
-public struct Value: Codable {
+public class Value: Codable {
     /// the schema of this Value
-    public let schema: Schema
+    public var schema: Schema
 
     /// if the value is marked 'required'.
     public let required: Bool?
