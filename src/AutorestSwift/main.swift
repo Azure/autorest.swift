@@ -11,8 +11,9 @@ let afterJsonUrl = documentsUrl.appendingPathComponent("after.json")
 do {
     var yamlString = try String(contentsOf: sourceUrl)
 
-    // Work around to handle blank namespace for Language not being decoded.
-    yamlString = yamlString.replacingOccurrences(of: "namespace: ''", with: "namespace: 'default'")
+    // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed. Replaces empty string with a single space.
+    yamlString = yamlString.replacingOccurrences(of: ": ''", with: ": ' '")
+
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
