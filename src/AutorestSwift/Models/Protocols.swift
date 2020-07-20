@@ -8,7 +8,7 @@
 import Foundation
 
 /// Custom extensible metadata for individual protocols (ie, HTTP, etc)
-public struct Protocols: Codable {
+public class Protocols: Codable {
     public let http: ProtocolInterface?
 
     public let amqp: ProtocolInterface?
@@ -23,7 +23,7 @@ public struct Protocols: Codable {
 
     // MARK: Codable
 
-    public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         http = (try? container.decode(HttpWithBodyRequest.self, forKey: .http)) ??
             (try? container.decode(HttpRequest.self, forKey: .http)) ??

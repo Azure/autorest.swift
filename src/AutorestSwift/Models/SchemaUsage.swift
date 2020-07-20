@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SchemaUsage: Codable {
+public class SchemaUsage: Codable {
     /// contexts in which the schema is used
     public let usage: [SchemaContext]
 

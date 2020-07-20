@@ -8,7 +8,7 @@
 import Foundation
 
 /// Code model information
-public struct Info: Codable {
+public class Info: Codable {
     /// the title of this service
     public let title: String
 

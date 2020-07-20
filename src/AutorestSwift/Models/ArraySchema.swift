@@ -23,7 +23,7 @@ public class ArraySchema: Schema {
     /// if elements in the array should be nullable
     public let nullableItems: Bool?
 
-    public enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case elementType, maxItems, minItems, uniqueItems, nullableItems
     }
 

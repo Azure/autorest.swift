@@ -17,7 +17,7 @@ public class DateTimeSchema: ValueSchema {
     /// date-time format
     public let format: DateTimeFormat
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case format
     }
 

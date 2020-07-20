@@ -8,7 +8,7 @@
 import Foundation
 
 /// Model that contains all the information required to generate a service API
-public struct CodeModel: Codable {
+public class CodeModel: Codable {
     let info: Info
     let schemas: Schemas
     let operationGroups: [OperationGroup]

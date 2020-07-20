@@ -7,13 +7,8 @@
 
 import Foundation
 
-public protocol MetadataInterface: Codable {
-    var language: Languages { get }
-    var `protocol`: Protocols { get }
-}
-
 /// Common pattern for Metadata on aspects
-public struct Metadata: MetadataInterface {
+public class Metadata: Codable {
     /// per-language information for this aspect
     public let language: Languages
 

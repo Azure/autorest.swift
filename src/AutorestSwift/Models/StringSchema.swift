@@ -20,7 +20,7 @@ public class StringSchema: PrimitiveSchema {
 
     // MARK: Codable
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case maxLength, minLength, pattern
     }
 

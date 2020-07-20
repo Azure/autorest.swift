@@ -7,8 +7,6 @@
 
 import Foundation
 
-// public typealias ConstantSchema = Compose<ConstantSchemaProperty, Schema>
-
 /// a schema that represents a constant value
 public class ConstantSchema: Schema {
     /// the schema type of the constant value (ie, StringSchema, NumberSchema, etc)
@@ -17,7 +15,7 @@ public class ConstantSchema: Schema {
     /// the constant value
     public let value: ConstantValue
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case valueType, value
     }
 

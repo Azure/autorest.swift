@@ -74,7 +74,7 @@ public enum HttpResponseStatusCode: String, Codable {
     case `default`
 }
 
-public struct HttpResponse: ProtocolInterface {
+public class HttpResponse: ProtocolInterface {
     // the possible HTTP status codes that this response MUST match one of
     public let statusCodes: [HttpResponseStatusCode]
 

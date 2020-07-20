@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Relations: Codable {
+public class Relations: Codable {
     public let immediate: [ComplexSchema]
 
     public let all: [ComplexSchema]

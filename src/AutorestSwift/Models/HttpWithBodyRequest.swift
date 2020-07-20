@@ -23,7 +23,7 @@ public class HttpWithBodyRequest: HttpRequest {
     // sets of HTTP headers grouped together into a single schema
     public let headerGroups: [GroupSchema]?
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case statusCodes, knownMediaType, mediaTypes, headers, headerGroups
     }
 

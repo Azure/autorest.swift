@@ -33,7 +33,7 @@ public class ObjectSchema: ComplexSchema {
 
     // MARK: Codable
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case discriminator, maxProperties, minProperties, parents, children, discriminatorValue, usage,
             serializationFormats
     }

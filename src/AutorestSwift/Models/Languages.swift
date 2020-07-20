@@ -8,7 +8,7 @@
 import Foundation
 
 /// Custom extensible metadata for individual language generators
-public struct Languages: Codable {
+public class Languages: Codable {
     public let `default`: Language
 
     public let csharp: CSharpLanguage?

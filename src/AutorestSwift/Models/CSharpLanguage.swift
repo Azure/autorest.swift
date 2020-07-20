@@ -7,4 +7,4 @@
 
 import Foundation
 
-public struct CSharpLanguage: Codable {}
+public class CSharpLanguage: Codable {}

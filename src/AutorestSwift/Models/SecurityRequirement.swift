@@ -8,4 +8,4 @@
 import Foundation
 
 /// common ways of serializing simple parameters
-public struct SecurityRequirement: Codable {}
+public class SecurityRequirement: Codable {}

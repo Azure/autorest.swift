@@ -8,7 +8,7 @@
 import Foundation
 
 /// License information
-public struct License: Codable {
+public class License: Codable {
     /// the name of the license
     public let name: String
 

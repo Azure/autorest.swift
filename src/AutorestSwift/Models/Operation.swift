@@ -8,7 +8,7 @@
 import Foundation
 
 /// represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
-public struct Operation: Codable {
+public class Operation: Codable {
     /// common parameters when there are multiple requests
     public let parameters: [Parameter]?
 
@@ -51,7 +51,7 @@ public struct Operation: Codable {
     /// additional metadata extensions dictionary
     public let extensions: [String: Bool]?
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
             deprecated,
             origin, externalDocs, language, `protocol`, extensions
@@ -59,7 +59,7 @@ public struct Operation: Codable {
 
     // MARK: Codable
 
-    public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
             (try? container.decode([Response].self, forKey: .responses))

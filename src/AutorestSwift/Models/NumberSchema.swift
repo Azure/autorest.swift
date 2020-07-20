@@ -29,7 +29,7 @@ public class NumberSchema: PrimitiveSchema {
 
     // MARK: Codable
 
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case precision, multipleOf, maximum, exclusiveMaximum, minimum, exclusiveMinimum
     }
 

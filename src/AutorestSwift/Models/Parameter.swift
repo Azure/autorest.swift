@@ -20,7 +20,7 @@ public class Parameter: Value {
 
     // MARK: Codable
   
-    public enum CodingKeys: String, CodingKey {
+     enum CodingKeys: String, CodingKey {
         case implementation, flattened, schema, groupedBy
     }
 

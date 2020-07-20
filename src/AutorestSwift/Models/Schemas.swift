@@ -8,7 +8,7 @@
 import Foundation
 
 /// The full set of schemas for a given service, categorized into convenient collections.
-public struct Schemas: Codable {
+public class Schemas: Codable {
     /// a collection of items
     public let arrays: [ArraySchema]?
 

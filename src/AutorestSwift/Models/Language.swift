@@ -8,7 +8,7 @@
 import Foundation
 
 /// The bare-minimum fields for per-language metadata on a given aspect
-public struct Language: Codable {
+public class Language: Codable {
     /// name used in actual implementation
     public let name: String
 
