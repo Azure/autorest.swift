@@ -19,6 +19,5 @@ public struct Contact: Codable {
     public let email: String?
 
     /// additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }
