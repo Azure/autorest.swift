@@ -21,7 +21,7 @@ public class Parameter: Value {
     // MARK: Codable
   
     public enum CodingKeys: String, CodingKey {
-        case implementation, flattened, schema
+        case implementation, flattened, schema, groupedBy
     }
 
     public required init(from decoder: Decoder) throws {
@@ -29,11 +29,16 @@ public class Parameter: Value {
 
         implementation = try? container.decode(ImplementationLocation.self, forKey: .implementation)
         flattened = try? container.decode(Bool.self, forKey: .flattened)
-
+        groupedBy = try? container.decode(Parameter.self, forKey: .groupedBy)
+      
         try super.init(from: decoder)
 
         if let constantSchema = try? container.decode(ConstantSchema.self, forKey: .schema) {
             super.schema = constantSchema
+        } else if let numberSchema = try? container.decode(NumberSchema.self, forKey: .schema) {
+            super.schema = numberSchema
+        } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
+            super.schema = objectSchema
         } else {
             super.schema = try container.decode(Schema.self, forKey: .schema)
         }

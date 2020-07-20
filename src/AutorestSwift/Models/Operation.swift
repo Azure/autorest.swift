@@ -19,10 +19,10 @@ public struct Operation: Codable {
     public let requests: [Request]?
 
     /// responses that indicate a successful call
-    public let responses: [ResponseInterface]?
+    public let responses: [Response]?
 
     /// responses that indicate a failed call
-    public let exceptions: [ResponseInterface]?
+    public let exceptions: [Response]?
 
     /// the apiVersion to use for a given profile name
     public let profile: [String: ApiVersion]?
@@ -86,16 +86,8 @@ public struct Operation: Codable {
         try container.encode(parameters, forKey: .parameters)
         try container.encode(signatureParameters, forKey: .signatureParameters)
         try container.encode(requests, forKey: .requests)
-        if responses is [SchemaResponse] {
-            try container.encode(responses as? [SchemaResponse], forKey: .responses)
-        } else if responses is [Response] {
-            try container.encode(responses as? [Response], forKey: .responses)
-        }
-        if exceptions is [SchemaResponse] {
-            try container.encode(responses as? [SchemaResponse], forKey: .exceptions)
-        } else if responses is [Response] {
-            try container.encode(responses as? [Response], forKey: .exceptions)
-        }
+        try container.encode(responses, forKey: .responses)
+        if exceptions != nil { try container.encode(exceptions, forKey: .exceptions) }
         if profile != nil { try container.encode(profile, forKey: .profile) }
         if summary != nil { try container.encode(summary, forKey: .summary) }
         try container.encode(apiVersions, forKey: .apiVersions)
