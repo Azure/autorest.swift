@@ -15,7 +15,7 @@ public class SchemaResponse: Response {
     /// indicates whether the response can be 'null'
     public let nullable: Bool?
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case schema, nullable
     }
 

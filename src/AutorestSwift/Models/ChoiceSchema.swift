@@ -15,7 +15,7 @@ public class ChoiceSchema: ValueSchema {
     /// the possible choices for in the set
     public let choices: [ChoiceValue]
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case choiceType, choices
     }
 

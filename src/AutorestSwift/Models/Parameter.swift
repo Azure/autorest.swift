@@ -19,8 +19,8 @@ public class Parameter: Value {
     public let groupedBy: Parameter?
 
     // MARK: Codable
-  
-     enum CodingKeys: String, CodingKey {
+
+    enum CodingKeys: String, CodingKey {
         case implementation, flattened, schema, groupedBy
     }
 
@@ -30,7 +30,7 @@ public class Parameter: Value {
         implementation = try? container.decode(ImplementationLocation.self, forKey: .implementation)
         flattened = try? container.decode(Bool.self, forKey: .flattened)
         groupedBy = try? container.decode(Parameter.self, forKey: .groupedBy)
-      
+
         try super.init(from: decoder)
 
         if let constantSchema = try? container.decode(ConstantSchema.self, forKey: .schema) {

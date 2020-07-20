@@ -14,20 +14,19 @@ public class Deprecation: Codable {
 
     /// The api versions that this deprecation is applicable to.
     public let apiVersions: [ApiVersion]
-     enum CodingKeys: String, CodingKey {
-    case message, apiVersions
+    enum CodingKeys: String, CodingKey {
+        case message, apiVersions
     }
 
     public required init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    message = try container.decode( String.self, forKey: .message)
-    apiVersions = try container.decode( [ApiVersion].self, forKey: .apiVersions)
-
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        message = try container.decode(String.self, forKey: .message)
+        apiVersions = try container.decode([ApiVersion].self, forKey: .apiVersions)
     }
-     public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(message, forKey: .message)
-    try container.encode(apiVersions, forKey: .apiVersions)
 
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(message, forKey: .message)
+        try container.encode(apiVersions, forKey: .apiVersions)
     }
 }

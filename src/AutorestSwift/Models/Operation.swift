@@ -51,7 +51,7 @@ public class Operation: Codable {
     /// additional metadata extensions dictionary
     public let extensions: [String: Bool]?
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
             deprecated,
             origin, externalDocs, language, `protocol`, extensions
@@ -59,7 +59,7 @@ public class Operation: Codable {
 
     // MARK: Codable
 
-    required public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
             (try? container.decode([Response].self, forKey: .responses))

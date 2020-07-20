@@ -15,7 +15,7 @@ public class ConstantSchema: Schema {
     /// the constant value
     public let value: ConstantValue
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case valueType, value
     }
 

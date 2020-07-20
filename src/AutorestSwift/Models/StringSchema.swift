@@ -20,7 +20,7 @@ public class StringSchema: PrimitiveSchema {
 
     // MARK: Codable
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case maxLength, minLength, pattern
     }
 
@@ -43,5 +43,4 @@ public class StringSchema: PrimitiveSchema {
 
         try super.encode(to: encoder)
     }
-
 }

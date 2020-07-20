@@ -21,7 +21,7 @@ public class Property: Value {
     // if this property is used as a discriminator for a polymorphic type
     public let isDiscriminator: Bool?
 
-     enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case readOnly, serializedName, flattenedNames, isDiscriminator, schema
     }
 

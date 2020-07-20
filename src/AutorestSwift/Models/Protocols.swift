@@ -23,7 +23,7 @@ public class Protocols: Codable {
 
     // MARK: Codable
 
-    required public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         http = (try? container.decode(HttpWithBodyRequest.self, forKey: .http)) ??
             (try? container.decode(HttpRequest.self, forKey: .http)) ??

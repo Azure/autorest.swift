@@ -7,5 +7,4 @@
 
 import Foundation
 
-public class Response: Metadata {
-}
+public class Response: Metadata {}
