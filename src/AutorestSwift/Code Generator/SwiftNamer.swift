@@ -26,6 +26,15 @@
 
 import Foundation
 
+private enum SwiftSdkRole: String {
+    case service
+    case operationGroup
+    case operation
+    case model
+    case property
+    case parameter
+}
+
 class SwiftNamer: CodeNamer {
     // MARK: Properties
 
@@ -41,6 +50,58 @@ class SwiftNamer: CodeNamer {
 
     /// Begin naming process
     func process() throws {
-        // TODO: Fill in naming logic here
+        // Iterate through entire model structure, examining any
+        // language.default properties and using that to populate
+        // language.swift
+        swiftName(forLanguage: model.language, inRole: .service)
+
+        for globalParam in model.globalParameters ?? [] {
+            swiftName(forLanguage: globalParam.language, inRole: .property)
+        }
+
+        for operationGroup in model.operationGroups {
+            swiftName(forLanguage: operationGroup.language, inRole: .operationGroup)
+            for operation in operationGroup.operations {
+                swiftName(forLanguage: operation.language, inRole: .operation)
+                print("====COMMON PARAMS====")
+                for parameter in operation.parameters ?? [] {
+                    swiftName(forLanguage: parameter.language, inRole: .parameter)
+                }
+                print("====SIGNATURE PARAMS====")
+                for parameter in operation.signatureParameters ?? [] {
+                    swiftName(forLanguage: parameter.language, inRole: .parameter)
+                }
+            }
+        }
     }
+}
+
+/// accepts a `Languages` object with `.default` and returns a new `Languages` object with `.swift`.
+private func swiftName(forLanguage lang: Languages, inRole role: SwiftSdkRole) {
+    switch role {
+    case .service:
+        // This should be the client name
+        let stripList = ["Service", "Client"]
+        var name = lang.swift.name
+        for item in stripList {
+            if name.hasSuffix(item) {
+                name = String(name.dropLast(item.count))
+            }
+        }
+        name = "\(name)Client"
+        lang.swift.name = name
+        break
+    case .operationGroup:
+        break
+    case .operation:
+        break
+    case .model:
+        break
+    case .property:
+        // TODO: verify camelCasing conventions
+        break
+    case .parameter:
+        break
+    }
+    print("\(role.rawValue): \(lang.default.name) => \(lang.swift.name)")
 }
