@@ -37,6 +37,7 @@ public struct Protocols: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+
         if http is HttpWithBodyRequest {
             try container.encode(http as? HttpWithBodyRequest, forKey: .http)
         } else if http is HttpParameter {
@@ -46,6 +47,7 @@ public struct Protocols: Codable {
         } else if http is HttpModel {
             try container.encode(http as? HttpModel, forKey: .http)
         }
+
         // TODO: Finish implementation
     }
 }
