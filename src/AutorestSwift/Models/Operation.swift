@@ -54,14 +54,13 @@ public struct Operation: Codable {
     public enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
             deprecated,
-            origin, externalDocs, language, `protocol`
+            origin, externalDocs, language, `protocol`, extensions
     }
 
     // MARK: Codable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        // TODO: Extract this logic to ResponseInterface extension
         responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
             (try? container.decode([Response].self, forKey: .responses))
 
@@ -77,6 +76,7 @@ public struct Operation: Codable {
         deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
         origin = try? container.decode(String.self, forKey: .origin)
         externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
+        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
         language = try container.decode(Languages.self, forKey: .language)
         `protocol` = try container.decode(Protocols.self, forKey: .protocol)
     }
