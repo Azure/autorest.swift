@@ -297,3 +297,4 @@ package/
 src/obj/
 *.log
 IDEFindNavigatorScopes.plist
+.swiftpm/xcode/xcuserdata/travisprescott.xcuserdatad

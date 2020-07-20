@@ -31,12 +31,12 @@ public class ObjectSchema: ComplexSchema {
     /// Known media types in which this schema can be serialized
     public let serializationFormats: [KnownMediaType]
 
+    // MARK: Codable
+
     public enum CodingKeys: String, CodingKey {
         case discriminator, maxProperties, minProperties, parents, children, discriminatorValue, usage,
             serializationFormats
     }
-
-    // MARK: Codable
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

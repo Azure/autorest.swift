@@ -8,7 +8,7 @@
 import Foundation
 
 /// a schema that represents a Number value
-public class NumberSchema: Schema {
+public class NumberSchema: PrimitiveSchema {
     /// precision (# of bits?) of the number
     public let precision: Int
 
@@ -27,11 +27,11 @@ public class NumberSchema: Schema {
     /// if present, the value must be higher than minimum
     public let exclusiveMinimum: Bool?
 
+    // MARK: Codable
+
     public enum CodingKeys: String, CodingKey {
         case precision, multipleOf, maximum, exclusiveMaximum, minimum, exclusiveMinimum
     }
-
-    // MARK: Codable
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
