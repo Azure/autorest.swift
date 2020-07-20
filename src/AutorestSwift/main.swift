@@ -9,7 +9,10 @@ let beforeJsonUrl = documentsUrl.appendingPathComponent("before.json")
 let afterJsonUrl = documentsUrl.appendingPathComponent("after.json")
 
 do {
-    let yamlString = try String(contentsOf: sourceUrl)
+    var yamlString = try String(contentsOf: sourceUrl)
+
+    // Work around to handle blank namespace for Language not being decoded.
+    yamlString = yamlString.replacingOccurrences(of: "namespace: ''", with: "namespace: 'default'")
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
