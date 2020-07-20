@@ -35,6 +35,8 @@ public class Parameter: Value {
 
         if let constantSchema = try? container.decode(ConstantSchema.self, forKey: .schema) {
             super.schema = constantSchema
+        } else if let numberSchema = try? container.decode(NumberSchema.self, forKey: .schema) {
+            super.schema = numberSchema
         } else {
             super.schema = try container.decode(Schema.self, forKey: .schema)
         }

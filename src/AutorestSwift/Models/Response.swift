@@ -7,9 +7,9 @@
 
 import Foundation
 
-public protocol ResponseInterface: MetadataInterface {}
+// public protocol ResponseInterface: MetadataInterface {}
 
-public struct Response: ResponseInterface {
+public class Response: MetadataInterface {
     /// per-language information for this aspect
     public let language: Languages
 

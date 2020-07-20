@@ -26,6 +26,7 @@ public struct Protocols: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         http = (try? container.decode(HttpWithBodyRequest.self, forKey: .http)) ??
+            (try? container.decode(HttpRequest.self, forKey: .http)) ??
             (try? container.decode(HttpParameter.self, forKey: .http)) ??
             (try? container.decode(HttpResponse.self, forKey: .http)) ??
             (try? container.decode(HttpModel.self, forKey: .http))
@@ -46,6 +47,8 @@ public struct Protocols: Codable {
             try container.encode(http as? HttpResponse, forKey: .http)
         } else if http is HttpModel {
             try container.encode(http as? HttpModel, forKey: .http)
+        } else if http is HttpRequest {
+            try container.encode(http as? HttpRequest, forKey: .http)
         }
 
         // TODO: Finish implementation
