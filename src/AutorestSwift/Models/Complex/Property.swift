@@ -45,6 +45,8 @@ public class Property: Value {
             super.schema = choiceSchema
         } else if let dateTimeSchema = try? container.decode(DateTimeSchema.self, forKey: .schema) {
             super.schema = dateTimeSchema
+        } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
+            super.schema = objectSchema
         } else if let stringSchema = try? container.decode(StringSchema.self, forKey: .schema) {
             super.schema = stringSchema
         } else {
