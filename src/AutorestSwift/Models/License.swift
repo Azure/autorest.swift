@@ -16,6 +16,5 @@ public struct License: Codable {
     public let url: String?
 
     /// additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

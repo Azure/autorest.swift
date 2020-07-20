@@ -16,6 +16,5 @@ public struct CodeModel: Codable {
     let security: Security
     let language: Languages
     let `protocol`: Protocols
-    // TODO: Not Codable
-    // let extensions: Dictionary<AnyHashable, Codable>?
+    let extensions: [String: Bool]?
 }
