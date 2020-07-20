@@ -21,6 +21,5 @@ public struct ConditionalValue: Codable {
     public let source: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

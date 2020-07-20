@@ -23,6 +23,5 @@ public struct ChoiceValue: Codable {
     public let value: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

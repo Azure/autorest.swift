@@ -46,6 +46,5 @@ public class Value: Codable {
     public let `protocol`: Protocols
 
     /// Additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

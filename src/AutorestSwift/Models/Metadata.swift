@@ -21,6 +21,5 @@ public struct Metadata: MetadataInterface {
     public let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

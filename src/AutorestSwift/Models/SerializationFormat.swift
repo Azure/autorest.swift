@@ -8,6 +8,5 @@
 import Foundation
 
 public struct SerializationFormat: Codable {
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

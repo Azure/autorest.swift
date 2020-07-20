@@ -16,11 +16,12 @@ public class Parameter: Value {
     public let flattened: Bool?
 
     /// when a parameter is grouped into another, this will tell where the parameter got grouped into
-    // FIXME: Recursive cycle
-    // public let groupedBy: Parameter?
+    public let groupedBy: Parameter?
 
+    // MARK: Codable
+  
     public enum CodingKeys: String, CodingKey {
-        case implementation, flattened, schema
+        case implementation, flattened, schema, groupedBy
     }
 
     public required init(from decoder: Decoder) throws {
@@ -28,7 +29,8 @@ public class Parameter: Value {
 
         implementation = try? container.decode(ImplementationLocation.self, forKey: .implementation)
         flattened = try? container.decode(Bool.self, forKey: .flattened)
-
+        groupedBy = try? container.decode(Parameter.self, forKey: .groupedBy)
+      
         try super.init(from: decoder)
 
         if let constantSchema = try? container.decode(ConstantSchema.self, forKey: .schema) {
