@@ -7,8 +7,6 @@
 
 import Foundation
 
-// public typealias Parameter = Compose<ParameterProperty, Value>
-
 /// A definition of an discrete input for an operation
 public class Parameter: Value {
     /// suggested implementation location for this parameter
