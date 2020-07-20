@@ -8,8 +8,6 @@
 import Foundation
 
 public class HttpWithBodyRequest: HttpRequest {
-    // the possible HTTP status codes that this response MUST match one of.
-    public let statusCodes: [HttpResponseStatusCode]?
 
     // canonical response type (ie, 'json')
     public let knownMediaType: KnownMediaType
@@ -24,7 +22,7 @@ public class HttpWithBodyRequest: HttpRequest {
     public let headerGroups: [GroupSchema]?
 
     enum CodingKeys: String, CodingKey {
-        case statusCodes, knownMediaType, mediaTypes, headers, headerGroups
+        case knownMediaType, mediaTypes, headers, headerGroups
     }
 
     // MARK: Codable
@@ -32,7 +30,6 @@ public class HttpWithBodyRequest: HttpRequest {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        statusCodes = try? container.decode([HttpResponseStatusCode].self, forKey: .statusCodes)
         knownMediaType = try container.decode(KnownMediaType.self, forKey: .knownMediaType)
         mediaTypes = try container.decode([String].self, forKey: .mediaTypes)
         headers = try? container.decode([HttpHeader].self, forKey: .headers)
@@ -43,8 +40,6 @@ public class HttpWithBodyRequest: HttpRequest {
 
     override public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
-        if statusCodes != nil { try container.encode(statusCodes, forKey: .statusCodes) }
 
         try container.encode(knownMediaType, forKey: .knownMediaType)
         try container.encode(mediaTypes, forKey: .mediaTypes)
