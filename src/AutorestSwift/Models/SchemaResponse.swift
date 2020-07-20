@@ -26,6 +26,8 @@ public class SchemaResponse: Response {
 
         if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
             self.schema = arraySchema
+        } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
+            self.schema = objectSchema
         } else {
             self.schema = try container.decode(Schema.self, forKey: .schema)
         }
