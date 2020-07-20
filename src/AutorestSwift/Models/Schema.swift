@@ -42,7 +42,7 @@ public class Schema: Codable {
     public let `protocol`: Protocols
 
     public let properties: [Property]?
+
     /// Additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }

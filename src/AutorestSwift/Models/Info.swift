@@ -28,6 +28,5 @@ public struct Info: Codable {
     public let externalDocs: ExternalDocumentation?
 
     /// additional metadata extensions dictionary
-    // TODO: Not Codable
-    // public let extensions: Dictionary<AnyHashable, Codable>?
+    public let extensions: [String: Bool]?
 }
