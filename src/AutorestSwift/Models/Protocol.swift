@@ -8,4 +8,4 @@
 import Foundation
 
 /// the bare-minimum fields for per-protocol metadata on a given aspect
-public protocol ProtocolInterface: Codable, Encodable {}
+public protocol ProtocolInterface: Codable {}
