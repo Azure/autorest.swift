@@ -11,29 +11,31 @@ import Foundation
 public class Languages: Codable {
     public let `default`: Language
 
-    public let csharp: CSharpLanguage?
+    // these properties we can set
+    private var _swift: Language?
 
-    public let python: Language?
+    public var swift: Language {
+        get {
+            if _swift == nil {
+                _swift = Language(from: `default`)
+            }
+            return _swift!
+        }
+        set {
+            if _swift == nil {
+                _swift = Language(from: `default`)
+            }
+            _swift = newValue
+        }
+    }
 
-    public let ruby: Language?
+    public var objectiveC: Language?
 
-    public let go: Language?
+    // MARK: Codable
 
-    public let typescript: Language?
-
-    public let javascript: Language?
-
-    public let powershell: Language?
-
-    public let java: Language?
-
-    public let c: Language?
-
-    public let cpp: Language?
-
-    public let swift: Language?
-
-    public let objectiveC: Language?
-
-    public let sputnik: Language?
+    enum CodingKeys: String, CodingKey {
+        case `default`
+        case _swift = "swift"
+        case objectiveC
+    }
 }

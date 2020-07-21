@@ -10,14 +10,24 @@ import Foundation
 /// The bare-minimum fields for per-language metadata on a given aspect
 public class Language: Codable {
     /// name used in actual implementation
-    public let name: String
+    public var name: String
 
     /// description text - describes this node.
-    public let description: String
+    public var description: String
 
-    public let summary: String?
+    public var summary: String?
 
-    public let serializedName: String?
+    public var serializedName: String?
 
-    public let namespace: String?
+    public var namespace: String?
+
+    // MARK: Initializers
+
+    public init(from original: Language) {
+        self.name = original.name
+        self.description = original.description
+        self.summary = original.summary
+        self.serializedName = original.serializedName
+        self.namespace = original.namespace
+    }
 }
