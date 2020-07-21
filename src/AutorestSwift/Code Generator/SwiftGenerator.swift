@@ -32,10 +32,13 @@ class SwiftGenerator: CodeGenerator {
 
     let model: CodeModel
 
+    let baseUrl: URL
+
     // MARK: Initializers
 
-    init(withModel model: CodeModel) {
+    init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
         self.model = model
+        self.baseUrl = baseUrl
     }
 
     // MARK: Methods
@@ -43,5 +46,50 @@ class SwiftGenerator: CodeGenerator {
     /// Begin code generation process
     func generate() throws {
         // TODO: Begin code generation process
+
+        try generateSchemas()
+    }
+
+    private func generateSchemas() throws {
+
+        let modelUrl = baseUrl.with(subfolder: .models)
+        try modelUrl.ensureExists()
+
+        // Create Enumerations.swift file
+        try createEnumerationsFile()
+
+        try createModelFiles()
+    }
+
+    private func createEnumerationsFile() throws {
+        let schemas = model.schemas
+        let choices = schemas.choices
+        let sealedChoices = schemas.sealedChoices
+
+        // don't generate file if there are no enums
+        guard choices != nil || sealedChoices != nil else { return }
+
+        // TODO: Handle "other" type values
+        var string = Constants.fileHeader + "\n"
+        for enumItem in choices ?? [] {
+            string += enumItem.toSnippet()
+        }
+
+        for enumItem in sealedChoices ?? [] {
+            string += enumItem.toSnippet()
+        }
+
+        let enumFileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Enumerations.swift")
+        try string.write(to: enumFileUrl, atomically: true, encoding: .utf8)
+    }
+
+    private func createModelFiles() throws {
+        let schemas = model.schemas
+        guard let objects = schemas.objects else { return }
+
+        let modelUrl = baseUrl.with(subfolder: .models)
+        for object in objects {
+            try object.toFile(inFolder: modelUrl)
+        }
     }
 }

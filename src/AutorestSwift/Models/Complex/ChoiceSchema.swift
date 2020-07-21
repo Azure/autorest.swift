@@ -57,3 +57,20 @@ public class ChoiceSchema: ValueSchema {
         try super.encode(to: encoder)
     }
 }
+
+extension ChoiceSchema: SnippetConvertible {
+    func toSnippet() -> String {
+        let name = self.name
+        let comment = self.description
+        var string = ""
+        if comment != "" {
+            string += "/// \(comment)\n"
+        }
+        string = "public enum \(name): Strings, Codable {\n"
+        for choice in self.choices {
+            string += "\t" + choice.toSnippet()
+        }
+        string += "}\n\n"
+        return string
+    }
+}

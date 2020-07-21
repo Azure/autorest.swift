@@ -33,9 +33,9 @@ import Foundation
 // }
 
 /// an individual choice in a ChoiceSchema
-public class ChoiceValue: Codable {
+public class ChoiceValue: Codable, LanguageShortcut {
     /// per-language information for this value
-    public let language: Languages
+    public var language: Languages
 
     /// the actual value
     // TODO: Resolve question about enum
@@ -60,5 +60,18 @@ public class ChoiceValue: Codable {
         try container.encode(language, forKey: .language)
         try container.encode(value, forKey: .value)
         if extensions != nil { try container.encode(extensions, forKey: .extensions) }
+    }
+}
+
+extension ChoiceValue: SnippetConvertible {
+    func toSnippet() -> String {
+        let name = self.name
+        var string = ""
+        let comment = self.description
+        if comment != "" {
+            string += "/// \(comment)\n"
+        }
+        string += "case \(name) = \"\(self.value)\"\n"
+        return string
     }
 }

@@ -26,9 +26,9 @@
 
 import Foundation
 
-public class FlagValue: Codable {
+public class FlagValue: Codable, LanguageShortcut {
     /// per-language information for this value
-    public let language: Language
+    public var language: Languages
 
     /// the actual value
     public let value: Int
@@ -42,7 +42,7 @@ public class FlagValue: Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        language = try container.decode(Language.self, forKey: .language)
+        language = try container.decode(Languages.self, forKey: .language)
         value = try container.decode(Int.self, forKey: .value)
         extensions = try? container.decode([String: Bool].self, forKey: .extensions)
     }

@@ -27,9 +27,9 @@
 import Foundation
 
 /// a container for the actual constant value
-public class ConstantValue: Codable {
+public class ConstantValue: Codable, OptionalLanguageShortcut {
     /// per-language information for this value
-    public let language: Language?
+    public var language: Languages?
 
     /// the actual constant value to use
     public let value: String
@@ -43,7 +43,7 @@ public class ConstantValue: Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        language = try? container.decode(Language?.self, forKey: .language)
+        language = try? container.decode(Languages?.self, forKey: .language)
         value = try container.decode(String.self, forKey: .value)
         extensions = try? container.decode([String: Bool].self, forKey: .extensions)
     }

@@ -52,3 +52,20 @@ public class SealedChoiceSchema: ValueSchema {
         try super.encode(to: encoder)
     }
 }
+
+extension SealedChoiceSchema: SnippetConvertible {
+    func toSnippet() -> String {
+        let name = self.name
+        let comment = self.description
+        var string = ""
+        if comment != "" {
+            string += "/// \(comment)\n"
+        }
+        string = "public enum \(name): \(self.type), Codable {\n"
+        for choice in self.choices {
+            string += "\t" + choice.toSnippet()
+        }
+        string += "}\n\n"
+        return string
+    }
+}
