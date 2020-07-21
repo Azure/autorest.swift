@@ -4,9 +4,7 @@ import Yams
 guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
 else { fatalError("Unable to find Documents directory.") }
 
-// let sourceUrl = documentsUrl.appendingPathComponent("communication-sms-code-model-v4-2.yaml")
-// let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
-let sourceUrl = documentsUrl.appendingPathComponent("communication-chat-code-model-v4-2.yaml")
+let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
 let beforeJsonUrl = documentsUrl.appendingPathComponent("before.json")
 let afterJsonUrl = documentsUrl.appendingPathComponent("after.json")
 
