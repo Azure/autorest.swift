@@ -16,5 +16,5 @@ public class CodeModel: Codable {
     let security: Security
     let language: Languages
     let `protocol`: Protocols
-    let extensions: [String: Bool]?
+    let extensions: AnyCodable?
 }
