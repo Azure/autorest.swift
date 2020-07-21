@@ -8,6 +8,9 @@
 import Foundation
 import Yams
 
+struct StringDecodeKeys : ExtensionStringDecodeKeys {
+    var stringDecodedKeys = ["clientMessageId", "shareHistoryTime", "id", "messageId", "createdAt", "version"]
+}
 /// Handles the configuration and orchestrations of the code generation process
 class Manager {
 
@@ -51,7 +54,8 @@ class Manager {
         // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed.
         // Replaces empty string with a single space.
         yamlString = yamlString.replacingOccurrences(of: ": ''", with: ": ' '")
-        let model = try decoder.decode(CodeModel.self, from: yamlString)
+
+        let model = try decoder.decode(CodeModel.self, from: yamlString, userInfo: [AnyCodable.extensionStringDecodedKey: StringDecodeKeys()])
 
         check(model: model, against: yamlString)
 
