@@ -49,7 +49,7 @@ public class Operation: Codable {
     public let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
@@ -76,7 +76,7 @@ public class Operation: Codable {
         deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
         origin = try? container.decode(String.self, forKey: .origin)
         externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
-        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
+        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
         language = try container.decode(Languages.self, forKey: .language)
         `protocol` = try container.decode(Protocols.self, forKey: .protocol)
     }
@@ -96,5 +96,6 @@ public class Operation: Codable {
         if externalDocs != nil { try container.encode(externalDocs, forKey: .externalDocs) }
         try container.encode(language, forKey: .language)
         try container.encode(`protocol`, forKey: .protocol)
+        if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
 }

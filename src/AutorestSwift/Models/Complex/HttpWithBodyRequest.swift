@@ -8,7 +8,6 @@
 import Foundation
 
 public class HttpWithBodyRequest: HttpRequest {
-
     // canonical response type (ie, 'json')
     public let knownMediaType: KnownMediaType
 
