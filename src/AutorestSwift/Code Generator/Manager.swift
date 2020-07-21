@@ -108,7 +108,9 @@ class Manager {
 
         if let existing = try? folder.resourceValues(forKeys: [.isDirectoryKey]) {
             if !existing.isDirectory! {
-                fatalError("Path exists but is not a folder!")
+                let err = "Path exists but is not a folder!"
+                logger.log(err, level: .error)
+                fatalError(err)
             }
         } else {
             // Path does not exist so let us create it
