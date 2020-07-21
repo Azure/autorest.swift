@@ -9,10 +9,12 @@
 
 import Foundation
 
+protocol ExtensionStringDecodeKeys {
+    var stringDecodedKeys: [String] { get }
+}
+
 public struct AnyCodable: Decodable {
     var value: Any
-
-    let stringDecodedKeys = ["clientMessageId", "shareHistoryTime", "id", "messageId", "createdAt", "version"]
 
     struct CodingKeys: CodingKey {
         var stringValue: String
@@ -23,6 +25,11 @@ public struct AnyCodable: Decodable {
         }
 
         init?(stringValue: String) { self.stringValue = stringValue }
+    }
+
+    // A sets of extensions key should be always decode as String type
+    static var extensionStringDecodedKey: CodingUserInfoKey {
+        return CodingUserInfoKey(rawValue: "stringDecoded")!
     }
 
     init(value: Any) {
@@ -45,9 +52,14 @@ public struct AnyCodable: Decodable {
         } else if let container = try? decoder.singleValueContainer() {
             let currentCodingKey = container.codingPath[container.codingPath.count - 1]
 
-            // for these keys, always decode as String, since the values are always digits,
-            // they will be deocded as Int instead of string
-            if stringDecodedKeys.contains(currentCodingKey.stringValue) {
+            let extensionKeys = decoder.userInfo[AnyCodable.extensionStringDecodedKey] as? ExtensionStringDecodeKeys
+            let stringDecodedKeys = extensionKeys?.stringDecodedKeys
+
+            // if the current coding key is part of the stringDecodedKeys, always decode as String. This is because
+            // the values of these properties are always digits, they will be deocded as Int instead of string by default
+            let shouldDecodedAsString = stringDecodedKeys?.contains(currentCodingKey.stringValue) ?? false
+
+            if shouldDecodedAsString {
                 if let stringVal = try? container.decode(String.self) {
                     self.value = stringVal
                 } else {
