@@ -96,6 +96,6 @@ public class Operation: Codable {
         if externalDocs != nil { try container.encode(externalDocs, forKey: .externalDocs) }
         try container.encode(language, forKey: .language)
         try container.encode(`protocol`, forKey: .protocol)
-        try container.encode(extensions, forKey: .extensions)
+        if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
 }

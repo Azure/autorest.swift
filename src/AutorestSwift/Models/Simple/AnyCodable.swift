@@ -12,6 +12,8 @@ import Foundation
 public struct AnyCodable: Decodable {
     var value: Any
 
+    let stringDecodedKeys = ["clientMessageId", "shareHistoryTime", "id", "messageId", "createdAt", "version"]
+
     struct CodingKeys: CodingKey {
         var stringValue: String
         var intValue: Int?
@@ -41,8 +43,30 @@ public struct AnyCodable: Decodable {
             }
             self.value = result
         } else if let container = try? decoder.singleValueContainer() {
-            if let intVal = try? container.decode(Int.self) {
-                self.value = intVal
+            let currentCodingKey = container.codingPath[container.codingPath.count - 1]
+
+            // for these keys, always decode as String, since the values are always digits,
+            // they will be deocded as Int instead of string
+            if stringDecodedKeys.contains(currentCodingKey.stringValue) {
+                if let stringVal = try? container.decode(String.self) {
+                    self.value = stringVal
+                } else {
+                    throw DecodingError.dataCorruptedError(
+                        in: container,
+                        debugDescription: "the container contains nothing serialisable"
+                    )
+                }
+            } else if let intVal = try? container.decode(Int.self) {
+                if let stringVal = try? container.decode(String.self) {
+                    // If the decode int value is only partial of the string value, use string value instead
+                    if String(intVal) == stringVal {
+                        self.value = intVal
+                    } else {
+                        self.value = stringVal
+                    }
+                } else {
+                    self.value = intVal
+                }
             } else if let doubleVal = try? container.decode(Double.self) {
                 self.value = doubleVal
             } else if let boolVal = try? container.decode(Bool.self) {
