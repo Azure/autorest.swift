@@ -28,7 +28,6 @@ import Foundation
 
 /// Class used to generate Swift code
 class SwiftGenerator: CodeGenerator {
-
     // MARK: Properties
 
     let model: CodeModel

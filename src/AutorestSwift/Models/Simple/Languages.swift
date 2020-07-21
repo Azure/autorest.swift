@@ -54,7 +54,21 @@ public class Languages: Codable {
 
     enum CodingKeys: String, CodingKey {
         case `default`
-        case _swift = "swift"
+        case codeSwift = "swift"
         case objectiveC
+    }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        `default` = try container.decode(Language.self, forKey: .default)
+        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(`default`, forKey: .default)
+        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
     }
 }

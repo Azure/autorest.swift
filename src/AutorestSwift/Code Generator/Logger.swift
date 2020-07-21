@@ -28,7 +28,6 @@ import Foundation
 import os.log
 
 class Logger {
-
     // MARK: Properties
 
     let name: String
@@ -39,12 +38,16 @@ class Logger {
 
     init(withName name: String) {
         self.name = name
-        loggers = [String: OSLog]()
+        self.loggers = [String: OSLog]()
     }
 
     // MARK: Methods
 
-    func log(_ message: @autoclosure @escaping () -> String?, category: String = "default", level: OSLogType = .default) {
+    func log(
+        _ message: @autoclosure @escaping () -> String?,
+        category: String = "default",
+        level: OSLogType = .default
+    ) {
         guard let msg = message() else {
             os_log("Unable to issue log message")
             return

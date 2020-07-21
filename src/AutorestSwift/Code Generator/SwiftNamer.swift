@@ -27,7 +27,6 @@
 import Foundation
 
 class SwiftNamer: CodeNamer {
-
     // MARK: Properties
 
     let model: CodeModel

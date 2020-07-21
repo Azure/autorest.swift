@@ -34,7 +34,8 @@ public class Property: Value {
     // the wire name of this property
     public let serializedName: String
 
-    // when a property is flattened, the property will be the set of serialized names to get to that target property. If flattenedName is present, then this property is a flattened property. (ie, ['properties','name'] )
+    // when a property is flattened, the property will be the set of serialized names to  get to that target property.
+    // If flattenedName is present, then this property is a flattened property. (ie, ['properties','name'] )
     public let flattenedNames: [String]?
 
     // if this property is used as a discriminator for a polymorphic type
