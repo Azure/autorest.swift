@@ -21,8 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F175405D24C7DDC4004A1139 /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F175405B24C7DD7F004A1139 /* Yams.framework */; };
-		F175405E24C7DDC4004A1139 /* Yams.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F175405B24C7DD7F004A1139 /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */; };
+		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_133 /* CodeNamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CodeNamer.swift */; };
@@ -148,7 +148,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F175405E24C7DDC4004A1139 /* Yams.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,9 +155,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A22B02C24C88EB000EC018E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0A22B02D24C88EB000EC018E /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
+		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AutorestSwift::AutorestSwiftTests::Product" /* AutorestSwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutorestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F175405B24C7DD7F004A1139 /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
+		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
+		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		OBJ_101 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
@@ -175,12 +181,9 @@
 		OBJ_113 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_117 /* misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = misc; sourceTree = SOURCE_ROOT; };
 		OBJ_118 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = SOURCE_ROOT; };
-		OBJ_119 /* Carthage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Carthage; sourceTree = SOURCE_ROOT; };
 		OBJ_12 /* CodeNamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNamer.swift; sourceTree = "<group>"; };
 		OBJ_120 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = SOURCE_ROOT; };
-		OBJ_121 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		OBJ_122 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		OBJ_123 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		OBJ_124 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_125 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		OBJ_13 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -270,11 +273,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C4C02833013DF1AD2B4E7233 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		OBJ_227 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				F175405D24C7DDC4004A1139 /* Yams.framework in Frameworks */,
+				07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,12 +292,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D140A829FDBE9A58B03FF430 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */,
+				6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E09E9823B4CA64CA4E9DEB27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */,
+				DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */,
+				50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */,
+				C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		OBJ_110 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,19 +418,19 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				0A22B02D24C88EB000EC018E /* Package.resolved */,
 				OBJ_7 /* Sources */,
 				OBJ_110 /* Tests */,
 				OBJ_114 /* Products */,
 				OBJ_117 /* misc */,
 				OBJ_118 /* tests */,
-				OBJ_119 /* Carthage */,
 				OBJ_120 /* scripts */,
-				OBJ_121 /* Cartfile.resolved */,
 				OBJ_122 /* LICENSE */,
-				OBJ_123 /* Cartfile */,
 				OBJ_124 /* README.md */,
 				OBJ_125 /* CONTRIBUTING.md */,
-				F175405B24C7DD7F004A1139 /* Yams.framework */,
+				0A22B02C24C88EB000EC018E /* Podfile */,
+				E09E9823B4CA64CA4E9DEB27 /* Pods */,
+				D140A829FDBE9A58B03FF430 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -494,6 +525,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */;
 			buildPhases = (
+				148BDF5E35394EA176B0C219 /* [CP] Check Pods Manifest.lock */,
 				OBJ_130 /* Sources */,
 				OBJ_227 /* Frameworks */,
 				F175405F24C7DDC4004A1139 /* Embed Frameworks */,
@@ -512,6 +544,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_240 /* Build configuration list for PBXNativeTarget "AutorestSwiftTests" */;
 			buildPhases = (
+				2F41EF7D6784CD98E2037517 /* [CP] Check Pods Manifest.lock */,
 				OBJ_243 /* Sources */,
 				OBJ_246 /* Frameworks */,
 			);
@@ -530,6 +563,7 @@
 			buildConfigurationList = OBJ_229 /* Build configuration list for PBXNativeTarget "AutorestSwiftPackageDescription" */;
 			buildPhases = (
 				OBJ_232 /* Sources */,
+				C4C02833013DF1AD2B4E7233 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -569,6 +603,50 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		148BDF5E35394EA176B0C219 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AutorestSwift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F41EF7D6784CD98E2037517 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AutorestSwiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F175406024C7DF83004A1139 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -727,6 +805,7 @@
 /* Begin XCBuildConfiguration section */
 		OBJ_128 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -753,6 +832,7 @@
 		};
 		OBJ_129 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -809,6 +889,7 @@
 		};
 		OBJ_241 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -834,6 +915,7 @@
 		};
 		OBJ_242 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
