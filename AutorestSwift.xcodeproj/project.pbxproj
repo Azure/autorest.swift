@@ -385,20 +385,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F1319F9C24C9446C004DC2FF /* Template */ = {
-			isa = PBXGroup;
-			children = (
-				0A22B05624CA4BD000EC018E /* HeaderSnippet.stencil */,
-				F190513124CA1ABF003215D3 /* ImportSnippet.stencil */,
-				0A22B05824CA4C1700EC018E /* EnumerationFile.stencil */,
-				F190513224CA1ACD003215D3 /* ModelFile.stencil */,
-				0A22B06D24CB4A8B00EC018E /* ServiceClientFile.stencil */,
-				0A22B06B24CB488D00EC018E /* Package.stencil */,
-				0A22B06C24CB48B000EC018E /* README.stencil */,
-			);
-			path = Template;
-			sourceTree = "<group>";
-		};
 		OBJ_110 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,7 +538,7 @@
 				0A22B05A24CA4C9300EC018E /* View Models */,
 				OBJ_9 /* Code Generator */,
 				OBJ_17 /* Models */,
-				0A22B04224C8967400EC018E /* Utils */,
+				0A22B04B24C8990700EC018E /* Utils */,
 				OBJ_109 /* main.swift */,
 			);
 			name = AutorestSwift;
@@ -591,6 +577,8 @@
 		OBJ_9 /* Code Generator */ = {
 			isa = PBXGroup;
 			children = (
+				0A22B04824C898FD00EC018E /* FileDestination.swift */,
+				0A22B04724C898FD00EC018E /* LanguageShortcut.swift */,
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
 				OBJ_12 /* CodeNamer.swift */,
@@ -781,6 +769,7 @@
 				OBJ_145 /* CodeModel.swift in Sources */,
 				OBJ_146 /* ComplexSchema.swift in Sources */,
 				OBJ_147 /* ConditionalSchema.swift in Sources */,
+				0A22B04F24C8990700EC018E /* URL+Extensions.swift in Sources */,
 				OBJ_148 /* ConstantSchema.swift in Sources */,
 				OBJ_149 /* CredentialSchema.swift in Sources */,
 				OBJ_150 /* DateSchema.swift in Sources */,
@@ -804,7 +793,7 @@
 				OBJ_168 /* Parameter.swift in Sources */,
 				OBJ_169 /* PrimitiveSchema.swift in Sources */,
 				OBJ_170 /* Property.swift in Sources */,
-				0A22B03A24C8964000EC018E /* FileDestination.swift in Sources */,
+				0A22B04A24C898FD00EC018E /* FileDestination.swift in Sources */,
 				OBJ_171 /* Protocol.swift in Sources */,
 				OBJ_172 /* Request.swift in Sources */,
 				OBJ_173 /* Response.swift in Sources */,
@@ -865,6 +854,7 @@
 				OBJ_220 /* Protocols.swift in Sources */,
 				OBJ_221 /* Relations.swift in Sources */,
 				OBJ_222 /* Schemas.swift in Sources */,
+				0A22B04E24C8990700EC018E /* Encodable+Extensions.swift in Sources */,
 				OBJ_223 /* Security.swift in Sources */,
 				OBJ_224 /* SecurityRequirement.swift in Sources */,
 				0A22B04624C8967400EC018E /* URL+Extensions.swift in Sources */,

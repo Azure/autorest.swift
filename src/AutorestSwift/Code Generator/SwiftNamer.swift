@@ -90,7 +90,6 @@ private func swiftName(forLanguage lang: Languages, inRole role: SwiftSdkRole) {
         }
         name = "\(name)Client"
         lang.swift.name = name
-        break
     case .operationGroup:
         break
     case .operation:
