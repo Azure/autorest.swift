@@ -25,6 +25,7 @@
 // --------------------------------------------------------------------------
 
 import Foundation
+import Stencil
 
 /// Class used to generate Swift code
 class SwiftGenerator: CodeGenerator {
@@ -33,6 +34,8 @@ class SwiftGenerator: CodeGenerator {
     let model: CodeModel
 
     let baseUrl: URL
+
+    let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
 
     // MARK: Initializers
 
@@ -46,8 +49,19 @@ class SwiftGenerator: CodeGenerator {
     /// Begin code generation process
     func generate() throws {
         // TODO: Begin code generation process
-
         try generateSchemas()
+
+        if let choices = model.schemas.choices {
+            for choice in choices {
+                try generateChoice(for: choice)
+            }
+        }
+
+        if let objects = model.schemas.objects {
+            for object in objects {
+                try generateObject(for: object)
+            }
+        }
     }
 
     private func generateSchemas() throws {
@@ -89,6 +103,41 @@ class SwiftGenerator: CodeGenerator {
         let modelUrl = baseUrl.with(subfolder: .models)
         for object in objects {
             try object.toFile(inFolder: modelUrl)
+        }
+    }
+
+    private func generateChoice(for choice: ChoiceSchema) throws {
+        /* if let templateUrl = documentsUrl?.appendingPathComponent("ChoiceSchema.stencil") {
+             let templateString = try String(contentsOf: templateUrl)
+
+             let template = Template(templateString: templateString)
+             var result = try template.render(["choice": choice])
+
+             print(result)
+         } */
+        try renderTemplate(filename: "ChoiceSchema.stencil", dictionary: ["choice": choice])
+    }
+
+    private func generateObject(for object: ObjectSchema) throws {
+        /* if let templateUrl = documentsUrl?.appendingPathComponent("ChoiceSchema.stencil") {
+             let templateString = try String(contentsOf: templateUrl)
+
+             let template = Template(templateString: templateString)
+             var result = try template.render(["object": object])
+
+             print(result)
+         } */
+        try renderTemplate(filename: "ObjectSchema.stencil", dictionary: ["object": object])
+    }
+
+    private func renderTemplate(filename: String, dictionary: [String: Any]) throws {
+        if let templateUrl = documentsUrl?.appendingPathComponent(filename) {
+            let templateString = try String(contentsOf: templateUrl)
+
+            let template = Template(templateString: templateString)
+            var result = try template.render(dictionary)
+
+            print(result)
         }
     }
 }

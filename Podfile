@@ -7,6 +7,7 @@ target 'AutorestSwift' do
 
   # Pods for AutorestSwift
   pod 'Yams'
+  pod 'Stencil', '~> 0.13.1'
 
   target 'AutorestSwiftTests' do
     inherit! :search_paths
