@@ -61,13 +61,13 @@ public class ChoiceSchema: ValueSchema {
 extension ChoiceSchema: SnippetConvertible {
     func toSnippet() -> String {
         let name = self.name
-        let comment = self.description
+        let comment = description
         var string = ""
         if comment != "" {
             string += "/// \(comment)\n"
         }
         string = "public enum \(name): Strings, Codable {\n"
-        for choice in self.choices {
+        for choice in choices {
             string += "\t" + choice.toSnippet()
         }
         string += "}\n\n"

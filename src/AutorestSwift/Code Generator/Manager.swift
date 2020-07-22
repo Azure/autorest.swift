@@ -46,7 +46,7 @@ class Manager {
     init(withInputUrl input: URL, destinationUrl dest: URL) {
         self.inputUrl = input
         // TODO: Make this configurable
-        destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
+        self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
         do {
             try destinationRootUrl.ensureExists()
         } catch {

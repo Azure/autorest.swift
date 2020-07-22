@@ -97,7 +97,7 @@ extension ObjectSchema: FileConvertible {
         string += "import Foundation\n\n"
 
         let name = self.name
-        let comment = self.description
+        let comment = description
         if comment != "" {
             string += "/// \(comment) \n"
         }

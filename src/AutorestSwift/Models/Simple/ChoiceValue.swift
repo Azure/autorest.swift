@@ -67,11 +67,11 @@ extension ChoiceValue: SnippetConvertible {
     func toSnippet() -> String {
         let name = self.name
         var string = ""
-        let comment = self.description
+        let comment = description
         if comment != "" {
             string += "/// \(comment)\n"
         }
-        string += "case \(name) = \"\(self.value)\"\n"
+        string += "case \(name) = \"\(value)\"\n"
         return string
     }
 }

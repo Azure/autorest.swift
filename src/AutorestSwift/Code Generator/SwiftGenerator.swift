@@ -51,7 +51,6 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func generateSchemas() throws {
-
         let modelUrl = baseUrl.with(subfolder: .models)
         try modelUrl.ensureExists()
 
