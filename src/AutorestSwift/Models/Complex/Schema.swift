@@ -63,5 +63,5 @@ public class Schema: Codable {
     public let properties: [Property]?
 
     /// Additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 }

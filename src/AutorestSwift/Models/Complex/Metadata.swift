@@ -35,5 +35,5 @@ public class Metadata: Codable {
     public let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 }
