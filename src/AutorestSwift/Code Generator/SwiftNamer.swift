@@ -59,48 +59,81 @@ class SwiftNamer: CodeNamer {
             swiftName(forLanguage: globalParam.language, inRole: .property)
         }
 
+        // Handle operations and parameter names
         for operationGroup in model.operationGroups {
             swiftName(forLanguage: operationGroup.language, inRole: .operationGroup)
             for operation in operationGroup.operations {
                 swiftName(forLanguage: operation.language, inRole: .operation)
-                print("====COMMON PARAMS====")
                 for parameter in operation.parameters ?? [] {
                     swiftName(forLanguage: parameter.language, inRole: .parameter)
                 }
-                print("====SIGNATURE PARAMS====")
                 for parameter in operation.signatureParameters ?? [] {
                     swiftName(forLanguage: parameter.language, inRole: .parameter)
                 }
             }
         }
-    }
-}
 
-/// accepts a `Languages` object with `.default` and returns a new `Languages` object with `.swift`.
-private func swiftName(forLanguage lang: Languages, inRole role: SwiftSdkRole) {
-    switch role {
-    case .service:
-        // This should be the client name
-        let stripList = ["Service", "Client"]
+        // Handle models and property names
+        let schemas = model.schemas
+        for object in schemas.objects ?? [] {
+            swiftName(forLanguage: object.language, inRole: .model)
+            for property in object.properties ?? [] {
+                swiftName(forLanguage: property.language, inRole: .property)
+            }
+        }
+
+        // TODO: Continue here... with enums and constants?
+    }
+
+    /// accepts a `Languages` object with `.default` and returns a new `Languages` object with `.swift`.
+    private func swiftName(forLanguage lang: Languages, inRole role: SwiftSdkRole) {
         var name = lang.swift.name
+        switch role {
+        case .service:
+            name = clientName(for: name)
+        case .operationGroup:
+            name = name.toCamelCase
+        case .operation:
+            name = operationName(for: name)
+        case .model:
+            name = name.toPascalCase
+        case .property:
+            name = name.toCamelCase
+        case .parameter:
+            name = name.toCamelCase
+        }
+        lang.swift.name = name
+    }
+
+    private func clientName(for serviceName: String) -> String {
+        var name = serviceName
+        let stripList = ["Service", "Client"]
         for item in stripList {
             if name.hasSuffix(item) {
                 name = String(name.dropLast(item.count))
             }
         }
-        name = "\(name)Client"
-        lang.swift.name = name
-    case .operationGroup:
-        break
-    case .operation:
-        break
-    case .model:
-        break
-    case .property:
-        // TODO: verify camelCasing conventions
-        break
-    case .parameter:
-        break
+        return "\(name)Client"
     }
-    print("\(role.rawValue): \(lang.default.name) => \(lang.swift.name)")
+
+    private func operationName(for operationName: String) -> String {
+        let pluralReplacements = [
+            "get": "list"
+        ]
+
+        var nameComps = operationName.splitAndJoinAcronyms
+
+        // TODO: Need a more reliable way to know whether the last item is singular or plural
+        let isPlural = nameComps.last?.hasSuffix("s") ?? false
+        for (index, comp) in nameComps.enumerated() {
+            if index == 0 {
+                if isPlural, let replacement = pluralReplacements[comp] {
+                    nameComps[index] = replacement
+                }
+            } else {
+                nameComps[index] = comp.capitalized
+            }
+        }
+        return nameComps.joined()
+    }
 }

@@ -780,6 +780,7 @@
 				OBJ_155 /* GroupProperty.swift in Sources */,
 				OBJ_156 /* GroupSchema.swift in Sources */,
 				OBJ_157 /* HttpModel.swift in Sources */,
+				0A22B05124C8ADC800EC018E /* String+Extensions.swift in Sources */,
 				OBJ_158 /* HttpParameter.swift in Sources */,
 				OBJ_159 /* HttpRequest.swift in Sources */,
 				OBJ_160 /* HttpResponse.swift in Sources */,
