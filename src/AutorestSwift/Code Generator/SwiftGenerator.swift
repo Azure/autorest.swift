@@ -107,26 +107,10 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func generateChoice(for choice: ChoiceSchema) throws {
-        /* if let templateUrl = documentsUrl?.appendingPathComponent("ChoiceSchema.stencil") {
-             let templateString = try String(contentsOf: templateUrl)
-
-             let template = Template(templateString: templateString)
-             var result = try template.render(["choice": choice])
-
-             print(result)
-         } */
         try renderTemplate(filename: "ChoiceSchema.stencil", dictionary: ["choice": choice])
     }
 
     private func generateObject(for object: ObjectSchema) throws {
-        /* if let templateUrl = documentsUrl?.appendingPathComponent("ChoiceSchema.stencil") {
-             let templateString = try String(contentsOf: templateUrl)
-
-             let template = Template(templateString: templateString)
-             var result = try template.render(["object": object])
-
-             print(result)
-         } */
         try renderTemplate(filename: "ObjectSchema.stencil", dictionary: ["object": object])
     }
 
