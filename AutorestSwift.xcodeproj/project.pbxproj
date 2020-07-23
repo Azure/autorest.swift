@@ -24,7 +24,6 @@
 		07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */; };
 		0A22B03924C8964000EC018E /* LanguageShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03424C8964000EC018E /* LanguageShortcut.swift */; };
 		0A22B03A24C8964000EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
-		0A22B03B24C8964000EC018E /* FileConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03624C8964000EC018E /* FileConvertible.swift */; };
 		0A22B03C24C8964000EC018E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03724C8964000EC018E /* Constants.swift */; };
 		0A22B04524C8967400EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04324C8967400EC018E /* Encodable+Extensions.swift */; };
 		0A22B04624C8967400EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04424C8967400EC018E /* URL+Extensions.swift */; };
@@ -190,7 +189,6 @@
 		0A22B02D24C88EB000EC018E /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		0A22B03424C8964000EC018E /* LanguageShortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageShortcut.swift; sourceTree = "<group>"; };
 		0A22B03524C8964000EC018E /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
-		0A22B03624C8964000EC018E /* FileConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileConvertible.swift; sourceTree = "<group>"; };
 		0A22B03724C8964000EC018E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0A22B04324C8967400EC018E /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		0A22B04424C8967400EC018E /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
@@ -582,7 +580,6 @@
 				OBJ_11 /* CodeGenerator.swift */,
 				OBJ_12 /* CodeNamer.swift */,
 				0A22B03724C8964000EC018E /* Constants.swift */,
-				0A22B03624C8964000EC018E /* FileConvertible.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
 				OBJ_13 /* Logger.swift */,
@@ -787,7 +784,6 @@
 				OBJ_163 /* NumberSchema.swift in Sources */,
 				OBJ_164 /* ODataQuerySchema.swift in Sources */,
 				OBJ_165 /* ObjectSchema.swift in Sources */,
-				0A22B03B24C8964000EC018E /* FileConvertible.swift in Sources */,
 				OBJ_166 /* OperationGroup.swift in Sources */,
 				OBJ_167 /* OrSchema.swift in Sources */,
 				OBJ_168 /* Parameter.swift in Sources */,
