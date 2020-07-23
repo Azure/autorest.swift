@@ -26,7 +26,7 @@
 
 import Foundation
 
-private enum SwiftSdkRole: String {
+enum SdkRole: String {
     case service
     case operationGroup
     case operation
@@ -42,51 +42,70 @@ class SwiftNamer: CodeNamer {
 
     // MARK: Initializers
 
-    init(withModel model: CodeModel) {
+    required init(withModel model: CodeModel) {
         self.model = model
     }
 
     // MARK: Methods
 
     /// Begin naming process
+    // swiftlint:disable cyclomatic_complexity
     func process() throws {
-        // Iterate through entire model structure, examining any
-        // language.default properties and using that to populate
-        // language.swift
-        swiftName(forLanguage: model.language, inRole: .service)
+        let schemas = model.schemas
 
+        // Name the client class from the service name
+        name(for: model.language, inRole: .service)
+
+        // Name global parameters
         for globalParam in model.globalParameters ?? [] {
-            swiftName(forLanguage: globalParam.language, inRole: .property)
+            name(for: globalParam.language, inRole: .property)
+            print(globalParam.name)
         }
 
-        // Handle operations and parameter names
+        // Name operations and parameters
         for operationGroup in model.operationGroups {
-            swiftName(forLanguage: operationGroup.language, inRole: .operationGroup)
+            name(for: operationGroup.language, inRole: .operationGroup)
             for operation in operationGroup.operations {
-                swiftName(forLanguage: operation.language, inRole: .operation)
+                name(for: operation.language, inRole: .operation)
                 for parameter in operation.parameters ?? [] {
-                    swiftName(forLanguage: parameter.language, inRole: .parameter)
+                    name(for: parameter.language, inRole: .parameter)
                 }
                 for parameter in operation.signatureParameters ?? [] {
-                    swiftName(forLanguage: parameter.language, inRole: .parameter)
+                    name(for: parameter.language, inRole: .parameter)
                 }
             }
         }
 
-        // Handle models and property names
-        let schemas = model.schemas
+        // Name models and properties
         for object in schemas.objects ?? [] {
-            swiftName(forLanguage: object.language, inRole: .model)
+            name(for: object.language, inRole: .model)
             for property in object.properties ?? [] {
-                swiftName(forLanguage: property.language, inRole: .property)
+                name(for: property.language, inRole: .property)
             }
         }
 
-        // TODO: Continue here... with enums and constants?
+        // Name enums and enum options
+        for choice in schemas.choices ?? [] {
+            name(for: choice.language, inRole: .model)
+            for value in choice.choices {
+                name(for: value.language, inRole: .property)
+            }
+        }
+        for choice in schemas.sealedChoices ?? [] {
+            name(for: choice.language, inRole: .model)
+            for value in choice.choices {
+                name(for: value.language, inRole: .property)
+            }
+        }
+
+        // Name constants
+        for constant in schemas.constants ?? [] {
+            name(for: constant.language, inRole: .property)
+        }
     }
 
     /// accepts a `Languages` object with `.default` and returns a new `Languages` object with `.swift`.
-    private func swiftName(forLanguage lang: Languages, inRole role: SwiftSdkRole) {
+    func name(for lang: Languages, inRole role: SdkRole) {
         var name = lang.swift.name
         switch role {
         case .service:
