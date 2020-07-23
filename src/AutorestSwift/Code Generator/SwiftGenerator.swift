@@ -59,30 +59,6 @@ class SwiftGenerator: CodeGenerator {
         try modelUrl.ensureExists()
 
         // Create Enumerations.swift file
-        // try createEnumerationsFile()
-
-        // try createModelFiles()
-        /*
-         var allEnums: [String] = []
-
-         if let choices = model.schemas.choices {
-             for choice in choices {
-                 if let result = try? choice.generateTemplate() {
-                     allEnums.append(result)
-                 }
-             }
-         }
-
-         var allStructs: [String] = []
-         if let objects = model.schemas.objects {
-             for object in objects {
-                 if let result = try? object.generateTemplate() {
-                     allStructs.append(result)
-                 }
-             }
-         }
-         */
-
         if let choices = model.schemas.choices {
             generateSnippetFromTemplate(stencilables: choices, results: &allEnums)
         }
@@ -108,64 +84,7 @@ class SwiftGenerator: CodeGenerator {
             dictionary: ["allEnums": allEnums, "allStructs": allStructs]
         )
 
-        let modelUrl = baseUrl.with(subfolder: .models)
-        let destUrl = modelUrl.appendingPathComponent("Model.swift")
-        try fileContent.write(to: destUrl, atomically: true, encoding: .utf8)
+        let modelUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Model.swift")
+        try fileContent.write(to: modelUrl, atomically: true, encoding: .utf8)
     }
-
-    /*
-     let schemas = model.schemas
-           guard let objects = schemas.objects else { return }
-
-           let modelUrl = baseUrl.with(subfolder: .models)
-
-      try renderTemplate(filename: "ObjectSchema.stencil", dictionary: ["object": object])
-
-           for object in objects {
-               try object.toFile(inFolder: modelUrl)
-           }
-       } */
-
-    /*
-        private func createEnumerationsFile() throws {
-            let schemas = model.schemas
-            let choices = schemas.choices
-            let sealedChoices = schemas.sealedChoices
-
-            // don't generate file if there are no enums
-            guard choices != nil || sealedChoices != nil else { return }
-
-            // TODO: Handle "other" type values
-            var string = Constants.fileHeader + "\n"
-            for enumItem in choices ?? [] {
-                string += enumItem.toSnippet()
-            }
-
-            for enumItem in sealedChoices ?? [] {
-                string += enumItem.toSnippet()
-            }
-
-            let enumFileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Enumerations.swift")
-            try string.write(to: enumFileUrl, atomically: true, encoding: .utf8)
-        }
-
-        private func createModelFiles() throws {
-            let schemas = model.schemas
-            guard let objects = schemas.objects else { return }
-
-            let modelUrl = baseUrl.with(subfolder: .models)
-            for object in objects {
-                try object.toFile(inFolder: modelUrl)
-            }
-        }
-     */
-    /*
-     private func generateChoice(for choice: ChoiceSchema) throws {
-         try renderTemplate(filename: "ChoiceSchema.stencil", dictionary: ["choice": choice])
-     }
-
-     private func generateObject(for object: ObjectSchema) throws {
-         try renderTemplate(filename: "ObjectSchema.stencil", dictionary: ["object": object])
-     }
-     */
 }

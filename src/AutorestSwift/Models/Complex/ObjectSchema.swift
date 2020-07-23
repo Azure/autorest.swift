@@ -93,33 +93,3 @@ extension ObjectSchema: Stencilable {
         return try renderTemplate(filename: "Struct.stencil", dictionary: ["object": self])
     }
 }
-
-/*
- extension ObjectSchema: FileConvertible {
-     func toFile(inFolder folder: URL) throws {
-         let destUrl = folder.appendingPathComponent("\(self.name).swift")
-         var string = Constants.fileHeader + "\n"
-
-         string += "import AzureCore\n"
-         string += "import Foundation\n\n"
-
-         let name = self.name
-         let comment = description
-         if comment != "" {
-             string += "/// \(comment) \n"
-         }
-         string += "public struct \(name) {\n"
-         for property in properties ?? [] {
-             property.prettyPrint()
-             let propertyName = property.name
-             let propertyComment = property.description
-             if propertyComment != "" {
-                 string += "\t/// \(propertyComment)\n"
-             }
-             string += "\tpublic \(propertyName): \(property.schema.type)\n\n"
-         }
-         string += "}\n\n"
-         try string.write(to: destUrl, atomically: true, encoding: .utf8)
-     }
- }
- */

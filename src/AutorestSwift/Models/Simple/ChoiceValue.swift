@@ -62,18 +62,3 @@ public class ChoiceValue: Codable, LanguageShortcut {
         if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
 }
-
-/*
- extension ChoiceValue: SnippetConvertible {
-     func toSnippet() -> String {
-         let name = self.name
-         var string = ""
-         let comment = description
-         if comment != "" {
-             string += "/// \(comment)\n"
-         }
-         string += "case \(name) = \"\(value)\"\n"
-         return string
-     }
- }
- */
