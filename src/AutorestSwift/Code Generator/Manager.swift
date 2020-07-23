@@ -46,7 +46,7 @@ class Manager {
     init(withInputUrl input: URL, destinationUrl dest: URL) {
         self.inputUrl = input
         // TODO: Make this configurable
-        destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
+        self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
         do {
             try destinationRootUrl.ensureExists()
         } catch {
@@ -64,7 +64,7 @@ class Manager {
         try namer.process()
 
         // Create folder structure
-        let packageName = model.name
+        let packageName = model.language.default.name
         let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
 
@@ -124,6 +124,8 @@ class Manager {
         if beforeJsonString != afterJsonString {
             let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
             let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
+            logger.log("before.json url=\(beforeJsonUrl)")
+            logger.log("after.json url=\(afterJsonUrl)")
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)

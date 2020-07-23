@@ -26,6 +26,6 @@
 
 import Foundation
 
-protocol SnippetConvertible {
-    func toSnippet() -> String
+protocol Stencilable {
+    func generateSnippet() throws -> String
 }

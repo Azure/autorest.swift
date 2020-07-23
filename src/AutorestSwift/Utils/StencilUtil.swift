@@ -26,6 +26,11 @@
 
 import Foundation
 
-protocol FileConvertible {
-    func toFile(inFolder folder: URL) throws
+import Stencil
+
+public func renderTemplate(filename: String, dictionary: [String: Any]) throws -> String {
+    let fsLoader = FileSystemLoader(bundle: [Bundle.main])
+    let environment = Environment(loader: fsLoader)
+
+    return try environment.renderTemplate(name: filename, context: dictionary)
 }

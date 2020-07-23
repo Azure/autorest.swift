@@ -34,6 +34,11 @@ class SwiftGenerator: CodeGenerator {
 
     let baseUrl: URL
 
+    var allEnums: [String] = []
+    var allStructs: [String] = []
+
+    lazy var logger = Logger(withName: "Autorest.Swift")
+
     // MARK: Initializers
 
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
@@ -46,50 +51,43 @@ class SwiftGenerator: CodeGenerator {
     /// Begin code generation process
     func generate() throws {
         // TODO: Begin code generation process
-
         try generateSchemas()
-    }
-
-    private func generateSchemas() throws {
-
-        let modelUrl = baseUrl.with(subfolder: .models)
-        try modelUrl.ensureExists()
-
-        // Create Enumerations.swift file
-        try createEnumerationsFile()
 
         try createModelFiles()
     }
 
-    private func createEnumerationsFile() throws {
-        let schemas = model.schemas
-        let choices = schemas.choices
-        let sealedChoices = schemas.sealedChoices
+    private func generateSchemas() throws {
+        let modelUrl = baseUrl.with(subfolder: .models)
+        try modelUrl.ensureExists()
 
-        // don't generate file if there are no enums
-        guard choices != nil || sealedChoices != nil else { return }
-
-        // TODO: Handle "other" type values
-        var string = Constants.fileHeader + "\n"
-        for enumItem in choices ?? [] {
-            string += enumItem.toSnippet()
+        // Create Enumerations.swift file
+        if let choices = model.schemas.choices {
+            generateSnippetFromTemplate(stencilables: choices, results: &allEnums)
         }
 
-        for enumItem in sealedChoices ?? [] {
-            string += enumItem.toSnippet()
+        if let objects = model.schemas.objects {
+            generateSnippetFromTemplate(stencilables: objects, results: &allStructs)
         }
+    }
 
-        let enumFileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Enumerations.swift")
-        try string.write(to: enumFileUrl, atomically: true, encoding: .utf8)
+    private func generateSnippetFromTemplate(stencilables: [Stencilable], results: inout [String]) {
+        for stencilable in stencilables {
+            do {
+                results.append(try stencilable.generateSnippet())
+            } catch {
+                print(error)
+            }
+        }
     }
 
     private func createModelFiles() throws {
-        let schemas = model.schemas
-        guard let objects = schemas.objects else { return }
+        let fileContent = try renderTemplate(
+            filename: "ModelFile.stencil",
+            dictionary: ["allEnums": allEnums, "allStructs": allStructs]
+        )
 
-        let modelUrl = baseUrl.with(subfolder: .models)
-        for object in objects {
-            try object.toFile(inFolder: modelUrl)
-        }
+        let modelUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Model.swift")
+        logger.log("model url=\(modelUrl)")
+        try fileContent.write(to: modelUrl, atomically: true, encoding: .utf8)
     }
 }

@@ -41,9 +41,6 @@ public class Languages: Codable {
             return _swift!
         }
         set {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
             _swift = newValue
         }
     }
