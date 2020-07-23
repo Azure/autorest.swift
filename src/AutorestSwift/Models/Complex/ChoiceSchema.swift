@@ -57,12 +57,3 @@ public class ChoiceSchema: ValueSchema {
         try super.encode(to: encoder)
     }
 }
-
-extension ChoiceSchema: Stencilable {
-    func generateSnippet() throws -> String {
-        return try renderTemplate(
-            filename: "Enumeration.stencil",
-            dictionary: ["choice": self, "choiceName": name, "choiceTypeName": choiceType.name]
-        )
-    }
-}

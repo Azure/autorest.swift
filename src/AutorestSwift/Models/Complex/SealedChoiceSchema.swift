@@ -52,9 +52,3 @@ public class SealedChoiceSchema: ValueSchema {
         try super.encode(to: encoder)
     }
 }
-
-extension SealedChoiceSchema: Stencilable {
-    func generateSnippet() throws -> String {
-        return try renderTemplate(filename: "Enumeration.stencil", dictionary: ["choice": self])
-    }
-}

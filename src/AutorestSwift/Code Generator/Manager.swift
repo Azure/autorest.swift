@@ -39,7 +39,7 @@ class Manager {
 
     let destinationRootUrl: URL
 
-    lazy var logger = Logger(withName: "Autorest.Swift")
+    lazy var logger = Logger(withName: "Autorest.Swift.Manager")
 
     // MARK: Initializers
 
@@ -64,7 +64,7 @@ class Manager {
         try namer.process()
 
         // Create folder structure
-        let packageName = model.language.default.name
+        let packageName = model.name
         let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
 

@@ -1,0 +1,18 @@
+{% include "HeaderSnippet.stencil" %}
+
+{% include "ImportSnippet.stencil" %}
+
+{% for enum in models.enums %}
+    {% if enum.comment %}
+/// {{ enum.comment }}
+    {% endif %}
+
+public enum {{ enum.name }}: {{ enum.type }}, Codable {
+{% for choice in enum.choices %}
+    {% if choice.comment %}
+    /// {{ choice.comment}}
+    {% endif %}
+    case {{ choice.name }} = "{{choice.value}}"
+{% endfor %}
+}
+{% endfor %}

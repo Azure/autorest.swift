@@ -26,6 +26,36 @@
 
 import Foundation
 
-protocol Stencilable {
-    func generateSnippet() throws -> String
+struct PropertyViewModel {
+    let name: String
+    let comment: String?
+    let type: String
+    let optional: Bool
+    let defaultValue: String?
+
+    init(from schema: Property) {
+        self.name = schema.name
+        self.comment = schema.description
+        self.type = schema.schema.name
+        self.optional = schema.required ?? true
+        self.defaultValue = schema.clientDefaultValue
+    }
+}
+
+struct ObjectViewModel {
+    let name: String
+    let comment: String?
+    let objectType = "struct"
+    let properties: [PropertyViewModel]
+
+    init(from schema: ObjectSchema) {
+        self.name = schema.name
+        self.comment = schema.description
+
+        var props = [PropertyViewModel]()
+        for property in schema.properties ?? [] {
+            props.append(PropertyViewModel(from: property))
+        }
+        self.properties = props
+    }
 }

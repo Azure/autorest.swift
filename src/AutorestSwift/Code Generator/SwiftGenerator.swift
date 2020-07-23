@@ -34,10 +34,7 @@ class SwiftGenerator: CodeGenerator {
 
     let baseUrl: URL
 
-    var allEnums: [String] = []
-    var allStructs: [String] = []
-
-    lazy var logger = Logger(withName: "Autorest.Swift")
+    lazy var logger = Logger(withName: "Autorest.Swift.Generator")
 
     // MARK: Initializers
 
@@ -52,42 +49,28 @@ class SwiftGenerator: CodeGenerator {
     func generate() throws {
         // TODO: Begin code generation process
         try generateSchemas()
-
-        try createModelFiles()
     }
 
     private func generateSchemas() throws {
         let modelUrl = baseUrl.with(subfolder: .models)
         try modelUrl.ensureExists()
+        logger.log("Models: \(modelUrl)")
 
         // Create Enumerations.swift file
-        if let choices = model.schemas.choices {
-            generateSnippetFromTemplate(stencilables: choices, results: &allEnums)
-        }
-
-        if let objects = model.schemas.objects {
-            generateSnippetFromTemplate(stencilables: objects, results: &allStructs)
-        }
-    }
-
-    private func generateSnippetFromTemplate(stencilables: [Stencilable], results: inout [String]) {
-        for stencilable in stencilables {
-            do {
-                results.append(try stencilable.generateSnippet())
-            } catch {
-                print(error)
-            }
-        }
-    }
-
-    private func createModelFiles() throws {
+        let enumViewModel = EnumerationFileViewModel(from: model.schemas)
         let fileContent = try renderTemplate(
-            filename: "ModelFile.stencil",
-            dictionary: ["allEnums": allEnums, "allStructs": allStructs]
+            filename: "EnumerationFile.stencil",
+            dictionary: ["models": enumViewModel]
         )
+        let fileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Enumerations.swift")
+        try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
 
-        let modelUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Model.swift")
-        logger.log("model url=\(modelUrl)")
-        try fileContent.write(to: modelUrl, atomically: true, encoding: .utf8)
+        // Create model files
+        for object in model.schemas.objects ?? [] {
+            let structViewModel = ObjectViewModel(from: object)
+            let fileContent = try renderTemplate(filename: "ModelFile.stencil", dictionary: ["model": structViewModel])
+            let fileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("\(object.name).swift")
+            try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
+        }
     }
 }
