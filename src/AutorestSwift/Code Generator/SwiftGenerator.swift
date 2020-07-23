@@ -115,13 +115,10 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func renderTemplate(filename: String, dictionary: [String: Any]) throws {
-        if let templateUrl = documentsUrl?.appendingPathComponent(filename) {
-            let templateString = try String(contentsOf: templateUrl)
+        let fsLoader = FileSystemLoader(bundle: [Bundle.main])
+        let environment = Environment(loader: fsLoader)
 
-            let template = Template(templateString: templateString)
-            var result = try template.render(dictionary)
-
-            print(result)
-        }
+        var result = try environment.renderTemplate(name: filename, context: dictionary)
+        print(result)
     }
 }

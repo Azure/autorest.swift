@@ -8,12 +8,13 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
+
 import AzureCore
 import Foundation
 
 public struct {{ object.language.default.name }} {
-   {% for property in object.properties %}
-   // {{ property.language.default.description }}
-   public {{ property.language.default.name }} : {{ property.schema.type }}
-   {% endfor %}
+    {% for property in object.properties %}
+    /* {{ property.language.default.description }} */
+    public let {{ property.language.default.name | lowercase }} : {{ String(property.schema.type) }}
+    {% endfor %}
 }
