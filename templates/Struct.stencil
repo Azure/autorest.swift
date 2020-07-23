@@ -1,6 +1,6 @@
-public struct {{ object.language.default.name }} {
+public struct {{ objectName }} {
     {% for property in object.properties %}
     /* {{ property.language.default.description }} */
-    public let {{ property.language.default.name | lowercase }} : {{ String(property.schema.type) }}
+    public let {{ property.language.default.name }} : {{ property.schema.type }}
     {% endfor %}
 }

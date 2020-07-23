@@ -60,6 +60,9 @@ public class ChoiceSchema: ValueSchema {
 
 extension ChoiceSchema: Stencilable {
     func generateSnippet() throws -> String {
-        return try renderTemplate(filename: "Enumeration.stencil", dictionary: ["choice": self])
+        return try renderTemplate(
+            filename: "Enumeration.stencil",
+            dictionary: ["choice": self, "choiceName": name, "choiceTypeName": choiceType.name]
+        )
     }
 }

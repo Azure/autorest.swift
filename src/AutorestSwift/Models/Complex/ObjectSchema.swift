@@ -90,6 +90,6 @@ public class ObjectSchema: ComplexSchema {
 
 extension ObjectSchema: Stencilable {
     func generateSnippet() throws -> String {
-        return try renderTemplate(filename: "Struct.stencil", dictionary: ["object": self])
+        return try renderTemplate(filename: "Struct.stencil", dictionary: ["object": self, "objectName": name])
     }
 }
