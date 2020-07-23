@@ -199,14 +199,13 @@
 		"AutorestSwift::AutorestSwiftTests::Product" /* AutorestSwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutorestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
-		F1319F8E24C8A7F0004DC2FF /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Generated; sourceTree = "<group>"; };
 		F1319F9824C92E04004DC2FF /* Enumeration.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Enumeration.stencil; path = ../templates/Enumeration.stencil; sourceTree = "<group>"; };
 		F1319F9924C92E13004DC2FF /* Struct.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Struct.stencil; path = ../templates/Struct.stencil; sourceTree = "<group>"; };
 		F1319F9A24C93E04004DC2FF /* HeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HeaderSnippet.stencil; path = ../templates/HeaderSnippet.stencil; sourceTree = "<group>"; };
 		F190512924CA0E88003215D3 /* Stencilable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stencilable.swift; sourceTree = "<group>"; };
 		F190512D24CA10E8003215D3 /* StencilUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StencilUtil.swift; sourceTree = "<group>"; };
-		F190513124CA1ABF003215D3 /* IncludeSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = file; name = IncludeSnippet.stencil; path = templates/IncludeSnippet.stencil; sourceTree = SOURCE_ROOT; };
-		F190513224CA1ACD003215D3 /* ModelFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = file; name = ModelFile.stencil; path = templates/ModelFile.stencil; sourceTree = SOURCE_ROOT; };
+		F190513124CA1ABF003215D3 /* IncludeSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; name = IncludeSnippet.stencil; path = templates/IncludeSnippet.stencil; sourceTree = SOURCE_ROOT; };
+		F190513224CA1ACD003215D3 /* ModelFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; name = ModelFile.stencil; path = templates/ModelFile.stencil; sourceTree = SOURCE_ROOT; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -533,7 +532,6 @@
 		OBJ_8 /* AutorestSwift */ = {
 			isa = PBXGroup;
 			children = (
-				F1319F8E24C8A7F0004DC2FF /* Generated */,
 				OBJ_9 /* Code Generator */,
 				OBJ_17 /* Models */,
 				0A22B04224C8967400EC018E /* Utils */,
