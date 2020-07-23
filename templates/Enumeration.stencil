@@ -1,6 +1,6 @@
 
 public enum {{ choice.language.default.name }}: {{ choice.choiceType.language.default.name }}, Codable {
 {% for aChoice in choice.choices %}
-    case {{ aChoice.value | lowercase }}
+    case {{ aChoice.value }}
 {% endfor %}
 }
