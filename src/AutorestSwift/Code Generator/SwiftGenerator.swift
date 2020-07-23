@@ -37,6 +37,8 @@ class SwiftGenerator: CodeGenerator {
     var allEnums: [String] = []
     var allStructs: [String] = []
 
+    lazy var logger = Logger(withName: "Autorest.Swift")
+
     // MARK: Initializers
 
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
@@ -85,6 +87,7 @@ class SwiftGenerator: CodeGenerator {
         )
 
         let modelUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Model.swift")
+        logger.log("model url=\(modelUrl)")
         try fileContent.write(to: modelUrl, atomically: true, encoding: .utf8)
     }
 }
