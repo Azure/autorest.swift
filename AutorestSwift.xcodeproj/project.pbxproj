@@ -26,13 +26,23 @@
 		0A22B03A24C8964000EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
 		0A22B03B24C8964000EC018E /* FileConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03624C8964000EC018E /* FileConvertible.swift */; };
 		0A22B03C24C8964000EC018E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03724C8964000EC018E /* Constants.swift */; };
-		0A22B03D24C8964000EC018E /* SnippetConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03824C8964000EC018E /* SnippetConvertible.swift */; };
 		0A22B04524C8967400EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04324C8967400EC018E /* Encodable+Extensions.swift */; };
 		0A22B04624C8967400EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04424C8967400EC018E /* URL+Extensions.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
-		F1319F9E24C947EE004DC2FF /* Header.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9A24C93E04004DC2FF /* Header.stencil */; };
-		F1319F9F24C947EE004DC2FF /* ChoiceSchema.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9824C92E04004DC2FF /* ChoiceSchema.stencil */; };
-		F1319FA024C947EE004DC2FF /* ObjectSchema.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9924C92E13004DC2FF /* ObjectSchema.stencil */; };
+		F1319F9E24C947EE004DC2FF /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9A24C93E04004DC2FF /* HeaderSnippet.stencil */; };
+		F1319F9F24C947EE004DC2FF /* Enumeration.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9824C92E04004DC2FF /* Enumeration.stencil */; };
+		F1319FA024C947EE004DC2FF /* Struct.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9924C92E13004DC2FF /* Struct.stencil */; };
+		F190512A24CA0E88003215D3 /* Stencilable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512924CA0E88003215D3 /* Stencilable.swift */; };
+		F190512B24CA0E88003215D3 /* Stencilable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512924CA0E88003215D3 /* Stencilable.swift */; };
+		F190512C24CA0E88003215D3 /* Stencilable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512924CA0E88003215D3 /* Stencilable.swift */; };
+		F190512E24CA10E8003215D3 /* StencilUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512D24CA10E8003215D3 /* StencilUtil.swift */; };
+		F190512F24CA10E8003215D3 /* StencilUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512D24CA10E8003215D3 /* StencilUtil.swift */; };
+		F190513024CA10E8003215D3 /* StencilUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190512D24CA10E8003215D3 /* StencilUtil.swift */; };
+		F190513324CA1BDA003215D3 /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F190513224CA1ACD003215D3 /* ModelFile.stencil */; };
+		F190513424CA1BDA003215D3 /* IncludeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F190513124CA1ABF003215D3 /* IncludeSnippet.stencil */; };
+		F190513624CA2203003215D3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190513524CA2202003215D3 /* test.swift */; };
+		F190513724CA2203003215D3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190513524CA2202003215D3 /* test.swift */; };
+		F190513824CA2203003215D3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F190513524CA2202003215D3 /* test.swift */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_133 /* CodeNamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CodeNamer.swift */; };
@@ -158,9 +168,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F1319F9E24C947EE004DC2FF /* Header.stencil in CopyFiles */,
-				F1319F9F24C947EE004DC2FF /* ChoiceSchema.stencil in CopyFiles */,
-				F1319FA024C947EE004DC2FF /* ObjectSchema.stencil in CopyFiles */,
+				F190513324CA1BDA003215D3 /* ModelFile.stencil in CopyFiles */,
+				F190513424CA1BDA003215D3 /* IncludeSnippet.stencil in CopyFiles */,
+				F1319F9E24C947EE004DC2FF /* HeaderSnippet.stencil in CopyFiles */,
+				F1319F9F24C947EE004DC2FF /* Enumeration.stencil in CopyFiles */,
+				F1319FA024C947EE004DC2FF /* Struct.stencil in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +195,6 @@
 		0A22B03524C8964000EC018E /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
 		0A22B03624C8964000EC018E /* FileConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileConvertible.swift; sourceTree = "<group>"; };
 		0A22B03724C8964000EC018E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		0A22B03824C8964000EC018E /* SnippetConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnippetConvertible.swift; sourceTree = "<group>"; };
 		0A22B04324C8967400EC018E /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		0A22B04424C8967400EC018E /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,9 +205,14 @@
 		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F1319F8E24C8A7F0004DC2FF /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Generated; sourceTree = "<group>"; };
-		F1319F9824C92E04004DC2FF /* ChoiceSchema.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChoiceSchema.stencil; path = ../templates/ChoiceSchema.stencil; sourceTree = "<group>"; };
-		F1319F9924C92E13004DC2FF /* ObjectSchema.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ObjectSchema.stencil; path = ../templates/ObjectSchema.stencil; sourceTree = "<group>"; };
-		F1319F9A24C93E04004DC2FF /* Header.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Header.stencil; path = ../templates/Header.stencil; sourceTree = "<group>"; };
+		F1319F9824C92E04004DC2FF /* Enumeration.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Enumeration.stencil; path = ../templates/Enumeration.stencil; sourceTree = "<group>"; };
+		F1319F9924C92E13004DC2FF /* Struct.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Struct.stencil; path = ../templates/Struct.stencil; sourceTree = "<group>"; };
+		F1319F9A24C93E04004DC2FF /* HeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HeaderSnippet.stencil; path = ../templates/HeaderSnippet.stencil; sourceTree = "<group>"; };
+		F190512924CA0E88003215D3 /* Stencilable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stencilable.swift; sourceTree = "<group>"; };
+		F190512D24CA10E8003215D3 /* StencilUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StencilUtil.swift; sourceTree = "<group>"; };
+		F190513124CA1ABF003215D3 /* IncludeSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = file; name = IncludeSnippet.stencil; path = templates/IncludeSnippet.stencil; sourceTree = SOURCE_ROOT; };
+		F190513224CA1ACD003215D3 /* ModelFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = file; name = ModelFile.stencil; path = templates/ModelFile.stencil; sourceTree = SOURCE_ROOT; };
+		F190513524CA2202003215D3 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -337,6 +353,7 @@
 			children = (
 				0A22B04324C8967400EC018E /* Encodable+Extensions.swift */,
 				0A22B04424C8967400EC018E /* URL+Extensions.swift */,
+				F190512D24CA10E8003215D3 /* StencilUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -364,9 +381,11 @@
 		F1319F9C24C9446C004DC2FF /* Template */ = {
 			isa = PBXGroup;
 			children = (
-				F1319F9A24C93E04004DC2FF /* Header.stencil */,
-				F1319F9824C92E04004DC2FF /* ChoiceSchema.stencil */,
-				F1319F9924C92E13004DC2FF /* ObjectSchema.stencil */,
+				F190513224CA1ACD003215D3 /* ModelFile.stencil */,
+				F190513124CA1ABF003215D3 /* IncludeSnippet.stencil */,
+				F1319F9A24C93E04004DC2FF /* HeaderSnippet.stencil */,
+				F1319F9824C92E04004DC2FF /* Enumeration.stencil */,
+				F1319F9924C92E13004DC2FF /* Struct.stencil */,
 			);
 			path = Template;
 			sourceTree = "<group>";
@@ -562,6 +581,7 @@
 		OBJ_9 /* Code Generator */ = {
 			isa = PBXGroup;
 			children = (
+				F190512924CA0E88003215D3 /* Stencilable.swift */,
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
 				OBJ_12 /* CodeNamer.swift */,
@@ -571,9 +591,9 @@
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
 				OBJ_13 /* Logger.swift */,
 				OBJ_14 /* Manager.swift */,
-				0A22B03824C8964000EC018E /* SnippetConvertible.swift */,
 				OBJ_15 /* SwiftGenerator.swift */,
 				OBJ_16 /* SwiftNamer.swift */,
+				F190513524CA2202003215D3 /* test.swift */,
 			);
 			path = "Code Generator";
 			sourceTree = "<group>";
@@ -642,6 +662,11 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"AutorestSwift::AutorestSwiftPackageTests::ProductTarget" = {
+						LastSwiftMigration = 1160;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "AutorestSwift" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -745,6 +770,7 @@
 				OBJ_141 /* BooleanSchema.swift in Sources */,
 				OBJ_142 /* ByteArraySchema.swift in Sources */,
 				OBJ_143 /* CharSchema.swift in Sources */,
+				F190513624CA2203003215D3 /* test.swift in Sources */,
 				OBJ_144 /* ChoiceSchema.swift in Sources */,
 				OBJ_145 /* CodeModel.swift in Sources */,
 				OBJ_146 /* ComplexSchema.swift in Sources */,
@@ -782,7 +808,6 @@
 				OBJ_176 /* SchemaUsage.swift in Sources */,
 				OBJ_177 /* SealedChoiceSchema.swift in Sources */,
 				OBJ_178 /* SealedConditionalSchema.swift in Sources */,
-				0A22B03D24C8964000EC018E /* SnippetConvertible.swift in Sources */,
 				OBJ_179 /* SerializationFormat.swift in Sources */,
 				OBJ_180 /* StringSchema.swift in Sources */,
 				OBJ_181 /* TimeSchema.swift in Sources */,
@@ -793,6 +818,7 @@
 				OBJ_186 /* ValueSchema.swift in Sources */,
 				OBJ_187 /* XmlSerializationFormat.swift in Sources */,
 				OBJ_188 /* XorSchema.swift in Sources */,
+				F190512E24CA10E8003215D3 /* StencilUtil.swift in Sources */,
 				OBJ_189 /* AllSchemaTypes.swift in Sources */,
 				OBJ_190 /* CompoundSchemaTypes.swift in Sources */,
 				OBJ_191 /* HttpMethod.swift in Sources */,
@@ -832,6 +858,7 @@
 				OBJ_222 /* Schemas.swift in Sources */,
 				OBJ_223 /* Security.swift in Sources */,
 				OBJ_224 /* SecurityRequirement.swift in Sources */,
+				F190512A24CA0E88003215D3 /* Stencilable.swift in Sources */,
 				0A22B04624C8967400EC018E /* URL+Extensions.swift in Sources */,
 				OBJ_225 /* SerializationFormats.swift in Sources */,
 				OBJ_226 /* main.swift in Sources */,
@@ -842,6 +869,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				F190512B24CA0E88003215D3 /* Stencilable.swift in Sources */,
+				F190513724CA2203003215D3 /* test.swift in Sources */,
+				F190512F24CA10E8003215D3 /* StencilUtil.swift in Sources */,
 				OBJ_233 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -850,8 +880,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				F190513024CA10E8003215D3 /* StencilUtil.swift in Sources */,
 				OBJ_244 /* AutorestSwiftTests.swift in Sources */,
 				OBJ_245 /* XCTestManifests.swift in Sources */,
+				F190513824CA2203003215D3 /* test.swift in Sources */,
+				F190512C24CA0E88003215D3 /* Stencilable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,7 +908,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_ASSET_PATHS = "templates/Header.stencil templates/ObjectSchema.stencil templates/ChoiceSchema.stencil";
+				DEVELOPMENT_ASSET_PATHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -903,7 +936,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_ASSET_PATHS = "templates/Header.stencil templates/ObjectSchema.stencil templates/ChoiceSchema.stencil";
+				DEVELOPMENT_ASSET_PATHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -948,12 +981,19 @@
 		OBJ_236 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		OBJ_237 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

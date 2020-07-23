@@ -58,19 +58,27 @@ public class ChoiceSchema: ValueSchema {
     }
 }
 
-extension ChoiceSchema: SnippetConvertible {
-    func toSnippet() -> String {
-        let name = self.name
-        let comment = description
-        var string = ""
-        if comment != "" {
-            string += "/// \(comment)\n"
-        }
-        string = "public enum \(name): Strings, Codable {\n"
-        for choice in choices {
-            string += "\t" + choice.toSnippet()
-        }
-        string += "}\n\n"
-        return string
+extension ChoiceSchema: Stencilable {
+    func generateSnippet() throws -> String {
+        return try renderTemplate(filename: "Enumeration.stencil", dictionary: ["choice": self])
     }
 }
+
+/*
+ extension ChoiceSchema: SnippetConvertible {
+     func toSnippet() -> String {
+         let name = self.name
+         let comment = description
+         var string = ""
+         if comment != "" {
+             string += "/// \(comment)\n"
+         }
+         string = "public enum \(name): Strings, Codable {\n"
+         for choice in choices {
+             string += "\t" + choice.toSnippet()
+         }
+         string += "}\n\n"
+         return string
+     }
+ }
+ */

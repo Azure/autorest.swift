@@ -1,8 +1,11 @@
-{% include "Header.stencil" %}
+{% include "HeaderSnippet.stencil" %}
+{% include "IncludeSnippet.stencil" %}
 
-public struct {{ object.language.default.name }} {
-    {% for property in object.properties %}
-    /* {{ property.language.default.description }} */
-    public let {{ property.language.default.name | lowercase }} : {{ String(property.schema.type) }}
-    {% endfor %}
-}
+{% for enum in allEnums %}
+{{enum}}
+{% endfor %}
+
+{% for struct in allStructs %}
+{{struct}}
+{% endfor %}
+

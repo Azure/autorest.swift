@@ -27,5 +27,5 @@
 import Foundation
 
 protocol Stencilable {
-    func generateTemplate() -> String
+    func generateSnippet() throws -> String
 }

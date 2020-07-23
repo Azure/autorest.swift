@@ -53,19 +53,27 @@ public class SealedChoiceSchema: ValueSchema {
     }
 }
 
-extension SealedChoiceSchema: SnippetConvertible {
-    func toSnippet() -> String {
-        let name = self.name
-        let comment = description
-        var string = ""
-        if comment != "" {
-            string += "/// \(comment)\n"
-        }
-        string = "public enum \(name): \(type), Codable {\n"
-        for choice in choices {
-            string += "\t" + choice.toSnippet()
-        }
-        string += "}\n\n"
-        return string
+extension SealedChoiceSchema: Stencilable {
+    func generateSnippet() throws -> String {
+        return try renderTemplate(filename: "Enumeration.stencil", dictionary: ["choice": self])
     }
 }
+
+/*
+ extension SealedChoiceSchema: SnippetConvertible {
+     func toSnippet() -> String {
+         let name = self.name
+         let comment = description
+         var string = ""
+         if comment != "" {
+             string += "/// \(comment)\n"
+         }
+         string = "public enum \(name): \(type), Codable {\n"
+         for choice in choices {
+             string += "\t" + choice.toSnippet()
+         }
+         string += "}\n\n"
+         return string
+     }
+ }
+ */

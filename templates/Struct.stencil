@@ -1,5 +1,3 @@
-{% include "Header.stencil" %}
-
 public struct {{ object.language.default.name }} {
     {% for property in object.properties %}
     /* {{ property.language.default.description }} */
