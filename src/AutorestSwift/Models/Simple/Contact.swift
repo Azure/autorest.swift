@@ -38,7 +38,7 @@ public class Contact: Codable {
     public let email: String?
 
     /// additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case name, url, email, extensions
@@ -49,7 +49,7 @@ public class Contact: Codable {
         name = try? container.decode(String?.self, forKey: .name)
         url = try? container.decode(String?.self, forKey: .url)
         email = try? container.decode(String?.self, forKey: .email)
-        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
+        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

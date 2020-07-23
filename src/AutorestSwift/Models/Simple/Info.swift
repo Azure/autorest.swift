@@ -47,5 +47,5 @@ public class Info: Codable {
     public let externalDocs: ExternalDocumentation?
 
     /// additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 }

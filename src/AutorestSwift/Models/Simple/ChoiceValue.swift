@@ -42,7 +42,7 @@ public class ChoiceValue: Codable, LanguageShortcut {
     public let value: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case language, value, extensions
@@ -52,7 +52,7 @@ public class ChoiceValue: Codable, LanguageShortcut {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         language = try container.decode(Languages.self, forKey: .language)
         value = try container.decode(String.self, forKey: .value)
-        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
+        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -29,7 +29,7 @@ import Foundation
 public class HttpHeader: Codable {
     public let header: String
     public let schema: Schema
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case header, schema, extensions
@@ -39,7 +39,7 @@ public class HttpHeader: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         header = try container.decode(String.self, forKey: .header)
         schema = try container.decode(Schema.self, forKey: .schema)
-        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
+        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

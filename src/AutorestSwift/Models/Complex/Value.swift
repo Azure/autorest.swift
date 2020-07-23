@@ -64,6 +64,6 @@ public class Value: Codable, LanguageShortcut {
     /// Per-protocol information for this aspect
     public let `protocol`: Protocols
 
-    /// Additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    /// additional metadata extensions dictionary
+    public let extensions: AnyCodable?
 }
