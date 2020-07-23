@@ -1,0 +1,12 @@
+jobs:
+  - job: CI
+
+    pool:
+      vmImage: 'macOS-10.15'
+
+    steps:
+      - script: sudo xcode-select --switch /Applications/Xcode_11.5.app
+        displayName: 'Use Xcode 11.5'
+
+      - script: swift build
+        displayName: 'Build'
