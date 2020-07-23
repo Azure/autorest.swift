@@ -30,7 +30,6 @@
 		0A22B04524C8967400EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04324C8967400EC018E /* Encodable+Extensions.swift */; };
 		0A22B04624C8967400EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B04424C8967400EC018E /* URL+Extensions.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
-		F1319F9324C8E35D004DC2FF /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1319F9224C8E35D004DC2FF /* test.swift */; };
 		F1319F9E24C947EE004DC2FF /* Header.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9A24C93E04004DC2FF /* Header.stencil */; };
 		F1319F9F24C947EE004DC2FF /* ChoiceSchema.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9824C92E04004DC2FF /* ChoiceSchema.stencil */; };
 		F1319FA024C947EE004DC2FF /* ObjectSchema.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1319F9924C92E13004DC2FF /* ObjectSchema.stencil */; };
@@ -195,7 +194,6 @@
 		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F1319F8E24C8A7F0004DC2FF /* Generated */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Generated; sourceTree = "<group>"; };
-		F1319F9224C8E35D004DC2FF /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		F1319F9824C92E04004DC2FF /* ChoiceSchema.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChoiceSchema.stencil; path = ../templates/ChoiceSchema.stencil; sourceTree = "<group>"; };
 		F1319F9924C92E13004DC2FF /* ObjectSchema.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ObjectSchema.stencil; path = ../templates/ObjectSchema.stencil; sourceTree = "<group>"; };
 		F1319F9A24C93E04004DC2FF /* Header.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Header.stencil; path = ../templates/Header.stencil; sourceTree = "<group>"; };
@@ -576,7 +574,6 @@
 				0A22B03824C8964000EC018E /* SnippetConvertible.swift */,
 				OBJ_15 /* SwiftGenerator.swift */,
 				OBJ_16 /* SwiftNamer.swift */,
-				F1319F9224C8E35D004DC2FF /* test.swift */,
 			);
 			path = "Code Generator";
 			sourceTree = "<group>";
@@ -764,7 +761,6 @@
 				OBJ_157 /* HttpModel.swift in Sources */,
 				OBJ_158 /* HttpParameter.swift in Sources */,
 				OBJ_159 /* HttpRequest.swift in Sources */,
-				F1319F9324C8E35D004DC2FF /* test.swift in Sources */,
 				OBJ_160 /* HttpResponse.swift in Sources */,
 				OBJ_161 /* HttpWithBodyRequest.swift in Sources */,
 				OBJ_162 /* Metadata.swift in Sources */,
