@@ -26,28 +26,30 @@
 
 import Foundation
 
-enum FileDestination {
-    case root
-    case tests
-    case source
-    case models
-    case operations
-    case options
+struct ReadmeUrls {
+    let source: String
+    let api: String
+    let product: String
+    let samples: String
+    let impressions: String
+}
 
-    func url(forBaseUrl baseUrl: URL) -> URL {
-        switch self {
-        case .root:
-            return baseUrl
-        case .tests:
-            return baseUrl.appendingPathComponent("Tests")
-        case .source:
-            return baseUrl.appendingPathComponent("Source")
-        case .models:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Models")
-        case .operations:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Operations")
-        case .options:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Options")
-        }
+struct ReadmeViewModel {
+    let title: String
+    let description: String
+    let extendedDescription: String
+    let urls: ReadmeUrls
+
+    init(from model: CodeModel) {
+        self.title = model.info.title
+        self.description = model.info.description ?? ""
+        self.extendedDescription = "TODO: Where?"
+        self.urls = ReadmeUrls(
+            source: "TODO: Find source URL",
+            api: "TODO: Find API docs URL",
+            product: "TODO: Find product documenation URL",
+            samples: "TODO: Find samples URL",
+            impressions: "TODO: Find impressions URL"
+        )
     }
 }
