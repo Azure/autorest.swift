@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a choice of several values (ie, an 'enum')
-public class ChoiceSchema: ValueSchema {
+public class ChoiceSchema: ValueSchema, EnumerableSchema {
     /// the primitive type for the choices
     public let choiceType: PrimitiveSchema
 
@@ -42,10 +42,8 @@ public class ChoiceSchema: ValueSchema {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
         choiceType = try container.decode(PrimitiveSchema.self, forKey: .choiceType)
         choices = try container.decode([ChoiceValue].self, forKey: .choices)
-
         try super.init(from: decoder)
     }
 
@@ -53,16 +51,6 @@ public class ChoiceSchema: ValueSchema {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(choiceType, forKey: .choiceType)
         try container.encode(choices, forKey: .choices)
-
         try super.encode(to: encoder)
-    }
-}
-
-extension ChoiceSchema: Stencilable {
-    func generateSnippet() throws -> String {
-        return try renderTemplate(
-            filename: "Enumeration.stencil",
-            dictionary: ["choice": self, "choiceName": name, "choiceTypeName": choiceType.name]
-        )
     }
 }

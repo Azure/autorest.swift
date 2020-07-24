@@ -26,26 +26,29 @@
 
 import Foundation
 
-public class HttpHeader: Codable {
-    public let header: String
-    public let schema: Schema
-    public let extensions: AnyCodable?
+// formatted version of comment
+struct ViewModelComment: CustomStringConvertible {
+    var description: String
 
-    enum CodingKeys: String, CodingKey {
-        case header, schema, extensions
+    init(from descVal: String?) {
+        self.description = ""
+        guard let desc = descVal else { return }
+        guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
+
+        // ensure multi-line comments are each commented
+        let lines = desc.split(whereSeparator: \.isNewline).map { "/// \($0)" }
+        description = lines.joined(separator: "\n")
     }
+}
 
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        header = try container.decode(String.self, forKey: .header)
-        schema = try container.decode(Schema.self, forKey: .schema)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
-    }
+// formatted version of a default value
+struct ViewModelDefault: CustomStringConvertible {
+    var description: String
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(header, forKey: .header)
-        try container.encode(schema, forKey: .schema)
-        try container.encode(extensions, forKey: .extensions)
+    init(from defaultValue: String?, isString: Bool) {
+        self.description = ""
+        guard let val = defaultValue else { return }
+        guard val.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
+        self.description = isString ? " = \"\(val)\"" : " = \(val)"
     }
 }

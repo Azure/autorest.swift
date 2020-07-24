@@ -87,9 +87,3 @@ public class ObjectSchema: ComplexSchema {
         try super.encode(to: encoder)
     }
 }
-
-extension ObjectSchema: Stencilable {
-    func generateSnippet() throws -> String {
-        return try renderTemplate(filename: "Struct.stencil", dictionary: ["object": self, "objectName": name])
-    }
-}

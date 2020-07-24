@@ -1,5 +1,0 @@
-public enum {{ choiceName }}: {{ choiceTypeName }}, Codable {
-{% for aChoice in choice.choices %}
-    case {{ aChoice.value }}
-{% endfor %}
-}

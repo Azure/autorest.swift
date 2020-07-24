@@ -26,6 +26,9 @@
 
 import Foundation
 
-protocol Stencilable {
-    func generateSnippet() throws -> String
+// Simple protocol to denote common interface between
+// ChoiceSchema and SealedChoiceSchema
+protocol EnumerableSchema: LanguageShortcut {
+    var choiceType: PrimitiveSchema { get }
+    var choices: [ChoiceValue] { get }
 }

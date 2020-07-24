@@ -34,7 +34,7 @@ public class ExternalDocumentation: Codable {
     public let url: String
 
     /// Additional metadata extensions dictionary
-    public let extensions: [String: Bool]?
+    public let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case description, url, extensions
@@ -44,7 +44,7 @@ public class ExternalDocumentation: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         description = try? container.decode(String?.self, forKey: .description)
         url = try container.decode(String.self, forKey: .url)
-        extensions = try? container.decode([String: Bool].self, forKey: .extensions)
+        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

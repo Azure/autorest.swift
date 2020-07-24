@@ -26,26 +26,36 @@
 
 import Foundation
 
-public class HttpHeader: Codable {
-    public let header: String
-    public let schema: Schema
-    public let extensions: AnyCodable?
+struct PropertyViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let type: String
+    let optional: Bool
+    let defaultValue: ViewModelDefault
 
-    enum CodingKeys: String, CodingKey {
-        case header, schema, extensions
+    init(from schema: Property) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+        self.type = schema.schema.name
+        self.optional = schema.required ?? true
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
+}
 
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        header = try container.decode(String.self, forKey: .header)
-        schema = try container.decode(Schema.self, forKey: .schema)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
-    }
+struct ObjectViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let objectType = "struct"
+    let properties: [PropertyViewModel]
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(header, forKey: .header)
-        try container.encode(schema, forKey: .schema)
-        try container.encode(extensions, forKey: .extensions)
+    init(from schema: ObjectSchema) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+
+        var props = [PropertyViewModel]()
+        for property in schema.properties ?? [] {
+            props.append(PropertyViewModel(from: property))
+        }
+        self.properties = props
     }
 }

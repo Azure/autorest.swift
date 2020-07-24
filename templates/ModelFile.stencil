@@ -1,11 +1,11 @@
 {% include "HeaderSnippet.stencil" %}
-{% include "IncludeSnippet.stencil" %}
 
-{% for enum in allEnums %}
-{{enum}}
-{% endfor %}
+{% include "ImportSnippet.stencil" %}
 
-{% for struct in allStructs %}
-{{struct}}
-{% endfor %}
-
+{{ model.comment }}
+public {{ model.objectType }} {{ model.name }} {
+    {% for property in model.properties %}
+    {{ property.comment }}
+    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
+    {% endfor %}
+}

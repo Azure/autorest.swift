@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a choice of several values (ie, an 'enum')
-public class SealedChoiceSchema: ValueSchema {
+public class SealedChoiceSchema: ValueSchema, EnumerableSchema {
     /// the primitive type for the choices
     public let choiceType: PrimitiveSchema
 
@@ -50,11 +50,5 @@ public class SealedChoiceSchema: ValueSchema {
         try container.encode(choiceType, forKey: .choiceType)
         try container.encode(choices, forKey: .choices)
         try super.encode(to: encoder)
-    }
-}
-
-extension SealedChoiceSchema: Stencilable {
-    func generateSnippet() throws -> String {
-        return try renderTemplate(filename: "Enumeration.stencil", dictionary: ["choice": self])
     }
 }
