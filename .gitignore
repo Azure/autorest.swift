@@ -298,3 +298,4 @@ src/obj/
 *.log
 IDEFindNavigatorScopes.plist
 .swiftpm/xcode/xcuserdata/travisprescott.xcuserdatad
+AutorestSwift.xcworkspace/xcuserdata/travisprescott.xcuserdatad

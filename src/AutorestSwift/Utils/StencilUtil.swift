@@ -26,46 +26,11 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+import Stencil
 
-    // these properties we can set
-    private var _swift: Language?
+public func renderTemplate(filename: String, dictionary: [String: Any]) throws -> String {
+    let fsLoader = FileSystemLoader(bundle: [Bundle.main])
+    let environment = Environment(loader: fsLoader)
 
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
-            return _swift!
-        }
-        set {
-            _swift = newValue
-        }
-    }
-
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
-    }
+    return try environment.renderTemplate(name: filename, context: dictionary)
 }

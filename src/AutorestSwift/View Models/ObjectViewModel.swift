@@ -26,46 +26,36 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+struct PropertyViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let type: String
+    let optional: Bool
+    let defaultValue: ViewModelDefault
 
-    // these properties we can set
-    private var _swift: Language?
+    init(from schema: Property) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+        self.type = schema.schema.name
+        self.optional = schema.required ?? true
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
+    }
+}
 
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
-            return _swift!
+struct ObjectViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let objectType = "struct"
+    let properties: [PropertyViewModel]
+
+    init(from schema: ObjectSchema) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+
+        var props = [PropertyViewModel]()
+        for property in schema.properties ?? [] {
+            props.append(PropertyViewModel(from: property))
         }
-        set {
-            _swift = newValue
-        }
-    }
-
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
+        self.properties = props
     }
 }

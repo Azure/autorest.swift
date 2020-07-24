@@ -27,9 +27,9 @@
 import Foundation
 
 /// an individual value in a ConditionalSchema
-public class ConditionalValue: Codable {
+public class ConditionalValue: Codable, LanguageShortcut {
     /// per-language information for this value
-    public let language: Language
+    public var language: Languages
 
     /// the actual value
     // TODO: Resolve issue with enum
@@ -48,7 +48,7 @@ public class ConditionalValue: Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        language = try container.decode(Language.self, forKey: .language)
+        language = try container.decode(Languages.self, forKey: .language)
         target = try container.decode(String.self, forKey: .target)
         source = try container.decode(String.self, forKey: .source)
         extensions = try? container.decode(AnyCodable.self, forKey: .extensions)

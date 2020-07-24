@@ -27,7 +27,7 @@
 import Foundation
 
 /// Common base interface for properties, parameters and the like.
-public class Value: Codable {
+public class Value: Codable, LanguageShortcut {
     /// the schema of this Value
     public var schema: Schema
 
@@ -59,7 +59,7 @@ public class Value: Codable {
     public let externalDocs: ExternalDocumentation?
 
     /// Per-language information for this aspect
-    public let language: Languages
+    public var language: Languages
 
     /// Per-protocol information for this aspect
     public let `protocol`: Protocols

@@ -26,46 +26,22 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+extension URL {
+    func ensureExists() throws {
+        let fileManager = FileManager.default
 
-    // these properties we can set
-    private var _swift: Language?
-
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
+        if let existing = try? resourceValues(forKeys: [.isDirectoryKey]) {
+            if !existing.isDirectory! {
+                let err = "Path exists but is not a folder!"
+                fatalError(err)
             }
-            return _swift!
+        } else {
+            // Path does not exist so let us create it
+            try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        set {
-            _swift = newValue
-        }
     }
 
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
+    func with(subfolder: FileDestination) -> URL {
+        return subfolder.url(forBaseUrl: self)
     }
 }

@@ -26,46 +26,25 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+enum FileDestination {
+    case tests
+    case root
+    case models
+    case operations
+    case options
 
-    // these properties we can set
-    private var _swift: Language?
-
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
-            return _swift!
+    func url(forBaseUrl baseUrl: URL) -> URL {
+        switch self {
+        case .tests:
+            return baseUrl.appendingPathComponent("Tests")
+        case .root:
+            return baseUrl.appendingPathComponent("Source")
+        case .models:
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Models")
+        case .operations:
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Operations")
+        case .options:
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Options")
         }
-        set {
-            _swift = newValue
-        }
-    }
-
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
     }
 }

@@ -1,0 +1,11 @@
+{% include "HeaderSnippet.stencil" %}
+
+{% include "ImportSnippet.stencil" %}
+
+{{ model.comment }}
+public {{ model.objectType }} {{ model.name }} {
+    {% for property in model.properties %}
+    {{ property.comment }}
+    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
+    {% endfor %}
+}

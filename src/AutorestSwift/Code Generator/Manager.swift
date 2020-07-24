@@ -39,7 +39,7 @@ class Manager {
 
     let destinationRootUrl: URL
 
-    lazy var logger = Logger(withName: "Autorest.Swift")
+    lazy var logger = Logger(withName: "Autorest.Swift.Manager")
 
     // MARK: Initializers
 
@@ -47,7 +47,11 @@ class Manager {
         self.inputUrl = input
         // TODO: Make this configurable
         self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
-        ensureExists(folder: destinationRootUrl)
+        do {
+            try destinationRootUrl.ensureExists()
+        } catch {
+            logger.log(error.localizedDescription, level: .error)
+        }
     }
 
     // MARK: Methods
@@ -59,8 +63,13 @@ class Manager {
         let namer = SwiftNamer(withModel: model)
         try namer.process()
 
+        // Create folder structure
+        let packageName = model.name
+        let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
+        try packageUrl.ensureExists()
+
         // Generate Swift code files
-        let generator = SwiftGenerator(withModel: model)
+        let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
     }
 
@@ -115,6 +124,8 @@ class Manager {
         if beforeJsonString != afterJsonString {
             let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
             let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
+            logger.log("before.json url=\(beforeJsonUrl)")
+            logger.log("after.json url=\(afterJsonUrl)")
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)
@@ -132,25 +143,6 @@ class Manager {
             logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
         } else {
             logger.log("Model file check: OK", level: .info)
-        }
-    }
-
-    private func ensureExists(folder: URL) {
-        let fileManager = FileManager.default
-
-        if let existing = try? folder.resourceValues(forKeys: [.isDirectoryKey]) {
-            if !existing.isDirectory! {
-                let err = "Path exists but is not a folder!"
-                logger.log(err, level: .error)
-                fatalError(err)
-            }
-        } else {
-            // Path does not exist so let us create it
-            do {
-                try fileManager.createDirectory(atPath: folder.path, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                logger.log(error.localizedDescription, level: .error)
-            }
         }
     }
 }

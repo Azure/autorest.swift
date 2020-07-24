@@ -26,46 +26,48 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+struct EnumerationChoiceViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let value: String
 
-    // these properties we can set
-    private var _swift: Language?
+    init(from schema: ChoiceValue) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+        self.value = schema.value
+    }
+}
 
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
-            return _swift!
+struct EnumerationViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let type: String
+    let choices: [EnumerationChoiceViewModel]
+
+    init(from schema: EnumerableSchema) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+        self.type = schema.choiceType.name
+
+        var items = [EnumerationChoiceViewModel]()
+        for choice in schema.choices {
+            items.append(EnumerationChoiceViewModel(from: choice))
         }
-        set {
-            _swift = newValue
+        self.choices = items
+    }
+}
+
+struct EnumerationFileViewModel {
+    let enums: [EnumerationViewModel]
+
+    init(from schema: Schemas) {
+        var items = [EnumerationViewModel]()
+        for choice in schema.choices ?? [] {
+            items.append(EnumerationViewModel(from: choice))
         }
-    }
-
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
+        for choice in schema.sealedChoices ?? [] {
+            items.append(EnumerationViewModel(from: choice))
+        }
+        self.enums = items
     }
 }

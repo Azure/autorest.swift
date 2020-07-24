@@ -26,46 +26,29 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+// formatted version of comment
+struct ViewModelComment: CustomStringConvertible {
+    var description: String
 
-    // these properties we can set
-    private var _swift: Language?
+    init(from descVal: String?) {
+        self.description = ""
+        guard let desc = descVal else { return }
+        guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
 
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
-            }
-            return _swift!
-        }
-        set {
-            _swift = newValue
-        }
+        // ensure multi-line comments are each commented
+        let lines = desc.split(whereSeparator: \.isNewline).map { "/// \($0)" }
+        description = lines.joined(separator: "\n")
     }
+}
 
-    public var objectiveC: Language?
+// formatted version of a default value
+struct ViewModelDefault: CustomStringConvertible {
+    var description: String
 
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
+    init(from defaultValue: String?, isString: Bool) {
+        self.description = ""
+        guard let val = defaultValue else { return }
+        guard val.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
+        self.description = isString ? " = \"\(val)\"" : " = \(val)"
     }
 }

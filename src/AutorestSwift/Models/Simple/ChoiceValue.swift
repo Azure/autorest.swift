@@ -33,9 +33,9 @@ import Foundation
 // }
 
 /// an individual choice in a ChoiceSchema
-public class ChoiceValue: Codable {
+public class ChoiceValue: Codable, LanguageShortcut {
     /// per-language information for this value
-    public let language: Languages
+    public var language: Languages
 
     /// the actual value
     // TODO: Resolve question about enum

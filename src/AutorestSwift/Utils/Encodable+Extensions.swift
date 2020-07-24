@@ -26,46 +26,14 @@
 
 import Foundation
 
-/// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
-
-    // these properties we can set
-    private var _swift: Language?
-
-    public var swift: Language {
-        get {
-            if _swift == nil {
-                _swift = Language(from: `default`)
+extension Encodable {
+    func prettyPrint() {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        if let jsonData = try? encoder.encode(self) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
             }
-            return _swift!
         }
-        set {
-            _swift = newValue
-        }
-    }
-
-    public var objectiveC: Language?
-
-    // MARK: Codable
-
-    enum CodingKeys: String, CodingKey {
-        case `default`
-        case codeSwift = "swift"
-        case objectiveC
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        `default` = try container.decode(Language.self, forKey: .default)
-        objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(`default`, forKey: .default)
-        if objectiveC != nil { try container.encode(objectiveC, forKey: .objectiveC) }
     }
 }

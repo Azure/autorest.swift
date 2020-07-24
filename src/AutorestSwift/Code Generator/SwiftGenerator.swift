@@ -32,10 +32,15 @@ class SwiftGenerator: CodeGenerator {
 
     let model: CodeModel
 
+    let baseUrl: URL
+
+    lazy var logger = Logger(withName: "Autorest.Swift.Generator")
+
     // MARK: Initializers
 
-    init(withModel model: CodeModel) {
+    init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
         self.model = model
+        self.baseUrl = baseUrl
     }
 
     // MARK: Methods
@@ -43,5 +48,45 @@ class SwiftGenerator: CodeGenerator {
     /// Begin code generation process
     func generate() throws {
         // TODO: Begin code generation process
+        try generateSchemas()
+    }
+
+    private func generateSchemas() throws {
+        let modelUrl = baseUrl.with(subfolder: .models)
+        try modelUrl.ensureExists()
+        logger.log("Models: \(modelUrl)")
+
+        // Create Enumerations.swift file
+        let enumViewModel = EnumerationFileViewModel(from: model.schemas)
+        try render(
+            template: "EnumerationFile",
+            toSubfolder: .models,
+            withFilename: "Enumerations",
+            andParams: ["models": enumViewModel]
+        )
+
+        // Create model files
+        for object in model.schemas.objects ?? [] {
+            let structViewModel = ObjectViewModel(from: object)
+            try render(
+                template: "ModelFile",
+                toSubfolder: .models,
+                withFilename: object.name,
+                andParams: ["model": structViewModel]
+            )
+        }
+    }
+
+    private func render(
+        template: String,
+        toSubfolder subfolder: FileDestination,
+        withFilename filename: String,
+        andParams params: [String: Any]
+    ) throws {
+        let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
+        let fileContent = try renderTemplate(filename: tname, dictionary: params)
+        let fname = filename.lowercased().hasSuffix(".swift") ? filename : "\(filename).swift"
+        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
+        try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 }
