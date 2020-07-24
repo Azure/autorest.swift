@@ -1,0 +1,31 @@
+{
+  "name": "@autorest/swift",
+  "version": "0.1.0",
+  "description": "AutoRest generator extension for the Swift programming language.",
+  "scripts": {
+    "start": "swift run AutorestSwift",
+    "install": "swift build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest.swift/"
+  },
+  "readme": "https://github.com/Azure/autorest.swift/blob/master/README.md",
+  "keywords": [
+    "autorest",
+    "swift"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.swift/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest.swift/blob/master/README.md",
+  "dependencies": {
+    "@azure-tools/extension": "^3.0.249"
+  },
+  "devDependencies": {
+    "@autorest/autorest": "^3.0.0",
+    "@microsoft.azure/autorest.testserver": "2.10.54"
+  }
+}
