@@ -3,15 +3,15 @@
 {% include "ImportSnippet.stencil" %}
 
 {{ model.comment }}
-public final class {{ model.clientName }}: PipelineClient {
+public final class {{ model.name }}: PipelineClient {
 {% for group in model.operationGroups %}
     // MARK: {{ group.name }}
     {% for op in group.operations %}
     {{ op.comment }}
     public func {{ op.name }}(
         {% for param in op.params %}
-        {{ param.name }}: {{ param.type }}{{ param.default }},
-        {% endfor }
+        {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
+        {% endfor %}
         completionHandler: @escaping HTTPResultHandler<{{ op.returnType }}>
     ) {
         // Construct URL
@@ -93,6 +93,6 @@ public final class {{ model.clientName }}: PipelineClient {
             }
         }
     }
-    {% endfor }
-{% endfor }
+    {% endfor %}
+{% endfor %}
 }
