@@ -78,9 +78,18 @@ class SwiftGenerator: CodeGenerator {
 
         // Create client file
         let clientViewModel = ServiceClientViewModel(from: model)
-        try render(template: "ServiceClientFile", toSubfolder: .root, withFilename: clientViewModel.name, andParams: [
+        try render(template: "ServiceClientFile", toSubfolder: .source, withFilename: clientViewModel.name, andParams: [
             "model": clientViewModel
         ])
+
+        // Create README.md file
+        let readmeViewModel = ReadmeViewModel(from: model)
+        try render(
+            template: "README",
+            toSubfolder: .root,
+            withFilename: "README.md",
+            andParams: ["model": readmeViewModel]
+        )
     }
 
     private func render(
@@ -91,7 +100,7 @@ class SwiftGenerator: CodeGenerator {
     ) throws {
         let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
         let fileContent = try renderTemplate(filename: tname, dictionary: params)
-        let fname = filename.lowercased().hasSuffix(".swift") ? filename : "\(filename).swift"
+        let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
         let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
