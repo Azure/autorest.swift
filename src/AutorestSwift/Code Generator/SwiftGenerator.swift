@@ -54,7 +54,7 @@ class SwiftGenerator: CodeGenerator {
     private func generateSchemas() throws {
         let modelUrl = baseUrl.with(subfolder: .models)
         try modelUrl.ensureExists()
-        logger.log("Models: \(modelUrl)")
+        logger.log("Base URL: \(baseUrl.path)")
 
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)
@@ -75,6 +75,12 @@ class SwiftGenerator: CodeGenerator {
                 andParams: ["model": structViewModel]
             )
         }
+
+        // Create client file
+        let clientViewModel = ServiceClientViewModel(from: model)
+        try render(template: "ServiceClientFile", toSubfolder: .root, withFilename: clientViewModel.name, andParams: [
+            "model": clientViewModel
+        ])
     }
 
     private func render(

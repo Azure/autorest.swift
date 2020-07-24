@@ -34,7 +34,7 @@ struct PropertyViewModel {
     let defaultValue: ViewModelDefault
 
     init(from schema: Property) {
-        self.name = schema.name
+        self.name = schema.name.toCamelCase
         self.comment = ViewModelComment(from: schema.description)
         self.type = schema.schema.name
         self.optional = schema.required ?? true
@@ -49,7 +49,7 @@ struct ObjectViewModel {
     let properties: [PropertyViewModel]
 
     init(from schema: ObjectSchema) {
-        self.name = schema.name
+        self.name = schema.name.toPascalCase
         self.comment = ViewModelComment(from: schema.description)
 
         var props = [PropertyViewModel]()

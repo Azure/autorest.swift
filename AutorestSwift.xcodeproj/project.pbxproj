@@ -40,14 +40,13 @@
 		0A22B08524CB738900EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
 		0A22B08624CB738900EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
 		0A22B08724CB738900EC018E /* EnumerationFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* EnumerationFile.stencil */; };
+		0A22B08924CB783F00EC018E /* ServiceClientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientViewModel.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
-		OBJ_133 /* CodeNamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CodeNamer.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
 		OBJ_135 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Manager.swift */; };
 		OBJ_136 /* SwiftGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* SwiftGenerator.swift */; };
-		OBJ_137 /* SwiftNamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* SwiftNamer.swift */; };
 		OBJ_138 /* AnySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* AnySchema.swift */; };
 		OBJ_139 /* ArraySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ArraySchema.swift */; };
 		OBJ_140 /* BinarySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* BinarySchema.swift */; };
@@ -209,6 +208,7 @@
 		0A22B07924CB721900EC018E /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		0A22B07B24CB721900EC018E /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		0A22B08824CB783F00EC018E /* ServiceClientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientViewModel.swift; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,7 +233,6 @@
 		OBJ_113 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_117 /* misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = misc; sourceTree = SOURCE_ROOT; };
 		OBJ_118 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = SOURCE_ROOT; };
-		OBJ_12 /* CodeNamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNamer.swift; sourceTree = "<group>"; };
 		OBJ_120 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = SOURCE_ROOT; };
 		OBJ_122 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		OBJ_124 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -241,7 +240,6 @@
 		OBJ_13 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		OBJ_15 /* SwiftGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenerator.swift; sourceTree = "<group>"; };
-		OBJ_16 /* SwiftNamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNamer.swift; sourceTree = "<group>"; };
 		OBJ_19 /* AnySchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySchema.swift; sourceTree = "<group>"; };
 		OBJ_20 /* ArraySchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArraySchema.swift; sourceTree = "<group>"; };
 		OBJ_21 /* BinarySchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySchema.swift; sourceTree = "<group>"; };
@@ -355,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */,
+				0A22B08824CB783F00EC018E /* ServiceClientViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
 				0A22B06324CA58AF00EC018E /* ObjectViewModel.swift */,
 			);
@@ -600,14 +599,12 @@
 			children = (
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
-				OBJ_12 /* CodeNamer.swift */,
 				0A22B03724C8964000EC018E /* Constants.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
 				OBJ_13 /* Logger.swift */,
 				OBJ_14 /* Manager.swift */,
 				OBJ_15 /* SwiftGenerator.swift */,
-				OBJ_16 /* SwiftNamer.swift */,
 			);
 			path = "Code Generator";
 			sourceTree = "<group>";
@@ -774,11 +771,9 @@
 				0A22B08024CB734600EC018E /* FileDestination.swift in Sources */,
 				OBJ_131 /* CodeGenerationError.swift in Sources */,
 				OBJ_132 /* CodeGenerator.swift in Sources */,
-				OBJ_133 /* CodeNamer.swift in Sources */,
 				OBJ_134 /* Logger.swift in Sources */,
 				OBJ_135 /* Manager.swift in Sources */,
 				OBJ_136 /* SwiftGenerator.swift in Sources */,
-				OBJ_137 /* SwiftNamer.swift in Sources */,
 				0A22B07E24CB721900EC018E /* Encodable+Extensions.swift in Sources */,
 				OBJ_138 /* AnySchema.swift in Sources */,
 				OBJ_139 /* ArraySchema.swift in Sources */,
@@ -790,6 +785,7 @@
 				OBJ_144 /* ChoiceSchema.swift in Sources */,
 				OBJ_145 /* CodeModel.swift in Sources */,
 				OBJ_146 /* ComplexSchema.swift in Sources */,
+				0A22B08924CB783F00EC018E /* ServiceClientViewModel.swift in Sources */,
 				OBJ_147 /* ConditionalSchema.swift in Sources */,
 				OBJ_148 /* ConstantSchema.swift in Sources */,
 				OBJ_149 /* CredentialSchema.swift in Sources */,

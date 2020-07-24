@@ -59,10 +59,6 @@ class Manager {
     func run() throws {
         let model = try loadModel()
 
-        // Determine Swift names for all model objects
-        let namer = SwiftNamer(withModel: model)
-        try namer.process()
-
         // Create folder structure
         let packageName = model.name
         let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
