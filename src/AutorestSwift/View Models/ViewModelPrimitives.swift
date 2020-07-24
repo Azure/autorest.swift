@@ -26,29 +26,29 @@
 
 import Foundation
 
-/// a schema that represents a choice of several values (ie, an 'enum')
-public class SealedChoiceSchema: ValueSchema, EnumerableSchema {
-    /// the primitive type for the choices
-    public let choiceType: PrimitiveSchema
+// formatted version of comment
+struct ViewModelComment: CustomStringConvertible {
+    var description: String
 
-    /// the possible choices for in the set
-    public let choices: [ChoiceValue]
+    init(from descVal: String?) {
+        self.description = ""
+        guard let desc = descVal else { return }
+        guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
 
-    enum CodingKeys: String, CodingKey {
-        case choiceType, choices
+        // ensure multi-line comments are each commented
+        let lines = desc.split(whereSeparator: \.isNewline).map { "/// \($0)" }
+        description = lines.joined(separator: "\n")
     }
+}
 
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        choiceType = try container.decode(PrimitiveSchema.self, forKey: .choiceType)
-        choices = try container.decode([ChoiceValue].self, forKey: .choices)
-        try super.init(from: decoder)
-    }
+// formatted version of a default value
+struct ViewModelDefault: CustomStringConvertible {
+    var description: String
 
-    override public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(choiceType, forKey: .choiceType)
-        try container.encode(choices, forKey: .choices)
-        try super.encode(to: encoder)
+    init(from defaultValue: String?, isString: Bool) {
+        self.description = ""
+        guard let val = defaultValue else { return }
+        guard val.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
+        self.description = isString ? " = \"\(val)\"" : " = \(val)"
     }
 }

@@ -2,11 +2,10 @@
 
 {% include "ImportSnippet.stencil" %}
 
+{{ model.comment }}
 public {{ model.objectType }} {{ model.name }} {
     {% for property in model.properties %}
-    {% if property.comment %}
-    /// {{ property.comment }}
-    {% endif %}
-    public let {{ property.name }}: {{ property.type }}{% if property.optional %}?{% endif %}{% if property.defaultValue %} = "{{property.defaultValue}}"{% endif %}
+    {{ property.comment }}
+    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
     {% endfor %}
 }

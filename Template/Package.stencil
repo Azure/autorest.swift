@@ -1,0 +1,34 @@
+// swift-tools-version:5.1
+//  The swift-tools-version declares the minimum version of Swift required to build this package.
+//
+{% include "HeaderSnippet.stencil" %}
+
+import PackageDescription
+
+let package = Package(
+    name: "{{ model.name }}",
+    platforms: [
+        .macOS(.v10_15), .iOS(.v12), .tvOS(.v12)
+    ],
+    products: [
+        .library(name: "{{ model.name }}", targets: ["{{ model.name }}"])
+    ],
+    dependencies: [],
+    targets: [
+        // Build targets
+        .target(
+            name: "{{ model.name }}",
+            dependencies: [],
+            path: "sdk/{{ model.shortname }}/{{ model.name }}",
+            sources: ["Source"]
+        ),
+        // Test targets
+        .testTarget(
+            name: "{{ model.name }}Tests",
+            dependencies: ["{{ model.name }}"],
+            path: "sdk/{{ model.shortname }}/{{ model.name }}",
+            sources: ["Tests"]
+        ),
+    ],
+    swiftLanguageVersions: [.v5]
+)

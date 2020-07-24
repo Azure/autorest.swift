@@ -58,19 +58,35 @@ class SwiftGenerator: CodeGenerator {
 
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)
-        let fileContent = try renderTemplate(
-            filename: "EnumerationFile.stencil",
-            dictionary: ["models": enumViewModel]
+        try render(
+            template: "EnumerationFile",
+            toSubfolder: .models,
+            withFilename: "Enumerations",
+            andParams: ["models": enumViewModel]
         )
-        let fileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("Enumerations.swift")
-        try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
 
         // Create model files
         for object in model.schemas.objects ?? [] {
             let structViewModel = ObjectViewModel(from: object)
-            let fileContent = try renderTemplate(filename: "ModelFile.stencil", dictionary: ["model": structViewModel])
-            let fileUrl = baseUrl.with(subfolder: .models).appendingPathComponent("\(object.name).swift")
-            try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
+            try render(
+                template: "ModelFile",
+                toSubfolder: .models,
+                withFilename: object.name,
+                andParams: ["model": structViewModel]
+            )
         }
+    }
+
+    private func render(
+        template: String,
+        toSubfolder subfolder: FileDestination,
+        withFilename filename: String,
+        andParams params: [String: Any]
+    ) throws {
+        let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
+        let fileContent = try renderTemplate(filename: tname, dictionary: params)
+        let fname = filename.lowercased().hasSuffix(".swift") ? filename : "\(filename).swift"
+        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
+        try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 }

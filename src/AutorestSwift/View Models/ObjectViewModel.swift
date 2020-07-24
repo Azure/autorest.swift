@@ -28,29 +28,29 @@ import Foundation
 
 struct PropertyViewModel {
     let name: String
-    let comment: String?
+    let comment: ViewModelComment
     let type: String
     let optional: Bool
-    let defaultValue: String?
+    let defaultValue: ViewModelDefault
 
     init(from schema: Property) {
         self.name = schema.name
-        self.comment = schema.description
+        self.comment = ViewModelComment(from: schema.description)
         self.type = schema.schema.name
         self.optional = schema.required ?? true
-        self.defaultValue = schema.clientDefaultValue
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }
 
 struct ObjectViewModel {
     let name: String
-    let comment: String?
+    let comment: ViewModelComment
     let objectType = "struct"
     let properties: [PropertyViewModel]
 
     init(from schema: ObjectSchema) {
         self.name = schema.name
-        self.comment = schema.description
+        self.comment = ViewModelComment(from: schema.description)
 
         var props = [PropertyViewModel]()
         for property in schema.properties ?? [] {
