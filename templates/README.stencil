@@ -1,4 +1,4 @@
-# {{ model.serviceName }} client library for iOS
+# {{ model.title }} client library for iOS
 {{ model.description }}
 
 [Source code]({{ model.urls.source }}) | [API reference documentation]({{ model.urls.api }}) | [Product documentation]({{ model.urls.product }}) | [Samples]({{ model.urls.samples}})
