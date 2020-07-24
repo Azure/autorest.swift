@@ -27,4 +27,12 @@
 import Foundation
 
 /// Common protocol for language code namers.
-protocol CodeNamer {}
+protocol CodeNamer {
+    var model: CodeModel { get }
+
+    init(withModel model: CodeModel)
+
+    func process() throws
+
+    func name(for lang: Languages, inRole role: SdkRole)
+}
