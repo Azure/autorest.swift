@@ -67,6 +67,9 @@ class Manager {
         // Generate Swift code files
         let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
+
+        // Run SwiftLint and SwiftFormat on generated files
+        try runSwiftLintandFormat(atBaseUrl: packageUrl)
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency
@@ -139,6 +142,35 @@ class Manager {
             logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
         } else {
             logger.log("Model file check: OK", level: .info)
+        }
+    }
+
+    private func runSwiftLintandFormat(atBaseUrl baseUrl: URL) throws {
+        if let swiftFormatConfigPath = Bundle.main.path(forResource: "", ofType: ".swiftformat") {
+            runTool(path: "/usr/local/bin/swiftformat", arguments: ["--config", swiftFormatConfigPath, baseUrl.path])
+
+        } else {
+            throw CodeGenerationError.general("Missing swiftformat config file")
+        }
+
+        if let swiftLintConfigPath = Bundle.main.path(forResource: "", ofType: ".swiftlint.yml") {
+            runTool(
+                path: "/usr/local/bin/swiftlint",
+                arguments: ["autocorrect", "--config", swiftLintConfigPath, baseUrl.path]
+            )
+        } else {
+            throw CodeGenerationError.general("Missing swiftformat lint file")
+        }
+    }
+
+    private func runTool(path: String, arguments: [String]) {
+        do {
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: path)
+            task.arguments = arguments
+            try task.run()
+        } catch {
+            logger.log("Fail to run tool \(path).", level: .error)
         }
     }
 }
