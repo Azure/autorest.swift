@@ -69,7 +69,7 @@ class Manager {
         try generator.generate()
 
         // Run SwiftLint and SwiftFormat on generated files
-        try runSwiftLintandFormat(atBaseUrl: packageUrl)
+        try formatCode(atBaseUrl: packageUrl)
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency
@@ -145,35 +145,41 @@ class Manager {
         }
     }
 
-    private func runSwiftLintandFormat(atBaseUrl baseUrl: URL) throws {
-        runTool(path: "/usr/local/bin/swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
+    private func formatCode(atBaseUrl baseUrl: URL) throws {
+        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
 
         runTool(
-            path: "/usr/local/bin/swiftlint",
+            with: "swiftlint",
             configFilename: ".swiftlint.yml",
             arguments: ["autocorrect", baseUrl.path]
         )
     }
 
-    private func runTool(path: String, configFilename: String, arguments: [String]) {
+    private func runTool(with tool: String, configFilename: String, arguments: [String]) {
         do {
             var allArguments: [String] = []
 
-            if let swiftFormatConfigPath = Bundle.main.path(forResource: "", ofType: configFilename) {
-                allArguments.insert("--config", at: 0)
-                allArguments.insert(swiftFormatConfigPath, at: 1)
-
-                allArguments.append(contentsOf: arguments)
-
-                let task = Process()
-                task.executableURL = URL(fileURLWithPath: path)
-                task.arguments = allArguments
-                try task.run()
-            } else {
-                logger.log("Can't find config file for tool \(path).", level: .error)
+            guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
+                logger.log("Can't find path for tool \(tool).", level: .error)
+                return
             }
+
+            guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
+                logger.log("Can't find config file for tool \(tool).", level: .error)
+                return
+            }
+
+            allArguments.append("--config")
+            allArguments.append(configPath)
+
+            allArguments.append(contentsOf: arguments)
+
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: toolPath)
+            task.arguments = allArguments
+            try task.run()
         } catch {
-            logger.log("Fail to run tool \(path).", level: .error)
+            logger.log("Fail to run tool \(tool).", level: .error)
         }
     }
 }
