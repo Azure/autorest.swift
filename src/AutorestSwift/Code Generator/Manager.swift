@@ -146,29 +146,34 @@ class Manager {
     }
 
     private func runSwiftLintandFormat(atBaseUrl baseUrl: URL) throws {
-        if let swiftFormatConfigPath = Bundle.main.path(forResource: "", ofType: ".swiftformat") {
-            runTool(path: "/usr/local/bin/swiftformat", arguments: ["--config", swiftFormatConfigPath, baseUrl.path])
+        runTool(path: "/usr/local/bin/swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
 
-        } else {
-            throw CodeGenerationError.general("Missing swiftformat config file")
-        }
-
-        if let swiftLintConfigPath = Bundle.main.path(forResource: "", ofType: ".swiftlint.yml") {
-            runTool(
-                path: "/usr/local/bin/swiftlint",
-                arguments: ["autocorrect", "--config", swiftLintConfigPath, baseUrl.path]
-            )
-        } else {
-            throw CodeGenerationError.general("Missing swiftformat lint file")
-        }
+        runTool(
+            path: "/usr/local/bin/swiftlint",
+            configFilename: ".swiftlint.yml",
+            arguments: ["autocorrect", baseUrl.path]
+        )
     }
 
-    private func runTool(path: String, arguments: [String]) {
+    private func runTool(path: String, configFilename: String, arguments: [String]) {
         do {
-            let task = Process()
-            task.executableURL = URL(fileURLWithPath: path)
-            task.arguments = arguments
-            try task.run()
+            var allArguments: [String] = []
+
+            if let swiftFormatConfigPath = Bundle.main.path(forResource: "", ofType: configFilename) {
+                allArguments.insert("--config", at: 0)
+                allArguments.insert(swiftFormatConfigPath, at: 1)
+
+                for arg in arguments {
+                    allArguments.append(arg)
+                }
+
+                let task = Process()
+                task.executableURL = URL(fileURLWithPath: path)
+                task.arguments = allArguments
+                try task.run()
+            } else {
+                logger.log("Can't find config file for tool \(path).", level: .error)
+            }
         } catch {
             logger.log("Fail to run tool \(path).", level: .error)
         }
