@@ -163,9 +163,7 @@ class Manager {
                 allArguments.insert("--config", at: 0)
                 allArguments.insert(swiftFormatConfigPath, at: 1)
 
-                for arg in arguments {
-                    allArguments.append(arg)
-                }
+                allArguments.append(contentsOf: arguments)
 
                 let task = Process()
                 task.executableURL = URL(fileURLWithPath: path)
