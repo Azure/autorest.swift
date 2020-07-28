@@ -34,6 +34,8 @@ class SwiftGenerator: CodeGenerator {
 
     let baseUrl: URL
 
+    let targetName: String
+
     lazy var logger = Logger(withName: "Autorest.Swift.Generator")
 
     // MARK: Initializers
@@ -41,6 +43,7 @@ class SwiftGenerator: CodeGenerator {
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
         self.model = model
         self.baseUrl = baseUrl
+        self.targetName = model.name
     }
 
     // MARK: Methods
@@ -52,7 +55,7 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func generateSchemas() throws {
-        let modelUrl = baseUrl.with(subfolder: .models)
+        let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
         try modelUrl.ensureExists()
         logger.log("Base URL: \(baseUrl.path)")
 
@@ -78,9 +81,14 @@ class SwiftGenerator: CodeGenerator {
 
         // Create client file
         let clientViewModel = ServiceClientViewModel(from: model)
-        try render(template: "ServiceClientFile", toSubfolder: .source, withFilename: clientViewModel.name, andParams: [
-            "model": clientViewModel
-        ])
+        try render(
+            template: "ServiceClientFile",
+            toSubfolder: .sources,
+            withFilename: clientViewModel.name,
+            andParams: [
+                "model": clientViewModel
+            ]
+        )
 
         // Create README.md file
         let readmeViewModel = ReadmeViewModel(from: model)
@@ -89,6 +97,15 @@ class SwiftGenerator: CodeGenerator {
             toSubfolder: .root,
             withFilename: "README.md",
             andParams: ["model": readmeViewModel]
+        )
+
+        // Create Package.swift file
+        let packageViewModel = PackageViewModel(from: model)
+        try render(
+            template: "Package",
+            toSubfolder: .root,
+            withFilename: "Package.swift",
+            andParams: ["model": packageViewModel]
         )
     }
 
@@ -101,7 +118,7 @@ class SwiftGenerator: CodeGenerator {
         let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
         let fileContent = try renderTemplate(filename: tname, dictionary: params)
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
-        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
+        let fileUrl = baseUrl.with(subfolder: subfolder, withTargetName: targetName).appendingPathComponent(fname)
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 }

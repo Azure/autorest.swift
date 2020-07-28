@@ -19,16 +19,15 @@ let package = Package(
         .target(
             name: "{{ model.name }}",
             dependencies: [],
-            path: "sdk/{{ model.shortname }}/{{ model.name }}",
-            sources: ["Source"]
+            path: "Sources"
         ),
+        // TODO: Add test targets when test code is generated
         // Test targets
-        .testTarget(
-            name: "{{ model.name }}Tests",
-            dependencies: ["{{ model.name }}"],
-            path: "sdk/{{ model.shortname }}/{{ model.name }}",
-            sources: ["Tests"]
-        ),
+        //.testTarget(
+        //    name: "{{ model.name }}Tests",
+        //    dependencies: ["{{ model.name }}"],
+        //    sources: ["Tests"]
+        //),
     ],
     swiftLanguageVersions: [.v5]
 )
