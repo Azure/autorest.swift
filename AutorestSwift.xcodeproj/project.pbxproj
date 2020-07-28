@@ -47,6 +47,7 @@
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F106830724CF9E0A007EB4D5 /* PackageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106830624CF9E0A007EB4D5 /* PackageViewModel.swift */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
@@ -239,6 +240,7 @@
 		F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
 		F106830324CF9244007EB4D5 /* swiftformat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftformat; path = ../Pods/SwiftFormat/CommandLineTool/swiftformat; sourceTree = "<group>"; };
+		F106830624CF9E0A007EB4D5 /* PackageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageViewModel.swift; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		0A22B05A24CA4C9300EC018E /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				F106830624CF9E0A007EB4D5 /* PackageViewModel.swift */,
 				0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */,
 				0A22B08824CB783F00EC018E /* ServiceClientViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
@@ -858,6 +861,7 @@
 				OBJ_170 /* Property.swift in Sources */,
 				OBJ_171 /* Protocol.swift in Sources */,
 				OBJ_172 /* Request.swift in Sources */,
+				F106830724CF9E0A007EB4D5 /* PackageViewModel.swift in Sources */,
 				OBJ_173 /* Response.swift in Sources */,
 				OBJ_174 /* Schema.swift in Sources */,
 				OBJ_175 /* SchemaResponse.swift in Sources */,

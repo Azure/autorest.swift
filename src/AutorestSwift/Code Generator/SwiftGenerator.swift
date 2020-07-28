@@ -52,7 +52,9 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func generateSchemas() throws {
-        let modelUrl = baseUrl.with(subfolder: .models)
+        let targetName = model.name
+
+        let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
         try modelUrl.ensureExists()
         logger.log("Base URL: \(baseUrl.path)")
 
@@ -62,6 +64,7 @@ class SwiftGenerator: CodeGenerator {
             template: "EnumerationFile",
             toSubfolder: .models,
             withFilename: "Enumerations",
+            withTargetName: targetName,
             andParams: ["models": enumViewModel]
         )
 
@@ -72,15 +75,22 @@ class SwiftGenerator: CodeGenerator {
                 template: "ModelFile",
                 toSubfolder: .models,
                 withFilename: object.name,
+                withTargetName: targetName,
                 andParams: ["model": structViewModel]
             )
         }
 
         // Create client file
         let clientViewModel = ServiceClientViewModel(from: model)
-        try render(template: "ServiceClientFile", toSubfolder: .source, withFilename: clientViewModel.name, andParams: [
-            "model": clientViewModel
-        ])
+        try render(
+            template: "ServiceClientFile",
+            toSubfolder: .sources,
+            withFilename: clientViewModel.name,
+            withTargetName: targetName,
+            andParams: [
+                "model": clientViewModel
+            ]
+        )
 
         // Create README.md file
         let readmeViewModel = ReadmeViewModel(from: model)
@@ -88,7 +98,18 @@ class SwiftGenerator: CodeGenerator {
             template: "README",
             toSubfolder: .root,
             withFilename: "README.md",
+            withTargetName: targetName,
             andParams: ["model": readmeViewModel]
+        )
+
+        // Create Package.swift file
+        let packageViewModel = PackageViewModel(from: model)
+        try render(
+            template: "Package",
+            toSubfolder: .root,
+            withFilename: "Package.swift",
+            withTargetName: targetName,
+            andParams: ["model": packageViewModel]
         )
     }
 
@@ -96,12 +117,13 @@ class SwiftGenerator: CodeGenerator {
         template: String,
         toSubfolder subfolder: FileDestination,
         withFilename filename: String,
+        withTargetName targetName: String,
         andParams params: [String: Any]
     ) throws {
         let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
         let fileContent = try renderTemplate(filename: tname, dictionary: params)
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
-        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
+        let fileUrl = baseUrl.with(subfolder: subfolder, withTargetName: targetName).appendingPathComponent(fname)
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 }

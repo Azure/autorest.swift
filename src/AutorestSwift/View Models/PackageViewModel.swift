@@ -26,31 +26,10 @@
 
 import Foundation
 
-enum FileDestination {
-    case root
-    case tests
-    case sources
-    case models
-    case operations
-    case options
+struct PackageViewModel {
+    let name: String
 
-    func url(forBaseUrl baseUrl: URL, withTargetName targetName: String) -> URL {
-        switch self {
-        case .root:
-            return baseUrl
-        case .tests:
-            return baseUrl.appendingPathComponent("Tests")
-        case .sources:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-        case .models:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Models")
-        case .operations:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Operations")
-        case .options:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Options")
-        }
+    init(from model: CodeModel) {
+        self.name = model.name
     }
 }
