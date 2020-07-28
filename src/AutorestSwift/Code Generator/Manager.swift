@@ -67,6 +67,9 @@ class Manager {
         // Generate Swift code files
         let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
+
+        // Run SwiftLint and SwiftFormat on generated files
+        try formatCode(atBaseUrl: packageUrl)
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency
@@ -139,6 +142,44 @@ class Manager {
             logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
         } else {
             logger.log("Model file check: OK", level: .info)
+        }
+    }
+
+    private func formatCode(atBaseUrl baseUrl: URL) throws {
+        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
+
+        runTool(
+            with: "swiftlint",
+            configFilename: ".swiftlint.yml",
+            arguments: ["autocorrect", baseUrl.path]
+        )
+    }
+
+    private func runTool(with tool: String, configFilename: String, arguments: [String]) {
+        do {
+            var allArguments: [String] = []
+
+            guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
+                logger.log("Can't find path for tool \(tool).", level: .error)
+                return
+            }
+
+            guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
+                logger.log("Can't find config file for tool \(tool).", level: .error)
+                return
+            }
+
+            allArguments.append("--config")
+            allArguments.append(configPath)
+
+            allArguments.append(contentsOf: arguments)
+
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: toolPath)
+            task.arguments = allArguments
+            try task.run()
+        } catch {
+            logger.log("Fail to run tool \(tool).", level: .error)
         }
     }
 }

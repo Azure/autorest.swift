@@ -27,7 +27,7 @@
 import Foundation
 
 /// Error codes thrown during code generation
-enum CodeGenerationError {
+enum CodeGenerationError: Error {
     /// A general error has occurred.
     case general(String)
 }

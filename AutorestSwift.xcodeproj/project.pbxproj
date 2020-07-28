@@ -43,6 +43,10 @@
 		0A22B08924CB783F00EC018E /* ServiceClientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientViewModel.swift */; };
 		0A22B08B24CB9E1000EC018E /* ReadmeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08A24CB9E0F00EC018E /* ReadmeViewModel.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
+		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
+		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
+		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
@@ -160,12 +164,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F106830024CF910A007EB4D5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */,
+				F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F1319F9D24C947CF004DC2FF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */,
+				F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */,
 				0A22B08124CB738900EC018E /* ImportSnippet.stencil in CopyFiles */,
 				0A22B08224CB738900EC018E /* ServiceClientFile.stencil in CopyFiles */,
 				0A22B08324CB738900EC018E /* HeaderSnippet.stencil in CopyFiles */,
@@ -218,6 +235,10 @@
 		"AutorestSwift::AutorestSwiftTests::Product" /* AutorestSwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutorestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
+		F106826B24CF5B71007EB4D5 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = SOURCE_ROOT; };
+		F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
+		F106830324CF9244007EB4D5 /* swiftformat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftformat; path = ../Pods/SwiftFormat/CommandLineTool/swiftformat; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -408,6 +429,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F106826A24CF5AB9007EB4D5 /* configs */ = {
+			isa = PBXGroup;
+			children = (
+				F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */,
+				F106826B24CF5B71007EB4D5 /* .swiftformat */,
+			);
+			path = configs;
+			sourceTree = "<group>";
+		};
+		F106830224CF9226007EB4D5 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				F106830324CF9244007EB4D5 /* swiftformat */,
+				F106830124CF9220007EB4D5 /* swiftlint */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
 		OBJ_110 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +555,8 @@
 				OBJ_118 /* tests */,
 				OBJ_120 /* scripts */,
 				0A22B06F24CB71E100EC018E /* templates */,
+				F106830224CF9226007EB4D5 /* tools */,
+				F106826A24CF5AB9007EB4D5 /* configs */,
 				OBJ_122 /* LICENSE */,
 				OBJ_124 /* README.md */,
 				OBJ_125 /* CONTRIBUTING.md */,
@@ -625,6 +666,7 @@
 				F175405F24C7DDC4004A1139 /* Embed Frameworks */,
 				F175406024C7DF83004A1139 /* ShellScript */,
 				F1319F9D24C947CF004DC2FF /* CopyFiles */,
+				F106830024CF910A007EB4D5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
