@@ -622,7 +622,6 @@
 		OBJ_194 /* misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = misc; sourceTree = SOURCE_ROOT; };
 		OBJ_195 /* AutorestSwift.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = AutorestSwift.xcworkspace; sourceTree = SOURCE_ROOT; };
 		OBJ_196 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = SOURCE_ROOT; };
-		OBJ_197 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = SOURCE_ROOT; };
 		OBJ_198 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = SOURCE_ROOT; };
 		OBJ_199 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = SOURCE_ROOT; };
 		OBJ_200 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -1130,7 +1129,7 @@
 			path = Complex;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				F106837D24CFFB10007EB4D5 /* yaml */,
@@ -1144,7 +1143,6 @@
 				OBJ_194 /* misc */,
 				OBJ_195 /* AutorestSwift.xcworkspace */,
 				OBJ_196 /* tests */,
-				OBJ_197 /* Pods */,
 				OBJ_198 /* scripts */,
 				OBJ_199 /* templates */,
 				OBJ_200 /* LICENSE */,
@@ -1154,7 +1152,6 @@
 				OBJ_204 /* Podfile */,
 				OBJ_205 /* Podfile.lock */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -1431,7 +1428,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_185 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
