@@ -27,11 +27,11 @@ let package = Package(
         ),
         .target(
             name: "AutorestSwift",
-            dependencies: ["AutorestSwiftFramework", "Yams", "Stencil"]
+            dependencies: ["AutorestSwiftFramework"]
         ),
         .testTarget(
             name: "AutorestSwiftTests",
-            dependencies: ["AutorestSwiftFramework", "Yams", "Stencil"]
+            dependencies: ["AutorestSwiftFramework"]
         )
     ],
     swiftLanguageVersions: [.v5]
