@@ -1,0 +1,213 @@
+Test Suite 'All tests' started at 2020-07-27 23:42:34.438
+Test Suite 'AutorestSwiftTests.xctest' started at 2020-07-27 23:42:34.439
+Test Suite 'AutorestSwiftTests' started at 2020-07-27 23:42:34.439
+Test Case '-[AutorestSwiftTests.AutorestSwiftTests testSwaggerFromTestServer]' started.
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(194:19: error: composer: found undefined alias:
+                - *ref_3
+                  ^)))
+<<< additionalProperties return false
+2020-07-27 23:42:46.225503-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.225697-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.227201-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< azure-parameter-grouping return false
+2020-07-27 23:42:46.254001-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.254055-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.255289-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< azure-report return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(128:21: error: composer: found undefined alias:
+                  - *ref_1
+                    ^)))
+<<< azure-resource-x return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(128:21: error: composer: found undefined alias:
+                  - *ref_1
+                    ^)))
+<<< azure-resource return false
+keyNotFound(CodingKeys(stringValue: "usage", intValue: nil), Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "schemas", intValue: nil), CodingKeys(stringValue: "objects", intValue: nil), _YAMLCodingKey(stringValue: "Index 1", intValue: 1)], debugDescription: "No value associated with key CodingKeys(stringValue: \"usage\", intValue: nil) (\"usage\").", underlyingError: nil))
+<<< azure-special-properties return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(1041:93: error: parser: while parsing a block mapping in line 1040, column 11
+did not find expected key:
+          description: 'Array of complex type with null item [{''integer'': 1 ''string'': ' '2''}, null, {''integer'': 5, ''string'': ' '6''}]'
+                                                                                            ^)))
+<<< body-array return false
+2020-07-27 23:42:46.360271-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-boolean.quirks return true
+2020-07-27 23:42:46.439819-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.439875-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.441422-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-boolean return false
+2020-07-27 23:42:46.506698-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.506754-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.508150-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-byte return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(1033:19: error: composer: found undefined alias:
+                - *ref_25
+                  ^)))
+<<< body-complex return false
+2020-07-27 23:42:46.609551-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-date return true
+2020-07-27 23:42:46.710116-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.710171-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.711954-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-datetime-rfc1123 return false
+2020-07-27 23:42:46.948250-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:46.948305-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:46.950813-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-datetime return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(637:98: error: parser: while parsing a block mapping in line 636, column 11
+did not find expected key:
+          description: 'Dictionary of complex type with null item [{''integer'': 1 ''string'': ' '2''}, null, {''integer'': 5, ''string'': ' '6''}]'
+                                                                                                 ^)))
+<<< body-dictionary return false
+2020-07-27 23:42:47.009310-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-duration return true
+2020-07-27 23:42:47.046010-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:47.046063-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:47.047800-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-file return false
+2020-07-27 23:42:47.083413-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-formdata-urlencoded return true
+2020-07-27 23:42:47.117783-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-formdata return true
+2020-07-27 23:42:47.272941-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:47.272996-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:47.275517-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-integer return false
+2020-07-27 23:42:47.538207-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:47.538261-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:47.541018-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-number.quirks return false
+2020-07-27 23:42:47.814096-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:47.814180-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:47.816615-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-number return false
+2020-07-27 23:42:48.067822-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:48.067876-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:48.072620-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-string.quirks return false
+2020-07-27 23:42:48.317092-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:48.317144-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:48.322129-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< body-string return false
+2020-07-27 23:42:48.355910-0700 xctest[55727:1207895] [default] Model file check: OK
+||| body-time return true
+2020-07-27 23:42:48.557998-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:48.558049-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:48.560631-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< complex-model return false
+keyNotFound(CodingKeys(stringValue: "usage", intValue: nil), Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "schemas", intValue: nil), CodingKeys(stringValue: "objects", intValue: nil), _YAMLCodingKey(stringValue: "Index 0", intValue: 0)], debugDescription: "No value associated with key CodingKeys(stringValue: \"usage\", intValue: nil) (\"usage\").", underlyingError: nil))
+<<< constants return false
+2020-07-27 23:42:48.614619-0700 xctest[55727:1207895] [default] Model file check: OK
+||| custom-baseUrl-more-options return true
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(493:42: error: composer: found undefined alias:
+                      nextLinkOperation: *ref_15
+                                         ^)))
+<<< custom-baseUrl-paging return false
+2020-07-27 23:42:48.643913-0700 xctest[55727:1207895] [default] Model file check: OK
+||| custom-baseUrl return true
+2020-07-27 23:42:48.719798-0700 xctest[55727:1207895] [default] Model file check: OK
+||| extensible-enums-swagger return true
+2020-07-27 23:42:48.737914-0700 xctest[55727:1207895] [default] Model file check: OK
+||| head-exceptions return true
+2020-07-27 23:42:48.758885-0700 xctest[55727:1207895] [default] Model file check: OK
+||| head return true
+2020-07-27 23:42:49.156687-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.156742-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.164432-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< header return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(451:19: error: composer: found undefined alias:
+                - *ref_4
+                  ^)))
+<<< httpInfrastructure.quirks return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(987:19: error: composer: found undefined alias:
+                - *ref_4
+                  ^)))
+<<< httpInfrastructure return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(1876:19: error: composer: found undefined alias:
+                - *ref_2
+                  ^)))
+<<< lro return false
+2020-07-27 23:42:49.247202-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.247252-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.249204-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< media_types return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(291:21: error: composer: found undefined alias:
+                  - *ref_2
+                    ^)))
+<<< model-flattening return false
+2020-07-27 23:42:49.282498-0700 xctest[55727:1207895] [default] Model file check: OK
+||| multiapi-v1-custom-base-url return true
+2020-07-27 23:42:49.380957-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.381011-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.382652-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< multiapi-v1 return false
+2020-07-27 23:42:49.412600-0700 xctest[55727:1207895] [default] Model file check: OK
+||| multiapi-v2-custom-base-url return true
+2020-07-27 23:42:49.505307-0700 xctest[55727:1207895] [default] Model file check: OK
+||| multiapi-v2 return true
+2020-07-27 23:42:49.614527-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.614582-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.616497-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< multiapi-v3 return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(76:19: error: composer: found undefined alias:
+                - *ref_0
+                  ^)))
+<<< multiple-inheritance return false
+2020-07-27 23:42:49.663075-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.663124-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.664559-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< non-string-enum return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(92:93: error: parser: while parsing a block mapping in line 91, column 13
+did not find expected key:
+            description: 'Basic get that returns an object. Returns object { ''message'': ' 'An object was successfully returned'' }'
+                                                                                            ^)))
+<<< object-type return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(1540:42: error: composer: found undefined alias:
+                      nextLinkOperation: *ref_40
+                                         ^)))
+<<< paging return false
+2020-07-27 23:42:49.708386-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.708439-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.709721-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< parameter-flattening return false
+2020-07-27 23:42:49.749637-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:49.749685-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:49.751001-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< report return false
+2020-07-27 23:42:50.258414-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:50.258470-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:50.262054-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< required-optional return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(573:19: error: composer: found undefined alias:
+                - *ref_7
+                  ^)))
+<<< storage return false
+2020-07-27 23:42:50.311624-0700 xctest[55727:1207895] [default] Model file check: OK
+||| subscriptionId-apiVersion return true
+2020-07-27 23:42:50.365579-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:50.365632-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:50.367055-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< url-multi-collectionFormat return false
+2020-07-27 23:42:51.180373-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:51.180425-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:51.194315-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< url return false
+2020-07-27 23:42:51.589040-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:51.589090-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:51.592213-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< validation return false
+2020-07-27 23:42:53.811294-0700 xctest[55727:1207895] [default] before.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/before.json
+2020-07-27 23:42:53.811346-0700 xctest[55727:1207895] [default] after.json url=file:///Users/sacheu/Documents/generated/test/generated/sdk/after.json
+2020-07-27 23:42:53.822122-0700 xctest[55727:1207895] [default] Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.
+<<< xml-service return false
+dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid YAML.", underlyingError: Optional(171:19: error: composer: found undefined alias:
+                - *ref_0
+                  ^)))
+<<< xms-error-responses return false
+Test Case '-[AutorestSwiftTests.AutorestSwiftTests testSwaggerFromTestServer]' passed (19.390 seconds).
+Test Suite 'AutorestSwiftTests' passed at 2020-07-27 23:42:53.830.
+	 Executed 1 test, with 0 failures (0 unexpected) in 19.390 (19.391) seconds
+Test Suite 'AutorestSwiftTests.xctest' passed at 2020-07-27 23:42:53.831.
+	 Executed 1 test, with 0 failures (0 unexpected) in 19.390 (19.392) seconds
+Test Suite 'All tests' passed at 2020-07-27 23:42:53.831.
+	 Executed 1 test, with 0 failures (0 unexpected) in 19.390 (19.393) seconds
+Program ended with exit code: 0
