@@ -26,48 +26,102 @@
 
 import class Foundation.Bundle
 import XCTest
+@testable import AutorestSwift
 
 final class AutorestSwiftTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
+    func testSwaggerFromTestServer() throws {
+        let yamlfiles = [
+            //  "additionalProperties",
+            //  "azure-parameter-grouping",
+            //  "azure-report",
+            //  "azure-resource-x",
+            //  "azure-resource",
+            //  "azure-special-properties",
+            //  "body-array",
+            "body-boolean.quirks",
+            //  "body-boolean",
+            //  "body-byte",
+            //  "body-complex",
+            "body-date",
+            //  "body-datetime-rfc1123",
+            //  "body-datetime",
+            //  "body-dictionary",
+            "body-duration",
+            //  "body-file",
+            "body-formdata-urlencoded",
+            "body-formdata",
+            //  "body-integer",
+            //  "body-number.quirks",
+            //  "body-number",
+            //  "body-string.quirks",
+            //  "body-string",
+            "body-time",
+            //  "complex-model",
+            //  "constants",
+            "custom-baseUrl-more-options",
+            //  "custom-baseUrl-paging",
+            "custom-baseUrl",
+            "extensible-enums-swagger",
+            "head-exceptions",
+            "head",
+            //   "header",
+            //   "httpInfrastructure.quirks",
+            //   "httpInfrastructure",
+            //   "lro",
+            //   "media_types",
+            //   "model-flattening",
+            "multiapi-v1-custom-base-url",
+            //   "multiapi-v1",
+            "multiapi-v2-custom-base-url",
+            "multiapi-v2",
+            //   "multiapi-v3",
+            //   "multiple-inheritance",
+            //   "non-string-enum",
+            //    "object-type",
+            //    "paging",
+            //    "parameter-flattening",
+            //    "report",
+            //    "required-optional",
+            //    "storage",
+            "subscriptionId-apiVersion"
+            //  "url-multi-collectionFormat",
+            //  "url",
+            //   "validation",
+            //    "xml-service",
+            //    "xms-error-responses"
+        ]
 
-        // Some of the APIs that we use below are available in macOS 10.13 and above.
-        guard #available(macOS 10.13, *) else {
-            return
+        for file in yamlfiles {
+            XCTAssertTrue(runTestSwaggerFromTestServer(yamlFileName: file))
         }
-
-        let fooBinary = productsDirectory.appendingPathComponent("autorest.swift")
-
-        let process = Process()
-        process.executableURL = fooBinary
-
-        let pipe = Pipe()
-        process.standardOutput = pipe
-
-        try process.run()
-        process.waitUntilExit()
-
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: .utf8)
-
-        XCTAssertEqual(output, "Hello, world!\n")
     }
 
-    /// Returns path to the built products directory.
-    var productsDirectory: URL {
-        #if os(macOS)
-            for bundle in Bundle.allBundles where bundle.bundlePath.hasSuffix(".xctest") {
-                return bundle.bundleURL.deletingLastPathComponent()
+    func runTestSwaggerFromTestServer(yamlFileName: String) -> Bool {
+        print("Test \(yamlFileName).yaml")
+
+        let bundle = Bundle(for: type(of: self))
+        guard let destUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("generated").appendingPathComponent("test") else {
+            print("\(yamlFileName).yaml destUrl is nil")
+            return false
+        }
+
+        if let sourceUrl = bundle.url(forResource: yamlFileName, withExtension: "yaml") {
+            let manager = Manager(withInputUrl: sourceUrl, destinationUrl: destUrl)
+            do {
+                let (_, isMatchedConsistency) = try manager.loadModel()
+                return isMatchedConsistency
+            } catch {
+                print(error)
+                return false
             }
-            fatalError("couldn't find the products directory")
-        #else
-            return Bundle.main.bundleURL
-        #endif
+        } else {
+            print("\(yamlFileName).yaml fails to load from bundle")
+            return false
+        }
     }
 
     static var allTests = [
-        ("testExample", testExample)
+        "testSwaggerFromTestServer"
     ]
 }

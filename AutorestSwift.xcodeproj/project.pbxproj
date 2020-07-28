@@ -48,6 +48,64 @@
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830724CF9E0A007EB4D5 /* PackageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106830624CF9E0A007EB4D5 /* PackageViewModel.swift */; };
+		F194331524D086D400A277BD /* additionalProperties.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330A24D086B100A277BD /* additionalProperties.yaml */; };
+		F194331624D086D400A277BD /* azure-parameter-grouping.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DD24D086AF00A277BD /* azure-parameter-grouping.yaml */; };
+		F194331724D086D400A277BD /* azure-report.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DE24D086AF00A277BD /* azure-report.yaml */; };
+		F194331824D086D400A277BD /* azure-resource-x.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E024D086AF00A277BD /* azure-resource-x.yaml */; };
+		F194331924D086D400A277BD /* azure-resource.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FE24D086B000A277BD /* azure-resource.yaml */; };
+		F194331A24D086D400A277BD /* azure-special-properties.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F324D086B000A277BD /* azure-special-properties.yaml */; };
+		F194331B24D086D400A277BD /* body-array.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E424D086AF00A277BD /* body-array.yaml */; };
+		F194331C24D086D400A277BD /* body-boolean.quirks.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194331224D086B200A277BD /* body-boolean.quirks.yaml */; };
+		F194331D24D086D400A277BD /* body-boolean.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432EA24D086AF00A277BD /* body-boolean.yaml */; };
+		F194331E24D086D400A277BD /* body-byte.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330224D086B100A277BD /* body-byte.yaml */; };
+		F194331F24D086D400A277BD /* body-complex.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330624D086B100A277BD /* body-complex.yaml */; };
+		F194332024D086D400A277BD /* body-date.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E324D086AF00A277BD /* body-date.yaml */; };
+		F194332124D086D400A277BD /* body-datetime-rfc1123.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F824D086B000A277BD /* body-datetime-rfc1123.yaml */; };
+		F194332224D086D400A277BD /* body-datetime.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F524D086B000A277BD /* body-datetime.yaml */; };
+		F194332324D086D400A277BD /* body-dictionary.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330724D086B100A277BD /* body-dictionary.yaml */; };
+		F194332424D086D400A277BD /* body-duration.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FD24D086B000A277BD /* body-duration.yaml */; };
+		F194332524D086D400A277BD /* body-file.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E624D086AF00A277BD /* body-file.yaml */; };
+		F194332624D086D400A277BD /* body-formdata-urlencoded.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330924D086B100A277BD /* body-formdata-urlencoded.yaml */; };
+		F194332724D086D400A277BD /* body-formdata.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330B24D086B100A277BD /* body-formdata.yaml */; };
+		F194332824D086D400A277BD /* body-integer.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330824D086B100A277BD /* body-integer.yaml */; };
+		F194332924D086D400A277BD /* body-number.quirks.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F024D086B000A277BD /* body-number.quirks.yaml */; };
+		F194332A24D086D400A277BD /* body-number.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330124D086B100A277BD /* body-number.yaml */; };
+		F194332B24D086D400A277BD /* body-string.quirks.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F724D086B000A277BD /* body-string.quirks.yaml */; };
+		F194332C24D086D400A277BD /* body-string.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FA24D086B000A277BD /* body-string.yaml */; };
+		F194332D24D086D400A277BD /* body-time.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194331324D086B200A277BD /* body-time.yaml */; };
+		F194332E24D086D400A277BD /* complex-model.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432EB24D086AF00A277BD /* complex-model.yaml */; };
+		F194332F24D086D400A277BD /* constants.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E224D086AF00A277BD /* constants.yaml */; };
+		F194333024D086D400A277BD /* custom-baseUrl-more-options.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330F24D086B200A277BD /* custom-baseUrl-more-options.yaml */; };
+		F194333124D086D400A277BD /* custom-baseUrl-paging.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E824D086AF00A277BD /* custom-baseUrl-paging.yaml */; };
+		F194333224D086D400A277BD /* custom-baseUrl.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E724D086AF00A277BD /* custom-baseUrl.yaml */; };
+		F194333324D086D400A277BD /* extensible-enums-swagger.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432EE24D086AF00A277BD /* extensible-enums-swagger.yaml */; };
+		F194333424D086D400A277BD /* head-exceptions.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DC24D086AF00A277BD /* head-exceptions.yaml */; };
+		F194333524D086D400A277BD /* head.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330424D086B100A277BD /* head.yaml */; };
+		F194333624D086D400A277BD /* header.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DB24D086AF00A277BD /* header.yaml */; };
+		F194333724D086D400A277BD /* httpInfrastructure.quirks.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E524D086AF00A277BD /* httpInfrastructure.quirks.yaml */; };
+		F194333824D086D400A277BD /* httpInfrastructure.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E124D086AF00A277BD /* httpInfrastructure.yaml */; };
+		F194333924D086D400A277BD /* lro.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330024D086B100A277BD /* lro.yaml */; };
+		F194333A24D086D400A277BD /* media_types.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432EF24D086B000A277BD /* media_types.yaml */; };
+		F194333B24D086D400A277BD /* model-flattening.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F224D086B000A277BD /* model-flattening.yaml */; };
+		F194333C24D086D400A277BD /* multiapi-v1-custom-base-url.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DF24D086AF00A277BD /* multiapi-v1-custom-base-url.yaml */; };
+		F194333D24D086D400A277BD /* multiapi-v1.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432EC24D086AF00A277BD /* multiapi-v1.yaml */; };
+		F194333E24D086D400A277BD /* multiapi-v2-custom-base-url.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F424D086B000A277BD /* multiapi-v2-custom-base-url.yaml */; };
+		F194333F24D086D400A277BD /* multiapi-v2.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432E924D086AF00A277BD /* multiapi-v2.yaml */; };
+		F194334024D086D400A277BD /* multiapi-v3.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330E24D086B100A277BD /* multiapi-v3.yaml */; };
+		F194334124D086D400A277BD /* multiple-inheritance.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330D24D086B100A277BD /* multiple-inheritance.yaml */; };
+		F194334224D086D400A277BD /* non-string-enum.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DA24D086AF00A277BD /* non-string-enum.yaml */; };
+		F194334324D086D400A277BD /* object-type.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F924D086B000A277BD /* object-type.yaml */; };
+		F194334424D086D400A277BD /* paging.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432ED24D086AF00A277BD /* paging.yaml */; };
+		F194334524D086D400A277BD /* parameter-flattening.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194331024D086B200A277BD /* parameter-flattening.yaml */; };
+		F194334624D086D400A277BD /* report.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F124D086B000A277BD /* report.yaml */; };
+		F194334724D086D400A277BD /* required-optional.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330324D086B100A277BD /* required-optional.yaml */; };
+		F194334824D086D400A277BD /* storage.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FB24D086B000A277BD /* storage.yaml */; };
+		F194334924D086D400A277BD /* subscriptionId-apiVersion.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194331124D086B200A277BD /* subscriptionId-apiVersion.yaml */; };
+		F194334A24D086D400A277BD /* url-multi-collectionFormat.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FF24D086B000A277BD /* url-multi-collectionFormat.yaml */; };
+		F194334B24D086D400A277BD /* url.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330C24D086B100A277BD /* url.yaml */; };
+		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
+		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
+		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
@@ -204,6 +262,73 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F194331424D086C800A277BD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F194331524D086D400A277BD /* additionalProperties.yaml in CopyFiles */,
+				F194331624D086D400A277BD /* azure-parameter-grouping.yaml in CopyFiles */,
+				F194331724D086D400A277BD /* azure-report.yaml in CopyFiles */,
+				F194331824D086D400A277BD /* azure-resource-x.yaml in CopyFiles */,
+				F194331924D086D400A277BD /* azure-resource.yaml in CopyFiles */,
+				F194331A24D086D400A277BD /* azure-special-properties.yaml in CopyFiles */,
+				F194331B24D086D400A277BD /* body-array.yaml in CopyFiles */,
+				F194331C24D086D400A277BD /* body-boolean.quirks.yaml in CopyFiles */,
+				F194331D24D086D400A277BD /* body-boolean.yaml in CopyFiles */,
+				F194331E24D086D400A277BD /* body-byte.yaml in CopyFiles */,
+				F194331F24D086D400A277BD /* body-complex.yaml in CopyFiles */,
+				F194332024D086D400A277BD /* body-date.yaml in CopyFiles */,
+				F194332124D086D400A277BD /* body-datetime-rfc1123.yaml in CopyFiles */,
+				F194332224D086D400A277BD /* body-datetime.yaml in CopyFiles */,
+				F194332324D086D400A277BD /* body-dictionary.yaml in CopyFiles */,
+				F194332424D086D400A277BD /* body-duration.yaml in CopyFiles */,
+				F194332524D086D400A277BD /* body-file.yaml in CopyFiles */,
+				F194332624D086D400A277BD /* body-formdata-urlencoded.yaml in CopyFiles */,
+				F194332724D086D400A277BD /* body-formdata.yaml in CopyFiles */,
+				F194332824D086D400A277BD /* body-integer.yaml in CopyFiles */,
+				F194332924D086D400A277BD /* body-number.quirks.yaml in CopyFiles */,
+				F194332A24D086D400A277BD /* body-number.yaml in CopyFiles */,
+				F194332B24D086D400A277BD /* body-string.quirks.yaml in CopyFiles */,
+				F194332C24D086D400A277BD /* body-string.yaml in CopyFiles */,
+				F194332D24D086D400A277BD /* body-time.yaml in CopyFiles */,
+				F194332E24D086D400A277BD /* complex-model.yaml in CopyFiles */,
+				F194332F24D086D400A277BD /* constants.yaml in CopyFiles */,
+				F194333024D086D400A277BD /* custom-baseUrl-more-options.yaml in CopyFiles */,
+				F194333124D086D400A277BD /* custom-baseUrl-paging.yaml in CopyFiles */,
+				F194333224D086D400A277BD /* custom-baseUrl.yaml in CopyFiles */,
+				F194333324D086D400A277BD /* extensible-enums-swagger.yaml in CopyFiles */,
+				F194333424D086D400A277BD /* head-exceptions.yaml in CopyFiles */,
+				F194333524D086D400A277BD /* head.yaml in CopyFiles */,
+				F194333624D086D400A277BD /* header.yaml in CopyFiles */,
+				F194333724D086D400A277BD /* httpInfrastructure.quirks.yaml in CopyFiles */,
+				F194333824D086D400A277BD /* httpInfrastructure.yaml in CopyFiles */,
+				F194333924D086D400A277BD /* lro.yaml in CopyFiles */,
+				F194333A24D086D400A277BD /* media_types.yaml in CopyFiles */,
+				F194333B24D086D400A277BD /* model-flattening.yaml in CopyFiles */,
+				F194333C24D086D400A277BD /* multiapi-v1-custom-base-url.yaml in CopyFiles */,
+				F194333D24D086D400A277BD /* multiapi-v1.yaml in CopyFiles */,
+				F194333E24D086D400A277BD /* multiapi-v2-custom-base-url.yaml in CopyFiles */,
+				F194333F24D086D400A277BD /* multiapi-v2.yaml in CopyFiles */,
+				F194334024D086D400A277BD /* multiapi-v3.yaml in CopyFiles */,
+				F194334124D086D400A277BD /* multiple-inheritance.yaml in CopyFiles */,
+				F194334224D086D400A277BD /* non-string-enum.yaml in CopyFiles */,
+				F194334324D086D400A277BD /* object-type.yaml in CopyFiles */,
+				F194334424D086D400A277BD /* paging.yaml in CopyFiles */,
+				F194334524D086D400A277BD /* parameter-flattening.yaml in CopyFiles */,
+				F194334624D086D400A277BD /* report.yaml in CopyFiles */,
+				F194334724D086D400A277BD /* required-optional.yaml in CopyFiles */,
+				F194334824D086D400A277BD /* storage.yaml in CopyFiles */,
+				F194334924D086D400A277BD /* subscriptionId-apiVersion.yaml in CopyFiles */,
+				F194334A24D086D400A277BD /* url-multi-collectionFormat.yaml in CopyFiles */,
+				F194334B24D086D400A277BD /* url.yaml in CopyFiles */,
+				F194334C24D086D400A277BD /* validation.yaml in CopyFiles */,
+				F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */,
+				F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +366,64 @@
 		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
 		F106830324CF9244007EB4D5 /* swiftformat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftformat; path = ../Pods/SwiftFormat/CommandLineTool/swiftformat; sourceTree = "<group>"; };
 		F106830624CF9E0A007EB4D5 /* PackageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageViewModel.swift; sourceTree = "<group>"; };
+		F19432DA24D086AF00A277BD /* non-string-enum.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "non-string-enum.yaml"; path = "yaml/non-string-enum.yaml"; sourceTree = "<group>"; };
+		F19432DB24D086AF00A277BD /* header.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = header.yaml; path = yaml/header.yaml; sourceTree = "<group>"; };
+		F19432DC24D086AF00A277BD /* head-exceptions.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "head-exceptions.yaml"; path = "yaml/head-exceptions.yaml"; sourceTree = "<group>"; };
+		F19432DD24D086AF00A277BD /* azure-parameter-grouping.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "azure-parameter-grouping.yaml"; path = "yaml/azure-parameter-grouping.yaml"; sourceTree = "<group>"; };
+		F19432DE24D086AF00A277BD /* azure-report.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "azure-report.yaml"; path = "yaml/azure-report.yaml"; sourceTree = "<group>"; };
+		F19432DF24D086AF00A277BD /* multiapi-v1-custom-base-url.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiapi-v1-custom-base-url.yaml"; path = "yaml/multiapi-v1-custom-base-url.yaml"; sourceTree = "<group>"; };
+		F19432E024D086AF00A277BD /* azure-resource-x.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "azure-resource-x.yaml"; path = "yaml/azure-resource-x.yaml"; sourceTree = "<group>"; };
+		F19432E124D086AF00A277BD /* httpInfrastructure.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = httpInfrastructure.yaml; path = yaml/httpInfrastructure.yaml; sourceTree = "<group>"; };
+		F19432E224D086AF00A277BD /* constants.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = constants.yaml; path = yaml/constants.yaml; sourceTree = "<group>"; };
+		F19432E324D086AF00A277BD /* body-date.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-date.yaml"; path = "yaml/body-date.yaml"; sourceTree = "<group>"; };
+		F19432E424D086AF00A277BD /* body-array.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-array.yaml"; path = "yaml/body-array.yaml"; sourceTree = "<group>"; };
+		F19432E524D086AF00A277BD /* httpInfrastructure.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = httpInfrastructure.quirks.yaml; path = yaml/httpInfrastructure.quirks.yaml; sourceTree = "<group>"; };
+		F19432E624D086AF00A277BD /* body-file.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-file.yaml"; path = "yaml/body-file.yaml"; sourceTree = "<group>"; };
+		F19432E724D086AF00A277BD /* custom-baseUrl.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "custom-baseUrl.yaml"; path = "yaml/custom-baseUrl.yaml"; sourceTree = "<group>"; };
+		F19432E824D086AF00A277BD /* custom-baseUrl-paging.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "custom-baseUrl-paging.yaml"; path = "yaml/custom-baseUrl-paging.yaml"; sourceTree = "<group>"; };
+		F19432E924D086AF00A277BD /* multiapi-v2.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiapi-v2.yaml"; path = "yaml/multiapi-v2.yaml"; sourceTree = "<group>"; };
+		F19432EA24D086AF00A277BD /* body-boolean.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.yaml"; path = "yaml/body-boolean.yaml"; sourceTree = "<group>"; };
+		F19432EB24D086AF00A277BD /* complex-model.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "complex-model.yaml"; path = "yaml/complex-model.yaml"; sourceTree = "<group>"; };
+		F19432EC24D086AF00A277BD /* multiapi-v1.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiapi-v1.yaml"; path = "yaml/multiapi-v1.yaml"; sourceTree = "<group>"; };
+		F19432ED24D086AF00A277BD /* paging.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = paging.yaml; path = yaml/paging.yaml; sourceTree = "<group>"; };
+		F19432EE24D086AF00A277BD /* extensible-enums-swagger.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "extensible-enums-swagger.yaml"; path = "yaml/extensible-enums-swagger.yaml"; sourceTree = "<group>"; };
+		F19432EF24D086B000A277BD /* media_types.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = media_types.yaml; path = yaml/media_types.yaml; sourceTree = "<group>"; };
+		F19432F024D086B000A277BD /* body-number.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-number.quirks.yaml"; path = "yaml/body-number.quirks.yaml"; sourceTree = "<group>"; };
+		F19432F124D086B000A277BD /* report.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = report.yaml; path = yaml/report.yaml; sourceTree = "<group>"; };
+		F19432F224D086B000A277BD /* model-flattening.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "model-flattening.yaml"; path = "yaml/model-flattening.yaml"; sourceTree = "<group>"; };
+		F19432F324D086B000A277BD /* azure-special-properties.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "azure-special-properties.yaml"; path = "yaml/azure-special-properties.yaml"; sourceTree = "<group>"; };
+		F19432F424D086B000A277BD /* multiapi-v2-custom-base-url.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiapi-v2-custom-base-url.yaml"; path = "yaml/multiapi-v2-custom-base-url.yaml"; sourceTree = "<group>"; };
+		F19432F524D086B000A277BD /* body-datetime.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-datetime.yaml"; path = "yaml/body-datetime.yaml"; sourceTree = "<group>"; };
+		F19432F624D086B000A277BD /* xms-error-responses.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "xms-error-responses.yaml"; path = "yaml/xms-error-responses.yaml"; sourceTree = "<group>"; };
+		F19432F724D086B000A277BD /* body-string.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-string.quirks.yaml"; path = "yaml/body-string.quirks.yaml"; sourceTree = "<group>"; };
+		F19432F824D086B000A277BD /* body-datetime-rfc1123.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-datetime-rfc1123.yaml"; path = "yaml/body-datetime-rfc1123.yaml"; sourceTree = "<group>"; };
+		F19432F924D086B000A277BD /* object-type.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "object-type.yaml"; path = "yaml/object-type.yaml"; sourceTree = "<group>"; };
+		F19432FA24D086B000A277BD /* body-string.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-string.yaml"; path = "yaml/body-string.yaml"; sourceTree = "<group>"; };
+		F19432FB24D086B000A277BD /* storage.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = storage.yaml; path = yaml/storage.yaml; sourceTree = "<group>"; };
+		F19432FC24D086B000A277BD /* validation.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = validation.yaml; path = yaml/validation.yaml; sourceTree = "<group>"; };
+		F19432FD24D086B000A277BD /* body-duration.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-duration.yaml"; path = "yaml/body-duration.yaml"; sourceTree = "<group>"; };
+		F19432FE24D086B000A277BD /* azure-resource.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "azure-resource.yaml"; path = "yaml/azure-resource.yaml"; sourceTree = "<group>"; };
+		F19432FF24D086B000A277BD /* url-multi-collectionFormat.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "url-multi-collectionFormat.yaml"; path = "yaml/url-multi-collectionFormat.yaml"; sourceTree = "<group>"; };
+		F194330024D086B100A277BD /* lro.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = lro.yaml; path = yaml/lro.yaml; sourceTree = "<group>"; };
+		F194330124D086B100A277BD /* body-number.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-number.yaml"; path = "yaml/body-number.yaml"; sourceTree = "<group>"; };
+		F194330224D086B100A277BD /* body-byte.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-byte.yaml"; path = "yaml/body-byte.yaml"; sourceTree = "<group>"; };
+		F194330324D086B100A277BD /* required-optional.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "required-optional.yaml"; path = "yaml/required-optional.yaml"; sourceTree = "<group>"; };
+		F194330424D086B100A277BD /* head.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = head.yaml; path = yaml/head.yaml; sourceTree = "<group>"; };
+		F194330524D086B100A277BD /* xml-service.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "xml-service.yaml"; path = "yaml/xml-service.yaml"; sourceTree = "<group>"; };
+		F194330624D086B100A277BD /* body-complex.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-complex.yaml"; path = "yaml/body-complex.yaml"; sourceTree = "<group>"; };
+		F194330724D086B100A277BD /* body-dictionary.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-dictionary.yaml"; path = "yaml/body-dictionary.yaml"; sourceTree = "<group>"; };
+		F194330824D086B100A277BD /* body-integer.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-integer.yaml"; path = "yaml/body-integer.yaml"; sourceTree = "<group>"; };
+		F194330924D086B100A277BD /* body-formdata-urlencoded.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-formdata-urlencoded.yaml"; path = "yaml/body-formdata-urlencoded.yaml"; sourceTree = "<group>"; };
+		F194330A24D086B100A277BD /* additionalProperties.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = additionalProperties.yaml; path = yaml/additionalProperties.yaml; sourceTree = "<group>"; };
+		F194330B24D086B100A277BD /* body-formdata.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-formdata.yaml"; path = "yaml/body-formdata.yaml"; sourceTree = "<group>"; };
+		F194330C24D086B100A277BD /* url.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = url.yaml; path = yaml/url.yaml; sourceTree = "<group>"; };
+		F194330D24D086B100A277BD /* multiple-inheritance.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiple-inheritance.yaml"; path = "yaml/multiple-inheritance.yaml"; sourceTree = "<group>"; };
+		F194330E24D086B100A277BD /* multiapi-v3.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "multiapi-v3.yaml"; path = "yaml/multiapi-v3.yaml"; sourceTree = "<group>"; };
+		F194330F24D086B200A277BD /* custom-baseUrl-more-options.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "custom-baseUrl-more-options.yaml"; path = "yaml/custom-baseUrl-more-options.yaml"; sourceTree = "<group>"; };
+		F194331024D086B200A277BD /* parameter-flattening.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "parameter-flattening.yaml"; path = "yaml/parameter-flattening.yaml"; sourceTree = "<group>"; };
+		F194331124D086B200A277BD /* subscriptionId-apiVersion.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "subscriptionId-apiVersion.yaml"; path = "yaml/subscriptionId-apiVersion.yaml"; sourceTree = "<group>"; };
+		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
+		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -450,6 +633,71 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
+		F19432D924D0869D00A277BD /* yaml */ = {
+			isa = PBXGroup;
+			children = (
+				F194330A24D086B100A277BD /* additionalProperties.yaml */,
+				F19432DD24D086AF00A277BD /* azure-parameter-grouping.yaml */,
+				F19432DE24D086AF00A277BD /* azure-report.yaml */,
+				F19432E024D086AF00A277BD /* azure-resource-x.yaml */,
+				F19432FE24D086B000A277BD /* azure-resource.yaml */,
+				F19432F324D086B000A277BD /* azure-special-properties.yaml */,
+				F19432E424D086AF00A277BD /* body-array.yaml */,
+				F194331224D086B200A277BD /* body-boolean.quirks.yaml */,
+				F19432EA24D086AF00A277BD /* body-boolean.yaml */,
+				F194330224D086B100A277BD /* body-byte.yaml */,
+				F194330624D086B100A277BD /* body-complex.yaml */,
+				F19432E324D086AF00A277BD /* body-date.yaml */,
+				F19432F824D086B000A277BD /* body-datetime-rfc1123.yaml */,
+				F19432F524D086B000A277BD /* body-datetime.yaml */,
+				F194330724D086B100A277BD /* body-dictionary.yaml */,
+				F19432FD24D086B000A277BD /* body-duration.yaml */,
+				F19432E624D086AF00A277BD /* body-file.yaml */,
+				F194330924D086B100A277BD /* body-formdata-urlencoded.yaml */,
+				F194330B24D086B100A277BD /* body-formdata.yaml */,
+				F194330824D086B100A277BD /* body-integer.yaml */,
+				F19432F024D086B000A277BD /* body-number.quirks.yaml */,
+				F194330124D086B100A277BD /* body-number.yaml */,
+				F19432F724D086B000A277BD /* body-string.quirks.yaml */,
+				F19432FA24D086B000A277BD /* body-string.yaml */,
+				F194331324D086B200A277BD /* body-time.yaml */,
+				F19432EB24D086AF00A277BD /* complex-model.yaml */,
+				F19432E224D086AF00A277BD /* constants.yaml */,
+				F194330F24D086B200A277BD /* custom-baseUrl-more-options.yaml */,
+				F19432E824D086AF00A277BD /* custom-baseUrl-paging.yaml */,
+				F19432E724D086AF00A277BD /* custom-baseUrl.yaml */,
+				F19432EE24D086AF00A277BD /* extensible-enums-swagger.yaml */,
+				F19432DC24D086AF00A277BD /* head-exceptions.yaml */,
+				F194330424D086B100A277BD /* head.yaml */,
+				F19432DB24D086AF00A277BD /* header.yaml */,
+				F19432E524D086AF00A277BD /* httpInfrastructure.quirks.yaml */,
+				F19432E124D086AF00A277BD /* httpInfrastructure.yaml */,
+				F194330024D086B100A277BD /* lro.yaml */,
+				F19432EF24D086B000A277BD /* media_types.yaml */,
+				F19432F224D086B000A277BD /* model-flattening.yaml */,
+				F19432DF24D086AF00A277BD /* multiapi-v1-custom-base-url.yaml */,
+				F19432EC24D086AF00A277BD /* multiapi-v1.yaml */,
+				F19432F424D086B000A277BD /* multiapi-v2-custom-base-url.yaml */,
+				F19432E924D086AF00A277BD /* multiapi-v2.yaml */,
+				F194330E24D086B100A277BD /* multiapi-v3.yaml */,
+				F194330D24D086B100A277BD /* multiple-inheritance.yaml */,
+				F19432DA24D086AF00A277BD /* non-string-enum.yaml */,
+				F19432F924D086B000A277BD /* object-type.yaml */,
+				F19432ED24D086AF00A277BD /* paging.yaml */,
+				F194331024D086B200A277BD /* parameter-flattening.yaml */,
+				F19432F124D086B000A277BD /* report.yaml */,
+				F194330324D086B100A277BD /* required-optional.yaml */,
+				F19432FB24D086B000A277BD /* storage.yaml */,
+				F194331124D086B200A277BD /* subscriptionId-apiVersion.yaml */,
+				F19432FF24D086B000A277BD /* url-multi-collectionFormat.yaml */,
+				F194330C24D086B100A277BD /* url.yaml */,
+				F19432FC24D086B000A277BD /* validation.yaml */,
+				F194330524D086B100A277BD /* xml-service.yaml */,
+				F19432F624D086B000A277BD /* xms-error-responses.yaml */,
+			);
+			name = yaml;
+			sourceTree = "<group>";
+		};
 		OBJ_110 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +806,7 @@
 				OBJ_118 /* tests */,
 				OBJ_120 /* scripts */,
 				0A22B06F24CB71E100EC018E /* templates */,
+				F19432D924D0869D00A277BD /* yaml */,
 				F106830224CF9226007EB4D5 /* tools */,
 				F106826A24CF5AB9007EB4D5 /* configs */,
 				OBJ_122 /* LICENSE */,
@@ -687,6 +936,7 @@
 				2F41EF7D6784CD98E2037517 /* [CP] Check Pods Manifest.lock */,
 				OBJ_243 /* Sources */,
 				OBJ_246 /* Frameworks */,
+				F194331424D086C800A277BD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -965,6 +1215,7 @@
 			baseConfigurationReference = F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -993,6 +1244,7 @@
 			baseConfigurationReference = DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",

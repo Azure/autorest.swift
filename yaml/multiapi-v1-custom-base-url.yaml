@@ -1,0 +1,219 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Service client for multiapi custom base url testing
+  title: Multiapi CustomBaseUrl Service Client
+schemas: !<!Schemas> 
+  numbers:
+    - !<!NumberSchema> &ref_5
+      type: integer
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: Integer
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!NumberSchema> &ref_1
+      type: integer
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: Integer
+          description: ''
+      protocol: !<!Protocols> {}
+  strings:
+    - !<!StringSchema> &ref_0
+      type: string
+      language: !<!Languages> 
+        default:
+          name: String
+          description: simple string
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_2
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ErrorMessage
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> 
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      minLength: 1
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> 
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+      protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_3
+      type: constant
+      value: !<!ConstantValue> 
+        value: 1.0.0
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ApiVersion10
+          description: Api Version (1.0.0)
+      protocol: !<!Protocols> {}
+  objects:
+    - !<!ObjectSchema> &ref_8
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_1
+          serializedName: status
+          language: !<!Languages> 
+            default:
+              name: status
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          serializedName: message
+          language: !<!Languages> 
+            default:
+              name: message
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language: !<!Languages> 
+        default:
+          name: Error
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+globalParameters:
+  - !<!Parameter> &ref_4
+    schema: *ref_0
+    implementation: Client
+    required: true
+    extensions:
+      x-in: path
+      x-ms-priority: 1
+      x-ms-skip-url-encoding: true
+      x-name: Endpoint
+      x-required: true
+      x-type: string
+    language: !<!Languages> 
+      default:
+        name: Endpoint
+        description: 'Pass in https://localhost:3000'
+        serializedName: Endpoint
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: uri
+  - !<!Parameter> &ref_6
+    schema: *ref_3
+    implementation: Client
+    origin: 'modelerfour:synthesized/api-version'
+    required: true
+    language: !<!Languages> 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: query
+operationGroups:
+  - !<!OperationGroup> 
+    $key: ''
+    operations:
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_4
+          - !<!Parameter> &ref_7
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !<!Languages> 
+              default:
+                name: id
+                description: An int parameter. Put in 1 to pass
+                serializedName: id
+            protocol: !<!Protocols> 
+              http: !<!HttpParameter> 
+                in: query
+          - *ref_6
+        requests:
+          - !<!Request> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /test
+                method: put
+                uri: '{Endpoint}/multiapiCustomBaseUrl/v1'
+        signatureParameters:
+          - *ref_7
+        responses:
+          - !<!Response> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_8
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !<!Languages> 
+          default:
+            name: Test
+            description: Should be a mixin operation. Put in 1 for the required parameter and have the correct api version of 1.0.0 to pass
+        protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ''
+        description: ''
+    protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
+language: !<!Languages> 
+  default:
+    name: MultiapiCustomBaseUrlServiceClient
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

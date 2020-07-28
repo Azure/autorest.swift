@@ -57,7 +57,7 @@ class Manager {
     // MARK: Methods
 
     func run() throws {
-        let model = try loadModel()
+        let (model, _) = try loadModel()
 
         // Create folder structure
         let packageName = model.name
@@ -73,7 +73,7 @@ class Manager {
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency
-    private func loadModel() throws -> CodeModel {
+    func loadModel() throws -> (CodeModel, Bool) {
         // decode YAML to model
         let decoder = YAMLDecoder()
         var yamlString = try String(contentsOf: inputUrl)
@@ -87,13 +87,13 @@ class Manager {
             userInfo: [AnyCodable.extensionStringDecodedKey: StringDecodeKeys()]
         )
 
-        check(model: model, against: yamlString)
+        let isMatchedConsistency = check(model: model, against: yamlString)
 
-        return model
+        return (model, isMatchedConsistency)
     }
 
     /// Check model for consistency and save debugging files if inconsistent
-    private func check(model: CodeModel, against yamlString: String) {
+    private func check(model: CodeModel, against yamlString: String) -> Bool {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
@@ -143,6 +143,8 @@ class Manager {
         } else {
             logger.log("Model file check: OK", level: .info)
         }
+
+        return (beforeJsonString == afterJsonString)
     }
 
     private func formatCode(atBaseUrl baseUrl: URL) throws {
