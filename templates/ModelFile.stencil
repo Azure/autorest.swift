@@ -1,6 +1,6 @@
 {% include "HeaderSnippet.stencil" %}
 
-{% include "ImportSnippet.stencil" %}
+{% include "ModelImportSnippet.stencil" %}
 
 {{ model.comment }}
 public {{ model.objectType }} {{ model.name }} {
