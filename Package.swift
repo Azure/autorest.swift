@@ -8,6 +8,10 @@ let package = Package(
     platforms: [
         .macOS(.v10_14)
     ],
+    products: [
+        .executable(name: "AutorestSwift", targets: ["AutorestSwift"]),
+        .library(name: "AutorestSwiftFramework", targets: ["AutorestSwiftFramework"])
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -18,12 +22,16 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "AutorestSwift",
+            name: "AutorestSwiftFramework",
             dependencies: ["Yams", "Stencil"]
+        ),
+        .target(
+            name: "AutorestSwift",
+            dependencies: ["AutorestSwiftFramework", "Yams", "Stencil"]
         ),
         .testTarget(
             name: "AutorestSwiftTests",
-            dependencies: ["AutorestSwift", "Yams", "Stencil"]
+            dependencies: ["AutorestSwiftFramework", "Yams", "Stencil"]
         )
     ],
     swiftLanguageVersions: [.v5]

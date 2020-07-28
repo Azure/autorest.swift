@@ -26,6 +26,7 @@
 
 import Foundation
 import os.log
+import AutorestSwiftFramework
 
 guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
     fatalError("Unabled to locate Documents directory.")
