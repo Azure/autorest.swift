@@ -81,24 +81,15 @@ struct RequestViewModel {
 
     init(from request: Request) {
         // load HttpRequest properties
-        if let httpRequest = (request.protocol.http as? HttpRequest) {
-            self.path = httpRequest.path
-            self.method = httpRequest.method.rawValue
-            self.uri = httpRequest.uri
-        } else {
-            self.path = ""
-            self.method = ""
-            self.uri = ""
-        }
+        let httpRequest = request.protocol.http as? HttpRequest
+        self.path = httpRequest?.path ?? ""
+        self.method = httpRequest?.method.rawValue ?? ""
+        self.uri = httpRequest?.uri ?? ""
 
         // load HttpWithBodyRequest specfic properties
-        if let httpWithBodyRequest = (request.protocol.http as? HttpWithBodyRequest) {
-            self.mediaTypes = httpWithBodyRequest.mediaTypes
-            self.knownMediaType = httpWithBodyRequest.knownMediaType.rawValue
-        } else {
-            self.mediaTypes = nil
-            self.knownMediaType = nil
-        }
+        let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
+        self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
+        self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
 
         // check if the request body is from signature parameter. If yes, store the object type
         // and add the request signature parameter to operation parameters
@@ -108,12 +99,7 @@ struct RequestViewModel {
         }
         self.params = params
 
-        if request.signatureParameters?.count == 1,
-            request.signatureParameters?[0].schema.type == AllSchemaTypes.object {
-            self.objectType = request.signatureParameters?[0].schema.name
-        } else {
-            self.objectType = nil
-        }
+        self.objectType = request.signatureParameters?.first?.schema.name
     }
 }
 
@@ -124,19 +110,13 @@ struct ResponseViewModel {
     let objectType: String?
 
     init(from response: Response) {
-        if let httpResponse = (response.protocol.http as? HttpResponse) {
-            var statusCodes = [String]()
-            for code in httpResponse.statusCodes {
-                statusCodes.append(code.rawValue)
-            }
-            self.statusCodes = statusCodes
-            self.knownMediaType = httpResponse.knownMediaType?.rawValue
-            self.mediaTypes = httpResponse.mediaTypes
-        } else {
-            self.statusCodes = []
-            self.knownMediaType = nil
-            self.mediaTypes = nil
-        }
+        let httpResponse = response.protocol.http as? HttpResponse
+        var statusCodes = [String]()
+        httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
+
+        self.statusCodes = statusCodes
+        self.knownMediaType = httpResponse?.knownMediaType?.rawValue
+        self.mediaTypes = httpResponse?.mediaTypes
 
         // check if the request body schema type is object, store the object type of the response body
         if let schemaResponse = response as? SchemaResponse,
@@ -177,16 +157,14 @@ struct OperationViewModel {
         var uriParams = [KeyValueViewModel]()
 
         for param in schema.parameters ?? [] {
-            if let httpParam = (param.protocol.http as? HttpParameter?) {
-                if httpParam?.in == ParameterLocation.query {
-                    queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-                } else
-                if httpParam?.in == ParameterLocation.header {
-                    headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-                } else
-                if httpParam?.in == ParameterLocation.uri {
-                    uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-                }
+            let httpParam = param.protocol.http as? HttpParameter?
+
+            if httpParam??.in == ParameterLocation.query {
+                queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+            } else if httpParam??.in == ParameterLocation.header {
+                headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+            } else if httpParam??.in == ParameterLocation.uri {
+                uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
             }
         }
 
@@ -209,19 +187,13 @@ struct OperationViewModel {
         self.responses = responses
 
         // TODO: only support max 1 request and  max 1 response for now
-        if requests.count == 1, responses.count == 1 {
-            for param in requests[0].params ?? [] {
-                items.append(param)
-            }
-
-            self.method = requests[0].method
-            self.path = requests[0].path
-            self.returnType = ReturnTypeViewModel(from: responses[0].objectType ?? "")
-        } else {
-            self.method = nil
-            self.path = nil
-            self.returnType = nil
+        for param in requests.first?.params ?? [] {
+            items.append(param)
         }
+
+        self.method = requests.first?.method
+        self.path = requests.first?.path
+        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
 
         self.params = items
     }
