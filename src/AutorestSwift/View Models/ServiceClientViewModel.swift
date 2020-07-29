@@ -161,7 +161,6 @@ struct OperationViewModel {
                 queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
             case .header:
                 headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-
             case .uri:
                 uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
 
