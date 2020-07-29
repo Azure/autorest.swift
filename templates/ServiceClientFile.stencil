@@ -12,23 +12,23 @@ public final class {{ model.name }}: PipelineClient {
         {% for param in op.params %}
         {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
         {% endfor %}
-        completionHandler: @escaping HTTPResultHandler<{{ op.returnType }}>
+        completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
     ) {
         // Construct URL
-        let urlTemplate = "{{ op.url }}"
+        let urlTemplate = "{{ op.path }}"
         guard let url = self.url(forTemplate: urlTemplate) else { return }
 
         // Construct query
         var queryParams: [QueryParameter] = [
             {% for param in op.queryParams %}
-            {{ param }}
+            "{{ param.key }}" : {{ param.value}}
             {% endfor %}
         ]
 
         // Construct headers
         var headers = HTTPHeaders([
             {% for param in op.headerParams %}
-            {{ param }}
+            "{{ param.key }}" : {{ param.value}}
             {% endfor %}
         ])
 
