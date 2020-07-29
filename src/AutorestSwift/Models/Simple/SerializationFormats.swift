@@ -28,13 +28,13 @@ import Foundation
 
 /// Custom extensible metadata for individual serialization formats
 public class SerializationFormats: Codable {
-    public let json: SerializationFormat?
+    let json: SerializationFormat?
 
-    public let xml: XmlSerializationFormat?
+    let xml: XmlSerializationFormat?
 
-    public let protobuf: SerializationFormat?
+    let protobuf: SerializationFormat?
 
-    public let binary: SerializationFormat?
+    let binary: SerializationFormat?
 
     enum CodingKeys: String, CodingKey {
         case json, xml, protobuf, binary

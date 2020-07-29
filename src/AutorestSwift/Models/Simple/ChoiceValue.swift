@@ -39,10 +39,10 @@ public class ChoiceValue: Codable, LanguageShortcut {
 
     /// the actual value
     // TODO: Resolve question about enum
-    public let value: String // StringOrNumberOrBoolean
+    let value: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case language, value, extensions

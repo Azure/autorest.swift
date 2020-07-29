@@ -34,7 +34,7 @@ public enum ByteArrayFormat: String, Codable {
 /// a schema that represents a ByteArray value
 public class ByteArraySchema: ValueSchema {
     /// date-time format
-    public let format: ByteArrayFormat
+    let format: ByteArrayFormat
 
     enum CodingKeys: String, CodingKey {
         case format

@@ -27,15 +27,15 @@
 import Foundation
 
 public class XmlSerializationFormat: SerializationFormat {
-    public let name: String?
+    let name: String?
 
-    public let namespace: String?
+    let namespace: String?
 
-    public let prefix: String?
+    let prefix: String?
 
-    public let attribute: Bool
+    let attribute: Bool
 
-    public let wrapped: Bool
+    let wrapped: Bool
 
     enum CodingKeys: String, CodingKey {
         case name, namespace, prefix, attribute, wrapped

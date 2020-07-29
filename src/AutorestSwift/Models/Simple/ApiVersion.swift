@@ -39,9 +39,9 @@ public enum ApiVersionRange: String, Codable {
 // - semver-range style (ie, '^1.0.0' or '~1.0.0' )
 public class ApiVersion: Codable {
     /// The actual API version string used in the API
-    public let version: String
+    let version: String
 
-    public let range: ApiVersionRange?
+    let range: ApiVersionRange?
 
     enum CodingKeys: String, CodingKey {
         case version, range

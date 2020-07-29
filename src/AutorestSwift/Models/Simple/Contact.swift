@@ -29,16 +29,16 @@ import Foundation
 /// Contact information
 public class Contact: Codable {
     /// contact name
-    public let name: String?
+    let name: String?
 
     /// a URI
-    public let url: String?
+    let url: String?
 
     /// contact email
-    public let email: String?
+    let email: String?
 
     /// additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case name, url, email, extensions

@@ -28,10 +28,10 @@ import Foundation
 
 public class Request: Metadata {
     /// the parameter inputs to the operation
-    public let parameters: [Parameter]?
+    let parameters: [Parameter]?
 
     /// a filtered list of parameters that is (assumably) the actual method signature parameters
-    public let signatureParameters: [Parameter]?
+    let signatureParameters: [Parameter]?
 
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters

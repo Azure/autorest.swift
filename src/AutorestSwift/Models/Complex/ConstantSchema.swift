@@ -29,10 +29,10 @@ import Foundation
 /// a schema that represents a constant value
 public class ConstantSchema: Schema {
     /// the schema type of the constant value (ie, StringSchema, NumberSchema, etc)
-    public let valueType: Schema
+    let valueType: Schema
 
     /// the constant value
-    public let value: ConstantValue
+    let value: ConstantValue
 
     enum CodingKeys: String, CodingKey {
         case valueType, value

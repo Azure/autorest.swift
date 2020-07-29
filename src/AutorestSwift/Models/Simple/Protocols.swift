@@ -28,13 +28,13 @@ import Foundation
 
 /// Custom extensible metadata for individual protocols (ie, HTTP, etc)
 public class Protocols: Codable {
-    public let http: ProtocolInterface?
+    let http: ProtocolInterface?
 
-    public let amqp: ProtocolInterface?
+    let amqp: ProtocolInterface?
 
-    public let mqtt: ProtocolInterface?
+    let mqtt: ProtocolInterface?
 
-    public let jsonrpc: ProtocolInterface?
+    let jsonrpc: ProtocolInterface?
 
     enum CodingKeys: String, CodingKey {
         case http, amqp, mqtt, jsonrpc

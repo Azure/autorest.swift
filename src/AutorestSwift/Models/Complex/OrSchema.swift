@@ -29,7 +29,7 @@ import Foundation
 /// an OR relationship between several schemas
 public class OrSchema: ComplexSchema {
     /// the set of schemas that this schema is composed of. Every schema is optional
-    public let anyOf: [ComplexSchema]
+    let anyOf: [ComplexSchema]
 
     enum CodingKeys: String, CodingKey {
         case anyOf

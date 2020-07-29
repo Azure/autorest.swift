@@ -27,11 +27,11 @@
 import Foundation
 
 public class Discriminator: Codable {
-    public let property: Property
+    let property: Property
 
-    public let immediate: [String: ComplexSchema]
+    let immediate: [String: ComplexSchema]
 
-    public let all: [String: ComplexSchema]
+    let all: [String: ComplexSchema]
 
     enum CodingKeys: String, CodingKey {
         case property, immediate, all

@@ -32,8 +32,8 @@ public class Metadata: Codable, LanguageShortcut {
     public var language: Languages
 
     /// per-protocol information for this aspect
-    public let `protocol`: Protocols
+    let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 }

@@ -29,26 +29,26 @@ import Foundation
 /// a schema that represents a type with child properties.
 public class ObjectSchema: ComplexSchema {
     /// the property of the polymorphic descriminator for this type, if there is one
-    public let discriminator: Discriminator?
+    let discriminator: Discriminator?
 
     /// maximum number of properties permitted
-    public let maxProperties: Int?
+    let maxProperties: Int?
 
     /// minimum number of properties permitted
-    public let minProperties: Int?
+    let minProperties: Int?
 
-    public let parents: Relations?
+    let parents: Relations?
 
-    public let children: Relations?
+    let children: Relations?
 
-    public let discriminatorValue: String?
+    let discriminatorValue: String?
 
     // MARK: allOf: Schema Usage
 
-    public let usage: [SchemaContext]
+    let usage: [SchemaContext]
 
     /// Known media types in which this schema can be serialized
-    public let serializationFormats: [KnownMediaType]
+    let serializationFormats: [KnownMediaType]
 
     // MARK: Codable
 

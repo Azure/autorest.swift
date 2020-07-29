@@ -32,10 +32,10 @@ public class ConstantValue: Codable, OptionalLanguageShortcut {
     public var language: Languages?
 
     /// the actual constant value to use
-    public let value: String
+    let value: String
 
     /// Additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case language, value, extensions

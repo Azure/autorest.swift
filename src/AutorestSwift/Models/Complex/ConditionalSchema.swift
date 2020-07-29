@@ -29,13 +29,13 @@ import Foundation
 /// a schema that represents a value dependent on another
 public class ConditionalSchema: ValueSchema {
     /// the primitive type for the conditional
-    public let conditionalType: PrimitiveSchema
+    let conditionalType: PrimitiveSchema
 
     /// the possible conditional values
-    public let conditions: [ConditionalValue]
+    let conditions: [ConditionalValue]
 
     /// the source value that drives the target value (property or parameter)
-    public let sourceValue: Value
+    let sourceValue: Value
 
     enum CodingKeys: String, CodingKey {
         case conditionalType, conditions, sourceValue

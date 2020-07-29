@@ -34,7 +34,7 @@ public enum DateTimeFormat: String, Codable {
 /// a schema that represents a DateTime value
 public class DateTimeSchema: ValueSchema {
     /// date-time format
-    public let format: DateTimeFormat
+    let format: DateTimeFormat
 
     enum CodingKeys: String, CodingKey {
         case format

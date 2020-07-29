@@ -29,5 +29,5 @@ import Foundation
 /// The security information for the API surface
 public class Security: Codable {
     /// indicates that the API surface requires authentication
-    public let authenticationRequired: Bool
+    let authenticationRequired: Bool
 }

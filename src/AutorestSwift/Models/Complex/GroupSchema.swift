@@ -30,10 +30,10 @@ public class GroupSchema: Schema {
     // MARK: allOf SchemaUsage
 
     /// contexts in which the schema is used
-    public let usage: [SchemaContext]
+    let usage: [SchemaContext]
 
     /// Known media types in which this schema can be serialized
-    public let serializationFormats: [KnownMediaType]
+    let serializationFormats: [KnownMediaType]
 
     enum CodingKeys: String, CodingKey {
         case usage, serializationFormats

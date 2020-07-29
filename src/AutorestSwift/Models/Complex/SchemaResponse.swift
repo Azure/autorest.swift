@@ -29,10 +29,10 @@ import Foundation
 /// a response that should be deserialized into a result of type(schema)
 public class SchemaResponse: Response {
     /// the content returned by the service for a given operation
-    public let schema: Schema
+    let schema: Schema
 
     /// indicates whether the response can be 'null'
-    public let nullable: Bool?
+    let nullable: Bool?
 
     enum CodingKeys: String, CodingKey {
         case schema, nullable

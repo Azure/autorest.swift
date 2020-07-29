@@ -29,23 +29,23 @@ import Foundation
 /// Code model information
 public class Info: Codable {
     /// the title of this service
-    public let title: String
+    let title: String
 
     /// a text description of the service
-    public let description: String?
+    let description: String?
 
     /// a URI to the terms of service specified to access the service
-    public let termsOfService: String?
+    let termsOfService: String?
 
     /// contact information for the service
-    public let contact: Contact?
+    let contact: Contact?
 
     /// license information for the service
-    public let license: License?
+    let license: License?
 
     /// external documentation
-    public let externalDocs: ExternalDocumentation?
+    let externalDocs: ExternalDocumentation?
 
     /// additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 }

@@ -31,13 +31,13 @@ import Foundation
 /// a schema that represents a Uri value
 public class UriSchema: PrimitiveSchema {
     /// the maximum length of the string
-    public let maxLength: Int?
+    let maxLength: Int?
 
     /// the minimum length of the string
-    public let minLength: Int?
+    let minLength: Int?
 
     /// a regular expression that the string must be validated against
-    public let pattern: String?
+    let pattern: String?
 
     enum CodingKeys: String, CodingKey {
         case maxLength, minLength, pattern
