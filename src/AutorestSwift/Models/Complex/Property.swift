@@ -27,19 +27,19 @@
 import Foundation
 
 // a property is a child value in an object
-public class Property: Value {
+class Property: Value {
     // if the property is marked read-only (ie, not intended to be sent to the service)
-    public let readOnly: Bool?
+    let readOnly: Bool?
 
     // the wire name of this property
-    public let serializedName: String
+    let serializedName: String
 
     // when a property is flattened, the property will be the set of serialized names to  get to that target property.
     // If flattenedName is present, then this property is a flattened property. (ie, ['properties','name'] )
-    public let flattenedNames: [String]?
+    let flattenedNames: [String]?
 
     // if this property is used as a discriminator for a polymorphic type
-    public let isDiscriminator: Bool?
+    let isDiscriminator: Bool?
 
     enum CodingKeys: String, CodingKey {
         case readOnly, serializedName, flattenedNames, isDiscriminator, schema

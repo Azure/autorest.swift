@@ -27,20 +27,20 @@
 import Foundation
 
 /// an individual value in a ConditionalSchema
-public class ConditionalValue: Codable, LanguageShortcut {
+class ConditionalValue: Codable, LanguageShortcut {
     /// per-language information for this value
     public var language: Languages
 
     /// the actual value
     // TODO: Resolve issue with enum
-    public let target: String // StringOrNumberOrBoolean
+    let target: String // StringOrNumberOrBoolean
 
     /// the source value
     // TODO: Resolve issue with enum
-    public let source: String // StringOrNumberOrBoolean
+    let source: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case language, target, source, extensions

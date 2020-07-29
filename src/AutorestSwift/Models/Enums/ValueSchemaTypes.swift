@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum ValueSchemaTypes: String, Codable {
+enum ValueSchemaTypes: String, Codable {
     case array
     case boolean
     case byteArray = "byte-array"

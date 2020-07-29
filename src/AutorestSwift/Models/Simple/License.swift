@@ -27,13 +27,13 @@
 import Foundation
 
 /// License information
-public class License: Codable {
+class License: Codable {
     /// the name of the license
-    public let name: String
+    let name: String
 
     /// a URI pointing to the full license text
-    public let url: String?
+    let url: String?
 
     /// additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 }

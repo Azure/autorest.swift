@@ -27,13 +27,13 @@
 import Foundation
 
 /// Common pattern for Metadata on aspects
-public class Metadata: Codable, LanguageShortcut {
+class Metadata: Codable, LanguageShortcut {
     /// per-language information for this aspect
     public var language: Languages
 
     /// per-protocol information for this aspect
-    public let `protocol`: Protocols
+    let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 }

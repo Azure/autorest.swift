@@ -26,15 +26,15 @@
 
 import Foundation
 
-public class FlagValue: Codable, LanguageShortcut {
+class FlagValue: Codable, LanguageShortcut {
     /// per-language information for this value
     public var language: Languages
 
     /// the actual value
-    public let value: Int
+    let value: Int
 
     /// Additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case language, value, extensions

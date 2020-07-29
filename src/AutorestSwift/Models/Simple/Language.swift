@@ -27,7 +27,7 @@
 import Foundation
 
 /// The bare-minimum fields for per-language metadata on a given aspect
-public class Language: Codable {
+class Language: Codable {
     /// name used in actual implementation
     public var name: String
 

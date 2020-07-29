@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a boolean value
-public typealias BinarySchema = Schema
+typealias BinarySchema = Schema

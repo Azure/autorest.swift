@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum SchemaContext: String, Codable {
+enum SchemaContext: String, Codable {
     case exception
     case input
     case output

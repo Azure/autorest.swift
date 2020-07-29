@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a Date value
-public typealias DateSchema = PrimitiveSchema
+typealias DateSchema = PrimitiveSchema

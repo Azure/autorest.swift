@@ -26,8 +26,8 @@
 
 import Foundation
 
-public class GroupProperty: Property {
-    public let originalParameter: [Parameter]
+class GroupProperty: Property {
+    let originalParameter: [Parameter]
 
     enum CodingKeys: String, CodingKey {
         case originalParameter

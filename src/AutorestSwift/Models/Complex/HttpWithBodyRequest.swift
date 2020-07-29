@@ -26,18 +26,18 @@
 
 import Foundation
 
-public class HttpWithBodyRequest: HttpRequest {
+class HttpWithBodyRequest: HttpRequest {
     // canonical response type (ie, 'json')
-    public let knownMediaType: KnownMediaType
+    let knownMediaType: KnownMediaType
 
     // content returned by the service in the HTTP headers
-    public let mediaTypes: [String]
+    let mediaTypes: [String]
 
     // content returned by the service in the HTTP headers
-    public let headers: [HttpHeader]?
+    let headers: [HttpHeader]?
 
     // sets of HTTP headers grouped together into a single schema
-    public let headerGroups: [GroupSchema]?
+    let headerGroups: [GroupSchema]?
 
     enum CodingKeys: String, CodingKey {
         case knownMediaType, mediaTypes, headers, headerGroups

@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum QueryEncodingStyle: String, Codable {
+enum QueryEncodingStyle: String, Codable {
     case deepObject
     case form
     case pipeDelimited

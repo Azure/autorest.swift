@@ -27,8 +27,8 @@
 import Foundation
 
 /// Custom extensible metadata for individual language generators
-public class Languages: Codable {
-    public let `default`: Language
+class Languages: Codable {
+    let `default`: Language
 
     // these properties we can set
     private var _swift: Language?

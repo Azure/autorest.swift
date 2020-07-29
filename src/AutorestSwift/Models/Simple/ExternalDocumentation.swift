@@ -27,14 +27,14 @@
 import Foundation
 
 /// A reference to external documentation
-public class ExternalDocumentation: Codable {
-    public let description: String?
+class ExternalDocumentation: Codable {
+    let description: String?
 
     /// A URI
-    public let url: String
+    let url: String
 
     /// Additional metadata extensions dictionary
-    public let extensions: AnyCodable?
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case description, url, extensions

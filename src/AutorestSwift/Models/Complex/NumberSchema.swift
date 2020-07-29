@@ -27,24 +27,24 @@
 import Foundation
 
 /// a schema that represents a Number value
-public class NumberSchema: PrimitiveSchema {
+class NumberSchema: PrimitiveSchema {
     /// precision (# of bits?) of the number
-    public let precision: Int
+    let precision: Int
 
     /// if present, the number must be an exact multiple of this value
-    public let multipleOf: Int?
+    let multipleOf: Int?
 
     /// if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)
-    public let maximum: Int?
+    let maximum: Int?
 
     /// if present, the value must be lower than maximum
-    public let exclusiveMaximum: Bool?
+    let exclusiveMaximum: Bool?
 
     /// if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)
-    public let minimum: Int?
+    let minimum: Int?
 
     /// if present, the value must be higher than minimum
-    public let exclusiveMinimum: Bool?
+    let exclusiveMinimum: Bool?
 
     // MARK: Codable
 

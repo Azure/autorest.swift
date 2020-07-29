@@ -26,7 +26,7 @@
 
 import Foundation
 
-// formatted version of comment
+/// formatted version of comment
 struct ViewModelComment: CustomStringConvertible {
     var description: String
 
@@ -41,7 +41,7 @@ struct ViewModelComment: CustomStringConvertible {
     }
 }
 
-// formatted version of a default value
+/// formatted version of a default value
 struct ViewModelDefault: CustomStringConvertible {
     var description: String
 

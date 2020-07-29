@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema types that are non-object or complex types
-public typealias BooleanSchema = PrimitiveSchema
+typealias BooleanSchema = PrimitiveSchema

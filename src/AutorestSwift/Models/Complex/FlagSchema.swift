@@ -26,9 +26,9 @@
 
 import Foundation
 
-public class FlagSchema: ValueSchema {
+class FlagSchema: ValueSchema {
     /// the possible choices for in the set
-    public let choices: [FlagValue]
+    let choices: [FlagValue]
 
     enum CodingKeys: String, CodingKey {
         case choices

@@ -50,13 +50,10 @@ class SwiftGenerator: CodeGenerator {
 
     /// Begin code generation process
     func generate() throws {
-        // TODO: Begin code generation process
-        try generateSchemas()
-    }
-
-    private func generateSchemas() throws {
         let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
+        let optionsUrl = baseUrl.with(subfolder: .options, withTargetName: targetName)
         try modelUrl.ensureExists()
+        try optionsUrl.ensureExists()
         logger.log("Base URL: \(baseUrl.path)")
 
         // Create Enumerations.swift file
@@ -79,8 +76,8 @@ class SwiftGenerator: CodeGenerator {
             )
         }
 
-        // Create client file
-        let clientViewModel = ServiceClientViewModel(from: model)
+        // Create Client.swift file
+        let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
             template: "ServiceClientFile",
             toSubfolder: .sources,
@@ -90,8 +87,16 @@ class SwiftGenerator: CodeGenerator {
             ]
         )
 
+        // Create ClientOptions.swift file
+        try render(
+            template: "ClientOptionsFile",
+            toSubfolder: .options,
+            withFilename: "\(clientViewModel.name)Options",
+            andParams: ["model": clientViewModel]
+        )
+
         // Create README.md file
-        let readmeViewModel = ReadmeViewModel(from: model)
+        let readmeViewModel = ReadmeFileViewModel(from: model)
         try render(
             template: "README",
             toSubfolder: .root,
@@ -100,7 +105,7 @@ class SwiftGenerator: CodeGenerator {
         )
 
         // Create Package.swift file
-        let packageViewModel = PackageViewModel(from: model)
+        let packageViewModel = PackageFileViewModel(from: model)
         try render(
             template: "Package",
             toSubfolder: .root,

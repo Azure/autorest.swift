@@ -27,7 +27,7 @@
 import Foundation
 
 /// Possible schema types that indicate the type of schema.
-public enum SchemaType: String, Codable {
+enum SchemaType: String, Codable {
     case any
     case array
     case binary

@@ -27,16 +27,16 @@
 import Foundation
 
 /// extended metadata for HTTP operation parameters
-public class HttpParameter: ProtocolInterface {
+class HttpParameter: ProtocolInterface {
     /// the location that this parameter is placed in the http request
-    public let `in`: ParameterLocation
+    let `in`: ParameterLocation
 
     /// the Serialization Style used for the parameter
-    public let style: SerializationStyle?
+    let style: SerializationStyle?
 
     /// when set, 'form' style parameters generate separate parameters for each value of an array
-    public let explode: Bool?
+    let explode: Bool?
 
     /// when set, this indicates that the content of the parameter should not be subject to URI encoding rules
-    public let skipUriEncoding: Bool?
+    let skipUriEncoding: Bool?
 }

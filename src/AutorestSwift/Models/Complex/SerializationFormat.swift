@@ -26,8 +26,8 @@
 
 import Foundation
 
-public class SerializationFormat: Codable {
-    public let extensions: AnyCodable?
+class SerializationFormat: Codable {
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case extensions

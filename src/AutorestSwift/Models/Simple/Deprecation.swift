@@ -27,12 +27,12 @@
 import Foundation
 
 /// Represents  deprecation information for a given aspect
-public class Deprecation: Codable {
+class Deprecation: Codable {
     /// The reason why this aspect
-    public let message: String
+    let message: String
 
     /// The api versions that this deprecation is applicable to.
-    public let apiVersions: [ApiVersion]
+    let apiVersions: [ApiVersion]
     enum CodingKeys: String, CodingKey {
         case message, apiVersions
     }

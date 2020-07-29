@@ -27,15 +27,15 @@
 import Foundation
 
 /// A definition of an discrete input for an operation
-public class Parameter: Value {
+class Parameter: Value {
     /// suggested implementation location for this parameter
-    public let implementation: ImplementationLocation?
+    let implementation: ImplementationLocation?
 
     /// When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)
-    public let flattened: Bool?
+    let flattened: Bool?
 
     /// when a parameter is grouped into another, this will tell where the parameter got grouped into
-    public let groupedBy: Parameter?
+    let groupedBy: Parameter?
 
     // MARK: Codable
 

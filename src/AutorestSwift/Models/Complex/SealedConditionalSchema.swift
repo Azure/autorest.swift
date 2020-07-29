@@ -27,15 +27,15 @@
 import Foundation
 
 /// a schema that represents a value dependent on another (not overridable)
-public class SealedConditionalSchema: ValueSchema {
+class SealedConditionalSchema: ValueSchema {
     /// the primitive type for the conditional
-    public let conditionalType: PrimitiveSchema
+    let conditionalType: PrimitiveSchema
 
     /// the possible conditional values
-    public let conditions: [ConditionalValue]
+    let conditions: [ConditionalValue]
 
     /// the source value that drives the target value
-    public let sourceValue: [Value]
+    let sourceValue: [Value]
 
     enum CodingKeys: String, CodingKey {
         case conditionalType, conditions, sourceValue

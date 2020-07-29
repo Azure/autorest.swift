@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum StatusCode: String, Codable {
+enum StatusCode: String, Codable {
     case code100 = "100"
     case code101 = "101"
     case code102 = "102"

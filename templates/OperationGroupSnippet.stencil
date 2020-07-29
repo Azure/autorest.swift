@@ -1,0 +1,4 @@
+// MARK: {{ group.description }}
+{% for op in group.operations %}
+    {% include "OperationSnippet.stencil" op %}
+{% endfor %}

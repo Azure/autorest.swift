@@ -27,12 +27,12 @@
 import Foundation
 
 /// a schema that represents a key-value collection
-public class DictionarySchema: ComplexSchema {
+class DictionarySchema: ComplexSchema {
     /// the element type of the dictionary. (Keys are always strings)
-    public let elementType: Schema
+    let elementType: Schema
 
     /// if elements in the dictionary should be nullable
-    public let nullableItems: Bool?
+    let nullableItems: Bool?
 
     enum CodingKeys: String, CodingKey {
         case elementType, nullableItems

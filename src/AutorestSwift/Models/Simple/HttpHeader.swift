@@ -26,10 +26,10 @@
 
 import Foundation
 
-public class HttpHeader: Codable {
-    public let header: String
-    public let schema: Schema
-    public let extensions: AnyCodable?
+class HttpHeader: Codable {
+    let header: String
+    let schema: Schema
+    let extensions: AnyCodable?
 
     enum CodingKeys: String, CodingKey {
         case header, schema, extensions

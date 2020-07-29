@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum ApiVersionRange: String, Codable {
+enum ApiVersionRange: String, Codable {
     case plus = "+"
     case minus = "-"
 }
@@ -37,11 +37,11 @@ public enum ApiVersionRange: String, Codable {
 // options:
 // - prepend a dash or append a plus to indicate a range (ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )
 // - semver-range style (ie, '^1.0.0' or '~1.0.0' )
-public class ApiVersion: Codable {
+class ApiVersion: Codable {
     /// The actual API version string used in the API
-    public let version: String
+    let version: String
 
-    public let range: ApiVersionRange?
+    let range: ApiVersionRange?
 
     enum CodingKeys: String, CodingKey {
         case version, range

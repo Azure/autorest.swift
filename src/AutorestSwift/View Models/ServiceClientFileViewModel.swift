@@ -26,30 +26,30 @@
 
 import Foundation
 
-struct ReadmeUrls {
-    let source: String
-    let api: String
-    let product: String
-    let samples: String
-    let impressions: String
-}
-
-struct ReadmeViewModel {
-    let title: String
-    let description: String
-    let extendedDescription: String
-    let urls: ReadmeUrls
+/// View Model for the service client file.
+struct ServiceClientFileViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let operationGroups: [OperationGroupViewModel]
 
     init(from model: CodeModel) {
-        self.title = model.info.title
-        self.description = model.info.description ?? ""
-        self.extendedDescription = "TODO: Where?"
-        self.urls = ReadmeUrls(
-            source: "TODO: Find source URL",
-            api: "TODO: Find API docs URL",
-            product: "TODO: Find product documenation URL",
-            samples: "TODO: Find samples URL",
-            impressions: "TODO: Find impressions URL"
-        )
+        self.name = clientName(for: model.name)
+        self.comment = ViewModelComment(from: model.description)
+        var items = [OperationGroupViewModel]()
+        for group in model.operationGroups {
+            items.append(OperationGroupViewModel(from: group, with: model))
+        }
+        self.operationGroups = items
     }
+}
+
+private func clientName(for serviceName: String) -> String {
+    var name = serviceName
+    let stripList = ["Service", "Client"]
+    for item in stripList {
+        if name.hasSuffix(item) {
+            name = String(name.dropLast(item.count))
+        }
+    }
+    return "\(name)Client"
 }

@@ -26,12 +26,10 @@
 
 import Foundation
 
-// public typealias XorSchema = Compose<XorSchemaProperty, Schema>
-
 /// an XOR relationship between several schemas
-public class XorSchema: Schema {
+class XorSchema: Schema {
     /// the set of schemas that this must be one and only one of.
-    public let oneOf: [Schema]
+    let oneOf: [Schema]
 
     enum CodingKeys: String, CodingKey {
         case oneOf

@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a Duration value
-public typealias DurationSchema = PrimitiveSchema
+typealias DurationSchema = PrimitiveSchema

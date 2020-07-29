@@ -27,4 +27,4 @@
 import Foundation
 
 /// schema types that can be objects
-public typealias ComplexSchema = Schema
+typealias ComplexSchema = Schema

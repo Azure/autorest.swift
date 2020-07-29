@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema types that are primitive language values
-public typealias PrimitiveSchema = ValueSchema
+typealias PrimitiveSchema = ValueSchema

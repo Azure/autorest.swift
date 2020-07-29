@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a ODataQuery value
-public typealias ODataQuerySchema = Schema
+typealias ODataQuerySchema = Schema
