@@ -80,7 +80,7 @@ class SwiftGenerator: CodeGenerator {
         }
 
         // Create client file
-        let clientViewModel = ServiceClientViewModel(from: model)
+        let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
             template: "ServiceClientFile",
             toSubfolder: .sources,
@@ -91,7 +91,7 @@ class SwiftGenerator: CodeGenerator {
         )
 
         // Create README.md file
-        let readmeViewModel = ReadmeViewModel(from: model)
+        let readmeViewModel = ReadmeFileViewModel(from: model)
         try render(
             template: "README",
             toSubfolder: .root,
@@ -100,7 +100,7 @@ class SwiftGenerator: CodeGenerator {
         )
 
         // Create Package.swift file
-        let packageViewModel = PackageViewModel(from: model)
+        let packageViewModel = PackageFileViewModel(from: model)
         try render(
             template: "Package",
             toSubfolder: .root,

@@ -26,18 +26,32 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// Container for various README URLs.
+struct ReadmeUrls {
+    let source: String
+    let api: String
+    let product: String
+    let samples: String
+    let impressions: String
+}
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+/// View Model for the README.md file.
+struct ReadmeFileViewModel {
+    let title: String
+    let description: String
+    let extendedDescription: String
+    let urls: ReadmeUrls
+
+    init(from model: CodeModel) {
+        self.title = model.info.title
+        self.description = model.info.description ?? ""
+        self.extendedDescription = "TODO: Where?"
+        self.urls = ReadmeUrls(
+            source: "TODO: Find source URL",
+            api: "TODO: Find API docs URL",
+            product: "TODO: Find product documenation URL",
+            samples: "TODO: Find samples URL",
+            impressions: "TODO: Find impressions URL"
+        )
     }
 }

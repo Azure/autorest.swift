@@ -26,30 +26,17 @@
 
 import Foundation
 
-struct ReadmeUrls {
-    let source: String
-    let api: String
-    let product: String
-    let samples: String
-    let impressions: String
-}
+/// View Model for a method signature parameter.
+/// Example:
+///     name: String? = nil
+struct ParameterViewModel {
+    let name: String
+    let type: String
+    let defaultValue: ViewModelDefault
 
-struct ReadmeViewModel {
-    let title: String
-    let description: String
-    let extendedDescription: String
-    let urls: ReadmeUrls
-
-    init(from model: CodeModel) {
-        self.title = model.info.title
-        self.description = model.info.description ?? ""
-        self.extendedDescription = "TODO: Where?"
-        self.urls = ReadmeUrls(
-            source: "TODO: Find source URL",
-            api: "TODO: Find API docs URL",
-            product: "TODO: Find product documenation URL",
-            samples: "TODO: Find samples URL",
-            impressions: "TODO: Find impressions URL"
-        )
+    init(from schema: Parameter) {
+        self.name = schema.name.toCamelCase
+        self.type = schema.schema.name
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }

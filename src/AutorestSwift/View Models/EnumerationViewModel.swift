@@ -26,18 +26,25 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for an enumeration object.
+/// Example:
+///     // a simple enum
+///     public enum SimpleEnum: String, Codable { ... }
+struct EnumerationViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let type: String
+    let choices: [EnumerationChoiceViewModel]
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
+    init(from schema: EnumerableSchema) {
+        self.name = schema.name.toPascalCase
+        self.comment = ViewModelComment(from: schema.description)
+        self.type = schema.choiceType.name
+
+        var items = [EnumerationChoiceViewModel]()
+        for choice in schema.choices {
+            items.append(EnumerationChoiceViewModel(from: choice))
         }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+        self.choices = items
     }
 }

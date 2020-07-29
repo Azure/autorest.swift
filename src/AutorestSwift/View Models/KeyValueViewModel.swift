@@ -26,18 +26,29 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
-
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
-    }
-}
+///// View Model for a key-value pair, as used in Dictionaries.
+///// Example:
+/////     "key" = value
+// struct KeyValueViewModel {
+//    let key: String
+//    let value: String
+//
+//    init(from schema: Parameter, signatureParameters params: [ParameterViewModel]) {
+//        self.key = schema.serializedName!
+//        self.value = values(for: schema, from: params)
+//    }
+// }
+//
+// private func values(for schema: Parameter, from params: [Parameter]) -> String {
+//    if let constantSchema = schema.schema as? ConstantSchema {
+//        return "\"\(constantSchema.value.value)\""
+//    }
+//
+//    // check if the name matches with one of the signature parameter
+//    // if match, the value is taken from the signature parameter
+//    for param in params where param.name == schema.name {
+//        return param.name
+//    }
+//
+//    return ""
+// }

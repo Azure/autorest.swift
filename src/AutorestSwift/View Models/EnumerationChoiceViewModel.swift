@@ -26,18 +26,18 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for an enumeration choice.
+/// Example:
+///     // a simple choice
+///     case simple = "Simple"
+struct EnumerationChoiceViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let value: String
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+    init(from schema: ChoiceValue) {
+        self.name = schema.name.toCamelCase
+        self.comment = ViewModelComment(from: schema.description)
+        self.value = schema.value
     }
 }

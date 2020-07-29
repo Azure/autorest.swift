@@ -26,18 +26,30 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for the service client file.
+struct ServiceClientFileViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let operationGroups: [OperationGroupViewModel]
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
+    init(from schema: CodeModel) {
+        self.name = clientName(for: schema.name)
+        self.comment = ViewModelComment(from: schema.description)
+        var items = [OperationGroupViewModel]()
+        for group in schema.operationGroups {
+            items.append(OperationGroupViewModel(from: group))
         }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+        self.operationGroups = items
     }
+}
+
+private func clientName(for serviceName: String) -> String {
+    var name = serviceName
+    let stripList = ["Service", "Client"]
+    for item in stripList {
+        if name.hasSuffix(item) {
+            name = String(name.dropLast(item.count))
+        }
+    }
+    return "\(name)Client"
 }

@@ -26,18 +26,45 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for an struct property.
+/// Example:
+///     // a simple property
+///     let simple: String = "default"
+struct PropertyViewModel {
+    let name: String
+    let comment: ViewModelComment
+    let type: String
+    let defaultValue: ViewModelDefault
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+    init(from schema: Property) {
+        self.name = schema.name.toCamelCase
+        self.comment = ViewModelComment(from: schema.description)
+        let required = schema.required ?? false
+        self.type = getType(from: schema.schema, optional: !required)
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
+}
+
+private func getType(from propertySchema: Schema, optional: Bool) -> String {
+    var type: String
+    switch propertySchema.type {
+    case AllSchemaTypes.string:
+        type = "String"
+    case AllSchemaTypes.boolean:
+        type = "Bool"
+    case AllSchemaTypes.array:
+        if let arraySchema = propertySchema as? ArraySchema {
+            type = "[\(arraySchema.elementType.name)]"
+        } else {
+            type = "[\(propertySchema.name)]"
+        }
+    case AllSchemaTypes.dateTime:
+        type = "Date"
+    case AllSchemaTypes.integer:
+        type = "Int"
+    default:
+        type = propertySchema.name
+    }
+
+    return optional ? "\(type)?" : type
 }

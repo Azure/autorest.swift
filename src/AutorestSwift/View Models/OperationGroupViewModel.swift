@@ -26,18 +26,20 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for an operation group
+/// Example:
+///     // MARK: OperationGroupName
+///     ...
+struct OperationGroupViewModel {
+    let name: String
+    let operations: [OperationViewModel]
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
+    init(from schema: OperationGroup) {
+        self.name = schema.name.toCamelCase
+        var items = [OperationViewModel]()
+        for operation in schema.operations {
+            items.append(OperationViewModel(from: operation))
         }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+        self.operations = items
     }
 }

@@ -26,18 +26,36 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for the method request creation.
+struct RequestViewModel {
+    let path: String
+    let method: String
+    let knownMediaType: String?
+    let uri: String?
+    let mediaTypes: [String]?
+    let params: [ParameterViewModel]?
+    let objectType: String?
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
+    init(from request: Request) {
+        // load HttpRequest properties
+        let httpRequest = request.protocol.http as? HttpRequest
+        self.path = httpRequest?.path ?? ""
+        self.method = httpRequest?.method.rawValue ?? ""
+        self.uri = httpRequest?.uri ?? ""
+
+        // load HttpWithBodyRequest specfic properties
+        let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
+        self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
+        self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
+
+        // check if the request body is from signature parameter. If yes, store the object type
+        // and add the request signature parameter to operation parameters
+        var params = [ParameterViewModel]()
+        for param in request.signatureParameters ?? [] {
+            params.append(ParameterViewModel(from: param))
         }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+        self.params = params
+
+        self.objectType = request.signatureParameters?.first?.schema.name
     }
 }

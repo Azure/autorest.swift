@@ -26,18 +26,13 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for method return type.
+/// Example:
+///     ... -> ReturnTypeName
+struct ReturnTypeViewModel {
+    let name: String
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+    init(from objectType: String) {
+        self.name = objectType
     }
 }

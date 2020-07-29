@@ -26,18 +26,24 @@
 
 import Foundation
 
-/// View Model for the Enumerations.swift file.
-struct EnumerationFileViewModel {
-    let enums: [EnumerationViewModel]
+/// View Model for method response handling.
+struct ResponseViewModel {
+    let statusCodes: [String]
+    let knownMediaType: String?
+    let mediaTypes: [String]?
+    let objectType: String?
 
-    init(from schema: Schemas) {
-        var items = [EnumerationViewModel]()
-        for choice in schema.choices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        for choice in schema.sealedChoices ?? [] {
-            items.append(EnumerationViewModel(from: choice))
-        }
-        self.enums = items
+    init(from response: Response) {
+        let httpResponse = response.protocol.http as? HttpResponse
+        var statusCodes = [String]()
+        httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
+
+        self.statusCodes = statusCodes
+        self.knownMediaType = httpResponse?.knownMediaType?.rawValue
+        self.mediaTypes = httpResponse?.mediaTypes
+
+        // check if the request body schema type is object, store the object type of the response body
+        let schemaResponse = response as? SchemaResponse
+        self.objectType = schemaResponse?.schema.name
     }
 }
