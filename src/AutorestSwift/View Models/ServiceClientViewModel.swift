@@ -119,12 +119,8 @@ struct ResponseViewModel {
         self.mediaTypes = httpResponse?.mediaTypes
 
         // check if the request body schema type is object, store the object type of the response body
-        if let schemaResponse = response as? SchemaResponse,
-            schemaResponse.schema.type == AllSchemaTypes.object {
-            self.objectType = schemaResponse.schema.name
-        } else {
-            self.objectType = nil
-        }
+        let schemaResponse = response as? SchemaResponse
+        self.objectType = schemaResponse?.schema.name
     }
 }
 
@@ -140,6 +136,7 @@ struct OperationViewModel {
     let responses: [ResponseViewModel]?
     let method: String?
     let path: String?
+    private static var logger = Logger(withName: "Autorest.Swift.OperationViewModel")
 
     init(from schema: Operation) {
         self.name = operationName(for: schema.name)
@@ -159,12 +156,18 @@ struct OperationViewModel {
         for param in schema.parameters ?? [] {
             let httpParam = param.protocol.http as? HttpParameter?
 
-            if httpParam??.in == ParameterLocation.query {
+            switch httpParam??.in {
+            case .query:
                 queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-            } else if httpParam??.in == ParameterLocation.header {
+            case .header:
                 headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-            } else if httpParam??.in == ParameterLocation.uri {
+
+            case .uri:
                 uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+
+            default:
+                // TODO: - implemented
+                OperationViewModel.logger.log("Http Parameter \(httpParam??.in) is not support")
             }
         }
 
