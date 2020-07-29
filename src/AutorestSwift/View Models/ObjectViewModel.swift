@@ -35,8 +35,8 @@ struct PropertyViewModel {
     init(from schema: Property) {
         self.name = schema.name.toCamelCase
         self.comment = ViewModelComment(from: schema.description)
-        let optional = schema.required ?? true
-        self.type = getType(from: schema.schema, optional: optional)
+        let required = schema.required ?? false
+        self.type = getType(from: schema.schema, optional: !required)
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }
