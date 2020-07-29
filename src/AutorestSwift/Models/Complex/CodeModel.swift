@@ -27,7 +27,7 @@
 import Foundation
 
 /// Model that contains all the information required to generate a service API
-public class CodeModel: Codable, LanguageShortcut {
+class CodeModel: Codable, LanguageShortcut {
     let info: Info
     let schemas: Schemas
     let operationGroups: [OperationGroup]
@@ -36,4 +36,9 @@ public class CodeModel: Codable, LanguageShortcut {
     var language: Languages
     let `protocol`: Protocols
     let extensions: AnyCodable?
+
+    /// Lookup a schema by name.
+    func schema(for name: String, withType type: AllSchemaTypes) -> Schema? {
+        return schemas.schema(for: name, withType: type)
+    }
 }

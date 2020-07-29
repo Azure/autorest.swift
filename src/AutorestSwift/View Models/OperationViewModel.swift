@@ -35,58 +35,53 @@ struct OperationViewModel {
     let comment: ViewModelComment
     let params: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
-//    let queryParams: [KeyValueViewModel]?
-//    let headerParams: [KeyValueViewModel]?
-//    let uriParams: [KeyValueViewModel]?
+    let queryParams: [KeyValueViewModel]?
+    let headerParams: [KeyValueViewModel]?
+    let uriParams: [KeyValueViewModel]?
     let requests: [RequestViewModel]?
     let responses: [ResponseViewModel]?
     let method: String?
     let path: String?
 
-    init(from schema: Operation) {
-        self.name = operationName(for: schema.name)
-        self.comment = ViewModelComment(from: schema.description)
+    init(from operation: Operation, with model: CodeModel) {
+        self.name = operationName(for: operation.name)
+        self.comment = ViewModelComment(from: operation.description)
 
         // operation parameters should be all the signature paramters from the schema
         // and the signature parameters of the Request
         var items = [ParameterViewModel]()
-        for param in schema.signatureParameters ?? [] {
+        for param in operation.signatureParameters ?? [] {
             items.append(ParameterViewModel(from: param))
         }
 
-//        var queryParams = [KeyValueViewModel]()
-//        var headerParams = [KeyValueViewModel]()
-//        var uriParams = [KeyValueViewModel]()
-//
-//        for param in schema.parameters ?? [] {
-//            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-//
-//            switch httpParam.in {
-//            case .query:
-//                queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-//            case .header:
-//                headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-//            case .uri:
-//                uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
-//
-//            default:
-//                // TODO: - implemented
-//                continue
-//            }
-//        }
-//
-//        self.queryParams = queryParams
-//        self.headerParams = headerParams
-//        self.uriParams = uriParams
+        var queryParams = [KeyValueViewModel]()
+        var headerParams = [KeyValueViewModel]()
+        var uriParams = [KeyValueViewModel]()
+        for param in operation.parameters ?? [] {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+            switch httpParam.in {
+            case .query:
+                queryParams.append(KeyValueViewModel(from: param, with: model))
+            case .header:
+                headerParams.append(KeyValueViewModel(from: param, with: model))
+            case .uri:
+                uriParams.append(KeyValueViewModel(from: param, with: model))
+            default:
+                continue
+            }
+        }
+        self.queryParams = queryParams
+        self.headerParams = headerParams
+        self.uriParams = uriParams
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
 
-        for request in schema.requests ?? [] {
+        for request in operation.requests ?? [] {
             requests.append(RequestViewModel(from: request))
         }
 
-        for response in schema.responses ?? [] {
+        for response in operation.responses ?? [] {
             responses.append(ResponseViewModel(from: response))
         }
 

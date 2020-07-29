@@ -1,0 +1,32 @@
+{% include "HeaderSnippet.stencil" %}
+
+{% include "ImportSnippet.stencil" %}
+
+/// User-configurable options for the `{{ model.name }}`.
+public struct {{ model.name }}Options: AzureClientOptions {
+    /// The API version of the {{ model.description }} to invoke.
+    public let apiVersion: String
+    /// The `ClientLogger` to be used by this `{{ model.name }}`.
+    public let logger: ClientLogger
+    /// Options for configuring telemetry sent by this `{{ model.name }}`.
+    public let telemetryOptions: TelemetryOptions
+    /// Global transport options
+    public let transportOptions: TransportOptions
+
+    /// Initialize a `{{ model.name }}Options` structure.
+    /// - Parameters:
+    ///   - apiVersion: The API version of the {{ model.description }} to invoke.
+    ///   - logger: The `ClientLogger` to be used by this `{{ model.name }}`.
+    ///   - telemetryOptions: Options for configuring telemetry sent by this `{{ model.name }}`.
+    public init(
+        apiVersion: {{ model.name }}Client.ApiVersion = .latest,
+        logger: ClientLogger = ClientLoggers.default(tag: "{{ model.name }}Client"),
+        telemetryOptions: TelemetryOptions = TelemetryOptions(),
+        transportOptions: TransportOptions? = nil
+    ) {
+        self.apiVersion = apiVersion.rawValue
+        self.logger = logger
+        self.telemetryOptions = telemetryOptions
+        self.transportOptions = transportOptions ?? TransportOptions()
+    }
+}

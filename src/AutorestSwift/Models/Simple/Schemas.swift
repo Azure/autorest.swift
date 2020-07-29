@@ -27,86 +27,98 @@
 import Foundation
 
 /// The full set of schemas for a given service, categorized into convenient collections.
-public class Schemas: Codable {
+class Schemas: Codable {
     /// a collection of items
-    public let arrays: [ArraySchema]?
+    let arrays: [ArraySchema]?
 
     /// an associative array (ie, dictionary, hashtable, etc)
-    public let dictionaries: [DictionarySchema]?
+    let dictionaries: [DictionarySchema]?
 
     /// a true or false value
-    public let booleans: [BooleanSchema]?
+    let booleans: [BooleanSchema]?
 
     /// a number value
-    public let numbers: [NumberSchema]?
+    let numbers: [NumberSchema]?
 
     /// an object of some type
-    public let objects: [ObjectSchema]?
+    let objects: [ObjectSchema]?
 
     /// a string of characters
-    public let strings: [StringSchema]?
+    let strings: [StringSchema]?
 
     /// UnixTime
-    public let unixTimes: [UnixTimeSchema]?
+    let unixTimes: [UnixTimeSchema]?
 
     /// an array of bytes
-    public let byteArrays: [ByteArraySchema]?
+    let byteArrays: [ByteArraySchema]?
 
-    public let streams: [Schema]?
+    let streams: [Schema]?
 
     /// a single characters
-    public let chars: [CharSchema]?
+    let chars: [CharSchema]?
 
     /// a date
-    public let dates: [DateSchema]?
+    let dates: [DateSchema]?
 
     /// a time
-    public let times: [TimeSchema]?
+    let times: [TimeSchema]?
 
     /// a datetime
-    public let dateTimes: [DateTimeSchema]?
+    let dateTimes: [DateTimeSchema]?
 
     /// a duration
-    public let durations: [DurationSchema]?
+    let durations: [DurationSchema]?
 
     /// a universally unique identifier
-    public let uuids: [UuidSchema]?
+    let uuids: [UuidSchema]?
 
     /// a URI of some kind
-    public let uris: [UriSchema]?
+    let uris: [UriSchema]?
 
     /// a password or credential
-    public let credentials: [CredentialSchema]?
+    let credentials: [CredentialSchema]?
 
     /// OData query
-    public let odataQueries: [ODataQuerySchema]?
+    let odataQueries: [ODataQuerySchema]?
 
     /// this essentially can be thought of as an enum that is a choice between one of several items, but an unspecified value is permitted
-    public let choices: [ChoiceSchema]?
+    let choices: [ChoiceSchema]?
 
     /// this essentially can be thought of as an enum that is a choice between one of several items, but an unknown value is not allowed
-    public let sealedChoices: [SealedChoiceSchema]?
+    let sealedChoices: [SealedChoiceSchema]?
 
     /// ie, when 'profile' is 'production', use '2018-01-01' for apiversion
-    public let conditionals: [ConditionalSchema]?
+    let conditionals: [ConditionalSchema]?
 
-    public let sealedConditionals: [SealedConditionalSchema]?
+    let sealedConditionals: [SealedConditionalSchema]?
 
-    public let flags: [FlagSchema]?
+    let flags: [FlagSchema]?
 
     /// a constant value
-    public let constants: [ConstantSchema]?
+    let constants: [ConstantSchema]?
 
-    public let ors: [OrSchema]?
+    let ors: [OrSchema]?
 
-    public let xors: [XorSchema]?
+    let xors: [XorSchema]?
 
-    public let binaries: [BinarySchema]?
+    let binaries: [BinarySchema]?
 
     /// it's possible that we just may make this an error \nin representation.
-    public let unknowns: [Schema]?
+    let unknowns: [Schema]?
 
-    public let groups: [GroupSchema]?
+    let groups: [GroupSchema]?
 
-    public let any: [AnySchema]?
+    let any: [AnySchema]?
+
+    /// Lookup a schema by name.
+    func schema(for name: String, withType type: AllSchemaTypes) -> Schema? {
+        switch type {
+        case .string:
+            return strings?.first { $0.name == name }
+        case .integer:
+            return numbers?.first { $0.name == name }
+        default:
+            fatalError("Unhandled schema type: \(type)")
+        }
+    }
 }

@@ -33,17 +33,9 @@
 		0A22B07E24CB721900EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */; };
 		0A22B07F24CB721900EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07B24CB721900EC018E /* URL+Extensions.swift */; };
 		0A22B08024CB734600EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
-		0A22B08124CB738900EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
-		0A22B08224CB738900EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
-		0A22B08324CB738900EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
-		0A22B08424CB738900EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
-		0A22B08524CB738900EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
-		0A22B08624CB738900EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
-		0A22B08724CB738900EC018E /* EnumerationFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* EnumerationFile.stencil */; };
 		0A22B08924CB783F00EC018E /* ServiceClientFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */; };
 		0A22B08B24CB9E1000EC018E /* ReadmeFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08A24CB9E0F00EC018E /* ReadmeFileViewModel.swift */; };
 		0A22B09624D09C2900EC018E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09524D09C2900EC018E /* Makefile */; };
-		0A22B09824D20B2F00EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
 		0A22B09A24D20D0300EC018E /* OperationSnippet.stencil in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */; };
 		0A22B09E24D2183500EC018E /* ParameterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09D24D2183500EC018E /* ParameterViewModel.swift */; };
 		0A22B0A024D2185500EC018E /* ReturnTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */; };
@@ -55,6 +47,17 @@
 		0A22B0AD24D2198D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
 		0A22B0AF24D219A600EC018E /* EnumerationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */; };
 		0A22B0B224D21D2700EC018E /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */; };
+		0A22B0B424D2272300EC018E /* ClientOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */; };
+		0A22B0B524D2272300EC018E /* EnumerationFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* EnumerationFile.stencil */; };
+		0A22B0B624D2272300EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
+		0A22B0B724D2272300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
+		0A22B0B824D2272300EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
+		0A22B0B924D2272300EC018E /* ModelImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */; };
+		0A22B0BA24D2272300EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
+		0A22B0BB24D2272300EC018E /* OperationSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */; };
+		0A22B0BC24D2272300EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
+		0A22B0BD24D2272300EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
+		0A22B0BE24D2272300EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -119,7 +122,6 @@
 		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
 		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
 		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
-		F194335024D095EF00A277BD /* ModelImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
@@ -254,17 +256,19 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F194335024D095EF00A277BD /* ModelImportSnippet.stencil in CopyFiles */,
+				0A22B0B424D2272300EC018E /* ClientOptionsFile.stencil in CopyFiles */,
+				0A22B0B524D2272300EC018E /* EnumerationFile.stencil in CopyFiles */,
+				0A22B0B624D2272300EC018E /* HeaderSnippet.stencil in CopyFiles */,
+				0A22B0B724D2272300EC018E /* ImportSnippet.stencil in CopyFiles */,
+				0A22B0B824D2272300EC018E /* ModelFile.stencil in CopyFiles */,
+				0A22B0B924D2272300EC018E /* ModelImportSnippet.stencil in CopyFiles */,
+				0A22B0BA24D2272300EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
+				0A22B0BB24D2272300EC018E /* OperationSnippet.stencil in CopyFiles */,
+				0A22B0BC24D2272300EC018E /* Package.stencil in CopyFiles */,
+				0A22B0BD24D2272300EC018E /* README.stencil in CopyFiles */,
+				0A22B0BE24D2272300EC018E /* ServiceClientFile.stencil in CopyFiles */,
 				F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */,
 				F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */,
-				0A22B08124CB738900EC018E /* ImportSnippet.stencil in CopyFiles */,
-				0A22B08224CB738900EC018E /* ServiceClientFile.stencil in CopyFiles */,
-				0A22B08324CB738900EC018E /* HeaderSnippet.stencil in CopyFiles */,
-				0A22B08424CB738900EC018E /* ModelFile.stencil in CopyFiles */,
-				0A22B08524CB738900EC018E /* Package.stencil in CopyFiles */,
-				0A22B08624CB738900EC018E /* README.stencil in CopyFiles */,
-				0A22B08724CB738900EC018E /* EnumerationFile.stencil in CopyFiles */,
-				0A22B09824D20B2F00EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +387,7 @@
 		0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationChoiceViewModel.swift; sourceTree = "<group>"; };
 		0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationViewModel.swift; sourceTree = "<group>"; };
 		0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewModel.swift; sourceTree = "<group>"; };
+		0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientOptionsFile.stencil; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -613,16 +618,17 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
-				F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */,
-				0A22B07024CB71E100EC018E /* ImportSnippet.stencil */,
-				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
-				0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */,
-				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
-				0A22B07424CB71E100EC018E /* Package.stencil */,
-				0A22B07524CB71E100EC018E /* README.stencil */,
+				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
 				0A22B07624CB71E100EC018E /* EnumerationFile.stencil */,
+				0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */,
+				0A22B07024CB71E100EC018E /* ImportSnippet.stencil */,
+				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
+				F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
+				0A22B07424CB71E100EC018E /* Package.stencil */,
+				0A22B07524CB71E100EC018E /* README.stencil */,
+				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";

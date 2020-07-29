@@ -4,6 +4,52 @@
 
 {{ model.comment }}
 public final class {{ model.name }}: PipelineClient {
+
+    /// API version of the {{ model.description }} to invoke. Defaults to the latest.
+    public enum ApiVersion: String {
+        // TODO: Population with apiVersions
+
+        /// The most recent API version of the {{ model.description }}
+        public static var latest: ApiVersion {
+            // TODO: Populate with latest ApiVersion
+        }
+    }
+
+    /// Options provided to configure this `{{ model.name }}`.
+    public let options: {{ model.name }}Options
+
+    // MARK: Initializers
+
+    /// Create a {{ model.description }} client.
+    /// - Parameters:
+    ///   - baseUrl: Base URL for the {{ model description }}.
+    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
+    ///   - options: Options used to configure the client.
+    private init(
+        baseUrl: URL,
+        authPolicy: Authenticating,
+        withOptions options: {{ model.name }}Options
+    ) throws {
+        self.options = options
+        // TODO: Determine the correct policies.
+        super.init(
+            baseUrl: baseUrl,
+            transport: URLSessionTransport(),
+            policies: [
+                UserAgentPolicy(for: {{ model.name }}.self, telemetryOptions: self.options.telemetryOptions),
+                RequestIdPolicy(),
+                AddDatePolicy(),
+                authPolicy,
+                ContentDecodePolicy(),
+                LoggingPolicy(),
+                NormalizeETagPolicy()
+            ],
+            logger: self.options.logger,
+            options: options
+        )
+    }
+
+    // MARK: Public Client Methods
 {% for group in model.operationGroups %}
     {% include "OperationGroupSnippet.stencil" group %}
 {% endfor %}

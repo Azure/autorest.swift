@@ -26,21 +26,21 @@
 
 import Foundation
 
-public class ArraySchema: Schema {
+class ArraySchema: Schema {
     /// elementType of the array
-    public let elementType: Schema
+    let elementType: Schema
 
     /// maximum number of elements in the array
-    public let maxItems: Int?
+    let maxItems: Int?
 
     /// minimum number of elements in the array
-    public let minItems: Int?
+    let minItems: Int?
 
     /// if the elements in the array should be unique
-    public let uniqueItems: Bool?
+    let uniqueItems: Bool?
 
     /// if elements in the array should be nullable
-    public let nullableItems: Bool?
+    let nullableItems: Bool?
 
     enum CodingKeys: String, CodingKey {
         case elementType, maxItems, minItems, uniqueItems, nullableItems
@@ -48,7 +48,7 @@ public class ArraySchema: Schema {
 
     // MARK: Codable
 
-    public required init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .elementType) {
@@ -64,7 +64,7 @@ public class ArraySchema: Schema {
         try super.init(from: decoder)
     }
 
-    override public func encode(to encoder: Encoder) throws {
+    override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(elementType, forKey: .elementType)

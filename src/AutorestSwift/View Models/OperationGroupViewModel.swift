@@ -34,11 +34,11 @@ struct OperationGroupViewModel {
     let name: String
     let operations: [OperationViewModel]
 
-    init(from schema: OperationGroup) {
-        self.name = schema.name.toCamelCase
+    init(from group: OperationGroup, with model: CodeModel) {
+        self.name = group.name.toCamelCase
         var items = [OperationViewModel]()
-        for operation in schema.operations {
-            items.append(OperationViewModel(from: operation))
+        for operation in group.operations {
+            items.append(OperationViewModel(from: operation, with: model))
         }
         self.operations = items
     }

@@ -26,29 +26,21 @@
 
 import Foundation
 
-///// View Model for a key-value pair, as used in Dictionaries.
-///// Example:
-/////     "key" = value
-// struct KeyValueViewModel {
-//    let key: String
-//    let value: String
-//
-//    init(from schema: Parameter, signatureParameters params: [ParameterViewModel]) {
-//        self.key = schema.serializedName!
-//        self.value = values(for: schema, from: params)
-//    }
-// }
-//
-// private func values(for schema: Parameter, from params: [Parameter]) -> String {
-//    if let constantSchema = schema.schema as? ConstantSchema {
-//        return "\"\(constantSchema.value.value)\""
-//    }
-//
-//    // check if the name matches with one of the signature parameter
-//    // if match, the value is taken from the signature parameter
-//    for param in params where param.name == schema.name {
-//        return param.name
-//    }
-//
-//    return ""
-// }
+/// View Model for a key-value pair, as used in Dictionaries.
+/// Example:
+///     "key" = value
+struct KeyValueViewModel {
+    let key: String
+    let value: String
+
+    init(from param: Parameter, with model: CodeModel) {
+        self.key = param.serializedName!
+        if let constant = param.schema as? ConstantSchema {
+            self.value = "\"\(constant.value.value)\""
+        } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
+            self.value = schema.name
+        } else {
+            self.value = ""
+        }
+    }
+}

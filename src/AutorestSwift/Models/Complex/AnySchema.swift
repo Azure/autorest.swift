@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema types that are any types
-public typealias AnySchema = Schema
+typealias AnySchema = Schema

@@ -32,12 +32,12 @@ struct ServiceClientFileViewModel {
     let comment: ViewModelComment
     let operationGroups: [OperationGroupViewModel]
 
-    init(from schema: CodeModel) {
-        self.name = clientName(for: schema.name)
-        self.comment = ViewModelComment(from: schema.description)
+    init(from model: CodeModel) {
+        self.name = clientName(for: model.name)
+        self.comment = ViewModelComment(from: model.description)
         var items = [OperationGroupViewModel]()
-        for group in schema.operationGroups {
-            items.append(OperationGroupViewModel(from: group))
+        for group in model.operationGroups {
+            items.append(OperationGroupViewModel(from: group, with: model))
         }
         self.operationGroups = items
     }
