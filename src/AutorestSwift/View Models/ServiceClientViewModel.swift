@@ -28,6 +28,10 @@ import Foundation
 
 struct ReturnTypeViewModel {
     let name: String
+
+    init(from objectType: String) {
+        self.name = objectType
+    }
 }
 
 struct ParameterViewModel {
@@ -42,23 +46,157 @@ struct ParameterViewModel {
     }
 }
 
+struct KeyValueViewModel {
+    let key: String
+    let value: String
+
+    init(from schema: Parameter, signatureParameters params: [ParameterViewModel]) {
+        self.key = schema.serializedName!
+        self.value = getValue(from: schema, signatureParameters: params)
+    }
+}
+
+private func getValue(from schema: Parameter, signatureParameters params: [ParameterViewModel]) -> String {
+    if let constantSchema = schema.schema as? ConstantSchema {
+        return "\"\(constantSchema.value.value)\""
+    }
+
+    // check if the name matches with one of the signature parameter
+    // if match, the value is taken from the signature parameter
+    for param in params where param.name == schema.name {
+        return param.name
+    }
+
+    return ""
+}
+
+struct RequestViewModel {
+    let path: String
+    let method: String
+    let knownMediaType: String?
+    let uri: String?
+    let mediaTypes: [String]?
+    let params: [ParameterViewModel]?
+    let objectType: String?
+
+    init(from request: Request) {
+        // load HttpRequest properties
+        let httpRequest = request.protocol.http as? HttpRequest
+        self.path = httpRequest?.path ?? ""
+        self.method = httpRequest?.method.rawValue ?? ""
+        self.uri = httpRequest?.uri ?? ""
+
+        // load HttpWithBodyRequest specfic properties
+        let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
+        self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
+        self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
+
+        // check if the request body is from signature parameter. If yes, store the object type
+        // and add the request signature parameter to operation parameters
+        var params = [ParameterViewModel]()
+        for param in request.signatureParameters ?? [] {
+            params.append(ParameterViewModel(from: param))
+        }
+        self.params = params
+
+        self.objectType = request.signatureParameters?.first?.schema.name
+    }
+}
+
+struct ResponseViewModel {
+    let statusCodes: [String]
+    let knownMediaType: String?
+    let mediaTypes: [String]?
+    let objectType: String?
+
+    init(from response: Response) {
+        let httpResponse = response.protocol.http as? HttpResponse
+        var statusCodes = [String]()
+        httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
+
+        self.statusCodes = statusCodes
+        self.knownMediaType = httpResponse?.knownMediaType?.rawValue
+        self.mediaTypes = httpResponse?.mediaTypes
+
+        // check if the request body schema type is object, store the object type of the response body
+        let schemaResponse = response as? SchemaResponse
+        self.objectType = schemaResponse?.schema.name
+    }
+}
+
 struct OperationViewModel {
     let name: String
     let comment: ViewModelComment
     let params: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
+    let queryParams: [KeyValueViewModel]?
+    let headerParams: [KeyValueViewModel]?
+    let uriParams: [KeyValueViewModel]?
+    let requests: [RequestViewModel]?
+    let responses: [ResponseViewModel]?
+    let method: String?
+    let path: String?
 
     init(from schema: Operation) {
         self.name = operationName(for: schema.name)
         self.comment = ViewModelComment(from: schema.description)
 
+        // operation parameters should be all the signature paramters from the schema
+        // and the signature parameters of the Request
         var items = [ParameterViewModel]()
         for param in schema.signatureParameters ?? [] {
             items.append(ParameterViewModel(from: param))
         }
+
+        var queryParams = [KeyValueViewModel]()
+        var headerParams = [KeyValueViewModel]()
+        var uriParams = [KeyValueViewModel]()
+
+        for param in schema.parameters ?? [] {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
+            switch httpParam.in {
+            case .query:
+                queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+            case .header:
+                headerParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+            case .uri:
+                uriParams.append(KeyValueViewModel(from: param, signatureParameters: items))
+
+            default:
+                // TODO: - implemented
+                continue
+            }
+        }
+
+        self.queryParams = queryParams
+        self.headerParams = headerParams
+        self.uriParams = uriParams
+
+        var requests = [RequestViewModel]()
+        var responses = [ResponseViewModel]()
+
+        for request in schema.requests ?? [] {
+            requests.append(RequestViewModel(from: request))
+        }
+
+        for response in schema.responses ?? [] {
+            responses.append(ResponseViewModel(from: response))
+        }
+
+        self.requests = requests
+        self.responses = responses
+
+        // TODO: only support max 1 request and  max 1 response for now
+        for param in requests.first?.params ?? [] {
+            items.append(param)
+        }
+
+        self.method = requests.first?.method
+        self.path = requests.first?.path
+        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
+
         self.params = items
-        // TODO: Finish implementation
-        self.returnType = nil
     }
 }
 

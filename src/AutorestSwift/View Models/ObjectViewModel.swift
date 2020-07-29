@@ -41,7 +41,7 @@ struct PropertyViewModel {
     }
 }
 
-func getType(from propertySchema: Schema, optional: Bool) -> String {
+private func getType(from propertySchema: Schema, optional: Bool) -> String {
     var type: String
     switch propertySchema.type {
     case AllSchemaTypes.string:
