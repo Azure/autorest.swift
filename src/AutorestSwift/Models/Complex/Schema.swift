@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class Schema: Codable, LanguageShortcut {
+class Schema: Codable, LanguageShortcut {
     /// Per-language information for Schema
     public var language: Languages
 

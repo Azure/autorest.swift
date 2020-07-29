@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a Char value
-public typealias CharSchema = PrimitiveSchema
+typealias CharSchema = PrimitiveSchema

@@ -26,13 +26,13 @@
 
 import Foundation
 
-public enum DateTimeFormat: String, Codable {
+enum DateTimeFormat: String, Codable {
     case dateTime = "date-time"
     case dateTimeRfc1123 = "date-time-rfc1123"
 }
 
 /// a schema that represents a DateTime value
-public class DateTimeSchema: ValueSchema {
+class DateTimeSchema: ValueSchema {
     /// date-time format
     let format: DateTimeFormat
 

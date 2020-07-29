@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum HttpMethod: String, Codable {
+enum HttpMethod: String, Codable {
     case delete
     case get
     case head

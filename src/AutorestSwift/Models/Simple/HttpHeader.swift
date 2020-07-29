@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class HttpHeader: Codable {
+class HttpHeader: Codable {
     let header: String
     let schema: Schema
     let extensions: AnyCodable?

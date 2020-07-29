@@ -27,4 +27,4 @@
 import Foundation
 
 /// common ways of serializing simple parameters
-public class SecurityRequirement: Codable {}
+class SecurityRequirement: Codable {}

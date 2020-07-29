@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class FlagValue: Codable, LanguageShortcut {
+class FlagValue: Codable, LanguageShortcut {
     /// per-language information for this value
     public var language: Languages
 

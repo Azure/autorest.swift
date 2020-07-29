@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class GroupSchema: Schema {
+class GroupSchema: Schema {
     // MARK: allOf SchemaUsage
 
     /// contexts in which the schema is used

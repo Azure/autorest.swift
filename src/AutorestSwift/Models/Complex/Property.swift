@@ -27,7 +27,7 @@
 import Foundation
 
 // a property is a child value in an object
-public class Property: Value {
+class Property: Value {
     // if the property is marked read-only (ie, not intended to be sent to the service)
     let readOnly: Bool?
 

@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a value dependent on another
-public class ConditionalSchema: ValueSchema {
+class ConditionalSchema: ValueSchema {
     /// the primitive type for the conditional
     let conditionalType: PrimitiveSchema
 

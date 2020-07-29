@@ -27,7 +27,7 @@
 import Foundation
 
 /// A reference to external documentation
-public class ExternalDocumentation: Codable {
+class ExternalDocumentation: Codable {
     let description: String?
 
     /// A URI

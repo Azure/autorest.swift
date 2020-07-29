@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a UnixTime value
-public typealias UnixTimeSchema = PrimitiveSchema
+typealias UnixTimeSchema = PrimitiveSchema

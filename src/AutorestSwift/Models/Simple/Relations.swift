@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class Relations: Codable {
+class Relations: Codable {
     let immediate: [ComplexSchema]
 
     let all: [ComplexSchema]

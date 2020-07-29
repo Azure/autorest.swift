@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class XmlSerializationFormat: SerializationFormat {
+class XmlSerializationFormat: SerializationFormat {
     let name: String?
 
     let namespace: String?

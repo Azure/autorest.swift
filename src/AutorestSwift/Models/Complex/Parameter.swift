@@ -27,7 +27,7 @@
 import Foundation
 
 /// A definition of an discrete input for an operation
-public class Parameter: Value {
+class Parameter: Value {
     /// suggested implementation location for this parameter
     let implementation: ImplementationLocation?
 

@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum ObjectSchemaTypes: String, Codable {
+enum ObjectSchemaTypes: String, Codable {
     case dictionary
     case object
     case or

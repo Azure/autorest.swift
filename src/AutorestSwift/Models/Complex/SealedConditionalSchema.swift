@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a value dependent on another (not overridable)
-public class SealedConditionalSchema: ValueSchema {
+class SealedConditionalSchema: ValueSchema {
     /// the primitive type for the conditional
     let conditionalType: PrimitiveSchema
 

@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class Discriminator: Codable {
+class Discriminator: Codable {
     let property: Property
 
     let immediate: [String: ComplexSchema]

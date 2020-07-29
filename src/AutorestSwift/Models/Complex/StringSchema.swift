@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a string value
-public class StringSchema: PrimitiveSchema {
+class StringSchema: PrimitiveSchema {
     /// the maximum length of the string
     let maxLength: Int?
 

@@ -27,7 +27,7 @@
 import Foundation
 
 /// Common pattern for Metadata on aspects
-public class Metadata: Codable, LanguageShortcut {
+class Metadata: Codable, LanguageShortcut {
     /// per-language information for this aspect
     public var language: Languages
 

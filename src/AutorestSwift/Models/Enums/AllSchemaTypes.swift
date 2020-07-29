@@ -27,7 +27,7 @@
 import Foundation
 
 /// all schema types
-public enum AllSchemaTypes: String, Codable {
+enum AllSchemaTypes: String, Codable {
     case any
     case array
     case binary

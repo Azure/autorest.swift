@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a credential value
-public class CredentialSchema: PrimitiveSchema {
+class CredentialSchema: PrimitiveSchema {
     /// the maximum length of the string
     let maxLength: Int?
 

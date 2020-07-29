@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema that represents a Uuid value
-public typealias UuidSchema = PrimitiveSchema
+typealias UuidSchema = PrimitiveSchema

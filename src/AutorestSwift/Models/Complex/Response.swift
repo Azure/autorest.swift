@@ -26,4 +26,4 @@
 
 import Foundation
 
-public class Response: Metadata {}
+class Response: Metadata {}

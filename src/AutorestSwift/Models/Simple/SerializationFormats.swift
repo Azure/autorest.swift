@@ -27,7 +27,7 @@
 import Foundation
 
 /// Custom extensible metadata for individual serialization formats
-public class SerializationFormats: Codable {
+class SerializationFormats: Codable {
     let json: SerializationFormat?
 
     let xml: XmlSerializationFormat?

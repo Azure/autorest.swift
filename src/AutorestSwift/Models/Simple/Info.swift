@@ -27,7 +27,7 @@
 import Foundation
 
 /// Code model information
-public class Info: Codable {
+class Info: Codable {
     /// the title of this service
     let title: String
 

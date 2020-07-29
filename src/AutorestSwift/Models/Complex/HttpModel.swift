@@ -27,7 +27,7 @@
 import Foundation
 
 /// code model metadata for HTTP protocol
-public class HttpModel: ProtocolInterface {
+class HttpModel: ProtocolInterface {
     /// a collection of security requirements for the service
     let security: [SecurityRequirement]?
 }

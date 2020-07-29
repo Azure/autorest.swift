@@ -27,4 +27,4 @@
 import Foundation
 
 /// a schema types that are non-object or complex types
-public typealias ValueSchema = Schema
+typealias ValueSchema = Schema

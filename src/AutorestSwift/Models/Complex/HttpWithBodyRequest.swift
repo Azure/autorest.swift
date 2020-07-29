@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class HttpWithBodyRequest: HttpRequest {
+class HttpWithBodyRequest: HttpRequest {
     // canonical response type (ie, 'json')
     let knownMediaType: KnownMediaType
 

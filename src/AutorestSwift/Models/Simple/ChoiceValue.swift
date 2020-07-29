@@ -26,14 +26,14 @@
 
 import Foundation
 
-// public enum StringOrNumberOrBoolean: String, Codable {
+// enum StringOrNumberOrBoolean: String, Codable {
 //    case string(String)
 //    case int(Int)
 //    case bool(Bool)
 // }
 
 /// an individual choice in a ChoiceSchema
-public class ChoiceValue: Codable, LanguageShortcut {
+class ChoiceValue: Codable, LanguageShortcut {
     /// per-language information for this value
     public var language: Languages
 

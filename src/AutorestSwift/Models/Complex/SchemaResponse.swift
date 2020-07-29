@@ -27,7 +27,7 @@
 import Foundation
 
 /// a response that should be deserialized into a result of type(schema)
-public class SchemaResponse: Response {
+class SchemaResponse: Response {
     /// the content returned by the service for a given operation
     let schema: Schema
 

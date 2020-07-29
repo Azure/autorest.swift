@@ -27,7 +27,7 @@
 import Foundation
 
 /// Common base interface for properties, parameters and the like.
-public class Value: Codable, LanguageShortcut {
+class Value: Codable, LanguageShortcut {
     /// the schema of this Value
     public var schema: Schema
 

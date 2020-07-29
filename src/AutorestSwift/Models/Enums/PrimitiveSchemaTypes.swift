@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum PrimitiveSchemaTypes: String, Codable {
+enum PrimitiveSchemaTypes: String, Codable {
     case boolean
     case char
     case credential

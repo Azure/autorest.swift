@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a choice of several values (ie, an 'enum')
-public class SealedChoiceSchema: ValueSchema, EnumerableSchema {
+class SealedChoiceSchema: ValueSchema, EnumerableSchema {
     /// the primitive type for the choices
     let choiceType: PrimitiveSchema
 

@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class Request: Metadata {
+class Request: Metadata {
     /// the parameter inputs to the operation
     let parameters: [Parameter]?
 

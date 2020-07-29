@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum KnownMediaType: String, Codable {
+enum KnownMediaType: String, Codable {
     case binary
     case form
     case json

@@ -27,7 +27,7 @@
 import Foundation
 
 /// Contact information
-public class Contact: Codable {
+class Contact: Codable {
     /// contact name
     let name: String?
 

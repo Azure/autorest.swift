@@ -27,7 +27,7 @@
 import Foundation
 
 /// License information
-public class License: Codable {
+class License: Codable {
     /// the name of the license
     let name: String
 

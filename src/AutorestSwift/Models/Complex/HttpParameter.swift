@@ -27,7 +27,7 @@
 import Foundation
 
 /// extended metadata for HTTP operation parameters
-public class HttpParameter: ProtocolInterface {
+class HttpParameter: ProtocolInterface {
     /// the location that this parameter is placed in the http request
     let `in`: ParameterLocation
 

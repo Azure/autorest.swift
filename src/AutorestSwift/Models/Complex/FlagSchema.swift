@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class FlagSchema: ValueSchema {
+class FlagSchema: ValueSchema {
     /// the possible choices for in the set
     let choices: [FlagValue]
 

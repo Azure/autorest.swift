@@ -26,7 +26,7 @@
 
 import Foundation
 
-public enum PathEncodingStyle: String, Codable {
+enum PathEncodingStyle: String, Codable {
     case label
     case matrix
     case simple

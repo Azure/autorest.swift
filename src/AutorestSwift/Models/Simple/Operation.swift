@@ -27,7 +27,7 @@
 import Foundation
 
 /// represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
-public class Operation: Codable, LanguageShortcut {
+class Operation: Codable, LanguageShortcut {
     /// common parameters when there are multiple requests
     let parameters: [Parameter]?
 

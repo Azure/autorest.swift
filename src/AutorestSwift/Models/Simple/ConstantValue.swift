@@ -27,7 +27,7 @@
 import Foundation
 
 /// a container for the actual constant value
-public class ConstantValue: Codable, OptionalLanguageShortcut {
+class ConstantValue: Codable, OptionalLanguageShortcut {
     /// per-language information for this value
     public var language: Languages?
 

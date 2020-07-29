@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a Number value
-public class NumberSchema: PrimitiveSchema {
+class NumberSchema: PrimitiveSchema {
     /// precision (# of bits?) of the number
     let precision: Int
 

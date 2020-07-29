@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a constant value
-public class ConstantSchema: Schema {
+class ConstantSchema: Schema {
     /// the schema type of the constant value (ie, StringSchema, NumberSchema, etc)
     let valueType: Schema
 

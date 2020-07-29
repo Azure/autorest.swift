@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class HttpResponse: ProtocolInterface {
+class HttpResponse: ProtocolInterface {
     // the possible HTTP status codes that this response MUST match one of
     let statusCodes: [StatusCode]
 

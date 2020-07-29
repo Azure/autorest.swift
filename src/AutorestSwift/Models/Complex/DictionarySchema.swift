@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a key-value collection
-public class DictionarySchema: ComplexSchema {
+class DictionarySchema: ComplexSchema {
     /// the element type of the dictionary. (Keys are always strings)
     let elementType: Schema
 

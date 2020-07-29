@@ -27,7 +27,7 @@
 import Foundation
 
 /// Custom extensible metadata for individual protocols (ie, HTTP, etc)
-public class Protocols: Codable {
+class Protocols: Codable {
     let http: ProtocolInterface?
 
     let amqp: ProtocolInterface?

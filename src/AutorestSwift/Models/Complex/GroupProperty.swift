@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class GroupProperty: Property {
+class GroupProperty: Property {
     let originalParameter: [Parameter]
 
     enum CodingKeys: String, CodingKey {

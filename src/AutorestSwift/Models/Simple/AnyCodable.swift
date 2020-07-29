@@ -33,7 +33,7 @@ protocol ExtensionStringDecodeKeys {
     var stringDecodedKeys: [String] { get }
 }
 
-public struct AnyCodable: Decodable {
+struct AnyCodable: Decodable {
     var value: Any
 
     struct CodingKeys: CodingKey {

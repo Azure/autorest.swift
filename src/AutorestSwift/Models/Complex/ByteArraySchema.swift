@@ -26,13 +26,13 @@
 
 import Foundation
 
-public enum ByteArrayFormat: String, Codable {
+enum ByteArrayFormat: String, Codable {
     case base64url
     case byte
 }
 
 /// a schema that represents a ByteArray value
-public class ByteArraySchema: ValueSchema {
+class ByteArraySchema: ValueSchema {
     /// date-time format
     let format: ByteArrayFormat
 

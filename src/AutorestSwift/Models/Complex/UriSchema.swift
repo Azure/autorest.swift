@@ -26,10 +26,8 @@
 
 import Foundation
 
-// public typealias UriSchema = Compose<UriSchemaProperty, PrimitiveSchema>
-
 /// a schema that represents a Uri value
-public class UriSchema: PrimitiveSchema {
+class UriSchema: PrimitiveSchema {
     /// the maximum length of the string
     let maxLength: Int?
 

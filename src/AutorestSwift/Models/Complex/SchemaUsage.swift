@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class SchemaUsage: Codable {
+class SchemaUsage: Codable {
     /// contexts in which the schema is used
     let usage: [SchemaContext]
 

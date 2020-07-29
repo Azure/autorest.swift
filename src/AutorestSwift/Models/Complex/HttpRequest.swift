@@ -26,7 +26,7 @@
 
 import Foundation
 
-public class HttpRequest: Codable, ProtocolInterface {
+class HttpRequest: Codable, ProtocolInterface {
     // A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is
     // appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order
     // to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete
