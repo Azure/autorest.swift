@@ -136,7 +136,6 @@ struct OperationViewModel {
     let responses: [ResponseViewModel]?
     let method: String?
     let path: String?
-    private static var logger = Logger(withName: "Autorest.Swift.OperationViewModel")
 
     init(from schema: Operation) {
         self.name = operationName(for: schema.name)
@@ -154,9 +153,9 @@ struct OperationViewModel {
         var uriParams = [KeyValueViewModel]()
 
         for param in schema.parameters ?? [] {
-            let httpParam = param.protocol.http as? HttpParameter?
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
-            switch httpParam??.in {
+            switch httpParam.in {
             case .query:
                 queryParams.append(KeyValueViewModel(from: param, signatureParameters: items))
             case .header:
@@ -166,7 +165,7 @@ struct OperationViewModel {
 
             default:
                 // TODO: - implemented
-                OperationViewModel.logger.log("Http Parameter \(httpParam??.in) is not support")
+                continue
             }
         }
 
