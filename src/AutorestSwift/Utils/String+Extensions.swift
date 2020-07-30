@@ -94,8 +94,4 @@ extension String {
         let value = casedComponents.joined()
         return value
     }
-
-    func lowercaseFirstLetter() -> String {
-        return prefix(1).lowercased() + dropFirst()
-    }
 }
