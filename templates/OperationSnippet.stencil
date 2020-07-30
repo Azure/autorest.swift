@@ -9,43 +9,8 @@ public func {{ op.name }}(
     let urlTemplate = "{{ op.path }}"
     guard let url = self.url(forTemplate: urlTemplate) else { return }
 
-    // Construct query
-    {% if op.queryInitParams.count > 0 %}
-    var queryParams: [QueryParameter] = [
-        {% for param in op.queryInitParams %}
-        ("{{ param.key }}" , {{ param.value}})
-        {% endfor %}
-    ]
-    {% elif op.queryParams.count > 0 %}
-    var queryParams = [QueryParameter]()
-    {% endif %}
-
-    {% if op.queryParams.count > 0 %}
-    {% for param in op.queryParams %}
-    if {{ param.value }} != nil {
-        queryParams.append("{{ param.key }}", {{ param.value}})
-    }
-    {% endfor %}
-    {% endif %}
-
-    // Construct headers
-    {% if op.headerInitParams.count > 0 %}
-    var headers = HTTPHeaders([
-        {% for param in op.headerInitParams %}
-        {{ param.key }} : "{{ param.value}}",
-        {% endfor %}
-    ])
-    {% elif op.headerParams.count > 0 %}
-    var headers = HTTPHeaders()
-    {% endif %}
-
-    {% if op.headerParams.count > 0 %}
-    {% for param in op.headerParams %}
-    if {{ param.value }} != nil {
-        headers["{{ param.key }}"] = {{ param.value}}
-    }
-    {% endfor %}
-    {% endif %}
+    {% include "OperationQueryParamSnippet.stencil" %}
+    {% include "OperationHeaderSnippet.stencil" %}
 
     // Process endpoint options
     if let options = options {
