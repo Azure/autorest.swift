@@ -69,7 +69,7 @@ struct OperationViewModel {
             switch httpParam.in {
             case .query:
                 let viewModel = KeyValueViewModel(from: param, with: model, and: operation)
-                viewModel.valueNilable ? queryParams.append(viewModel) : queryInitParams.append(viewModel)
+                viewModel.optional ? queryParams.append(viewModel) : queryInitParams.append(viewModel)
             case .header:
                 let standardHeader = isStandardHttpHeader(with: param.serializedName!)
 
@@ -80,7 +80,7 @@ struct OperationViewModel {
                     using: convertHttpHeaderKey(from: standardHeader?.rawValue ?? nil)
                 )
                 // Only standard http header and value can't be nil can be placed in header initializer
-                standardHeader != nil && !viewModel.valueNilable ? headerInitParams.append(viewModel) : headerParams
+                standardHeader != nil && !viewModel.optional ? headerInitParams.append(viewModel) : headerParams
                     .append(viewModel)
             case .uri:
                 uriParams.append(KeyValueViewModel(from: param, with: model, and: operation))

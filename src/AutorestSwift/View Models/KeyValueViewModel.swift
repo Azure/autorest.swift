@@ -32,7 +32,8 @@ import Foundation
 struct KeyValueViewModel {
     let key: String
     let value: String
-    let valueNilable: Bool
+    // Flag indicates if value is optional
+    let optional: Bool
 
     init(from param: Parameter, with model: CodeModel, and operation: Operation, using key: String? = nil) {
         self.key = key ?? param.serializedName!
@@ -42,22 +43,22 @@ struct KeyValueViewModel {
             let val: String = constantSchema.value.value
 
             self.value = isString ? "\"\(val)\"" : "\(val)"
-            self.valueNilable = false
+            self.optional = false
         } else if let signatureParameter = operation.signatureParameters(for: param.name) {
             self.value = param.name
-            self.valueNilable = signatureParameter.required ?? true
+            self.optional = signatureParameter.required ?? true
         } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
             self.value = schema.name
-            self.valueNilable = false
+            self.optional = false
         } else {
             self.value = ""
-            self.valueNilable = false
+            self.optional = false
         }
     }
 
     init(key: String, value: String) {
         self.key = key
         self.value = value
-        self.valueNilable = false
+        self.optional = false
     }
 }
