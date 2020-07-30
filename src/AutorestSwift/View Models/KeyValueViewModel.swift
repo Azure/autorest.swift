@@ -63,8 +63,8 @@ struct KeyValueViewModel {
             if swiftType.starts(with: "String") {
                 self.value = param.name
             } else {
-                // Convert the Swift type into String
-                self.value = "String(\(param.name))"
+                // Convert into String in generated code
+                self.value = "String(\(param.name)!)"
             }
         } else {
             self.value = ""
