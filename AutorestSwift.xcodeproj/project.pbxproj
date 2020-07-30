@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */; };
 		0A22B03924C8964000EC018E /* LanguageShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03424C8964000EC018E /* LanguageShortcut.swift */; };
-		0A22B03C24C8964000EC018E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03724C8964000EC018E /* Constants.swift */; };
 		0A22B05C24CA4CA400EC018E /* EnumerationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */; };
 		0A22B06424CA58AF00EC018E /* PropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06324CA58AF00EC018E /* PropertyViewModel.swift */; };
 		0A22B06624CB357A00EC018E /* Enumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06524CB357A00EC018E /* Enumerable.swift */; };
@@ -122,6 +121,7 @@
 		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
 		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
 		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
+		F19433DA24D2442600A277BD /* HttpHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19433D924D2442600A277BD /* HttpHeaders.swift */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
 		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
@@ -356,7 +356,6 @@
 		0A22B02D24C88EB000EC018E /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		0A22B03424C8964000EC018E /* LanguageShortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageShortcut.swift; sourceTree = "<group>"; };
 		0A22B03524C8964000EC018E /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
-		0A22B03724C8964000EC018E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationFileViewModel.swift; sourceTree = "<group>"; };
 		0A22B06324CA58AF00EC018E /* PropertyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyViewModel.swift; sourceTree = "<group>"; };
 		0A22B06524CB357A00EC018E /* Enumerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerable.swift; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
 		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
 		F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelImportSnippet.stencil; sourceTree = "<group>"; };
+		F19433D924D2442600A277BD /* HttpHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeaders.swift; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -611,6 +611,7 @@
 				0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */,
 				0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */,
 				0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */,
+				F19433D924D2442600A277BD /* HttpHeaders.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -945,7 +946,6 @@
 			children = (
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
-				0A22B03724C8964000EC018E /* Constants.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
 				OBJ_13 /* Logger.swift */,
@@ -1188,6 +1188,7 @@
 				OBJ_188 /* XorSchema.swift in Sources */,
 				OBJ_189 /* AllSchemaTypes.swift in Sources */,
 				OBJ_190 /* CompoundSchemaTypes.swift in Sources */,
+				F19433DA24D2442600A277BD /* HttpHeaders.swift in Sources */,
 				OBJ_191 /* HttpMethod.swift in Sources */,
 				OBJ_192 /* ImplementationLocation.swift in Sources */,
 				OBJ_193 /* KnownMediaType.swift in Sources */,
@@ -1206,7 +1207,6 @@
 				OBJ_201 /* SerializationStyle.swift in Sources */,
 				0A22B0A524D218C600EC018E /* RequestViewModel.swift in Sources */,
 				OBJ_202 /* StatusCode.swift in Sources */,
-				0A22B03C24C8964000EC018E /* Constants.swift in Sources */,
 				OBJ_203 /* ValueSchemaTypes.swift in Sources */,
 				0A22B0AB24D2194C00EC018E /* OperationGroupViewModel.swift in Sources */,
 				OBJ_204 /* AnyCodable.swift in Sources */,
