@@ -113,12 +113,12 @@ struct OperationViewModel {
 
         if let headerValue = requests.first?.knownMediaType {
             requiredHeaders
-                .append(KeyValueViewModel(key: ".contentType", value: headerValue))
+                .append(KeyValueViewModel(key: ".contentType", value: "\"\(headerValue)\""))
         }
 
         if let headerValue = requests.first?.mediaTypes?.first {
             requiredHeaders
-                .append(KeyValueViewModel(key: ".accept", value: headerValue))
+                .append(KeyValueViewModel(key: ".accept", value: "\"\(headerValue)\""))
         }
 
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
@@ -126,6 +126,9 @@ struct OperationViewModel {
         self.params = items
         self.optionalQueryParams = optionalQueryParams
         self.optionalHeaders = optionalHeaders
+
+        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+        if requiredHeaders.count == 0 { requiredHeaders.append(KeyValueViewModel(key: "", value: "")) }
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders
         self.uriParams = uriParams

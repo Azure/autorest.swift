@@ -1,18 +1,13 @@
 // Construct query
-{% if op.requiredQueryParams.count > 0 %}
 var queryParams: [QueryParameter] = [
     {% for param in op.requiredQueryParams %}
     ("{{ param.key }}" , {{ param.value}})
     {% endfor %}
 ]
-{% elif op.optionalQueryParams.count > 0 %}
-var queryParams = [QueryParameter]()
-{% endif %}
 
-{% if op.optionalQueryParams.count > 0 %}
 {% for param in op.optionalQueryParams %}
 if {{ param.value }} != nil {
     queryParams.append("{{ param.key }}", {{ param.value}})
 }
 {% endfor %}
-{% endif %}
+
