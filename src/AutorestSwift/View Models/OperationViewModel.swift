@@ -41,6 +41,7 @@ struct OperationViewModel {
     // Query Params/Header need to add Nil check
     let optionalQueryParams: [KeyValueViewModel]?
     let optionalHeaders: [KeyValueViewModel]?
+    let pipelineContext: [KeyValueViewModel]?
     let uriParams: [KeyValueViewModel]?
     let requests: [RequestViewModel]?
     let responses: [ResponseViewModel]?
@@ -63,6 +64,8 @@ struct OperationViewModel {
         var optionalQueryParams = [KeyValueViewModel]()
         var optionalHeaders = [KeyValueViewModel]()
         var uriParams = [KeyValueViewModel]()
+        var pipelineContext = [KeyValueViewModel]()
+
         for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
@@ -123,7 +126,9 @@ struct OperationViewModel {
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
         if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+        if pipelineContext.count == 0 { pipelineContext.append(KeyValueViewModel(key: "", value: "")) }
 
+        self.pipelineContext = pipelineContext
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders
         self.uriParams = uriParams

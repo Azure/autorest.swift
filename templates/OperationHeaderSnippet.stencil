@@ -1,11 +1,11 @@
 // Construct headers
 var headers = HTTPHeaders()
-{% for param in op.requiredHeaders %}
-headers["{{ param.key }}"] = {{ param.value }}
+{% for header in op.requiredHeaders %}
+headers["{{ header.key }}"] = {{ header.value }}
 {% endfor %}
 
-{% for param in op.optionalHeaders %}
-if {{ param.paramName }} != nil {
-    headers["{{ param.key }}"] = {{ param.value}}
+{% for header in op.optionalHeaders %}
+if {{ header.paramName }} != nil {
+    headers["{{ header.key }}"] = {{ header.value}}
 }
 {% endfor %}
