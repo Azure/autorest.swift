@@ -1,0 +1,7 @@
+{% include "HeaderSnippet.stencil" %}
+
+{% include "ImportSnippet.stencil" %}
+
+{% for model in models %}
+    {% include "ClientMethodOptionsSnippet.stencil" model %}
+{% endfor %}

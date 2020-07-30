@@ -26,25 +26,27 @@
 
 import Foundation
 
-enum BodyType: String {
-    /// Service returns a pageable response
-    case pagedBody
-    /// Service returns some kind of deserializable object
-    case body
-    /// Service returns no response data, only a status code
-    case noBody
-}
+/// View Model for an individual client method Options object.
+struct ClientMethodOptionsViewModel {
+    /// The name of the client class (i.e. AzureStorageBlob)
+    let clientName: String
 
-/// View Model for method return type.
-/// Example:
-///     ... -> ReturnTypeName
-struct ReturnTypeViewModel {
+    /// The name of the operation (i.e. listContainers)
+    let operationName: String
+
+    /// The name of the options object (i.e. ListContainersOptions)
     let name: String
-    let strategy: String
 
-    init(from objectType: String) {
-        self.name = objectType
-        // TODO: Logic here to decide what type this should be
-        self.strategy = BodyType.body.rawValue
+    let properties: [PropertyViewModel]
+
+    init(from operation: Operation, with model: CodeModel) {
+        self.clientName = model.name
+        self.operationName = operation.name.toCamelCase
+        self.name = "\(operation.name.toPascalCase)Options"
+        var properties = [PropertyViewModel]()
+        for param in operation.signatureParameters ?? [] {
+            properties.append(PropertyViewModel(from: param))
+        }
+        self.properties = properties
     }
 }

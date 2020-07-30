@@ -22,47 +22,150 @@
 
 /* Begin PBXBuildFile section */
 		07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */; };
-		0A22B03924C8964000EC018E /* LanguageShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03424C8964000EC018E /* LanguageShortcut.swift */; };
-		0A22B05C24CA4CA400EC018E /* EnumerationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */; };
-		0A22B06424CA58AF00EC018E /* PropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06324CA58AF00EC018E /* PropertyViewModel.swift */; };
-		0A22B06624CB357A00EC018E /* Enumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06524CB357A00EC018E /* Enumerable.swift */; };
-		0A22B06A24CB3B6300EC018E /* ViewModelPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */; };
-		0A22B07C24CB721900EC018E /* StencilUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07824CB721900EC018E /* StencilUtil.swift */; };
-		0A22B07D24CB721900EC018E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07924CB721900EC018E /* String+Extensions.swift */; };
-		0A22B07E24CB721900EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */; };
-		0A22B07F24CB721900EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07B24CB721900EC018E /* URL+Extensions.swift */; };
-		0A22B08024CB734600EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
-		0A22B08924CB783F00EC018E /* ServiceClientFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */; };
-		0A22B08B24CB9E1000EC018E /* ReadmeFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08A24CB9E0F00EC018E /* ReadmeFileViewModel.swift */; };
-		0A22B09624D09C2900EC018E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09524D09C2900EC018E /* Makefile */; };
-		0A22B09A24D20D0300EC018E /* OperationSnippet.stencil in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */; };
-		0A22B09E24D2183500EC018E /* ParameterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09D24D2183500EC018E /* ParameterViewModel.swift */; };
-		0A22B0A024D2185500EC018E /* ReturnTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */; };
-		0A22B0A324D2189600EC018E /* KeyValueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A224D2189600EC018E /* KeyValueViewModel.swift */; };
-		0A22B0A524D218C600EC018E /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A424D218C600EC018E /* RequestViewModel.swift */; };
-		0A22B0A724D218E300EC018E /* ResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A624D218E300EC018E /* ResponseViewModel.swift */; };
-		0A22B0A924D2190300EC018E /* OperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A824D2190300EC018E /* OperationViewModel.swift */; };
-		0A22B0AB24D2194C00EC018E /* OperationGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AA24D2194C00EC018E /* OperationGroupViewModel.swift */; };
-		0A22B0AD24D2198D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
-		0A22B0AF24D219A600EC018E /* EnumerationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */; };
-		0A22B0B224D21D2700EC018E /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */; };
-		0A22B0B424D2272300EC018E /* ClientOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */; };
-		0A22B0B524D2272300EC018E /* EnumerationFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* EnumerationFile.stencil */; };
-		0A22B0B624D2272300EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
-		0A22B0B724D2272300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
-		0A22B0B824D2272300EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
-		0A22B0B924D2272300EC018E /* ModelImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */; };
-		0A22B0BA24D2272300EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
-		0A22B0BB24D2272300EC018E /* OperationSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */; };
-		0A22B0BC24D2272300EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
-		0A22B0BD24D2272300EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
-		0A22B0BE24D2272300EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
+		0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */; };
+		0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
+		0A22B0DE24D3671D00EC018E /* EnumerationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */; };
+		0A22B0DF24D3671D00EC018E /* EnumerationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */; };
+		0A22B0E024D3671D00EC018E /* KeyValueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A224D2189600EC018E /* KeyValueViewModel.swift */; };
+		0A22B0E124D3671D00EC018E /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */; };
+		0A22B0E224D3671E00EC018E /* OperationGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AA24D2194C00EC018E /* OperationGroupViewModel.swift */; };
+		0A22B0E324D3671E00EC018E /* OperationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A824D2190300EC018E /* OperationViewModel.swift */; };
+		0A22B0E424D3671E00EC018E /* PackageFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106830624CF9E0A007EB4D5 /* PackageFileViewModel.swift */; };
+		0A22B0E524D3671E00EC018E /* ParameterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09D24D2183500EC018E /* ParameterViewModel.swift */; };
+		0A22B0E624D3671E00EC018E /* PropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06324CA58AF00EC018E /* PropertyViewModel.swift */; };
+		0A22B0E724D3671E00EC018E /* ReadmeFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08A24CB9E0F00EC018E /* ReadmeFileViewModel.swift */; };
+		0A22B0E824D3671E00EC018E /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A424D218C600EC018E /* RequestViewModel.swift */; };
+		0A22B0E924D3671E00EC018E /* ResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0A624D218E300EC018E /* ResponseViewModel.swift */; };
+		0A22B0EA24D3671E00EC018E /* ReturnTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */; };
+		0A22B0EB24D3671E00EC018E /* ServiceClientFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */; };
+		0A22B0EC24D3671E00EC018E /* ViewModelPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */; };
+		0A22B0ED24D3671E00EC018E /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
+		0A22B0EE24D3671E00EC018E /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
+		0A22B0F024D3671E00EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
+		0A22B0F124D3671E00EC018E /* LanguageShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03424C8964000EC018E /* LanguageShortcut.swift */; };
+		0A22B0F224D3671E00EC018E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
+		0A22B0F324D3671E00EC018E /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Manager.swift */; };
+		0A22B0F424D3671E00EC018E /* SwiftGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* SwiftGenerator.swift */; };
+		0A22B0F524D3671E00EC018E /* AnySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* AnySchema.swift */; };
+		0A22B0F624D3671E00EC018E /* ArraySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ArraySchema.swift */; };
+		0A22B0F724D3671E00EC018E /* BinarySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* BinarySchema.swift */; };
+		0A22B0F824D3671E00EC018E /* BooleanSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BooleanSchema.swift */; };
+		0A22B0F924D3671E00EC018E /* ByteArraySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ByteArraySchema.swift */; };
+		0A22B0FA24D3671E00EC018E /* CharSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* CharSchema.swift */; };
+		0A22B0FB24D3671E00EC018E /* ChoiceSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ChoiceSchema.swift */; };
+		0A22B0FC24D3671E00EC018E /* CodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* CodeModel.swift */; };
+		0A22B0FD24D3671E00EC018E /* ComplexSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ComplexSchema.swift */; };
+		0A22B0FE24D3671E00EC018E /* ConditionalSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ConditionalSchema.swift */; };
+		0A22B0FF24D3671E00EC018E /* ConstantSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* ConstantSchema.swift */; };
+		0A22B10024D3671E00EC018E /* CredentialSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* CredentialSchema.swift */; };
+		0A22B10124D3671E00EC018E /* DateSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* DateSchema.swift */; };
+		0A22B10224D3671E00EC018E /* DateTimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* DateTimeSchema.swift */; };
+		0A22B10324D3671E00EC018E /* DictionarySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* DictionarySchema.swift */; };
+		0A22B10424D3671E00EC018E /* DurationSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* DurationSchema.swift */; };
+		0A22B10524D3671E00EC018E /* Enumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06524CB357A00EC018E /* Enumerable.swift */; };
+		0A22B10624D3671E00EC018E /* FlagSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* FlagSchema.swift */; };
+		0A22B10724D3671E00EC018E /* GroupProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* GroupProperty.swift */; };
+		0A22B10824D3671E00EC018E /* GroupSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* GroupSchema.swift */; };
+		0A22B10924D3671E00EC018E /* HttpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* HttpModel.swift */; };
+		0A22B10A24D3671E00EC018E /* HttpParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* HttpParameter.swift */; };
+		0A22B10B24D3671E00EC018E /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* HttpRequest.swift */; };
+		0A22B10C24D3671E00EC018E /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* HttpResponse.swift */; };
+		0A22B10D24D3671E00EC018E /* HttpWithBodyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* HttpWithBodyRequest.swift */; };
+		0A22B10E24D3671E00EC018E /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Metadata.swift */; };
+		0A22B10F24D3671E00EC018E /* NumberSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* NumberSchema.swift */; };
+		0A22B11024D3671E00EC018E /* ODataQuerySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* ODataQuerySchema.swift */; };
+		0A22B11124D3671E00EC018E /* ObjectSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* ObjectSchema.swift */; };
+		0A22B11224D3671E00EC018E /* OperationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* OperationGroup.swift */; };
+		0A22B11324D3671E00EC018E /* OrSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* OrSchema.swift */; };
+		0A22B11424D3671E00EC018E /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Parameter.swift */; };
+		0A22B11524D3671E00EC018E /* PrimitiveSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* PrimitiveSchema.swift */; };
+		0A22B11624D3671E00EC018E /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Property.swift */; };
+		0A22B11724D3671E00EC018E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* Protocol.swift */; };
+		0A22B11824D3671E00EC018E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Request.swift */; };
+		0A22B11924D3671E00EC018E /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Response.swift */; };
+		0A22B11A24D3671E00EC018E /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Schema.swift */; };
+		0A22B11B24D3671E00EC018E /* SchemaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* SchemaResponse.swift */; };
+		0A22B11C24D3671E00EC018E /* SchemaUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* SchemaUsage.swift */; };
+		0A22B11D24D3671E00EC018E /* SealedChoiceSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* SealedChoiceSchema.swift */; };
+		0A22B11E24D3671E00EC018E /* SealedConditionalSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* SealedConditionalSchema.swift */; };
+		0A22B11F24D3671E00EC018E /* SerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* SerializationFormat.swift */; };
+		0A22B12024D3671E00EC018E /* StringSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* StringSchema.swift */; };
+		0A22B12124D3671E00EC018E /* TimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* TimeSchema.swift */; };
+		0A22B12224D3671E00EC018E /* UnixTimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* UnixTimeSchema.swift */; };
+		0A22B12324D3671E00EC018E /* UriSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* UriSchema.swift */; };
+		0A22B12424D3671E00EC018E /* UuidSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* UuidSchema.swift */; };
+		0A22B12524D3671E00EC018E /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Value.swift */; };
+		0A22B12624D3671E00EC018E /* ValueSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* ValueSchema.swift */; };
+		0A22B12724D3671E00EC018E /* XmlSerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* XmlSerializationFormat.swift */; };
+		0A22B12824D3671E00EC018E /* XorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* XorSchema.swift */; };
+		0A22B12924D3671E00EC018E /* AllSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* AllSchemaTypes.swift */; };
+		0A22B12A24D3671E00EC018E /* CompoundSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* CompoundSchemaTypes.swift */; };
+		0A22B12B24D3671E00EC018E /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* HttpMethod.swift */; };
+		0A22B12C24D3671E00EC018E /* ImplementationLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* ImplementationLocation.swift */; };
+		0A22B12D24D3671E00EC018E /* KnownMediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* KnownMediaType.swift */; };
+		0A22B12E24D3671E00EC018E /* ObjectSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* ObjectSchemaTypes.swift */; };
+		0A22B12F24D3671E00EC018E /* ParameterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* ParameterLocation.swift */; };
+		0A22B13024D3671E00EC018E /* PathEncodingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* PathEncodingStyle.swift */; };
+		0A22B13124D3671E00EC018E /* PrimitiveSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* PrimitiveSchemaTypes.swift */; };
+		0A22B13224D3671E00EC018E /* QueryEncodingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* QueryEncodingStyle.swift */; };
+		0A22B13324D3671E00EC018E /* SchemaContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* SchemaContext.swift */; };
+		0A22B13424D3671E00EC018E /* SchemaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* SchemaType.swift */; };
+		0A22B13524D3671E00EC018E /* SerializationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* SerializationStyle.swift */; };
+		0A22B13624D3671E00EC018E /* StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* StatusCode.swift */; };
+		0A22B13724D3671E00EC018E /* ValueSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* ValueSchemaTypes.swift */; };
+		0A22B13824D3671E00EC018E /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* AnyCodable.swift */; };
+		0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* ApiVersion.swift */; };
+		0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* ChoiceValue.swift */; };
+		0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* ConditionalValue.swift */; };
+		0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* ConstantValue.swift */; };
+		0A22B13D24D3671E00EC018E /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* Contact.swift */; };
+		0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* Deprecation.swift */; };
+		0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* Discriminator.swift */; };
+		0A22B14024D3671E00EC018E /* ExternalDocumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* ExternalDocumentation.swift */; };
+		0A22B14124D3671F00EC018E /* FlagValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* FlagValue.swift */; };
+		0A22B14224D3671F00EC018E /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* HttpHeader.swift */; };
+		0A22B14324D3671F00EC018E /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* Info.swift */; };
+		0A22B14424D3671F00EC018E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* Language.swift */; };
+		0A22B14524D3671F00EC018E /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Languages.swift */; };
+		0A22B14624D3671F00EC018E /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* License.swift */; };
+		0A22B14724D3671F00EC018E /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Operation.swift */; };
+		0A22B14824D3671F00EC018E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* Protocols.swift */; };
+		0A22B14924D3671F00EC018E /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* Relations.swift */; };
+		0A22B14A24D3671F00EC018E /* Schemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Schemas.swift */; };
+		0A22B14B24D3671F00EC018E /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Security.swift */; };
+		0A22B14C24D3671F00EC018E /* SecurityRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* SecurityRequirement.swift */; };
+		0A22B14D24D3671F00EC018E /* SerializationFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* SerializationFormats.swift */; };
+		0A22B14E24D3671F00EC018E /* StencilUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07824CB721900EC018E /* StencilUtil.swift */; };
+		0A22B14F24D3671F00EC018E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07924CB721900EC018E /* String+Extensions.swift */; };
+		0A22B15024D3671F00EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */; };
+		0A22B15124D3671F00EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07B24CB721900EC018E /* URL+Extensions.swift */; };
+		0A22B15224D3671F00EC018E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* main.swift */; };
+		0A22B15324D36F8300EC018E /* ClientMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */; };
+		0A22B15424D36F8300EC018E /* ClientMethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C124D32FAB00EC018E /* ClientMethodOptionsSnippet.stencil */; };
+		0A22B15524D36F8300EC018E /* ClientOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */; };
+		0A22B15624D36F8300EC018E /* EnumerationFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* EnumerationFile.stencil */; };
+		0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
+		0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
+		0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
+		0A22B15A24D36F8400EC018E /* ModelImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */; };
+		0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
+		0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */; };
+		0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */; };
+		0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */; };
+		0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */; };
+		0A22B16024D36F8400EC018E /* OperationResponseSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */; };
+		0A22B16124D36F8400EC018E /* OperationResponseNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */; };
+		0A22B16224D36F8400EC018E /* OperationSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */; };
+		0A22B16324D36F8400EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
+		0A22B16424D36F8400EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
+		0A22B16524D36F8400EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
+		0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */; };
+		0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		F106830724CF9E0A007EB4D5 /* PackageFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106830624CF9E0A007EB4D5 /* PackageFileViewModel.swift */; };
 		F194331524D086D400A277BD /* additionalProperties.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330A24D086B100A277BD /* additionalProperties.yaml */; };
 		F194331624D086D400A277BD /* azure-parameter-grouping.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DD24D086AF00A277BD /* azure-parameter-grouping.yaml */; };
 		F194331724D086D400A277BD /* azure-report.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DE24D086AF00A277BD /* azure-report.yaml */; };
@@ -121,102 +224,6 @@
 		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
 		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
 		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
-		F19433DD24D32EDE00A277BD /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19433DB24D32EC400A277BD /* OperationHeaderSnippet.stencil */; };
-		F19433DE24D32EDE00A277BD /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19433DC24D32EC400A277BD /* OperationQueryParamSnippet.stencil */; };
-		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
-		OBJ_132 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
-		OBJ_134 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Logger.swift */; };
-		OBJ_135 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Manager.swift */; };
-		OBJ_136 /* SwiftGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* SwiftGenerator.swift */; };
-		OBJ_138 /* AnySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* AnySchema.swift */; };
-		OBJ_139 /* ArraySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ArraySchema.swift */; };
-		OBJ_140 /* BinarySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* BinarySchema.swift */; };
-		OBJ_141 /* BooleanSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BooleanSchema.swift */; };
-		OBJ_142 /* ByteArraySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ByteArraySchema.swift */; };
-		OBJ_143 /* CharSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* CharSchema.swift */; };
-		OBJ_144 /* ChoiceSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ChoiceSchema.swift */; };
-		OBJ_145 /* CodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* CodeModel.swift */; };
-		OBJ_146 /* ComplexSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ComplexSchema.swift */; };
-		OBJ_147 /* ConditionalSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ConditionalSchema.swift */; };
-		OBJ_148 /* ConstantSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* ConstantSchema.swift */; };
-		OBJ_149 /* CredentialSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* CredentialSchema.swift */; };
-		OBJ_150 /* DateSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* DateSchema.swift */; };
-		OBJ_151 /* DateTimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* DateTimeSchema.swift */; };
-		OBJ_152 /* DictionarySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* DictionarySchema.swift */; };
-		OBJ_153 /* DurationSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* DurationSchema.swift */; };
-		OBJ_154 /* FlagSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* FlagSchema.swift */; };
-		OBJ_155 /* GroupProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* GroupProperty.swift */; };
-		OBJ_156 /* GroupSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* GroupSchema.swift */; };
-		OBJ_157 /* HttpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* HttpModel.swift */; };
-		OBJ_158 /* HttpParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* HttpParameter.swift */; };
-		OBJ_159 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* HttpRequest.swift */; };
-		OBJ_160 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* HttpResponse.swift */; };
-		OBJ_161 /* HttpWithBodyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* HttpWithBodyRequest.swift */; };
-		OBJ_162 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Metadata.swift */; };
-		OBJ_163 /* NumberSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* NumberSchema.swift */; };
-		OBJ_164 /* ODataQuerySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* ODataQuerySchema.swift */; };
-		OBJ_165 /* ObjectSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* ObjectSchema.swift */; };
-		OBJ_166 /* OperationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* OperationGroup.swift */; };
-		OBJ_167 /* OrSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* OrSchema.swift */; };
-		OBJ_168 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Parameter.swift */; };
-		OBJ_169 /* PrimitiveSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* PrimitiveSchema.swift */; };
-		OBJ_170 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Property.swift */; };
-		OBJ_171 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* Protocol.swift */; };
-		OBJ_172 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Request.swift */; };
-		OBJ_173 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Response.swift */; };
-		OBJ_174 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Schema.swift */; };
-		OBJ_175 /* SchemaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* SchemaResponse.swift */; };
-		OBJ_176 /* SchemaUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* SchemaUsage.swift */; };
-		OBJ_177 /* SealedChoiceSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* SealedChoiceSchema.swift */; };
-		OBJ_178 /* SealedConditionalSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* SealedConditionalSchema.swift */; };
-		OBJ_179 /* SerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* SerializationFormat.swift */; };
-		OBJ_180 /* StringSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* StringSchema.swift */; };
-		OBJ_181 /* TimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* TimeSchema.swift */; };
-		OBJ_182 /* UnixTimeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* UnixTimeSchema.swift */; };
-		OBJ_183 /* UriSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* UriSchema.swift */; };
-		OBJ_184 /* UuidSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* UuidSchema.swift */; };
-		OBJ_185 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Value.swift */; };
-		OBJ_186 /* ValueSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* ValueSchema.swift */; };
-		OBJ_187 /* XmlSerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* XmlSerializationFormat.swift */; };
-		OBJ_188 /* XorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* XorSchema.swift */; };
-		OBJ_189 /* AllSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* AllSchemaTypes.swift */; };
-		OBJ_190 /* CompoundSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* CompoundSchemaTypes.swift */; };
-		OBJ_191 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* HttpMethod.swift */; };
-		OBJ_192 /* ImplementationLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* ImplementationLocation.swift */; };
-		OBJ_193 /* KnownMediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* KnownMediaType.swift */; };
-		OBJ_194 /* ObjectSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* ObjectSchemaTypes.swift */; };
-		OBJ_195 /* ParameterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* ParameterLocation.swift */; };
-		OBJ_196 /* PathEncodingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* PathEncodingStyle.swift */; };
-		OBJ_197 /* PrimitiveSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* PrimitiveSchemaTypes.swift */; };
-		OBJ_198 /* QueryEncodingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* QueryEncodingStyle.swift */; };
-		OBJ_199 /* SchemaContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* SchemaContext.swift */; };
-		OBJ_200 /* SchemaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* SchemaType.swift */; };
-		OBJ_201 /* SerializationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* SerializationStyle.swift */; };
-		OBJ_202 /* StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* StatusCode.swift */; };
-		OBJ_203 /* ValueSchemaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* ValueSchemaTypes.swift */; };
-		OBJ_204 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* AnyCodable.swift */; };
-		OBJ_205 /* ApiVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* ApiVersion.swift */; };
-		OBJ_206 /* ChoiceValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* ChoiceValue.swift */; };
-		OBJ_207 /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* ConditionalValue.swift */; };
-		OBJ_208 /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* ConstantValue.swift */; };
-		OBJ_209 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* Contact.swift */; };
-		OBJ_210 /* Deprecation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* Deprecation.swift */; };
-		OBJ_211 /* Discriminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* Discriminator.swift */; };
-		OBJ_212 /* ExternalDocumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* ExternalDocumentation.swift */; };
-		OBJ_213 /* FlagValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* FlagValue.swift */; };
-		OBJ_214 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* HttpHeader.swift */; };
-		OBJ_215 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* Info.swift */; };
-		OBJ_216 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* Language.swift */; };
-		OBJ_217 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Languages.swift */; };
-		OBJ_218 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* License.swift */; };
-		OBJ_219 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Operation.swift */; };
-		OBJ_220 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* Protocols.swift */; };
-		OBJ_221 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* Relations.swift */; };
-		OBJ_222 /* Schemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Schemas.swift */; };
-		OBJ_223 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Security.swift */; };
-		OBJ_224 /* SecurityRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* SecurityRequirement.swift */; };
-		OBJ_225 /* SerializationFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* SerializationFormats.swift */; };
-		OBJ_226 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* main.swift */; };
 		OBJ_233 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_244 /* AutorestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* AutorestSwiftTests.swift */; };
 		OBJ_245 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* XCTestManifests.swift */; };
@@ -257,19 +264,27 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F19433DD24D32EDE00A277BD /* OperationHeaderSnippet.stencil in CopyFiles */,
-				F19433DE24D32EDE00A277BD /* OperationQueryParamSnippet.stencil in CopyFiles */,
-				0A22B0B424D2272300EC018E /* ClientOptionsFile.stencil in CopyFiles */,
-				0A22B0B524D2272300EC018E /* EnumerationFile.stencil in CopyFiles */,
-				0A22B0B624D2272300EC018E /* HeaderSnippet.stencil in CopyFiles */,
-				0A22B0B724D2272300EC018E /* ImportSnippet.stencil in CopyFiles */,
-				0A22B0B824D2272300EC018E /* ModelFile.stencil in CopyFiles */,
-				0A22B0B924D2272300EC018E /* ModelImportSnippet.stencil in CopyFiles */,
-				0A22B0BA24D2272300EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
-				0A22B0BB24D2272300EC018E /* OperationSnippet.stencil in CopyFiles */,
-				0A22B0BC24D2272300EC018E /* Package.stencil in CopyFiles */,
-				0A22B0BD24D2272300EC018E /* README.stencil in CopyFiles */,
-				0A22B0BE24D2272300EC018E /* ServiceClientFile.stencil in CopyFiles */,
+				0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */,
+				0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */,
+				0A22B15324D36F8300EC018E /* ClientMethodOptionsFile.stencil in CopyFiles */,
+				0A22B15424D36F8300EC018E /* ClientMethodOptionsSnippet.stencil in CopyFiles */,
+				0A22B15524D36F8300EC018E /* ClientOptionsFile.stencil in CopyFiles */,
+				0A22B15624D36F8300EC018E /* EnumerationFile.stencil in CopyFiles */,
+				0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */,
+				0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */,
+				0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */,
+				0A22B15A24D36F8400EC018E /* ModelImportSnippet.stencil in CopyFiles */,
+				0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
+				0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */,
+				0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */,
+				0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */,
+				0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */,
+				0A22B16024D36F8400EC018E /* OperationResponseSnippet.stencil in CopyFiles */,
+				0A22B16124D36F8400EC018E /* OperationResponseNoBodySnippet.stencil in CopyFiles */,
+				0A22B16224D36F8400EC018E /* OperationSnippet.stencil in CopyFiles */,
+				0A22B16324D36F8400EC018E /* Package.stencil in CopyFiles */,
+				0A22B16424D36F8400EC018E /* README.stencil in CopyFiles */,
+				0A22B16524D36F8400EC018E /* ServiceClientFile.stencil in CopyFiles */,
 				F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */,
 				F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */,
 			);
@@ -390,11 +405,22 @@
 		0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationViewModel.swift; sourceTree = "<group>"; };
 		0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewModel.swift; sourceTree = "<group>"; };
 		0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientOptionsFile.stencil; sourceTree = "<group>"; };
+		0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationOptionsSnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientMethodOptionsFile.stencil; sourceTree = "<group>"; };
+		0A22B0C124D32FAB00EC018E /* ClientMethodOptionsSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientMethodOptionsSnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientMethodOptionsViewModel.swift; sourceTree = "<group>"; };
+		0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponsePagedBodySnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseBodySnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseNoBodySnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestSnippet.stencil; sourceTree = "<group>"; };
+		0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseSnippet.stencil; sourceTree = "<group>"; };
+		0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
+		0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
-		"AutorestSwift::AutorestSwiftTests::Product" /* AutorestSwiftTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AutorestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"AutorestSwift::AutorestSwiftTests::Product" /* AutorestSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = AutorestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F106826B24CF5B71007EB4D5 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = SOURCE_ROOT; };
@@ -461,8 +487,6 @@
 		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
 		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
 		F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelImportSnippet.stencil; sourceTree = "<group>"; };
-		F19433DB24D32EC400A277BD /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
-		F19433DC24D32EC400A277BD /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -599,6 +623,7 @@
 		0A22B05A24CA4C9300EC018E /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */,
 				0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
 				0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */,
@@ -622,8 +647,8 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
-				F19433DB24D32EC400A277BD /* OperationHeaderSnippet.stencil */,
-				F19433DC24D32EC400A277BD /* OperationQueryParamSnippet.stencil */,
+				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
+				0A22B0C124D32FAB00EC018E /* ClientMethodOptionsSnippet.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
 				0A22B07624CB71E100EC018E /* EnumerationFile.stencil */,
 				0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */,
@@ -631,6 +656,14 @@
 				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
 				F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
+				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
+				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
+				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
+				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
+				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
+				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
+				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
+				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
@@ -1121,125 +1154,124 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				0A22B08024CB734600EC018E /* FileDestination.swift in Sources */,
-				OBJ_131 /* CodeGenerationError.swift in Sources */,
-				OBJ_132 /* CodeGenerator.swift in Sources */,
-				OBJ_134 /* Logger.swift in Sources */,
-				OBJ_135 /* Manager.swift in Sources */,
-				0A22B0A324D2189600EC018E /* KeyValueViewModel.swift in Sources */,
-				OBJ_136 /* SwiftGenerator.swift in Sources */,
-				0A22B07E24CB721900EC018E /* Encodable+Extensions.swift in Sources */,
-				OBJ_138 /* AnySchema.swift in Sources */,
-				0A22B09E24D2183500EC018E /* ParameterViewModel.swift in Sources */,
-				OBJ_139 /* ArraySchema.swift in Sources */,
-				OBJ_140 /* BinarySchema.swift in Sources */,
-				OBJ_141 /* BooleanSchema.swift in Sources */,
-				OBJ_142 /* ByteArraySchema.swift in Sources */,
-				0A22B07F24CB721900EC018E /* URL+Extensions.swift in Sources */,
-				OBJ_143 /* CharSchema.swift in Sources */,
-				0A22B09A24D20D0300EC018E /* OperationSnippet.stencil in Sources */,
-				OBJ_144 /* ChoiceSchema.swift in Sources */,
-				OBJ_145 /* CodeModel.swift in Sources */,
-				OBJ_146 /* ComplexSchema.swift in Sources */,
-				0A22B08924CB783F00EC018E /* ServiceClientFileViewModel.swift in Sources */,
-				OBJ_147 /* ConditionalSchema.swift in Sources */,
-				OBJ_148 /* ConstantSchema.swift in Sources */,
-				OBJ_149 /* CredentialSchema.swift in Sources */,
-				OBJ_150 /* DateSchema.swift in Sources */,
-				0A22B09624D09C2900EC018E /* Makefile in Sources */,
-				OBJ_151 /* DateTimeSchema.swift in Sources */,
-				OBJ_152 /* DictionarySchema.swift in Sources */,
-				OBJ_153 /* DurationSchema.swift in Sources */,
-				OBJ_154 /* FlagSchema.swift in Sources */,
-				OBJ_155 /* GroupProperty.swift in Sources */,
-				OBJ_156 /* GroupSchema.swift in Sources */,
-				OBJ_157 /* HttpModel.swift in Sources */,
-				0A22B07C24CB721900EC018E /* StencilUtil.swift in Sources */,
-				OBJ_158 /* HttpParameter.swift in Sources */,
-				OBJ_159 /* HttpRequest.swift in Sources */,
-				OBJ_160 /* HttpResponse.swift in Sources */,
-				0A22B0A724D218E300EC018E /* ResponseViewModel.swift in Sources */,
-				OBJ_161 /* HttpWithBodyRequest.swift in Sources */,
-				OBJ_162 /* Metadata.swift in Sources */,
-				OBJ_163 /* NumberSchema.swift in Sources */,
-				OBJ_164 /* ODataQuerySchema.swift in Sources */,
-				OBJ_165 /* ObjectSchema.swift in Sources */,
-				OBJ_166 /* OperationGroup.swift in Sources */,
-				OBJ_167 /* OrSchema.swift in Sources */,
-				OBJ_168 /* Parameter.swift in Sources */,
-				OBJ_169 /* PrimitiveSchema.swift in Sources */,
-				OBJ_170 /* Property.swift in Sources */,
-				OBJ_171 /* Protocol.swift in Sources */,
-				OBJ_172 /* Request.swift in Sources */,
-				0A22B0AD24D2198D00EC018E /* EnumerationChoiceViewModel.swift in Sources */,
-				F106830724CF9E0A007EB4D5 /* PackageFileViewModel.swift in Sources */,
-				OBJ_173 /* Response.swift in Sources */,
-				OBJ_174 /* Schema.swift in Sources */,
-				OBJ_175 /* SchemaResponse.swift in Sources */,
-				OBJ_176 /* SchemaUsage.swift in Sources */,
-				OBJ_177 /* SealedChoiceSchema.swift in Sources */,
-				OBJ_178 /* SealedConditionalSchema.swift in Sources */,
-				OBJ_179 /* SerializationFormat.swift in Sources */,
-				0A22B08B24CB9E1000EC018E /* ReadmeFileViewModel.swift in Sources */,
-				OBJ_180 /* StringSchema.swift in Sources */,
-				OBJ_181 /* TimeSchema.swift in Sources */,
-				OBJ_182 /* UnixTimeSchema.swift in Sources */,
-				OBJ_183 /* UriSchema.swift in Sources */,
-				OBJ_184 /* UuidSchema.swift in Sources */,
-				OBJ_185 /* Value.swift in Sources */,
-				0A22B05C24CA4CA400EC018E /* EnumerationFileViewModel.swift in Sources */,
-				OBJ_186 /* ValueSchema.swift in Sources */,
-				OBJ_187 /* XmlSerializationFormat.swift in Sources */,
-				OBJ_188 /* XorSchema.swift in Sources */,
-				OBJ_189 /* AllSchemaTypes.swift in Sources */,
-				OBJ_190 /* CompoundSchemaTypes.swift in Sources */,
-				OBJ_191 /* HttpMethod.swift in Sources */,
-				OBJ_192 /* ImplementationLocation.swift in Sources */,
-				OBJ_193 /* KnownMediaType.swift in Sources */,
-				0A22B0B224D21D2700EC018E /* ObjectViewModel.swift in Sources */,
-				OBJ_194 /* ObjectSchemaTypes.swift in Sources */,
-				0A22B03924C8964000EC018E /* LanguageShortcut.swift in Sources */,
-				0A22B0A924D2190300EC018E /* OperationViewModel.swift in Sources */,
-				0A22B06624CB357A00EC018E /* Enumerable.swift in Sources */,
-				OBJ_195 /* ParameterLocation.swift in Sources */,
-				OBJ_196 /* PathEncodingStyle.swift in Sources */,
-				OBJ_197 /* PrimitiveSchemaTypes.swift in Sources */,
-				OBJ_198 /* QueryEncodingStyle.swift in Sources */,
-				OBJ_199 /* SchemaContext.swift in Sources */,
-				OBJ_200 /* SchemaType.swift in Sources */,
-				0A22B06424CA58AF00EC018E /* PropertyViewModel.swift in Sources */,
-				OBJ_201 /* SerializationStyle.swift in Sources */,
-				0A22B0A524D218C600EC018E /* RequestViewModel.swift in Sources */,
-				OBJ_202 /* StatusCode.swift in Sources */,
-				OBJ_203 /* ValueSchemaTypes.swift in Sources */,
-				0A22B0AB24D2194C00EC018E /* OperationGroupViewModel.swift in Sources */,
-				OBJ_204 /* AnyCodable.swift in Sources */,
-				OBJ_205 /* ApiVersion.swift in Sources */,
-				OBJ_206 /* ChoiceValue.swift in Sources */,
-				OBJ_207 /* ConditionalValue.swift in Sources */,
-				OBJ_208 /* ConstantValue.swift in Sources */,
-				OBJ_209 /* Contact.swift in Sources */,
-				OBJ_210 /* Deprecation.swift in Sources */,
-				OBJ_211 /* Discriminator.swift in Sources */,
-				OBJ_212 /* ExternalDocumentation.swift in Sources */,
-				OBJ_213 /* FlagValue.swift in Sources */,
-				OBJ_214 /* HttpHeader.swift in Sources */,
-				OBJ_215 /* Info.swift in Sources */,
-				0A22B0A024D2185500EC018E /* ReturnTypeViewModel.swift in Sources */,
-				OBJ_216 /* Language.swift in Sources */,
-				0A22B07D24CB721900EC018E /* String+Extensions.swift in Sources */,
-				OBJ_217 /* Languages.swift in Sources */,
-				OBJ_218 /* License.swift in Sources */,
-				0A22B06A24CB3B6300EC018E /* ViewModelPrimitives.swift in Sources */,
-				OBJ_219 /* Operation.swift in Sources */,
-				OBJ_220 /* Protocols.swift in Sources */,
-				OBJ_221 /* Relations.swift in Sources */,
-				0A22B0AF24D219A600EC018E /* EnumerationViewModel.swift in Sources */,
-				OBJ_222 /* Schemas.swift in Sources */,
-				OBJ_223 /* Security.swift in Sources */,
-				OBJ_224 /* SecurityRequirement.swift in Sources */,
-				OBJ_225 /* SerializationFormats.swift in Sources */,
-				OBJ_226 /* main.swift in Sources */,
+				0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */,
+				0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */,
+				0A22B0DE24D3671D00EC018E /* EnumerationFileViewModel.swift in Sources */,
+				0A22B0DF24D3671D00EC018E /* EnumerationViewModel.swift in Sources */,
+				0A22B0E024D3671D00EC018E /* KeyValueViewModel.swift in Sources */,
+				0A22B0E124D3671D00EC018E /* ObjectViewModel.swift in Sources */,
+				0A22B0E224D3671E00EC018E /* OperationGroupViewModel.swift in Sources */,
+				0A22B0E324D3671E00EC018E /* OperationViewModel.swift in Sources */,
+				0A22B0E424D3671E00EC018E /* PackageFileViewModel.swift in Sources */,
+				0A22B0E524D3671E00EC018E /* ParameterViewModel.swift in Sources */,
+				0A22B0E624D3671E00EC018E /* PropertyViewModel.swift in Sources */,
+				0A22B0E724D3671E00EC018E /* ReadmeFileViewModel.swift in Sources */,
+				0A22B0E824D3671E00EC018E /* RequestViewModel.swift in Sources */,
+				0A22B0E924D3671E00EC018E /* ResponseViewModel.swift in Sources */,
+				0A22B0EA24D3671E00EC018E /* ReturnTypeViewModel.swift in Sources */,
+				0A22B0EB24D3671E00EC018E /* ServiceClientFileViewModel.swift in Sources */,
+				0A22B0EC24D3671E00EC018E /* ViewModelPrimitives.swift in Sources */,
+				0A22B0ED24D3671E00EC018E /* CodeGenerationError.swift in Sources */,
+				0A22B0EE24D3671E00EC018E /* CodeGenerator.swift in Sources */,
+				0A22B0F024D3671E00EC018E /* FileDestination.swift in Sources */,
+				0A22B0F124D3671E00EC018E /* LanguageShortcut.swift in Sources */,
+				0A22B0F224D3671E00EC018E /* Logger.swift in Sources */,
+				0A22B0F324D3671E00EC018E /* Manager.swift in Sources */,
+				0A22B0F424D3671E00EC018E /* SwiftGenerator.swift in Sources */,
+				0A22B0F524D3671E00EC018E /* AnySchema.swift in Sources */,
+				0A22B0F624D3671E00EC018E /* ArraySchema.swift in Sources */,
+				0A22B0F724D3671E00EC018E /* BinarySchema.swift in Sources */,
+				0A22B0F824D3671E00EC018E /* BooleanSchema.swift in Sources */,
+				0A22B0F924D3671E00EC018E /* ByteArraySchema.swift in Sources */,
+				0A22B0FA24D3671E00EC018E /* CharSchema.swift in Sources */,
+				0A22B0FB24D3671E00EC018E /* ChoiceSchema.swift in Sources */,
+				0A22B0FC24D3671E00EC018E /* CodeModel.swift in Sources */,
+				0A22B0FD24D3671E00EC018E /* ComplexSchema.swift in Sources */,
+				0A22B0FE24D3671E00EC018E /* ConditionalSchema.swift in Sources */,
+				0A22B0FF24D3671E00EC018E /* ConstantSchema.swift in Sources */,
+				0A22B10024D3671E00EC018E /* CredentialSchema.swift in Sources */,
+				0A22B10124D3671E00EC018E /* DateSchema.swift in Sources */,
+				0A22B10224D3671E00EC018E /* DateTimeSchema.swift in Sources */,
+				0A22B10324D3671E00EC018E /* DictionarySchema.swift in Sources */,
+				0A22B10424D3671E00EC018E /* DurationSchema.swift in Sources */,
+				0A22B10524D3671E00EC018E /* Enumerable.swift in Sources */,
+				0A22B10624D3671E00EC018E /* FlagSchema.swift in Sources */,
+				0A22B10724D3671E00EC018E /* GroupProperty.swift in Sources */,
+				0A22B10824D3671E00EC018E /* GroupSchema.swift in Sources */,
+				0A22B10924D3671E00EC018E /* HttpModel.swift in Sources */,
+				0A22B10A24D3671E00EC018E /* HttpParameter.swift in Sources */,
+				0A22B10B24D3671E00EC018E /* HttpRequest.swift in Sources */,
+				0A22B10C24D3671E00EC018E /* HttpResponse.swift in Sources */,
+				0A22B10D24D3671E00EC018E /* HttpWithBodyRequest.swift in Sources */,
+				0A22B10E24D3671E00EC018E /* Metadata.swift in Sources */,
+				0A22B10F24D3671E00EC018E /* NumberSchema.swift in Sources */,
+				0A22B11024D3671E00EC018E /* ODataQuerySchema.swift in Sources */,
+				0A22B11124D3671E00EC018E /* ObjectSchema.swift in Sources */,
+				0A22B11224D3671E00EC018E /* OperationGroup.swift in Sources */,
+				0A22B11324D3671E00EC018E /* OrSchema.swift in Sources */,
+				0A22B11424D3671E00EC018E /* Parameter.swift in Sources */,
+				0A22B11524D3671E00EC018E /* PrimitiveSchema.swift in Sources */,
+				0A22B11624D3671E00EC018E /* Property.swift in Sources */,
+				0A22B11724D3671E00EC018E /* Protocol.swift in Sources */,
+				0A22B11824D3671E00EC018E /* Request.swift in Sources */,
+				0A22B11924D3671E00EC018E /* Response.swift in Sources */,
+				0A22B11A24D3671E00EC018E /* Schema.swift in Sources */,
+				0A22B11B24D3671E00EC018E /* SchemaResponse.swift in Sources */,
+				0A22B11C24D3671E00EC018E /* SchemaUsage.swift in Sources */,
+				0A22B11D24D3671E00EC018E /* SealedChoiceSchema.swift in Sources */,
+				0A22B11E24D3671E00EC018E /* SealedConditionalSchema.swift in Sources */,
+				0A22B11F24D3671E00EC018E /* SerializationFormat.swift in Sources */,
+				0A22B12024D3671E00EC018E /* StringSchema.swift in Sources */,
+				0A22B12124D3671E00EC018E /* TimeSchema.swift in Sources */,
+				0A22B12224D3671E00EC018E /* UnixTimeSchema.swift in Sources */,
+				0A22B12324D3671E00EC018E /* UriSchema.swift in Sources */,
+				0A22B12424D3671E00EC018E /* UuidSchema.swift in Sources */,
+				0A22B12524D3671E00EC018E /* Value.swift in Sources */,
+				0A22B12624D3671E00EC018E /* ValueSchema.swift in Sources */,
+				0A22B12724D3671E00EC018E /* XmlSerializationFormat.swift in Sources */,
+				0A22B12824D3671E00EC018E /* XorSchema.swift in Sources */,
+				0A22B12924D3671E00EC018E /* AllSchemaTypes.swift in Sources */,
+				0A22B12A24D3671E00EC018E /* CompoundSchemaTypes.swift in Sources */,
+				0A22B12B24D3671E00EC018E /* HttpMethod.swift in Sources */,
+				0A22B12C24D3671E00EC018E /* ImplementationLocation.swift in Sources */,
+				0A22B12D24D3671E00EC018E /* KnownMediaType.swift in Sources */,
+				0A22B12E24D3671E00EC018E /* ObjectSchemaTypes.swift in Sources */,
+				0A22B12F24D3671E00EC018E /* ParameterLocation.swift in Sources */,
+				0A22B13024D3671E00EC018E /* PathEncodingStyle.swift in Sources */,
+				0A22B13124D3671E00EC018E /* PrimitiveSchemaTypes.swift in Sources */,
+				0A22B13224D3671E00EC018E /* QueryEncodingStyle.swift in Sources */,
+				0A22B13324D3671E00EC018E /* SchemaContext.swift in Sources */,
+				0A22B13424D3671E00EC018E /* SchemaType.swift in Sources */,
+				0A22B13524D3671E00EC018E /* SerializationStyle.swift in Sources */,
+				0A22B13624D3671E00EC018E /* StatusCode.swift in Sources */,
+				0A22B13724D3671E00EC018E /* ValueSchemaTypes.swift in Sources */,
+				0A22B13824D3671E00EC018E /* AnyCodable.swift in Sources */,
+				0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */,
+				0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */,
+				0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */,
+				0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */,
+				0A22B13D24D3671E00EC018E /* Contact.swift in Sources */,
+				0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */,
+				0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */,
+				0A22B14024D3671E00EC018E /* ExternalDocumentation.swift in Sources */,
+				0A22B14124D3671F00EC018E /* FlagValue.swift in Sources */,
+				0A22B14224D3671F00EC018E /* HttpHeader.swift in Sources */,
+				0A22B14324D3671F00EC018E /* Info.swift in Sources */,
+				0A22B14424D3671F00EC018E /* Language.swift in Sources */,
+				0A22B14524D3671F00EC018E /* Languages.swift in Sources */,
+				0A22B14624D3671F00EC018E /* License.swift in Sources */,
+				0A22B14724D3671F00EC018E /* Operation.swift in Sources */,
+				0A22B14824D3671F00EC018E /* Protocols.swift in Sources */,
+				0A22B14924D3671F00EC018E /* Relations.swift in Sources */,
+				0A22B14A24D3671F00EC018E /* Schemas.swift in Sources */,
+				0A22B14B24D3671F00EC018E /* Security.swift in Sources */,
+				0A22B14C24D3671F00EC018E /* SecurityRequirement.swift in Sources */,
+				0A22B14D24D3671F00EC018E /* SerializationFormats.swift in Sources */,
+				0A22B14E24D3671F00EC018E /* StencilUtil.swift in Sources */,
+				0A22B14F24D3671F00EC018E /* String+Extensions.swift in Sources */,
+				0A22B15024D3671F00EC018E /* Encodable+Extensions.swift in Sources */,
+				0A22B15124D3671F00EC018E /* URL+Extensions.swift in Sources */,
+				0A22B15224D3671F00EC018E /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1407,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1401,6 +1434,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
