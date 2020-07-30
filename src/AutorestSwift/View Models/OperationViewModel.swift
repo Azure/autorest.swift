@@ -35,15 +35,19 @@ struct OperationViewModel {
     let comment: ViewModelComment
     let params: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
-    let queryParams: [KeyValueViewModel]?
-    let headerParams: [KeyValueViewModel]?
+    // Query Params/Header can be placed inside QueryParameter Initializer
+    let requiredQueryParams: [KeyValueViewModel]?
+    let requiredHeaders: [KeyValueViewModel]?
+    // Query Params/Header need to add Nil check
+    let optionalQueryParams: [KeyValueViewModel]?
+    let optionalHeaders: [KeyValueViewModel]?
     let uriParams: [KeyValueViewModel]?
     let requests: [RequestViewModel]?
     let responses: [ResponseViewModel]?
     let method: String?
     let path: String?
 
-    init(from operation: Operation, with model: CodeModel) {
+    init(from operation: Operation) {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
 
@@ -54,25 +58,28 @@ struct OperationViewModel {
             items.append(ParameterViewModel(from: param))
         }
 
-        var queryParams = [KeyValueViewModel]()
-        var headerParams = [KeyValueViewModel]()
+        var requiredQueryParams = [KeyValueViewModel]()
+        var requiredHeaders = [KeyValueViewModel]()
+        var optionalQueryParams = [KeyValueViewModel]()
+        var optionalHeaders = [KeyValueViewModel]()
         var uriParams = [KeyValueViewModel]()
         for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
+            let viewModel = KeyValueViewModel(from: param, with: operation)
+
             switch httpParam.in {
             case .query:
-                queryParams.append(KeyValueViewModel(from: param, with: model))
+                viewModel.optional ? optionalQueryParams.append(viewModel) : requiredQueryParams.append(viewModel)
             case .header:
-                headerParams.append(KeyValueViewModel(from: param, with: model))
+                viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
+                    .append(viewModel)
             case .uri:
-                uriParams.append(KeyValueViewModel(from: param, with: model))
+                uriParams.append(viewModel)
             default:
                 continue
             }
         }
-        self.queryParams = queryParams
-        self.headerParams = headerParams
-        self.uriParams = uriParams
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
@@ -95,9 +102,29 @@ struct OperationViewModel {
 
         self.method = requests.first?.method
         self.path = requests.first?.path
+
+        if let headerValue = requests.first?.knownMediaType {
+            requiredHeaders
+                .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
+        }
+
+        if let headerValue = responses.first?.mediaTypes?.first {
+            requiredHeaders
+                .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
+        }
+
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
 
         self.params = items
+        self.optionalQueryParams = optionalQueryParams
+        self.optionalHeaders = optionalHeaders
+
+        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
+        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+
+        self.requiredQueryParams = requiredQueryParams
+        self.requiredHeaders = requiredHeaders
+        self.uriParams = uriParams
     }
 }
 

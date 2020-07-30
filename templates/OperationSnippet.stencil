@@ -9,19 +9,8 @@ public func {{ op.name }}(
     let urlTemplate = "{{ op.path }}"
     guard let url = self.url(forTemplate: urlTemplate) else { return }
 
-    // Construct query
-    var queryParams: [QueryParameter] = [
-        {% for param in op.queryParams %}
-        "{{ param.key }}" : {{ param.value}}
-        {% endfor %}
-    ]
-
-    // Construct headers
-    var headers = HTTPHeaders([
-        {% for param in op.headerParams %}
-        "{{ param.key }}" : {{ param.value}}
-        {% endfor %}
-    ])
+    {% include "OperationQueryParamSnippet.stencil" %}
+    {% include "OperationHeaderSnippet.stencil" %}
 
     // Process endpoint options
     if let options = options {

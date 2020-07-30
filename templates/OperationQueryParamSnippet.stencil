@@ -1,0 +1,13 @@
+// Construct query
+var queryParams: [QueryParameter] = [
+    {% for param in op.requiredQueryParams %}
+    ("{{ param.key }}" , {{ param.value}})
+    {% endfor %}
+]
+
+{% for param in op.optionalQueryParams %}
+if {{ param.value }} != nil {
+    queryParams.append("{{ param.key }}", {{ param.value}})
+}
+{% endfor %}
+

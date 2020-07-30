@@ -3,7 +3,7 @@
 {% include "ModelImportSnippet.stencil" %}
 
 {{ model.comment }}
-public {{ model.objectType }} {{ model.name }} {
+public {{ model.objectType }} {{ model.name }} : Codable {
     {% for property in model.properties %}
     {{ property.comment }}
     public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}

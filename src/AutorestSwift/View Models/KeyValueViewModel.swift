@@ -32,15 +32,45 @@ import Foundation
 struct KeyValueViewModel {
     let key: String
     let value: String
+    // Flag indicates if value is optional
+    let optional: Bool
 
-    init(from param: Parameter, with model: CodeModel) {
+    /**
+        Create a ViewModel with a Key and Value pair
+
+        - Parameter param: The parameter for the KeyValue Pair.  The serialized Name will be used as the key.
+                    If the parameter is a Constant Schema, the value pf the VM will be the value of the Constant Schema
+                     If not, it will check if the parameter is the signaure parameter of the operation If yes,
+                    the value of the VM will be the name of the signature parameter.
+        - Parameter operation: the operation which this paramter exists.
+     */
+    init(from param: Parameter, with operation: Operation) {
         self.key = param.serializedName!
-        if let constant = param.schema as? ConstantSchema {
-            self.value = "\"\(constant.value.value)\""
-        } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
-            self.value = schema.name
+
+        if let constantSchema = param.schema as? ConstantSchema {
+            let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
+            let val: String = constantSchema.value.value
+
+            self.value = isString ? "\"\(val)\"" : "\(val)"
+            self.optional = false
+        } else if let signatureParameter = operation.signatureParameter(for: param.name) {
+            self.value = param.name
+            self.optional = signatureParameter.required ?? true
         } else {
             self.value = ""
+            self.optional = false
         }
+    }
+
+    /**
+        Create a ViewModel with a Key and Value pair
+
+        - Parameter key: Key String in the Key value pair
+        - Parameter value: the value string
+     */
+    init(key: String, value: String) {
+        self.key = key
+        self.value = value
+        self.optional = false
     }
 }

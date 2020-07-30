@@ -44,6 +44,6 @@ struct ResponseViewModel {
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
-        self.objectType = schemaResponse?.schema.name
+        self.objectType = schemaResponse?.schema.swiftType(optional: false)
     }
 }
