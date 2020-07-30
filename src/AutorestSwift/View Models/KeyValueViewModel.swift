@@ -31,6 +31,7 @@ import Foundation
 ///     "key" = value
 struct KeyValueViewModel {
     let key: String
+    let paramName: String?
     let value: String
     // Flag indicates if value is optional
     let optional: Bool
@@ -53,12 +54,22 @@ struct KeyValueViewModel {
 
             self.value = isString ? "\"\(val)\"" : "\(val)"
             self.optional = false
+            self.paramName = nil
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
-            self.value = param.name
+            // value is referring a signautre parameter, no need to wrap as String
+            self.paramName = param.name
             self.optional = signatureParameter.required ?? true
+            let swiftType = signatureParameter.schema.swiftType(optional: optional)
+            if swiftType.starts(with: "String") {
+                self.value = param.name
+            } else {
+                // Convert the Swift type into String
+                self.value = "String(\(param.name))"
+            }
         } else {
             self.value = ""
             self.optional = false
+            self.paramName = nil
         }
     }
 
@@ -72,5 +83,6 @@ struct KeyValueViewModel {
         self.key = key
         self.value = value
         self.optional = false
+        self.paramName = nil
     }
 }

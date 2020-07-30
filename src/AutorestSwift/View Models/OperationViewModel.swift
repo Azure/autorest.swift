@@ -103,17 +103,19 @@ struct OperationViewModel {
         self.method = requests.first?.method
         self.path = requests.first?.path
 
-        if let headerValue = requests.first?.knownMediaType {
+        if let headerValue = requests.first?.knownMediaType,
+            headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
         }
 
-        if let headerValue = responses.first?.mediaTypes?.first {
+        if let headerValue = responses.first?.mediaTypes?.first,
+            headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
-        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
+        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "Void")
 
         self.params = items
         self.optionalQueryParams = optionalQueryParams
