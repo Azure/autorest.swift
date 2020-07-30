@@ -65,24 +65,27 @@ class Schema: Codable, LanguageShortcut {
     /// Additional metadata extensions dictionary
     let extensions: AnyCodable?
 
-    var swiftType: String {
+    func swiftType(optional: Bool) -> String {
+        var swiftType: String
         switch type {
         case AllSchemaTypes.string:
-            return "String"
+            swiftType = "String"
         case AllSchemaTypes.boolean:
-            return "Bool"
+            swiftType = "Bool"
         case AllSchemaTypes.array:
             if let arraySchema = self as? ArraySchema {
-                return "[\(arraySchema.elementType.name)]"
+                swiftType = "[\(arraySchema.elementType.name)]"
             } else {
-                return "[\(name)]"
+                swiftType = "[\(name)]"
             }
         case AllSchemaTypes.dateTime:
-            return "Date"
+            swiftType = "Date"
         case AllSchemaTypes.integer:
-            return "Int"
+            swiftType = "Int"
         default:
-            return name
+            swiftType = name
         }
+
+        return optional ? "\(swiftType)?" : swiftType
     }
 }

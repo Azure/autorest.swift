@@ -40,7 +40,7 @@ struct PropertyViewModel {
         self.name = schema.name.toCamelCase
         self.comment = ViewModelComment(from: schema.description)
         let required = schema.required ?? false
-        self.type = schema.schema.swiftType + (!required ? "?" : "")
+        self.type = schema.schema.swiftType(optional: !required)
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }

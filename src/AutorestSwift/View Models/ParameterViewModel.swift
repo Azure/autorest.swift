@@ -38,7 +38,7 @@ struct ParameterViewModel {
     init(from schema: Parameter) {
         self.name = schema.name.toCamelCase
         self.required = schema.required ?? false
-        self.type = schema.schema.swiftType + (!required ? "?" : "")
+        self.type = schema.schema.swiftType(optional: !required)
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }
