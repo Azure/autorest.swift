@@ -26,10 +26,13 @@
 
 import Foundation
 
-enum ReturnTypeEnum: String {
-    case pageable
-    case decoding
-    case statusCode
+enum ResponseStrategy: String {
+    /// Service returns a pageable response
+    case pagedStrategy
+    /// Service returns some kind of deserializable object
+    case codableStrategy
+    /// Service returns no response data, only a status code
+    case noResponseStrategy
 }
 
 /// View Model for method return type.
@@ -37,11 +40,11 @@ enum ReturnTypeEnum: String {
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
     let name: String
-    let type: String
+    let strategy: String
 
     init(from objectType: String) {
         self.name = objectType
         // TODO: Logic here to decide what type this should be
-        self.type = ReturnTypeEnum.decoding.rawValue
+        self.strategy = ResponseStrategy.codableStrategy.rawValue
     }
 }
