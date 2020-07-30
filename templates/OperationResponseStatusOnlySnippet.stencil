@@ -1,0 +1,10 @@
+switch result {
+case .success:
+    DispatchQueue.main.async {
+        completionHandler(.success(()), httpResponse)
+    }
+case let .failure(error):
+    DispatchQueue.main.async {
+        completionHandler(.failure(error), httpResponse)
+    }
+}

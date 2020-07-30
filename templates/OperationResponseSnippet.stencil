@@ -1,0 +1,9 @@
+{% if op.returnType.type == "pageable" %}
+    {% include "OperationResponsePageableSnippet.stencil" op %}
+{% elif op.returnType.type == "decoding" %}
+    {% include "OperationResponseDecodingSnippet.stencil" op %}
+{% elif op.returnType.type == "statusCode" %}
+    {% include "OperationResponseStatusCodeOnlySnippet.stencil" %}
+{% else %}
+    // TODO: Couldn't match the thing for {{ op.returnType.type }}
+{% endif %}

@@ -1,0 +1,14 @@
+// Process endpoint options
+if let options = options {
+    // Query options
+    {% for opt in op.options.queryOptions %}
+    if let {{ opt.name }} = options.{{ opt.name }} { queryParams.append("{{ opt.name }}", {{ opt.name}}) }
+    {% endfor %}
+
+    // Header options
+    {% for opt in op.options.headerOptions %}
+    if let {{ opt.name }} = options.{{ opt.name }} {
+        headers[.{{ opt.name }}] = {{ opt.name }}
+    }
+    {% endfor %}
+}

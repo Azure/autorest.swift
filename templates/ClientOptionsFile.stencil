@@ -5,13 +5,13 @@
 /// User-configurable options for the `{{ model.name }}`.
 public struct {{ model.name }}Options: AzureClientOptions {
     /// The API version of the {{ model.description }} to invoke.
-    let apiVersion: String
+    public let apiVersion: String
     /// The `ClientLogger` to be used by this `{{ model.name }}`.
-    let logger: ClientLogger
+    public let logger: ClientLogger
     /// Options for configuring telemetry sent by this `{{ model.name }}`.
-    let telemetryOptions: TelemetryOptions
+    public let telemetryOptions: TelemetryOptions
     /// Global transport options
-    let transportOptions: TransportOptions
+    public let transportOptions: TransportOptions
 
     /// Initialize a `{{ model.name }}Options` structure.
     /// - Parameters:

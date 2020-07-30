@@ -1,0 +1,23 @@
+/// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
+public struct {{ model.name }}: AzureOptions {
+
+{% for property in model.properties %}
+    {{ property.comment }}
+    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
+{% endfor %}
+
+    /// Initialize a `{{ model.name }}` structure.
+    /// - Parameters:
+{% for property in model.properties %}
+    ///   - {{ property.name }}: {{ property.comment }}
+{% endfor %}
+    public init(
+    {% for property in model.properties %}
+        {{ property.name }}: {{ property.type }} = nil,
+    {% endfor %}
+    ) {
+    {% for property in model.properties %}
+        self.{{ property.name }} = {{ property.name }}
+    {% endfor %}
+    }
+}
