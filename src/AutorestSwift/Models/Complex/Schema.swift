@@ -82,8 +82,11 @@ class Schema: Codable, LanguageShortcut {
             swiftType = "Date"
         case AllSchemaTypes.integer:
             swiftType = "Int"
-        default:
+        case AllSchemaTypes.choice,
+             AllSchemaTypes.object:
             swiftType = name
+        default:
+            fatalError("Type \(type) not implemented")
         }
 
         return optional ? "\(swiftType)?" : swiftType

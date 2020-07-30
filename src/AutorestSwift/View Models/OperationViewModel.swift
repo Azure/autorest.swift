@@ -47,7 +47,7 @@ struct OperationViewModel {
     let method: String?
     let path: String?
 
-    init(from operation: Operation, with model: CodeModel) {
+    init(from operation: Operation) {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
 
@@ -66,7 +66,7 @@ struct OperationViewModel {
         for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
-            let viewModel = KeyValueViewModel(from: param, with: model, and: operation)
+            let viewModel = KeyValueViewModel(from: param, with: operation)
 
             switch httpParam.in {
             case .query:
@@ -75,7 +75,7 @@ struct OperationViewModel {
                 viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
                     .append(viewModel)
             case .uri:
-                uriParams.append(KeyValueViewModel(from: param, with: model, and: operation))
+                uriParams.append(viewModel)
             default:
                 continue
             }
@@ -105,12 +105,12 @@ struct OperationViewModel {
 
         if let headerValue = requests.first?.knownMediaType {
             requiredHeaders
-                .append(KeyValueViewModel(using: "Content-Type", modelValue: "\"\(headerValue)\""))
+                .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
         }
 
-        if let headerValue = requests.first?.mediaTypes?.first {
+        if let headerValue = responses.first?.mediaTypes?.first {
             requiredHeaders
-                .append(KeyValueViewModel(using: "Accept", modelValue: "\"\(headerValue)\""))
+                .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
@@ -120,7 +120,7 @@ struct OperationViewModel {
         self.optionalHeaders = optionalHeaders
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
-        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(using: "", modelValue: "")) }
+        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
 
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders

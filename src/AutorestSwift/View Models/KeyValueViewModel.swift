@@ -35,40 +35,42 @@ struct KeyValueViewModel {
     // Flag indicates if value is optional
     let optional: Bool
 
-    init(
-        from parameter: Parameter? = nil,
-        with codemodel: CodeModel? = nil,
-        and operation: Operation? = nil,
-        using key: String? = nil,
-        modelValue: String? = nil
-    ) {
-        self.key = key ?? parameter?.serializedName! ?? ""
+    /**
+        Create a ViewModel with a Key and Value pair
 
-        if let param = parameter,
-            let model = codemodel,
-            let opt = operation {
-            if let constantSchema = param.schema as? ConstantSchema {
-                let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
-                let val: String = constantSchema.value.value
+        - Parameter param: The parameter for the KeyValue Pair.  The serialized Name will be used as the key.
+                    If the parameter is a Constant Schema, the value pf the VM will be the value of the Constant Schema
+                     If not, it will check if the parameter is the signaure parameter of the operation If yes,
+                    the value of the VM will be the name of the signature parameter.
+        - Parameter operation: the operation which this paramter exists.
+     */
+    init(from param: Parameter, with operation: Operation) {
+        self.key = param.serializedName!
 
-                self.value = isString ? "\"\(val)\"" : "\(val)"
-                self.optional = false
-            } else if let signatureParameter = opt.signatureParameter(for: param.name) {
-                self.value = param.name
-                self.optional = signatureParameter.required ?? true
-            } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
-                self.value = schema.name
-                self.optional = false
-            } else {
-                self.value = ""
-                self.optional = false
-            }
-        } else if let value = modelValue {
-            self.value = value
+        if let constantSchema = param.schema as? ConstantSchema {
+            let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
+            let val: String = constantSchema.value.value
+
+            self.value = isString ? "\"\(val)\"" : "\(val)"
             self.optional = false
+        } else if let signatureParameter = operation.signatureParameter(for: param.name) {
+            self.value = param.name
+            self.optional = signatureParameter.required ?? true
         } else {
             self.value = ""
             self.optional = false
         }
+    }
+
+    /**
+        Create a ViewModel with a Key and Value pair
+
+        - Parameter key: Key String in the Key value pair
+        - Parameter value: the value string
+     */
+    init(key: String, value: String) {
+        self.key = key
+        self.value = value
+        self.optional = false
     }
 }
