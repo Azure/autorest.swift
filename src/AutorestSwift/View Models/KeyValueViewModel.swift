@@ -32,15 +32,32 @@ import Foundation
 struct KeyValueViewModel {
     let key: String
     let value: String
+    let valueNilable: Bool
 
-    init(from param: Parameter, with model: CodeModel) {
-        self.key = param.serializedName!
-        if let constant = param.schema as? ConstantSchema {
-            self.value = "\"\(constant.value.value)\""
+    init(from param: Parameter, with model: CodeModel, and operation: Operation, using key: String? = nil) {
+        self.key = key ?? param.serializedName!
+
+        if let constantSchema = param.schema as? ConstantSchema {
+            let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
+            let val: String = constantSchema.value.value
+
+            self.value = isString ? "\"\(val)\"" : "\(val)"
+            self.valueNilable = false
+        } else if let signatureParameter = operation.signatureParameters(for: param.name) {
+            self.value = param.name
+            self.valueNilable = signatureParameter.required ?? true
         } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
             self.value = schema.name
+            self.valueNilable = false
         } else {
             self.value = ""
+            self.valueNilable = false
         }
+    }
+
+    init(key: String, value: String) {
+        self.key = key
+        self.value = value
+        self.valueNilable = false
     }
 }

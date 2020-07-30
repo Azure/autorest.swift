@@ -117,4 +117,9 @@ class Operation: Codable, LanguageShortcut {
         try container.encode(`protocol`, forKey: .protocol)
         if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
+
+    /// Lookup a signatureParameter by name.
+    func signatureParameters(for name: String) -> Parameter? {
+        return signatureParameters?.first { $0.name == name }
+    }
 }

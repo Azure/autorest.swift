@@ -32,11 +32,13 @@ import Foundation
 struct ParameterViewModel {
     let name: String
     let type: String
+    let required: Bool
     let defaultValue: ViewModelDefault
 
     init(from schema: Parameter) {
         self.name = schema.name.toCamelCase
-        self.type = schema.schema.name
+        self.required = schema.required ?? false
+        self.type = getType(from: schema.schema, optional: !required)
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
 }

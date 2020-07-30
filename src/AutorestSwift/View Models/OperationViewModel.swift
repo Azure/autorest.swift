@@ -35,6 +35,10 @@ struct OperationViewModel {
     let comment: ViewModelComment
     let params: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
+    // Query Params/Header can be placed inside QueryParameter Initializer
+    let queryInitParams: [KeyValueViewModel]?
+    let headerInitParams: [KeyValueViewModel]?
+    // Query Params/Header need to add Nil check
     let queryParams: [KeyValueViewModel]?
     let headerParams: [KeyValueViewModel]?
     let uriParams: [KeyValueViewModel]?
@@ -54,25 +58,36 @@ struct OperationViewModel {
             items.append(ParameterViewModel(from: param))
         }
 
+        var queryInitParams = [KeyValueViewModel]()
+        var headerInitParams = [KeyValueViewModel]()
         var queryParams = [KeyValueViewModel]()
         var headerParams = [KeyValueViewModel]()
         var uriParams = [KeyValueViewModel]()
         for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
             switch httpParam.in {
             case .query:
-                queryParams.append(KeyValueViewModel(from: param, with: model))
+                let viewModel = KeyValueViewModel(from: param, with: model, and: operation)
+                viewModel.valueNilable ? queryParams.append(viewModel) : queryInitParams.append(viewModel)
             case .header:
-                headerParams.append(KeyValueViewModel(from: param, with: model))
+                let standardHeader = isStandardHttpHeader(with: param.serializedName!)
+
+                let viewModel = KeyValueViewModel(
+                    from: param,
+                    with: model,
+                    and: operation,
+                    using: convertHttpHeaderKey(from: standardHeader?.rawValue ?? nil)
+                )
+                // Only standard http header and value can't be nil can be placed in header initializer
+                standardHeader != nil && !viewModel.valueNilable ? headerInitParams.append(viewModel) : headerParams
+                    .append(viewModel)
             case .uri:
-                uriParams.append(KeyValueViewModel(from: param, with: model))
+                uriParams.append(KeyValueViewModel(from: param, with: model, and: operation))
             default:
                 continue
             }
         }
-        self.queryParams = queryParams
-        self.headerParams = headerParams
-        self.uriParams = uriParams
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
@@ -95,10 +110,38 @@ struct OperationViewModel {
 
         self.method = requests.first?.method
         self.path = requests.first?.path
+
+        if let headerValue = requests.first?.knownMediaType {
+            headerInitParams
+                .append(KeyValueViewModel(key: ".contentType", value: headerValue))
+        }
+
+        if let headerValue = requests.first?.mediaTypes?.first {
+            headerInitParams
+                .append(KeyValueViewModel(key: ".accept", value: headerValue))
+        }
+
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
 
         self.params = items
+        self.queryParams = queryParams
+        self.headerParams = headerParams
+        self.queryInitParams = queryInitParams
+        self.headerInitParams = headerInitParams
+        self.uriParams = uriParams
     }
+}
+
+private func isStandardHttpHeader(with headerName: String) -> HTTPHeaders? {
+    for header in HTTPHeaders.allCases where header.rawValue == headerName {
+        return header
+    }
+    return nil
+}
+
+private func convertHttpHeaderKey(from header: String?) -> String? {
+    return header != nil ? "." + header!.replacingOccurrences(of: "-", with: "")
+        .replacingOccurrences(of: "xms", with: "").lowercaseFirstLetter() : nil
 }
 
 private func operationName(for operationName: String) -> String {
