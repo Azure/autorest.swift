@@ -53,7 +53,7 @@ struct KeyValueViewModel {
 
                 self.value = isString ? "\"\(val)\"" : "\(val)"
                 self.optional = false
-            } else if let signatureParameter = opt.signatureParameters(for: param.name) {
+            } else if let signatureParameter = opt.signatureParameter(for: param.name) {
                 self.value = param.name
                 self.optional = signatureParameter.required ?? true
             } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
