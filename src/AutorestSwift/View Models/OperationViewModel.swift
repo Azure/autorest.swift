@@ -105,12 +105,12 @@ struct OperationViewModel {
 
         if let headerValue = requests.first?.knownMediaType {
             requiredHeaders
-                .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
+                .append(KeyValueViewModel(using: "Content-Type", modelValue: "\"\(headerValue)\""))
         }
 
         if let headerValue = requests.first?.mediaTypes?.first {
             requiredHeaders
-                .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
+                .append(KeyValueViewModel(using: "Accept", modelValue: "\"\(headerValue)\""))
         }
 
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
@@ -119,7 +119,8 @@ struct OperationViewModel {
         self.optionalQueryParams = optionalQueryParams
         self.optionalHeaders = optionalHeaders
 
-        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
+        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(using: "", modelValue: "")) }
 
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders

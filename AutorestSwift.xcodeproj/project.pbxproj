@@ -121,7 +121,6 @@
 		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
 		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
 		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
-		F19433DA24D2442600A277BD /* HttpHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19433D924D2442600A277BD /* HttpHeaders.swift */; };
 		F19433DD24D32EDE00A277BD /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19433DB24D32EC400A277BD /* OperationHeaderSnippet.stencil */; };
 		F19433DE24D32EDE00A277BD /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19433DC24D32EC400A277BD /* OperationQueryParamSnippet.stencil */; };
 		OBJ_131 /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
@@ -462,7 +461,6 @@
 		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
 		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
 		F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelImportSnippet.stencil; sourceTree = "<group>"; };
-		F19433D924D2442600A277BD /* HttpHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeaders.swift; sourceTree = "<group>"; };
 		F19433DB24D32EC400A277BD /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
 		F19433DC24D32EC400A277BD /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -617,7 +615,6 @@
 				0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */,
 				0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */,
 				0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */,
-				F19433D924D2442600A277BD /* HttpHeaders.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1196,7 +1193,6 @@
 				OBJ_188 /* XorSchema.swift in Sources */,
 				OBJ_189 /* AllSchemaTypes.swift in Sources */,
 				OBJ_190 /* CompoundSchemaTypes.swift in Sources */,
-				F19433DA24D2442600A277BD /* HttpHeaders.swift in Sources */,
 				OBJ_191 /* HttpMethod.swift in Sources */,
 				OBJ_192 /* ImplementationLocation.swift in Sources */,
 				OBJ_193 /* KnownMediaType.swift in Sources */,

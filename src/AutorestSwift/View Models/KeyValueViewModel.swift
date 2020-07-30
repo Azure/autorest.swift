@@ -35,30 +35,40 @@ struct KeyValueViewModel {
     // Flag indicates if value is optional
     let optional: Bool
 
-    init(from param: Parameter, with model: CodeModel, and operation: Operation, using key: String? = nil) {
-        self.key = key ?? param.serializedName!
+    init(
+        from parameter: Parameter? = nil,
+        with codemodel: CodeModel? = nil,
+        and operation: Operation? = nil,
+        using key: String? = nil,
+        modelValue: String? = nil
+    ) {
+        self.key = key ?? parameter?.serializedName! ?? ""
 
-        if let constantSchema = param.schema as? ConstantSchema {
-            let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
-            let val: String = constantSchema.value.value
+        if let param = parameter,
+            let model = codemodel,
+            let opt = operation {
+            if let constantSchema = param.schema as? ConstantSchema {
+                let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
+                let val: String = constantSchema.value.value
 
-            self.value = isString ? "\"\(val)\"" : "\(val)"
-            self.optional = false
-        } else if let signatureParameter = operation.signatureParameters(for: param.name) {
-            self.value = param.name
-            self.optional = signatureParameter.required ?? true
-        } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
-            self.value = schema.name
+                self.value = isString ? "\"\(val)\"" : "\(val)"
+                self.optional = false
+            } else if let signatureParameter = opt.signatureParameters(for: param.name) {
+                self.value = param.name
+                self.optional = signatureParameter.required ?? true
+            } else if let schema = model.schema(for: param.schema.name, withType: param.schema.type) {
+                self.value = schema.name
+                self.optional = false
+            } else {
+                self.value = ""
+                self.optional = false
+            }
+        } else if let value = modelValue {
+            self.value = value
             self.optional = false
         } else {
             self.value = ""
             self.optional = false
         }
-    }
-
-    init(key: String, value: String) {
-        self.key = key
-        self.value = value
-        self.optional = false
     }
 }
