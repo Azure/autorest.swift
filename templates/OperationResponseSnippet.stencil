@@ -1,9 +1,9 @@
-{% if op.returnType.strategy == "pagedStrategy" %}
-    {% include "OperationResponsePageableSnippet.stencil" op %}
-{% elif op.returnType.strategy == "codableStrategy" %}
-    {% include "OperationResponseDecodingSnippet.stencil" op %}
-{% elif op.returnType.strategy == "noResponseStrategy" %}
-    {% include "OperationResponseStatusCodeOnlySnippet.stencil" %}
+{% if op.returnType.strategy == "pagedBody" %}
+    {% include "OperationResponsePagedBodySnippet.stencil" op %}
+{% elif op.returnType.strategy == "body" %}
+    {% include "OperationResponseBodySnippet.stencil" op %}
+{% elif op.returnType.strategy == "noBody" %}
+    {% include "OperationResponseNoBodySnippet.stencil" %}
 {% else %}
     // TODO: Couldn't match the thing for {{ op.returnType.strategy }}
 {% endif %}

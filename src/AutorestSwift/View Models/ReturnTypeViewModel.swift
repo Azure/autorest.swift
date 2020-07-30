@@ -26,13 +26,13 @@
 
 import Foundation
 
-enum ResponseStrategy: String {
+enum BodyType: String {
     /// Service returns a pageable response
-    case pagedStrategy
+    case pagedBody
     /// Service returns some kind of deserializable object
-    case codableStrategy
+    case body
     /// Service returns no response data, only a status code
-    case noResponseStrategy
+    case noBody
 }
 
 /// View Model for method return type.
@@ -45,6 +45,6 @@ struct ReturnTypeViewModel {
     init(from objectType: String) {
         self.name = objectType
         // TODO: Logic here to decide what type this should be
-        self.strategy = ResponseStrategy.codableStrategy.rawValue
+        self.strategy = BodyType.body.rawValue
     }
 }
