@@ -40,31 +40,7 @@ struct PropertyViewModel {
         self.name = schema.name.toCamelCase
         self.comment = ViewModelComment(from: schema.description)
         let required = schema.required ?? false
-        self.type = getType(from: schema.schema, optional: !required)
+        self.type = schema.schema.swiftType + (!required ? "?" : "")
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
     }
-}
-
-func getType(from propertySchema: Schema, optional: Bool = false) -> String {
-    var type: String
-    switch propertySchema.type {
-    case AllSchemaTypes.string:
-        type = "String"
-    case AllSchemaTypes.boolean:
-        type = "Bool"
-    case AllSchemaTypes.array:
-        if let arraySchema = propertySchema as? ArraySchema {
-            type = "[\(arraySchema.elementType.name)]"
-        } else {
-            type = "[\(propertySchema.name)]"
-        }
-    case AllSchemaTypes.dateTime:
-        type = "Date"
-    case AllSchemaTypes.integer:
-        type = "Int"
-    default:
-        type = propertySchema.name
-    }
-
-    return optional ? "\(type)?" : type
 }

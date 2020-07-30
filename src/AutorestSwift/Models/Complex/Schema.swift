@@ -64,4 +64,25 @@ class Schema: Codable, LanguageShortcut {
 
     /// Additional metadata extensions dictionary
     let extensions: AnyCodable?
+
+    var swiftType: String {
+        switch type {
+        case AllSchemaTypes.string:
+            return "String"
+        case AllSchemaTypes.boolean:
+            return "Bool"
+        case AllSchemaTypes.array:
+            if let arraySchema = self as? ArraySchema {
+                return "[\(arraySchema.elementType.name)]"
+            } else {
+                return "[\(name)]"
+            }
+        case AllSchemaTypes.dateTime:
+            return "Date"
+        case AllSchemaTypes.integer:
+            return "Int"
+        default:
+            return name
+        }
+    }
 }
