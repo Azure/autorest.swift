@@ -5,7 +5,7 @@ public func {{ op.name }}(
     {% endfor %}
     withOptions options: {{ model.name }}Options? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
-) throws {
+) {
     // Construct URL
     let urlTemplate = "{{ op.request.path }}"
     guard let url = self.url(forTemplate: urlTemplate) else { return }

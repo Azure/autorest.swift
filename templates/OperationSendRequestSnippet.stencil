@@ -6,7 +6,6 @@
 
 // Send reqeust
 let context = PipelineContext.of(keyValues: [
-   // TODO: Context keys
    {% for param in op.pipelineContext %}
    {{ param.key }} : {{ param.value}} as AnyObject
    {% endfor %}
