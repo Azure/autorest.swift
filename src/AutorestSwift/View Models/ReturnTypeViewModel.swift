@@ -42,9 +42,11 @@ struct ReturnTypeViewModel {
     let name: String
     let strategy: String
 
-    init(from objectType: String) {
-        self.name = objectType
-        // TODO: Logic here to decide what type this should be
-        self.strategy = BodyType.body.rawValue
+    init(from response: ResponseViewModel?, with operation: Operation) {
+        self.name = response?.objectType ?? "Void"
+        let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
+
+        self.strategy = response?.objectType != nil ? BodyType.body
+            .rawValue : (hasSyncStateParameter ? BodyType.pagedBody.rawValue : BodyType.noBody.rawValue)
     }
 }

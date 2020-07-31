@@ -12,21 +12,26 @@ public struct {{ model.name }}Options: AzureClientOptions {
     public let telemetryOptions: TelemetryOptions
     /// Global transport options
     public let transportOptions: TransportOptions
+    /// A token used to make a best-effort attempt at canceling a request.
+    public let cancellationToken: CancellationToken?
 
     /// Initialize a `{{ model.name }}Options` structure.
     /// - Parameters:
     ///   - apiVersion: The API version of the {{ model.description }} to invoke.
     ///   - logger: The `ClientLogger` to be used by this `{{ model.name }}`.
     ///   - telemetryOptions: Options for configuring telemetry sent by this `{{ model.name }}`.
+    ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     public init(
-        apiVersion: {{ model.name }}Client.ApiVersion = .latest,
+        apiVersion: {{ model.name }}.ApiVersion = .latest,
         logger: ClientLogger = ClientLoggers.default(tag: "{{ model.name }}Client"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
-        transportOptions: TransportOptions? = nil
+        transportOptions: TransportOptions? = nil,
+        cancellationToken: CancellationToken? = nil
     ) {
         self.apiVersion = apiVersion.rawValue
         self.logger = logger
         self.telemetryOptions = telemetryOptions
         self.transportOptions = transportOptions ?? TransportOptions()
+        self.cancellationToken = cancellationToken
     }
 }

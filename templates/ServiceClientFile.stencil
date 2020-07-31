@@ -7,11 +7,12 @@ public final class {{ model.name }}: PipelineClient {
 
     /// API version of the {{ model.description }} to invoke. Defaults to the latest.
     public enum ApiVersion: String {
-        // TODO: Population with apiVersions
+        /// API version "{{ model.apiVersion }}"
+        case {{ model.apiVersionName }} = "{{ model.apiVersion }}"
 
         /// The most recent API version of the {{ model.description }}
         public static var latest: ApiVersion {
-            // TODO: Populate with latest ApiVersion
+             return .{{ model.apiVersionName }}
         }
     }
 

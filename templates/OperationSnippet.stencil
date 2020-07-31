@@ -3,6 +3,7 @@ public func {{ op.name }}(
     {% for param in op.params %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
     {% endfor %}
+    withOptions options: {{ model.name }}Options? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     // Construct URL

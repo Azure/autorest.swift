@@ -41,6 +41,7 @@ struct OperationViewModel {
     // Query Params/Header need to add Nil check
     let optionalQueryParams: [KeyValueViewModel]?
     let optionalHeaders: [KeyValueViewModel]?
+    let pipelineContext: [KeyValueViewModel]?
     let uriParams: [KeyValueViewModel]?
     let requests: [RequestViewModel]?
     let responses: [ResponseViewModel]?
@@ -63,6 +64,8 @@ struct OperationViewModel {
         var optionalQueryParams = [KeyValueViewModel]()
         var optionalHeaders = [KeyValueViewModel]()
         var uriParams = [KeyValueViewModel]()
+        var pipelineContext = [KeyValueViewModel]()
+
         for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
@@ -103,17 +106,27 @@ struct OperationViewModel {
         self.method = requests.first?.method
         self.path = requests.first?.path
 
-        if let headerValue = requests.first?.knownMediaType {
+        if let headerValue = requests.first?.knownMediaType,
+            headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
         }
 
-        if let headerValue = responses.first?.mediaTypes?.first {
+        if let headerValue = responses.first?.mediaTypes?.first,
+            headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
-        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "")
+        if let statusCodes = responses.first?.statusCodes {
+            pipelineContext
+                .append(KeyValueViewModel(
+                    key: "ContextKey.allowedStatusCodes.rawValue",
+                    value: "[\(statusCodes.joined(separator: ","))]"
+                ))
+        }
+
+        self.returnType = ReturnTypeViewModel(from: responses.first, with: operation)
 
         self.params = items
         self.optionalQueryParams = optionalQueryParams
@@ -122,6 +135,7 @@ struct OperationViewModel {
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
         if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
 
+        self.pipelineContext = pipelineContext
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders
         self.uriParams = uriParams

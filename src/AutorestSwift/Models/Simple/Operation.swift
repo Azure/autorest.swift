@@ -122,4 +122,9 @@ class Operation: Codable, LanguageShortcut {
     func signatureParameter(for name: String) -> Parameter? {
         return signatureParameters?.first { $0.name == name }
     }
+
+    /// Lookup a parameter by name.
+    func parameter(for name: String) -> Parameter? {
+        return parameters?.first { $0.name == name }
+    }
 }
