@@ -83,7 +83,8 @@ struct OperationViewModel {
             case .header:
                 viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
                     .append(viewModel)
-            case .uri:
+            case .path,
+                 .uri:
                 uriParams.append(viewModel)
             default:
                 continue
