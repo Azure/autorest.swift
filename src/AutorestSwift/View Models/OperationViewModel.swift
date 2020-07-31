@@ -33,6 +33,7 @@ import Foundation
 struct OperationViewModel {
     let name: String
     let comment: ViewModelComment
+    let paramscomment: ViewModelComment
     let params: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
     // Query Params/Header can be placed inside QueryParameter Initializer
@@ -51,6 +52,12 @@ struct OperationViewModel {
     init(from operation: Operation) {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
+
+        var allParams: [String] = []
+        for param in operation.signatureParameters ?? [] where param.description != "" {
+            allParams.append("   - \(param.name) : \(param.description)")
+        }
+        self.paramscomment = ViewModelComment(from: allParams.joined(separator: "\n"))
 
         // operation parameters should be all the signature paramters from the schema
         // and the signature parameters of the Request

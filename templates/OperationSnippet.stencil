@@ -1,10 +1,8 @@
 {{ op.comment }}
 /// - Parameters:
-{% for param in op.params %}
-///   - {{ param.name }}: {{ param.comment }}
-{% endfor %}
-///   - options: A list of options for the operation
-///   - completionHandler: A completion handler that receives a status code on
+{{ op.paramscomment }}
+///    - options: A list of options for the operation
+///    - completionHandler: A completion handler that receives a status code on
 ///     success.
 public func {{ op.name }}(
     {% for param in op.params %}
