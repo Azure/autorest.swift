@@ -1,6 +1,10 @@
 // Construct request
-let requestBodyjsonData = try! JSONEncoder().encode( {{ op.request.objectName }})
-let requestBodyData: Data? =  String(data: requestBodyjsonData, encoding: .utf8)!.data(using: .utf8)
+guard let requestBody = try? JSONEncoder().encode( {{ op.request.objectName }} ) else {
+    throw AzureError.sdk("Failed to encode request body as json.")
+}
 
-guard let requestUrl = url.appendingQueryParameters(queryParams) else { return }
-guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers, data: requestBodyData) else { return }
+guard let requestUrl = url.appendingQueryParameters(queryParams) else {
+    throw AzureError.sdk("Failed to append query parameters to url")
+}
+
+guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers, data: requestBody) else { throw AzureError.sdk("Failed to construct Http request") }

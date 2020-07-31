@@ -654,7 +654,6 @@
 			isa = PBXGroup;
 			children = (
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
-				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
 				0A22B0C124D32FAB00EC018E /* ClientMethodOptionsSnippet.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
@@ -668,6 +667,7 @@
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
+				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,

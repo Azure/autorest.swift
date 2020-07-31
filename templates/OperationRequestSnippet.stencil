@@ -1,3 +1,8 @@
 // Construct request
-guard let requestUrl = url.appendingQueryParameters(queryParams) else { return }
-guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else { return }
+guard let requestUrl = url.appendingQueryParameters(queryParams) else {
+    throw AzureError.sdk("Failed to append query parameters to url")
+}
+
+guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else {
+    throw AzureError.sdk("Failed to construct Http request")
+}
