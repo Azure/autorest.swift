@@ -31,6 +31,8 @@ struct ServiceClientFileViewModel {
     let name: String
     let comment: ViewModelComment
     let operationGroups: [OperationGroupViewModel]
+    let apiVersion: String
+    let apiVersionName: String
 
     init(from model: CodeModel) {
         self.name = clientName(for: model.name)
@@ -40,6 +42,8 @@ struct ServiceClientFileViewModel {
             items.append(OperationGroupViewModel(from: group))
         }
         self.operationGroups = items
+        self.apiVersion = model.getApiVersion()
+        self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
     }
 }
 
