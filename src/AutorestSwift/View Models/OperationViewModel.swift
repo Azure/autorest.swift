@@ -44,10 +44,9 @@ struct OperationViewModel {
     let optionalHeaders: [KeyValueViewModel]?
     let pipelineContext: [KeyValueViewModel]?
     let uriParams: [KeyValueViewModel]?
-    let requests: [RequestViewModel]?
-    let responses: [ResponseViewModel]?
-    let method: String?
-    let path: String?
+    private let requests: [RequestViewModel]?
+    private let responses: [ResponseViewModel]?
+    let request: RequestViewModel?
 
     init(from operation: Operation) {
         self.name = operationName(for: operation.name)
@@ -106,26 +105,25 @@ struct OperationViewModel {
         self.responses = responses
 
         // TODO: only support max 1 request and  max 1 response for now
-        for param in requests.first?.params ?? [] {
+        self.request = requests.first
+        let response = responses.first
+        for param in request?.params ?? [] {
             items.append(param)
         }
 
-        self.method = requests.first?.method
-        self.path = requests.first?.path
-
-        if let headerValue = requests.first?.knownMediaType,
+        if let headerValue = request?.knownMediaType,
             headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
         }
 
-        if let headerValue = responses.first?.mediaTypes?.first,
+        if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
             requiredHeaders
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
-        if let statusCodes = responses.first?.statusCodes {
+        if let statusCodes = response?.statusCodes {
             pipelineContext
                 .append(KeyValueViewModel(
                     key: "ContextKey.allowedStatusCodes.rawValue",
@@ -133,7 +131,7 @@ struct OperationViewModel {
                 ))
         }
 
-        self.returnType = ReturnTypeViewModel(from: responses.first, with: operation)
+        self.returnType = ReturnTypeViewModel(from: response, with: operation)
 
         self.params = items
         self.optionalQueryParams = optionalQueryParams

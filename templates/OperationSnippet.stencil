@@ -12,11 +12,11 @@ public func {{ op.name }}(
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     // Construct URL
-    let urlTemplate = "{{ op.path }}"
+    let urlTemplate = "{{ op.request.path }}"
     guard let url = self.url(forTemplate: urlTemplate) else { return }
 
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}
     {% include "OperationOptionsSnippet.stencil" op %}
-    {% include "OperationRequestSnippet.stencil" op %}
+    {% include "OperationSendRequestSnippet.stencil" op %}
 }
