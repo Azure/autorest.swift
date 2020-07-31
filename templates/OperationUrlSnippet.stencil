@@ -1,0 +1,11 @@
+// Construct URL
+let urlTemplate = "{{ op.request.uri }}/{{ op.request.path }}"
+let pathParams = [
+    {% for param in op.uriParams %}
+        "{{ param.key }}" : {{ param.value}},
+    {% endfor %}
+]
+guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
+    options?.logger.error("Failed to construct url")
+    return
+}

@@ -11,10 +11,7 @@ public func {{ op.name }}(
     withOptions options: {{ model.name }}Options? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
-    // Construct URL
-    let urlTemplate = "{{ op.request.path }}"
-    guard let url = self.url(forTemplate: urlTemplate) else { return }
-
+    {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}
     {% include "OperationOptionsSnippet.stencil" op %}
