@@ -4,7 +4,7 @@ guard let request = try? HTTPRequest(method: .{{ op.method }}, url: requestUrl, 
 let context = PipelineContext.of(keyValues: [
    // TODO: Context keys
    {% for param in op.pipelineContext %}
-   {{ param.key }} : {{ param.value}}
+   {{ param.key }} : {{ param.value}} as AnyObject
    {% endfor %}
 ])
 if let cancellationToken = options?.cancellationToken {

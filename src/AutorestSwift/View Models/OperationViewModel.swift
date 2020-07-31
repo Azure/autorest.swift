@@ -118,6 +118,14 @@ struct OperationViewModel {
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
+        if let statusCodes = responses.first?.statusCodes {
+            pipelineContext
+                .append(KeyValueViewModel(
+                    key: "ContextKey.allowedStatusCodes.rawValue",
+                    value: "[\(statusCodes.joined(separator: ","))]"
+                ))
+        }
+
         self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "Void")
 
         self.params = items
@@ -126,7 +134,6 @@ struct OperationViewModel {
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
         if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
-        if pipelineContext.count == 0 { pipelineContext.append(KeyValueViewModel(key: "", value: "")) }
 
         self.pipelineContext = pipelineContext
         self.requiredQueryParams = requiredQueryParams
