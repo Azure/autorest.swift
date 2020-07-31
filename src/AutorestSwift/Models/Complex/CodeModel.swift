@@ -42,7 +42,7 @@ class CodeModel: Codable, LanguageShortcut {
         return schemas.schema(for: name, withType: type)
     }
 
-      /// Lookup a global parameter by name.
+    /// Lookup a global parameter by name.
     func globalParameter(for name: String) -> Parameter? {
         return globalParameters?.first { $0.name == name }
     }
