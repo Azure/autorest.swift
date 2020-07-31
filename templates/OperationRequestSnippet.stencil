@@ -1,15 +1,10 @@
-// Construct and send request
-guard let requestUrl = url.appendingQueryParameters(queryParams) else { return }
-guard let request = try? HTTPRequest(method: .{{ op.method }}, url: requestUrl, headers: headers) else { return }
-let context = PipelineContext.of(keyValues: [
-   {% for param in op.pipelineContext %}
-   {{ param.key }} : {{ param.value}} as AnyObject
-   {% endfor %}
-])
-if let cancellationToken = options?.cancellationToken {
-   cancellationToken.addTimeout(from: self.options.transportOptions)
-   context.add(value: cancellationToken as AnyObject, forKey: .cancellationToken)
+// Construct request
+guard let requestUrl = url.appendingQueryParameters(queryParams) else {
+    options?.logger.error("Failed to append query parameters to url")
+    return
 }
-self.request(request, context: context) { result, httpResponse in
-    {% include "OperationResponseSnippet.stencil" op %}
+
+guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else {
+    options?.logger.error("Failed to construct Http request")
+    return
 }
