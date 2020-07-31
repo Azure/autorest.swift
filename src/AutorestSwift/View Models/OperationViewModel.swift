@@ -126,7 +126,7 @@ struct OperationViewModel {
                 ))
         }
 
-        self.returnType = ReturnTypeViewModel(from: responses.first?.objectType ?? "Void")
+        self.returnType = ReturnTypeViewModel(from: responses.first)
 
         self.params = items
         self.optionalQueryParams = optionalQueryParams

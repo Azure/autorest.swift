@@ -13,6 +13,8 @@ public struct {{ model.name }}Options: AzureClientOptions {
     /// Global transport options
     public let transportOptions: TransportOptions
 
+    public let cancellationToken: CancellationToken?
+
     /// Initialize a `{{ model.name }}Options` structure.
     /// - Parameters:
     ///   - apiVersion: The API version of the {{ model.description }} to invoke.
@@ -28,5 +30,8 @@ public struct {{ model.name }}Options: AzureClientOptions {
         self.logger = logger
         self.telemetryOptions = telemetryOptions
         self.transportOptions = transportOptions ?? TransportOptions()
+
+        // TODO: To be implemented
+        self.cancellationToken = nil
     }
 }
