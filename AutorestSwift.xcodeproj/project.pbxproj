@@ -166,6 +166,8 @@
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */; };
+		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
 		F194331524D086D400A277BD /* additionalProperties.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330A24D086B100A277BD /* additionalProperties.yaml */; };
 		F194331624D086D400A277BD /* azure-parameter-grouping.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DD24D086AF00A277BD /* azure-parameter-grouping.yaml */; };
 		F194331724D086D400A277BD /* azure-report.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432DE24D086AF00A277BD /* azure-report.yaml */; };
@@ -264,6 +266,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */,
+				F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */,
 				0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */,
 				0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */,
 				0A22B15324D36F8300EC018E /* ClientMethodOptionsFile.stencil in CopyFiles */,
@@ -428,6 +432,8 @@
 		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
 		F106830324CF9244007EB4D5 /* swiftformat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftformat; path = ../Pods/SwiftFormat/CommandLineTool/swiftformat; sourceTree = "<group>"; };
 		F106830624CF9E0A007EB4D5 /* PackageFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageFileViewModel.swift; sourceTree = "<group>"; };
+		F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestBodySnippet.stencil; sourceTree = "<group>"; };
+		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
 		F19432DA24D086AF00A277BD /* non-string-enum.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "non-string-enum.yaml"; path = "yaml/non-string-enum.yaml"; sourceTree = "<group>"; };
 		F19432DB24D086AF00A277BD /* header.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = header.yaml; path = yaml/header.yaml; sourceTree = "<group>"; };
 		F19432DC24D086AF00A277BD /* head-exceptions.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "head-exceptions.yaml"; path = "yaml/head-exceptions.yaml"; sourceTree = "<group>"; };
@@ -647,6 +653,8 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
+				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
+				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
 				0A22B0C124D32FAB00EC018E /* ClientMethodOptionsSnippet.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,

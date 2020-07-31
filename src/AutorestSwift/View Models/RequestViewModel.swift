@@ -35,6 +35,8 @@ struct RequestViewModel {
     let mediaTypes: [String]?
     let params: [ParameterViewModel]?
     let objectType: String?
+    let objectName: String?
+    let hasBody: Bool
 
     init(from request: Request) {
         // load HttpRequest properties
@@ -57,5 +59,7 @@ struct RequestViewModel {
         self.params = params
 
         self.objectType = request.signatureParameters?.first?.schema.name
+        self.objectName = request.signatureParameters?.first?.name
+        self.hasBody = objectType != nil
     }
 }

@@ -1,0 +1,20 @@
+{% if op.request.hasBody %}
+{% include "OperationRequestBodySnippet.stencil" op %}
+{% else %}
+{% include "OperationRequestSnippet.stencil" op %}
+{% endif %}
+
+// Send reqeust
+let context = PipelineContext.of(keyValues: [
+   // TODO: Context keys
+   {% for param in op.pipelineContext %}
+   {{ param.key }} : {{ param.value}} as AnyObject
+   {% endfor %}
+])
+if let cancellationToken = options?.cancellationToken {
+   cancellationToken.addTimeout(from: self.options.transportOptions)
+   context.add(value: cancellationToken as AnyObject, forKey: .cancellationToken)
+}
+self.request(request, context: context) { result, httpResponse in
+    {% include "OperationResponseSnippet.stencil" op %}
+}
