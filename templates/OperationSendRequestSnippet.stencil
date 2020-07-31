@@ -1,7 +1,9 @@
-{% if op.request.hasBody %}
+{% if op.request.strategy == "body" %}
 {% include "OperationRequestBodySnippet.stencil" op %}
-{% else %}
+{% elif op.request.strategy == "noBody" %}
 {% include "OperationRequestSnippet.stencil" op %}
+{% elif op.request.strategy == "patchBody" %}
+{% include "OperationRequestPatchBodySnippet.stencil" op %}
 {% endif %}
 
 // Send request

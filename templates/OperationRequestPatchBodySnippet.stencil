@@ -1,0 +1,21 @@
+// Construct patch request
+let patch = MergePatchObject()
+{% for name in op.request.bodyParamProperties %}
+if let val = {{ name }} {
+    patch.replace(atPath: "{{name}}/", withValue: val)
+}
+{% endfor %}
+guard let patchBody = try? JSONEncoder().encode(patch) else {
+    self.options.logger.error("Failed to encode PATCH request body as JSON.")
+    return
+}
+
+guard let requestUrl = url.appendingQueryParameters(queryParams) else {
+    self.options.logger.error("Failed to append query parameters to URL")
+    return
+}
+
+guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers, data: patchBody) else {
+    self.options.logger.error("Failed to construct HTTP request")
+    return
+}

@@ -26,13 +26,27 @@
 
 import Foundation
 
+enum RequestBodyType: String {
+    /// Service requires some kind of serialized object
+    case body
+    /// Service requires no request body
+    case noBody
+    /// Service requires a serialzed JSON merge-patch body
+    case patchBody
+}
+
 /// View Model for the method request creation.
 struct RequestViewModel {
     let path: String
     let method: String
-    let objectType: String?
-    let objectName: String?
-    let hasBody: Bool
+    let knownMediaType: String?
+    let uri: String?
+    let mediaTypes: [String]?
+    let bodyParamType: String?
+    let bodyParamName: String?
+    let bodyParamProperties: [String]
+    /// Identifies the correct snippet to use when rendering the view model
+    let strategy: String
 
     init(from request: Request) {
         // load HttpRequest properties
@@ -43,18 +57,26 @@ struct RequestViewModel {
         // load HttpWithBodyRequest specfic properties
         let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
 
-        // TODO: only support the first signature parameter in Reqest now
+        // TODO: only support the first signature parameter in Request now
         let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
         assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(request.name)")
 
-        let bodyParam = bodyParams.first
-        self.objectType = bodyParam?.schema.name
-        if belongsInSignature(param: bodyParam) {
-            self.objectName = bodyParam?.name
-        } else {
-            self.objectName = "options?.\(bodyParam?.name ?? "")"
+        if let bodyParam = bodyParams.first {
+            assert(belongsInSignature(param: bodyParam), "Body param found that doesn't go in signature...")
         }
-        self.hasBody = objectType != nil
+        self.bodyParamType = bodyParams.first?.schema.name
+        self.bodyParamName = bodyParams.first?.name
+        let properties = bodyParams.first?.schema.properties ?? []
+        self.bodyParamProperties = properties.map { $0.name }
+
+        // Determine which kind of request body snippet to render
+        if method == "patch" {
+            self.strategy = RequestBodyType.patchBody.rawValue
+        } else if bodyParamType != nil {
+            self.strategy = RequestBodyType.body.rawValue
+        } else {
+            self.strategy = RequestBodyType.noBody.rawValue
+        }
     }
 }
 
