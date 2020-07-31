@@ -30,9 +30,12 @@ import Foundation
 /// Example:
 ///     "key" = value
 struct KeyValueViewModel {
+    /// key of the Key-Value pair
     let key: String
-    let paramName: String?
+    /// value of the Key-Value pair
     let value: String
+    /// nane of the parameter where the 'value' is retrieved from.
+    let paramName: String?
     // Flag indicates if value is optional
     let optional: Bool
 

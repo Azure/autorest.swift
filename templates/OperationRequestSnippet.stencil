@@ -2,7 +2,6 @@
 guard let requestUrl = url.appendingQueryParameters(queryParams) else { return }
 guard let request = try? HTTPRequest(method: .{{ op.method }}, url: requestUrl, headers: headers) else { return }
 let context = PipelineContext.of(keyValues: [
-   // TODO: Context keys
    {% for param in op.pipelineContext %}
    {{ param.key }} : {{ param.value}} as AnyObject
    {% endfor %}
