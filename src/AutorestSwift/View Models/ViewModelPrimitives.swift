@@ -30,13 +30,13 @@ import Foundation
 struct ViewModelComment: CustomStringConvertible {
     var description: String
 
-    init(from descVal: String?) {
+    init(from descVal: String?, addCommentPrefix: Bool = true) {
         self.description = ""
         guard let desc = descVal else { return }
         guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
 
         // ensure multi-line comments are each commented
-        let lines = desc.split(whereSeparator: \.isNewline).map { "/// \($0)" }
+        let lines = desc.split(whereSeparator: \.isNewline).map { addCommentPrefix ? "/// \($0)" : "\($0)" }
         description = lines.joined(separator: "\n")
     }
 }
