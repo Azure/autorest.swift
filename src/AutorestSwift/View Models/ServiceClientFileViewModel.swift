@@ -39,7 +39,7 @@ struct ServiceClientFileViewModel {
         self.comment = ViewModelComment(from: model.description)
         var items = [OperationGroupViewModel]()
         for group in model.operationGroups {
-            items.append(OperationGroupViewModel(from: group))
+            items.append(OperationGroupViewModel(from: group, with: model))
         }
         self.operationGroups = items
         self.apiVersion = model.getApiVersion()

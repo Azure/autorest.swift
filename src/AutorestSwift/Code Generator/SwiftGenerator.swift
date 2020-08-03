@@ -87,6 +87,19 @@ class SwiftGenerator: CodeGenerator {
             ]
         )
 
+        // Create ClientMethodOptions.swift file
+        for operationGroup in clientViewModel.operationGroups {
+            for operation in operationGroup.operations {
+                let clientMethodOptionsViewModel = operation.clientMethodOptionsViewModel
+                try render(
+                    template: "ClientMethodOptionsFile",
+                    toSubfolder: .options,
+                    withFilename: "\(clientMethodOptionsViewModel.name)Options",
+                    andParams: ["model": clientMethodOptionsViewModel]
+                )
+            }
+        }
+
         // Create ClientOptions.swift file
         try render(
             template: "ClientOptionsFile",

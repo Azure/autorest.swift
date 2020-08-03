@@ -38,7 +38,7 @@ struct RequestViewModel {
     let objectName: String?
     let hasBody: Bool
 
-    init(from request: Request) {
+    init(from request: Request, with operation: Operation) {
         // load HttpRequest properties
         let httpRequest = request.protocol.http as? HttpRequest
         self.path = httpRequest?.path ?? ""
@@ -58,8 +58,15 @@ struct RequestViewModel {
         }
         self.params = params
 
-        self.objectType = request.signatureParameters?.first?.schema.name
-        self.objectName = request.signatureParameters?.first?.name
+        // TODO: only support the first signature parameter in Reqest now
+        let firstSignatreParam = request.signatureParameters?.first
+        self.objectType = firstSignatreParam?.schema.name
+        if firstSignatreParam?.required ?? false {
+            self.objectName = firstSignatreParam?.name
+        } else {
+            let optionName = "\(operation.name)Options?".toCamelCase
+            self.objectName = "\(optionName).\(firstSignatreParam?.name ?? "")"
+        }
         self.hasBody = objectType != nil
     }
 }
