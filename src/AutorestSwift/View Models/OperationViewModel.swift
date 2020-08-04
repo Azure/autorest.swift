@@ -85,8 +85,8 @@ struct OperationViewModel {
             }
         }
 
-        var signatureParams = filterParam(for: operation.signatureParameters ?? [], with: [.path, .uri])
-        var optionsParams = filterParam(for: operation.signatureParameters ?? [], with: [.header, .query, .body])
+        var signatureParams = filterParams(for: operation.signatureParameters ?? [], with: [.path, .uri])
+        var optionsParams = filterParams(for: operation.signatureParameters ?? [], with: [.header, .query, .body])
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
@@ -95,7 +95,7 @@ struct OperationViewModel {
             requests.append(RequestViewModel(from: request))
 
             let requestSignatureParams = filterParam(for: request.signatureParameters ?? [], with: [.path, .uri])
-            let requestOptionsParams = filterParam(
+            let requestOptionsParams = filterParams(
                 for: request.signatureParameters ?? [],
                 with: [.header, .query, .body]
             )
@@ -165,7 +165,7 @@ struct OperationViewModel {
     }
 }
 
-private func filterParam(for params: [Parameter], with allowed: [ParameterLocation]) -> [Parameter] {
+private func filterParams(for params: [Parameter], with allowed: [ParameterLocation]) -> [Parameter] {
     let optionsParams = params.filter { param in
         guard let httpParam = param.protocol.http as? HttpParameter else { return false }
         return allowed.contains(httpParam.in)
