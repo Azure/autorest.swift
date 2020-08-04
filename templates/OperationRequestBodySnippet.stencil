@@ -1,15 +1,15 @@
 // Construct request
 guard let requestBody = try? JSONEncoder().encode( {{ op.request.objectName }} ) else {
-    self.options.logger.error("Failed to encode request body as json.")
+    options.logger.error("Failed to encode request body as json.")
     return
 }
 
 guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-    self.options.logger.error("Failed to append query parameters to url")
+    options.logger.error("Failed to append query parameters to url")
     return
 }
 
 guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers, data: requestBody) else {
-    self.options.logger.error("Failed to construct Http request")
+    options.logger.error("Failed to construct Http request")
     return
 }

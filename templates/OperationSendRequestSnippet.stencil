@@ -11,7 +11,7 @@ let context = PipelineContext.of(keyValues: [
    {% endfor %}
 ])
 if let cancellationToken = {{ op.clientMethodOptionsViewModel.variableName }}?.cancellationToken {
-   cancellationToken.addTimeout(from: self.options.transportOptions)
+   cancellationToken.addTimeout(from: options.transportOptions)
    context.add(value: cancellationToken as AnyObject, forKey: .cancellationToken)
 }
 self.request(request, context: context) { result, httpResponse in

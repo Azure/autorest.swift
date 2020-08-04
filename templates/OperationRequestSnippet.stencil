@@ -1,10 +1,10 @@
 // Construct request
 guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-    self.options.logger.error("Failed to append query parameters to url")
+    options.logger.error("Failed to append query parameters to url")
     return
 }
 
 guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else {
-    self.options.logger.error("Failed to construct Http request")
+    options.logger.error("Failed to construct Http request")
     return
 }
