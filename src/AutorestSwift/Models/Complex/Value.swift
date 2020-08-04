@@ -31,8 +31,21 @@ class Value: Codable, LanguageShortcut {
     /// the schema of this Value
     public var schema: Schema
 
+    // these properties we can set
+    private var _required: Bool?
+
     /// if the value is marked 'required'.
-    let required: Bool?
+    public var required: Bool {
+        get {
+            if _required == nil {
+                _required = false
+            }
+            return _required!
+        }
+        set {
+            _required = newValue
+        }
+    }
 
     /// can null be passed in instead
     let nullable: Bool?
