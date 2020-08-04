@@ -1,5 +1,5 @@
 // Construct URL
-let urlTemplate = "{{ op.request.uri }}/{{ op.request.path }}"
+let urlTemplate = "{{ op.request.uri }}{{ op.request.path }}"
 let pathParams = [
     {% for param in op.uriParams %}
         "{{ param.key }}" : {{ param.value}},
