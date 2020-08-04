@@ -61,7 +61,7 @@ struct KeyValueViewModel {
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             // value is referring a signautre parameter, no need to wrap as String
             self.paramName = param.name
-            self.optional = signatureParameter.required ?? true
+            self.optional = !signatureParameter.required
             let swiftType = signatureParameter.schema.swiftType(optional: optional)
             if swiftType.starts(with: "String") {
                 self.value = param.name
