@@ -85,8 +85,8 @@ struct OperationViewModel {
             }
         }
 
-        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri])
-        var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query, .body])
+        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
+        var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
@@ -94,10 +94,10 @@ struct OperationViewModel {
         for request in operation.requests ?? [] {
             requests.append(RequestViewModel(from: request))
 
-            let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
+            let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri, .body])
             let requestOptionsParams = filterParams(
                 for: request.signatureParameters,
-                with: [.header, .query, .body]
+                with: [.header, .query]
             )
 
             optionsParams.append(contentsOf: requestOptionsParams)
