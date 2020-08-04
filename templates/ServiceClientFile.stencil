@@ -37,7 +37,7 @@ public final class {{ model.name }}: PipelineClient {
             baseUrl: baseUrl,
             transport: URLSessionTransport(),
             policies: [
-                UserAgentPolicy(for: {{ model.name }}.self, telemetryOptions: self.options.telemetryOptions),
+                UserAgentPolicy(for: {{ model.name }}.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
                 AddDatePolicy(),
                 authPolicy,
@@ -45,7 +45,7 @@ public final class {{ model.name }}: PipelineClient {
                 LoggingPolicy(),
                 NormalizeETagPolicy()
             ],
-            logger: self.options.logger,
+            logger: options.logger,
             options: options
         )
     }

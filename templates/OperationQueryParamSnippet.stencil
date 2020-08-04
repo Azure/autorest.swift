@@ -6,7 +6,7 @@ var queryParams: [QueryParameter] = [
 ]
 
 {% for param in op.optionalQueryParams %}
-if {{ param.paramName }} != nil {
+if let {{ param.paramName }} = options?.{{ param.paramName }} {
     queryParams.append("{{ param.key }}", {{ param.value}})
 }
 {% endfor %}

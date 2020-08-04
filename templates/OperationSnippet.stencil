@@ -5,10 +5,10 @@
 ///    - completionHandler: A completion handler that receives a status code on
 ///     success.
 public func {{ op.name }}(
-    {% for param in op.params %}
+    {% for param in op.signatureParams %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
     {% endfor %}
-    withOptions options: {{ model.name }}Options? = nil,
+    withOptions options: {{ op.clientMethodOptions.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     {% include "OperationUrlSnippet.stencil" %}

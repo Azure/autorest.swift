@@ -6,6 +6,6 @@ let pathParams = [
     {% endfor %}
 ]
 guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-    options?.logger.error("Failed to construct url")
+    self.options.logger.error("Failed to construct url")
     return
 }

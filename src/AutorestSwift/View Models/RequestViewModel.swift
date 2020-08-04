@@ -33,7 +33,6 @@ struct RequestViewModel {
     let knownMediaType: String?
     let uri: String?
     let mediaTypes: [String]?
-    let params: [ParameterViewModel]?
     let objectType: String?
     let objectName: String?
     let hasBody: Bool
@@ -50,16 +49,26 @@ struct RequestViewModel {
         self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
         self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
 
-        // check if the request body is from signature parameter. If yes, store the object type
-        // and add the request signature parameter to operation parameters
-        var params = [ParameterViewModel]()
-        for param in request.signatureParameters ?? [] {
-            params.append(ParameterViewModel(from: param))
-        }
-        self.params = params
+        // TODO: only support the first signature parameter in Reqest now
+        assert(
+            (request.signatureParameters?.count ?? 0) <= 1,
+            "Unexpectedly found more than 1 signature parameter in Request schema"
+        )
 
-        self.objectType = request.signatureParameters?.first?.schema.name
-        self.objectName = request.signatureParameters?.first?.name
+        let firstSignatureParam = request.signatureParameters?.first
+        self.objectType = firstSignatureParam?.schema.name
+        if belongsInSignature(param: firstSignatureParam) {
+            self.objectName = firstSignatureParam?.name
+        } else {
+            self.objectName = "options?.\(firstSignatureParam?.name ?? "")"
+        }
         self.hasBody = objectType != nil
     }
+}
+
+private func belongsInSignature(param: Parameter?) -> Bool {
+    guard let httpParam = param?.protocol.http as? HttpParameter else { return false }
+
+    let required = [ParameterLocation.path, ParameterLocation.uri]
+    return required.contains(httpParam.in)
 }

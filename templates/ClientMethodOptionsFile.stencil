@@ -2,6 +2,39 @@
 
 {% include "ImportSnippet.stencil" %}
 
-{% for model in models %}
-    {% include "ClientMethodOptionsSnippet.stencil" model %}
+/// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
+public struct {{ model.name }}: AzureOptions {
+
+{% for property in model.properties %}
+    {{ property.comment }}
+    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
 {% endfor %}
+
+    /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
+    /// Highly recommended for correlating client-side activites with requests received by the server.
+    public let clientRequestId: String?
+
+    /// A token used to make a best-effort attempt at canceling a request.
+    public let cancellationToken: CancellationToken?
+
+    /// Initialize a `{{ model.name }}` structure.
+    /// - Parameters:
+{% for property in model.properties %}
+    ///   - {{ property.name }}: {{ property.comment }}
+    ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
+    ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+{% endfor %}
+    public init(
+    {% for property in model.properties %}
+        {{ property.name }}: {{ property.type }}{{ property.initDefaultValue }},
+    {% endfor %}
+        clientRequestId: String? = nil,
+        cancellationToken: CancellationToken? = nil
+    ) {
+    {% for property in model.properties %}
+        self.{{ property.name }} = {{ property.name }}
+    {% endfor %}
+        self.clientRequestId = clientRequestId
+        self.cancellationToken = cancellationToken
+    }
+}
