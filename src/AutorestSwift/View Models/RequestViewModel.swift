@@ -50,20 +50,29 @@ struct RequestViewModel {
         self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
 
         // TODO: only support the first signature parameter in Reqest now
-        assert(
-            (request.signatureParameters?.count ?? 0) <= 1,
-            "Unexpectedly found more than 1 signature parameter in Request schema"
-        )
+        let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
+        assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(request.name)")
 
-        let firstSignatureParam = request.signatureParameters?.first
-        self.objectType = firstSignatureParam?.schema.name
-        if belongsInSignature(param: firstSignatureParam) {
-            self.objectName = firstSignatureParam?.name
+        let bodyParam = bodyParams.first
+        self.objectType = bodyParam?.schema.name
+        if belongsInSignature(param: bodyParam) {
+            self.objectName = bodyParam?.name
         } else {
-            self.objectName = "options?.\(firstSignatureParam?.name ?? "")"
+            self.objectName = "options?.\(bodyParam?.name ?? "")"
         }
         self.hasBody = objectType != nil
     }
+}
+
+private func getBodyParameters(signatureParameters: [Parameter]?) -> [Parameter] {
+    var bodyParameters = [Parameter]()
+    for param in signatureParameters ?? [] {
+        if let httpParam = param.protocol.http as? HttpParameter,
+            httpParam.in == .body {
+            bodyParameters.append(param)
+        }
+    }
+    return bodyParameters
 }
 
 private func belongsInSignature(param: Parameter?) -> Bool {
