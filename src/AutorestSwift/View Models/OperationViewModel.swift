@@ -160,7 +160,6 @@ struct OperationViewModel {
         )
 
         for param in optionsParams {
-            // let required = param.required ?? false
             assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
         }
     }
