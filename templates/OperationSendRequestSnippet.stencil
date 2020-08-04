@@ -4,7 +4,7 @@
 {% include "OperationRequestSnippet.stencil" op %}
 {% endif %}
 
-// Send reqeust
+// Send request
 let context = PipelineContext.of(keyValues: [
    {% for param in op.pipelineContext %}
    {{ param.key }} : {{ param.value}} as AnyObject
