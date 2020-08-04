@@ -90,12 +90,12 @@ class SwiftGenerator: CodeGenerator {
         // Create ClientMethodOptions.swift file
         for operationGroup in clientViewModel.operationGroups {
             for operation in operationGroup.operations {
-                let clientMethodOptionsViewModel = operation.clientMethodOptionsViewModel
+                let clientMethodOptions = operation.clientMethodOptions
                 try render(
                     template: "ClientMethodOptionsFile",
                     toSubfolder: .options,
-                    withFilename: "\(clientMethodOptionsViewModel.name)",
-                    andParams: ["model": clientMethodOptionsViewModel]
+                    withFilename: "\(clientMethodOptions.name)",
+                    andParams: ["model": clientMethodOptions]
                 )
             }
         }

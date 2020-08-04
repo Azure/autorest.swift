@@ -47,7 +47,7 @@ struct OperationViewModel {
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
     let request: RequestViewModel?
-    let clientMethodOptionsViewModel: ClientMethodOptionsViewModel
+    let clientMethodOptions: ClientMethodOptionsViewModel
 
     init(from operation: Operation, with model: CodeModel) {
         self.name = operationName(for: operation.name)
@@ -85,8 +85,8 @@ struct OperationViewModel {
             }
         }
 
-        var signatureParams = filterParams(for: operation.signatureParameters ?? [], with: [.path, .uri])
-        var optionsParams = filterParams(for: operation.signatureParameters ?? [], with: [.header, .query, .body])
+        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri])
+        var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query, .body])
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
@@ -94,9 +94,9 @@ struct OperationViewModel {
         for request in operation.requests ?? [] {
             requests.append(RequestViewModel(from: request))
 
-            let requestSignatureParams = filterParams(for: request.signatureParameters ?? [], with: [.path, .uri])
+            let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
             let requestOptionsParams = filterParams(
-                for: request.signatureParameters ?? [],
+                for: request.signatureParameters,
                 with: [.header, .query, .body]
             )
 
@@ -153,7 +153,7 @@ struct OperationViewModel {
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders
         self.uriParams = uriParams
-        self.clientMethodOptionsViewModel = ClientMethodOptionsViewModel(
+        self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
             parameters: optionsParams
@@ -165,12 +165,15 @@ struct OperationViewModel {
     }
 }
 
-private func filterParams(for params: [Parameter], with allowed: [ParameterLocation]) -> [Parameter] {
-    let optionsParams = params.filter { param in
-        guard let httpParam = param.protocol.http as? HttpParameter else { return false }
-        return allowed.contains(httpParam.in)
+private func filterParams(for params: [Parameter]?, with allowed: [ParameterLocation]) -> [Parameter] {
+    let optionsParams = params?.filter { param in
+        if let httpParam = param.protocol.http as? HttpParameter {
+            return allowed.contains(httpParam.in)
+        } else {
+            return false
+        }
     }
-    return optionsParams
+    return optionsParams ?? []
 }
 
 private func operationName(for operationName: String) -> String {
