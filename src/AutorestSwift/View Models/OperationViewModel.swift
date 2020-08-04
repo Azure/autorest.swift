@@ -94,7 +94,7 @@ struct OperationViewModel {
         for request in operation.requests ?? [] {
             requests.append(RequestViewModel(from: request))
 
-            let requestSignatureParams = filterParam(for: request.signatureParameters ?? [], with: [.path, .uri])
+            let requestSignatureParams = filterParams(for: request.signatureParameters ?? [], with: [.path, .uri])
             let requestOptionsParams = filterParams(
                 for: request.signatureParameters ?? [],
                 with: [.header, .query, .body]
