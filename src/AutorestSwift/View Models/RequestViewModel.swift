@@ -59,13 +59,13 @@ struct RequestViewModel {
         self.params = params
 
         // TODO: only support the first signature parameter in Reqest now
-        let firstSignatreParam = request.signatureParameters?.first
-        self.objectType = firstSignatreParam?.schema.name
-        if firstSignatreParam?.required ?? false {
-            self.objectName = firstSignatreParam?.name
+        let firstSignatureParam = request.signatureParameters?.first
+        self.objectType = firstSignatureParam?.schema.name
+        if firstSignatureParam?.required ?? false {
+            self.objectName = firstSignatureParam?.name
         } else {
             let optionName = "\(operation.name)Options?".toCamelCase
-            self.objectName = "\(optionName).\(firstSignatreParam?.name ?? "")"
+            self.objectName = "\(optionName).\(firstSignatureParam?.name ?? "")"
         }
         self.hasBody = objectType != nil
     }
