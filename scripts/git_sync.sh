@@ -28,10 +28,10 @@ SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/
 #swift run --package-path $REPO_ROOT
 
 # ensure the preview/SecretSDK branch is active
-echo
-echo "Refreshing folder: " $SDK_PACKAGE_ROOT
-rm -rf $SDK_PACKAGE_ROOT
-mkdir -p $SDK_PACKAGE_ROOT
+#echo
+#echo "Refreshing folder: " $SDK_PACKAGE_ROOT
+#rm -rf $SDK_PACKAGE_ROOT
+#mkdir -p $SDK_PACKAGE_ROOT
 
 echo
 echo "==~ Copying generated code to azure-sdk-for-ios-pr ~=="

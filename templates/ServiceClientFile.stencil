@@ -32,7 +32,6 @@ public final class {{ model.name }}: PipelineClient {
         withOptions options: {{ model.name }}Options
     ) throws {
         self.options = options
-        // TODO: Determine the correct policies.
         super.init(
             baseUrl: baseUrl,
             transport: URLSessionTransport(),
