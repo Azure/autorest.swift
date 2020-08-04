@@ -15,16 +15,17 @@ SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/"
 SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/"
 SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/SecretSDK"
 
-echo
-echo "AutoRest.Swift root: $REPO_ROOT"
-echo
-echo "==~ Building AutoRest.Swift ~=="
-echo
-make build -C $REPO_ROOT
-echo
-echo "==~ Generating SDK ~=="
-echo
-swift run --package-path $REPO_ROOT
+# FIXME: The build step fails when run with makefile.
+#echo
+#echo "AutoRest.Swift root: $REPO_ROOT"
+#echo
+#echo "==~ Building AutoRest.Swift ~=="
+#echo
+#make build -C $REPO_ROOT
+#echo
+#echo "==~ Generating SDK ~=="
+#echo
+#swift run --package-path $REPO_ROOT
 
 # ensure the preview/SecretSDK branch is active
 echo
