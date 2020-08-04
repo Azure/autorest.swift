@@ -8,4 +8,19 @@ public {{ model.objectType }} {{ model.name }} : Codable {
     {{ property.comment }}
     public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
     {% endfor %}
+
+    /// Initialize a `{{ model.name }}` structure.
+    /// - Parameters:
+    {% for property in model.properties %}
+    ///   - {{ property.name }}: {{ property.comment }}
+    {% endfor %}
+    public init(
+    {% for property in model.properties %}
+        {{ property.name }}: {{ property.type }}{{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
+    {% endfor %}
+    ) {
+    {% for property in model.properties %}
+        self.{{ property.name }} = {{ property.name }}
+    {% endfor %}
+    }
 }
