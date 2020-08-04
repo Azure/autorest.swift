@@ -32,19 +32,11 @@ class Value: Codable, LanguageShortcut {
     public var schema: Schema
 
     // these properties we can set
-    private var _required: Bool?
+    private var internalRequired: Bool?
 
     /// if the value is marked 'required'.
     public var required: Bool {
-        get {
-            if _required == nil {
-                _required = false
-            }
-            return _required!
-        }
-        set {
-            _required = newValue
-        }
+        return internalRequired ?? false
     }
 
     /// can null be passed in instead
@@ -79,4 +71,20 @@ class Value: Codable, LanguageShortcut {
 
     /// additional metadata extensions dictionary
     let extensions: AnyCodable?
+
+    enum CodingKeys: String, CodingKey {
+        case schema
+        case internalRequired = "required"
+        case nullable
+        case assumedValue
+        case clientDefaultValue
+        case summary
+        case apiVersions
+        case deprecated
+        case origin
+        case externalDocs
+        case language
+        case `protocol`
+        case extensions
+    }
 }

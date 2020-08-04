@@ -26,7 +26,7 @@ public final class {{ model.name }}: PipelineClient {
     ///   - baseUrl: Base URL for the {{ model description }}.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
-    private init(
+    public init(
         baseUrl: URL,
         authPolicy: Authenticating,
         withOptions options: {{ model.name }}Options
