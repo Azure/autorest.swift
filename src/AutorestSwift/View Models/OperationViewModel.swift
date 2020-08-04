@@ -85,11 +85,23 @@ struct OperationViewModel {
             }
         }
 
+        var signatureParams = filterParam(for: operation.signatureParameters ?? [], with: [.path, .uri])
+        var optionsParams = filterParam(for: operation.signatureParameters ?? [], with: [.header, .query, .body])
+
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
 
         for request in operation.requests ?? [] {
-            requests.append(RequestViewModel(from: request, with: operation))
+            requests.append(RequestViewModel(from: request))
+
+            let requestSignatureParams = filterParam(for: request.signatureParameters ?? [], with: [.path, .uri])
+            let requestOptionsParams = filterParam(
+                for: request.signatureParameters ?? [],
+                with: [.header, .query, .body]
+            )
+
+            optionsParams.append(contentsOf: requestOptionsParams)
+            signatureParams.append(contentsOf: requestSignatureParams)
         }
 
         for response in operation.responses ?? [] {
@@ -102,27 +114,6 @@ struct OperationViewModel {
         // TODO: only support max 1 request and  max 1 response for now
         self.request = requests.first
         let response = responses.first
-
-        // All required parameters from the signature paramters from the schema
-        // and the signature parameters from the Request are stored in signatureParams.
-        // All the optional parameters will be in optionalParams
-        var signatureParams = [ParameterViewModel]()
-        var optionalParams = [ParameterViewModel]()
-        for param in operation.signatureParameters ?? [] {
-            if param.required ?? false {
-                signatureParams.append(ParameterViewModel(from: param))
-            } else {
-                optionalParams.append(ParameterViewModel(from: param))
-            }
-        }
-
-        for param in request?.params ?? [] {
-            if param.optional {
-                optionalParams.append(param)
-            } else {
-                signatureParams.append(param)
-            }
-        }
 
         if let headerValue = request?.knownMediaType,
             headerValue != "" {
@@ -146,7 +137,12 @@ struct OperationViewModel {
 
         self.returnType = ReturnTypeViewModel(from: response, with: operation)
 
-        self.signatureParams = signatureParams
+        var signaturePropertyViewModel = [ParameterViewModel]()
+        signatureParams.forEach {
+            signaturePropertyViewModel.append(ParameterViewModel(from: $0))
+        }
+
+        self.signatureParams = signaturePropertyViewModel
         self.optionalQueryParams = optionalQueryParams
         self.optionalHeaders = optionalHeaders
 
@@ -160,9 +156,21 @@ struct OperationViewModel {
         self.clientMethodOptionsViewModel = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
-            properties: optionalParams
+            parameters: optionsParams
         )
+
+        for param in optionsParams {
+            assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
+        }
     }
+}
+
+private func filterParam(for params: [Parameter], with allowed: [ParameterLocation]) -> [Parameter] {
+    let optionsParams = params.filter { param in
+        guard let httpParam = param.protocol.http as? HttpParameter else { return false }
+        return allowed.contains(httpParam.in)
+    }
+    return optionsParams
 }
 
 private func operationName(for operationName: String) -> String {

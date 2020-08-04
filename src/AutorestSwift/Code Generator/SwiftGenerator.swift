@@ -94,7 +94,7 @@ class SwiftGenerator: CodeGenerator {
                 try render(
                     template: "ClientMethodOptionsFile",
                     toSubfolder: .options,
-                    withFilename: "\(clientMethodOptionsViewModel.name)Options",
+                    withFilename: "\(clientMethodOptionsViewModel.name)",
                     andParams: ["model": clientMethodOptionsViewModel]
                 )
             }

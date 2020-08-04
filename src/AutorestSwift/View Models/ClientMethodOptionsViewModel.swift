@@ -38,16 +38,16 @@ struct ClientMethodOptionsViewModel {
     let name: String
 
     // The list of properites for the options object
-    let properties: [ParameterViewModel]
+    let properties: [PropertyViewModel]
 
-    /// The param of the options object in the generated code
-    let paramName: String
-
-    init(from operation: Operation, with model: CodeModel, properties: [ParameterViewModel]) {
+    init(from operation: Operation, with model: CodeModel, parameters: [Parameter]) {
         self.clientName = model.name
         self.operationName = operation.name.toCamelCase
         self.name = "\(operation.name.toPascalCase)Options"
-        self.paramName = name.toCamelCase
+        var properties = [PropertyViewModel]()
+        parameters.forEach {
+            properties.append(PropertyViewModel(from: $0))
+        }
         self.properties = properties
     }
 }

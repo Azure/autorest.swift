@@ -8,7 +8,7 @@ public func {{ op.name }}(
     {% for param in op.signatureParams %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
     {% endfor %}
-    withOptions {{ op.clientMethodOptionsViewModel.variableName }}: {{ op.clientMethodOptionsViewModel.name }}? = nil,
+    withOptions options: {{ op.clientMethodOptionsViewModel.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     {% include "OperationUrlSnippet.stencil" %}

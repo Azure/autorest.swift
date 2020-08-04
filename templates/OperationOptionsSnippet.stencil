@@ -1,5 +1,5 @@
 // Process endpoint options
-if let {{ op.clientMethodOptionsViewModel.variableName }} = {{ op.clientMethodOptionsViewModel.variableName }} {
+if let options = options {
     // Query options
     {% for opt in op.options.queryOptions %}
     if let {{ opt.name }} = options.{{ opt.name }} { queryParams.append("{{ opt.name }}", {{ opt.name}}) }

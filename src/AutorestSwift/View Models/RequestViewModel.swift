@@ -33,12 +33,11 @@ struct RequestViewModel {
     let knownMediaType: String?
     let uri: String?
     let mediaTypes: [String]?
-    let params: [ParameterViewModel]?
     let objectType: String?
     let objectName: String?
     let hasBody: Bool
 
-    init(from request: Request, with operation: Operation) {
+    init(from request: Request) {
         // load HttpRequest properties
         let httpRequest = request.protocol.http as? HttpRequest
         self.path = httpRequest?.path ?? ""
@@ -50,23 +49,24 @@ struct RequestViewModel {
         self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
         self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
 
-        // check if the request body is from signature parameter. If yes, store the object type
-        // and add the request signature parameter to operation parameters
-        var params = [ParameterViewModel]()
-        for param in request.signatureParameters ?? [] {
-            params.append(ParameterViewModel(from: param))
-        }
-        self.params = params
-
         // TODO: only support the first signature parameter in Reqest now
         let firstSignatureParam = request.signatureParameters?.first
         self.objectType = firstSignatureParam?.schema.name
-        if firstSignatureParam?.required ?? false {
+        if isRequired(param: firstSignatureParam) {
             self.objectName = firstSignatureParam?.name
         } else {
-            let optionName = "\(operation.name)Options?".toCamelCase
-            self.objectName = "\(optionName).\(firstSignatureParam?.name ?? "")"
+            self.objectName = "options?.\(firstSignatureParam?.name ?? "")"
         }
         self.hasBody = objectType != nil
+    }
+}
+
+private func isRequired(param: Parameter?) -> Bool {
+    guard let httpParam = param?.protocol.http as? HttpParameter else { return false }
+
+    if httpParam.in == .path || httpParam.in == .uri {
+        return true
+    } else {
+        return false
     }
 }

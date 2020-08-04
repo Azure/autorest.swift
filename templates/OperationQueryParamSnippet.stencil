@@ -6,7 +6,7 @@ var queryParams: [QueryParameter] = [
 ]
 
 {% for param in op.optionalQueryParams %}
-if let {{ param.paramName }} = {{ op.clientMethodOptionsViewModel.variableName }}?.{{ param.paramName }} {
+if let {{ param.paramName }} = options?.{{ param.paramName }} {
     queryParams.append("{{ param.key }}", {{ param.value}})
 }
 {% endfor %}

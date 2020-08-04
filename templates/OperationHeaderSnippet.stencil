@@ -5,7 +5,7 @@ headers["{{ header.key }}"] = {{ header.value }}
 {% endfor %}
 
 {% for header in op.optionalHeaders %}
-if let {{ header.paramName }} = {{ op.clientMethodOptionsViewModel.variableName }}?.{{ header.paramName }} {
+if let {{ header.paramName }} = options?.{{ header.paramName }} {
     headers["{{ header.key }}"] = {{ header.value}}
 }
 {% endfor %}
