@@ -78,6 +78,6 @@ private func getBodyParameters(signatureParameters: [Parameter]?) -> [Parameter]
 private func belongsInSignature(param: Parameter?) -> Bool {
     guard let httpParam = param?.protocol.http as? HttpParameter else { return false }
 
-    let required = [ParameterLocation.path, ParameterLocation.uri, ParameterLocation.body]
+    let required: [ParameterLocation] = [.path, .uri, .body]
     return required.contains(httpParam.in)
 }
