@@ -26,7 +26,7 @@ public struct {{ model.name }}: AzureOptions {
 {% endfor %}
     public init(
     {% for property in model.properties %}
-        {{ property.name }}: {{ property.type }}{{ property.initDefaultValue }},
+        {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }},
     {% endfor %}
         clientRequestId: String? = nil,
         cancellationToken: CancellationToken? = nil

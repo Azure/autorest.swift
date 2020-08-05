@@ -49,7 +49,7 @@ struct KeyValueViewModel {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: Parameter, with operation: Operation) {
-        self.key = param.serializedName!
+        self.key = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
             let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
@@ -69,10 +69,6 @@ struct KeyValueViewModel {
                 // Convert into String in generated code
                 self.value = "String(\(param.name))"
             }
-        } else if key == "endpoint" {
-            self.value = "baseUrl.absoluteString" // baseUrl is a property of the generated client code
-            self.optional = false
-            self.paramName = nil
         } else {
             self.value = ""
             self.optional = false

@@ -16,7 +16,7 @@ public {{ model.objectType }} {{ model.name }} : Codable {
     {% endfor %}
     public init(
     {% for property in model.properties %}
-        {{ property.name }}: {{ property.type }}{{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
+        {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
     {% endfor %}
     ) {
     {% for property in model.properties %}

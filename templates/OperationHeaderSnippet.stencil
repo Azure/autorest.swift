@@ -3,9 +3,3 @@ var headers = HTTPHeaders()
 {% for header in op.requiredHeaders %}
 headers["{{ header.key }}"] = {{ header.value }}
 {% endfor %}
-
-{% for header in op.optionalHeaders %}
-if let {{ header.paramName }} = options?.{{ header.paramName }} {
-    headers["{{ header.key }}"] = {{ header.value}}
-}
-{% endfor %}

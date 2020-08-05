@@ -26,6 +26,54 @@
 
 import Foundation
 
+struct OperationParameters {
+    var header: Params
+    var query: Params
+    var path: [KeyValueViewModel]
+
+    /// Build a list of required and optional query params and headers from a list of parameters
+    init(
+        parameters: [Parameter]?,
+        operation: Operation,
+        operationParameters: OperationParameters? = nil
+    ) {
+        self.header = operationParameters?.header ?? Params()
+        self.query = operationParameters?.query ?? Params()
+        self.path = operationParameters?.path ?? [KeyValueViewModel]()
+
+        for param in parameters ?? [] {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
+            let viewModel = KeyValueViewModel(from: param, with: operation)
+
+            switch httpParam.in {
+            case .query:
+                viewModel.optional ? query.optional.append(viewModel) : query.required
+                    .append(viewModel)
+            case .header:
+                viewModel.optional ? header.optional.append(viewModel) : header.required
+                    .append(viewModel)
+            case .path:
+                path.append(viewModel)
+            default:
+                continue
+            }
+        }
+    }
+}
+
+struct Params {
+    // Query Params/Header in initializer
+    var required: [KeyValueViewModel]
+    // Query Params/Header need to add Nil check
+    var optional: [KeyValueViewModel]
+
+    init(from params: Params? = nil) {
+        self.required = params?.required ?? [KeyValueViewModel]()
+        self.optional = params?.optional ?? [KeyValueViewModel]()
+    }
+}
+
 /// View Model for an operation.
 /// Example:
 ///     // a simple endpoint
@@ -36,14 +84,8 @@ struct OperationViewModel {
     let signatureComment: ViewModelComment
     let signatureParams: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
-    // Query Params/Header can be placed inside QueryParameter Initializer
-    let requiredQueryParams: [KeyValueViewModel]?
-    let requiredHeaders: [KeyValueViewModel]?
-    // Query Params/Header need to add Nil check
-    let optionalQueryParams: [KeyValueViewModel]?
-    let optionalHeaders: [KeyValueViewModel]?
+    let params: OperationParameters
     let pipelineContext: [KeyValueViewModel]?
-    let uriParams: [KeyValueViewModel]?
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
     let request: RequestViewModel?
@@ -53,37 +95,12 @@ struct OperationViewModel {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
 
-        var signatureComments: [String] = []
-        for param in operation.signatureParameters ?? [] where param.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.description)")
-        }
-        self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
-
-        var requiredQueryParams = [KeyValueViewModel]()
-        var requiredHeaders = [KeyValueViewModel]()
-        var optionalQueryParams = [KeyValueViewModel]()
-        var optionalHeaders = [KeyValueViewModel]()
-        var uriParams = [KeyValueViewModel]()
         var pipelineContext = [KeyValueViewModel]()
 
-        for param in operation.parameters ?? [] {
-            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-
-            let viewModel = KeyValueViewModel(from: param, with: operation)
-
-            switch httpParam.in {
-            case .query:
-                viewModel.optional ? optionalQueryParams.append(viewModel) : requiredQueryParams.append(viewModel)
-            case .header:
-                viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
-                    .append(viewModel)
-            case .path,
-                 .uri:
-                uriParams.append(viewModel)
-            default:
-                continue
-            }
-        }
+        var params = OperationParameters(
+            parameters: operation.parameters,
+            operation: operation
+        )
 
         var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
         var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
@@ -102,6 +119,12 @@ struct OperationViewModel {
 
             optionsParams.append(contentsOf: requestOptionsParams)
             signatureParams.append(contentsOf: requestSignatureParams)
+
+            params = OperationParameters(
+                parameters: request.parameters,
+                operation: operation,
+                operationParameters: params
+            )
         }
 
         for response in operation.responses ?? [] {
@@ -115,15 +138,9 @@ struct OperationViewModel {
         self.request = requests.first
         let response = responses.first
 
-        if let headerValue = request?.knownMediaType,
-            headerValue != "" {
-            requiredHeaders
-                .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
-        }
-
         if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
-            requiredHeaders
+            params.header.required
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
@@ -142,17 +159,21 @@ struct OperationViewModel {
             signaturePropertyViewModel.append(ParameterViewModel(from: $0))
         }
 
+        var signatureComments: [String] = []
+        for param in signatureParams where param.description != "" {
+            signatureComments.append("   - \(param.name) : \(param.description)")
+        }
+        self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
+
         self.signatureParams = signaturePropertyViewModel
-        self.optionalQueryParams = optionalQueryParams
-        self.optionalHeaders = optionalHeaders
 
-        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
-        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
+        if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
+        if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
 
+        self.params = params
         self.pipelineContext = pipelineContext
-        self.requiredQueryParams = requiredQueryParams
-        self.requiredHeaders = requiredHeaders
-        self.uriParams = uriParams
+
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
