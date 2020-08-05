@@ -52,9 +52,19 @@ class SwiftGenerator: CodeGenerator {
     func generate() throws {
         let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
         let optionsUrl = baseUrl.with(subfolder: .options, withTargetName: targetName)
+        let utilUrl = baseUrl.with(subfolder: .util, withTargetName: targetName)
         try modelUrl.ensureExists()
         try optionsUrl.ensureExists()
+        try utilUrl.ensureExists()
         logger.log("Base URL: \(baseUrl.path)")
+
+        // Create PatchUtil.swift file
+        try render(
+            template: "PatchUtilFile",
+            toSubfolder: .util,
+            withFilename: "PatchUtil",
+            andParams: [:]
+        )
 
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)

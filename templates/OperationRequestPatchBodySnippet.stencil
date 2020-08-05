@@ -1,7 +1,7 @@
 // Construct patch request
 let patch = MergePatchObject()
-{% for name in op.request.bodyParamProperties %}
-if let val = {{ name }} {
+{% for name in op.request.bodyParam.propertyNames %}
+if let val = {{ op.request.bodyParam.name }}.{{ name }} {
     patch.replace(atPath: "{{name}}/", withValue: val)
 }
 {% endfor %}

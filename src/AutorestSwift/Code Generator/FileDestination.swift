@@ -33,6 +33,7 @@ enum FileDestination {
     case models
     case operations
     case options
+    case util
 
     func url(forBaseUrl baseUrl: URL, withTargetName targetName: String) -> URL {
         switch self {
@@ -51,6 +52,9 @@ enum FileDestination {
         case .options:
             return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
                 .appendingPathComponent("Options")
+        case .util:
+            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
+                .appendingPathComponent("Util")
         }
     }
 }
