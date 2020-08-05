@@ -66,23 +66,15 @@ struct OperationViewModel {
         var pathParams = [KeyValueViewModel]()
         var pipelineContext = [KeyValueViewModel]()
 
-        for param in operation.parameters ?? [] {
-            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-
-            let viewModel = KeyValueViewModel(from: param, with: operation)
-
-            switch httpParam.in {
-            case .query:
-                viewModel.optional ? optionalQueryParams.append(viewModel) : requiredQueryParams.append(viewModel)
-            case .header:
-                viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
-                    .append(viewModel)
-            case .path:
-                pathParams.append(viewModel)
-            default:
-                continue
-            }
-        }
+        buildQueryParamsHeaders(
+            parameters: operation.parameters,
+            with: operation,
+            requiredQueryParams: &requiredQueryParams,
+            requiredHeaders: &requiredHeaders,
+            optionalQueryParams: &optionalQueryParams,
+            optionalHeaders: &optionalHeaders,
+            pathParams: &pathParams
+        )
 
         var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
         var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
@@ -102,14 +94,15 @@ struct OperationViewModel {
             optionsParams.append(contentsOf: requestOptionsParams)
             signatureParams.append(contentsOf: requestSignatureParams)
 
-            for param in request.parameters ?? [] {
-                guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-                if httpParam.in == .header {
-                    let viewModel = KeyValueViewModel(from: param, with: operation)
-                    viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
-                        .append(viewModel)
-                }
-            }
+            buildQueryParamsHeaders(
+                parameters: request.parameters,
+                with: operation,
+                requiredQueryParams: &requiredQueryParams,
+                requiredHeaders: &requiredHeaders,
+                optionalQueryParams: &optionalQueryParams,
+                optionalHeaders: &optionalHeaders,
+                pathParams: &pathParams
+            )
         }
 
         for response in operation.responses ?? [] {
@@ -122,16 +115,6 @@ struct OperationViewModel {
         // TODO: only support max 1 request and  max 1 response for now
         self.request = requests.first
         let response = responses.first
-
-        // for request in operation.requests ?? [] {
-
-        // }
-        /*
-         if let headerValue = request?.knownMediaType,
-             headerValue != "" {
-             requiredHeaders
-                 .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
-         }*/
 
         if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
@@ -178,19 +161,6 @@ struct OperationViewModel {
     }
 }
 
-/*
- private func filterConstantParams(for params: [Parameter]?) -> [Parameter] {
-     let optionsParams = params?.filter { param in
-         if let httpParam = param.protocol.http as? HttpParameter,
-           let constantSchema = param.schema as? ConstantSchema {
-             return allowed.contains(httpParam.in)
-         } else {
-             return false
-         }
-     }
-     return optionsParams ?? []
- }
- */
 private func filterParams(for params: [Parameter]?, with allowed: [ParameterLocation]) -> [Parameter] {
     let optionsParams = params?.filter { param in
         if let httpParam = param.protocol.http as? HttpParameter {
@@ -221,4 +191,33 @@ private func operationName(for operationName: String) -> String {
         }
     }
     return nameComps.joined()
+}
+
+/// Build a list of required and optional query params and headers from a list of parameters
+private func buildQueryParamsHeaders(
+    parameters: [Parameter]?,
+    with operation: Operation,
+    requiredQueryParams: inout [KeyValueViewModel],
+    requiredHeaders: inout [KeyValueViewModel],
+    optionalQueryParams: inout [KeyValueViewModel],
+    optionalHeaders: inout [KeyValueViewModel],
+    pathParams: inout [KeyValueViewModel]
+) {
+    for param in parameters ?? [] {
+        guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
+        let viewModel = KeyValueViewModel(from: param, with: operation)
+
+        switch httpParam.in {
+        case .query:
+            viewModel.optional ? optionalQueryParams.append(viewModel) : requiredQueryParams.append(viewModel)
+        case .header:
+            viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
+                .append(viewModel)
+        case .path:
+            pathParams.append(viewModel)
+        default:
+            continue
+        }
+    }
 }

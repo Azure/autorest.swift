@@ -49,7 +49,7 @@ struct KeyValueViewModel {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: Parameter, with operation: Operation) {
-        self.key = param.serializedName!
+        self.key = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
             let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
