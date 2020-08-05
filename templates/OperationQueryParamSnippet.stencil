@@ -1,6 +1,6 @@
 // Construct query
 var queryParams: [QueryParameter] = [
-    {% for param in op.requiredQueryParams %}
+    {% for param in op.params.query.required %}
     ("{{ param.key }}" , {{ param.value}})
     {% endfor %}
 ]

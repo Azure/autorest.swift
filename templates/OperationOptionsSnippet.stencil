@@ -1,14 +1,14 @@
 // Process endpoint options
 if let options = options {
     // Query options
-    {% for param in op.optionalQueryParams %}
+    {% for param in op.params.query.optional %}
     if let {{ param.paramName }} = options.{{ param.paramName }} {
         queryParams.append("{{ param.key }}", {{ param.value}})
     }
     {% endfor %}
 
     // Header options
-    {% for header in op.optionalHeaders %}
+    {% for header in op.params.header.optional %}
     if let {{ header.paramName }} = options.{{ header.paramName }} {
         headers["{{ header.key }}"] = {{ header.value}}
     }

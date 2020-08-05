@@ -26,6 +26,41 @@
 
 import Foundation
 
+struct OperationParameters {
+    var header: Params
+    var query: Params
+    var path: [KeyValueViewModel]
+
+    init() {
+        self.header = Params()
+        self.query = Params()
+        self.path = [KeyValueViewModel]()
+    }
+
+    init(operationParameters: OperationParameters) {
+        self.header = operationParameters.header
+        self.query = operationParameters.query
+        self.path = operationParameters.path
+    }
+}
+
+struct Params {
+    // Query Params/Header in initializer
+    var required: [KeyValueViewModel]
+    // Query Params/Header need to add Nil check
+    var optional: [KeyValueViewModel]
+
+    init(from params: Params) {
+        self.required = params.required
+        self.optional = params.optional
+    }
+
+    init() {
+        self.required = [KeyValueViewModel]()
+        self.optional = [KeyValueViewModel]()
+    }
+}
+
 /// View Model for an operation.
 /// Example:
 ///     // a simple endpoint
@@ -36,14 +71,8 @@ struct OperationViewModel {
     let signatureComment: ViewModelComment
     let signatureParams: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
-    // Query Params/Header can be placed inside QueryParameter Initializer
-    let requiredQueryParams: [KeyValueViewModel]?
-    let requiredHeaders: [KeyValueViewModel]?
-    // Query Params/Header need to add Nil check
-    let optionalQueryParams: [KeyValueViewModel]?
-    let optionalHeaders: [KeyValueViewModel]?
+    let params: OperationParameters
     let pipelineContext: [KeyValueViewModel]?
-    let pathParams: [KeyValueViewModel]?
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
     let request: RequestViewModel?
@@ -59,21 +88,13 @@ struct OperationViewModel {
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
 
-        var requiredQueryParams = [KeyValueViewModel]()
-        var requiredHeaders = [KeyValueViewModel]()
-        var optionalQueryParams = [KeyValueViewModel]()
-        var optionalHeaders = [KeyValueViewModel]()
-        var pathParams = [KeyValueViewModel]()
+        var params = OperationParameters()
         var pipelineContext = [KeyValueViewModel]()
 
-        buildQueryParamsHeaders(
+        params = buildQueryParamsHeaders(
             parameters: operation.parameters,
-            with: operation,
-            requiredQueryParams: &requiredQueryParams,
-            requiredHeaders: &requiredHeaders,
-            optionalQueryParams: &optionalQueryParams,
-            optionalHeaders: &optionalHeaders,
-            pathParams: &pathParams
+            operation: operation,
+            params: params
         )
 
         var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
@@ -94,14 +115,10 @@ struct OperationViewModel {
             optionsParams.append(contentsOf: requestOptionsParams)
             signatureParams.append(contentsOf: requestSignatureParams)
 
-            buildQueryParamsHeaders(
+            params = buildQueryParamsHeaders(
                 parameters: request.parameters,
-                with: operation,
-                requiredQueryParams: &requiredQueryParams,
-                requiredHeaders: &requiredHeaders,
-                optionalQueryParams: &optionalQueryParams,
-                optionalHeaders: &optionalHeaders,
-                pathParams: &pathParams
+                operation: operation,
+                params: params
             )
         }
 
@@ -118,7 +135,7 @@ struct OperationViewModel {
 
         if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
-            requiredHeaders
+            params.header.required
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
@@ -138,17 +155,14 @@ struct OperationViewModel {
         }
 
         self.signatureParams = signaturePropertyViewModel
-        self.optionalQueryParams = optionalQueryParams
-        self.optionalHeaders = optionalHeaders
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
-        if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
-        if pathParams.count == 0 { pathParams.append(KeyValueViewModel(key: "", value: "\"\"")) }
+        if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
+        if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
 
+        self.params = params
         self.pipelineContext = pipelineContext
-        self.requiredQueryParams = requiredQueryParams
-        self.requiredHeaders = requiredHeaders
-        self.pathParams = pathParams
+
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
@@ -196,13 +210,10 @@ private func operationName(for operationName: String) -> String {
 /// Build a list of required and optional query params and headers from a list of parameters
 private func buildQueryParamsHeaders(
     parameters: [Parameter]?,
-    with operation: Operation,
-    requiredQueryParams: inout [KeyValueViewModel],
-    requiredHeaders: inout [KeyValueViewModel],
-    optionalQueryParams: inout [KeyValueViewModel],
-    optionalHeaders: inout [KeyValueViewModel],
-    pathParams: inout [KeyValueViewModel]
-) {
+    operation: Operation,
+    params: OperationParameters
+) -> OperationParameters {
+    var returnParams = OperationParameters(operationParameters: params)
     for param in parameters ?? [] {
         guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
@@ -210,14 +221,17 @@ private func buildQueryParamsHeaders(
 
         switch httpParam.in {
         case .query:
-            viewModel.optional ? optionalQueryParams.append(viewModel) : requiredQueryParams.append(viewModel)
+            viewModel.optional ? returnParams.query.optional.append(viewModel) : returnParams.query.required
+                .append(viewModel)
         case .header:
-            viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
+            viewModel.optional ? returnParams.header.optional.append(viewModel) : returnParams.header.required
                 .append(viewModel)
         case .path:
-            pathParams.append(viewModel)
+            returnParams.path.append(viewModel)
         default:
             continue
         }
     }
+
+    return returnParams
 }
