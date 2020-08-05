@@ -31,16 +31,34 @@ struct OperationParameters {
     var query: Params
     var path: [KeyValueViewModel]
 
-    init() {
-        self.header = Params()
-        self.query = Params()
-        self.path = [KeyValueViewModel]()
-    }
+    /// Build a list of required and optional query params and headers from a list of parameters
+    init(
+        parameters: [Parameter]?,
+        operation: Operation,
+        operationParameters: OperationParameters? = nil
+    ) {
+        self.header = operationParameters?.header ?? Params()
+        self.query = operationParameters?.query ?? Params()
+        self.path = operationParameters?.path ?? [KeyValueViewModel]()
 
-    init(operationParameters: OperationParameters) {
-        self.header = operationParameters.header
-        self.query = operationParameters.query
-        self.path = operationParameters.path
+        for param in parameters ?? [] {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+
+            let viewModel = KeyValueViewModel(from: param, with: operation)
+
+            switch httpParam.in {
+            case .query:
+                viewModel.optional ? query.optional.append(viewModel) : query.required
+                    .append(viewModel)
+            case .header:
+                viewModel.optional ? header.optional.append(viewModel) : header.required
+                    .append(viewModel)
+            case .path:
+                path.append(viewModel)
+            default:
+                continue
+            }
+        }
     }
 }
 
@@ -50,14 +68,9 @@ struct Params {
     // Query Params/Header need to add Nil check
     var optional: [KeyValueViewModel]
 
-    init(from params: Params) {
-        self.required = params.required
-        self.optional = params.optional
-    }
-
-    init() {
-        self.required = [KeyValueViewModel]()
-        self.optional = [KeyValueViewModel]()
+    init(from params: Params? = nil) {
+        self.required = params?.required ?? [KeyValueViewModel]()
+        self.optional = params?.optional ?? [KeyValueViewModel]()
     }
 }
 
@@ -82,13 +95,11 @@ struct OperationViewModel {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
 
-        var params = OperationParameters()
         var pipelineContext = [KeyValueViewModel]()
 
-        params = buildQueryParamsHeaders(
+        var params = OperationParameters(
             parameters: operation.parameters,
-            operation: operation,
-            params: params
+            operation: operation
         )
 
         var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
@@ -109,10 +120,10 @@ struct OperationViewModel {
             optionsParams.append(contentsOf: requestOptionsParams)
             signatureParams.append(contentsOf: requestSignatureParams)
 
-            params = buildQueryParamsHeaders(
+            params = OperationParameters(
                 parameters: request.parameters,
                 operation: operation,
-                params: params
+                operationParameters: params
             )
         }
 
@@ -205,33 +216,4 @@ private func operationName(for operationName: String) -> String {
         }
     }
     return nameComps.joined()
-}
-
-/// Build a list of required and optional query params and headers from a list of parameters
-private func buildQueryParamsHeaders(
-    parameters: [Parameter]?,
-    operation: Operation,
-    params: OperationParameters
-) -> OperationParameters {
-    var returnParams = OperationParameters(operationParameters: params)
-    for param in parameters ?? [] {
-        guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-
-        let viewModel = KeyValueViewModel(from: param, with: operation)
-
-        switch httpParam.in {
-        case .query:
-            viewModel.optional ? returnParams.query.optional.append(viewModel) : returnParams.query.required
-                .append(viewModel)
-        case .header:
-            viewModel.optional ? returnParams.header.optional.append(viewModel) : returnParams.header.required
-                .append(viewModel)
-        case .path:
-            returnParams.path.append(viewModel)
-        default:
-            continue
-        }
-    }
-
-    return returnParams
 }
