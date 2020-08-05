@@ -43,7 +43,7 @@ struct OperationViewModel {
     let optionalQueryParams: [KeyValueViewModel]?
     let optionalHeaders: [KeyValueViewModel]?
     let pipelineContext: [KeyValueViewModel]?
-    let uriParams: [KeyValueViewModel]?
+    let pathParams: [KeyValueViewModel]?
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
     let request: RequestViewModel?
@@ -63,7 +63,7 @@ struct OperationViewModel {
         var requiredHeaders = [KeyValueViewModel]()
         var optionalQueryParams = [KeyValueViewModel]()
         var optionalHeaders = [KeyValueViewModel]()
-        var uriParams = [KeyValueViewModel]()
+        var pathParams = [KeyValueViewModel]()
         var pipelineContext = [KeyValueViewModel]()
 
         for param in operation.parameters ?? [] {
@@ -77,9 +77,8 @@ struct OperationViewModel {
             case .header:
                 viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
                     .append(viewModel)
-            case .path,
-                 .uri:
-                uriParams.append(viewModel)
+            case .path:
+                pathParams.append(viewModel)
             default:
                 continue
             }
@@ -102,6 +101,15 @@ struct OperationViewModel {
 
             optionsParams.append(contentsOf: requestOptionsParams)
             signatureParams.append(contentsOf: requestSignatureParams)
+
+            for param in request.parameters ?? [] {
+                guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+                if httpParam.in == .header {
+                    let viewModel = KeyValueViewModel(from: param, with: operation)
+                    viewModel.optional ? optionalHeaders.append(viewModel) : requiredHeaders
+                        .append(viewModel)
+                }
+            }
         }
 
         for response in operation.responses ?? [] {
@@ -115,11 +123,15 @@ struct OperationViewModel {
         self.request = requests.first
         let response = responses.first
 
-        if let headerValue = request?.knownMediaType,
-            headerValue != "" {
-            requiredHeaders
-                .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
-        }
+        // for request in operation.requests ?? [] {
+
+        // }
+        /*
+         if let headerValue = request?.knownMediaType,
+             headerValue != "" {
+             requiredHeaders
+                 .append(KeyValueViewModel(key: "Content-Type", value: "\"\(headerValue)\""))
+         }*/
 
         if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
@@ -146,13 +158,14 @@ struct OperationViewModel {
         self.optionalQueryParams = optionalQueryParams
         self.optionalHeaders = optionalHeaders
 
-        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams constructor
+        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
         if requiredQueryParams.count == 0 { requiredQueryParams.append(KeyValueViewModel(key: "", value: "")) }
+        if pathParams.count == 0 { pathParams.append(KeyValueViewModel(key: "", value: "\"\"")) }
 
         self.pipelineContext = pipelineContext
         self.requiredQueryParams = requiredQueryParams
         self.requiredHeaders = requiredHeaders
-        self.uriParams = uriParams
+        self.pathParams = pathParams
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
@@ -165,6 +178,19 @@ struct OperationViewModel {
     }
 }
 
+/*
+ private func filterConstantParams(for params: [Parameter]?) -> [Parameter] {
+     let optionsParams = params?.filter { param in
+         if let httpParam = param.protocol.http as? HttpParameter,
+           let constantSchema = param.schema as? ConstantSchema {
+             return allowed.contains(httpParam.in)
+         } else {
+             return false
+         }
+     }
+     return optionsParams ?? []
+ }
+ */
 private func filterParams(for params: [Parameter]?, with allowed: [ParameterLocation]) -> [Parameter] {
     let optionsParams = params?.filter { param in
         if let httpParam = param.protocol.http as? HttpParameter {

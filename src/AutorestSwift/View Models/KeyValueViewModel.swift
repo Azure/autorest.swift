@@ -69,10 +69,6 @@ struct KeyValueViewModel {
                 // Convert into String in generated code
                 self.value = "String(\(param.name))"
             }
-        } else if key == "endpoint" {
-            self.value = "baseUrl.absoluteString" // baseUrl is a property of the generated client code
-            self.optional = false
-            self.paramName = nil
         } else {
             self.value = ""
             self.optional = false

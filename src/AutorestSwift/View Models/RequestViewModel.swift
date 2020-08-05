@@ -30,9 +30,6 @@ import Foundation
 struct RequestViewModel {
     let path: String
     let method: String
-    let knownMediaType: String?
-    let uri: String?
-    let mediaTypes: [String]?
     let objectType: String?
     let objectName: String?
     let hasBody: Bool
@@ -42,12 +39,9 @@ struct RequestViewModel {
         let httpRequest = request.protocol.http as? HttpRequest
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
-        self.uri = httpRequest?.uri ?? ""
 
         // load HttpWithBodyRequest specfic properties
         let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
-        self.mediaTypes = httpWithBodyRequest?.mediaTypes ?? []
-        self.knownMediaType = httpWithBodyRequest?.knownMediaType.rawValue ?? ""
 
         // TODO: only support the first signature parameter in Reqest now
         let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
