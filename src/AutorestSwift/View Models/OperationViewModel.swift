@@ -82,12 +82,6 @@ struct OperationViewModel {
         self.name = operationName(for: operation.name)
         self.comment = ViewModelComment(from: operation.description)
 
-        var signatureComments: [String] = []
-        for param in operation.signatureParameters ?? [] where param.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.description)")
-        }
-        self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
-
         var params = OperationParameters()
         var pipelineContext = [KeyValueViewModel]()
 
@@ -153,6 +147,12 @@ struct OperationViewModel {
         signatureParams.forEach {
             signaturePropertyViewModel.append(ParameterViewModel(from: $0))
         }
+
+        var signatureComments: [String] = []
+        for param in signatureParams where param.description != "" {
+            signatureComments.append("   - \(param.name) : \(param.description)")
+        }
+        self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
 
         self.signatureParams = signaturePropertyViewModel
 
