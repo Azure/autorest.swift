@@ -1,0 +1,7 @@
+if let dateString = try? container.decode(String.self, forKey: .{{ property.name }}) {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+    self.{{ property.name }} = dateFormatter.date(from: dateString)
+} else {
+    self.{{ property.name }} = nil
+}

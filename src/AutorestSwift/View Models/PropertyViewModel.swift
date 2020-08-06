@@ -36,14 +36,19 @@ struct PropertyViewModel {
     let type: String
     let defaultValue: ViewModelDefault
     let initDefaultValue: String
+    let isDate: Bool
+    let optional: Bool
+    let className: String
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
         self.name = schema.name.toCamelCase
         self.comment = ViewModelComment(from: schema.description)
-        let optional = !schema.required
-        self.type = schema.schema.swiftType(optional: optional)
+        self.className = schema.schema.swiftType()
+        self.optional = !schema.required
+        self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
         self.initDefaultValue = optional ? "= nil" : ""
+        self.isDate = type.contains("Date")
     }
 }
