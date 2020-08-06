@@ -28,19 +28,21 @@ import Foundation
 
 /// formatted version of comment
 struct ViewModelComment: CustomStringConvertible {
-    let rawValue: String
-
+    var withoutPrefix: String
     var description: String
 
     init(from descVal: String?) {
-        self.rawValue = descVal ?? ""
-        self.description = ""
-        guard let desc = descVal else { return }
-        guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
-
+        guard let desc = descVal,
+            desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else {
+            self.description = ""
+            self.withoutPrefix = ""
+            return
+        }
         // ensure multi-line comments are each commented
         let lines = desc.split(whereSeparator: \.isNewline).map { "/// \($0)" }
         description = lines.joined(separator: "\n")
+        /// save a version without the leading /// for use in doc comments.
+        withoutPrefix = String(description.dropFirst("/// ".count))
     }
 }
 
