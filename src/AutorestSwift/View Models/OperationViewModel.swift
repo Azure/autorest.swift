@@ -92,7 +92,7 @@ struct OperationViewModel {
     let clientMethodOptions: ClientMethodOptionsViewModel
 
     init(from operation: Operation, with model: CodeModel) {
-        self.name = operationName(for: operation.name)
+        self.name = operationName(for: operation)
         self.comment = ViewModelComment(from: operation.description)
 
         var pipelineContext = [KeyValueViewModel]()
@@ -206,12 +206,14 @@ private func filterParams(for params: [Parameter]?, with allowed: [ParameterLoca
     return optionsParams ?? []
 }
 
-private func operationName(for operationName: String) -> String {
+private func operationName(for operation: Operation) -> String {
+    let swaggerName = operation.name
     let pluralReplacements = [
         "get": "list"
     ]
 
-    var nameComps = operationName.splitAndJoinAcronyms
+    var nameComps = swaggerName.splitAndJoinAcronyms
+    operation.requests?.first?.signatureParameters
 
     // TODO: Need a more reliable way to know whether the last item is singular or plural
     let isPlural = nameComps.last?.hasSuffix("s") ?? false

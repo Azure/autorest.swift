@@ -61,10 +61,7 @@ struct RequestViewModel {
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 
-        let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
-        // current logic only supports a single request per operation
-        assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(request.name)")
-        let bodyParam = bodyParams.first
+        let bodyParam = request.bodyParam
         self.bodyParam = bodyParam != nil ? BodyParam(from: bodyParam!) : nil
 
         // Determine which kind of request body snippet to render
@@ -74,15 +71,4 @@ struct RequestViewModel {
             self.strategy = bodyParam != nil ? RequestBodyType.body.rawValue : RequestBodyType.noBody.rawValue
         }
     }
-}
-
-private func getBodyParameters(signatureParameters: [Parameter]?) -> [Parameter] {
-    var bodyParameters = [Parameter]()
-    for param in signatureParameters ?? [] {
-        if let httpParam = param.protocol.http as? HttpParameter,
-            httpParam.in == .body {
-            bodyParameters.append(param)
-        }
-    }
-    return bodyParameters
 }
