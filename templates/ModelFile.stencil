@@ -12,7 +12,7 @@ public {{ model.objectType }} {{ model.name }} : Codable {
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
     {% for property in model.properties %}
-    ///   - {{ property.name }}: {{ property.comment }}
+    ///   - {{ property.name }}: {{ property.comment.rawValue }}
     {% endfor %}
     public init(
     {% for property in model.properties %}
