@@ -160,6 +160,8 @@
 		0A22B16524D36F8400EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
 		0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */; };
 		0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */; };
+		0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */; };
+		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -266,6 +268,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */,
+				0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */,
 				F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */,
 				F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */,
 				F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */,
@@ -419,6 +423,8 @@
 		0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseSnippet.stencil; sourceTree = "<group>"; };
 		0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
 		0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
+		0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestPatchBodySnippet.stencil; sourceTree = "<group>"; };
+		0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtilFile.stencil; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -666,6 +672,7 @@
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
+				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
@@ -676,6 +683,7 @@
 				0A22B07424CB71E100EC018E /* Package.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
 				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
+				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";

@@ -26,7 +26,7 @@
 
 import Foundation
 
-enum BodyType: String {
+enum ResponseBodyType: String {
     /// Service returns a pageable response
     case pagedBody
     /// Service returns some kind of deserializable object
@@ -40,13 +40,14 @@ enum BodyType: String {
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
     let name: String
+    /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 
     init(from response: ResponseViewModel?, with operation: Operation) {
         self.name = response?.objectType ?? "Void"
         let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
 
-        self.strategy = response?.objectType != nil ? BodyType.body
-            .rawValue : (hasSyncStateParameter ? BodyType.pagedBody.rawValue : BodyType.noBody.rawValue)
+        self.strategy = response?.objectType != nil ? ResponseBodyType.body
+            .rawValue : (hasSyncStateParameter ? ResponseBodyType.pagedBody.rawValue : ResponseBodyType.noBody.rawValue)
     }
 }

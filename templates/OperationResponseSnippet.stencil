@@ -5,5 +5,5 @@
 {% elif op.returnType.strategy == "noBody" %}
     {% include "OperationResponseNoBodySnippet.stencil" %}
 {% else %}
-    // TODO: Couldn't match the thing for {{ op.returnType.strategy }}
+    // TODO: Couldn't find template for {{ op.returnType.strategy }}
 {% endif %}

@@ -26,13 +26,34 @@
 
 import Foundation
 
+enum RequestBodyType: String {
+    /// Service requires some kind of serialized object
+    case body
+    /// Service requires no request body
+    case noBody
+    /// Service requires a serialzed JSON merge-patch body
+    case patchBody
+}
+
+struct BodyParam {
+    let name: String
+    let type: String
+    let propertyNames: [String]
+
+    init(from parameter: Parameter) {
+        self.name = parameter.name
+        self.type = parameter.schema.name
+        self.propertyNames = (parameter.schema.properties ?? []).map { $0.name }
+    }
+}
+
 /// View Model for the method request creation.
 struct RequestViewModel {
     let path: String
     let method: String
-    let objectType: String?
-    let objectName: String?
-    let hasBody: Bool
+    let bodyParam: BodyParam?
+    /// Identifies the correct snippet to use when rendering the view model
+    let strategy: String
 
     init(from request: Request) {
         // load HttpRequest properties
@@ -40,21 +61,18 @@ struct RequestViewModel {
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 
-        // load HttpWithBodyRequest specfic properties
-        let httpWithBodyRequest = request.protocol.http as? HttpWithBodyRequest
-
-        // TODO: only support the first signature parameter in Reqest now
         let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
+        // current logic only supports a single request per operation
         assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(request.name)")
-
         let bodyParam = bodyParams.first
-        self.objectType = bodyParam?.schema.name
-        if belongsInSignature(param: bodyParam) {
-            self.objectName = bodyParam?.name
+        self.bodyParam = bodyParam != nil ? BodyParam(from: bodyParam!) : nil
+
+        // Determine which kind of request body snippet to render
+        if method == "patch" {
+            self.strategy = RequestBodyType.patchBody.rawValue
         } else {
-            self.objectName = "options?.\(bodyParam?.name ?? "")"
+            self.strategy = bodyParam != nil ? RequestBodyType.body.rawValue : RequestBodyType.noBody.rawValue
         }
-        self.hasBody = objectType != nil
     }
 }
 
@@ -67,11 +85,4 @@ private func getBodyParameters(signatureParameters: [Parameter]?) -> [Parameter]
         }
     }
     return bodyParameters
-}
-
-private func belongsInSignature(param: Parameter?) -> Bool {
-    guard let httpParam = param?.protocol.http as? HttpParameter else { return false }
-
-    let required: [ParameterLocation] = [.path, .uri, .body]
-    return required.contains(httpParam.in)
 }
