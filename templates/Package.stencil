@@ -11,14 +11,19 @@ let package = Package(
         .macOS(.v10_15), .iOS(.v12), .tvOS(.v12)
     ],
     products: [
-        .library(name: "{{ model.name }}", targets: ["{{ model.name }}"])
+        .library(name: "{{ model.name }}", type: .static ,targets: ["{{ model.name }}"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/Azure/azure-sdk-for-ios.git",
+               .branch("master")
+        )
+    ],
     targets: [
         // Build targets
         .target(
             name: "{{ model.name }}",
-            dependencies: [],
+            dependencies: ["AzureCore"],
             path: "Sources"
         ),
         // TODO: Add test targets when test code is generated
