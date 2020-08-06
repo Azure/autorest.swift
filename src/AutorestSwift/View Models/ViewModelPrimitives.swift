@@ -28,9 +28,12 @@ import Foundation
 
 /// formatted version of comment
 struct ViewModelComment: CustomStringConvertible {
+    let rawValue: String
+
     var description: String
 
     init(from descVal: String?) {
+        self.rawValue = descVal ?? ""
         self.description = ""
         guard let desc = descVal else { return }
         guard desc.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
