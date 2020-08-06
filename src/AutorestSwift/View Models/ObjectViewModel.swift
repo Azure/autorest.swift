@@ -47,6 +47,6 @@ struct ObjectViewModel {
         }
         self.properties = props
 
-        self.hasDateProperty = props.filter { $0.type.contains("Date") }.count > 1
+        self.hasDateProperty = props.filter { $0.isDate == true }.count > 0
     }
 }
