@@ -26,15 +26,6 @@
 
 import Foundation
 
-enum ResponseBodyType: String {
-    /// Service returns a pageable response
-    case pagedBody
-    /// Service returns some kind of deserializable object
-    case body
-    /// Service returns no response data, only a status code
-    case noBody
-}
-
 /// View Model for method return type.
 /// Example:
 ///     ... -> ReturnTypeName
@@ -43,11 +34,8 @@ struct ReturnTypeViewModel {
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 
-    init(from response: ResponseViewModel?, with operation: Operation) {
+    init(from response: ResponseViewModel?) {
         self.name = response?.objectType ?? "Void"
-        let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
-
-        self.strategy = response?.objectType != nil ? ResponseBodyType.body
-            .rawValue : (hasSyncStateParameter ? ResponseBodyType.pagedBody.rawValue : ResponseBodyType.noBody.rawValue)
+        self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
     }
 }
