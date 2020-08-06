@@ -40,8 +40,8 @@ struct BodyParam {
     let type: String
     let propertyNames: [String]
 
-    init(from parameter: Parameter) {
-        self.name = parameter.name
+    init(from parameter: Parameter, with operation: Operation) {
+        self.name = operation.requests?.first?.bodyParamName(for: operation) ?? parameter.name
         self.type = parameter.schema.name
         self.propertyNames = (parameter.schema.properties ?? []).map { $0.name }
     }
@@ -55,14 +55,18 @@ struct RequestViewModel {
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 
-    init(from request: Request) {
+    init(from request: Request, with operation: Operation) {
         // load HttpRequest properties
         let httpRequest = request.protocol.http as? HttpRequest
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 
-        let bodyParam = request.bodyParam
-        self.bodyParam = bodyParam != nil ? BodyParam(from: bodyParam!) : nil
+        // create a body param model, if the request has one
+        if let bodyParam = request.bodyParam {
+            self.bodyParam = BodyParam(from: bodyParam, with: operation)
+        } else {
+            self.bodyParam = nil
+        }
 
         // Determine which kind of request body snippet to render
         if method == "patch" {

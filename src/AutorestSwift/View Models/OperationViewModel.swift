@@ -82,6 +82,7 @@ struct OperationViewModel {
     let name: String
     let comment: ViewModelComment
     let signatureComment: ViewModelComment
+    let bodyParam: ParameterViewModel?
     let signatureParams: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
     let params: OperationParameters
@@ -102,30 +103,33 @@ struct OperationViewModel {
             operation: operation
         )
 
-        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri, .body])
+        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri])
         var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
 
-        for request in operation.requests ?? [] {
-            requests.append(RequestViewModel(from: request))
+        assert(
+            operation.requests?.count ?? 0 <= 1,
+            "Multiple requests per operation is currently not supported... \(operation.name)"
+        )
+        guard let request = operation.requests?.first else { fatalError("No requests found.") }
+        requests.append(RequestViewModel(from: request, with: operation))
 
-            let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri, .body])
-            let requestOptionsParams = filterParams(
-                for: request.signatureParameters,
-                with: [.header, .query]
-            )
+        let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
+        let requestOptionsParams = filterParams(
+            for: request.signatureParameters,
+            with: [.header, .query]
+        )
 
-            optionsParams.append(contentsOf: requestOptionsParams)
-            signatureParams.append(contentsOf: requestSignatureParams)
+        optionsParams.append(contentsOf: requestOptionsParams)
+        signatureParams.append(contentsOf: requestSignatureParams)
 
-            params = OperationParameters(
-                parameters: request.parameters,
-                operation: operation,
-                operationParameters: params
-            )
-        }
+        params = OperationParameters(
+            parameters: request.parameters,
+            operation: operation,
+            operationParameters: params
+        )
 
         for response in operation.responses ?? [] {
             responses.append(ResponseViewModel(from: response, with: operation))
@@ -160,19 +164,27 @@ struct OperationViewModel {
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
-        self.returnType = ReturnTypeViewModel(from: response)
+        // Construct the relevant view models
+
+        if let bodyParam = operation.requests?.first?.bodyParam {
+            let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
+            self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
+        } else {
+            self.bodyParam = nil
+        }
 
         var signaturePropertyViewModel = [ParameterViewModel]()
         signatureParams.forEach {
             signaturePropertyViewModel.append(ParameterViewModel(from: $0))
         }
 
+        self.returnType = ReturnTypeViewModel(from: response)
+
         var signatureComments: [String] = []
         for param in signatureParams where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
-
         self.signatureParams = signaturePropertyViewModel
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
@@ -208,12 +220,11 @@ private func filterParams(for params: [Parameter]?, with allowed: [ParameterLoca
 
 private func operationName(for operation: Operation) -> String {
     let swaggerName = operation.name
+    var operationName = swaggerName
     let pluralReplacements = [
         "get": "list"
     ]
-
     var nameComps = swaggerName.splitAndJoinAcronyms
-    operation.requests?.first?.signatureParameters
 
     // TODO: Need a more reliable way to know whether the last item is singular or plural
     let isPlural = nameComps.last?.hasSuffix("s") ?? false
@@ -226,5 +237,15 @@ private func operationName(for operation: Operation) -> String {
             nameComps[index] = comp.capitalized
         }
     }
-    return nameComps.joined()
+    operationName = nameComps.joined()
+
+    // Strip off the body param name, if there is one.
+    // (ex: `createCat(...)` becomes `create(cat:...)`
+    if let bodyParamName = operation.requests?.first?.bodyParamName(for: operation) {
+        let suffix = bodyParamName.prefix(1).uppercased() + bodyParamName.dropFirst()
+        if operationName.hasSuffix(suffix) {
+            operationName = String(operationName.dropLast(suffix.count))
+        }
+    }
+    return operationName
 }

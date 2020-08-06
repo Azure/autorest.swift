@@ -36,11 +36,11 @@ struct ParameterViewModel {
     let defaultValue: ViewModelDefault
     let comment: ViewModelComment
 
-    init(from schema: Parameter) {
-        self.name = schema.name.toCamelCase
-        self.optional = !schema.required
-        self.type = schema.schema.swiftType(optional: optional)
-        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
-        self.comment = ViewModelComment(from: schema.description)
+    init(from param: Parameter, withName name: String? = nil) {
+        self.name = name ?? param.name.toCamelCase
+        self.optional = !param.required
+        self.type = param.schema.swiftType(optional: optional)
+        self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true)
+        self.comment = ViewModelComment(from: param.description)
     }
 }
