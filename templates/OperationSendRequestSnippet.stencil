@@ -4,6 +4,8 @@
 {% include "OperationRequestSnippet.stencil" op %}
 {% elif op.request.strategy == "patchBody" %}
 {% include "OperationRequestPatchBodySnippet.stencil" op %}
+{% else %}
+// TODO: Couldn't find template for {{ op.request.strategy }}
 {% endif %}
 
 // Send request

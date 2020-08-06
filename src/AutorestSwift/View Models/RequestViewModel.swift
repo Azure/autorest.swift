@@ -41,7 +41,6 @@ struct BodyParam {
     let propertyNames: [String]
 
     init(from parameter: Parameter) {
-        assert(belongsInSignature(param: parameter), "Body param found that doesn't go in signature...")
         self.name = parameter.name
         self.type = parameter.schema.name
         self.propertyNames = (parameter.schema.properties ?? []).map { $0.name }
@@ -62,8 +61,8 @@ struct RequestViewModel {
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 
-        // TODO: only support the first signature parameter in Request now
         let bodyParams = getBodyParameters(signatureParameters: request.signatureParameters)
+        // current logic only supports a single request per operation
         assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(request.name)")
         let bodyParam = bodyParams.first
         self.bodyParam = bodyParam != nil ? BodyParam(from: bodyParam!) : nil
@@ -86,11 +85,4 @@ private func getBodyParameters(signatureParameters: [Parameter]?) -> [Parameter]
         }
     }
     return bodyParameters
-}
-
-private func belongsInSignature(param: Parameter?) -> Bool {
-    guard let httpParam = param?.protocol.http as? HttpParameter else { return false }
-
-    let required: [ParameterLocation] = [.path, .uri, .body]
-    return required.contains(httpParam.in)
 }

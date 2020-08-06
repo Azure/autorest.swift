@@ -160,7 +160,6 @@
 		0A22B16524D36F8400EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
 		0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */; };
 		0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */; };
-		0A22B16C24D483FC00EC018E /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B16B24D483FC00EC018E /* PatchUtil.swift */; };
 		0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */; };
 		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
@@ -424,7 +423,6 @@
 		0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseSnippet.stencil; sourceTree = "<group>"; };
 		0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
 		0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
-		0A22B16B24D483FC00EC018E /* PatchUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUtil.swift; sourceTree = "<group>"; };
 		0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestPatchBodySnippet.stencil; sourceTree = "<group>"; };
 		0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtilFile.stencil; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -697,7 +695,6 @@
 				0A22B07924CB721900EC018E /* String+Extensions.swift */,
 				0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */,
 				0A22B07B24CB721900EC018E /* URL+Extensions.swift */,
-				0A22B16B24D483FC00EC018E /* PatchUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1208,7 +1205,6 @@
 				0A22B0FD24D3671E00EC018E /* ComplexSchema.swift in Sources */,
 				0A22B0FE24D3671E00EC018E /* ConditionalSchema.swift in Sources */,
 				0A22B0FF24D3671E00EC018E /* ConstantSchema.swift in Sources */,
-				0A22B16C24D483FC00EC018E /* PatchUtil.swift in Sources */,
 				0A22B10024D3671E00EC018E /* CredentialSchema.swift in Sources */,
 				0A22B10124D3671E00EC018E /* DateSchema.swift in Sources */,
 				0A22B10224D3671E00EC018E /* DateTimeSchema.swift in Sources */,
