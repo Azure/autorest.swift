@@ -23,4 +23,6 @@ public {{ model.objectType }} {{ model.name }} : Codable {
         self.{{ property.name }} = {{ property.name }}
     {% endfor %}
     }
+    
+    {% include "ModelDecoderEncoderSnippet.stencil" model %}
 }

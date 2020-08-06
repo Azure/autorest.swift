@@ -1,0 +1,2 @@
+self.{{ property.name }} = try? container.decode({{ property.className }}.self, forKey: .{{ property.name }})
+ 
