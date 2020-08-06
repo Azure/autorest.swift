@@ -26,14 +26,25 @@
 
 import Foundation
 
+enum ResponseBodyType: String {
+    /// Service returns a pageable response
+    case pagedBody
+    /// Service returns some kind of deserializable object
+    case body
+    /// Service returns no response data, only a status code
+    case noBody
+}
+
 /// View Model for method response handling.
 struct ResponseViewModel {
     let statusCodes: [String]
     let knownMediaType: String?
     let mediaTypes: [String]?
     let objectType: String?
+    /// Identifies the correct snippet to use when rendering the view model
+    let strategy: ResponseBodyType
 
-    init(from response: Response) {
+    init(from response: Response, with operation: Operation) {
         let httpResponse = response.protocol.http as? HttpResponse
         var statusCodes = [String]()
         httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
@@ -45,5 +56,9 @@ struct ResponseViewModel {
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
         self.objectType = schemaResponse?.schema.swiftType(optional: false)
+
+        let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
+        self.strategy = objectType != nil ? ResponseBodyType
+            .body : (hasSyncStateParameter ? ResponseBodyType.pagedBody : ResponseBodyType.noBody)
     }
 }

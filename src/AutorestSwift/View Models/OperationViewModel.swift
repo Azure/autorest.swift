@@ -128,31 +128,39 @@ struct OperationViewModel {
         }
 
         for response in operation.responses ?? [] {
-            responses.append(ResponseViewModel(from: response))
+            responses.append(ResponseViewModel(from: response, with: operation))
         }
+
+        var statusCodes = [String]()
+        responses.forEach {
+            statusCodes.append(contentsOf: $0.statusCodes)
+        }
+
+        pipelineContext.append(KeyValueViewModel(
+            key: "ContextKey.allowedStatusCodes.rawValue",
+            value: "[\(statusCodes.joined(separator: ","))]"
+        ))
 
         self.requests = requests
         self.responses = responses
 
-        // TODO: only support max 1 request and  max 1 response for now
+        // current logic only supports a single request and response
+        assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
+        assert(
+            responses.filter { $0.strategy != ResponseBodyType.noBody }.count <= 1,
+            "Multiple Nobody responses per operation is currently not supported... \(operation.name)"
+        )
         self.request = requests.first
         let response = responses.first
 
+        // TODO: Remove this special logic to get Accept header value when the value is available in yaml file
         if let headerValue = response?.mediaTypes?.first,
             headerValue != "" {
             params.header.required
                 .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
         }
 
-        if let statusCodes = response?.statusCodes {
-            pipelineContext
-                .append(KeyValueViewModel(
-                    key: "ContextKey.allowedStatusCodes.rawValue",
-                    value: "[\(statusCodes.joined(separator: ","))]"
-                ))
-        }
-
-        self.returnType = ReturnTypeViewModel(from: response, with: operation)
+        self.returnType = ReturnTypeViewModel(from: response)
 
         var signaturePropertyViewModel = [ParameterViewModel]()
         signatureParams.forEach {
@@ -180,6 +188,7 @@ struct OperationViewModel {
             parameters: optionsParams
         )
 
+        // validate our assumption that there won't be any "required options"
         for param in optionsParams {
             assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
         }
