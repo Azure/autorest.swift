@@ -134,7 +134,9 @@ struct OperationViewModel {
         self.requests = requests
         self.responses = responses
 
-        // TODO: only support max 1 request and  max 1 response for now
+        // current logic only supports a single request and response
+        assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
+        assert(responses.count <= 1, "Multiple responses per operation is currently not supported... \(operation.name)")
         self.request = requests.first
         let response = responses.first
 
@@ -180,6 +182,7 @@ struct OperationViewModel {
             parameters: optionsParams
         )
 
+        // validate our assumption that there won't be any "required options"
         for param in optionsParams {
             assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
         }
