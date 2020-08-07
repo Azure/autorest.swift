@@ -1,0 +1,3 @@
+{% if op.bodyParam != nil %}
+{{ op.bodyParam.name }}: {{ op.bodyParam.type }}{{ op.bodyParam.defaultValue }},
+{% endif %}

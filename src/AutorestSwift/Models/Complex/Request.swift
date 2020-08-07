@@ -33,6 +33,8 @@ class Request: Metadata {
     /// a filtered list of parameters that is (assumably) the actual method signature parameters
     let signatureParameters: [Parameter]?
 
+    // MARK: Codable
+
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters
     }
@@ -49,5 +51,32 @@ class Request: Metadata {
         if parameters != nil { try? container.encode(parameters, forKey: .parameters) }
         if signatureParameters != nil { try? container.encode(signatureParameters, forKey: .signatureParameters) }
         try super.encode(to: encoder)
+    }
+}
+
+extension Request {
+    /// Retrieves a single body-encoded parameter, if there is one. Fails if there is more than one.
+    var bodyParam: Parameter? {
+        var bodyParams = [Parameter]()
+        for param in signatureParameters ?? [] {
+            if let httpParam = param.protocol.http as? HttpParameter,
+                httpParam.in == .body {
+                bodyParams.append(param)
+            }
+        }
+        // current logic only supports a single request per operation
+        assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(name)")
+        return bodyParams.first
+    }
+
+    /// Gets the Swift name for the body-encoded parameter, if there is one. Fails if there is more than one.
+    func bodyParamName(for operation: Operation) -> String? {
+        guard bodyParam != nil else { return nil }
+        let operationNameComps = operation.name.splitAndJoinAcronyms
+        var bodyParamNameComps = Array(operationNameComps[1 ..< operationNameComps.count])
+        for (index, comp) in bodyParamNameComps.enumerated() where index != 0 {
+            bodyParamNameComps[index] = comp.capitalized
+        }
+        return bodyParamNameComps.joined()
     }
 }

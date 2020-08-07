@@ -1,6 +1,6 @@
 {% include "HeaderSnippet.stencil" %}
 
-{% include "ModelImportSnippet.stencil" %}
+{% include "ImportSnippet.stencil" %}
 
 {{ model.comment }}
 public {{ model.objectType }} {{ model.name }} : Codable {
