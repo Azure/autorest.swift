@@ -50,4 +50,9 @@ class Request: Metadata {
         if signatureParameters != nil { try? container.encode(signatureParameters, forKey: .signatureParameters) }
         try super.encode(to: encoder)
     }
+
+    /// Lookup a parameter by name.
+    func parameter(for name: String) -> Parameter? {
+        return parameters?.first { $0.serializedName == name }
+    }
 }
