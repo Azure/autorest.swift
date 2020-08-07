@@ -228,11 +228,6 @@
 		F194334C24D086D400A277BD /* validation.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432FC24D086B000A277BD /* validation.yaml */; };
 		F194334D24D086D400A277BD /* xml-service.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194330524D086B100A277BD /* xml-service.yaml */; };
 		F194334E24D086D400A277BD /* xms-error-responses.yaml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19432F624D086B000A277BD /* xms-error-responses.yaml */; };
-		F1A5FD2924DCC8E000A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD2524DCC8CA00A5CC6C /* ModelDecoderDateProperty.stencil */; };
-		F1A5FD2A24DCC8E000A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD2724DCC8CA00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
-		F1A5FD2B24DCC8E000A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD2624DCC8CA00A5CC6C /* ModelDecoderProperty.stencil */; };
-		F1A5FD2C24DCC8E000A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD2424DCC8CA00A5CC6C /* ModelEncoderDateProperty.stencil */; };
-		F1A5FD2D24DCC8E000A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD2824DCC8CA00A5CC6C /* ModelEncoderProperty.stencil */; };
 		OBJ_233 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_244 /* AutorestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* AutorestSwiftTests.swift */; };
 		OBJ_245 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* XCTestManifests.swift */; };
@@ -273,27 +268,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 				0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */,
-=======
-=======
->>>>>>> a0b4e53... Add xcode proejct
-=======
->>>>>>> 7bb9115d8c2bafb3983175e4a880560573c5af8c
-				F1A5FD2924DCC8E000A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */,
-				F1A5FD2A24DCC8E000A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */,
-				F1A5FD2B24DCC8E000A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */,
-				F1A5FD2C24DCC8E000A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */,
-				F1A5FD2D24DCC8E000A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */,
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cc94c2e... Add xcode proejct
-=======
->>>>>>> a0b4e53... Add xcode proejct
-=======
->>>>>>> 7bb9115d8c2bafb3983175e4a880560573c5af8c
 				0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */,
 				0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */,
 				F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */,
@@ -524,21 +499,6 @@
 		F194331124D086B200A277BD /* subscriptionId-apiVersion.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "subscriptionId-apiVersion.yaml"; path = "yaml/subscriptionId-apiVersion.yaml"; sourceTree = "<group>"; };
 		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
 		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
-		F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelImportSnippet.stencil; sourceTree = "<group>"; };
-		F1A5FD2424DCC8CA00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
-		F1A5FD2524DCC8CA00A5CC6C /* ModelDecoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderDateProperty.stencil; sourceTree = "<group>"; };
-		F1A5FD2624DCC8CA00A5CC6C /* ModelDecoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderProperty.stencil; sourceTree = "<group>"; };
-		F1A5FD2724DCC8CA00A5CC6C /* ModelDecoderEncoderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderEncoderSnippet.stencil; sourceTree = "<group>"; };
-		F1A5FD2824DCC8CA00A5CC6C /* ModelEncoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderProperty.stencil; sourceTree = "<group>"; };
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cc94c2e... Add xcode proejct
-=======
->>>>>>> a0b4e53... Add xcode proejct
-=======
->>>>>>> 7bb9115d8c2bafb3983175e4a880560573c5af8c
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -699,27 +659,7 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 				0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */,
-=======
-=======
->>>>>>> a0b4e53... Add xcode proejct
-=======
->>>>>>> 7bb9115d8c2bafb3983175e4a880560573c5af8c
-				F1A5FD2524DCC8CA00A5CC6C /* ModelDecoderDateProperty.stencil */,
-				F1A5FD2724DCC8CA00A5CC6C /* ModelDecoderEncoderSnippet.stencil */,
-				F1A5FD2624DCC8CA00A5CC6C /* ModelDecoderProperty.stencil */,
-				F1A5FD2424DCC8CA00A5CC6C /* ModelEncoderDateProperty.stencil */,
-				F1A5FD2824DCC8CA00A5CC6C /* ModelEncoderProperty.stencil */,
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cc94c2e... Add xcode proejct
-=======
->>>>>>> a0b4e53... Add xcode proejct
-=======
->>>>>>> 7bb9115d8c2bafb3983175e4a880560573c5af8c
 				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
 				0A22B07624CB71E100EC018E /* EnumerationFile.stencil */,
