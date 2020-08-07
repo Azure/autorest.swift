@@ -13,5 +13,4 @@ if let options = options {
         headers["{{ header.key }}"] = {{ header.value}}
     }
     {% endfor %}
-
 }

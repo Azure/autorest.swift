@@ -146,7 +146,6 @@
 		0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
 		0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
 		0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
-		0A22B15A24D36F8400EC018E /* ModelImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */; };
 		0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
 		0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */; };
 		0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */; };
@@ -162,6 +161,7 @@
 		0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */; };
 		0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */; };
 		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
+		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -268,6 +268,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */,
 				0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */,
 				0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */,
 				F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */,
@@ -281,7 +282,6 @@
 				0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */,
 				0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */,
 				0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */,
-				0A22B15A24D36F8400EC018E /* ModelImportSnippet.stencil in CopyFiles */,
 				0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
 				0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */,
 				0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */,
@@ -425,6 +425,7 @@
 		0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
 		0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestPatchBodySnippet.stencil; sourceTree = "<group>"; };
 		0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtilFile.stencil; sourceTree = "<group>"; };
+		0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BodyParamSnippet.stencil; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -498,7 +499,6 @@
 		F194331124D086B200A277BD /* subscriptionId-apiVersion.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "subscriptionId-apiVersion.yaml"; path = "yaml/subscriptionId-apiVersion.yaml"; sourceTree = "<group>"; };
 		F194331224D086B200A277BD /* body-boolean.quirks.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-boolean.quirks.yaml"; path = "yaml/body-boolean.quirks.yaml"; sourceTree = "<group>"; };
 		F194331324D086B200A277BD /* body-time.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = "body-time.yaml"; path = "yaml/body-time.yaml"; sourceTree = "<group>"; };
-		F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelImportSnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -659,31 +659,31 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
+				0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */,
 				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
 				0A22B07624CB71E100EC018E /* EnumerationFile.stencil */,
 				0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */,
 				0A22B07024CB71E100EC018E /* ImportSnippet.stencil */,
 				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
-				F194334F24D095BA00A277BD /* ModelImportSnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
-				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
+				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
+				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
-				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
 				F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package.stencil */,
+				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
 				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
-				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
