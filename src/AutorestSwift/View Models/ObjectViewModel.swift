@@ -35,6 +35,7 @@ struct ObjectViewModel {
     let comment: ViewModelComment
     let objectType = "struct"
     let properties: [PropertyViewModel]
+    let hasDateProperty: Bool
 
     init(from schema: ObjectSchema) {
         self.name = schema.name.toPascalCase
@@ -45,5 +46,7 @@ struct ObjectViewModel {
             props.append(PropertyViewModel(from: property))
         }
         self.properties = props
+
+        self.hasDateProperty = props.filter { $0.isDate == true }.count > 0
     }
 }

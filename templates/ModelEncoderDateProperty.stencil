@@ -1,0 +1,7 @@
+if {{ property.name }} != nil {
+    let dateFormatter = DateFormatter()
+    let dateString = dateFormatter.string(from: {{ property.name }}!)
+    try? container.encode(dateString, forKey: .{{ property.name }})
+}
+        
+ 
