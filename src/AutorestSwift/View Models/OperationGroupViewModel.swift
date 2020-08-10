@@ -35,7 +35,7 @@ struct OperationGroupViewModel {
     let operations: [OperationViewModel]
 
     init(from group: OperationGroup, with model: CodeModel) {
-        self.name = group.name.toCamelCase
+        self.name = group.name.toCamelCase.isEmpty ? model.name.toCamelCase : group.name.toCamelCase
         var items = [OperationViewModel]()
         for operation in group.operations {
             items.append(OperationViewModel(from: operation, with: model))
