@@ -21,9 +21,9 @@ public final class {{ model.name }}: PipelineClient {
 
     // MARK: Initializers
 
-    /// Create a {{ model.description }} client.
+    /// Create a {{ model.name }} client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the {{ model description }}.
+    ///   - baseUrl: Base URL for the {{ model.name }}.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
