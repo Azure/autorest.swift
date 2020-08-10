@@ -29,6 +29,9 @@ import Foundation
 /// View Model for an the Package.swift file.
 struct PackageFileViewModel {
     let name: String
+    // FIXME: This should come from config?
+    let namespace = "secret"
+    let version = "0.1"
 
     init(from model: CodeModel) {
         self.name = model.name

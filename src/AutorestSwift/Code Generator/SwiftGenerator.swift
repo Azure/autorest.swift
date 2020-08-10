@@ -53,9 +53,11 @@ class SwiftGenerator: CodeGenerator {
         let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
         let optionsUrl = baseUrl.with(subfolder: .options, withTargetName: targetName)
         let utilUrl = baseUrl.with(subfolder: .util, withTargetName: targetName)
+        let jazzyUrl = baseUrl.with(subfolder: .jazzy, withTargetName: "")
         try modelUrl.ensureExists()
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
+        try jazzyUrl.ensureExists()
         logger.log("Base URL: \(baseUrl.path)")
 
         // Create PatchUtil.swift file
@@ -133,6 +135,14 @@ class SwiftGenerator: CodeGenerator {
             template: "Package",
             toSubfolder: .root,
             withFilename: "Package.swift",
+            andParams: ["model": packageViewModel]
+        )
+
+        // Create Jazzy config file
+        try render(
+            template: "JazzyFile",
+            toSubfolder: .jazzy,
+            withFilename: "\(model.name).yml",
             andParams: ["model": packageViewModel]
         )
     }
