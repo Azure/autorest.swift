@@ -147,7 +147,7 @@ class Manager {
         return (beforeJsonString == afterJsonString)
     }
 
-    private func formatCode(atBaseUrl baseUrl: URL) throws {
+    private func formatCode(atBaseUrl baseUrl: URL) {
         runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
 
         runTool(
@@ -158,28 +158,29 @@ class Manager {
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
+        var allArguments: [String] = []
+
+        guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
+            logger.log("Can't find path for tool \(tool).", level: .error)
+            return
+        }
+
+        guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
+            logger.log("Can't find config file for tool \(tool).", level: .error)
+            return
+        }
+
+        allArguments.append("--config")
+        allArguments.append(configPath)
+
+        allArguments.append(contentsOf: arguments)
+
         do {
-            var allArguments: [String] = []
-
-            guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-                logger.log("Can't find path for tool \(tool).", level: .error)
-                return
-            }
-
-            guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-                logger.log("Can't find config file for tool \(tool).", level: .error)
-                return
-            }
-
-            allArguments.append("--config")
-            allArguments.append(configPath)
-
-            allArguments.append(contentsOf: arguments)
-
             let task = Process()
             task.executableURL = URL(fileURLWithPath: toolPath)
             task.arguments = allArguments
             try task.run()
+            task.waitUntilExit()
         } catch {
             logger.log("Fail to run tool \(tool).", level: .error)
         }
