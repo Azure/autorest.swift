@@ -1,2 +1,5 @@
 disabled_rules: # rule identifiers to exclude from running
 - large_tuple
+- function_body_length
+
+excluded: # paths to ignore during linting.
