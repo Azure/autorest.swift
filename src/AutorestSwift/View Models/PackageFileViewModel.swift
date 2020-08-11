@@ -34,6 +34,6 @@ struct PackageFileViewModel {
     let version = "0.1"
 
     init(from model: CodeModel) {
-        self.name = model.name
+        self.name = model.packageName
     }
 }

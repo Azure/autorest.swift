@@ -35,7 +35,7 @@ struct ServiceClientFileViewModel {
     let apiVersionName: String
 
     init(from model: CodeModel) {
-        self.name = clientName(for: model.name)
+        self.name = "\(model.packageName)Client"
         self.comment = ViewModelComment(from: model.description)
         var items = [OperationGroupViewModel]()
         for group in model.operationGroups {
@@ -45,15 +45,4 @@ struct ServiceClientFileViewModel {
         self.apiVersion = model.getApiVersion()
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
     }
-}
-
-private func clientName(for serviceName: String) -> String {
-    var name = serviceName
-    let stripList = ["Service", "Client"]
-    for item in stripList {
-        if name.hasSuffix(item) {
-            name = String(name.dropLast(item.count))
-        }
-    }
-    return "\(name)Client"
 }

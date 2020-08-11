@@ -43,7 +43,7 @@ class SwiftGenerator: CodeGenerator {
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
         self.model = model
         self.baseUrl = baseUrl
-        self.targetName = model.name
+        self.targetName = model.packageName
     }
 
     // MARK: Methods
@@ -142,7 +142,7 @@ class SwiftGenerator: CodeGenerator {
         try render(
             template: "JazzyFile",
             toSubfolder: .jazzy,
-            withFilename: "\(model.name).yml",
+            withFilename: "\(model.packageName).yml",
             andParams: ["model": packageViewModel]
         )
     }

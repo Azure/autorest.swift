@@ -532,7 +532,6 @@
 		OBJ_11 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_112 /* AutorestSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorestSwiftTests.swift; sourceTree = "<group>"; };
 		OBJ_113 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		OBJ_117 /* misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = misc; sourceTree = SOURCE_ROOT; };
 		OBJ_118 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = SOURCE_ROOT; };
 		OBJ_120 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = SOURCE_ROOT; };
 		OBJ_122 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -931,7 +930,6 @@
 				OBJ_7 /* Sources */,
 				OBJ_110 /* Tests */,
 				OBJ_114 /* Products */,
-				OBJ_117 /* misc */,
 				OBJ_118 /* tests */,
 				OBJ_120 /* scripts */,
 				0A22B06F24CB71E100EC018E /* templates */,
