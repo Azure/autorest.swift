@@ -38,8 +38,6 @@ enum ResponseBodyType: String {
 /// View Model for method response handling.
 struct ResponseViewModel {
     let statusCodes: [String]
-    let knownMediaType: String?
-    let mediaTypes: [String]?
     let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: ResponseBodyType
@@ -50,8 +48,6 @@ struct ResponseViewModel {
         httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
 
         self.statusCodes = statusCodes
-        self.knownMediaType = httpResponse?.knownMediaType?.rawValue
-        self.mediaTypes = httpResponse?.mediaTypes
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse

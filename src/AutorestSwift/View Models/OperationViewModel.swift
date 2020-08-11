@@ -160,13 +160,6 @@ struct OperationViewModel {
         self.request = requests.first
         let response = responses.first
 
-        // TODO: Remove this special logic to get Accept header value when the value is available in yaml file
-        if let headerValue = response?.mediaTypes?.first,
-            headerValue != "" {
-            params.header.required
-                .append(KeyValueViewModel(key: "Accept", value: "\"\(headerValue)\""))
-        }
-
         // Construct the relevant view models
         if let bodyParam = operation.requests?.first?.bodyParam {
             let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
