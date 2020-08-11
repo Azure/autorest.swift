@@ -192,8 +192,12 @@ struct OperationViewModel {
         if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
         if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
 
+        // If there is no optional query params, change query param declaration to 'let'
+        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
+        // header parameters will be initialized out of header initializer
         params.query.declaration = params.query.optional.count == 0 ? "let" : "var"
-        params.header.declaration = params.header.optional.count == 0 ? "let" : "var"
+        params.header.declaration = params.header.optional.count == 0 && params.header.required
+            .count == 0 ? "let" : "var"
 
         self.params = params
         self.pipelineContext = pipelineContext
