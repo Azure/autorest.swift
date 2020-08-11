@@ -55,3 +55,25 @@ class CodeModel: Codable, LanguageShortcut {
         }
     }
 }
+
+extension CodeModel {
+    var packageName: String {
+        let strippedSuffixes = ["service", "client"]
+        var nameComps = name.splitAndJoinAcronyms
+
+        while nameComps.count > 0 {
+            guard let last = nameComps.last else { break }
+            if strippedSuffixes.contains(last) {
+                nameComps = Array(nameComps.dropLast())
+                continue
+            } else {
+                break
+            }
+        }
+        // capitalize each word and join
+        for (index, comp) in nameComps.enumerated() {
+            nameComps[index] = comp.capitalized
+        }
+        return nameComps.joined()
+    }
+}

@@ -14,6 +14,7 @@ REPO_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. >/dev/null 2>&1 && pwd )"
 SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/"
 SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/"
 SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/SecretSDK"
+SDK_SRC="/Users/travisprescott/Documents/generated/sdk"
 
 # FIXME: The build step fails when run with makefile.
 #echo
@@ -27,7 +28,7 @@ SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/
 #echo
 #swift run --package-path $REPO_ROOT
 
-# ensure the preview/SecretSDK branch is active
+## ensure the preview/SecretSDK branch is active
 #echo
 #echo "Refreshing folder: " $SDK_PACKAGE_ROOT
 #rm -rf $SDK_PACKAGE_ROOT
@@ -35,7 +36,11 @@ SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/
 
 echo
 echo "==~ Copying generated code to azure-sdk-for-ios-pr ~=="
-cp -r ~/Documents/generated/sdk/* $SDK_PACKAGE_ROOT
+PACKAGE_NAME=$(ls  -1 -t $SDK_SRC | head -2)
+# move the jazzy docs from the generated package into the SDK root
+cp -r $SDK_SRC/$PACKAGE_NAME/.jazzy/ $SDK_REPO_ROOT/.jazzy
+rm -rf $SDK_SRC/$PACKAGE_NAME/.jazzy/
+cp -r $SDK_SRC/* $SDK_PACKAGE_ROOT
 
 echo
 echo "Switching to: " $SDK_REPO_ROOT

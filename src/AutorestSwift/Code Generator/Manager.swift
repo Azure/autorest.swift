@@ -60,7 +60,7 @@ class Manager {
         let (model, _) = try loadModel()
 
         // Create folder structure
-        let packageName = model.name
+        let packageName = model.packageName
         let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
 
