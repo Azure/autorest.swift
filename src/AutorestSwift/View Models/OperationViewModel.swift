@@ -30,6 +30,7 @@ struct OperationParameters {
     var header: Params
     var query: Params
     var path: [KeyValueViewModel]
+    var hasOptionalsParams: Bool = false
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(
@@ -67,6 +68,8 @@ struct Params {
     var required: [KeyValueViewModel]
     // Query Params/Header need to add Nil check
     var optional: [KeyValueViewModel]
+    // Whether to 'var' or 'let' in generated code for the param declaration
+    var declaration: String = "var"
 
     init(from params: Params? = nil) {
         self.required = params?.required ?? [KeyValueViewModel]()
@@ -165,7 +168,6 @@ struct OperationViewModel {
         }
 
         // Construct the relevant view models
-
         if let bodyParam = operation.requests?.first?.bodyParam {
             let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
             self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
@@ -190,6 +192,14 @@ struct OperationViewModel {
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
         if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
         if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
+
+        // If there is no optional query params, change query param declaration to 'let'
+        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
+        // header parameters will be initialized out of header initializer
+        params.query.declaration = params.query.optional.count == 0 ? "let" : "var"
+        params.header.declaration = params.header.optional.count == 0 && params.header.required
+            .count == 0 ? "let" : "var"
+        params.hasOptionalsParams = params.query.optional.count + params.header.optional.count > 0
 
         self.params = params
         self.pipelineContext = pipelineContext
