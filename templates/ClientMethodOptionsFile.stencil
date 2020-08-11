@@ -2,6 +2,10 @@
 
 {% include "ImportSnippet.stencil" %}
 
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable identifier_name
+// swiftlint:disable line_length
+
 /// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
 public struct {{ model.name }}: AzureOptions {
 
