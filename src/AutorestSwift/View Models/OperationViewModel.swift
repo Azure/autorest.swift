@@ -30,6 +30,7 @@ struct OperationParameters {
     var header: Params
     var query: Params
     var path: [KeyValueViewModel]
+    var hasOptionalsParams: Bool = false
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(
@@ -198,6 +199,7 @@ struct OperationViewModel {
         params.query.declaration = params.query.optional.count == 0 ? "let" : "var"
         params.header.declaration = params.header.optional.count == 0 && params.header.required
             .count == 0 ? "let" : "var"
+        params.hasOptionalsParams = params.query.optional.count + params.header.optional.count > 0
 
         self.params = params
         self.pipelineContext = pipelineContext
