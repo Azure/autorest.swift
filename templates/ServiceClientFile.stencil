@@ -1,6 +1,11 @@
 {% include "HeaderSnippet.stencil" %}
 
 {% include "ImportSnippet.stencil" %}
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 
 {{ model.comment }}
 public final class {{ model.name }}: PipelineClient {
