@@ -25,9 +25,9 @@ public struct {{ model.name }}: AzureOptions {
     /// - Parameters:
 {% for property in model.properties %}
     ///   - {{ property.name }}: {{ property.comment.withoutPrefix }}
+{% endfor %}
     ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
-{% endfor %}
     public init(
     {% for property in model.properties %}
         {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }},
