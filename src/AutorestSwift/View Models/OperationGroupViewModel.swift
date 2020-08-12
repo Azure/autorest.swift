@@ -33,9 +33,11 @@ import Foundation
 struct OperationGroupViewModel {
     let name: String
     let operations: [OperationViewModel]
+    let comment: ViewModelComment
 
     init(from group: OperationGroup, with model: CodeModel) {
         self.name = group.name.toCamelCase.isEmpty ? model.name.toCamelCase : group.name.toCamelCase
+        self.comment = ViewModelComment(from: group.description)
         var items = [OperationViewModel]()
         for operation in group.operations {
             items.append(OperationViewModel(from: operation, with: model))
