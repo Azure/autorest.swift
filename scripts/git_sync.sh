@@ -13,7 +13,7 @@ REPO_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. >/dev/null 2>&1 && pwd )"
 # TODO: make this not hard coded
 SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/"
 SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/"
-SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/SecretSDK"
+#SDK_DEST="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/SecretSDK"
 SDK_SRC="/Users/travisprescott/Documents/generated/sdk"
 
 # FIXME: The build step fails when run with makefile.

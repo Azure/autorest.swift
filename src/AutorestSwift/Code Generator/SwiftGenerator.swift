@@ -34,8 +34,6 @@ class SwiftGenerator: CodeGenerator {
 
     let baseUrl: URL
 
-    let targetName: String
-
     lazy var logger = Logger(withName: "Autorest.Swift.Generator")
 
     // MARK: Initializers
@@ -43,17 +41,16 @@ class SwiftGenerator: CodeGenerator {
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
         self.model = model
         self.baseUrl = baseUrl
-        self.targetName = model.packageName
     }
 
     // MARK: Methods
 
     /// Begin code generation process
     func generate() throws {
-        let modelUrl = baseUrl.with(subfolder: .models, withTargetName: targetName)
-        let optionsUrl = baseUrl.with(subfolder: .options, withTargetName: targetName)
-        let utilUrl = baseUrl.with(subfolder: .util, withTargetName: targetName)
-        let jazzyUrl = baseUrl.with(subfolder: .jazzy, withTargetName: "")
+        let modelUrl = baseUrl.with(subfolder: .models)
+        let optionsUrl = baseUrl.with(subfolder: .options)
+        let utilUrl = baseUrl.with(subfolder: .util)
+        let jazzyUrl = baseUrl.with(subfolder: .jazzy)
         try modelUrl.ensureExists()
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
@@ -92,7 +89,7 @@ class SwiftGenerator: CodeGenerator {
         let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
             template: "ServiceClientFile",
-            toSubfolder: .sources,
+            toSubfolder: .source,
             withFilename: clientViewModel.name,
             andParams: [
                 "model": clientViewModel
@@ -156,7 +153,7 @@ class SwiftGenerator: CodeGenerator {
         let tname = template.lowercased().hasSuffix(".stencil") ? template : "\(template).stencil"
         let fileContent = try renderTemplate(filename: tname, dictionary: params)
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
-        let fileUrl = baseUrl.with(subfolder: subfolder, withTargetName: targetName).appendingPathComponent(fname)
+        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 }

@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "{{ model.name }}",
             dependencies: ["AzureCore"],
-            path: "Sources"
+            path: "Source"
         ),
         // TODO: Add test targets when test code is generated
         // Test targets
