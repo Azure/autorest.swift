@@ -41,7 +41,7 @@ extension URL {
         }
     }
 
-    func with(subfolder: FileDestination, withTargetName targetName: String) -> URL {
-        return subfolder.url(forBaseUrl: self, withTargetName: targetName)
+    func with(subfolder: FileDestination) -> URL {
+        return subfolder.url(forBaseUrl: self)
     }
 }

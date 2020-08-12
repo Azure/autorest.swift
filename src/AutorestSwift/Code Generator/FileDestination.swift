@@ -29,33 +29,29 @@ import Foundation
 enum FileDestination {
     case root
     case tests
-    case sources
+    case source
     case models
     case operations
     case options
     case util
     case jazzy
 
-    func url(forBaseUrl baseUrl: URL, withTargetName targetName: String) -> URL {
+    func url(forBaseUrl baseUrl: URL) -> URL {
         switch self {
         case .root:
             return baseUrl
         case .tests:
             return baseUrl.appendingPathComponent("Tests")
-        case .sources:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
+        case .source:
+            return baseUrl.appendingPathComponent("Source")
         case .models:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Models")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Models")
         case .operations:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Operations")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Operations")
         case .options:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Options")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Options")
         case .util:
-            return baseUrl.appendingPathComponent("Sources").appendingPathComponent(targetName)
-                .appendingPathComponent("Util")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Util")
         case .jazzy:
             return baseUrl.appendingPathComponent(".jazzy")
         }
