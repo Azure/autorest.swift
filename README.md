@@ -18,44 +18,69 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-## AutoRest extension configuration
+## Autorest plugin configuration
+
+Please don't edit this section unless you're re-configuring how the Swift extension plugs in to AutoRest. AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
+
+**Swift code gen**
 
 ``` yaml
+version: 3.0.6267
 use-extension:
-  "@microsoft.azure/autorest.modeler": "2.1.22"
+  "@autorest/modelerfour": "4.15.410"
+
+modelerfour:
+  # this runs a pre-namer step to clean up names
+  prenamer: true
+
+  # this will flatten models marked with 'x-ms-client-flatten'
+  flatten-models: true
+
+  # TODO: What does this do?
+  flatten-payloads: false
+
+  # this will make the content-type parameter always specified
+  always-create-content-type-parameter: true
+
+  # TODO: What does this do?
+  multiple-request-parameter-flattening: false
+
+  # enables parameter grouping via x-ms-parameter-grouping
+  group-parameters: true
+
+naming:
+  parameter: camelcase
+  property: camelcase
+  operation: camelcase
+  operationGroup:  pascalcase
+  choice:  pascalcase
+  choiceValue:  camelcase
+  constant:  camelcase
+  constantParameter:  camelcase
+  type:  pascalcase
+  local: _ + camelcase # TODO: Is this right?
+  global: camelcase
+  preserve-uppercase-max-length: 6
+  override:
+    $host: $host
+
+pass-thru:
+  - model-deduplicator
+  - subset-reducer
 
 pipeline:
-  swift/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: swift
-  swift/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-  swift/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-  swift/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-  swift/generate:
-    plugin: swift
-    input: cm/transform
-    output-artifact: source-file-swift
-  swift/transform:
-    input: generate
-    output-artifact: source-file-swift
-    scope: scope-transform-string
+  swift: # <- name of plugin 
+    input: modelerfour/identity
+    output-artifact: swift-files
+
   swift/emitter:
-    input: transform
-    scope: scope-swift/emitter
+    input: swift
+    scope: swift-scope/emitter
 
-scope-swift/emitter:
-  input-artifact: source-file-swift
-  output-uri-expr: $key
+swift-scope/emitter:
+  input-artifact: swift-files
 
-output-artifact:
-- source-file-swift
+output-artifact: swift-files
 ```
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-ios%2FREADME.png)
