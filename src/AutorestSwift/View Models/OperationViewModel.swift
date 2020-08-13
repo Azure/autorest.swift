@@ -176,6 +176,9 @@ struct OperationViewModel {
         self.returnType = ReturnTypeViewModel(from: response)
 
         var signatureComments: [String] = []
+        if let param = bodyParam {
+            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
+        }
         for param in signatureParams where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")
         }
