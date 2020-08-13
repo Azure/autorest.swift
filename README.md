@@ -25,6 +25,8 @@ Please don't edit this section unless you're re-configuring how the Swift extens
 **Swift code gen**
 
 ``` yaml
+# for details on options see: https://github.com/Azure/autorest.modelerfour/blame/master/modelerfour/readme.md
+
 version: 3.0.6267
 use-extension:
   "@autorest/modelerfour": "4.15.410"
@@ -36,13 +38,14 @@ modelerfour:
   # this will flatten models marked with 'x-ms-client-flatten'
   flatten-models: true
 
-  # TODO: What does this do?
+  # this will flatten parameters when payload-flattening-threshold is specified (or marked in the input spec)
   flatten-payloads: false
 
   # this will make the content-type parameter always specified
   always-create-content-type-parameter: true
 
-  # TODO: What does this do?
+  # setting this to false will skip parameter flattening 
+  # for operations that have multiple requests (ie, JSON and BINARY)
   multiple-request-parameter-flattening: false
 
   # enables parameter grouping via x-ms-parameter-grouping
