@@ -234,6 +234,13 @@
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
 		F1A5FD8124DCFEE600A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */; };
 		F1A5FD8224DCFEE600A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */; };
+		F1C2373C24EAF23400D1B3D4 /* JSONRPCFraming+ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2373B24EAF23400D1B3D4 /* JSONRPCFraming+ContentLengthHeader.swift */; };
+		F1CEA58424E705C200431A3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58024E705C200431A3F /* Utils.swift */; };
+		F1CEA58524E705C200431A3F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58124E705C200431A3F /* Model.swift */; };
+		F1CEA58624E705C200431A3F /* Codec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58224E705C200431A3F /* Codec.swift */; };
+		F1CEA58724E705C200431A3F /* RPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58324E705C200431A3F /* RPCHandler.swift */; };
+		F1CEA58924E71D5E00431A3F /* AutoRestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */; };
+		F1CEA58B24E71D7800431A3F /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58A24E71D7800431A3F /* Server.swift */; };
 		OBJ_233 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_244 /* AutorestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* AutorestSwiftTests.swift */; };
 		OBJ_245 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* XCTestManifests.swift */; };
@@ -518,6 +525,13 @@
 		F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderDateProperty.stencil; sourceTree = "<group>"; };
+		F1C2373B24EAF23400D1B3D4 /* JSONRPCFraming+ContentLengthHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "JSONRPCFraming+ContentLengthHeader.swift"; path = "jsonrpc/JSONRPCFraming+ContentLengthHeader.swift"; sourceTree = "<group>"; };
+		F1CEA58024E705C200431A3F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = jsonrpc/Utils.swift; sourceTree = "<group>"; };
+		F1CEA58124E705C200431A3F /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = jsonrpc/Model.swift; sourceTree = "<group>"; };
+		F1CEA58224E705C200431A3F /* Codec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Codec.swift; path = jsonrpc/Codec.swift; sourceTree = "<group>"; };
+		F1CEA58324E705C200431A3F /* RPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPCHandler.swift; path = jsonrpc/RPCHandler.swift; sourceTree = "<group>"; };
+		F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestHandler.swift; sourceTree = "<group>"; };
+		F1CEA58A24E71D7800431A3F /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -826,6 +840,18 @@
 			name = yaml;
 			sourceTree = "<group>";
 		};
+		F1CEA57F24E705A300431A3F /* jsonrpc */ = {
+			isa = PBXGroup;
+			children = (
+				F1C2373B24EAF23400D1B3D4 /* JSONRPCFraming+ContentLengthHeader.swift */,
+				F1CEA58224E705C200431A3F /* Codec.swift */,
+				F1CEA58124E705C200431A3F /* Model.swift */,
+				F1CEA58324E705C200431A3F /* RPCHandler.swift */,
+				F1CEA58024E705C200431A3F /* Utils.swift */,
+			);
+			name = jsonrpc;
+			sourceTree = "<group>";
+		};
 		OBJ_110 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1022,6 +1048,9 @@
 		OBJ_9 /* Code Generator */ = {
 			isa = PBXGroup;
 			children = (
+				F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */,
+				F1CEA58A24E71D7800431A3F /* Server.swift */,
+				F1CEA57F24E705A300431A3F /* jsonrpc */,
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
@@ -1196,6 +1225,7 @@
 			files = (
 				0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */,
 				0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */,
+				F1CEA58B24E71D7800431A3F /* Server.swift in Sources */,
 				0A22B0DE24D3671D00EC018E /* EnumerationFileViewModel.swift in Sources */,
 				0A22B0DF24D3671D00EC018E /* EnumerationViewModel.swift in Sources */,
 				0A22B0E024D3671D00EC018E /* KeyValueViewModel.swift in Sources */,
@@ -1204,11 +1234,13 @@
 				0A22B0E324D3671E00EC018E /* OperationViewModel.swift in Sources */,
 				0A22B0E424D3671E00EC018E /* PackageFileViewModel.swift in Sources */,
 				0A22B0E524D3671E00EC018E /* ParameterViewModel.swift in Sources */,
+				F1CEA58624E705C200431A3F /* Codec.swift in Sources */,
 				0A22B0E624D3671E00EC018E /* PropertyViewModel.swift in Sources */,
 				0A22B0E724D3671E00EC018E /* ReadmeFileViewModel.swift in Sources */,
 				0A22B0E824D3671E00EC018E /* RequestViewModel.swift in Sources */,
 				0A22B0E924D3671E00EC018E /* ResponseViewModel.swift in Sources */,
 				0A22B0EA24D3671E00EC018E /* ReturnTypeViewModel.swift in Sources */,
+				F1CEA58524E705C200431A3F /* Model.swift in Sources */,
 				0A22B0EB24D3671E00EC018E /* ServiceClientFileViewModel.swift in Sources */,
 				0A22B0EC24D3671E00EC018E /* ViewModelPrimitives.swift in Sources */,
 				0A22B0ED24D3671E00EC018E /* CodeGenerationError.swift in Sources */,
@@ -1242,6 +1274,7 @@
 				0A22B10A24D3671E00EC018E /* HttpParameter.swift in Sources */,
 				0A22B10B24D3671E00EC018E /* HttpRequest.swift in Sources */,
 				0A22B10C24D3671E00EC018E /* HttpResponse.swift in Sources */,
+				F1CEA58724E705C200431A3F /* RPCHandler.swift in Sources */,
 				0A22B10D24D3671E00EC018E /* HttpWithBodyRequest.swift in Sources */,
 				0A22B10E24D3671E00EC018E /* Metadata.swift in Sources */,
 				0A22B10F24D3671E00EC018E /* NumberSchema.swift in Sources */,
@@ -1276,8 +1309,10 @@
 				0A22B12C24D3671E00EC018E /* ImplementationLocation.swift in Sources */,
 				0A22B12D24D3671E00EC018E /* KnownMediaType.swift in Sources */,
 				0A22B12E24D3671E00EC018E /* ObjectSchemaTypes.swift in Sources */,
+				F1CEA58924E71D5E00431A3F /* AutoRestHandler.swift in Sources */,
 				0A22B12F24D3671E00EC018E /* ParameterLocation.swift in Sources */,
 				0A22B13024D3671E00EC018E /* PathEncodingStyle.swift in Sources */,
+				F1C2373C24EAF23400D1B3D4 /* JSONRPCFraming+ContentLengthHeader.swift in Sources */,
 				0A22B13124D3671E00EC018E /* PrimitiveSchemaTypes.swift in Sources */,
 				0A22B13224D3671E00EC018E /* QueryEncodingStyle.swift in Sources */,
 				0A22B13324D3671E00EC018E /* SchemaContext.swift in Sources */,
@@ -1288,6 +1323,7 @@
 				0A22B13824D3671E00EC018E /* AnyCodable.swift in Sources */,
 				0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */,
 				0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */,
+				F1CEA58424E705C200431A3F /* Utils.swift in Sources */,
 				0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */,
 				0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */,
 				0A22B13D24D3671E00EC018E /* Contact.swift in Sources */,

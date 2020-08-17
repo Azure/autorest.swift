@@ -141,20 +141,20 @@ class Manager {
         } else if beforeJsonString == nil || afterJsonString == nil {
             logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
         } else {
-            logger.log("Model file check: OK", level: .info)
+            // logger.log("Model file check: OK", level: .info)
         }
 
         return (beforeJsonString == afterJsonString)
     }
 
     private func formatCode(atBaseUrl baseUrl: URL) {
-        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
+        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
 
-        runTool(
-            with: "swiftlint",
-            configFilename: ".swiftlint.yml",
-            arguments: ["autocorrect", baseUrl.path]
-        )
+        /*   runTool(
+             with: "swiftlint",
+             configFilename: ".swiftlint.yml",
+             arguments: ["autocorrect", "--quiet", baseUrl.path]
+         ) */
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
