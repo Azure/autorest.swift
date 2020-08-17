@@ -4,7 +4,7 @@
   "description": "AutoRest generator extension for the Swift programming language.",
   "scripts": {
     "start": "swift run AutorestSwift",
-    "install": "swift build"
+    "install": "make"
   },
   "repository": {
     "type": "git",
