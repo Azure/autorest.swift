@@ -103,7 +103,7 @@ class AutorestPlugin {
             initializationComplete()
         default:
             callback(.failure(RPCError(.invalidMethod)))
-            logger.logToURL("invalid method: \(method)")
+            // logger.logToURL("invalid method: \(method)")
         }
     }
 
