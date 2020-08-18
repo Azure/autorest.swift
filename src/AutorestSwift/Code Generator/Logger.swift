@@ -61,3 +61,27 @@ class Logger {
         }
     }
 }
+
+class FileLogger {
+    // MARK: Properties
+
+    let url: URL
+
+    // MARK: Initializers
+
+    init(withFileName name: String) {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            fatalError("Unable to locate Documents directory.")
+        }
+        self.url = documentsUrl.appendingPathComponent(name)
+    }
+
+    // MARK: Methods
+
+    func log(_ message: @autoclosure @escaping () -> String?) {
+        guard let msg = message() else {
+            return
+        }
+        try? url.append(line: msg)
+    }
+}
