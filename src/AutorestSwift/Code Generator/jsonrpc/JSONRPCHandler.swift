@@ -1,9 +1,9 @@
 import Foundation
 import NIO
 
+// TODO: Does this need to suport ChannelOutboundHandler?
 public class JSONRPCHandler: ChannelInboundHandler {
     public typealias InboundIn = JSONRequest
-    // public typealias InboundOut = JSONRequest
     public typealias OutboundOut = JSONResponse
 
     private let closure: RPCClosure
@@ -13,22 +13,22 @@ public class JSONRPCHandler: ChannelInboundHandler {
         self.closure = closure
     }
 
+    // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         logger.logToURL("JSONRPCHandler channelRead")
         let request = unwrapInboundIn(data)
 
         closure(request.method, RPCObject(request.params)) { result in
             switch result {
-            case let .success(handlerResult, resultType, method):
+            case let .success(handlerResult, resultType, _):
 
                 if resultType == RPCObjectType.response {
                     let response: JSONResponse
-
-                    logger.logToURL("rpc handler closure returned success")
+                    logger.logToURL("RPC handler closure returned success")
                     response = JSONResponse(id: request.id, result: handlerResult)
                     context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)
                 } else {
-                    logger.logToURL("rpc handler remove AutorestServer handler")
+                    logger.logToURL("RPC handler remove AutorestServer handler")
                     let future = context.pipeline.removeHandler(name: "AutorestServer").flatMap {
                         context.pipeline.addHandler(
                             CodableCodec<JSONResponse, JSONRequest>(),
@@ -38,7 +38,7 @@ public class JSONRPCHandler: ChannelInboundHandler {
                     }
 
                     future.whenSuccess {
-                        self.logger.logToURL("rpc handler remove AutorestServer handler successfully")
+                        self.logger.logToURL("RPC handler removed AutorestServer handler successfully")
 
                         /*  let request2 = JSONRequest(
                              id: request.id + 1,

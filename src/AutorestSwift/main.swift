@@ -45,27 +45,26 @@ private let group = DispatchGroup()
 let autoRestPlugin = AutoRestPlugin()
 let logger = Logger(withFileName: "autorest-swift-debug.log")
 do {
-    logger.logToURL("start AutoRestPlugin")
-    try autoRestPlugin.start().wait()
+    _ = try autoRestPlugin.start().wait()
+    logger.logToURL("Starting AutoRest.Swift")
 } catch {
-    logger.logToURL("error in srever start \(error)")
+    logger.logToURL("Error starting AutoRest.Swift: \(error)")
 }
 
+// Check for an OS signal to abort
 group.enter()
-
 let signalSource = trap(signal: Signal.INT) { signal in
-    logger.logToURL("intercepted signal: \(signal)")
-    // Todo implemetn stop
+    logger.logToURL("Intercepted signal: \(signal)")
     // server.stop().whenComplete { _ in
     group.leave()
     // }
 }
 
 group.wait()
-
-// cleanup
+logger.logToURL("Cleaning up AutoRest.Swift")
 signalSource.cancel()
 
+// TODO: Relocate this out of main.swift
 private func trap(signal sig: Signal, handler: @escaping (Signal) -> Void) -> DispatchSourceSignal {
     let queue = DispatchQueue(label: "Autorest swift")
     let signalSource = DispatchSource.makeSignalSource(signal: sig.rawValue, queue: queue)
@@ -78,6 +77,7 @@ private func trap(signal sig: Signal, handler: @escaping (Signal) -> Void) -> Di
     return signalSource
 }
 
+// TODO: Relocate this out of main.swift
 private enum Signal: Int32 {
     case HUP = 1
     case INT = 2

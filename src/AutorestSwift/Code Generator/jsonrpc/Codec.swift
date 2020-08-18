@@ -275,9 +275,9 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         do {
             let encodable = unwrapOutboundIn(data)
             let data = try encoder.encode(encodable)
-    
+
             logger.logToURL("<-- encoding \(String(decoding: data, as: UTF8.self))")
-            
+
             var buffer = context.channel.allocator.buffer(capacity: data.count)
             buffer.writeBytes(data)
             context.write(wrapOutboundOut(buffer), promise: promise)
