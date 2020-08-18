@@ -1048,9 +1048,9 @@
 		OBJ_9 /* Code Generator */ = {
 			isa = PBXGroup;
 			children = (
+				F1CEA57F24E705A300431A3F /* jsonrpc */,
 				F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */,
 				F1CEA58A24E71D7800431A3F /* AutoRestPlugin.swift */,
-				F1CEA57F24E705A300431A3F /* jsonrpc */,
 				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
