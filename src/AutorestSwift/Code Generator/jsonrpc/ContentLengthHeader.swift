@@ -25,16 +25,8 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
     public typealias OutboundOut = ByteBuffer
 
     private var scratchBuffer: ByteBuffer
-    private let log: URL
+
     public init() {
-        //  self.scratchBuffer = context.channel.allocator.buffer(capacity: 512)
-
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Unabled to locate Documents directory.")
-        }
-
-        self.log = documentsUrl.appendingPathComponent("autorest-swift.log")
-
         self.scratchBuffer = ByteBuffer()
     }
 
@@ -63,8 +55,6 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
     }
 
     public func encode(data: OutboundIn, out: inout ByteBuffer) throws {
-        try? "Encode in ContentLengthHeaderFrameEncoder".appendToURL(fileURL: log)
-
         scratchBuffer.clear()
 
         // Step 2, write the wire protocol for the header.
@@ -77,14 +67,9 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
             out.writeBuffer(&scratchBuffer)
             var payload = data
             out.writeBuffer(&payload)
-
-            try? scratchBuffer.debugDescription.appendToURL(fileURL: log)
-            try? payload.debugDescription.appendToURL(fileURL: log)
         } else {
             var payload = data
             out.writeBuffer(&payload)
-
-            try? "data.readableBytes is < 0".appendToURL(fileURL: log)
         }
     }
 }

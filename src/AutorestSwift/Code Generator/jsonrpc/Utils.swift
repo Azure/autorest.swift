@@ -1,8 +1,8 @@
 import Foundation
 import NIO
 
-public enum ResultType<Value, Error> {
-    case success(Value)
+public enum ResultType<Value, Type, Method, Error> {
+    case success(Value, Type, Method)
     case failure(Error)
 }
 

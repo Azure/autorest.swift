@@ -32,27 +32,6 @@ guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .
     fatalError("Unabled to locate Documents directory.")
 }
 
-/*
- private class Server {
-
-     public func start() throws -> EventLoopFuture<Server> {
-         let log = documentsUrl.appendingPathComponent("autorest-swift.log")
-         //do {
-            try  "Start NIO pipe".write(to: log, atomically: true, encoding: .utf8)
-             let channel = NIOPipeBootstrap(group: MultiThreadedEventLoopGroup(numberOfThreads: 1))
-                 .channelInitializer { channel in
-                     let autoRestHandler = AutoRestHandler()
-                     return channel.pipeline.addHandler(RPCHandler(autoRestHandler.handle))
-                 }
-                 .withPipes(inputDescriptor: STDIN_FILENO, outputDescriptor: STDOUT_FILENO)
-
-             return channel.eventLoop.makeSucceededFuture(self)
-         //} catch {
-        //     try? "error Start NIO pipe".write(to: log, atomically: true, encoding: .utf8)
-        // }
-     }
- }
- */
 // Load yaml file
 let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
 let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
@@ -63,38 +42,32 @@ do {
 }
 
 private let group = DispatchGroup()
-let server = Server()
-let log = documentsUrl.appendingPathComponent("autorest-swift.log")
+let autoRestPlugin = AutoRestPlugin()
+let logger = Logger(withFileName: "autorest-swift-debug.log")
 do {
-    try "before wait".appendLineToURL(fileURL: log)
-
-    try server.start().wait()
-
-    try "after wait".appendLineToURL(fileURL: log)
+    logger.logToURL("start AutoRestPlugin")
+    try autoRestPlugin.start().wait()
 } catch {
-    print(error)
-    try "error in srever start".appendLineToURL(fileURL: log)
+    logger.logToURL("error in srever start \(error)")
 }
 
 group.enter()
 
-print(" after enter")
 let signalSource = trap(signal: Signal.INT) { signal in
-    print("intercepted signal: \(signal)")
+    logger.logToURL("intercepted signal: \(signal)")
     // Todo implemetn stop
     // server.stop().whenComplete { _ in
     group.leave()
     // }
 }
 
-print(" before group wait")
 group.wait()
 
 // cleanup
 signalSource.cancel()
 
 private func trap(signal sig: Signal, handler: @escaping (Signal) -> Void) -> DispatchSourceSignal {
-    let queue = DispatchQueue(label: "ExampleServer")
+    let queue = DispatchQueue(label: "Autorest swift")
     let signalSource = DispatchSource.makeSignalSource(signal: sig.rawValue, queue: queue)
     signal(sig.rawValue, SIG_IGN)
     signalSource.setEventHandler(handler: {

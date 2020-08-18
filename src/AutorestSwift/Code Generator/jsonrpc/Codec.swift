@@ -15,7 +15,7 @@ internal extension ChannelPipeline {
         switch framing {
         case .jsonpos:
             let framingHandler = ContentLengthHeaderFrameDecoder()
-            let encoder1 = ContentLengthHeaderFrameEncoder() // JSONPosCodec()
+            let encoder1 = ContentLengthHeaderFrameEncoder()
             return addHandlers([
                 ByteToMessageHandler(framingHandler),
                 MessageToByteHandler(encoder1)
@@ -47,15 +47,6 @@ internal final class NewlineEncoder: ByteToMessageDecoder, MessageToByteEncoder 
     private let delimiter2 = UInt8(ascii: "\n")
 
     private var lastIndex = 0
-    private let log: URL
-
-    init() {
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Unabled to locate Documents directory.")
-        }
-
-        self.log = documentsUrl.appendingPathComponent("autorest-swift.log")
-    }
 
     // inbound
     public func decode(context: ChannelHandlerContext, buffer: inout ByteBuffer) throws -> DecodingState {
@@ -82,7 +73,6 @@ internal final class NewlineEncoder: ByteToMessageDecoder, MessageToByteEncoder 
         buffer.moveReaderIndex(forwardBy: 2)
         lastIndex = 0
         // call next handler
-        try? "call next handler \(length)".appendLineToURL(fileURL: log)
         context.fireChannelRead(wrapInboundOut(slice))
         return .continue
     }
@@ -94,7 +84,6 @@ internal final class NewlineEncoder: ByteToMessageDecoder, MessageToByteEncoder 
     ) throws -> DecodingState {
         while try decode(context: context, buffer: &buffer) == .continue {}
         if buffer.readableBytes > buffer.readerIndex {
-            try? "CodecError.badFraming 1".appendLineToURL(fileURL: log)
             throw CodecError.badFraming
         }
         return .needMoreData
@@ -124,17 +113,6 @@ internal final class JSONPosCodec: ByteToMessageDecoder, MessageToByteEncoder {
 
     private let newline = UInt8(ascii: "\n")
     private let colon = UInt8(ascii: ":")
-    private let delimiter = UInt8(ascii: "\r")
-
-    private let log: URL
-
-    init() {
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Unabled to locate Documents directory.")
-        }
-
-        self.log = documentsUrl.appendingPathComponent("autorest-swift.log")
-    }
 
     // inbound
     public func decode(context: ChannelHandlerContext, buffer: inout ByteBuffer) throws -> DecodingState {
@@ -145,59 +123,27 @@ internal final class JSONPosCodec: ByteToMessageDecoder, MessageToByteEncoder {
             return .needMoreData
         }
 
-        let len = buffer.readableBytes
-        // print(buffer.debugDescription)
-        try? buffer.debugDescription.appendLineToURL(fileURL: log)
-
         let readableBytesView = buffer.readableBytesView
-        // assuming we have the format Content-Length: <payload>\n
-        let lengthView = readableBytesView.prefix(14) // contains Content-Length
-        let fromColonView = readableBytesView.dropFirst(14) // contains :<payload>\n
-        // let payloadView = fromColonView.dropFirst() // contains <payload>\n
-        let hex1 = String(decoding: lengthView, as: Unicode.UTF8.self)
-        let hex2 = String(decoding: fromColonView, as: Unicode.UTF8.self)
-        // let hex = String(decoding: payloadView, as: Unicode.UTF8.self)
+        // assuming we have the format <length>:<payload>\n
+        let lengthView = readableBytesView.prefix(8) // contains <length>
+        let fromColonView = readableBytesView.dropFirst(8) // contains :<payload>\n
+        let payloadView = fromColonView.dropFirst() // contains <payload>\n
+        let hex = String(decoding: lengthView, as: Unicode.UTF8.self)
 
-        guard let index = fromColonView.firstIndex(of: delimiter) else {
-            try? "CodecError.badFraming 0 hex1=\(hex1) hex2=\(hex2)"
-                .appendLineToURL(fileURL: log)
+        guard let payloadSize = Int(hex, radix: 16) else {
             throw CodecError.badFraming
         }
-
-        let hexslice = buffer.getSlice(at: 15, length: index - 15)!
-
-        let hexString: String = hexslice.getString(at: 0, length: index - 15)?
-            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-
-        try? "log \(hexslice) hexstring = \(hexString)".appendLineToURL(fileURL: log)
-
-        let payloadView = fromColonView.dropFirst(index)
-
-        guard let payloadSize = Int(hexString) else {
-            try? "CodecError.badFraming 1 hex1=\(hex1) hex2=\(hex2)"
-                .appendLineToURL(fileURL: log)
+        guard colon == fromColonView.first! else {
             throw CodecError.badFraming
         }
-        /*  guard colon == fromColonView.first! else {
-             try? "CodecError.badFraming 2".write(to: log7, atomically: true, encoding: .utf8)
-             throw CodecError.badFraming
-         }*/
-        //  guard payloadView.count >= payloadSize + 1, newline == payloadView.last else {
-        //      return .needMoreData
-        //   }
+        guard payloadView.count >= payloadSize + 1, newline == payloadView.last else {
+            return .needMoreData
+        }
 
         // slice the buffer
-        //    assert(payloadView.startIndex == readableBytesView.startIndex + 9)
-        try? "payloadSize \(payloadSize) payloadView.startIndex = \(payloadView.startIndex)"
-            .appendLineToURL(fileURL: log)
-        // len of 'Content-Length : " actual len
-        let slice = buffer.getSlice(at: 22, length: payloadSize)!
-        let sliceSTring: String = slice.getString(at: 0, length: payloadSize) ?? ""
-
-        try? sliceSTring.appendLineToURL(fileURL: log)
-        try? sliceSTring.appendLineToURL(fileURL: log)
+        assert(payloadView.startIndex == readableBytesView.startIndex + 9)
+        let slice = buffer.getSlice(at: payloadView.startIndex, length: payloadSize)!
         buffer.moveReaderIndex(to: payloadSize + 10)
-        // try? slice.write(to: log5, atomically: true, encoding: .utf8)
         // call next handler
         context.fireChannelRead(wrapInboundOut(slice))
         return .continue
@@ -210,7 +156,6 @@ internal final class JSONPosCodec: ByteToMessageDecoder, MessageToByteEncoder {
     ) throws -> DecodingState {
         while try decode(context: context, buffer: &buffer) == .continue {}
         if buffer.readableBytes > buffer.readerIndex {
-            try? "CodecError.badFraming 3".appendLineToURL(fileURL: log)
             throw CodecError.badFraming
         }
         return .needMoreData
@@ -291,7 +236,8 @@ internal final class BruteForceCodec<T>: ByteToMessageDecoder, MessageToByteEnco
 }
 
 // bytes to codable and back
-internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutboundHandler where In: Decodable,
+internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutboundHandler,
+    RemovableChannelHandler where In: Decodable,
     Out: Encodable {
     public typealias InboundIn = ByteBuffer
     public typealias InboundOut = In
@@ -300,40 +246,26 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
 
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
-    private let log: URL
-
-    init() {
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Unabled to locate Documents directory.")
-        }
-
-        self.log = documentsUrl.appendingPathComponent("autorest-swift.log")
-    }
+    private let logger: Logger = Logger(withFileName: "autorest-swift-debug.log")
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         var buffer = unwrapInboundIn(data)
         let data = buffer.readData(length: buffer.readableBytes)!
 
-        let str = String(decoding: data, as: UTF8.self)
-
-        // try? str.appendLineToURL(fileURL: log)
-
         do {
-            //   print(
-            //       "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: //UTF8.self))"
-            // )
-
-            try? "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: UTF8.self))"
-                .appendLineToURL(fileURL: log)
+            logger
+                .logToURL(
+                    "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: UTF8.self))"
+                )
             let decodable = try decoder.decode(In.self, from: data)
             // call next handler
             context.fireChannelRead(wrapInboundOut(decodable))
         } catch let error as DecodingError {
-            try? "\(error)".appendLineToURL(fileURL: log)
+            logger.logToURL("DecodingError \(error)")
             context.fireErrorCaught(CodecError.badJSON(error))
         } catch {
-            try? "\(error)".appendLineToURL(fileURL: log)
+            logger.logToURL("Read Error \(error)")
             context.fireErrorCaught(error)
         }
     }
@@ -343,16 +275,17 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         do {
             let encodable = unwrapOutboundIn(data)
             let data = try encoder.encode(encodable)
-            // print("<-- encoding \(String(decoding: data, as: UTF8.self))")
-
-            try? ("<-- encoding \(String(decoding: data, as: UTF8.self))").appendLineToURL(fileURL: log)
-
+    
+            logger.logToURL("<-- encoding \(String(decoding: data, as: UTF8.self))")
+            
             var buffer = context.channel.allocator.buffer(capacity: data.count)
             buffer.writeBytes(data)
             context.write(wrapOutboundOut(buffer), promise: promise)
         } catch let error as EncodingError {
+            logger.logToURL("EncodingError \(error)")
             promise?.fail(CodecError.badJSON(error))
         } catch {
+            logger.logToURL("Write Error \(error)")
             promise?.fail(error)
         }
     }

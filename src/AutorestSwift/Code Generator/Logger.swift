@@ -30,15 +30,27 @@ import os.log
 class Logger {
     // MARK: Properties
 
-    let name: String
+    let name: String?
 
-    var loggers: [String: OSLog]
+    var loggers: [String: OSLog]?
+
+    let logUrl: URL?
 
     // MARK: Initializers
 
     init(withName name: String) {
         self.name = name
         self.loggers = [String: OSLog]()
+        self.logUrl = nil
+    }
+
+    init(withFileName name: String) {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            fatalError("Unabled to locate Documents directory.")
+        }
+        self.name = nil
+        self.loggers = nil
+        self.logUrl = documentsUrl.appendingPathComponent(name)
     }
 
     // MARK: Methods
@@ -52,12 +64,18 @@ class Logger {
             os_log("Unable to issue log message")
             return
         }
-        if let logger = loggers[category] {
+        if let logger = loggers?[category] {
             os_log("%@", log: logger, type: level, msg)
         } else {
-            let logger = OSLog(subsystem: name, category: category)
-            loggers[category] = logger
+            let logger = OSLog(subsystem: name ?? "", category: category)
+            loggers?[category] = logger
             os_log("%@", log: logger, type: level, msg)
+        }
+    }
+
+    func logToURL(_ message: String) {
+        if let url = logUrl {
+            try? message.appendLineToURL(fileURL: url)
         }
     }
 }

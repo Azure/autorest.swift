@@ -345,6 +345,11 @@ public struct RPCError {
     }
 }
 
+public enum RPCObjectType: Equatable {
+    case request
+    case response
+}
+
 public typealias RPCClosure = (String, RPCObject, (RPCResult) -> Void) -> Void
 
-public typealias RPCResult = ResultType<RPCObject, RPCError>
+public typealias RPCResult = ResultType<RPCObject, RPCObjectType, String, RPCError>

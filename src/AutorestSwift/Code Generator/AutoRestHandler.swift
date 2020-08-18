@@ -3,40 +3,35 @@ import NIO
 import os.log
 
 class AutoRestHandler {
-    private let log: URL
+    private let logger: Logger
 
     init() {
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Unabled to locate Documents directory.")
-        }
-
-        self.log = documentsUrl.appendingPathComponent("autorest-swift.log")
+        self.logger = Logger(withFileName: "autorest-swift-debug.log")
     }
 
-    func handle(method: String, params: RPCObject, callback: (RPCResult) -> Void) {
+    func handle(method: String, params _: RPCObject, callback: (RPCResult) -> Void) {
         switch method.lowercased() {
         case "getpluginnames":
-
-            try? "Get a getpluginnames request".appendLineToURL(fileURL: log)
-            return callback(.success(.list([.string("swift")])))
+            logger.logToURL("Get a getpluginnames request")
+            return callback(.success(.list([.string("swift")]), RPCObjectType.response, ""))
 
         case "process":
-            try? "Get a process request".appendLineToURL(fileURL: log)
+            logger.logToURL("Get a process request")
 
-            return callback(.success(.bool(true)))
-        case "codegen":
+            let sessionId = "session_7"
 
-            do {
-                try? "Get a process request".appendLineToURL(fileURL: log)
-                let data = try JSONSerialization.data(withJSONObject: params, options: [.prettyPrinted])
-                try data.appendToURL(fileURL: log)
-            } catch {
-                try? "Get an \(error)".appendLineToURL(fileURL: log)
-            }
-        // self.add(params: params, callback: callback)
+            logger.logToURL("Send back a process response")
+            callback(.success(.bool(true), RPCObjectType.response, ""))
+
+            logger.logToURL("Send a ListInputs request")
+            return callback(.success(
+                .list([.string(sessionId), .string("code-model-v4")]),
+                RPCObjectType.request,
+                "ListInputs"
+            ))
         default:
             callback(.failure(RPCError(.invalidMethod)))
-            try? "invalid metho \(method)".appendLineToURL(fileURL: log)
+            logger.logToURL("invalid method: \(method)")
         }
     }
 }
