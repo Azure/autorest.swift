@@ -32,7 +32,7 @@ class AutorestPlugin {
     let logger: FileLogger
     var client: ChannelClient!
     var server: ChannelServer!
-    var sessionId: String?
+    var sessionId: String!
 
     // TODO: Increase when working correctly
     private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -96,8 +96,9 @@ class AutorestPlugin {
             )
         case "process":
             plugin.sessionId = params.asList?.last?.asString ?? ""
-            callback(.success(.bool(true)))
             initializationComplete()
+        // TODO: Sending back Process response will stop Autorest.
+        // callback(.success(.bool(true)))
         default:
             callback(.failure(RPCError(.invalidMethod)))
             logger.log("invalid method: \(method)")
@@ -105,17 +106,41 @@ class AutorestPlugin {
     }
 
     func initializationComplete() {
-        guard let sessionId = sessionId else { fatalError() }
         let listInputsRequest: RPCObject = .list([.string(sessionId), .string("code-model-v4")])
-        plugin.client.call(method: "ListInputs", params: listInputsRequest)
-        // TODO: Retrieve the code model filename
-        let filename = "code-model-v4.yaml"
+        let future = plugin.client.call(method: "ListInputs", params: listInputsRequest)
+        future.whenSuccess { result in
+            switch result {
+            case let .success(response):
+                self.handleListInputs(response: response)
+            case let .failure(error):
+                fatalError(error.localizedDescription)
+            }
+        }
+        future.whenFailure { error in
+            fatalError(error.localizedDescription)
+        }
+    }
 
+    func handleListInputs(response: RPCObject) {
+        let filename = response.asList?.first?.asString ?? ""
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
-        plugin.client.call(method: "ReadFile", params: readFileRequest)
-        // TODO: Retrieve the code model contents
-        let codeModelString = "..."
+        let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
+        future.whenSuccess { result in
+            switch result {
+            case let .success(response):
+                self.handleReadFile(response: response)
+            case let .failure(error):
+                fatalError(error.localizedDescription)
+            }
+        }
+        future.whenFailure { error in
+            fatalError(error.localizedDescription)
+        }
+    }
 
-        // TODO: Run through AutoRest.Swift and then make WriteFile requests
+    func handleReadFile(response: RPCObject) {
+        let codeModel = response.asString ?? ""
+        // TODO: Now convert to code model and generate
+        
     }
 }
