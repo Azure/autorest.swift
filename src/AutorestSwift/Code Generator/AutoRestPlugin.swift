@@ -3,22 +3,25 @@ import NIO
 import os.log
 
 class AutoRestPlugin {
-    var logger: Logger!
-    var sessionId: String?
+    let logger: Logger = Logger(withFileName: "autorest-swift-debug.log")
+    var sessionId: String? = ""
+    let group: MultiThreadedEventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+    var id = 3
 
     public func start() throws -> EventLoopFuture<AutoRestPlugin> {
-        logger = Logger(withFileName: "autorest-swift-debug.log")
         logger.logToURL("Starting NIO pipeline")
-        let handler = AutoRestHandler(withPlugin: self)
-        let channel = NIOPipeBootstrap(group: MultiThreadedEventLoopGroup(numberOfThreads: 1))
+
+        let autotResthandler = AutoRestHandler(withPlugin: self)
+        let channel = NIOPipeBootstrap(group: group)
             .channelInitializer { channel in
-                channel.pipeline.addTimeoutHandlers(TimeAmount.seconds(5 * 100))
+                channel.pipeline.addFramingHandlers(framing: .jsonpos)
                     .flatMap {
-                        channel.pipeline.addFramingHandlers(framing: .jsonpos)
+                        channel.pipeline.addHandler(CodableCodec<JSONRequest, JSONResponse>(), name: "AutorestServer")
                     }.flatMap {
-                        channel.pipeline.addHandler(CodableCodec<JSONRequest, JSONResponse>(), name: "AutoRestServer")
-                    }.flatMap {
-                        channel.pipeline.addHandler(JSONRPCHandler(handler.handle))
+                        channel.pipeline.addHandler(
+                            JSONRPCServerHandler(autotResthandler),
+                            name: "JSONRPCServerHandler"
+                        )
                     }
             }
             .withPipes(inputDescriptor: STDIN_FILENO, outputDescriptor: STDOUT_FILENO)
@@ -26,21 +29,19 @@ class AutoRestPlugin {
         return channel.eventLoop.makeSucceededFuture(self)
     }
 
-    public func call(method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
-        // FIXME: Fix this Implmentation
-//        if .connected != self.state {
-//             return self.group.next().makeFailedFuture(ClientError.notReady)
-//         }
-//         guard let channel = self.channel else {
-//             return self.group.next().makeFailedFuture(ClientError.notReady)
-//         }
-//         let promise: EventLoopPromise<JSONResponse> = channel.eventLoop.makePromise()
-//         let request = JSONRequest(id: NSUUID().uuidString, method: method, params: JSONObject(params))
-//         let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
-//         let future = channel.writeAndFlush(requestWrapper)
-//         future.cascadeFailure(to: promise) // if write fails
-//         return future.flatMap {
-//             promise.futureResult.map { Result($0) }
-//         }
+    public func call(context: ChannelHandlerContext, method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
+        logger.logToURL("call \(method)")
+
+        id += 1
+        let promise: EventLoopPromise<JSONResponse> = context.channel.eventLoop.makePromise()
+        let request = JSONRequest(id: id, method: method, params: JSONObject(params))
+        let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
+
+        let future = context.channel.writeAndFlush(requestWrapper)
+        future.cascadeFailure(to: promise) // if write fails
+
+        return future.flatMap {
+            promise.futureResult.map { RPCResult($0) }
+        }
     }
 }

@@ -14,11 +14,9 @@ internal extension ChannelPipeline {
     func addFramingHandlers(framing: Framing) -> EventLoopFuture<Void> {
         switch framing {
         case .jsonpos:
-            let framingHandler = ContentLengthHeaderFrameDecoder()
-            let encoder1 = ContentLengthHeaderFrameEncoder()
             return addHandlers([
-                ByteToMessageHandler(framingHandler),
-                MessageToByteHandler(encoder1)
+                ByteToMessageHandler(ContentLengthHeaderFrameDecoder()),
+                MessageToByteHandler(ContentLengthHeaderFrameEncoder())
             ])
         case .brute:
             let framingHandler = BruteForceCodec<JSONResponse>()

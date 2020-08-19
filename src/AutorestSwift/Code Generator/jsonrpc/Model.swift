@@ -1,4 +1,5 @@
 import Foundation
+import NIO
 
 /*
  spec from https://www.jsonrpc.org/specification
@@ -152,8 +153,10 @@ internal struct JSONError: Codable {
             self.init(code: .invalidParams, message: error.description ?? "invalid params")
         case .invalidRequest:
             self.init(code: .invalidRequest, message: error.description ?? "invalid request")
-        case let .applicationError(description):
-            self.init(code: .other, message: error.description ?? description)
+        case .invalidServerResponse:
+            self.init(code: .invalidServerResponse, message: error.description ?? "invalid server response")
+        case .applicationError, .otherServerError:
+            self.init(code: .other, message: error.description ?? "no description")
         }
     }
 }
@@ -164,6 +167,7 @@ internal enum JSONErrorCode: Int, Codable {
     case methodNotFound = -32601
     case invalidParams = -32602
     case internalError = -32603
+    case invalidServerResponse = -32006
     case other = -32000
 }
 
@@ -383,9 +387,16 @@ public enum RPCObject: Equatable {
 }
 
 public struct RPCError {
-    public init(_ kind: Kind, description: String? = nil) {
+    public init(kind: Kind, description: String? = nil) {
         self.kind = kind
         self.description = description
+    }
+
+    init(_ error: JSONError) {
+        self.init(
+            kind: JSONErrorCode(rawValue: error.code).map { Kind($0) } ?? .otherServerError,
+            description: error.message
+        )
     }
 
     public let kind: Kind
@@ -393,9 +404,36 @@ public struct RPCError {
 
     public enum Kind {
         case invalidMethod
-        case invalidParams(String)
-        case invalidRequest(String)
-        case applicationError(String)
+        case invalidParams
+        case invalidRequest
+        case applicationError
+        case invalidServerResponse
+        case otherServerError
+
+        internal init(_ code: JSONErrorCode) {
+            switch code {
+            case .parseError, .invalidRequest, .methodNotFound:
+                self = .invalidMethod
+            case .invalidParams:
+                self = .invalidParams
+            case .invalidServerResponse:
+                self = .invalidServerResponse
+            case .internalError, .other:
+                self = .otherServerError
+            }
+        }
+    }
+}
+
+internal extension ResultType where Value == RPCObject, Error == RPCError {
+    init(_ response: JSONResponse) {
+        if let result = response.result {
+            self = .success(RPCObject(result))
+        } else if let error = response.error {
+            self = .failure(RPCError(error))
+        } else {
+            self = .failure(RPCError(kind: .invalidServerResponse, description: "invalid server response"))
+        }
     }
 }
 
@@ -404,6 +442,9 @@ public enum RPCObjectType: Equatable {
     case response
 }
 
-public typealias RPCClosure = (String, RPCObject, (RPCResult) -> Void) -> Void
+public typealias RPCClosure = (ChannelHandlerContext, String, RPCObject, (RPCResult) -> Void) -> Void
 
-public typealias RPCResult = ResultType<RPCObject, RPCObjectType, String, RPCError>
+public typealias SwitchMode = (ChannelHandlerContext) -> Void
+public typealias InitComplete = (ChannelHandlerContext) -> Void
+
+public typealias RPCResult = ResultType<RPCObject, RPCError>

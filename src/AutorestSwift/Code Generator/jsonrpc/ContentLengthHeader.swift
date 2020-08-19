@@ -18,7 +18,7 @@ import NIO
 // extension NIOJSONRPCFraming {
 /// `ContentLengthHeaderFrameEncoder` is responsible for emitting JSON-RPC wire protocol with 'Content-Length'
 /// HTTP-like headers as used by for example by LSP (Language Server Protocol).
-public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, MessageToByteEncoder {
+public final class ContentLengthHeaderFrameEncoder: MessageToByteEncoder {
     /// We'll get handed one message through the `Channel` and ...
     public typealias OutboundIn = ByteBuffer
     /// ... will encode it into a `ByteBuffer`.
@@ -34,27 +34,9 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
         scratchBuffer = context.channel.allocator.buffer(capacity: 512)
     }
 
-    public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        let data = unwrapOutboundIn(data)
+    public func encode(data: OutboundIn, out: inout ByteBuffer) throws {
         // Step 1, clear the target buffer (note, we are re-using it so if we get lucky we don't need to
         // allocate at all.
-        //    self.scratchBuffer.clear()
-
-        // Step 2, write the wire protocol for the header.
-        //   self.scratchBuffer.writeStaticString("Content-Length: ")
-        //   self.scratchBuffer.writeString(String(data.readableBytes, radix: 10))
-        //   self.scratchBuffer.writeStaticString("\r\n\r\n")
-
-        // Step 3, send header and the raw message through the `Channel`.
-        if data.readableBytes > 0 {
-            context.write(wrapOutboundOut(scratchBuffer), promise: nil)
-            context.write(wrapOutboundOut(data), promise: promise)
-        } else {
-            context.write(wrapOutboundOut(scratchBuffer), promise: promise)
-        }
-    }
-
-    public func encode(data: OutboundIn, out: inout ByteBuffer) throws {
         scratchBuffer.clear()
 
         // Step 2, write the wire protocol for the header.
@@ -77,10 +59,6 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
 /// `ContentLengthHeaderFrameDecoder` is responsible for parsing JSON-RPC wire protocol with 'Content-Length'
 /// HTTP-like headers as used by for example by LSP (Language Server Protocol).
 public struct ContentLengthHeaderFrameDecoder: ByteToMessageDecoder {
-    // Mark
-
-    // MARK: 
-
     /// We're emitting one `ByteBuffer` corresponding exactly to one full payload, no headers etc.
     public typealias InboundOut = ByteBuffer
 

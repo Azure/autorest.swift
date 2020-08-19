@@ -235,10 +235,11 @@
 		F1A5FD8124DCFEE600A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */; };
 		F1A5FD8224DCFEE600A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */; };
 		F1C2373C24EAF23400D1B3D4 /* ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2373B24EAF23400D1B3D4 /* ContentLengthHeader.swift */; };
+		F1C2374024ED9A8B00D1B3D4 /* JSONRPCClientHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2373F24ED9A8B00D1B3D4 /* JSONRPCClientHandler.swift */; };
 		F1CEA58424E705C200431A3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58024E705C200431A3F /* Utils.swift */; };
 		F1CEA58524E705C200431A3F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58124E705C200431A3F /* Model.swift */; };
 		F1CEA58624E705C200431A3F /* Codec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58224E705C200431A3F /* Codec.swift */; };
-		F1CEA58724E705C200431A3F /* JSONRPCHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58324E705C200431A3F /* JSONRPCHandler.swift */; };
+		F1CEA58724E705C200431A3F /* JSONRPCServerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58324E705C200431A3F /* JSONRPCServerHandler.swift */; };
 		F1CEA58924E71D5E00431A3F /* AutoRestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */; };
 		F1CEA58B24E71D7800431A3F /* AutoRestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CEA58A24E71D7800431A3F /* AutoRestPlugin.swift */; };
 		OBJ_233 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
@@ -526,10 +527,11 @@
 		F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderDateProperty.stencil; sourceTree = "<group>"; };
 		F1C2373B24EAF23400D1B3D4 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentLengthHeader.swift; path = jsonrpc/ContentLengthHeader.swift; sourceTree = "<group>"; };
+		F1C2373F24ED9A8B00D1B3D4 /* JSONRPCClientHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCClientHandler.swift; sourceTree = "<group>"; };
 		F1CEA58024E705C200431A3F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = jsonrpc/Utils.swift; sourceTree = "<group>"; };
 		F1CEA58124E705C200431A3F /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = jsonrpc/Model.swift; sourceTree = "<group>"; };
 		F1CEA58224E705C200431A3F /* Codec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Codec.swift; path = jsonrpc/Codec.swift; sourceTree = "<group>"; };
-		F1CEA58324E705C200431A3F /* JSONRPCHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCHandler.swift; path = jsonrpc/JSONRPCHandler.swift; sourceTree = "<group>"; };
+		F1CEA58324E705C200431A3F /* JSONRPCServerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONRPCServerHandler.swift; path = jsonrpc/JSONRPCServerHandler.swift; sourceTree = "<group>"; };
 		F1CEA58824E71D5E00431A3F /* AutoRestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestHandler.swift; sourceTree = "<group>"; };
 		F1CEA58A24E71D7800431A3F /* AutoRestPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestPlugin.swift; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -846,8 +848,9 @@
 				F1C2373B24EAF23400D1B3D4 /* ContentLengthHeader.swift */,
 				F1CEA58224E705C200431A3F /* Codec.swift */,
 				F1CEA58124E705C200431A3F /* Model.swift */,
-				F1CEA58324E705C200431A3F /* JSONRPCHandler.swift */,
+				F1CEA58324E705C200431A3F /* JSONRPCServerHandler.swift */,
 				F1CEA58024E705C200431A3F /* Utils.swift */,
+				F1C2373F24ED9A8B00D1B3D4 /* JSONRPCClientHandler.swift */,
 			);
 			name = jsonrpc;
 			sourceTree = "<group>";
@@ -1266,6 +1269,7 @@
 				0A22B10224D3671E00EC018E /* DateTimeSchema.swift in Sources */,
 				0A22B10324D3671E00EC018E /* DictionarySchema.swift in Sources */,
 				0A22B10424D3671E00EC018E /* DurationSchema.swift in Sources */,
+				F1C2374024ED9A8B00D1B3D4 /* JSONRPCClientHandler.swift in Sources */,
 				0A22B10524D3671E00EC018E /* Enumerable.swift in Sources */,
 				0A22B10624D3671E00EC018E /* FlagSchema.swift in Sources */,
 				0A22B10724D3671E00EC018E /* GroupProperty.swift in Sources */,
@@ -1274,7 +1278,7 @@
 				0A22B10A24D3671E00EC018E /* HttpParameter.swift in Sources */,
 				0A22B10B24D3671E00EC018E /* HttpRequest.swift in Sources */,
 				0A22B10C24D3671E00EC018E /* HttpResponse.swift in Sources */,
-				F1CEA58724E705C200431A3F /* JSONRPCHandler.swift in Sources */,
+				F1CEA58724E705C200431A3F /* JSONRPCServerHandler.swift in Sources */,
 				0A22B10D24D3671E00EC018E /* HttpWithBodyRequest.swift in Sources */,
 				0A22B10E24D3671E00EC018E /* Metadata.swift in Sources */,
 				0A22B10F24D3671E00EC018E /* NumberSchema.swift in Sources */,
