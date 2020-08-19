@@ -115,7 +115,8 @@ internal final class NewlineEncoder: ByteToMessageDecoder, MessageToByteEncoder 
 }
 
 // bytes to codable and back
-internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutboundHandler where In: Decodable,
+internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutboundHandler,
+    RemovableChannelHandler where In: Decodable,
     Out: Encodable {
     public typealias InboundIn = ByteBuffer
     public typealias InboundOut = In
@@ -124,21 +125,24 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
 
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
+    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         var buffer = unwrapInboundIn(data)
         let data = buffer.readData(length: buffer.readableBytes)!
         do {
-            print(
+            logger.log(
                 "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: UTF8.self))"
             )
             let decodable = try decoder.decode(In.self, from: data)
             // call next handler
             context.fireChannelRead(wrapInboundOut(decodable))
         } catch let error as DecodingError {
+            logger.log("DecodingError \(error)")
             context.fireErrorCaught(CodecError.badJSON(error))
         } catch {
+            logger.log("Read Error \(error)")
             context.fireErrorCaught(error)
         }
     }
@@ -148,13 +152,15 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         do {
             let encodable = unwrapOutboundIn(data)
             let data = try encoder.encode(encodable)
-            print("<-- encoding \(String(decoding: data, as: UTF8.self))")
+            logger.log("<-- encoding \(String(decoding: data, as: UTF8.self))")
             var buffer = context.channel.allocator.buffer(capacity: data.count)
             buffer.writeBytes(data)
             context.write(wrapOutboundOut(buffer), promise: promise)
         } catch let error as EncodingError {
+            logger.log("EncodingError \(error)")
             promise?.fail(CodecError.badJSON(error))
         } catch {
+            logger.log("Write Error \(error)")
             promise?.fail(error)
         }
     }
