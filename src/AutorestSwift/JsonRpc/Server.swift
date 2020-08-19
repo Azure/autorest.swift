@@ -109,7 +109,7 @@ private class Handler: ChannelInboundHandler {
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let request = unwrapInboundIn(data)
-        closure(request.method, RPCObject(request.params)) { result in
+        closure(context, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
@@ -129,13 +129,13 @@ private class Handler: ChannelInboundHandler {
         }
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
-            let response = JSONResponse(id: "unknown", errorCode: .parseError, error: error)
+            let response = JSONResponse(id: 0, errorCode: .parseError, error: error)
             context.channel.writeAndFlush(wrapOutboundOut(response), promise: nil)
         case CodecError.requestTooLarge:
-            let response = JSONResponse(id: "unknown", errorCode: .invalidRequest, error: error)
+            let response = JSONResponse(id: 0, errorCode: .invalidRequest, error: error)
             context.channel.writeAndFlush(wrapOutboundOut(response), promise: nil)
         default:
-            let response = JSONResponse(id: "unknown", errorCode: .internalError, error: error)
+            let response = JSONResponse(id: 0, errorCode: .internalError, error: error)
             context.channel.writeAndFlush(wrapOutboundOut(response), promise: nil)
         }
         // close the client connection

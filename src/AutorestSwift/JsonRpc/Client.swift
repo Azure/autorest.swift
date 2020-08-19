@@ -88,7 +88,7 @@ public final class ChannelClient {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         let promise: EventLoopPromise<JSONResponse> = channel.eventLoop.makePromise()
-        let request = JSONRequest(id: NSUUID().uuidString, method: method, params: JSONObject(params))
+        let request = JSONRequest(id: Int(NSUUID().uuidString) ?? 0, method: method, params: JSONObject(params))
         let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
         let future = channel.writeAndFlush(requestWrapper)
         future.cascadeFailure(to: promise) // if write fails
@@ -161,7 +161,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     public typealias OutboundIn = JSONRequestWrapper
     public typealias OutboundOut = JSONRequest
 
-    private var queue = CircularBuffer<(String, EventLoopPromise<JSONResponse>)>()
+    private var queue = CircularBuffer<(Int, EventLoopPromise<JSONResponse>)>()
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {

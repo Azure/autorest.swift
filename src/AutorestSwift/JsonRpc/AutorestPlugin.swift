@@ -88,7 +88,12 @@ class AutorestPlugin {
     }
 
     /// The handler for incoming messages
-    func incomingHandler(method: String, params: RPCObject, callback: (RPCResult) -> Void) {
+    func incomingHandler(
+        context _: ChannelHandlerContext,
+        method: String,
+        params: RPCObject,
+        callback: (RPCResult) -> Void
+    ) {
         switch method.lowercased() {
         case "getpluginnames":
             callback(
@@ -141,6 +146,5 @@ class AutorestPlugin {
     func handleReadFile(response: RPCObject) {
         let codeModel = response.asString ?? ""
         // TODO: Now convert to code model and generate
-        
     }
 }

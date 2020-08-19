@@ -27,6 +27,7 @@
 // TODO: Update license. Reproduced from: https://github.com/apple/swift-nio-examples/tree/master/json-rpc/Sources/JsonRpc
 
 import Foundation
+import NIO
 
 /*
  spec from https://www.jsonrpc.org/specification
@@ -95,11 +96,11 @@ private let jsonrpcVersion = "2.0"
 
 internal struct JSONRequest: Codable {
     var jsonrpc: String
-    var id: String
+    var id: Int
     var method: String
     var params: JSONObject
 
-    init(id: String, method: String, params: JSONObject) {
+    init(id: Int, method: String, params: JSONObject) {
         self.jsonrpc = jsonrpcVersion
         self.id = id
         self.method = method
@@ -109,33 +110,33 @@ internal struct JSONRequest: Codable {
 
 internal struct JSONResponse: Codable {
     var jsonrpc: String
-    var id: String
+    var id: Int
     var result: JSONObject?
     var error: JSONError?
 
-    init(id: String, result: JSONObject) {
+    init(id: Int, result: JSONObject) {
         self.jsonrpc = jsonrpcVersion
         self.id = id
         self.result = result
         self.error = nil
     }
 
-    init(id: String, error: JSONError) {
+    init(id: Int, error: JSONError) {
         self.jsonrpc = jsonrpcVersion
         self.id = id
         self.result = nil
         self.error = error
     }
 
-    init(id: String, errorCode: JSONErrorCode, error: Error) {
+    init(id: Int, errorCode: JSONErrorCode, error: Error) {
         self.init(id: id, error: JSONError(code: errorCode, error: error))
     }
 
-    init(id: String, result: RPCObject) {
+    init(id: Int, result: RPCObject) {
         self.init(id: id, result: JSONObject(result))
     }
 
-    init(id: String, error: RPCError) {
+    init(id: Int, error: RPCError) {
         self.init(id: id, error: JSONError(error))
     }
 }
@@ -360,6 +361,8 @@ public struct RPCError {
     }
 }
 
-public typealias RPCClosure = (String, RPCObject, (RPCResult) -> Void) -> Void
+public typealias RPCClosure = (ChannelHandlerContext, String, RPCObject, (RPCResult) -> Void) -> Void
+public typealias SwitchMode = (ChannelHandlerContext) -> Void
+public typealias InitComplete = (ChannelHandlerContext) -> Void
 
 public typealias RPCResult = ResultType<RPCObject, RPCError>
