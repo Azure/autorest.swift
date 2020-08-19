@@ -97,17 +97,20 @@ public final class ChannelServer {
     }
 }
 
-private class Handler: ChannelInboundHandler {
+private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     public typealias InboundIn = JSONRequest
     public typealias OutboundOut = JSONResponse
 
     private let closure: RPCClosure
+
+    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
     public init(_ closure: @escaping RPCClosure) {
         self.closure = closure
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
+        logger.log("Server Handler channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
@@ -124,6 +127,7 @@ private class Handler: ChannelInboundHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
+        logger.log("Server Handler errorCaught")
         if let remoteAddress = context.remoteAddress {
             print("client", remoteAddress, "error", error)
         }

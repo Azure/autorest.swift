@@ -53,10 +53,6 @@ class AutorestPlugin {
     }
 
     func start() {
-        // start up the client
-        client = ChannelClient(group: eventLoopGroup)
-        _ = try! client.start().wait()
-
         // start up the server
         server = ChannelServer(group: eventLoopGroup, closure: incomingHandler)
         _ = try! server.start().wait()
@@ -101,7 +97,7 @@ class AutorestPlugin {
             )
         case "process":
             plugin.sessionId = params.asList?.last?.asString ?? ""
-            initializationComplete()
+        // initializationComplete()
         // TODO: Sending back Process response will stop Autorest.
         // callback(.success(.bool(true)))
         default:

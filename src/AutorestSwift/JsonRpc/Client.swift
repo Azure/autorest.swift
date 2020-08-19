@@ -165,12 +165,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
-    private let initComplete: InitComplete
+    // private let initComplete: InitComplete
 
-    init(_ initComplete: @escaping InitComplete) {
-        self.initComplete = initComplete
-    }
-    
+    //  init(_ initComplete: @escaping InitComplete) {
+    //      self.initComplete = initComplete
+    //  }
+
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
         let requestWrapper = unwrapOutboundIn(data)
@@ -189,12 +189,13 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
         promise?.succeed(response)
     }
 
-    public func handlerAdded(context: ChannelHandlerContext) {
+    public func handlerAdded(context _: ChannelHandlerContext) {
         logger.log("Client Handler handlerAdded")
-        initComplete(context)
+        //    initComplete(context)
     }
-    
+
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
+        logger.log("Client Handler errorCaught")
         if let remoteAddress = context.remoteAddress {
             print("server", remoteAddress, "error", error)
         }
