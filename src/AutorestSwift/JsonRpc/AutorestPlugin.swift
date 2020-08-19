@@ -30,14 +30,13 @@ import NIO
 // swiftlint:disable force_try
 class AutorestPlugin {
     let logger: FileLogger
-    var client: TCPClient!
-    var server: TCPServer!
+    var client: ChannelClient!
+    var server: ChannelServer!
     var sessionId: String?
 
     // TODO: Increase when working correctly
     private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
     private let group = DispatchGroup()
-    private let address = ("127.0.0.1", 8000)
 
     private enum Signal: Int32 {
         case HUP = 1
@@ -55,18 +54,18 @@ class AutorestPlugin {
 
     func start() {
         // start up the client
-        client = TCPClient(group: eventLoopGroup)
-        _ = try! client.connect(host: address.0, port: address.1).wait()
+        client = ChannelClient(group: eventLoopGroup)
+        _ = try! client.start().wait()
 
         // start up the server
-        server = TCPServer(group: eventLoopGroup, closure: incomingHandler)
-        _ = try! server.start(host: address.0, port: address.1).wait()
+        server = ChannelServer(group: eventLoopGroup, closure: incomingHandler)
+        _ = try! server.start().wait()
 
         // trap
         group.enter()
         let signalSource = trap(signal: Signal.INT) { _ in
             // shut down the client and server on a termination signal
-            try! self.client.disconnect().wait()
+            try! self.client.stop().wait()
             self.server.stop().whenComplete { _ in
                 self.group.leave()
             }

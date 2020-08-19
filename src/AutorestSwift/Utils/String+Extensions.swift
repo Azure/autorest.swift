@@ -94,4 +94,13 @@ extension String {
         let value = casedComponents.joined()
         return value
     }
+
+    func trimmed() -> Substring {
+        guard let firstElementIndex = firstIndex(where: { !$0.isWhitespace }) else {
+            return Substring("")
+        }
+
+        let lastElementIndex = reversed().firstIndex(where: { !$0.isWhitespace })!
+        return self[firstElementIndex ..< lastElementIndex.base]
+    }
 }

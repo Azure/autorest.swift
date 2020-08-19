@@ -29,7 +29,7 @@
 import Foundation
 import NIO
 
-public final class TCPServer {
+public final class ChannelServer {
     private let group: MultiThreadedEventLoopGroup
     private let config: Config
     private var channel: Channel?
@@ -46,13 +46,11 @@ public final class TCPServer {
         assert(self.state == .stopped)
     }
 
-    public func start(host: String, port: Int) -> EventLoopFuture<TCPServer> {
+    public func start() -> EventLoopFuture<ChannelServer> {
         assert(state == .initializing)
 
-        let bootstrap = ServerBootstrap(group: group)
-            .serverChannelOption(ChannelOptions.backlog, value: 256)
-            .serverChannelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-            .childChannelInitializer { channel in
+        let bootstrap = NIOPipeBootstrap(group: group)
+            .channelInitializer { channel in
                 channel.pipeline.addTimeoutHandlers(self.config.timeout)
                     .flatMap {
                         channel.pipeline.addFramingHandlers(framing: self.config.framing)
@@ -62,16 +60,10 @@ public final class TCPServer {
                             Handler(self.closure)
                         ])
                     }
-            }
-            .childChannelOption(ChannelOptions.socket(IPPROTO_TCP, TCP_NODELAY), value: 1)
-            .childChannelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
+            }.withPipes(inputDescriptor: STDIN_FILENO, outputDescriptor: STDOUT_FILENO)
 
-        state = .starting("\(host):\(port)")
-        return bootstrap.bind(host: host, port: port).flatMap { channel in
-            self.channel = channel
-            self.state = .started
-            return channel.eventLoop.makeSucceededFuture(self)
-        }
+        state = .starting
+        return bootstrap.eventLoop.makeSucceededFuture(self)
     }
 
     public func stop() -> EventLoopFuture<Void> {
@@ -88,9 +80,9 @@ public final class TCPServer {
         return channel.close()
     }
 
-    private var _state = State.initializing
+    private var _state = ChannelState.initializing
     private let lock = NSLock()
-    private var state: State {
+    private var state: ChannelState {
         get {
             return lock.withLock {
                 _state
@@ -101,24 +93,6 @@ public final class TCPServer {
                 _state = newValue
                 print("\(self) \(_state)")
             }
-        }
-    }
-
-    private enum State: Equatable {
-        case initializing
-        case starting(String)
-        case started
-        case stopping
-        case stopped
-    }
-
-    public struct Config {
-        public let timeout: TimeAmount
-        public let framing: Framing
-
-        public init(timeout: TimeAmount = TimeAmount.seconds(5), framing: Framing = .default) {
-            self.timeout = timeout
-            self.framing = framing
         }
     }
 }
@@ -187,10 +161,4 @@ private class Handler: ChannelInboundHandler {
             context.fireUserInboundEventTriggered(event)
         }
     }
-}
-
-internal enum ServerError: Error {
-    case notReady
-    case cantBind
-    case timeout
 }

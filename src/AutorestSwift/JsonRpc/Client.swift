@@ -29,7 +29,7 @@
 import Foundation
 import NIO
 
-public final class TCPClient {
+public final class ChannelClient {
     public let group: MultiThreadedEventLoopGroup
     public let config: Config
     private var channel: Channel?
@@ -42,14 +42,13 @@ public final class TCPClient {
     }
 
     deinit {
-        assert(self.state == .disconnected)
+        assert(self.state == .stopped)
     }
 
-    public func connect(host: String, port: Int) -> EventLoopFuture<TCPClient> {
+    public func start() -> EventLoopFuture<ChannelClient> {
         assert(state == .initializing)
 
-        let bootstrap = ClientBootstrap(group: group)
-            .channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
+        let bootstrap = NIOPipeBootstrap(group: group)
             .channelInitializer { channel in
                 channel.pipeline.addTimeoutHandlers(self.config.timeout)
                     .flatMap {
@@ -60,33 +59,29 @@ public final class TCPClient {
                             Handler()
                         ])
                     }
-            }
+            }.withPipes(inputDescriptor: STDOUT_FILENO, outputDescriptor: STDIN_FILENO)
 
-        state = .connecting("\(host):\(port)")
-        return bootstrap.connect(host: host, port: port).flatMap { channel in
-            self.channel = channel
-            self.state = .connected
-            return channel.eventLoop.makeSucceededFuture(self)
-        }
+        state = .starting
+        return bootstrap.eventLoop.makeSucceededFuture(self)
     }
 
-    public func disconnect() -> EventLoopFuture<Void> {
-        if state != .connected {
+    public func stop() -> EventLoopFuture<Void> {
+        if state != .started {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let channel = self.channel else {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
-        state = .disconnecting
+        state = .stopping
         channel.closeFuture.whenComplete { _ in
-            self.state = .disconnected
+            self.state = .stopped
         }
         channel.close(promise: nil)
         return channel.closeFuture
     }
 
     public func call(method: String, params: RPCObject) -> EventLoopFuture<Result> {
-        if state != .connected {
+        if state != .started {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let channel = self.channel else {
@@ -102,9 +97,9 @@ public final class TCPClient {
         }
     }
 
-    private var _state = State.initializing
+    private var _state = ChannelState.initializing
     private let lock = NSLock()
-    private var state: State {
+    private var state: ChannelState {
         get {
             return lock.withLock {
                 _state
@@ -116,14 +111,6 @@ public final class TCPClient {
                 print("\(self) \(_state)")
             }
         }
-    }
-
-    private enum State: Equatable {
-        case initializing
-        case connecting(String)
-        case connected
-        case disconnecting
-        case disconnected
     }
 
     public typealias Result = ResultType<RPCObject, Error>
@@ -165,16 +152,6 @@ public final class TCPClient {
                     self = .otherServerError
                 }
             }
-        }
-    }
-
-    public struct Config {
-        public let timeout: TimeAmount
-        public let framing: Framing
-
-        public init(timeout: TimeAmount = TimeAmount.seconds(5), framing: Framing = .default) {
-            self.timeout = timeout
-            self.framing = framing
         }
     }
 }
@@ -252,21 +229,14 @@ private struct JSONRequestWrapper {
     let promise: EventLoopPromise<JSONResponse>
 }
 
-internal enum ClientError: Error {
-    case notReady
-    case cantBind
-    case timeout
-    case connectionResetByPeer
-}
-
-internal extension ResultType where Value == RPCObject, Error == TCPClient.Error {
+internal extension ResultType where Value == RPCObject, Error == ChannelClient.Error {
     init(_ response: JSONResponse) {
         if let result = response.result {
             self = .success(RPCObject(result))
         } else if let error = response.error {
-            self = .failure(TCPClient.Error(error))
+            self = .failure(ChannelClient.Error(error))
         } else {
-            self = .failure(TCPClient.Error(kind: .invalidServerResponse, description: "invalid server response"))
+            self = .failure(ChannelClient.Error(kind: .invalidServerResponse, description: "invalid server response"))
         }
     }
 }
