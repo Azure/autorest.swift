@@ -161,8 +161,16 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     public typealias OutboundIn = JSONRequestWrapper
     public typealias OutboundOut = JSONRequest
 
-    private var queue = CircularBuffer<(Int, EventLoopPromise<JSONResponse>)>()
+    private var queue = CircularBuffer<(Int, EventLoopPromise<JSONResponse>?)>()
 
+    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
+
+    private let initComplete: InitComplete
+
+    init(_ initComplete: @escaping InitComplete) {
+        self.initComplete = initComplete
+    }
+    
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
         let requestWrapper = unwrapOutboundIn(data)
@@ -172,14 +180,20 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
+        logger.log("JSONRPCClientHandler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
         let promise = queue.removeFirst().1
         let response = unwrapInboundIn(data)
-        promise.succeed(response)
+        promise?.succeed(response)
     }
 
+    public func handlerAdded(context: ChannelHandlerContext) {
+        logger.log("Client Handler handlerAdded")
+        initComplete(context)
+    }
+    
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
         if let remoteAddress = context.remoteAddress {
             print("server", remoteAddress, "error", error)
@@ -192,9 +206,9 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
         let promise = item.1
         switch error {
         case CodecError.requestTooLarge, CodecError.badFraming, CodecError.badJSON:
-            promise.succeed(JSONResponse(id: requestId, errorCode: .parseError, error: error))
+            promise?.succeed(JSONResponse(id: requestId, errorCode: .parseError, error: error))
         default:
-            promise.fail(error)
+            promise?.fail(error)
             // close the connection
             context.close(promise: nil)
         }
@@ -224,9 +238,28 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 }
 
-private struct JSONRequestWrapper {
+private struct JSONRequestWrapper: Codable {
     let request: JSONRequest
-    let promise: EventLoopPromise<JSONResponse>
+    let promise: EventLoopPromise<JSONResponse>?
+
+    enum CodingKeys: String, CodingKey {
+        case request
+    }
+
+    public init(request: JSONRequest, promise: EventLoopPromise<JSONResponse>?) {
+        self.request = request
+        self.promise = promise
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.request = try container.decode(JSONRequest.self, forKey: .request)
+        self.promise = nil
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        try request.encode(to: encoder)
+    }
 }
 
 internal extension ResultType where Value == RPCObject, Error == ChannelClient.Error {
