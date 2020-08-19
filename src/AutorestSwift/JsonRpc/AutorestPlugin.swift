@@ -25,14 +25,14 @@
 // --------------------------------------------------------------------------
 
 import Dispatch
-import JSONRPC
 import NIO
 
+// swiftlint:disable force_try
 class AutorestPlugin {
     let logger: FileLogger
-    let client: TCPClient!
-    let server: TCPServer!
-    let sessionId: String?
+    var client: TCPClient!
+    var server: TCPServer!
+    var sessionId: String?
 
     // TODO: Increase when working correctly
     private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -51,7 +51,9 @@ class AutorestPlugin {
 
     init() {
         self.logger = FileLogger(withFileName: "autorest-swift-debug.log")
+    }
 
+    func start() {
         // start up the client
         client = TCPClient(group: eventLoopGroup)
         _ = try! client.connect(host: address.0, port: address.1).wait()
@@ -59,16 +61,14 @@ class AutorestPlugin {
         // start up the server
         server = TCPServer(group: eventLoopGroup, closure: incomingHandler)
         _ = try! server.start(host: address.0, port: address.1).wait()
-    }
 
-    func start() {
         // trap
         group.enter()
-        let signalSource = trap(signal: Signal.INT) { signal in
+        let signalSource = trap(signal: Signal.INT) { _ in
             // shut down the client and server on a termination signal
             try! self.client.disconnect().wait()
-            server.stop().whenComplete { _ in
-                group.leave()
+            self.server.stop().whenComplete { _ in
+                self.group.leave()
             }
         }
         group.wait()
@@ -93,29 +93,27 @@ class AutorestPlugin {
         switch method.lowercased() {
         case "getpluginnames":
             callback(
-                .success(.list([.string("swift")]), .response, "")
+                .success(.list([.string("swift")]))
             )
         case "process":
             plugin.sessionId = params.asList?.last?.asString ?? ""
-            callback(
-                .success(.bool(true), .response, "")
-            )
+            callback(.success(.bool(true)))
             initializationComplete()
         default:
             callback(.failure(RPCError(.invalidMethod)))
-            // logger.logToURL("invalid method: \(method)")
+            logger.log("invalid method: \(method)")
         }
     }
 
     func initializationComplete() {
         guard let sessionId = sessionId else { fatalError() }
         let listInputsRequest: RPCObject = .list([.string(sessionId), .string("code-model-v4")])
-        plugin.call(method: "ListInputs", params: listInputsRequest)
+        plugin.client.call(method: "ListInputs", params: listInputsRequest)
         // TODO: Retrieve the code model filename
         let filename = "code-model-v4.yaml"
 
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
-        plugin.call(method: "ReadFile", params: readFileRequest)
+        plugin.client.call(method: "ReadFile", params: readFileRequest)
         // TODO: Retrieve the code model contents
         let codeModelString = "..."
 

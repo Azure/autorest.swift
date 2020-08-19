@@ -169,6 +169,7 @@
 		0AA2BA1F24EC958600CEA1D6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1E24EC958600CEA1D6 /* Model.swift */; };
 		0AA2BA2124EC95A900CEA1D6 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2024EC95A900CEA1D6 /* Server.swift */; };
 		0AA2BA2324EC95CE00CEA1D6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */; };
+		0AA2BA2524ED829600CEA1D6 /* Model+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -452,6 +453,7 @@
 		0AA2BA1E24EC958600CEA1D6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0AA2BA2024EC95A900CEA1D6 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Extensions.swift"; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -744,6 +746,7 @@
 				0AA2BA1E24EC958600CEA1D6 /* Model.swift */,
 				0AA2BA2024EC95A900CEA1D6 /* Server.swift */,
 				0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */,
+				0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */,
 			);
 			path = JsonRpc;
 			sourceTree = "<group>";
@@ -1263,6 +1266,7 @@
 				0AA2BA2124EC95A900CEA1D6 /* Server.swift in Sources */,
 				0A22B10324D3671E00EC018E /* DictionarySchema.swift in Sources */,
 				0A22B10424D3671E00EC018E /* DurationSchema.swift in Sources */,
+				0AA2BA2524ED829600CEA1D6 /* Model+Extensions.swift in Sources */,
 				0A22B10524D3671E00EC018E /* Enumerable.swift in Sources */,
 				0A22B10624D3671E00EC018E /* FlagSchema.swift in Sources */,
 				0A22B10724D3671E00EC018E /* GroupProperty.swift in Sources */,
