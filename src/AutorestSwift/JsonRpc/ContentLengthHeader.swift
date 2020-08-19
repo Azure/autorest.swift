@@ -42,7 +42,7 @@ import NIO
 
 /// `ContentLengthHeaderFrameEncoder` is responsible for emitting JSON-RPC wire protocol with 'Content-Length'
 /// HTTP-like headers as used by for example by LSP (Language Server Protocol).
-public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, MessageToByteEncoder {
+public final class ContentLengthHeaderFrameEncoder: MessageToByteEncoder {
     /// We'll get handed one message through the `Channel` and ...
     public typealias OutboundIn = ByteBuffer
     /// ... will encode it into a `ByteBuffer`.
@@ -50,13 +50,11 @@ public final class ContentLengthHeaderFrameEncoder: ChannelOutboundHandler, Mess
 
     private var scratchBuffer: ByteBuffer!
 
-    public init() {}
-
-    public func handlerAdded(context: ChannelHandlerContext) {
-        scratchBuffer = context.channel.allocator.buffer(capacity: 512)
+    public init() {
+        self.scratchBuffer = ByteBuffer()
     }
 
-    public func encode(data: ByteBuffer, out: inout ByteBuffer) throws {
+    public func encode(data: OutboundIn, out: inout ByteBuffer) throws {
         // Step 1, clear the target buffer (note, we are re-using it so if we get lucky we don't need to
         // allocate at all.
         scratchBuffer.clear()
