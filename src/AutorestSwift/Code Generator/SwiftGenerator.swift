@@ -34,8 +34,6 @@ class SwiftGenerator: CodeGenerator {
 
     let baseUrl: URL
 
-    lazy var logger = Logger(withName: "Autorest.Swift.Generator")
-
     // MARK: Initializers
 
     init(withModel model: CodeModel, atBaseUrl baseUrl: URL) {
@@ -55,7 +53,7 @@ class SwiftGenerator: CodeGenerator {
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
         try jazzyUrl.ensureExists()
-        // logger.log("Base URL: \(baseUrl.path)")
+        SharedLogger.log("Base URL: \(baseUrl.path)")
 
         // Create PatchUtil.swift file
         try render(

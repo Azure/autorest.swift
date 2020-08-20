@@ -35,5 +35,8 @@ import Foundation
 //    print(error)
 // }
 
+// Enable file logging
+SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"))
+
 let plugin = AutorestPlugin()
 plugin.start()

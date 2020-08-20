@@ -91,7 +91,7 @@ public final class ChannelServer {
         set {
             lock.withLock {
                 _state = newValue
-                FileLogger.shared.log("\(self) \(_state)")
+                SharedLogger.log("\(self) \(_state)")
             }
         }
     }
@@ -108,7 +108,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        FileLogger.shared.log("Server Handler channelRead")
+        SharedLogger.log("Server Handler channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.id, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
@@ -125,7 +125,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        FileLogger.shared.log("Server Handler errorCaught")
+        SharedLogger.log("Server Handler errorCaught")
 
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
@@ -143,11 +143,11 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        FileLogger.shared.log("Server Handler channelActive")
+        SharedLogger.log("Server Handler channelActive")
     }
 
     public func channelInactive(context _: ChannelHandlerContext) {
-        FileLogger.shared.log("Server Handler channelInactive")
+        SharedLogger.log("Server Handler channelInactive")
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {

@@ -47,8 +47,6 @@ class Manager {
 
     let mode: InvocationMode
 
-    lazy var logger = Logger(withName: "Autorest.Swift.Manager")
-
     // MARK: Initializers
 
     /// Initialize with an input file URL (i.e. running locally).
@@ -64,7 +62,7 @@ class Manager {
         do {
             try destinationRootUrl.ensureExists()
         } catch {
-            // logger.log(error.localizedDescription, level: .error)
+            SharedLogger.logFailure("\(error)")
         }
     }
 
@@ -96,7 +94,7 @@ class Manager {
         self.packageUrl = packageUrl
 
         // Generate Swift code files
-        logger.log("Generating code at: \(packageUrl.path)")
+        SharedLogger.log("Generating code at: \(packageUrl.path)")
         let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
 
@@ -133,7 +131,7 @@ class Manager {
                 )
                 beforeJsonString = String(data: beforeJsonData, encoding: .utf8)
             } catch {
-                // logger.log(error.localizedDescription, level: .error)
+                SharedLogger.logFailure("\(error)")
             }
         }
 
@@ -147,51 +145,37 @@ class Manager {
         if beforeJsonString != afterJsonString {
             let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
             let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
-            // logger.log("before.json url=\(beforeJsonUrl)")
-            // logger.log("after.json url=\(afterJsonUrl)")
+            SharedLogger.log("before.json url=\(beforeJsonUrl)")
+            SharedLogger.log("after.json url=\(afterJsonUrl)")
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)
-//                 logger
-//                    .log(
-//                        "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
-//                    )
+                SharedLogger.log("Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.")
             } catch {
-//                 logger.log(
-//                    "Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)",
-//                    level: .error
-//                )
+                SharedLogger.log("Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)", level: .warning)
             }
         } else if beforeJsonString == nil || afterJsonString == nil {
-            // logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
+            SharedLogger.logFailure("Errors found trying to decode models. Please check your Swagger file.")
         } else {
-            // logger.log("Model file check: OK", level: .info)
+            SharedLogger.log("Model file check: OK")
         }
-
         return (beforeJsonString == afterJsonString)
     }
 
     private func formatCode(atBaseUrl baseUrl: URL) {
         runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
-
-//        runTool(
-//            with: "swiftlint",
-//            configFilename: ".swiftlint.yml",
-//            arguments: ["autocorrect", baseUrl.path]
-//        )
+        // FIXME: Re-enable swiftlint
+        // runTool(with: "swiftlint", configFilename: ".swiftlint.yml", arguments: ["autocorrect", baseUrl.path])
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
         var allArguments: [String] = []
 
         guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-            // logger.log("Can't find path for tool \(tool).", level: .error)
-            return
+            SharedLogger.logFailure("Can't find path for tool \(tool).")
         }
-
         guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-            // logger.log("Can't find config file for tool \(tool).", level: .error)
-            return
+            SharedLogger.logFailure("Can't find config file for tool \(tool).")
         }
 
         allArguments.append("--config")
@@ -206,7 +190,7 @@ class Manager {
             try task.run()
             task.waitUntilExit()
         } catch {
-            // logger.log("Fail to run tool \(tool).", level: .error)
+            SharedLogger.log("Fail to run tool \(tool).")
         }
     }
 }

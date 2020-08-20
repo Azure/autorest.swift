@@ -137,17 +137,17 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         var buffer = unwrapInboundIn(data)
         let data = buffer.readData(length: buffer.readableBytes)!
         do {
-            FileLogger.shared.log(
+            SharedLogger.log(
                 "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: UTF8.self))"
             )
             let decodable = try decoder.decode(In.self, from: data)
             // call next handler
             context.fireChannelRead(wrapInboundOut(decodable))
         } catch let error as DecodingError {
-            FileLogger.shared.log("DecodingError \(error)")
+            SharedLogger.log("DecodingError \(error)")
             context.fireErrorCaught(CodecError.badJSON(error))
         } catch {
-            FileLogger.shared.log("Read Error \(error)")
+            SharedLogger.log("Read Error \(error)")
             context.fireErrorCaught(error)
         }
     }
@@ -157,15 +157,15 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         do {
             let encodable = unwrapOutboundIn(data)
             let data = try encoder.encode(encodable)
-            FileLogger.shared.log("<-- encoding \(String(decoding: data, as: UTF8.self))")
+            SharedLogger.log("<-- encoding \(String(decoding: data, as: UTF8.self))")
             var buffer = context.channel.allocator.buffer(capacity: data.count)
             buffer.writeBytes(data)
             context.write(wrapOutboundOut(buffer), promise: promise)
         } catch let error as EncodingError {
-            FileLogger.shared.log("EncodingError \(error)")
+            SharedLogger.log("EncodingError \(error)")
             promise?.fail(CodecError.badJSON(error))
         } catch {
-            FileLogger.shared.log("Write Error \(error)")
+            SharedLogger.log("Write Error \(error)")
             promise?.fail(error)
         }
     }

@@ -101,7 +101,7 @@ class AutorestPlugin {
             startChannelClient(context: context)
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
-            FileLogger.shared.logAndFail("invalid method: \(method)")
+            SharedLogger.logFailure("invalid method: \(method)")
         }
     }
 
@@ -117,17 +117,17 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleListInputs(response: response)
             case let .failure(error):
-                FileLogger.shared.logAndFail("Call ListInputs failure \(error)")
+                SharedLogger.logFailure("Call ListInputs failure \(error)")
             }
         }
         future.whenFailure { error in
-            FileLogger.shared.logAndFail("Call ListInputs failure \(error.localizedDescription)")
+            SharedLogger.logFailure("Call ListInputs failure \(error.localizedDescription)")
         }
     }
 
     func handleListInputs(response: RPCObject) {
         guard let filename = response.asList?.first?.asString else {
-            FileLogger.shared.logAndFail("handleListInputs filename is nil")
+            SharedLogger.logFailure("handleListInputs filename is nil")
         }
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
         let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
@@ -136,11 +136,11 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleReadFile(response: response)
             case let .failure(error):
-                FileLogger.shared.logAndFail("Call ReadFile failure \(error)")
+                SharedLogger.logFailure("Call ReadFile failure \(error)")
             }
         }
         future.whenFailure { error in
-            FileLogger.shared.logAndFail("Call ReadFile failure \(error.localizedDescription)")
+            SharedLogger.logFailure("Call ReadFile failure \(error.localizedDescription)")
         }
     }
 
@@ -164,7 +164,7 @@ class AutorestPlugin {
 
     func handleReadFile(response: RPCObject) {
         guard let codeModel = response.asString else {
-            FileLogger.shared.logAndFail("Unable to retrieve code model from Autorest.")
+            SharedLogger.logFailure("Unable to retrieve code model from Autorest.")
         }
         let manager = Manager(withString: codeModel)
         do {
@@ -181,7 +181,7 @@ class AutorestPlugin {
 
             sendProcessResponse()
         } catch {
-            FileLogger.shared.logAndFail("Code generation failure: \(error)")
+            SharedLogger.logFailure("Code generation failure: \(error)")
         }
     }
 
