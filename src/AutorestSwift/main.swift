@@ -32,14 +32,14 @@ guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .
     fatalError("Unabled to locate Documents directory.")
 }
 
-// Load yaml file
-let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
-let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
-do {
-    try manager.run()
-} catch {
-    print(error)
-}
+//// Load yaml file
+//let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
+//let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
+//do {
+//    try manager.run()
+//} catch {
+//    print(error)
+//}
 
 private let group = DispatchGroup()
 let autoRestPlugin = AutoRestPlugin()

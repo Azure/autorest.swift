@@ -74,7 +74,15 @@ class AutoRestHandler {
         future?.whenSuccess { result in
             switch result {
             case let .success(response):
-                self.logger.logToURL("\(response)")
+                let modelString = response.asString ?? ""
+                let manager = Manager(withString: modelString)
+                self.logger.logToURL("\(manager.inputString)")
+                do {
+                    try manager.run()
+                    self.logger.logToURL("Code generation complete: \(manager.destinationRootUrl)")
+                } catch {
+                    self.logger.logToURL(error.localizedDescription)
+                }
             case let .failure(error):
                 self.logger.logToURL("failed with \(error)")
             }
