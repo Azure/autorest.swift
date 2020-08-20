@@ -34,6 +34,7 @@ public final class ChannelServer {
     private let config: Config
     private var channel: Channel?
     private let closure: RPCClosure
+    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
     public init(group: MultiThreadedEventLoopGroup, config: Config = Config(), closure: @escaping RPCClosure) {
         self.group = group
@@ -51,14 +52,14 @@ public final class ChannelServer {
 
         let bootstrap = NIOPipeBootstrap(group: group)
             .channelInitializer { channel in
-                channel.pipeline.addTimeoutHandlers(self.config.timeout)
+                channel.pipeline.addFramingHandlers(framing: .jsonpos)
                     .flatMap {
-                        channel.pipeline.addFramingHandlers(framing: self.config.framing)
+                        channel.pipeline.addHandler(CodableCodec<JSONRequest, JSONResponse>(), name: "AutorestServer")
                     }.flatMap {
-                        channel.pipeline.addHandlers([
-                            CodableCodec<JSONRequest, JSONResponse>(),
-                            Handler(self.closure)
-                        ])
+                        channel.pipeline.addHandler(
+                            Handler(self.closure),
+                            name: "ServerHandler"
+                        )
                     }
             }.withPipes(inputDescriptor: STDIN_FILENO, outputDescriptor: STDOUT_FILENO)
 
@@ -91,7 +92,7 @@ public final class ChannelServer {
         set {
             lock.withLock {
                 _state = newValue
-                print("\(self) \(_state)")
+                logger.log("\(self) \(_state)")
             }
         }
     }
@@ -116,10 +117,10 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
-                print("rpc handler returned success", handlerResult)
+                logger.log("rpc handler returned success \(handlerResult)")
                 response = JSONResponse(id: request.id, result: handlerResult)
             case let .failure(handlerError):
-                print("rpc handler returned failure", handlerError)
+                logger.log("rpc handler returned failure \(handlerError)")
                 response = JSONResponse(id: request.id, error: handlerError)
             }
             context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)
@@ -128,9 +129,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
         logger.log("Server Handler errorCaught")
-        if let remoteAddress = context.remoteAddress {
-            print("client", remoteAddress, "error", error)
-        }
+
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
             let response = JSONResponse(id: 0, errorCode: .parseError, error: error)
@@ -146,16 +145,12 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
         context.close(promise: nil)
     }
 
-    public func channelActive(context: ChannelHandlerContext) {
-        if let remoteAddress = context.remoteAddress {
-            print("client", remoteAddress, "connected")
-        }
+    public func channelActive(context _: ChannelHandlerContext) {
+        logger.log("Server Handler channelActive")
     }
 
-    public func channelInactive(context: ChannelHandlerContext) {
-        if let remoteAddress = context.remoteAddress {
-            print("client", remoteAddress, "disconnected")
-        }
+    public func channelInactive(context _: ChannelHandlerContext) {
+        logger.log("Server Handler channelInactive")
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {

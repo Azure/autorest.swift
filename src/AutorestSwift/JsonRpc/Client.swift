@@ -30,14 +30,22 @@ import Foundation
 import NIO
 
 public final class ChannelClient {
-    public let group: MultiThreadedEventLoopGroup
+    private let group: MultiThreadedEventLoopGroup
     public let config: Config
-    private var channel: Channel?
+    private var context: ChannelHandlerContext?
+    private let processCallback: ProcessCallback
+    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
+    // TODO: get this value based on last response id from AutoRest
+    var id = 3
 
-    public init(group: MultiThreadedEventLoopGroup, config: Config = Config()) {
+    public init(
+        group: MultiThreadedEventLoopGroup,
+        config: Config = Config(),
+        processCallback: @escaping ProcessCallback
+    ) {
         self.group = group
         self.config = config
-        self.channel = nil
+        self.processCallback = processCallback
         self.state = .initializing
     }
 
@@ -45,55 +53,59 @@ public final class ChannelClient {
         assert(self.state == .stopped)
     }
 
-    public func start() -> EventLoopFuture<ChannelClient> {
+    public func start(context: ChannelHandlerContext) {
         assert(state == .initializing)
 
-        let bootstrap = NIOPipeBootstrap(group: group)
-            .channelInitializer { channel in
-                channel.pipeline.addTimeoutHandlers(self.config.timeout)
-                    .flatMap {
-                        channel.pipeline.addFramingHandlers(framing: self.config.framing)
-                    }.flatMap {
-                        channel.pipeline.addHandlers([
-                            CodableCodec<JSONResponse, JSONRequest>(),
-                            Handler()
-                        ])
-                    }
-            }.withPipes(inputDescriptor: STDOUT_FILENO, outputDescriptor: STDIN_FILENO)
+        let future = context.pipeline.removeHandler(name: "AutorestServer").flatMap {
+            context.pipeline.removeHandler(name: "ServerHandler").flatMap {
+                context.pipeline.addHandler(
+                    CodableCodec<JSONResponse, JSONRequest>(),
+                    name: "AutorestClient"
+                ).flatMap {
+                    context.pipeline.addHandler(
+                        Handler(self.initComplete),
+                        name: "ClientHandler"
+                    )
+                }
+            }
+        }
 
-        state = .starting
-        return bootstrap.eventLoop.makeSucceededFuture(self)
+        future.whenFailure { error in
+            self.logger.log("Switch to client mode failed: \(error)")
+        }
     }
 
-    public func stop() -> EventLoopFuture<Void> {
-        if state != .started {
-            return group.next().makeFailedFuture(ClientError.notReady)
-        }
-        guard let channel = self.channel else {
-            return group.next().makeFailedFuture(ClientError.notReady)
-        }
-        state = .stopping
-        channel.closeFuture.whenComplete { _ in
-            self.state = .stopped
-        }
-        channel.close(promise: nil)
-        return channel.closeFuture
+    func initComplete(context: ChannelHandlerContext) {
+        logger.log("initComplete called")
+        state = .started
+        self.context = context
+        processCallback()
     }
 
-    public func call(method: String, params: RPCObject) -> EventLoopFuture<Result> {
+    public func stop() {
+        state = .stopped
+    }
+
+    public func call(method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
         if state != .started {
+            logger.log("Client call failed. State is not started")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
-        guard let channel = self.channel else {
+        guard let context = self.context else {
+            logger.log("Client call failed. Content is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
-        let promise: EventLoopPromise<JSONResponse> = channel.eventLoop.makePromise()
-        let request = JSONRequest(id: Int(NSUUID().uuidString) ?? 0, method: method, params: JSONObject(params))
+
+        id += 1
+        let promise: EventLoopPromise<JSONResponse> = context.channel.eventLoop.makePromise()
+        let request = JSONRequest(id: id, method: method, params: JSONObject(params))
         let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
-        let future = channel.writeAndFlush(requestWrapper)
+
+        let future = context.channel.writeAndFlush(requestWrapper)
         future.cascadeFailure(to: promise) // if write fails
+
         return future.flatMap {
-            promise.futureResult.map { Result($0) }
+            promise.futureResult.map { RPCResult($0) }
         }
     }
 
@@ -108,49 +120,7 @@ public final class ChannelClient {
         set {
             lock.withLock {
                 _state = newValue
-                print("\(self) \(_state)")
-            }
-        }
-    }
-
-    public typealias Result = ResultType<RPCObject, Error>
-
-    public struct Error: Swift.Error, Equatable {
-        public let kind: Kind
-        public let description: String
-
-        init(kind: Kind, description: String) {
-            self.kind = kind
-            self.description = description
-        }
-
-        internal init(_ error: JSONError) {
-            self.init(
-                kind: JSONErrorCode(rawValue: error.code).map { Kind($0) } ?? .otherServerError,
-                description: error.message
-            )
-        }
-
-        public enum Kind {
-            case invalidMethod
-            case invalidParams
-            case invalidRequest
-            case invalidServerResponse
-            case otherServerError
-
-            internal init(_ code: JSONErrorCode) {
-                switch code {
-                case .invalidRequest:
-                    self = .invalidRequest
-                case .methodNotFound:
-                    self = .invalidMethod
-                case .invalidParams:
-                    self = .invalidParams
-                case .parseError:
-                    self = .invalidServerResponse
-                case .internalError, .other:
-                    self = .otherServerError
-                }
+                logger.log("\(self) \(_state)")
             }
         }
     }
@@ -165,14 +135,15 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
-    // private let initComplete: InitComplete
+    private let initComplete: InitCompleteCallback
 
-    //  init(_ initComplete: @escaping InitComplete) {
-    //      self.initComplete = initComplete
-    //  }
+    init(_ initComplete: @escaping InitCompleteCallback) {
+        self.initComplete = initComplete
+    }
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
+        logger.log("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -180,7 +151,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        logger.log("JSONRPCClientHandler channelRead")
+        logger.log("Client Handler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -189,9 +160,9 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
         promise?.succeed(response)
     }
 
-    public func handlerAdded(context _: ChannelHandlerContext) {
+    public func handlerAdded(context: ChannelHandlerContext) {
         logger.log("Client Handler handlerAdded")
-        //    initComplete(context)
+        initComplete(context)
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
@@ -239,7 +210,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 }
 
-private struct JSONRequestWrapper: Codable {
+internal struct JSONRequestWrapper: Codable {
     let request: JSONRequest
     let promise: EventLoopPromise<JSONResponse>?
 
@@ -263,14 +234,14 @@ private struct JSONRequestWrapper: Codable {
     }
 }
 
-internal extension ResultType where Value == RPCObject, Error == ChannelClient.Error {
+internal extension ResultType where Value == RPCObject, Error == RPCError {
     init(_ response: JSONResponse) {
         if let result = response.result {
             self = .success(RPCObject(result))
         } else if let error = response.error {
-            self = .failure(ChannelClient.Error(error))
+            self = .failure(RPCError(error))
         } else {
-            self = .failure(ChannelClient.Error(kind: .invalidServerResponse, description: "invalid server response"))
+            self = .failure(RPCError(kind: .invalidServerResponse, description: "invalid server response"))
         }
     }
 }

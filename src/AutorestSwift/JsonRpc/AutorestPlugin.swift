@@ -53,6 +53,8 @@ class AutorestPlugin {
     }
 
     func start() {
+        client = ChannelClient(group: eventLoopGroup, processCallback: handleProcess)
+
         // start up the server
         server = ChannelServer(group: eventLoopGroup, closure: incomingHandler)
         _ = try! server.start().wait()
@@ -61,7 +63,7 @@ class AutorestPlugin {
         group.enter()
         let signalSource = trap(signal: Signal.INT) { _ in
             // shut down the client and server on a termination signal
-            try! self.client.stop().wait()
+            self.client.stop()
             self.server.stop().whenComplete { _ in
                 self.group.leave()
             }
@@ -85,7 +87,7 @@ class AutorestPlugin {
 
     /// The handler for incoming messages
     func incomingHandler(
-        context _: ChannelHandlerContext,
+        context: ChannelHandlerContext,
         method: String,
         params: RPCObject,
         callback: (RPCResult) -> Void
@@ -97,16 +99,20 @@ class AutorestPlugin {
             )
         case "process":
             plugin.sessionId = params.asList?.last?.asString ?? ""
-        // initializationComplete()
+            startChannelClient(context: context)
         // TODO: Sending back Process response will stop Autorest.
         // callback(.success(.bool(true)))
         default:
-            callback(.failure(RPCError(.invalidMethod)))
+            callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
             logger.log("invalid method: \(method)")
         }
     }
 
-    func initializationComplete() {
+    func startChannelClient(context: ChannelHandlerContext) {
+        client.start(context: context)
+    }
+
+    func handleProcess() {
         let listInputsRequest: RPCObject = .list([.string(sessionId), .string("code-model-v4")])
         let future = plugin.client.call(method: "ListInputs", params: listInputsRequest)
         future.whenSuccess { result in
@@ -114,7 +120,7 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleListInputs(response: response)
             case let .failure(error):
-                fatalError(error.localizedDescription)
+                fatalError("\(error)")
             }
         }
         future.whenFailure { error in
@@ -131,7 +137,7 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleReadFile(response: response)
             case let .failure(error):
-                fatalError(error.localizedDescription)
+                fatalError("\(error)")
             }
         }
         future.whenFailure { error in

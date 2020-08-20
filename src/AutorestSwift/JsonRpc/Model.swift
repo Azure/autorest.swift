@@ -163,13 +163,13 @@ internal struct JSONError: Codable {
     init(_ error: RPCError) {
         switch error.kind {
         case .invalidMethod:
-            self.init(code: .methodNotFound, message: error.description ?? "invalid method")
+            self.init(code: .methodNotFound, message: error.description)
         case .invalidParams:
-            self.init(code: .invalidParams, message: error.description ?? "invalid params")
+            self.init(code: .invalidParams, message: error.description)
         case .invalidRequest:
-            self.init(code: .invalidRequest, message: error.description ?? "invalid request")
-        case let .applicationError(description):
-            self.init(code: .other, message: error.description ?? description)
+            self.init(code: .invalidRequest, message: error.description)
+        case .invalidServerResponse, .otherServerError:
+            self.init(code: .other, message: error.description)
         }
     }
 }
@@ -345,24 +345,46 @@ public enum RPCObject: Equatable {
 }
 
 public struct RPCError {
-    public init(_ kind: Kind, description: String? = nil) {
+    public let kind: Kind
+    public let description: String
+
+    init(kind: Kind, description: String) {
         self.kind = kind
         self.description = description
     }
 
-    public let kind: Kind
-    public let description: String?
+    internal init(_ error: JSONError) {
+        self.init(
+            kind: JSONErrorCode(rawValue: error.code).map { Kind($0) } ?? .otherServerError,
+            description: error.message
+        )
+    }
 
     public enum Kind {
         case invalidMethod
-        case invalidParams(String)
-        case invalidRequest(String)
-        case applicationError(String)
+        case invalidParams
+        case invalidRequest
+        case invalidServerResponse
+        case otherServerError
+
+        internal init(_ code: JSONErrorCode) {
+            switch code {
+            case .invalidRequest:
+                self = .invalidRequest
+            case .methodNotFound:
+                self = .invalidMethod
+            case .invalidParams:
+                self = .invalidParams
+            case .parseError:
+                self = .invalidServerResponse
+            case .internalError, .other:
+                self = .otherServerError
+            }
+        }
     }
 }
 
 public typealias RPCClosure = (ChannelHandlerContext, String, RPCObject, (RPCResult) -> Void) -> Void
-public typealias SwitchMode = (ChannelHandlerContext) -> Void
-public typealias InitComplete = (ChannelHandlerContext) -> Void
-
+public typealias InitCompleteCallback = (ChannelHandlerContext) -> Void
+public typealias ProcessCallback = () -> Void
 public typealias RPCResult = ResultType<RPCObject, RPCError>
