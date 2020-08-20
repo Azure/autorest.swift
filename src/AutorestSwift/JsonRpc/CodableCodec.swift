@@ -125,24 +125,23 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
 
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
-    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         var buffer = unwrapInboundIn(data)
         let data = buffer.readData(length: buffer.readableBytes)!
         do {
-            logger.log(
+            FileLogger.instance.log(
                 "--> decoding \(String(decoding: data[data.startIndex ..< min(data.startIndex + 100, data.endIndex)], as: UTF8.self))"
             )
             let decodable = try decoder.decode(In.self, from: data)
             // call next handler
             context.fireChannelRead(wrapInboundOut(decodable))
         } catch let error as DecodingError {
-            logger.log("DecodingError \(error)")
+            FileLogger.instance.log("DecodingError \(error)")
             context.fireErrorCaught(CodecError.badJSON(error))
         } catch {
-            logger.log("Read Error \(error)")
+            FileLogger.instance.log("Read Error \(error)")
             context.fireErrorCaught(error)
         }
     }
@@ -152,15 +151,15 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
         do {
             let encodable = unwrapOutboundIn(data)
             let data = try encoder.encode(encodable)
-            logger.log("<-- encoding \(String(decoding: data, as: UTF8.self))")
+            FileLogger.instance.log("<-- encoding \(String(decoding: data, as: UTF8.self))")
             var buffer = context.channel.allocator.buffer(capacity: data.count)
             buffer.writeBytes(data)
             context.write(wrapOutboundOut(buffer), promise: promise)
         } catch let error as EncodingError {
-            logger.log("EncodingError \(error)")
+            FileLogger.instance.log("EncodingError \(error)")
             promise?.fail(CodecError.badJSON(error))
         } catch {
-            logger.log("Write Error \(error)")
+            FileLogger.instance.log("Write Error \(error)")
             promise?.fail(error)
         }
     }

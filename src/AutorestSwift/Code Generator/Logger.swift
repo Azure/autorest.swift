@@ -67,6 +67,8 @@ class FileLogger {
 
     let url: URL
 
+    static let instance = FileLogger(withFileName: "autorest-swift-debug.log")
+
     // MARK: Initializers
 
     init(withFileName name: String) {

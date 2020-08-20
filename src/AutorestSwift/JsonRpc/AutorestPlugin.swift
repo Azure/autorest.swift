@@ -29,7 +29,6 @@ import NIO
 
 // swiftlint:disable force_try
 class AutorestPlugin {
-    let logger: FileLogger
     var client: ChannelClient!
     var server: ChannelServer!
     var sessionId: String!
@@ -46,10 +45,6 @@ class AutorestPlugin {
         case KILL = 9
         case ALRM = 14
         case TERM = 15
-    }
-
-    init() {
-        self.logger = FileLogger(withFileName: "autorest-swift-debug.log")
     }
 
     func start() {
@@ -98,22 +93,13 @@ class AutorestPlugin {
                 .success(.list([.string("swift")]))
             )
         case "process":
-            guard let sessionId = params.asList?.last?.asString else {
-                logger.log("Process request get invalid session id")
-                callback(.failure(RPCError(
-                    kind: .invalidParams,
-                    description: "Process request get invalid session id"
-                )))
-                return
-            }
-
-            plugin.sessionId = sessionId
+            plugin.sessionId = params.asList?.last?.asString
             startChannelClient(context: context)
         // TODO: Sending back Process response will stop Autorest.
         // callback(.success(.bool(true)))
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
-            logger.log("invalid method: \(method)")
+            FileLogger.instance.log("invalid method: \(method)")
         }
     }
 
@@ -139,8 +125,8 @@ class AutorestPlugin {
 
     func handleListInputs(response: RPCObject) {
         guard let filename = response.asList?.first?.asString else {
-            logger.log("handleListInputs filename is nil")
-            return
+            FileLogger.instance.log("handleListInputs filename is nil")
+            fatalError("handleListInputs filename is nil")
         }
 
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])

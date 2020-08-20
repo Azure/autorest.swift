@@ -34,7 +34,7 @@ public final class ChannelClient {
     public let config: Config
     private var context: ChannelHandlerContext?
     private let processCallback: ProcessCallback
-    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
+
     // TODO: get this value based on last response id from AutoRest
     var id = 3
 
@@ -71,12 +71,12 @@ public final class ChannelClient {
         }
 
         future.whenFailure { error in
-            self.logger.log("Switch to client mode failed: \(error)")
+            FileLogger.instance.log("Switch to client mode failed: \(error)")
         }
     }
 
-    func initalizationComplete(context: ChannelHandlerContext) {
-        logger.log("initalizationComplete called")
+    private func initalizationComplete(context: ChannelHandlerContext) {
+        FileLogger.instance.log("initalizationComplete called")
         state = .started
         self.context = context
         processCallback()
@@ -88,11 +88,11 @@ public final class ChannelClient {
 
     public func call(method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
         if state != .started {
-            logger.log("Client call failed. State is not started")
+            FileLogger.instance.log("Client call failed. State is not started")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let context = self.context else {
-            logger.log("Client call failed. Content is nil")
+            FileLogger.instance.log("Client call failed. Content is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
 
@@ -120,7 +120,7 @@ public final class ChannelClient {
         set {
             lock.withLock {
                 _state = newValue
-                logger.log("\(self) \(_state)")
+                FileLogger.instance.log("\(self) \(_state)")
             }
         }
     }
@@ -133,8 +133,6 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     private var queue = CircularBuffer<(Int, EventLoopPromise<JSONResponse>)>()
 
-    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
-
     private let initComplete: InitCompleteCallback
 
     init(_ initComplete: @escaping InitCompleteCallback) {
@@ -143,7 +141,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        logger.log("Client Handler write")
+        FileLogger.instance.log("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -151,7 +149,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        logger.log("Client Handler channelRead")
+        FileLogger.instance.log("Client Handler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -161,12 +159,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
-        logger.log("Client Handler handlerAdded")
+        FileLogger.instance.log("Client Handler handlerAdded")
         initComplete(context)
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        logger.log("Client Handler errorCaught")
+        FileLogger.instance.log("Client Handler errorCaught")
         if let remoteAddress = context.remoteAddress {
             print("server", remoteAddress, "error", error)
         }
@@ -187,11 +185,11 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        logger.log("Client Handler channelActive")
+        FileLogger.instance.log("Client Handler channelActive")
     }
 
     public func channelInactive(context: ChannelHandlerContext) {
-        logger.log("Client Handler channelInactive")
+        FileLogger.instance.log("Client Handler channelInactive")
 
         if !queue.isEmpty {
             errorCaught(context: context, error: ClientError.connectionResetByPeer)

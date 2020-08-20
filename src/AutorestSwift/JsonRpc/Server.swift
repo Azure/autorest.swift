@@ -34,7 +34,6 @@ public final class ChannelServer {
     private let config: Config
     private var channel: Channel?
     private let closure: RPCClosure
-    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
 
     public init(group: MultiThreadedEventLoopGroup, config: Config = Config(), closure: @escaping RPCClosure) {
         self.group = group
@@ -92,7 +91,7 @@ public final class ChannelServer {
         set {
             lock.withLock {
                 _state = newValue
-                logger.log("\(self) \(_state)")
+                FileLogger.instance.log("\(self) \(_state)")
             }
         }
     }
@@ -104,23 +103,21 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
 
     private let closure: RPCClosure
 
-    private let logger = FileLogger(withFileName: "autorest-swift-debug.log")
-
     public init(_ closure: @escaping RPCClosure) {
         self.closure = closure
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        logger.log("Server Handler channelRead")
+        FileLogger.instance.log("Server Handler channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
-                logger.log("rpc handler returned success \(handlerResult)")
+                FileLogger.instance.log("rpc handler returned success \(handlerResult)")
                 response = JSONResponse(id: request.id, result: handlerResult)
             case let .failure(handlerError):
-                logger.log("rpc handler returned failure \(handlerError)")
+                FileLogger.instance.log("rpc handler returned failure \(handlerError)")
                 response = JSONResponse(id: request.id, error: handlerError)
             }
             context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)
@@ -128,7 +125,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        logger.log("Server Handler errorCaught")
+        FileLogger.instance.log("Server Handler errorCaught")
 
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
@@ -146,11 +143,11 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        logger.log("Server Handler channelActive")
+        FileLogger.instance.log("Server Handler channelActive")
     }
 
     public func channelInactive(context _: ChannelHandlerContext) {
-        logger.log("Server Handler channelInactive")
+        FileLogger.instance.log("Server Handler channelInactive")
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
