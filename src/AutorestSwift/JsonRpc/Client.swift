@@ -63,7 +63,7 @@ public final class ChannelClient {
                     name: "AutorestClient"
                 ).flatMap {
                     context.pipeline.addHandler(
-                        Handler(self.initComplete),
+                        Handler(self.initalizationComplete),
                         name: "ClientHandler"
                     )
                 }
@@ -75,8 +75,8 @@ public final class ChannelClient {
         }
     }
 
-    func initComplete(context: ChannelHandlerContext) {
-        logger.log("initComplete called")
+    func initalizationComplete(context: ChannelHandlerContext) {
+        logger.log("initalizationComplete called")
         state = .started
         self.context = context
         processCallback()
@@ -187,15 +187,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 
     public func channelActive(context: ChannelHandlerContext) {
-        if let remoteAddress = context.remoteAddress {
-            print("server", remoteAddress, "connected")
-        }
+        logger.log("Client Handler channelActive")
     }
 
     public func channelInactive(context: ChannelHandlerContext) {
-        if let remoteAddress = context.remoteAddress {
-            print("server ", remoteAddress, "disconnected")
-        }
+        logger.log("Client Handler channelInactive")
+        
         if !queue.isEmpty {
             errorCaught(context: context, error: ClientError.connectionResetByPeer)
         }
