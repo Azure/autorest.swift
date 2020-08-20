@@ -39,7 +39,7 @@
 		0A22B0EA24D3671E00EC018E /* ReturnTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */; };
 		0A22B0EB24D3671E00EC018E /* ServiceClientFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */; };
 		0A22B0EC24D3671E00EC018E /* ViewModelPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B06924CB3B6300EC018E /* ViewModelPrimitives.swift */; };
-		0A22B0ED24D3671E00EC018E /* CodeGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerationError.swift */; };
+		0A22B0ED24D3671E00EC018E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Errors.swift */; };
 		0A22B0EE24D3671E00EC018E /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeGenerator.swift */; };
 		0A22B0F024D3671E00EC018E /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03524C8964000EC018E /* FileDestination.swift */; };
 		0A22B0F124D3671E00EC018E /* LanguageShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B03424C8964000EC018E /* LanguageShortcut.swift */; };
@@ -163,6 +163,15 @@
 		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
+		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
+		0AA2BA1B24EC951700CEA1D6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1A24EC951700CEA1D6 /* Client.swift */; };
+		0AA2BA1D24EC956C00CEA1D6 /* CodableCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1C24EC956C00CEA1D6 /* CodableCodec.swift */; };
+		0AA2BA1F24EC958600CEA1D6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1E24EC958600CEA1D6 /* Model.swift */; };
+		0AA2BA2124EC95A900CEA1D6 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2024EC95A900CEA1D6 /* Server.swift */; };
+		0AA2BA2324EC95CE00CEA1D6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */; };
+		0AA2BA2524ED829600CEA1D6 /* Model+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */; };
+		0AA2BA2924EDB4ED00CEA1D6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2824EDB4ED00CEA1D6 /* Common.swift */; };
+		0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */; };
 		A8E0881BE1C5556D6425CC16 /* libPods-AutorestSwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -440,6 +449,15 @@
 		0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BodyParamSnippet.stencil; sourceTree = "<group>"; };
 		0A22B46324E1E64900EC018E /* JazzyFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = JazzyFile.stencil; sourceTree = "<group>"; };
 		0AA2B98824E5FD6500CEA1D6 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorestPlugin.swift; sourceTree = "<group>"; };
+		0AA2BA1A24EC951700CEA1D6 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		0AA2BA1C24EC956C00CEA1D6 /* CodableCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCodec.swift; sourceTree = "<group>"; };
+		0AA2BA1E24EC958600CEA1D6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0AA2BA2024EC95A900CEA1D6 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Extensions.swift"; sourceTree = "<group>"; };
+		0AA2BA2824EDB4ED00CEA1D6 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLengthHeader.swift; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,7 +537,7 @@
 		F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderDateProperty.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
-		OBJ_10 /* CodeGenerationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerationError.swift; sourceTree = "<group>"; };
+		OBJ_10 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		OBJ_101 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
 		OBJ_102 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -721,6 +739,22 @@
 				0A22B07B24CB721900EC018E /* URL+Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0AA2BA1624EC864300CEA1D6 /* JsonRpc */ = {
+			isa = PBXGroup;
+			children = (
+				0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */,
+				0AA2BA1C24EC956C00CEA1D6 /* CodableCodec.swift */,
+				0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */,
+				0AA2BA1A24EC951700CEA1D6 /* Client.swift */,
+				0AA2BA2824EDB4ED00CEA1D6 /* Common.swift */,
+				0AA2BA1E24EC958600CEA1D6 /* Model.swift */,
+				0AA2BA2024EC95A900CEA1D6 /* Server.swift */,
+				0AA2BA2224EC95CE00CEA1D6 /* Utils.swift */,
+				0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */,
+			);
+			path = JsonRpc;
 			sourceTree = "<group>";
 		};
 		D140A829FDBE9A58B03FF430 /* Frameworks */ = {
@@ -980,10 +1014,12 @@
 		OBJ_8 /* AutorestSwift */ = {
 			isa = PBXGroup;
 			children = (
+				0AA2BA1624EC864300CEA1D6 /* JsonRpc */,
 				0A22B05A24CA4C9300EC018E /* View Models */,
 				OBJ_9 /* Code Generator */,
 				OBJ_17 /* Models */,
 				0A22B07724CB721900EC018E /* Utils */,
+				OBJ_10 /* Errors.swift */,
 				OBJ_109 /* main.swift */,
 			);
 			name = AutorestSwift;
@@ -1022,7 +1058,6 @@
 		OBJ_9 /* Code Generator */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_10 /* CodeGenerationError.swift */,
 				OBJ_11 /* CodeGenerator.swift */,
 				0A22B03524C8964000EC018E /* FileDestination.swift */,
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
@@ -1204,6 +1239,7 @@
 				0A22B0E324D3671E00EC018E /* OperationViewModel.swift in Sources */,
 				0A22B0E424D3671E00EC018E /* PackageFileViewModel.swift in Sources */,
 				0A22B0E524D3671E00EC018E /* ParameterViewModel.swift in Sources */,
+				0AA2BA1D24EC956C00CEA1D6 /* CodableCodec.swift in Sources */,
 				0A22B0E624D3671E00EC018E /* PropertyViewModel.swift in Sources */,
 				0A22B0E724D3671E00EC018E /* ReadmeFileViewModel.swift in Sources */,
 				0A22B0E824D3671E00EC018E /* RequestViewModel.swift in Sources */,
@@ -1211,7 +1247,7 @@
 				0A22B0EA24D3671E00EC018E /* ReturnTypeViewModel.swift in Sources */,
 				0A22B0EB24D3671E00EC018E /* ServiceClientFileViewModel.swift in Sources */,
 				0A22B0EC24D3671E00EC018E /* ViewModelPrimitives.swift in Sources */,
-				0A22B0ED24D3671E00EC018E /* CodeGenerationError.swift in Sources */,
+				0A22B0ED24D3671E00EC018E /* Errors.swift in Sources */,
 				0A22B0EE24D3671E00EC018E /* CodeGenerator.swift in Sources */,
 				0A22B0F024D3671E00EC018E /* FileDestination.swift in Sources */,
 				0A22B0F124D3671E00EC018E /* LanguageShortcut.swift in Sources */,
@@ -1232,8 +1268,11 @@
 				0A22B10024D3671E00EC018E /* CredentialSchema.swift in Sources */,
 				0A22B10124D3671E00EC018E /* DateSchema.swift in Sources */,
 				0A22B10224D3671E00EC018E /* DateTimeSchema.swift in Sources */,
+				0AA2BA1B24EC951700CEA1D6 /* Client.swift in Sources */,
+				0AA2BA2124EC95A900CEA1D6 /* Server.swift in Sources */,
 				0A22B10324D3671E00EC018E /* DictionarySchema.swift in Sources */,
 				0A22B10424D3671E00EC018E /* DurationSchema.swift in Sources */,
+				0AA2BA2524ED829600CEA1D6 /* Model+Extensions.swift in Sources */,
 				0A22B10524D3671E00EC018E /* Enumerable.swift in Sources */,
 				0A22B10624D3671E00EC018E /* FlagSchema.swift in Sources */,
 				0A22B10724D3671E00EC018E /* GroupProperty.swift in Sources */,
@@ -1255,6 +1294,7 @@
 				0A22B11724D3671E00EC018E /* Protocol.swift in Sources */,
 				0A22B11824D3671E00EC018E /* Request.swift in Sources */,
 				0A22B11924D3671E00EC018E /* Response.swift in Sources */,
+				0AA2BA1F24EC958600CEA1D6 /* Model.swift in Sources */,
 				0A22B11A24D3671E00EC018E /* Schema.swift in Sources */,
 				0A22B11B24D3671E00EC018E /* SchemaResponse.swift in Sources */,
 				0A22B11C24D3671E00EC018E /* SchemaUsage.swift in Sources */,
@@ -1265,6 +1305,7 @@
 				0A22B12124D3671E00EC018E /* TimeSchema.swift in Sources */,
 				0A22B12224D3671E00EC018E /* UnixTimeSchema.swift in Sources */,
 				0A22B12324D3671E00EC018E /* UriSchema.swift in Sources */,
+				0AA2BA2924EDB4ED00CEA1D6 /* Common.swift in Sources */,
 				0A22B12424D3671E00EC018E /* UuidSchema.swift in Sources */,
 				0A22B12524D3671E00EC018E /* Value.swift in Sources */,
 				0A22B12624D3671E00EC018E /* ValueSchema.swift in Sources */,
@@ -1273,12 +1314,14 @@
 				0A22B12924D3671E00EC018E /* AllSchemaTypes.swift in Sources */,
 				0A22B12A24D3671E00EC018E /* CompoundSchemaTypes.swift in Sources */,
 				0A22B12B24D3671E00EC018E /* HttpMethod.swift in Sources */,
+				0AA2BA2324EC95CE00CEA1D6 /* Utils.swift in Sources */,
 				0A22B12C24D3671E00EC018E /* ImplementationLocation.swift in Sources */,
 				0A22B12D24D3671E00EC018E /* KnownMediaType.swift in Sources */,
 				0A22B12E24D3671E00EC018E /* ObjectSchemaTypes.swift in Sources */,
 				0A22B12F24D3671E00EC018E /* ParameterLocation.swift in Sources */,
 				0A22B13024D3671E00EC018E /* PathEncodingStyle.swift in Sources */,
 				0A22B13124D3671E00EC018E /* PrimitiveSchemaTypes.swift in Sources */,
+				0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */,
 				0A22B13224D3671E00EC018E /* QueryEncodingStyle.swift in Sources */,
 				0A22B13324D3671E00EC018E /* SchemaContext.swift in Sources */,
 				0A22B13424D3671E00EC018E /* SchemaType.swift in Sources */,
@@ -1298,6 +1341,7 @@
 				0A22B14224D3671F00EC018E /* HttpHeader.swift in Sources */,
 				0A22B14324D3671F00EC018E /* Info.swift in Sources */,
 				0A22B14424D3671F00EC018E /* Language.swift in Sources */,
+				0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */,
 				0A22B14524D3671F00EC018E /* Languages.swift in Sources */,
 				0A22B14624D3671F00EC018E /* License.swift in Sources */,
 				0A22B14724D3671F00EC018E /* Operation.swift in Sources */,

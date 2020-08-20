@@ -50,7 +50,7 @@ class Manager {
         do {
             try destinationRootUrl.ensureExists()
         } catch {
-            logger.log(error.localizedDescription, level: .error)
+            // logger.log(error.localizedDescription, level: .error)
         }
     }
 
@@ -109,7 +109,7 @@ class Manager {
                 )
                 beforeJsonString = String(data: beforeJsonData, encoding: .utf8)
             } catch {
-                logger.log(error.localizedDescription, level: .error)
+                // logger.log(error.localizedDescription, level: .error)
             }
         }
 
@@ -123,50 +123,50 @@ class Manager {
         if beforeJsonString != afterJsonString {
             let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
             let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
-            logger.log("before.json url=\(beforeJsonUrl)")
-            logger.log("after.json url=\(afterJsonUrl)")
+            // logger.log("before.json url=\(beforeJsonUrl)")
+            // logger.log("after.json url=\(afterJsonUrl)")
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)
-                logger
-                    .log(
-                        "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
-                    )
+//                 logger
+//                    .log(
+//                        "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
+//                    )
             } catch {
-                logger.log(
-                    "Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)",
-                    level: .error
-                )
+//                 logger.log(
+//                    "Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)",
+//                    level: .error
+//                )
             }
         } else if beforeJsonString == nil || afterJsonString == nil {
-            logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
+            // logger.log("Errors found trying to decode models. Please check your Swagger file.", level: .error)
         } else {
-            logger.log("Model file check: OK", level: .info)
+            // logger.log("Model file check: OK", level: .info)
         }
 
         return (beforeJsonString == afterJsonString)
     }
 
     private func formatCode(atBaseUrl baseUrl: URL) {
-        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: [baseUrl.path])
+        runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
 
-        runTool(
-            with: "swiftlint",
-            configFilename: ".swiftlint.yml",
-            arguments: ["autocorrect", baseUrl.path]
-        )
+//        runTool(
+//            with: "swiftlint",
+//            configFilename: ".swiftlint.yml",
+//            arguments: ["autocorrect", baseUrl.path]
+//        )
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
         var allArguments: [String] = []
 
         guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-            logger.log("Can't find path for tool \(tool).", level: .error)
+            // logger.log("Can't find path for tool \(tool).", level: .error)
             return
         }
 
         guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-            logger.log("Can't find config file for tool \(tool).", level: .error)
+            // logger.log("Can't find config file for tool \(tool).", level: .error)
             return
         }
 
@@ -182,7 +182,7 @@ class Manager {
             try task.run()
             task.waitUntilExit()
         } catch {
-            logger.log("Fail to run tool \(tool).", level: .error)
+            // logger.log("Fail to run tool \(tool).", level: .error)
         }
     }
 }

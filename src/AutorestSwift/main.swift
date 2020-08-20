@@ -33,9 +33,11 @@ guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .
 
 // Load yaml file
 let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
-let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
-do {
-    try manager.run()
-} catch {
-    print(error)
-}
+// let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
+// do {
+//    try manager.run()
+// } catch {
+//    print(error)
+// }
+let plugin = AutorestPlugin()
+plugin.start()

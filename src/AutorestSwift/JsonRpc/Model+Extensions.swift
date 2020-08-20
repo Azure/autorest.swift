@@ -26,8 +26,58 @@
 
 import Foundation
 
-/// Error codes thrown during code generation
-enum CodeGenerationError: Error {
-    /// A general error has occurred.
-    case general(String)
+extension RPCObject {
+    public var asString: String? {
+        switch self {
+        case let .string(value):
+            return value
+        default:
+            return nil
+        }
+    }
+
+    public var asList: [RPCObject]? {
+        switch self {
+        case let .list(values):
+            return values
+        default:
+            return nil
+        }
+    }
+
+    public var asInt: Int? {
+        switch self {
+        case let .integer(value):
+            return value
+        default:
+            return nil
+        }
+    }
+
+    public var asDouble: Double? {
+        switch self {
+        case let .double(value):
+            return value
+        default:
+            return nil
+        }
+    }
+
+    public var asBool: Bool? {
+        switch self {
+        case let .bool(value):
+            return value
+        default:
+            return nil
+        }
+    }
+
+    public var asDict: [String: RPCObject]? {
+        switch self {
+        case let .dictionary(value):
+            return value
+        default:
+            return nil
+        }
+    }
 }

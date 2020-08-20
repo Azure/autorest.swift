@@ -25,34 +25,22 @@
 // --------------------------------------------------------------------------
 
 import Foundation
+import NIO
 
-extension URL {
-    func ensureExists() throws {
-        let fileManager = FileManager.default
+enum ChannelState: Equatable {
+    case initializing
+    case starting
+    case started
+    case stopping
+    case stopped
+}
 
-        if let existing = try? resourceValues(forKeys: [.isDirectoryKey]) {
-            if !existing.isDirectory! {
-                let err = "Path exists but is not a folder!"
-                fatalError(err)
-            }
-        } else {
-            // Path does not exist so let us create it
-            try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-        }
-    }
+public struct Config {
+    public let timeout: TimeAmount
+    public let framing: Framing
 
-    func with(subfolder: FileDestination) -> URL {
-        return subfolder.url(forBaseUrl: self)
-    }
-
-    func append(line: String) throws {
-        guard let lineData = "\(line)\n".data(using: .utf8) else { return }
-        if let handle = FileHandle(forWritingAtPath: path) {
-            defer { handle.closeFile() }
-            handle.seekToEndOfFile()
-            handle.write(lineData)
-        } else {
-            try lineData.write(to: self, options: .atomic)
-        }
+    public init(timeout: TimeAmount = TimeAmount.seconds(5), framing: Framing = .default) {
+        self.timeout = timeout
+        self.framing = framing
     }
 }
