@@ -98,7 +98,16 @@ class AutorestPlugin {
                 .success(.list([.string("swift")]))
             )
         case "process":
-            plugin.sessionId = params.asList?.last?.asString ?? ""
+            guard let sessionId = params.asList?.last?.asString else {
+                logger.log("Process request get invalid session id")
+                callback(.failure(RPCError(
+                    kind: .invalidParams,
+                    description: "Process request get invalid session id"
+                )))
+                return
+            }
+
+            plugin.sessionId = sessionId
             startChannelClient(context: context)
         // TODO: Sending back Process response will stop Autorest.
         // callback(.success(.bool(true)))
@@ -129,7 +138,11 @@ class AutorestPlugin {
     }
 
     func handleListInputs(response: RPCObject) {
-        let filename = response.asList?.first?.asString ?? ""
+        guard let filename = response.asList?.first?.asString else {
+            logger.log("handleListInputs filename is nil")
+            return
+        }
+
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
         let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
         future.whenSuccess { result in
