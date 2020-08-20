@@ -126,9 +126,7 @@ class AutorestPlugin {
     func handleListInputs(response: RPCObject) {
         guard let filename = response.asList?.first?.asString else {
             FileLogger.shared.logAndFail("handleListInputs filename is nil")
-            return
         }
-
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
         let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
         future.whenSuccess { result in
@@ -140,12 +138,19 @@ class AutorestPlugin {
             }
         }
         future.whenFailure { error in
-             FileLogger.shared.logAndFail("Call ReadFile failure \(error.localizedDescription)")
+            FileLogger.shared.logAndFail("Call ReadFile failure \(error.localizedDescription)")
         }
     }
 
     func handleReadFile(response: RPCObject) {
-        let codeModel = response.asString ?? ""
-        // TODO: Now convert to code model and generate
+        guard let codeModel = response.asString else {
+            FileLogger.shared.logAndFail("Unable to retrieve code model from Autorest.")
+        }
+        let manager = Manager(withString: codeModel)
+        do {
+            try manager.run()
+        } catch {
+            FileLogger.shared.logAndFail("Code generation failure: \(error)")
+        }
     }
 }

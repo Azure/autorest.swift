@@ -71,11 +71,14 @@ class FileLogger {
 
     // MARK: Initializers
 
-    init(withFileName name: String) {
+    internal init(withFileName name: String, deleteIfExists: Bool = true) {
         guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("Unable to locate Documents directory.")
         }
         self.url = documentsUrl.appendingPathComponent(name)
+        if deleteIfExists {
+            try? FileManager.default.removeItem(atPath: url.path)
+        }
     }
 
     // MARK: Methods
@@ -87,8 +90,9 @@ class FileLogger {
         try? url.append(line: msg)
     }
 
-    func logAndFail(_ message: @autoclosure @escaping () -> String?) {
-        log(message())
-        fatalError(message() ?? "")
+    func logAndFail(_ message: @autoclosure @escaping () -> String?) -> Never {
+        let msg = message() ?? ""
+        log(msg)
+        fatalError(msg)
     }
 }

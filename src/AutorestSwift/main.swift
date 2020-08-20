@@ -25,19 +25,21 @@
 // --------------------------------------------------------------------------
 
 import Foundation
+import NIO
 import os.log
 
 guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
     fatalError("Unabled to locate Documents directory.")
 }
 
-// Load yaml file
-let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
+// TODO: Re-enable this for local runs
+// let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
 // let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
 // do {
 //    try manager.run()
 // } catch {
 //    print(error)
 // }
+
 let plugin = AutorestPlugin()
 plugin.start()

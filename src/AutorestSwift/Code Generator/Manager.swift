@@ -33,18 +33,30 @@ struct StringDecodeKeys: ExtensionStringDecodeKeys {
 
 /// Handles the configuration and orchestrations of the code generation process
 class Manager {
+    internal enum InvocationMode {
+        case autorest
+        case commandLine
+    }
+
     // MARK: Properties
 
-    let inputUrl: URL
+    let inputString: String
 
     let destinationRootUrl: URL
+
+    let mode: InvocationMode
 
     lazy var logger = Logger(withName: "Autorest.Swift.Manager")
 
     // MARK: Initializers
 
-    init(withInputUrl input: URL, destinationUrl dest: URL) {
-        self.inputUrl = input
+    /// Initialize with an input file URL (i.e. running locally).
+    init(withInputUrl input: URL, destinationUrl dest: URL) throws {
+        self.mode = .commandLine
+
+        let yamlString = try String(contentsOf: input)
+        self.inputString = Manager.sanitize(yaml: yamlString)
+
         // TODO: Make this configurable
         self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
         do {
@@ -54,10 +66,24 @@ class Manager {
         }
     }
 
+    /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
+    init(withString string: String) {
+        self.mode = .autorest
+        self.inputString = Manager.sanitize(yaml: string)
+        self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+    }
+
     // MARK: Methods
 
+    private static func sanitize(yaml: String) -> String {
+        // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed.
+        // Replaces empty string with a single space.
+        return yaml.replacingOccurrences(of: ": ''", with: ": ' '")
+    }
+
     func run() throws {
-        let (model, _) = try loadModel()
+        let model = try loadModel()
+        _ = check(model: model, against: inputString)
 
         // Create folder structure
         let packageName = model.packageName
@@ -65,6 +91,7 @@ class Manager {
         try packageUrl.ensureExists()
 
         // Generate Swift code files
+        logger.log("Generating code at: \(packageUrl.path)")
         let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
 
@@ -73,23 +100,15 @@ class Manager {
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency
-    func loadModel() throws -> (CodeModel, Bool) {
+    func loadModel() throws -> CodeModel {
         // decode YAML to model
         let decoder = YAMLDecoder()
-        var yamlString = try String(contentsOf: inputUrl)
-        // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed.
-        // Replaces empty string with a single space.
-        yamlString = yamlString.replacingOccurrences(of: ": ''", with: ": ' '")
-
         let model = try decoder.decode(
             CodeModel.self,
-            from: yamlString,
+            from: inputString,
             userInfo: [AnyCodable.extensionStringDecodedKey: StringDecodeKeys()]
         )
-
-        let isMatchedConsistency = check(model: model, against: yamlString)
-
-        return (model, isMatchedConsistency)
+        return model
     }
 
     /// Check model for consistency and save debugging files if inconsistent
