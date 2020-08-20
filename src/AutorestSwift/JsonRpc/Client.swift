@@ -71,12 +71,12 @@ public final class ChannelClient {
         }
 
         future.whenFailure { error in
-            FileLogger.instance.log("Switch to client mode failed: \(error)")
+            FileLogger.shared.logAndFail("Switch to client mode failed: \(error)")
         }
     }
 
     private func initalizationComplete(context: ChannelHandlerContext) {
-        FileLogger.instance.log("initalizationComplete called")
+        FileLogger.shared.log("initalizationComplete called")
         state = .started
         self.context = context
         processCallback()
@@ -88,11 +88,11 @@ public final class ChannelClient {
 
     public func call(method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
         if state != .started {
-            FileLogger.instance.log("Client call failed. State is not started")
+            FileLogger.shared.log("Client call failed. State is not started")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let context = self.context else {
-            FileLogger.instance.log("Client call failed. Content is nil")
+            FileLogger.shared.log("Client call failed. Content is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
 
@@ -120,7 +120,7 @@ public final class ChannelClient {
         set {
             lock.withLock {
                 _state = newValue
-                FileLogger.instance.log("\(self) \(_state)")
+                FileLogger.shared.log("\(self) \(_state)")
             }
         }
     }
@@ -141,7 +141,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        FileLogger.instance.log("Client Handler write")
+        FileLogger.shared.log("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -149,7 +149,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        FileLogger.instance.log("Client Handler channelRead")
+        FileLogger.shared.log("Client Handler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -159,12 +159,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
-        FileLogger.instance.log("Client Handler handlerAdded")
+        FileLogger.shared.log("Client Handler handlerAdded")
         initComplete(context)
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        FileLogger.instance.log("Client Handler errorCaught")
+        FileLogger.shared.log("Client Handler errorCaught")
         if let remoteAddress = context.remoteAddress {
             print("server", remoteAddress, "error", error)
         }
@@ -185,11 +185,11 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        FileLogger.instance.log("Client Handler channelActive")
+        FileLogger.shared.log("Client Handler channelActive")
     }
 
     public func channelInactive(context: ChannelHandlerContext) {
-        FileLogger.instance.log("Client Handler channelInactive")
+        FileLogger.shared.log("Client Handler channelInactive")
 
         if !queue.isEmpty {
             errorCaught(context: context, error: ClientError.connectionResetByPeer)

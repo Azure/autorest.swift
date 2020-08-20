@@ -99,7 +99,7 @@ class AutorestPlugin {
         // callback(.success(.bool(true)))
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
-            FileLogger.instance.log("invalid method: \(method)")
+            FileLogger.shared.logAndFail("invalid method: \(method)")
         }
     }
 
@@ -115,18 +115,18 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleListInputs(response: response)
             case let .failure(error):
-                fatalError("\(error)")
+                FileLogger.shared.logAndFail("Call ListInputs failure \(error)")
             }
         }
         future.whenFailure { error in
-            fatalError(error.localizedDescription)
+            FileLogger.shared.logAndFail("Call ListInputs failure \(error.localizedDescription)")
         }
     }
 
     func handleListInputs(response: RPCObject) {
         guard let filename = response.asList?.first?.asString else {
-            FileLogger.instance.log("handleListInputs filename is nil")
-            fatalError("handleListInputs filename is nil")
+            FileLogger.shared.logAndFail("handleListInputs filename is nil")
+            return
         }
 
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
@@ -136,11 +136,11 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleReadFile(response: response)
             case let .failure(error):
-                fatalError("\(error)")
+                FileLogger.shared.logAndFail("Call ReadFile failure \(error)")
             }
         }
         future.whenFailure { error in
-            fatalError(error.localizedDescription)
+             FileLogger.shared.logAndFail("Call ReadFile failure \(error.localizedDescription)")
         }
     }
 

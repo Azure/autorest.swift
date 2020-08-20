@@ -67,7 +67,7 @@ class FileLogger {
 
     let url: URL
 
-    static let instance = FileLogger(withFileName: "autorest-swift-debug.log")
+    static let shared = FileLogger(withFileName: "autorest-swift-debug.log")
 
     // MARK: Initializers
 
@@ -85,5 +85,10 @@ class FileLogger {
             return
         }
         try? url.append(line: msg)
+    }
+
+    func logAndFail(_ message: @autoclosure @escaping () -> String?) {
+        log(message())
+        fatalError(message() ?? "")
     }
 }
