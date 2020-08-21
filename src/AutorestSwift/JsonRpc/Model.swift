@@ -96,13 +96,19 @@ private let jsonrpcVersion = "2.0"
 
 internal struct JSONRequest: Codable {
     var jsonrpc: String
-    var id: Int
+    var id: Int?
     var method: String
     var params: JSONObject
 
     init(id: Int, method: String, params: JSONObject) {
         self.jsonrpc = jsonrpcVersion
         self.id = id
+        self.method = method
+        self.params = params
+    }
+
+    init(method: String, params: JSONObject) {
+        self.jsonrpc = jsonrpcVersion
         self.method = method
         self.params = params
     }
@@ -384,7 +390,7 @@ public struct RPCError {
     }
 }
 
-public typealias RPCClosure = (ChannelHandlerContext, String, RPCObject, (RPCResult) -> Void) -> Void
+public typealias RPCClosure = (ChannelHandlerContext, Int?, String, RPCObject, (RPCResult) -> Void) -> Void
 public typealias InitCompleteCallback = (ChannelHandlerContext) -> Void
 public typealias ProcessCallback = () -> Void
 public typealias RPCResult = ResultType<RPCObject, RPCError>

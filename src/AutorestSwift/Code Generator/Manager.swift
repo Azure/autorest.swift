@@ -43,6 +43,7 @@ class Manager {
     let inputString: String
 
     let destinationRootUrl: URL
+    var packageUrl: URL?
 
     let mode: InvocationMode
 
@@ -56,6 +57,7 @@ class Manager {
 
         let yamlString = try String(contentsOf: input)
         self.inputString = Manager.sanitize(yaml: yamlString)
+        self.packageUrl = nil
 
         // TODO: Make this configurable
         self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
@@ -71,6 +73,7 @@ class Manager {
         self.mode = .autorest
         self.inputString = Manager.sanitize(yaml: string)
         self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        self.packageUrl = nil
     }
 
     // MARK: Methods
@@ -89,6 +92,8 @@ class Manager {
         let packageName = model.packageName
         let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
+
+        self.packageUrl = packageUrl
 
         // Generate Swift code files
         logger.log("Generating code at: \(packageUrl.path)")

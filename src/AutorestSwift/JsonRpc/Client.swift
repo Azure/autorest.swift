@@ -34,9 +34,7 @@ public final class ChannelClient {
     public let config: Config
     private var context: ChannelHandlerContext?
     private let processCallback: ProcessCallback
-
-    // TODO: get this value based on last response id from AutoRest
-    var id = 3
+    var id: Int!
 
     public init(
         group: MultiThreadedEventLoopGroup,
@@ -53,8 +51,9 @@ public final class ChannelClient {
         assert(self.state == .stopped)
     }
 
-    public func start(context: ChannelHandlerContext) {
+    public func start(context: ChannelHandlerContext, id: Int) {
         assert(state == .initializing)
+        self.id = id
 
         let future = context.pipeline.removeHandler(name: "AutorestServer").flatMap {
             context.pipeline.removeHandler(name: "ServerHandler").flatMap {
@@ -72,6 +71,25 @@ public final class ChannelClient {
 
         future.whenFailure { error in
             FileLogger.shared.logAndFail("Switch to client mode failed: \(error)")
+        }
+    }
+
+    public func setupHandler(initComplete: InitCompleteCallback?) {
+        guard let context = self.context else {
+            FileLogger.shared.logAndFail("No context")
+        }
+
+        let future = context.pipeline.removeHandler(name: "AutorestClient").flatMap {
+            context.pipeline.removeHandler(name: "ClientHandler").flatMap {
+                context.pipeline.addHandler(
+                    CodableCodec<JSONRequest, JSONResponse>(initComplete),
+                    name: "AutorestServer"
+                )
+            }
+        }
+
+        future.whenFailure { error in
+            FileLogger.shared.logAndFail("Switch to server mode failed: \(error)")
         }
     }
 
@@ -96,9 +114,17 @@ public final class ChannelClient {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
 
-        id += 1
         let promise: EventLoopPromise<JSONResponse> = context.channel.eventLoop.makePromise()
-        let request = JSONRequest(id: id, method: method, params: JSONObject(params))
+
+        var request: JSONRequest
+        // WriteFile is a Notification (i.e. a JSONRequest with no id)
+        if method == "WriteFile" {
+            request = JSONRequest(method: method, params: JSONObject(params))
+        } else {
+            id += 1
+            request = JSONRequest(id: id, method: method, params: JSONObject(params))
+        }
+
         let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
 
         let future = context.channel.writeAndFlush(requestWrapper)
@@ -126,7 +152,7 @@ public final class ChannelClient {
     }
 }
 
-private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
+private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableChannelHandler {
     public typealias InboundIn = JSONResponse
     public typealias OutboundIn = JSONRequestWrapper
     public typealias OutboundOut = JSONRequest
@@ -143,7 +169,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler {
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
         FileLogger.shared.log("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
-        queue.append((requestWrapper.request.id, requestWrapper.promise))
+        queue.append((requestWrapper.request.id ?? 0, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
     }
 

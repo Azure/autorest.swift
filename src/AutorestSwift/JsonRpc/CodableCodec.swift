@@ -126,6 +126,12 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
 
+    private let initComplete: InitCompleteCallback?
+
+    public init(_ initComplete: InitCompleteCallback? = nil) {
+        self.initComplete = initComplete
+    }
+
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         var buffer = unwrapInboundIn(data)
@@ -162,6 +168,11 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
             FileLogger.shared.log("Write Error \(error)")
             promise?.fail(error)
         }
+    }
+
+    public func handlerAdded(context: ChannelHandlerContext) {
+        FileLogger.shared.log("Client Handler handlerAdded")
+        initComplete?(context)
     }
 }
 
