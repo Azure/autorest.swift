@@ -149,12 +149,12 @@ class AutorestPlugin {
 
         guard let enumerator =
             FileManager.default.enumerator(atPath: directory.path) else {
-            FileLogger.shared.logAndFail("Iterate Directory fail")
+            SharedLogger.logFailure("Iterate Directory fail")
         }
 
         while let file = enumerator.nextObject() as? String {
             if file.hasSuffix(".swift") || file.hasSuffix(".md") || file.hasSuffix(".yml") {
-                FileLogger.shared.log("Found file in generated directory: \(file)")
+                SharedLogger.log("Found file in generated directory: \(file)")
                 generatedFileList.append(file)
             }
         }
@@ -171,7 +171,7 @@ class AutorestPlugin {
             try manager.run()
 
             guard let packageUrl = manager.packageUrl else {
-                FileLogger.shared.logAndFail("Unable to get packageUrl")
+                SharedLogger.logFailure("Unable to get packageUrl")
             }
 
             let generatedFileListQueue = iterateDirectory(directory: packageUrl)
@@ -195,16 +195,16 @@ class AutorestPlugin {
             future.whenSuccess { result in
                 switch result {
                 case let .success(response):
-                    FileLogger.shared.logAndFail("Call WriteFile succeed \(response)")
+                    SharedLogger.logFailure("Call WriteFile succeed \(response)")
                 case let .failure(error):
-                    FileLogger.shared.logAndFail("Call WriteFile failure: \(error)")
+                    SharedLogger.logFailure("Call WriteFile failure: \(error)")
                 }
             }
             future.whenFailure { error in
-                FileLogger.shared.logAndFail("Call WriteFile failure: \(error.localizedDescription)")
+                SharedLogger.logFailure("Call WriteFile failure: \(error.localizedDescription)")
             }
         } catch {
-            FileLogger.shared.logAndFail("Call WriteFile failure: \(error.localizedDescription)")
+            SharedLogger.logFailure("Call WriteFile failure: \(error.localizedDescription)")
         }
     }
 
@@ -216,7 +216,7 @@ class AutorestPlugin {
             response = JSONResponse(id: self.processRequestId, result: JSONObject(.bool(true)))
             let future = context.channel.writeAndFlush(response)
             future.whenFailure { error in
-                FileLogger.shared.logAndFail("Send Process Response failure: \(error.localizedDescription)")
+                SharedLogger.logFailure("Send Process Response failure: \(error.localizedDescription)")
             }
         }
     }

@@ -114,10 +114,10 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
-                FileLogger.shared.log("RPC handler returned success \(handlerResult)")
+                SharedLogger.log("RPC handler returned success \(handlerResult)")
                 response = JSONResponse(id: request.id ?? 0, result: handlerResult)
             case let .failure(handlerError):
-                FileLogger.shared.log("RPC handler returned failure \(handlerError)")
+                SharedLogger.log("RPC handler returned failure \(handlerError)")
                 response = JSONResponse(id: request.id ?? 0, error: handlerError)
             }
             context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)

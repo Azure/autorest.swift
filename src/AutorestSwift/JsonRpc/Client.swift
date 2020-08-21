@@ -76,7 +76,7 @@ public final class ChannelClient {
 
     public func setupHandler(initComplete: InitCompleteCallback?) {
         guard let context = self.context else {
-            FileLogger.shared.logAndFail("No context")
+            SharedLogger.logFailure("No context")
         }
 
         let future = context.pipeline.removeHandler(name: "AutorestClient").flatMap {
@@ -89,7 +89,7 @@ public final class ChannelClient {
         }
 
         future.whenFailure { error in
-            FileLogger.shared.logAndFail("Switch to server mode failed: \(error)")
+            SharedLogger.logFailure("Switch to server mode failed: \(error)")
         }
     }
 

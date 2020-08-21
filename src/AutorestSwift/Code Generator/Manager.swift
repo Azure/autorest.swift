@@ -150,9 +150,15 @@ class Manager {
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)
-                SharedLogger.log("Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot.")
+                SharedLogger
+                    .log(
+                        "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
+                    )
             } catch {
-                SharedLogger.log("Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)", level: .warning)
+                SharedLogger.log(
+                    "Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)",
+                    level: .warning
+                )
             }
         } else if beforeJsonString == nil || afterJsonString == nil {
             SharedLogger.logFailure("Errors found trying to decode models. Please check your Swagger file.")
