@@ -62,8 +62,16 @@ enum LogLevel: Int {
 }
 
 protocol Logger {
+    var level: LogLevel { get set }
+
     func log(_ message: @autoclosure @escaping () -> String?, category: String?, level: LogLevel)
     func logFailure(_ message: @autoclosure @escaping () -> String?, category: String?) -> Never
+}
+
+extension Logger {
+    func shouldLog(forLevel level: LogLevel) -> Bool {
+        return level.rawValue <= self.level.rawValue
+    }
 }
 
 // MARK: - Implementation
@@ -82,6 +90,7 @@ struct SharedLogger {
         category: String? = nil,
         level: LogLevel = .info
     ) {
+        guard logger.shouldLog(forLevel: level) else { return }
         SharedLogger.logger.log(message(), category: category ?? SharedLogger.default, level: level)
     }
 
@@ -95,6 +104,8 @@ struct SharedLogger {
 
 /// Do-nothing logger
 class NullLogger: Logger {
+    var level: LogLevel = .info
+
     func log(_: @autoclosure @escaping () -> String?, category _: String? = nil, level _: LogLevel = .info) {}
 
     func logFailure(_: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
@@ -105,6 +116,8 @@ class NullLogger: Logger {
 /// OSX-specific OS logger
 class OSLogger: Logger {
     // MARK: Properties
+
+    var level: LogLevel = .info
 
     let name: String
     var loggers: [String: OSLog]
@@ -122,6 +135,7 @@ class OSLogger: Logger {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }
+        guard shouldLog(forLevel: level) else { return }
         let cat = category ?? SharedLogger.default
         if let logger = loggers[cat] {
             os_log("%@", log: logger, type: level.asOSLogLevel, msg)
@@ -143,6 +157,8 @@ class OSLogger: Logger {
 
 /// Cross-platform Swift logger implementation
 class SwiftLogger: Logger {
+    var level: LogLevel = .info
+
     func log(
         _ message: @autoclosure @escaping () -> String?,
         category _: String? = nil,
@@ -151,6 +167,7 @@ class SwiftLogger: Logger {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }
+        guard shouldLog(forLevel: level) else { return }
         // TODO: Implement
     }
 
@@ -165,10 +182,13 @@ class SwiftLogger: Logger {
 
 /// Logs to a file.
 class FileLogger: Logger {
+    var level: LogLevel = .info
+
     func log(_ message: @autoclosure @escaping () -> String?, category: String? = nil, level: LogLevel = .info) {
         guard var msg = message() else {
             fatalError("Unable to create log message.")
         }
+        guard shouldLog(forLevel: level) else { return }
         if let cat = category {
             msg = "AutorestSwift.\(cat) (\(level.label)) \(msg)"
         } else {

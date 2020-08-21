@@ -178,10 +178,12 @@ class Manager {
         var allArguments: [String] = []
 
         guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-            SharedLogger.logFailure("Can't find path for tool \(tool).")
+            SharedLogger.log("Can't find path for tool \(tool).")
+            return
         }
         guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-            SharedLogger.logFailure("Can't find config file for tool \(tool).")
+            SharedLogger.log("Can't find config file for tool \(tool).")
+            return
         }
 
         allArguments.append("--config")
