@@ -110,15 +110,15 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         FileLogger.shared.log("Server Handler channelRead")
         let request = unwrapInboundIn(data)
-        closure(context, request.method, RPCObject(request.params)) { result in
+        closure(context, request.id, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
-                FileLogger.shared.log("rpc handler returned success \(handlerResult)")
-                response = JSONResponse(id: request.id, result: handlerResult)
+                FileLogger.shared.log("RPC handler returned success \(handlerResult)")
+                response = JSONResponse(id: request.id ?? 0, result: handlerResult)
             case let .failure(handlerError):
-                FileLogger.shared.log("rpc handler returned failure \(handlerError)")
-                response = JSONResponse(id: request.id, error: handlerError)
+                FileLogger.shared.log("RPC handler returned failure \(handlerError)")
+                response = JSONResponse(id: request.id ?? 0, error: handlerError)
             }
             context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)
         }

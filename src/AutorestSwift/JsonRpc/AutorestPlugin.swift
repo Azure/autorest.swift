@@ -25,6 +25,7 @@
 // --------------------------------------------------------------------------
 
 import Dispatch
+import Foundation
 import NIO
 
 // swiftlint:disable force_try
@@ -32,6 +33,7 @@ class AutorestPlugin {
     var client: ChannelClient!
     var server: ChannelServer!
     var sessionId: String!
+    var processRequestId: Int!
 
     // TODO: Increase when working correctly
     private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -83,6 +85,7 @@ class AutorestPlugin {
     /// The handler for incoming messages
     func incomingHandler(
         context: ChannelHandlerContext,
+        id: Int?,
         method: String,
         params: RPCObject,
         callback: (RPCResult) -> Void
@@ -94,9 +97,8 @@ class AutorestPlugin {
             )
         case "process":
             plugin.sessionId = params.asList?.last?.asString
+            processRequestId = id
             startChannelClient(context: context)
-        // TODO: Sending back Process response will stop Autorest.
-        // callback(.success(.bool(true)))
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
             FileLogger.shared.logAndFail("invalid method: \(method)")
@@ -104,7 +106,7 @@ class AutorestPlugin {
     }
 
     func startChannelClient(context: ChannelHandlerContext) {
-        client.start(context: context)
+        client.start(context: context, id: processRequestId)
     }
 
     func handleProcess() {
@@ -142,6 +144,24 @@ class AutorestPlugin {
         }
     }
 
+    private func iterateDirectory(directory: URL) -> [String] {
+        var generatedFileList: [String] = []
+
+        guard let enumerator =
+            FileManager.default.enumerator(atPath: directory.path) else {
+            FileLogger.shared.logAndFail("Iterate Directory fail")
+        }
+
+        while let file = enumerator.nextObject() as? String {
+            if file.hasSuffix(".swift") || file.hasSuffix(".md") || file.hasSuffix(".yml") {
+                FileLogger.shared.log("Found file in generated directory: \(file)")
+                generatedFileList.append(file)
+            }
+        }
+
+        return generatedFileList
+    }
+
     func handleReadFile(response: RPCObject) {
         guard let codeModel = response.asString else {
             FileLogger.shared.logAndFail("Unable to retrieve code model from Autorest.")
@@ -149,8 +169,55 @@ class AutorestPlugin {
         let manager = Manager(withString: codeModel)
         do {
             try manager.run()
+
+            guard let packageUrl = manager.packageUrl else {
+                FileLogger.shared.logAndFail("Unable to get packageUrl")
+            }
+
+            let generatedFileListQueue = iterateDirectory(directory: packageUrl)
+            generatedFileListQueue.forEach {
+                sendWriteFile(fileName: $0, packageUrl: packageUrl)
+            }
+
+            sendProcessResponse()
         } catch {
             FileLogger.shared.logAndFail("Code generation failure: \(error)")
+        }
+    }
+
+    func sendWriteFile(fileName: String, packageUrl: URL) {
+        do {
+            let fileUrl = packageUrl.appendingPathComponent(fileName)
+            let fileContent = try String(contentsOf: fileUrl)
+
+            let writeFileRequest: RPCObject = .list([.string(sessionId), .string(fileName), .string(fileContent)])
+            let future = plugin.client.call(method: "WriteFile", params: writeFileRequest)
+            future.whenSuccess { result in
+                switch result {
+                case let .success(response):
+                    FileLogger.shared.logAndFail("Call WriteFile succeed \(response)")
+                case let .failure(error):
+                    FileLogger.shared.logAndFail("Call WriteFile failure: \(error)")
+                }
+            }
+            future.whenFailure { error in
+                FileLogger.shared.logAndFail("Call WriteFile failure: \(error.localizedDescription)")
+            }
+        } catch {
+            FileLogger.shared.logAndFail("Call WriteFile failure: \(error.localizedDescription)")
+        }
+    }
+
+    func sendProcessResponse() {
+        // Setup the client to write JSONResponse in output handler.
+        // When Handler is setup, write JSONResponse to the handler's channel
+        client.setupHandler { context in
+            let response: JSONResponse
+            response = JSONResponse(id: self.processRequestId, result: JSONObject(.bool(true)))
+            let future = context.channel.writeAndFlush(response)
+            future.whenFailure { error in
+                FileLogger.shared.logAndFail("Send Process Response failure: \(error.localizedDescription)")
+            }
         }
     }
 }
