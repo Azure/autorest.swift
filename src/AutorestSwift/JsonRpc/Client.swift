@@ -70,13 +70,13 @@ public final class ChannelClient {
         }
 
         future.whenFailure { error in
-            FileLogger.shared.logAndFail("Switch to client mode failed: \(error)")
+            SharedLogger.fail("Switch to client mode failed: \(error)")
         }
     }
 
     public func setupHandler(initComplete: InitCompleteCallback?) {
         guard let context = self.context else {
-            FileLogger.shared.logAndFail("No context")
+            SharedLogger.fail("No context")
         }
 
         let future = context.pipeline.removeHandler(name: "AutorestClient").flatMap {
@@ -89,12 +89,12 @@ public final class ChannelClient {
         }
 
         future.whenFailure { error in
-            FileLogger.shared.logAndFail("Switch to server mode failed: \(error)")
+            SharedLogger.fail("Switch to server mode failed: \(error)")
         }
     }
 
     private func initalizationComplete(context: ChannelHandlerContext) {
-        FileLogger.shared.log("initalizationComplete called")
+        SharedLogger.debug("initalizationComplete called")
         state = .started
         self.context = context
         processCallback()
@@ -106,11 +106,11 @@ public final class ChannelClient {
 
     public func call(method: String, params: RPCObject) -> EventLoopFuture<RPCResult> {
         if state != .started {
-            FileLogger.shared.log("Client call failed. State is not started")
+            SharedLogger.error("Client call failed. State is not started")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let context = self.context else {
-            FileLogger.shared.log("Client call failed. Content is nil")
+            SharedLogger.error("Client call failed. Content is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
 
@@ -146,7 +146,6 @@ public final class ChannelClient {
         set {
             lock.withLock {
                 _state = newValue
-                FileLogger.shared.log("\(self) \(_state)")
             }
         }
     }
@@ -167,7 +166,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        FileLogger.shared.log("Client Handler write")
+        SharedLogger.debug("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id ?? 0, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -175,7 +174,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        FileLogger.shared.log("Client Handler channelRead")
+        SharedLogger.debug("Client Handler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -185,12 +184,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
-        FileLogger.shared.log("Client Handler handlerAdded")
+        SharedLogger.debug("Client Handler handlerAdded")
         initComplete(context)
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        FileLogger.shared.log("Client Handler errorCaught")
+        SharedLogger.debug("Client Handler errorCaught")
         if let remoteAddress = context.remoteAddress {
             print("server", remoteAddress, "error", error)
         }
@@ -211,11 +210,11 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        FileLogger.shared.log("Client Handler channelActive")
+        SharedLogger.debug("Client Handler channelActive")
     }
 
     public func channelInactive(context: ChannelHandlerContext) {
-        FileLogger.shared.log("Client Handler channelInactive")
+        SharedLogger.debug("Client Handler channelInactive")
 
         if !queue.isEmpty {
             errorCaught(context: context, error: ClientError.connectionResetByPeer)
