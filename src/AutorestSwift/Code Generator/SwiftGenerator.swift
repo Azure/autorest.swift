@@ -53,7 +53,7 @@ class SwiftGenerator: CodeGenerator {
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
         try jazzyUrl.ensureExists()
-        SharedLogger.log("Base URL: \(baseUrl.path)")
+        SharedLogger.info("Base URL: \(baseUrl.path)")
 
         // Create PatchUtil.swift file
         try render(

@@ -101,7 +101,7 @@ class AutorestPlugin {
             startChannelClient(context: context)
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
-            SharedLogger.logFailure("invalid method: \(method)")
+            SharedLogger.fail("invalid method: \(method)")
         }
     }
 
@@ -117,17 +117,17 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleListInputs(response: response)
             case let .failure(error):
-                SharedLogger.logFailure("Call ListInputs failure \(error)")
+                SharedLogger.fail("Call ListInputs failure \(error)")
             }
         }
         future.whenFailure { error in
-            SharedLogger.logFailure("Call ListInputs failure \(error.localizedDescription)")
+            SharedLogger.fail("Call ListInputs failure \(error)")
         }
     }
 
     func handleListInputs(response: RPCObject) {
         guard let filename = response.asList?.first?.asString else {
-            SharedLogger.logFailure("handleListInputs filename is nil")
+            SharedLogger.fail("handleListInputs filename is nil")
         }
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
         let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
@@ -136,11 +136,11 @@ class AutorestPlugin {
             case let .success(response):
                 self.handleReadFile(response: response)
             case let .failure(error):
-                SharedLogger.logFailure("Call ReadFile failure \(error)")
+                SharedLogger.fail("Call ReadFile failure \(error)")
             }
         }
         future.whenFailure { error in
-            SharedLogger.logFailure("Call ReadFile failure \(error.localizedDescription)")
+            SharedLogger.fail("Call ReadFile failure \(error)")
         }
     }
 
@@ -149,12 +149,11 @@ class AutorestPlugin {
 
         guard let enumerator =
             FileManager.default.enumerator(atPath: directory.path) else {
-            SharedLogger.logFailure("Iterate Directory fail")
+            SharedLogger.fail("Iterate Directory fail")
         }
 
         while let file = enumerator.nextObject() as? String {
             if file.hasSuffix(".swift") || file.hasSuffix(".md") || file.hasSuffix(".yml") {
-                SharedLogger.log("Found file in generated directory: \(file)")
                 generatedFileList.append(file)
             }
         }
@@ -164,14 +163,14 @@ class AutorestPlugin {
 
     func handleReadFile(response: RPCObject) {
         guard let codeModel = response.asString else {
-            SharedLogger.logFailure("Unable to retrieve code model from Autorest.")
+            SharedLogger.fail("Unable to retrieve code model from Autorest.")
         }
         let manager = Manager(withString: codeModel)
         do {
             try manager.run()
 
             guard let packageUrl = manager.packageUrl else {
-                SharedLogger.logFailure("Unable to get packageUrl")
+                SharedLogger.fail("Unable to get packageUrl")
             }
 
             let generatedFileListQueue = iterateDirectory(directory: packageUrl)
@@ -181,7 +180,7 @@ class AutorestPlugin {
 
             sendProcessResponse()
         } catch {
-            SharedLogger.logFailure("Code generation failure: \(error)")
+            SharedLogger.fail("Code generation failure: \(error)")
         }
     }
 
@@ -195,16 +194,16 @@ class AutorestPlugin {
             future.whenSuccess { result in
                 switch result {
                 case let .success(response):
-                    SharedLogger.logFailure("Call WriteFile succeed \(response)")
+                    SharedLogger.debug("Call WriteFile succeed: \(response)")
                 case let .failure(error):
-                    SharedLogger.logFailure("Call WriteFile failure: \(error)")
+                    SharedLogger.fail("Call WriteFile failure: \(error)")
                 }
             }
             future.whenFailure { error in
-                SharedLogger.logFailure("Call WriteFile failure: \(error.localizedDescription)")
+                SharedLogger.fail("Call WriteFile failure: \(error)")
             }
         } catch {
-            SharedLogger.logFailure("Call WriteFile failure: \(error.localizedDescription)")
+            SharedLogger.fail("Call WriteFile failure: \(error)")
         }
     }
 
@@ -216,7 +215,7 @@ class AutorestPlugin {
             response = JSONResponse(id: self.processRequestId, result: JSONObject(.bool(true)))
             let future = context.channel.writeAndFlush(response)
             future.whenFailure { error in
-                SharedLogger.logFailure("Send Process Response failure: \(error.localizedDescription)")
+                SharedLogger.fail("Send Process Response failure: \(error)")
             }
         }
     }

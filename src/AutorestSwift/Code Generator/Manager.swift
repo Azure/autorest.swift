@@ -62,7 +62,7 @@ class Manager {
         do {
             try destinationRootUrl.ensureExists()
         } catch {
-            SharedLogger.logFailure("\(error)")
+            SharedLogger.fail("\(error)")
         }
     }
 
@@ -94,7 +94,7 @@ class Manager {
         self.packageUrl = packageUrl
 
         // Generate Swift code files
-        SharedLogger.log("Generating code at: \(packageUrl.path)")
+        SharedLogger.info("Generating code at: \(packageUrl.path)")
         let generator = SwiftGenerator(withModel: model, atBaseUrl: packageUrl)
         try generator.generate()
 
@@ -131,7 +131,7 @@ class Manager {
                 )
                 beforeJsonString = String(data: beforeJsonData, encoding: .utf8)
             } catch {
-                SharedLogger.logFailure("\(error)")
+                SharedLogger.fail("\(error)")
             }
         }
 
@@ -145,44 +145,42 @@ class Manager {
         if beforeJsonString != afterJsonString {
             let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
             let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
-            SharedLogger.log("before.json url=\(beforeJsonUrl)")
-            SharedLogger.log("after.json url=\(afterJsonUrl)")
+            SharedLogger.debug("before.json url=\(beforeJsonUrl)")
+            SharedLogger.debug("after.json url=\(afterJsonUrl)")
             do {
                 try beforeJsonString?.write(to: beforeJsonUrl, atomically: true, encoding: .utf8)
                 try afterJsonString?.write(to: afterJsonUrl, atomically: true, encoding: .utf8)
                 SharedLogger
-                    .log(
+                    .warn(
                         "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
                     )
             } catch {
-                SharedLogger.log(
-                    "Discrepancies found in round-tripped code model. Error saving files: \(error.localizedDescription)",
-                    level: .warning
+                SharedLogger.warn(
+                    "Discrepancies found in round-tripped code model. Error saving files: \(error)"
                 )
             }
         } else if beforeJsonString == nil || afterJsonString == nil {
-            SharedLogger.logFailure("Errors found trying to decode models. Please check your Swagger file.")
+            SharedLogger.fail("Errors found trying to decode models. Please check your Swagger file.")
         } else {
-            SharedLogger.log("Model file check: OK")
+            SharedLogger.info("Model file check: OK")
         }
         return (beforeJsonString == afterJsonString)
     }
 
     private func formatCode(atBaseUrl baseUrl: URL) {
         runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
-        // FIXME: Re-enable swiftlint
-        // runTool(with: "swiftlint", configFilename: ".swiftlint.yml", arguments: ["autocorrect", baseUrl.path])
+        runTool(with: "swiftlint", configFilename: ".swiftlint.yml", arguments: ["autocorrect", baseUrl.path])
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
         var allArguments: [String] = []
 
         guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-            SharedLogger.log("Can't find path for tool \(tool).")
+            SharedLogger.warn("Can't find path for tool \(tool).")
             return
         }
         guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-            SharedLogger.log("Can't find config file for tool \(tool).")
+            SharedLogger.warn("Can't find config file for tool \(tool).")
             return
         }
 
@@ -198,7 +196,7 @@ class Manager {
             try task.run()
             task.waitUntilExit()
         } catch {
-            SharedLogger.log("Fail to run tool \(tool).")
+            SharedLogger.fail("Fail to run tool \(tool).")
         }
     }
 }

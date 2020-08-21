@@ -65,7 +65,7 @@ protocol Logger {
     var level: LogLevel { get set }
 
     func log(_ message: @autoclosure @escaping () -> String?, category: String?, level: LogLevel)
-    func logFailure(_ message: @autoclosure @escaping () -> String?, category: String?) -> Never
+    func fail(_ message: @autoclosure @escaping () -> String?, category: String?) -> Never
 }
 
 extension Logger {
@@ -85,20 +85,48 @@ struct SharedLogger {
         SharedLogger.logger = logger
     }
 
-    static func log(
+    static func error(
+        _ message: @autoclosure @escaping () -> String?,
+        category: String? = nil
+    ) {
+        log(message(), category: category, level: .error)
+    }
+
+    static func warn(
+        _ message: @autoclosure @escaping () -> String?,
+        category: String? = nil
+    ) {
+        log(message(), category: category, level: .warning)
+    }
+
+    static func info(
+        _ message: @autoclosure @escaping () -> String?,
+        category: String? = nil
+    ) {
+        log(message(), category: category, level: .info)
+    }
+
+    static func debug(
+        _ message: @autoclosure @escaping () -> String?,
+        category: String? = nil
+    ) {
+        log(message(), category: category, level: .debug)
+    }
+
+    private static func log(
         _ message: @autoclosure @escaping () -> String?,
         category: String? = nil,
-        level: LogLevel = .info
+        level: LogLevel
     ) {
         guard logger.shouldLog(forLevel: level) else { return }
         SharedLogger.logger.log(message(), category: category ?? SharedLogger.default, level: level)
     }
 
-    static func logFailure(
+    static func fail(
         _ message: @autoclosure @escaping () -> String?,
         category: String = SharedLogger.default
     ) -> Never {
-        SharedLogger.logger.logFailure(message(), category: category)
+        SharedLogger.logger.fail(message(), category: category)
     }
 }
 
@@ -108,7 +136,7 @@ class NullLogger: Logger {
 
     func log(_: @autoclosure @escaping () -> String?, category _: String? = nil, level _: LogLevel = .info) {}
 
-    func logFailure(_: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
+    func fail(_: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
         fatalError()
     }
 }
@@ -131,7 +159,7 @@ class OSLogger: Logger {
 
     // MARK: Methods
 
-    func log(_ message: @autoclosure @escaping () -> String?, category: String? = nil, level: LogLevel = .info) {
+    func log(_ message: @autoclosure @escaping () -> String?, category: String? = nil, level: LogLevel) {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }
@@ -146,7 +174,7 @@ class OSLogger: Logger {
         }
     }
 
-    func logFailure(_ message: @autoclosure @escaping () -> String?, category: String? = nil) -> Never {
+    func fail(_ message: @autoclosure @escaping () -> String?, category: String? = nil) -> Never {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }
@@ -162,7 +190,7 @@ class SwiftLogger: Logger {
     func log(
         _ message: @autoclosure @escaping () -> String?,
         category _: String? = nil,
-        level _: LogLevel = .info
+        level _: LogLevel
     ) {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
@@ -171,7 +199,7 @@ class SwiftLogger: Logger {
         // TODO: Implement
     }
 
-    func logFailure(_ message: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
+    func fail(_ message: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }
@@ -184,7 +212,7 @@ class SwiftLogger: Logger {
 class FileLogger: Logger {
     var level: LogLevel = .info
 
-    func log(_ message: @autoclosure @escaping () -> String?, category: String? = nil, level: LogLevel = .info) {
+    func log(_ message: @autoclosure @escaping () -> String?, category: String? = nil, level: LogLevel) {
         guard var msg = message() else {
             fatalError("Unable to create log message.")
         }
@@ -197,7 +225,7 @@ class FileLogger: Logger {
         try? url.append(line: msg)
     }
 
-    func logFailure(_ message: @autoclosure @escaping () -> String?, category: String? = nil) -> Never {
+    func fail(_ message: @autoclosure @escaping () -> String?, category: String? = nil) -> Never {
         guard let msg = message() else {
             fatalError("Unable to create log message.")
         }

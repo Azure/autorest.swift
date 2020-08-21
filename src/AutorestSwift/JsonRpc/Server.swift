@@ -91,7 +91,6 @@ public final class ChannelServer {
         set {
             lock.withLock {
                 _state = newValue
-                SharedLogger.log("\(self) \(_state)")
             }
         }
     }
@@ -108,16 +107,16 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        SharedLogger.log("Server Handler channelRead")
+        SharedLogger.debug("Server Handler channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.id, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
             switch result {
             case let .success(handlerResult):
-                SharedLogger.log("RPC handler returned success \(handlerResult)")
+                SharedLogger.debug("RPC handler returned success \(handlerResult)")
                 response = JSONResponse(id: request.id ?? 0, result: handlerResult)
             case let .failure(handlerError):
-                SharedLogger.log("RPC handler returned failure \(handlerError)")
+                SharedLogger.error("RPC handler returned failure \(handlerError)")
                 response = JSONResponse(id: request.id ?? 0, error: handlerError)
             }
             context.channel.writeAndFlush(self.wrapOutboundOut(response), promise: nil)
@@ -125,7 +124,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        SharedLogger.log("Server Handler errorCaught")
+        SharedLogger.debug("Server Handler errorCaught")
 
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
@@ -143,11 +142,11 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelActive(context _: ChannelHandlerContext) {
-        SharedLogger.log("Server Handler channelActive")
+        SharedLogger.debug("Server Handler channelActive")
     }
 
     public func channelInactive(context _: ChannelHandlerContext) {
-        SharedLogger.log("Server Handler channelInactive")
+        SharedLogger.debug("Server Handler channelInactive")
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
