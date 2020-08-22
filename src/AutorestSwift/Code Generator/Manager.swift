@@ -169,18 +169,25 @@ class Manager {
 
     private func formatCode(atBaseUrl baseUrl: URL) {
         runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
-        runTool(with: "swiftlint", configFilename: ".swiftlint.yml", arguments: ["autocorrect", baseUrl.path])
+        runTool(
+            with: "swiftlint",
+            configFilename: ".swiftlint.yml",
+            arguments: ["autocorrect", "--quiet", baseUrl.path]
+        )
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {
         var allArguments: [String] = []
 
         guard let toolPath = Bundle.main.path(forResource: tool, ofType: nil) else {
-            SharedLogger.warn("Can't find path for tool \(tool).")
+            SharedLogger.warn("Can't find path for tool \(tool) in path \(Bundle.main.bundlePath)")
             return
         }
         guard let configPath = Bundle.main.path(forResource: "", ofType: configFilename) else {
-            SharedLogger.warn("Can't find config file for tool \(tool).")
+            SharedLogger
+                .warn(
+                    "Can't find config file for tool \(tool) with config \(configFilename) in path \(Bundle.main.bundlePath)."
+                )
             return
         }
 
@@ -190,11 +197,21 @@ class Manager {
         allArguments.append(contentsOf: arguments)
 
         do {
+            let outputPipe = Pipe()
+            let errorPipe = Pipe()
+
             let task = Process()
+            task.standardOutput = outputPipe
+            task.standardError = errorPipe
             task.executableURL = URL(fileURLWithPath: toolPath)
             task.arguments = allArguments
             try task.run()
             task.waitUntilExit()
+
+            let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
+            let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
+            SharedLogger.debug("Stdout from \(tool) \(String(decoding: outputData, as: UTF8.self))")
+            SharedLogger.debug("Stderr from \(tool) \(String(decoding: errorData, as: UTF8.self))")
         } catch {
             SharedLogger.fail("Fail to run tool \(tool).")
         }
