@@ -25,25 +25,9 @@
 // --------------------------------------------------------------------------
 
 import Foundation
-import os.log
 
 enum LogLevel: Int {
     case error, warning, info, debug
-
-    var asOSLogLevel: OSLogType {
-        switch self {
-        case .error:
-            return OSLogType.error
-        case .warning:
-            fallthrough
-        case .info:
-            return OSLogType.info
-        case .debug:
-            return OSLogType.debug
-        default:
-            return OSLogType.default
-        }
-    }
 
     var label: String {
         switch self {
@@ -55,8 +39,6 @@ enum LogLevel: Int {
             return "INFO"
         case .debug:
             return "DEBUG"
-        default:
-            return "UNK"
         }
     }
 }
@@ -141,21 +123,11 @@ class NullLogger: Logger {
     }
 }
 
-/// OSX-specific OS logger
-class OSLogger: Logger {
+/// Stdiout logger
+class StdoutLogger: Logger {
     // MARK: Properties
 
     var level: LogLevel = .info
-
-    let name: String
-    var loggers: [String: OSLog]
-
-    // MARK: Initializers
-
-    init(withName name: String) {
-        self.name = name
-        self.loggers = [String: OSLog]()
-    }
 
     // MARK: Methods
 
@@ -165,13 +137,7 @@ class OSLogger: Logger {
         }
         guard shouldLog(forLevel: level) else { return }
         let cat = category ?? SharedLogger.default
-        if let logger = loggers[cat] {
-            os_log("%@", log: logger, type: level.asOSLogLevel, msg)
-        } else {
-            let logger = OSLog(subsystem: name, category: cat)
-            loggers[cat] = logger
-            os_log("%@", log: logger, type: level.asOSLogLevel, msg)
-        }
+        print("AutorestSwift.\(cat) (\(level.label)) \(msg)")
     }
 
     func fail(_ message: @autoclosure @escaping () -> String?, category: String? = nil) -> Never {
