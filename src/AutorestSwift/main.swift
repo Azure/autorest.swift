@@ -47,6 +47,6 @@ if arguments.count == 0 {
         let manager = try Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
         try manager.run()
     } catch {
-        print(error)
+        SharedLogger.error("\(error)")
     }
 }
