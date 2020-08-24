@@ -26,17 +26,27 @@
 
 import Foundation
 
-// TODO: Re-enable this for local runs
-// let sourceUrl = documentsUrl.appendingPathComponent("code-model-v4-2.yaml")
-// let manager = Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
-// do {
-//    try manager.run()
-// } catch {
-//    print(error)
-// }
+// Drop the first argument as that is the Executable name
+let arguments: [String] = Array(CommandLine.arguments.dropFirst())
 
-// Enable file logging
-SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"))
+if arguments.count == 0 {
+    // Enable file logging
+    SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"))
 
-let plugin = AutorestPlugin()
-plugin.start()
+    let plugin = AutorestPlugin()
+    plugin.start()
+} else if arguments[0] == "--standalone" {
+    guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    else { fatalError("Unable to find Documents directory.") }
+
+    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4-2.yaml"
+    let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
+    do {
+        SharedLogger.set(logger: SwiftLogger())
+
+        let manager = try Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
+        try manager.run()
+    } catch {
+        print(error)
+    }
+}
