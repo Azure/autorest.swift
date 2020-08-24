@@ -40,13 +40,14 @@ struct ClientMethodOptionsViewModel {
     // The list of properites for the options object
     let properties: [PropertyViewModel]
 
-    init(from operation: Operation, with model: CodeModel, parameters: [Parameter]) {
+    init(from operation: Operation, with model: CodeModel, parameters: [ParameterType]) {
         self.clientName = model.name
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
+        // FIXME: ClientMethodOptions needs update for flattened params
         var properties = [PropertyViewModel]()
         parameters.forEach {
-            properties.append(PropertyViewModel(from: $0))
+            properties.append(PropertyViewModel(from: $0.value))
         }
         self.properties = properties
     }

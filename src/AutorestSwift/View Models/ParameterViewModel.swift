@@ -33,14 +33,16 @@ struct ParameterViewModel {
     let name: String
     let type: String
     let optional: Bool
+    let flattened: Bool
     let defaultValue: ViewModelDefault
     let comment: ViewModelComment
 
-    init(from param: Parameter, withName name: String? = nil) {
+    init(from param: ParameterType, withName name: String? = nil) {
         self.name = name ?? param.name
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true)
         self.comment = ViewModelComment(from: param.description)
+        self.flattened = param.flattened
     }
 }

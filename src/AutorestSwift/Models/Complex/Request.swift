@@ -28,10 +28,10 @@ import Foundation
 
 class Request: Metadata {
     /// the parameter inputs to the operation
-    let parameters: [Parameter]?
+    let parameters: [ParameterType]?
 
     /// a filtered list of parameters that is (assumably) the actual method signature parameters
-    let signatureParameters: [Parameter]?
+    let signatureParameters: [ParameterType]?
 
     // MARK: Codable
 
@@ -41,8 +41,8 @@ class Request: Metadata {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        parameters = try? container.decode([Parameter]?.self, forKey: .parameters)
-        signatureParameters = try? container.decode([Parameter]?.self, forKey: .signatureParameters)
+        self.parameters = try? container.decode([ParameterType]?.self, forKey: .parameters)
+        self.signatureParameters = try? container.decode([ParameterType]?.self, forKey: .signatureParameters)
         try super.init(from: decoder)
     }
 
@@ -54,15 +54,15 @@ class Request: Metadata {
     }
 
     /// Lookup a parameter by name.
-    func parameter(for name: String) -> Parameter? {
-        return parameters?.first { $0.serializedName == name }
+    func parameter(for name: String) -> ParameterType? {
+        return parameters?.first(named: name)
     }
 }
 
 extension Request {
     /// Retrieves a single body-encoded parameter, if there is one. Fails if there is more than one.
-    var bodyParam: Parameter? {
-        var bodyParams = [Parameter]()
+    var bodyParam: ParameterType? {
+        var bodyParams = [ParameterType]()
         for param in signatureParameters ?? [] {
             if let httpParam = param.protocol.http as? HttpParameter,
                 httpParam.in == .body {

@@ -27,7 +27,7 @@
 import Foundation
 
 /// A definition of an discrete input for an operation
-class Parameter: Value {
+class Parameter: Value, CustomDebugStringConvertible {
     /// suggested implementation location for this parameter
     let implementation: ImplementationLocation?
 
@@ -59,5 +59,11 @@ class Parameter: Value {
         if flattened != nil { try container.encode(flattened, forKey: .flattened) }
 
         try super.encode(to: encoder)
+    }
+
+    // MARK: CustomDebugStringConvertible
+
+    public var debugDescription: String {
+        return debugString() ?? description
     }
 }

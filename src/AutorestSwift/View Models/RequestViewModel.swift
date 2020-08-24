@@ -35,15 +35,19 @@ enum RequestBodyType: String {
     case patchBody
 }
 
-struct BodyParam {
+struct BodyParamViewModel {
     let name: String
     let type: String
-    let propertyNames: [String]
+    let flattened: Bool
+    let properties: [ParameterViewModel]
 
-    init(from parameter: Parameter, with operation: Operation) {
-        self.name = operation.requests?.first?.bodyParamName(for: operation) ?? parameter.name
+    init(from parameter: ParameterType, with operation: Operation) {
+        self.name = operation.request?.bodyParamName(for: operation) ?? parameter.name
         self.type = parameter.schema.name
-        self.propertyNames = (parameter.schema.properties ?? []).map { $0.name }
+        self.flattened = parameter.flattened
+        var properties = [ParameterViewModel]()
+        // FIXME: Create metadata for the virtual properties
+        self.properties = properties
     }
 }
 
@@ -51,7 +55,7 @@ struct BodyParam {
 struct RequestViewModel {
     let path: String
     let method: String
-    let bodyParam: BodyParam?
+    let bodyParam: BodyParamViewModel?
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 
@@ -63,7 +67,7 @@ struct RequestViewModel {
 
         // create a body param model, if the request has one
         if let bodyParam = request.bodyParam {
-            self.bodyParam = BodyParam(from: bodyParam, with: operation)
+            self.bodyParam = BodyParamViewModel(from: bodyParam, with: operation)
         } else {
             self.bodyParam = nil
         }

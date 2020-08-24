@@ -26,22 +26,39 @@
 
 import Foundation
 
-class GroupProperty: Property {
-    let originalParameter: [ParameterType]
+/// A definition of an discrete input for an operation
+class VirtualParameter: Parameter {
+    /// the original body parameter that this parameter is in effect replacing
+    let originalParameter: Parameter
+
+    /// if this parameter is for a nested property, this is the path of properties it takes to get there
+    let pathToProperty: [Property]
+
+    /// the target property this virtual parameter represents
+    let targetProperty: Property
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case originalParameter
+        case originalParameter, pathToProperty, targetProperty
     }
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        originalParameter = try container.decode([ParameterType].self, forKey: .originalParameter)
+
+        originalParameter = try container.decode(Parameter.self, forKey: .originalParameter)
+        pathToProperty = try container.decode([Property].self, forKey: .pathToProperty)
+        targetProperty = try container.decode(Property.self, forKey: .targetProperty)
+
         try super.init(from: decoder)
     }
 
     override public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(originalParameter, forKey: .originalParameter)
+        try container.encode(pathToProperty, forKey: .pathToProperty)
+        try container.encode(targetProperty, forKey: .targetProperty)
+
         try super.encode(to: encoder)
     }
 }

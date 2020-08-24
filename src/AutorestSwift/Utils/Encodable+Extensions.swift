@@ -36,4 +36,15 @@ extension Encodable {
             }
         }
     }
+
+    func debugString() -> String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        if let jsonData = try? encoder.encode(self) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                return jsonString
+            }
+        }
+        return nil
+    }
 }

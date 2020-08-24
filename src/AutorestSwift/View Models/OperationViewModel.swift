@@ -34,7 +34,7 @@ struct OperationParameters {
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(
-        parameters: [Parameter]?,
+        parameters: [ParameterType]?,
         operation: Operation,
         operationParameters: OperationParameters? = nil
     ) {
@@ -115,11 +115,9 @@ struct OperationViewModel {
         var responses = [ResponseViewModel]()
         var exceptions = [ExceptionResponseViewModel]()
 
-        assert(
-            operation.requests?.count ?? 0 <= 1,
-            "Multiple requests per operation is currently not supported... \(operation.name)"
-        )
-        guard let request = operation.requests?.first else { fatalError("No requests found.") }
+        guard let request = operation.request else {
+            fatalError("Request not found for operation \(operation.name).")
+        }
         requests.append(RequestViewModel(from: request, with: operation))
 
         let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
@@ -227,7 +225,7 @@ struct OperationViewModel {
     }
 }
 
-private func filterParams(for params: [Parameter]?, with allowed: [ParameterLocation]) -> [Parameter] {
+private func filterParams(for params: [ParameterType]?, with allowed: [ParameterLocation]) -> [ParameterType] {
     let optionsParams = params?.filter { param in
         if let httpParam = param.protocol.http as? HttpParameter {
             return allowed.contains(httpParam.in)
