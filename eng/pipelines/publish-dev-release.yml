@@ -1,0 +1,22 @@
+trigger: none
+pr: none
+
+jobs:
+  - job: PreviewRelease
+
+    pool:
+      vmImage: 'macOS-10.15'
+
+    steps:
+      - script: sudo xcode-select --switch /Applications/Xcode_11.5.app
+        displayName: 'Use Xcode 11.5'
+
+      - script: npm install
+        displayName: Build
+
+      - script : |
+          export DEV_VERSION=$(node -p -e "require('./package.json').version")-dev.$BUILD_BUILDNUMBER
+          npm version --no-git-tag-version $DEV_VERSION
+          npm pack
+          npx publish-release --token $(azuresdk-github-pat) --repo autorest.swift --owner Azure --name "AutoRest for Swift v$DEV_VERSION" --tag v$DEV_VERSION --notes='Preview release of AutoRest for Swift' --prerelease --editRelease false --assets autorest-swift-$DEV_VERSION.tgz --target_commitish $(Build.SourceBranchName)
+        displayName: 'Publish development release'
