@@ -76,7 +76,7 @@ public final class ChannelClient {
 
     public func setupHandler(initComplete: InitCompleteCallback?) {
         guard let context = self.context else {
-            SharedLogger.fail("No context")
+            SharedLogger.fail("No context in setupHandler")
         }
 
         let future = context.pipeline.removeHandler(name: "AutorestClient").flatMap {
@@ -94,7 +94,6 @@ public final class ChannelClient {
     }
 
     private func initalizationComplete(context: ChannelHandlerContext) {
-        SharedLogger.debug("initalizationComplete called")
         state = .started
         self.context = context
         processCallback()
@@ -166,7 +165,6 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
-        SharedLogger.debug("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id ?? 0, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -174,7 +172,6 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        SharedLogger.debug("Client Handler channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -184,15 +181,12 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
-        SharedLogger.debug("Client Handler handlerAdded")
         initComplete(context)
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        SharedLogger.debug("Client Handler errorCaught")
-        if let remoteAddress = context.remoteAddress {
-            print("server", remoteAddress, "error", error)
-        }
+        SharedLogger.error("Client Handler errorCaught")
+
         if queue.isEmpty {
             return context.fireErrorCaught(error) // already complete
         }
@@ -209,13 +203,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
         }
     }
 
-    public func channelActive(context _: ChannelHandlerContext) {
-        SharedLogger.debug("Client Handler channelActive")
-    }
-
     public func channelInactive(context: ChannelHandlerContext) {
-        SharedLogger.debug("Client Handler channelInactive")
-
         if !queue.isEmpty {
             errorCaught(context: context, error: ClientError.connectionResetByPeer)
         }
