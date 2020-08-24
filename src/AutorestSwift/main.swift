@@ -42,11 +42,11 @@ if arguments.count == 0 {
     let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4-2.yaml"
     let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
     do {
-        SharedLogger.set(logger: SwiftLogger())
+        SharedLogger.set(logger: StdoutLogger())
 
         let manager = try Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
         try manager.run()
     } catch {
-        print(error)
+        SharedLogger.error("\(error)")
     }
 }
