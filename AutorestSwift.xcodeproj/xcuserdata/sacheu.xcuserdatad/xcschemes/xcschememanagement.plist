@@ -12,12 +12,12 @@
 		<key>AutorestSwiftPackageDescription.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>17</integer>
 		</dict>
 		<key>AutorestSwiftPackageTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>16</integer>
 		</dict>
 		<key>AutorestSwiftTests.xcscheme_^#shared#^_</key>
 		<dict>
