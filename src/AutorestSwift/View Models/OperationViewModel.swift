@@ -34,7 +34,7 @@ struct OperationParameters {
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(
-        parameters: [Parameter]?,
+        parameters: [ParameterType]?,
         operation: Operation,
         operationParameters: OperationParameters? = nil
     ) {
@@ -46,7 +46,6 @@ struct OperationParameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
             let viewModel = KeyValueViewModel(from: param, with: operation)
-
             switch httpParam.in {
             case .query:
                 viewModel.optional ? query.optional.append(viewModel) : query.required
@@ -106,9 +105,7 @@ struct OperationViewModel {
             operation: operation
         )
 
-        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri])
-        var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
-
+        var (signatureParams, optionsParams) = sort(params: operation.signatureParameters)
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
 
@@ -119,14 +116,9 @@ struct OperationViewModel {
         guard let request = operation.requests?.first else { fatalError("No requests found.") }
         requests.append(RequestViewModel(from: request, with: operation))
 
-        let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
-        let requestOptionsParams = filterParams(
-            for: request.signatureParameters,
-            with: [.header, .query]
-        )
-
-        optionsParams.append(contentsOf: requestOptionsParams)
-        signatureParams.append(contentsOf: requestSignatureParams)
+        let sorted = sort(params: request.signatureParameters)
+        optionsParams.append(contentsOf: sorted.optional)
+        signatureParams.append(contentsOf: sorted.method)
 
         params = OperationParameters(
             parameters: request.parameters,
@@ -155,13 +147,13 @@ struct OperationViewModel {
         assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
         assert(
             responses.filter { $0.strategy != ResponseBodyType.noBody }.count <= 1,
-            "Multiple Nobody responses per operation is currently not supported... \(operation.name)"
+            "Multiple noBody responses per operation is currently not supported... \(operation.name)"
         )
         self.request = requests.first
         let response = responses.first
 
         // Construct the relevant view models
-        if let bodyParam = operation.requests?.first?.bodyParam {
+        if let firstRequest = operation.requests?.first, let bodyParam = firstRequest.bodyParam {
             let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
             self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
         } else {
@@ -213,15 +205,22 @@ struct OperationViewModel {
     }
 }
 
-private func filterParams(for params: [Parameter]?, with allowed: [ParameterLocation]) -> [Parameter] {
-    let optionsParams = params?.filter { param in
-        if let httpParam = param.protocol.http as? HttpParameter {
-            return allowed.contains(httpParam.in)
+private func sort(params: [ParameterType]?) -> (method: [ParameterType], optional: [ParameterType]) {
+    var methodParams = [ParameterType]()
+    var optionalParams = [ParameterType]()
+    for param in params ?? [] {
+        // TODO: Virtual Params here!!!
+        if case let .virtual(virt) = param {
+            print("\(virt.name) is Virtual Parameter for \(virt.originalParameter.name)")
+            let test = "best"
+        }
+        if param.implementation == .method {
+            methodParams.append(param)
         } else {
-            return false
+            optionalParams.append(param)
         }
     }
-    return optionsParams ?? []
+    return (methodParams, optionalParams)
 }
 
 private func operationName(for operation: Operation) -> String {

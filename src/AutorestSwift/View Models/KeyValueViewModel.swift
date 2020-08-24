@@ -48,7 +48,7 @@ struct KeyValueViewModel {
                     the value of the VM will be the name of the signature parameter.
         - Parameter operation: the operation which this paramter exists.
      */
-    init(from param: Parameter, with operation: Operation) {
+    init(from param: ParameterType, with operation: Operation) {
         self.key = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {

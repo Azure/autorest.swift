@@ -38,7 +38,7 @@ struct ObjectViewModel {
     let hasDateProperty: Bool
 
     init(from schema: ObjectSchema) {
-        self.name = schema.name.toPascalCase
+        self.name = schema.name
         self.comment = ViewModelComment(from: schema.description)
 
         var props = [PropertyViewModel]()

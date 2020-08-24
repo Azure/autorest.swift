@@ -31,7 +31,7 @@ class CodeModel: Codable, LanguageShortcut {
     let info: Info
     let schemas: Schemas
     let operationGroups: [OperationGroup]
-    let globalParameters: [Parameter]?
+    let globalParameters: [ParameterType]?
     let security: Security
     var language: Languages
     let `protocol`: Protocols
@@ -43,8 +43,8 @@ class CodeModel: Codable, LanguageShortcut {
     }
 
     /// Lookup a global parameter by name.
-    func globalParameter(for name: String) -> Parameter? {
-        return globalParameters?.first { $0.name == name }
+    func globalParameter(for name: String) -> ParameterType? {
+        return globalParameters?.first(named: name)
     }
 
     func getApiVersion() -> String {

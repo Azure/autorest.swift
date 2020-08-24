@@ -29,10 +29,10 @@ import Foundation
 /// represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
 class Operation: Codable, LanguageShortcut {
     /// common parameters when there are multiple requests
-    let parameters: [Parameter]?
+    let parameters: [ParameterType]?
 
     /// a common filtered list of parameters that is (assumably) the actual method signature parameters
-    let signatureParameters: [Parameter]?
+    let signatureParameters: [ParameterType]?
 
     /// the different possibilities to build the request.
     let requests: [Request]?
@@ -86,18 +86,18 @@ class Operation: Codable, LanguageShortcut {
         exceptions = (try? container.decode([SchemaResponse].self, forKey: .exceptions)) ??
             (try? container.decode([Response].self, forKey: .exceptions))
 
-        parameters = try? container.decode([Parameter].self, forKey: .parameters)
-        signatureParameters = try? container.decode([Parameter].self, forKey: .signatureParameters)
-        requests = try? container.decode([Request].self, forKey: .requests)
-        profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
-        summary = try? container.decode(String.self, forKey: .summary)
-        apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
-        deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
-        origin = try? container.decode(String.self, forKey: .origin)
-        externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
-        language = try container.decode(Languages.self, forKey: .language)
-        `protocol` = try container.decode(Protocols.self, forKey: .protocol)
+        self.parameters = try? container.decode([ParameterType]?.self, forKey: .parameters)
+        self.signatureParameters = try? container.decode([ParameterType].self, forKey: .signatureParameters)
+        self.requests = try? container.decode([Request].self, forKey: .requests)
+        self.profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
+        self.summary = try? container.decode(String.self, forKey: .summary)
+        self.apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
+        self.deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
+        self.origin = try? container.decode(String.self, forKey: .origin)
+        self.externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
+        self.extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
+        self.language = try container.decode(Languages.self, forKey: .language)
+        self.protocol = try container.decode(Protocols.self, forKey: .protocol)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -119,12 +119,12 @@ class Operation: Codable, LanguageShortcut {
     }
 
     /// Lookup a signatureParameter by name.
-    func signatureParameter(for name: String) -> Parameter? {
-        return signatureParameters?.first { $0.name == name }
+    func signatureParameter(for name: String) -> ParameterType? {
+        return signatureParameters?.first(named: name)
     }
 
     /// Lookup a parameter by name.
-    func parameter(for name: String) -> Parameter? {
-        return parameters?.first { $0.name == name }
+    func parameter(for name: String) -> ParameterType? {
+        return parameters?.first(named: name)
     }
 }

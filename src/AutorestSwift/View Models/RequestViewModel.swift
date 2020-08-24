@@ -40,7 +40,7 @@ struct BodyParam {
     let type: String
     let propertyNames: [String]
 
-    init(from parameter: Parameter, with operation: Operation) {
+    init(from parameter: ParameterType, with operation: Operation) {
         self.name = operation.requests?.first?.bodyParamName(for: operation) ?? parameter.name
         self.type = parameter.schema.name
         self.propertyNames = (parameter.schema.properties ?? []).map { $0.name }
