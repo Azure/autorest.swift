@@ -14,10 +14,4 @@ target 'AutorestSwift' do
   pod 'SwiftNIO'
   pod 'SwiftNIOFoundationCompat'
 
-  target 'AutorestSwiftTests' do
-    inherit! :search_paths
-    # Pods for testing
-    pod 'Yams'
-  end
-
 end
