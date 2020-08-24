@@ -185,7 +185,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        SharedLogger.error("Client Handler errorCaught")
+        SharedLogger.error("Client Handler errorCaught. error=\(error)")
 
         if queue.isEmpty {
             return context.fireErrorCaught(error) // already complete

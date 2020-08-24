@@ -123,7 +123,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        SharedLogger.error("Server Handler errorCaught")
+        SharedLogger.error("Server Handler errorCaught. error=\(error)")
 
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
