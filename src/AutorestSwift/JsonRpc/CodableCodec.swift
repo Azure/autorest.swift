@@ -171,7 +171,6 @@ internal final class CodableCodec<In, Out>: ChannelInboundHandler, ChannelOutbou
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
-        SharedLogger.debug("Client Handler handlerAdded")
         initComplete?(context)
     }
 }

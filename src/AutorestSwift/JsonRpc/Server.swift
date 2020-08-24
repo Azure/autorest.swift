@@ -107,7 +107,6 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
-        SharedLogger.debug("Server Handler channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.id, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
@@ -124,7 +123,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func errorCaught(context: ChannelHandlerContext, error: Error) {
-        SharedLogger.debug("Server Handler errorCaught")
+        SharedLogger.error("Server Handler errorCaught. error=\(error)")
 
         switch error {
         case CodecError.badFraming, CodecError.badJSON:
@@ -139,14 +138,6 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
         }
         // close the client connection
         context.close(promise: nil)
-    }
-
-    public func channelActive(context _: ChannelHandlerContext) {
-        SharedLogger.debug("Server Handler channelActive")
-    }
-
-    public func channelInactive(context _: ChannelHandlerContext) {
-        SharedLogger.debug("Server Handler channelInactive")
     }
 
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
