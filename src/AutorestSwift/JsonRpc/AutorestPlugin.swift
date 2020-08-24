@@ -96,7 +96,7 @@ class AutorestPlugin {
                 .success(.list([.string("swift")]))
             )
         case "process":
-            plugin.sessionId = params.asList?.last?.asString
+            sessionId = params.asList?.last?.asString
             processRequestId = id
             startChannelClient(context: context)
         default:
@@ -111,7 +111,7 @@ class AutorestPlugin {
 
     func handleProcess() {
         let listInputsRequest: RPCObject = .list([.string(sessionId), .string("code-model-v4")])
-        let future = plugin.client.call(method: "ListInputs", params: listInputsRequest)
+        let future = client.call(method: "ListInputs", params: listInputsRequest)
         future.whenSuccess { result in
             switch result {
             case let .success(response):
@@ -130,7 +130,7 @@ class AutorestPlugin {
             SharedLogger.fail("handleListInputs filename is nil")
         }
         let readFileRequest: RPCObject = .list([.string(sessionId), .string(filename)])
-        let future = plugin.client.call(method: "ReadFile", params: readFileRequest)
+        let future = client.call(method: "ReadFile", params: readFileRequest)
         future.whenSuccess { result in
             switch result {
             case let .success(response):
@@ -190,7 +190,7 @@ class AutorestPlugin {
             let fileContent = try String(contentsOf: fileUrl)
 
             let writeFileRequest: RPCObject = .list([.string(sessionId), .string(fileName), .string(fileContent)])
-            let future = plugin.client.call(method: "WriteFile", params: writeFileRequest)
+            let future = client.call(method: "WriteFile", params: writeFileRequest)
             future.whenSuccess { result in
                 switch result {
                 case let .success(response):
