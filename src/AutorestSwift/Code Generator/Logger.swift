@@ -149,31 +149,6 @@ class StdoutLogger: Logger {
     }
 }
 
-/// Cross-platform Swift logger implementation
-class SwiftLogger: Logger {
-    var level: LogLevel = .info
-
-    func log(
-        _ message: @autoclosure @escaping () -> String?,
-        category _: String? = nil,
-        level _: LogLevel
-    ) {
-        guard let msg = message() else {
-            fatalError("Unable to create log message.")
-        }
-        guard shouldLog(forLevel: level) else { return }
-        // TODO: Implement
-    }
-
-    func fail(_ message: @autoclosure @escaping () -> String?, category _: String? = nil) -> Never {
-        guard let msg = message() else {
-            fatalError("Unable to create log message.")
-        }
-        // TODO: Implement
-        fatalError(msg)
-    }
-}
-
 /// Logs to a file.
 class FileLogger: Logger {
     var level: LogLevel = .info
