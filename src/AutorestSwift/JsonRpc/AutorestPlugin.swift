@@ -166,7 +166,6 @@ class AutorestPlugin {
             SharedLogger.fail("Unable to retrieve code model from Autorest.")
         }
         let manager = Manager(withString: codeModel)
-        manager.saveCodeModel()
         do {
             try manager.run()
 

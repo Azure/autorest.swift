@@ -71,10 +71,6 @@ class Parameter: Value, CustomDebugStringConvertible {
         try super.encode(to: encoder)
     }
 
-    public static var codingKeys: CodingKeys.Type {
-        return CodingKeys.self
-    }
-
     // MARK: CustomDebugStringConvertible
 
     public var debugDescription: String {
