@@ -42,7 +42,7 @@ struct BodyParamViewModel {
     let properties: [ParameterViewModel]
 
     init(from parameter: ParameterType, with operation: Operation) {
-        self.name = operation.requests?.first?.bodyParamName(for: operation) ?? parameter.name
+        self.name = operation.request?.bodyParamName(for: operation) ?? parameter.name
         self.type = parameter.schema.name
         self.flattened = parameter.flattened
         var properties = [ParameterViewModel]()

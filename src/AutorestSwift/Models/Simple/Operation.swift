@@ -35,7 +35,7 @@ class Operation: Codable, LanguageShortcut {
     let signatureParameters: [ParameterType]?
 
     /// the different possibilities to build the request.
-    let requests: [Request]?
+    private let requests: [Request]?
 
     /// responses that indicate a successful call
     let responses: [Response]?
@@ -70,13 +70,22 @@ class Operation: Codable, LanguageShortcut {
     /// additional metadata extensions dictionary
     let extensions: AnyCodable?
 
+    /// The request corresponding to this operation
+    var request: Request? {
+        assert(
+            requests?.count ?? 0 <= 1,
+            "Multiple requests per operation is currently not supported. Operation: \(name)"
+        )
+        return requests?.first
+    }
+
+    // MARK: Codable
+
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
             deprecated,
             origin, externalDocs, language, `protocol`, extensions
     }
-
-    // MARK: Codable
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

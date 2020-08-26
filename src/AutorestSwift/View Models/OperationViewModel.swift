@@ -33,18 +33,13 @@ struct OperationParameters {
     var path: [KeyValueViewModel]
     var hasOptionalsParams: Bool = false
 
-    /// Build a list of required and optional query params and headers from a list of parameters
-    init(
-        parameters: [ParameterType]?,
-        operation: Operation,
-        operationParameters: OperationParameters? = nil
-    ) {
-        self.header = operationParameters?.header ?? Params()
-        self.query = operationParameters?.query ?? Params()
-        self.body = operationParameters?.body ?? Params()
-        self.path = operationParameters?.path ?? [KeyValueViewModel]()
+    init(for operation: Operation) {
+        self.header = Params()
+        self.query = Params()
+        self.body = Params()
+        self.path = [KeyValueViewModel]()
 
-        for param in parameters ?? [] {
+        for param in operation.parameters ?? [] {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
             let viewModel = KeyValueViewModel(from: param, with: operation)
@@ -57,6 +52,27 @@ struct OperationParameters {
                     .append(viewModel)
             case .path:
                 path.append(viewModel)
+            case .body:
+                fatalError("Body parameter not expected in operation parameters.")
+            default:
+                continue
+            }
+        }
+    }
+
+    mutating func update(with request: Request, for operation: Operation) {
+        for param in request.signatureParameters ?? [] {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+            let viewModel = KeyValueViewModel(from: param, with: operation)
+            switch httpParam.in {
+            case .query:
+                viewModel.optional ? query.optional.append(viewModel) : query.required.append(viewModel)
+            case .header:
+                viewModel.optional ? header.optional.append(viewModel) : header.required.append(viewModel)
+            case .path:
+                path.append(viewModel)
+            case .body:
+                viewModel.optional ? body.optional.append(viewModel) : body.required.append(viewModel)
             default:
                 continue
             }
@@ -86,99 +102,67 @@ struct OperationViewModel {
     let name: String
     let comment: ViewModelComment
     let signatureComment: ViewModelComment
-    let bodyParam: ParameterViewModel?
-    let signatureParams: [ParameterViewModel]
     let returnType: ReturnTypeViewModel?
     let params: OperationParameters
     let pipelineContext: [KeyValueViewModel]?
+    let request: RequestViewModel?
+
+    //    let clientMethodOptions: ClientMethodOptionsViewModel
+    //    let bodyParam: ParameterViewModel?
+    //    let signatureParams: [ParameterViewModel]
+
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
-    let request: RequestViewModel?
-    let clientMethodOptions: ClientMethodOptionsViewModel
 
     init(from operation: Operation, with model: CodeModel) {
+        guard let request = operation.request else { fatalError("No request found for operation \(operation.name).") }
+
         self.name = operationName(for: operation)
         self.comment = ViewModelComment(from: operation.description)
+
+        var params = OperationParameters(for: operation)
+        params.update(with: request, for: operation)
 
         if name == "sendMessage" {
             let test = "best"
         }
 
-        var pipelineContext = [KeyValueViewModel]()
+        self.request = RequestViewModel(from: request, with: operation)
 
-        var params = OperationParameters(
-            parameters: operation.parameters,
-            operation: operation
-        )
-
-        var (signatureParams, optionsParams, _) = sort(params: operation.signatureParameters)
-        var requests = [RequestViewModel]()
+        // Build up response view model
         var responses = [ResponseViewModel]()
-
-        assert(
-            operation.requests?.count ?? 0 <= 1,
-            "Multiple requests per operation is currently not supported... \(operation.name)"
-        )
-        guard let request = operation.requests?.first else { fatalError("No requests found.") }
-        let sorted = sort(params: request.signatureParameters)
-        if let body = sorted.body {
-            let bodyParamName = request.bodyParamName(for: operation)
-            self.bodyParam = ParameterViewModel(from: body, withName: bodyParamName)
-        } else {
-            self.bodyParam = nil
-        }
-        optionsParams.append(contentsOf: sorted.optional)
-        signatureParams.append(contentsOf: sorted.required)
-        requests.append(RequestViewModel(from: request, with: operation))
-
-        params = OperationParameters(
-            parameters: request.parameters,
-            operation: operation,
-            operationParameters: params
-        )
-
         for response in operation.responses ?? [] {
             responses.append(ResponseViewModel(from: response, with: operation))
         }
-
         var statusCodes = [String]()
         responses.forEach {
             statusCodes.append(contentsOf: $0.statusCodes)
         }
-
+        var pipelineContext = [KeyValueViewModel]()
         pipelineContext.append(KeyValueViewModel(
             key: "ContextKey.allowedStatusCodes.rawValue",
             value: "[\(statusCodes.joined(separator: ","))]"
         ))
+        self.pipelineContext = pipelineContext
 
-        self.requests = requests
+        // current logic only supports a single '.noBody' response
         self.responses = responses
-
-        // current logic only supports a single request and response
-        assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
         assert(
             responses.filter { $0.strategy != ResponseBodyType.noBody }.count <= 1,
-            "Multiple noBody responses per operation is currently not supported... \(operation.name)"
+            "Multiple '.noBody' responses per operation is currently not supported... \(operation.name)"
         )
-        self.request = requests.first
         let response = responses.first
 
+        // FIXME: Refine this?
         var signaturePropertyViewModel = [ParameterViewModel]()
-        signatureParams.forEach {
-            signaturePropertyViewModel.append(ParameterViewModel(from: $0))
+        for param in signatureParams {
+            signaturePropertyViewModel.append(ParameterViewModel(from: param))
         }
+        self.signatureParams = signaturePropertyViewModel
 
         self.returnType = ReturnTypeViewModel(from: response)
+        self.signatureComment = buildSignatureComment(from: params)
 
-        var signatureComments: [String] = []
-        if let param = bodyParam, param.flattened == false {
-            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
-        }
-        for param in signatureParams where param.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.description)")
-        }
-        self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
-        self.signatureParams = signaturePropertyViewModel
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
         if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
@@ -193,7 +177,6 @@ struct OperationViewModel {
         params.hasOptionalsParams = params.query.optional.count + params.header.optional.count > 0
 
         self.params = params
-        self.pipelineContext = pipelineContext
 
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
@@ -203,36 +186,15 @@ struct OperationViewModel {
     }
 }
 
-private func sort(params: [ParameterType]?)
-    -> (required: [ParameterType], optional: [ParameterType], body: ParameterType?) {
-    var requiredParams = [ParameterType]()
-    var optionalParams = [ParameterType]()
-    var bodyParam: ParameterType?
-    var hasVirt = false
-    for param in params ?? [] {
-        if case let .virtual(virt) = param {
-            hasVirt = true
-            let newBodyParam = virt.originalParameter
-            if bodyParam != nil {
-                // swiftlint:disable force_try
-                assert(
-                    bodyParam!.schema.name == newBodyParam.schema.name,
-                    "Unexpectedly found virtual parameters for different body params."
-                )
-            }
-            bodyParam = .regular(newBodyParam)
-        }
-        if param.required == true {
-            requiredParams.append(param)
-        } else {
-            optionalParams.append(param)
-        }
+private func buildSignatureComment(from params: OperationParameters) -> ViewModelComment {
+    var signatureComments: [String] = []
+    if let param = bodyParam, param.flattened == false {
+        signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
     }
-    // ensure that a body param is found if there are any virtual parameters
-    if hasVirt, bodyParam == nil {
-        assertionFailure("Virtual parameters should only accompany a body param.")
+    for param in signatureParams where param.description != "" {
+        signatureComments.append("   - \(param.name) : \(param.description)")
     }
-    return (requiredParams, optionalParams, bodyParam)
+    return ViewModelComment(from: signatureComments.joined(separator: "\n"))
 }
 
 private func operationName(for operation: Operation) -> String {
@@ -258,7 +220,7 @@ private func operationName(for operation: Operation) -> String {
 
     // Strip off the body param name, if there is one.
     // (ex: `createCat(...)` becomes `create(cat:...)`
-    if let bodyParamName = operation.requests?.first?.bodyParamName(for: operation) {
+    if let bodyParamName = operation.request?.bodyParamName(for: operation) {
         let suffix = bodyParamName.prefix(1).uppercased() + bodyParamName.dropFirst()
         if operationName.hasSuffix(suffix) {
             operationName = String(operationName.dropLast(suffix.count))
