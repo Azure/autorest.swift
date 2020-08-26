@@ -56,13 +56,12 @@ class AutoRestHeadTest: XCTestCase {
             }
         }
         
-        // Wait until the expectation is fulfilled, with a timeout of 5 seconds.
         wait(for: [expectation], timeout: 5.0)
     }
     
     func testhead204() throws {
-        let expectation = XCTestExpectation(description: "Call head200")
-        let failedExpectation = XCTestExpectation(description: "Call head200 failed")
+        let expectation = XCTestExpectation(description: "Call head204")
+        let failedExpectation = XCTestExpectation(description: "Call head204 failed")
         failedExpectation.isInverted = true
         
         client.head204() { result, _  in
@@ -75,13 +74,12 @@ class AutoRestHeadTest: XCTestCase {
             }
         }
         
-        // Wait until the expectation is fulfilled, with a timeout of 5 seconds.
         wait(for: [expectation], timeout: 5.0)
     }
     
     func testhead404() throws {
-        let expectation = XCTestExpectation(description: "Call head200")
-        let failedExpectation = XCTestExpectation(description: "Call head200 failed")
+        let expectation = XCTestExpectation(description: "Call head404")
+        let failedExpectation = XCTestExpectation(description: "Call head404 failed")
         failedExpectation.isInverted = true
         
         client.head200() { result, _  in
@@ -94,7 +92,6 @@ class AutoRestHeadTest: XCTestCase {
             }
         }
         
-        // Wait until the expectation is fulfilled, with a timeout of 5 seconds.
         wait(for: [expectation], timeout: 5.0)
     }
 }
