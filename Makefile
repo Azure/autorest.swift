@@ -26,14 +26,17 @@ copyTestResources:
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
 	cp templates/* ${TEST_RESOURCES_DIRECTORY}
 
+buildSwiftlint:
+	scripts/build-swift-lint.sh
+
 copyTools:
-	pod install
-	cp ./Pods/SwiftFormat/CommandLineTool/swiftformat ${RUN_RESOURCES_DIRECTORY}
-	cp ./Pods/SwiftLint/swiftlint ${RUN_RESOURCES_DIRECTORY}
+	chmod +w ./.build/checkouts/SwiftFormat/CommandLineTool/swiftformat
+	cp ./.build/checkouts/SwiftFormat/CommandLineTool/swiftformat ${RUN_RESOURCES_DIRECTORY}
+	cp ./.build/checkouts/SwiftLint/.build/x86_64-apple-macosx/debug/swiftlint ${RUN_RESOURCES_DIRECTORY}
 	cp ./.swiftformat ${RUN_RESOURCES_DIRECTORY}
 	cp ./.swiftlint.yml ${RUN_RESOURCES_DIRECTORY}
 
-install: build copyTools
+install: build buildSwiftlint copyTools
 
 run: build
 	${EXECUTABLE_DIRECTORY}/AutorestSwift
