@@ -29,6 +29,7 @@ import Foundation
 struct OperationParameters {
     var header: Params
     var query: Params
+    var body: Params
     var path: [KeyValueViewModel]
     var hasOptionalsParams: Bool = false
 
@@ -40,6 +41,7 @@ struct OperationParameters {
     ) {
         self.header = operationParameters?.header ?? Params()
         self.query = operationParameters?.query ?? Params()
+        self.body = operationParameters?.body ?? Params()
         self.path = operationParameters?.path ?? [KeyValueViewModel]()
 
         for param in parameters ?? [] {
@@ -98,6 +100,10 @@ struct OperationViewModel {
         self.name = operationName(for: operation)
         self.comment = ViewModelComment(from: operation.description)
 
+        if name == "sendMessage" {
+            let test = "best"
+        }
+
         var pipelineContext = [KeyValueViewModel]()
 
         var params = OperationParameters(
@@ -105,7 +111,7 @@ struct OperationViewModel {
             operation: operation
         )
 
-        var (signatureParams, optionsParams) = sort(params: operation.signatureParameters)
+        var (signatureParams, optionsParams, _) = sort(params: operation.signatureParameters)
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
 
@@ -114,11 +120,16 @@ struct OperationViewModel {
             "Multiple requests per operation is currently not supported... \(operation.name)"
         )
         guard let request = operation.requests?.first else { fatalError("No requests found.") }
-        requests.append(RequestViewModel(from: request, with: operation))
-
         let sorted = sort(params: request.signatureParameters)
+        if let body = sorted.body {
+            let bodyParamName = request.bodyParamName(for: operation)
+            self.bodyParam = ParameterViewModel(from: body, withName: bodyParamName)
+        } else {
+            self.bodyParam = nil
+        }
         optionsParams.append(contentsOf: sorted.optional)
-        signatureParams.append(contentsOf: sorted.method)
+        signatureParams.append(contentsOf: sorted.required)
+        requests.append(RequestViewModel(from: request, with: operation))
 
         params = OperationParameters(
             parameters: request.parameters,
@@ -152,14 +163,6 @@ struct OperationViewModel {
         self.request = requests.first
         let response = responses.first
 
-        // Construct the relevant view models
-        if let firstRequest = operation.requests?.first, let bodyParam = firstRequest.bodyParam {
-            let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
-            self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
-        } else {
-            self.bodyParam = nil
-        }
-
         var signaturePropertyViewModel = [ParameterViewModel]()
         signatureParams.forEach {
             signaturePropertyViewModel.append(ParameterViewModel(from: $0))
@@ -168,7 +171,7 @@ struct OperationViewModel {
         self.returnType = ReturnTypeViewModel(from: response)
 
         var signatureComments: [String] = []
-        if let param = bodyParam {
+        if let param = bodyParam, param.flattened == false {
             signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
         }
         for param in signatureParams where param.description != "" {
@@ -197,30 +200,39 @@ struct OperationViewModel {
             with: model,
             parameters: optionsParams
         )
-
-        // validate our assumption that there won't be any "required options"
-        for param in optionsParams {
-            assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
-        }
     }
 }
 
-private func sort(params: [ParameterType]?) -> (method: [ParameterType], optional: [ParameterType]) {
-    var methodParams = [ParameterType]()
+private func sort(params: [ParameterType]?)
+    -> (required: [ParameterType], optional: [ParameterType], body: ParameterType?) {
+    var requiredParams = [ParameterType]()
     var optionalParams = [ParameterType]()
+    var bodyParam: ParameterType?
+    var hasVirt = false
     for param in params ?? [] {
-        // TODO: Virtual Params here!!!
         if case let .virtual(virt) = param {
-            print("\(virt.name) is Virtual Parameter for \(virt.originalParameter.name)")
-            let test = "best"
+            hasVirt = true
+            let newBodyParam = virt.originalParameter
+            if bodyParam != nil {
+                // swiftlint:disable force_try
+                assert(
+                    bodyParam!.schema.name == newBodyParam.schema.name,
+                    "Unexpectedly found virtual parameters for different body params."
+                )
+            }
+            bodyParam = .regular(newBodyParam)
         }
-        if param.implementation == .method {
-            methodParams.append(param)
+        if param.required == true {
+            requiredParams.append(param)
         } else {
             optionalParams.append(param)
         }
     }
-    return (methodParams, optionalParams)
+    // ensure that a body param is found if there are any virtual parameters
+    if hasVirt, bodyParam == nil {
+        assertionFailure("Virtual parameters should only accompany a body param.")
+    }
+    return (requiredParams, optionalParams, bodyParam)
 }
 
 private func operationName(for operation: Operation) -> String {

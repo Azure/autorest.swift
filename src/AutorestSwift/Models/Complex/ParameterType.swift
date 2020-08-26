@@ -90,6 +90,10 @@ enum ParameterType: Codable {
         return common.clientDefaultValue
     }
 
+    var flattened: Bool {
+        return common.flattened ?? false
+    }
+
     /// Return the common base class Parameter properties
     private var common: Parameter {
         switch self {

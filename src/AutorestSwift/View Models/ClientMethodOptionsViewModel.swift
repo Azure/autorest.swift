@@ -44,6 +44,7 @@ struct ClientMethodOptionsViewModel {
         self.clientName = model.name
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
+        // FIXME: ClientMethodOptions needs update for flattened params
         var properties = [PropertyViewModel]()
         parameters.forEach {
             properties.append(PropertyViewModel(from: $0.value))
