@@ -16,9 +16,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AutorestSwift::AutorestSwiftTests"
-               BuildableName = "AutorestSwiftTests.xctest"
-               BlueprintName = "AutorestSwiftTests"
+               BlueprintIdentifier = "F1A6719124F5CCCC00C2712C"
+               BuildableName = "AutorestSwiftTest.xctest"
+               BlueprintName = "AutorestSwiftTest"
                ReferencedContainer = "container:AutorestSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>

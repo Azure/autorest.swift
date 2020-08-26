@@ -165,12 +165,44 @@
 		F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */; };
 		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
+		F11303CA24F6EF2F007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */; };
 		F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */; };
 		F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
 		F1A5FD8124DCFEE600A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */; };
 		F1A5FD8224DCFEE600A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1A671B124F5E54100C2712C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestHeadTest::AutoRestHeadTest::Product";
+			remoteInfo = AutoRestHeadTest;
+		};
+		F1A671B324F5E54100C2712C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
+			remoteInfo = AzureCore;
+		};
+		F1A671B524F5E5FA00C2712C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestHeadTest::AutoRestHeadTest";
+			remoteInfo = AutoRestHeadTest;
+		};
+		F1A671B724F5E5FF00C2712C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AzureSDK::AzureCore";
+			remoteInfo = AzureCore;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		F106830024CF910A007EB4D5 /* CopyFiles */ = {
@@ -312,11 +344,15 @@
 		F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestBodySnippet.stencil; sourceTree = "<group>"; };
 		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
 		F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationUrlSnippet.stencil; sourceTree = "<group>"; };
+		F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutorestHeadTest.swift; path = test/integration/AutorestHeadTest.swift; sourceTree = SOURCE_ROOT; };
 		F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderEncoderSnippet.stencil; sourceTree = "<group>"; };
 		F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderDateProperty.stencil; sourceTree = "<group>"; };
+		F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutorestSwiftTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1A6719624F5CCCC00C2712C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestHeadTest.xcodeproj; path = test/integration/generated/head/AutoRestHeadTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -421,6 +457,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F1A6718F24F5CCCC00C2712C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		OBJ_227 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -559,10 +602,46 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
+		F11303C724F6EF1B007FF3A3 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				F11303C824F6EF20007FF3A3 /* integration */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		F11303C824F6EF20007FF3A3 /* integration */ = {
+			isa = PBXGroup;
+			children = (
+				F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */,
+			);
+			path = integration;
+			sourceTree = "<group>";
+		};
+		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
+			isa = PBXGroup;
+			children = (
+				F11303C724F6EF1B007FF3A3 /* test */,
+				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
+				F1A6719624F5CCCC00C2712C /* Info.plist */,
+			);
+			path = AutorestSwiftTest;
+			sourceTree = "<group>";
+		};
+		F1A671AA24F5E54000C2712C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1A671B224F5E54100C2712C /* AutoRestHeadTest.framework */,
+				F1A671B424F5E54100C2712C /* AzureCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		OBJ_114 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */,
+				F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -644,6 +723,7 @@
 				OBJ_6 /* Package.swift */,
 				0A22B02D24C88EB000EC018E /* Package.resolved */,
 				OBJ_7 /* Sources */,
+				F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */,
 				OBJ_114 /* Products */,
 				OBJ_118 /* tests */,
 				OBJ_120 /* scripts */,
@@ -770,6 +850,25 @@
 			productReference = "AutorestSwift::AutorestSwift::Product" /* AutorestSwift */;
 			productType = "com.apple.product-type.tool";
 		};
+		F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1A6719924F5CCCC00C2712C /* Build configuration list for PBXNativeTarget "AutorestSwiftTest" */;
+			buildPhases = (
+				F1A6718E24F5CCCC00C2712C /* Sources */,
+				F1A6718F24F5CCCC00C2712C /* Frameworks */,
+				F1A6719024F5CCCC00C2712C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
+				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
+			);
+			name = AutorestSwiftTest;
+			productName = AutorestSwiftTest;
+			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -777,7 +876,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 9999;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					F1A6719124F5CCCC00C2712C = {
+						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "AutorestSwift" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -789,12 +896,46 @@
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_114 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F1A671AA24F5E54000C2712C /* Products */;
+					ProjectRef = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				"AutorestSwift::AutorestSwift" /* AutorestSwift */,
+				F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F1A671B224F5E54100C2712C /* AutoRestHeadTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestHeadTest.framework;
+			remoteRef = F1A671B124F5E54100C2712C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1A671B424F5E54100C2712C /* AzureCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCore.framework;
+			remoteRef = F1A671B324F5E54100C2712C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1A6719024F5CCCC00C2712C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		148BDF5E35394EA176B0C219 /* [CP] Check Pods Manifest.lock */ = {
@@ -839,6 +980,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F1A6718E24F5CCCC00C2712C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F11303CA24F6EF2F007FF3A3 /* AutorestHeadTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		OBJ_130 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -975,7 +1124,144 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F1A671B624F5E5FA00C2712C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestHeadTest;
+			targetProxy = F1A671B524F5E5FA00C2712C /* PBXContainerItemProxy */;
+		};
+		F1A671B824F5E5FF00C2712C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AzureCore;
+			targetProxy = F1A671B724F5E5FF00C2712C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		F1A6719724F5CCCC00C2712C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AutorestSwiftTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/test/libs",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.generated.AutorestSwiftTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F1A6719824F5CCCC00C2712C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AutorestSwiftTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/test/libs",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.generated.AutorestSwiftTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		OBJ_128 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */;
@@ -1088,6 +1374,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F1A6719924F5CCCC00C2712C /* Build configuration list for PBXNativeTarget "AutorestSwiftTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1A6719724F5CCCC00C2712C /* Debug */,
+				F1A6719824F5CCCC00C2712C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
