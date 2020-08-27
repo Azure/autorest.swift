@@ -63,6 +63,14 @@ class SwiftGenerator: CodeGenerator {
             andParams: [:]
         )
 
+        // Create Util.swift file
+        try render(
+            template: "UtilFile",
+            toSubfolder: .util,
+            withFilename: "Util",
+            andParams: [:]
+        )
+
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)
         try render(
