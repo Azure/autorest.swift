@@ -186,7 +186,7 @@ struct OperationViewModel {
         self.signatureParams = signaturePropertyViewModel
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
-        if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "")) }
+        if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "\"\"")) }
         if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
 
         // If there is no optional query params, change query param declaration to 'let'

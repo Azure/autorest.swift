@@ -6,15 +6,17 @@ import PackageDescription
 let package = Package(
     name: "AutorestSwift",
     platforms: [
-        .macOS(.v10_14)
+        .macOS(.v10_15)
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
+        .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", .branch("master")),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
-    .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1")
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
+        .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -27,6 +29,11 @@ let package = Package(
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOFoundationCompat", package: "swift-nio")
             ]
+        ),
+        .testTarget(
+            name: "AutorestSwiftTest",
+            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest"],
+            path: "AutorestSwiftTest"
         )
     ],
     swiftLanguageVersions: [.v5]
