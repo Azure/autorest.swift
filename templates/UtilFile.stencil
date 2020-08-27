@@ -1,7 +1,0 @@
-import Foundation
- 
- public func formatDateToString(_ date: Date) -> String {
-     let dateFormatter = DateFormatter()
-     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-     return dateFormatter.string(from: date)
- }

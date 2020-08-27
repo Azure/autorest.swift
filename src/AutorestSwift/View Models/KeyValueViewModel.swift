@@ -66,7 +66,7 @@ struct KeyValueViewModel {
             if swiftType.starts(with: "String") {
                 self.value = param.name
             } else if swiftType.starts(with: "Date") {
-                self.value = "formatDateToString(\(param.name))"
+                self.value = "String(describing:\(param.name), format: Date.Format.iso8601))"
             } else {
                 // Convert into String in generated code
                 self.value = "String(\(param.name))"
