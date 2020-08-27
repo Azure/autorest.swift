@@ -165,7 +165,7 @@
 		F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */; };
 		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
-		F11303CA24F6EF2F007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */; };
+		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
 		F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */; };
 		F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
@@ -344,7 +344,7 @@
 		F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestBodySnippet.stencil; sourceTree = "<group>"; };
 		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
 		F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationUrlSnippet.stencil; sourceTree = "<group>"; };
-		F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutorestHeadTest.swift; path = test/integration/AutorestHeadTest.swift; sourceTree = SOURCE_ROOT; };
+		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
 		F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderEncoderSnippet.stencil; sourceTree = "<group>"; };
 		F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
@@ -602,26 +602,10 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
-		F11303C724F6EF1B007FF3A3 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				F11303C824F6EF20007FF3A3 /* integration */,
-			);
-			path = test;
-			sourceTree = "<group>";
-		};
-		F11303C824F6EF20007FF3A3 /* integration */ = {
-			isa = PBXGroup;
-			children = (
-				F11303C924F6EF2F007FF3A3 /* AutorestHeadTest.swift */,
-			);
-			path = integration;
-			sourceTree = "<group>";
-		};
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
-				F11303C724F6EF1B007FF3A3 /* test */,
+				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
 				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 			);
@@ -984,7 +968,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F11303CA24F6EF2F007FF3A3 /* AutorestHeadTest.swift in Sources */,
+				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
