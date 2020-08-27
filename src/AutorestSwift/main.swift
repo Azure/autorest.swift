@@ -28,10 +28,11 @@ import Foundation
 
 // Drop the first argument as that is the Executable name
 let arguments: [String] = Array(CommandLine.arguments.dropFirst())
+let logLevel = LogLevel.info
 
 if arguments.count == 0 {
     // Enable file logging
-    SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"))
+    SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"), withLevel: logLevel)
 
     let plugin = AutorestPlugin()
     plugin.start()
@@ -39,10 +40,10 @@ if arguments.count == 0 {
     guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     else { fatalError("Unable to find Documents directory.") }
 
-    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4-2.yaml"
+    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4.yaml"
     let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
     do {
-        SharedLogger.set(logger: StdoutLogger())
+        SharedLogger.set(logger: StdoutLogger(), withLevel: logLevel)
 
         let manager = try Manager(withInputUrl: sourceUrl, destinationUrl: documentsUrl)
         try manager.run()

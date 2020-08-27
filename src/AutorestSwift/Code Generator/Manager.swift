@@ -85,6 +85,7 @@ class Manager {
     func run() throws {
         let model = try loadModel()
         _ = check(model: model, against: inputString)
+        saveCodeModel()
 
         // Create folder structure
         let packageName = model.packageName
@@ -215,5 +216,14 @@ class Manager {
         } catch {
             SharedLogger.fail("Fail to run tool \(tool).")
         }
+    }
+
+    func saveCodeModel() {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            fatalError("Unable to locate Documents directory.")
+        }
+        let dest = documentsUrl.appendingPathComponent("code-model-v4.yaml")
+        let finalString = inputString.replacingOccurrences(of: "' '", with: "''")
+        try? finalString.write(to: dest, atomically: true, encoding: .utf8)
     }
 }

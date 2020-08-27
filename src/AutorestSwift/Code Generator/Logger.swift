@@ -61,10 +61,21 @@ extension Logger {
 struct SharedLogger {
     private static var logger: Logger!
 
+    static var level: LogLevel {
+        set {
+            logger.level = newValue
+        }
+
+        get {
+            logger.level
+        }
+    }
+
     fileprivate static let `default` = "default"
 
-    static func set(logger: Logger) {
+    static func set(logger: Logger, withLevel level: LogLevel = .info) {
         SharedLogger.logger = logger
+        SharedLogger.level = level
     }
 
     static func error(
