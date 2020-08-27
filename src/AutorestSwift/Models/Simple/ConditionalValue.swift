@@ -40,7 +40,7 @@ class ConditionalValue: Codable, LanguageShortcut {
     let source: String // StringOrNumberOrBoolean
 
     /// Additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     enum CodingKeys: String, CodingKey {
         case language, target, source, extensions
@@ -51,7 +51,7 @@ class ConditionalValue: Codable, LanguageShortcut {
         language = try container.decode(Languages.self, forKey: .language)
         target = try container.decode(String.self, forKey: .target)
         source = try container.decode(String.self, forKey: .source)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
+        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -28,7 +28,6 @@ import Foundation
 
 /// The bare-minimum fields for per-language metadata on a given aspect
 class Language: Codable {
-
     // MARK: Properties
 
     /// name used in actual implementation
@@ -48,6 +47,13 @@ class Language: Codable {
     struct PagingNames: Codable {
         var itemName: String
         var nextLinkName: String
+
+        init?(from dict: [String: String]) {
+            guard let itemName = dict["itemName"],
+                let nextLinkName = dict["nextLinkName"] else { return nil }
+            self.itemName = itemName
+            self.nextLinkName = nextLinkName
+        }
     }
 
     public var paging: PagingNames?

@@ -63,7 +63,7 @@ class Schema: Codable, LanguageShortcut {
     let properties: [Property]?
 
     /// Additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String

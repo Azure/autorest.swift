@@ -9,7 +9,11 @@ case let .success(data):
     }
     do {
         let decoder = JSONDecoder()
-        let paged = try PagedCollection<{{ op.returnType.name }}>(
+        let codingKeys = PagedCodingKeys(
+            items: "{{ op.returnType.pagingNames.itemName }}",
+            continuationToken: "{{ op.returnType.pagingNames.nextLinkName }}"
+        )
+        let paged = try {{ op.returnType.name }}(
             client: self,
             request: request,
             context: context,

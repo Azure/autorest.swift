@@ -27,7 +27,7 @@
 import Foundation
 
 class SerializationFormat: Codable {
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     enum CodingKeys: String, CodingKey {
         case extensions
@@ -35,7 +35,7 @@ class SerializationFormat: Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
+        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {
