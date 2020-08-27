@@ -10,3 +10,6 @@ jobs:
 
       - script: npm install
         displayName: Build
+
+      - script: npm run test
+        displayName: Run Tests
