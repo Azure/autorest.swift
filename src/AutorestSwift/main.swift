@@ -39,7 +39,7 @@ if arguments.count == 0 {
     guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     else { fatalError("Unable to find Documents directory.") }
 
-    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4-2.yaml"
+    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4.yaml"
     let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
     do {
         SharedLogger.set(logger: StdoutLogger())
