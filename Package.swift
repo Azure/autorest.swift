@@ -10,10 +10,12 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/jpsim/Yams.git", from: "3.0.1"),
+        .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", .branch("master")),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
         .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/")
     ],
     targets: [

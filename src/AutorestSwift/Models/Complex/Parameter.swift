@@ -52,12 +52,14 @@ class Parameter: Value {
 
         try super.init(from: decoder)
 
-        if let constantSchema = try? container.decode(ConstantSchema.self, forKey: .schema) {
-            super.schema = constantSchema
-        } else if let numberSchema = try? container.decode(NumberSchema.self, forKey: .schema) {
-            super.schema = numberSchema
-        } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
-            super.schema = objectSchema
+        if let decoded = try? container.decode(ConstantSchema.self, forKey: .schema) {
+            super.schema = decoded
+        } else if let decoded = try? container.decode(NumberSchema.self, forKey: .schema) {
+            super.schema = decoded
+        } else if let decoded = try? container.decode(ObjectSchema.self, forKey: .schema) {
+            super.schema = decoded
+        } else if let decoded = try? container.decode(DateTimeSchema.self, forKey: .schema) {
+            super.schema = decoded
         } else {
             super.schema = try container.decode(Schema.self, forKey: .schema)
         }
