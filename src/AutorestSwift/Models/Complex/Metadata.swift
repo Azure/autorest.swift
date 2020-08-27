@@ -35,5 +35,5 @@ class Metadata: Codable, LanguageShortcut {
     let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 }

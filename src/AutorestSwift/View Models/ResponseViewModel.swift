@@ -41,6 +41,7 @@ struct ResponseViewModel {
     let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: ResponseBodyType
+    let pagingNames: Language.PagingNames?
 
     init(from response: Response, with operation: Operation) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -53,8 +54,13 @@ struct ResponseViewModel {
         let schemaResponse = response as? SchemaResponse
         self.objectType = schemaResponse?.schema.swiftType(optional: false)
 
-        let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
-        self.strategy = objectType != nil ? ResponseBodyType
-            .body : (hasSyncStateParameter ? ResponseBodyType.pagedBody : ResponseBodyType.noBody)
+        if let pageable = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
+            let pagingNames = Language.PagingNames(from: pageable) {
+            self.strategy = .pagedBody
+            self.pagingNames = pagingNames
+        } else {
+            self.strategy = objectType != nil ? .body : .noBody
+            self.pagingNames = nil
+        }
     }
 }

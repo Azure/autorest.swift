@@ -35,7 +35,7 @@ class CodeModel: Codable, LanguageShortcut {
     let security: Security
     var language: Languages
     let `protocol`: Protocols
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     /// Lookup a schema by name.
     func schema(for name: String, withType type: AllSchemaTypes) -> Schema? {

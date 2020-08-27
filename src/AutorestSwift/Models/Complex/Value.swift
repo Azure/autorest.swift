@@ -70,7 +70,7 @@ class Value: Codable, LanguageShortcut {
     let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     enum CodingKeys: String, CodingKey {
         case schema

@@ -33,9 +33,15 @@ struct ReturnTypeViewModel {
     let name: String
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
+    let pagingNames: Language.PagingNames?
 
     init(from response: ResponseViewModel?) {
-        self.name = response?.objectType ?? "Void"
         self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
+        self.pagingNames = response?.pagingNames
+        if let objectType = response?.objectType, response?.pagingNames != nil {
+            self.name = "PagedCollection<\(objectType)>"
+        } else {
+            self.name = response?.objectType ?? "Void"
+        }
     }
 }

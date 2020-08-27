@@ -35,5 +35,5 @@ class License: Codable {
     let url: String?
 
     /// additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 }

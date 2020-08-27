@@ -47,6 +47,13 @@ class Language: Codable {
     struct PagingNames: Codable {
         var itemName: String
         var nextLinkName: String
+
+        init?(from dict: [String: String]) {
+            guard let itemName = dict["itemName"],
+                let nextLinkName = dict["nextLinkName"] else { return nil }
+            self.itemName = itemName
+            self.nextLinkName = nextLinkName
+        }
     }
 
     public var paging: PagingNames?

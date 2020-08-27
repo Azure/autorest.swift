@@ -68,7 +68,7 @@ class Operation: Codable, LanguageShortcut {
     let `protocol`: Protocols
 
     /// additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
@@ -95,7 +95,7 @@ class Operation: Codable, LanguageShortcut {
         deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
         origin = try? container.decode(String.self, forKey: .origin)
         externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
+        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
         language = try container.decode(Languages.self, forKey: .language)
         `protocol` = try container.decode(Protocols.self, forKey: .protocol)
     }
