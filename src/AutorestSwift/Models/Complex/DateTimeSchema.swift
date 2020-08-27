@@ -53,7 +53,6 @@ class DateTimeSchema: ValueSchema {
     override public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(format, forKey: .format)
-
         try super.encode(to: encoder)
     }
 }

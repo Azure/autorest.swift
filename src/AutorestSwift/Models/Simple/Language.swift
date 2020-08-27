@@ -28,6 +28,9 @@ import Foundation
 
 /// The bare-minimum fields for per-language metadata on a given aspect
 class Language: Codable {
+
+    // MARK: Properties
+
     /// name used in actual implementation
     public var name: String
 
@@ -40,6 +43,15 @@ class Language: Codable {
 
     public var namespace: String?
 
+    // MARK: AdditionalProperties
+
+    struct PagingNames: Codable {
+        var itemName: String
+        var nextLinkName: String
+    }
+
+    public var paging: PagingNames?
+
     // MARK: Initializers
 
     public init(from original: Language) {
@@ -48,5 +60,6 @@ class Language: Codable {
         self.summary = original.summary
         self.serializedName = original.serializedName
         self.namespace = original.namespace
+        self.paging = original.paging
     }
 }
