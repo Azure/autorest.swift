@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
-        .package(url: "https://github.com/realm/SwiftLint.git", .branch("master"))
+    .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
