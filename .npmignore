@@ -1,0 +1,5 @@
+.build/
+.swiftpm/
+Pods/
+AutorestSwift.xcworkspace/
+AutorestSwift.xcodeproj/xcuserdata/
