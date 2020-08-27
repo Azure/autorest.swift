@@ -41,7 +41,7 @@ class AutoRestHeadTest: XCTestCase {
                                             withOptions: AutoRestHeadTestClientOptions())
     }
 
-    func testhead200() throws {
+    func test_Head_success200() throws {
         let expectation = XCTestExpectation(description: "Call head200")
         let failedExpectation = XCTestExpectation(description: "Call head200 failed")
         failedExpectation.isInverted = true
@@ -59,7 +59,7 @@ class AutoRestHeadTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
-    func testhead204() throws {
+    func test_Head_success204() throws {
         let expectation = XCTestExpectation(description: "Call head204")
         let failedExpectation = XCTestExpectation(description: "Call head204 failed")
         failedExpectation.isInverted = true
@@ -77,7 +77,7 @@ class AutoRestHeadTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
-    func testhead404() throws {
+    func test_Head_success404() throws {
         let expectation = XCTestExpectation(description: "Call head404")
         let failedExpectation = XCTestExpectation(description: "Call head404 failed")
         failedExpectation.isInverted = true
