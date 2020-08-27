@@ -65,6 +65,8 @@ struct KeyValueViewModel {
             let swiftType = signatureParameter.schema.swiftType(optional: optional)
             if swiftType.starts(with: "String") {
                 self.value = param.name
+            } else if swiftType.starts(with: "Date") {
+                self.value = "String(describing:\(param.name), format: Date.Format.iso8601)"
             } else {
                 // Convert into String in generated code
                 self.value = "String(\(param.name))"
