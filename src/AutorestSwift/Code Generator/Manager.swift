@@ -70,7 +70,9 @@ class Manager {
     init(withString string: String) {
         self.mode = .autorest
         self.inputString = Manager.sanitize(yaml: string)
+        // for autorest mode, create a temp directory using a random Guid as the directory name
         self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent(UUID().uuidString)
         self.packageUrl = nil
     }
 
