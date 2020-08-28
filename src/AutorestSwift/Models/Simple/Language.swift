@@ -45,7 +45,10 @@ class Language: Codable {
     // MARK: AdditionalProperties
 
     struct PagingNames: Codable {
+        /// name for the item property
         var itemName: String
+
+        /// name of the next link property
         var nextLinkName: String
 
         init?(from dict: [String: String]) {

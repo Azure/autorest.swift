@@ -38,8 +38,8 @@ struct ReturnTypeViewModel {
     init(from response: ResponseViewModel?) {
         self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
         self.pagingNames = response?.pagingNames
-        if let objectType = response?.objectType, response?.pagingNames != nil {
-            self.name = "PagedCollection<\(objectType)>"
+        if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
+            self.name = "PagedCollection<\(elementType)>"
         } else {
             self.name = response?.objectType ?? "Void"
         }
