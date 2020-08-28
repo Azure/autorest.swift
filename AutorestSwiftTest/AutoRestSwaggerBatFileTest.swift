@@ -25,40 +25,38 @@
 // --------------------------------------------------------------------------
 
 import Foundation
+import XCTest
+import AzureCore
+import AutoRestSwaggerBatFile
 
-/// The bare-minimum fields for per-language metadata on a given aspect
-class Language: Codable {
-    // MARK: Properties
-
-    /// name used in actual implementation
-    public var name: String
-
-    /// description text - describes this node.
-    public var description: String
-
-    public var summary: String?
-
-    public var serializedName: String?
-
-    public var namespace: String?
-
-    // MARK: AdditionalProperties
-
-    struct PagingNames: Codable {
-        var itemName: String
-        var nextLinkName: String
+class AutoRestSwaggerBatFileTest: XCTestCase {
+    var client: AutoRestSwaggerBatFileClient!
+    
+    override func setUpWithError() throws {
+        guard let baseUrl = URL(string: "http://localhost:3000") else {
+            fatalError("Unable to form base URL")
+        }
+        
+        client = try AutoRestSwaggerBatFileClient(baseUrl: baseUrl,
+                                            authPolicy: AnonymousAccessPolicy(),
+                                            withOptions: AutoRestSwaggerBatFileClientOptions())
     }
 
-    public var paging: PagingNames?
-
-    // MARK: Initializers
-
-    public init(from original: Language) {
-        self.name = original.name
-        self.description = original.description
-        self.summary = original.summary
-        self.serializedName = original.serializedName
-        self.namespace = original.namespace
-        self.paging = original.paging
+    func test_BodyFile_getFile() throws {
+        let expectation = XCTestExpectation(description: "Call getFile")
+        let failedExpectation = XCTestExpectation(description: "Call getFile failed")
+        failedExpectation.isInverted = true
+        
+        client.getFile() { result, _  in
+            switch result {
+                case .success:
+                 expectation.fulfill()
+               case let .failure(error):
+                print("test failed. error=\(error.message)")
+                failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
     }
 }
