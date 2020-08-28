@@ -166,6 +166,7 @@
 		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
 		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
+		F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */; };
 		F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */; };
 		F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
@@ -174,6 +175,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile::Product";
+			remoteInfo = AutoRestSwaggerBatFile;
+		};
+		F11304A424F8BA30007FF3A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile";
+			remoteInfo = AutoRestSwaggerBatFile;
+		};
 		F1A671B124F5E54100C2712C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
@@ -345,6 +360,8 @@
 		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
 		F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationUrlSnippet.stencil; sourceTree = "<group>"; };
 		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
+		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
 		F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderEncoderSnippet.stencil; sourceTree = "<group>"; };
 		F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
@@ -602,11 +619,21 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
+		F113049724F8BA0C007FF3A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F11304A124F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
-				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
 				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
+				F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */,
+				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
+				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 			);
 			path = AutorestSwiftTest;
@@ -845,6 +872,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
 			);
@@ -885,6 +913,10 @@
 					ProductGroup = F1A671AA24F5E54000C2712C /* Products */;
 					ProjectRef = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
 				},
+				{
+					ProductGroup = F113049724F8BA0C007FF3A3 /* Products */;
+					ProjectRef = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -895,6 +927,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F11304A124F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestSwaggerBatFile.framework;
+			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F1A671B224F5E54100C2712C /* AutoRestHeadTest.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -968,6 +1007,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1109,6 +1149,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F11304A524F8BA30007FF3A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestSwaggerBatFile;
+			targetProxy = F11304A424F8BA30007FF3A3 /* PBXContainerItemProxy */;
+		};
 		F1A671B624F5E5FA00C2712C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AutoRestHeadTest;

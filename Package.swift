@@ -16,7 +16,8 @@ let package = Package(
         .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", .branch("master")),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
-        .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/")
+        .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
+        .package(name: "AutoRestSwaggerBatFile", path: "./test/integration/generated/body-file/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -32,7 +33,7 @@ let package = Package(
         ),
         .testTarget(
             name: "AutorestSwiftTest",
-            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest"],
+            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest", "AutoRestSwaggerBatFile"],
             path: "AutorestSwiftTest"
         )
     ],
