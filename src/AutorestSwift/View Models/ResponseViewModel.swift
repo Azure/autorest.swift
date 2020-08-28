@@ -54,8 +54,8 @@ struct ResponseViewModel {
         let schemaResponse = response as? SchemaResponse
         self.objectType = schemaResponse?.schema.swiftType(optional: false)
 
-        if let pageable = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
-            let pagingNames = Language.PagingNames(from: pageable) {
+        if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
+            let pagingNames = Language.PagingNames(from: pagingMetadata) {
             self.strategy = .pagedBody
             self.pagingNames = pagingNames
         } else {

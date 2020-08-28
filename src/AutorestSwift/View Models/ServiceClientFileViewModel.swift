@@ -33,6 +33,8 @@ struct ServiceClientFileViewModel {
     let operationGroups: [OperationGroupViewModel]
     let apiVersion: String
     let apiVersionName: String
+    let protocols: String
+    let paging: Language.PagingNames?
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
@@ -44,5 +46,7 @@ struct ServiceClientFileViewModel {
         self.operationGroups = items
         self.apiVersion = model.getApiVersion()
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
+        self.paging = model.pagingNames
+        self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
     }
 }

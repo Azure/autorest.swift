@@ -54,6 +54,17 @@ class CodeModel: Codable, LanguageShortcut {
             return ""
         }
     }
+
+    var pagingNames: Language.PagingNames? {
+        for group in operationGroups {
+            for operation in group.operations {
+                if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String] {
+                    return Language.PagingNames(from: pagingMetadata)
+                }
+            }
+        }
+        return nil
+    }
 }
 
 extension CodeModel {
