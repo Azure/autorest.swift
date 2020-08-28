@@ -12,7 +12,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
 
     {% if model.paging != nil %}
     public func continuationUrl(forRequestUrl requestUrl: URL, withContinuationToken token: String) -> URL? {
-        return requestUrl.appendingQueryParameters([QueryParameter("{{ model.paging.nextLinkName }}", token)])
+        return URL(string: token)
     }
     {% endif %}
 
