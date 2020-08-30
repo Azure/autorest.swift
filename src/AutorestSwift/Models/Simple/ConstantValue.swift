@@ -35,7 +35,7 @@ class ConstantValue: Codable, OptionalLanguageShortcut {
     let value: String
 
     /// Additional metadata extensions dictionary
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     enum CodingKeys: String, CodingKey {
         case language, value, extensions
@@ -45,7 +45,7 @@ class ConstantValue: Codable, OptionalLanguageShortcut {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         language = try? container.decode(Languages?.self, forKey: .language)
         value = try container.decode(String.self, forKey: .value)
-        extensions = try? container.decode(AnyCodable.self, forKey: .extensions)
+        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

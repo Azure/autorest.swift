@@ -35,7 +35,7 @@ class CodeModel: Codable, LanguageShortcut {
     let security: Security
     var language: Languages
     let `protocol`: Protocols
-    let extensions: AnyCodable?
+    let extensions: [String: AnyCodable]?
 
     /// Lookup a schema by name.
     func schema(for name: String, withType type: AllSchemaTypes) -> Schema? {
@@ -53,6 +53,17 @@ class CodeModel: Codable, LanguageShortcut {
         } else {
             return ""
         }
+    }
+
+    var pagingNames: Language.PagingNames? {
+        for group in operationGroups {
+            for operation in group.operations {
+                if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String] {
+                    return Language.PagingNames(from: pagingMetadata)
+                }
+            }
+        }
+        return nil
     }
 }
 

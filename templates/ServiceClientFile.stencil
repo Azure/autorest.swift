@@ -8,7 +8,13 @@
 // swiftlint:disable type_body_length
 
 {{ model.comment }}
-public final class {{ model.name }}: PipelineClient {
+public final class {{ model.name }}: {{ model.protocols }} {
+
+    {% if model.paging != nil %}
+    public func continuationUrl(forRequestUrl requestUrl: URL, withContinuationToken token: String) -> URL? {
+        return URL(string: token)
+    }
+    {% endif %}
 
     /// API version of the {{ model.description }} to invoke. Defaults to the latest.
     public enum ApiVersion: String {

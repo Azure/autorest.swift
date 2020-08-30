@@ -41,6 +41,8 @@ struct ResponseViewModel {
     let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: ResponseBodyType
+    let pagingNames: Language.PagingNames?
+    let pagedElementClassName: String?
 
     init(from response: Response, with operation: Operation) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -53,8 +55,18 @@ struct ResponseViewModel {
         let schemaResponse = response as? SchemaResponse
         self.objectType = schemaResponse?.schema.swiftType(optional: false)
 
-        let hasSyncStateParameter = operation.parameter(for: "syncState") != nil
-        self.strategy = objectType != nil ? ResponseBodyType
-            .body : (hasSyncStateParameter ? ResponseBodyType.pagedBody : ResponseBodyType.noBody)
+        if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
+            let pagingNames = Language.PagingNames(from: pagingMetadata) {
+            let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
+            guard arrayElements.count == 1
+            else { fatalError("Did not find exactly one array type for paged collection.") }
+            self.strategy = .pagedBody
+            self.pagingNames = pagingNames
+            self.pagedElementClassName = arrayElements.first?.elementType.name
+        } else {
+            self.strategy = objectType != nil ? .body : .noBody
+            self.pagingNames = nil
+            self.pagedElementClassName = nil
+        }
     }
 }
