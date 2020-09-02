@@ -8,18 +8,18 @@ case let .success(data):
         do {
             let decoder = JSONDecoder()
             let decoded = try decoder.decode({{ op.returnType.name }}.self, from: data)
-            DispatchQueue.main.async {
+            dispatchQueue.async {
                 completionHandler(.success(decoded), httpResponse)
             }
         } catch {
-            DispatchQueue.main.async {
+            dispatchQueue.async {
                 completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
             }
         }
     }
     {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
-    DispatchQueue.main.async {
+    dispatchQueue.async {
         completionHandler(.failure(error), httpResponse)
     }
 }
