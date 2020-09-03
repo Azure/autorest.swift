@@ -76,25 +76,6 @@ extension String {
         return components
     }
 
-    /// Converts a string into one with camel casing. Acronyms are forced to camel case as well.
-    var toCamelCase: String {
-        let components = splitAndJoinAcronyms
-        var casedComponents = [String]()
-        for (index, comp) in components.enumerated() {
-            casedComponents.append(index == 0 ? comp : comp.capitalized)
-        }
-        let value = casedComponents.joined()
-        return value
-    }
-
-    /// Converts a string into one with camel casing. Acronyms are forced to camel case as well.
-    var toPascalCase: String {
-        let components = splitAndJoinAcronyms
-        let casedComponents = components.map { $0.capitalized }
-        let value = casedComponents.joined()
-        return value
-    }
-
     func trimmed() -> Substring {
         guard let firstElementIndex = firstIndex(where: { !$0.isWhitespace }) else {
             return Substring("")
