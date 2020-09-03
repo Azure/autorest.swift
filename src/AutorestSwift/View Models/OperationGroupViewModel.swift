@@ -36,7 +36,7 @@ struct OperationGroupViewModel {
     let comment: ViewModelComment
 
     init(from group: OperationGroup, with model: CodeModel) {
-        self.name = group.name.toCamelCase.isEmpty ? model.name.toCamelCase : group.name.toCamelCase
+        self.name = group.name.isEmpty ? model.name : group.name
         self.comment = ViewModelComment(from: group.description)
         var items = [OperationViewModel]()
         for operation in group.operations {
