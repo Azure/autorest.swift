@@ -31,17 +31,19 @@ import Foundation
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
     let name: String
+    let statusCodes: [String]
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
     let pagingNames: Language.PagingNames?
 
     init(from response: ResponseViewModel?) {
-        self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
+        self.strategy = response?.strategy ?? ResponseBodyType.noBody.rawValue
         self.pagingNames = response?.pagingNames
         if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
             self.name = "PagedCollection<\(elementType)>"
         } else {
             self.name = response?.objectType ?? "Void"
         }
+        self.statusCodes = response?.statusCodes ?? []
     }
 }

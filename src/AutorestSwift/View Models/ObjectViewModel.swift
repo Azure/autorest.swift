@@ -36,6 +36,7 @@ struct ObjectViewModel {
     let objectType = "struct"
     let properties: [PropertyViewModel]
     let hasDateProperty: Bool
+    let isExcpetionContext: Bool
 
     init(from schema: ObjectSchema) {
         self.name = schema.name.toPascalCase
@@ -48,5 +49,7 @@ struct ObjectViewModel {
         self.properties = props
 
         self.hasDateProperty = props.filter { $0.isDate == true }.count > 0
+
+        self.isExcpetionContext = (schema.usage.count > 0) ?  (schema.usage[0] == SchemaContext.exception) : false
     }
 }
