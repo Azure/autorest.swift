@@ -36,7 +36,7 @@ struct EnumerationChoiceViewModel {
     let value: String
 
     init(from schema: ChoiceValue) {
-        self.name = schema.name.toCamelCase
+        self.name = schema.name
         self.comment = ViewModelComment(from: schema.description)
         self.value = schema.value
     }

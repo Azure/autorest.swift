@@ -42,8 +42,8 @@ struct ClientMethodOptionsViewModel {
 
     init(from operation: Operation, with model: CodeModel, parameters: [Parameter]) {
         self.clientName = model.name
-        self.operationName = operation.name.toCamelCase
-        self.name = "\(operation.name.toPascalCase)Options"
+        self.operationName = operation.name
+        self.name = "\(operation.name)Options"
         var properties = [PropertyViewModel]()
         parameters.forEach {
             properties.append(PropertyViewModel(from: $0))
