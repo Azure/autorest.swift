@@ -26,30 +26,32 @@
 
 import Foundation
 
-/// View Model for a class or struct defintion.
-/// Example:
-///   // a simple model object
-///   public struct ModelObject { ... }
-struct ObjectViewModel {
-    let name: String
-    let comment: ViewModelComment
-    let objectType = "struct"
-    let properties: [PropertyViewModel]
-    let hasDateProperty: Bool
-    let isErrorType: Bool
+/// View Model for method exception response handling.
+struct ExceptionResponseViewModel {
+    let statusCodes: [String]
+    let objectType: String?
+    /// Identifies the correct snippet to use when rendering the view model
+    let description: String?
 
-    init(from schema: ObjectSchema) {
-        self.name = schema.name.toPascalCase
-        self.comment = ViewModelComment(from: schema.description)
+    init(from response: Response) {
+        let httpResponse = response.protocol.http as? HttpResponse
+        var statusCodes = [String]()
+        httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
 
-        var props = [PropertyViewModel]()
-        for property in schema.properties ?? [] {
-            props.append(PropertyViewModel(from: property))
+        self.statusCodes = statusCodes
+
+        // check if the request body schema type is object, store the object type of the response body
+        let schemaResponse = response as? SchemaResponse
+        self.objectType = schemaResponse?.schema.swiftType(optional: false)
+
+        self.description = schemaResponse?.description
+
+        if let errorResponseMetadata = response.extensions?["x-ms-error-response"]?.value as? Bool,
+            errorResponseMetadata {
+            guard objectType != nil
+            else { fatalError("Did not find object type for error response") }
+        } else {
+            fatalError("Did not find object type for error response")
         }
-        self.properties = props
-
-        self.hasDateProperty = props.filter { $0.isDate == true }.count > 0
-
-        self.isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
     }
 }

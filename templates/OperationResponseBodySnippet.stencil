@@ -3,11 +3,7 @@ switch result {
 case let .success(data):
     {% include "OperationResponseData.stencil" %}
     let statusCode = httpResponse?.statusCode ?? -1
-    if [
-    {% for statusCode in op.returnType.statusCodes %}
-      {{ statusCode }},
-    {% endfor  %}
-    ].contains(statusCode)
+    {% include "OperationResponseStatusCodeSnippet.stencil" %}
     {
         do {
             let decoder = JSONDecoder()

@@ -4,11 +4,7 @@ case let .success(data):
     {% include "OperationResponseData.stencil" %}
     {% endif %}
     let statusCode = httpResponse?.statusCode ?? -1
-    if [
-    {% for statusCode in op.returnType.statusCodes %}
-    {{ statusCode }},
-    {% endfor  %}
-    ].contains(statusCode)
+    {% include "OperationResponseStatusCodeSnippet.stencil" %}
     {
         DispatchQueue.main.async {
             completionHandler(.success(()), httpResponse)

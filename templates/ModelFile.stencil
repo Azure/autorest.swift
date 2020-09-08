@@ -7,7 +7,7 @@
 // swiftlint:disable cyclomatic_complexity
 
 {{ model.comment }}
-{%if model.isExcpetionContext %}
+{%if model.isErrorType %}
 public {{ model.objectType }} {{ model.name }} : Codable, Swift.Error {
 {% else %}
 public {{ model.objectType }} {{ model.name }} : Codable {

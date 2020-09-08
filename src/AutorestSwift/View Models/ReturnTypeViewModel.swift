@@ -37,7 +37,7 @@ struct ReturnTypeViewModel {
     let pagingNames: Language.PagingNames?
 
     init(from response: ResponseViewModel?) {
-        self.strategy = response?.strategy ?? ResponseBodyType.noBody.rawValue
+        self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
         self.pagingNames = response?.pagingNames
         if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
             self.name = "PagedCollection<\(elementType)>"
