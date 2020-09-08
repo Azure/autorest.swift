@@ -85,9 +85,9 @@ class Manager {
     }
 
     func run() throws {
+        saveCodeModel()
         let model = try loadModel()
         _ = check(model: model, against: inputString)
-        saveCodeModel()
 
         // Create folder structure
         let packageName = model.packageName
