@@ -1,10 +1,10 @@
 switch result {
 case let .success(data):
     {% if op.exceptions.count > 0 %}
-    {% include "OperationResponseData.stencil" %}
+    {% include "OperationResponseDataSnippet.stencil" %}
     {% endif %}
-    let statusCode = httpResponse?.statusCode ?? -1
     {% include "OperationResponseStatusCodeSnippet.stencil" %}
+    {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
     {
         DispatchQueue.main.async {
             completionHandler(.success(()), httpResponse)

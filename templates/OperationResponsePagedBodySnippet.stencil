@@ -1,8 +1,8 @@
 switch result {
 case let .success(data):
-    {% include "OperationResponseData.stencil" %}
-    let statusCode = httpResponse?.statusCode ?? -1
+    {% include "OperationResponseDataSnippet.stencil" %}
     {% include "OperationResponseStatusCodeSnippet.stencil" %}
+    {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
     {
         do {
             let decoder = JSONDecoder()
