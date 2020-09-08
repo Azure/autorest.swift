@@ -167,6 +167,9 @@
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
 		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
 		F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */; };
+		F120004B250345C300797F1A /* OperationResponseExceptionSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */; };
+		F120FFB92501ECB100797F1A /* OperationResponseExceptionBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F120FFB42501ECB000797F1A /* OperationResponseExceptionBodySnippet.stencil */; };
+		F19B01CC25073E7F00121831 /* OperationResponseData.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseData.stencil */; };
 		F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */; };
 		F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
@@ -362,6 +365,9 @@
 		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
 		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
+		F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
+		F120FFB42501ECB000797F1A /* OperationResponseExceptionBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionBodySnippet.stencil; sourceTree = "<group>"; };
+		F19B01C725073E7F00121831 /* OperationResponseData.stencil */ = {isa = PBXFileReference; lastKnownFileType = file; name = OperationResponseData.stencil; path = templates/OperationResponseData.stencil; sourceTree = SOURCE_ROOT; };
 		F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderProperty.stencil; sourceTree = "<group>"; };
 		F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelDecoderEncoderSnippet.stencil; sourceTree = "<group>"; };
 		F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelEncoderDateProperty.stencil; sourceTree = "<group>"; };
@@ -539,10 +545,13 @@
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
+				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
+				F19B01C725073E7F00121831 /* OperationResponseData.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
-				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
+				F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */,
+				F120FFB42501ECB000797F1A /* OperationResponseExceptionBodySnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
 				F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */,
@@ -955,6 +964,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F120FFB92501ECB100797F1A /* OperationResponseExceptionBodySnippet.stencil in Resources */,
+				F120004B250345C300797F1A /* OperationResponseExceptionSnippet.stencil in Resources */,
+				F19B01CC25073E7F00121831 /* OperationResponseData.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
