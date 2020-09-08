@@ -1,0 +1,7 @@
+{% for exception in op.exceptions %}
+    {% if exception.strategy == "body" %}
+        {% include "OperationResponseExceptionBodySnippet.stencil" exception %}
+    {% else %}
+        // TODO: Couldn't find template for {{ exception.strategy }}
+    {% endif %}
+{% endfor %}

@@ -1,8 +1,20 @@
 switch result {
-case .success:
-    DispatchQueue.main.async {
-        completionHandler(.success(()), httpResponse)
+case let .success(data):
+    {% if op.exceptions.count > 0 %}
+    {% include "OperationResponseData.stencil" %}
+    {% endif %}
+    let statusCode = httpResponse?.statusCode ?? -1
+    if [
+    {% for statusCode in op.returnType.statusCodes %}
+    {{ statusCode }},
+    {% endfor  %}
+    ].contains(statusCode)
+    {
+        DispatchQueue.main.async {
+            completionHandler(.success(()), httpResponse)
+        }
     }
+    {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
     DispatchQueue.main.async {
         completionHandler(.failure(error), httpResponse)
