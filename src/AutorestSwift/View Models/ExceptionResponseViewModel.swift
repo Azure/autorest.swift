@@ -26,24 +26,32 @@
 
 import Foundation
 
-/// View Model for method return type.
-/// Example:
-///     ... -> ReturnTypeName
-struct ReturnTypeViewModel {
-    let name: String
+/// View Model for method exception response handling.
+struct ExceptionResponseViewModel {
     let statusCodes: [String]
+    let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
-    let strategy: String
-    let pagingNames: Language.PagingNames?
+    let description: String?
 
-    init(from response: ResponseViewModel?) {
-        self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
-        self.pagingNames = response?.pagingNames
-        if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
-            self.name = "PagedCollection<\(elementType)>"
+    init(from response: Response) {
+        let httpResponse = response.protocol.http as? HttpResponse
+        var statusCodes = [String]()
+        httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
+
+        self.statusCodes = statusCodes
+
+        // check if the request body schema type is object, store the object type of the response body
+        let schemaResponse = response as? SchemaResponse
+        self.objectType = schemaResponse?.schema.swiftType(optional: false)
+
+        self.description = schemaResponse?.description
+
+        if let errorResponseMetadata = response.extensions?["x-ms-error-response"]?.value as? Bool,
+            errorResponseMetadata {
+            guard objectType != nil
+            else { fatalError("Did not find object type for error response") }
         } else {
-            self.name = response?.objectType ?? "Void"
+            fatalError("Did not find object type for error response")
         }
-        self.statusCodes = response?.statusCodes ?? []
     }
 }

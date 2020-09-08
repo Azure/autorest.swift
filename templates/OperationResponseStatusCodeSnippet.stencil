@@ -1,0 +1,3 @@
+guard let statusCode = httpResponse?.statusCode else {
+  completionHandler(.failure("Expected a status code in response but didn't find one.")
+}

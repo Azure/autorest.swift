@@ -92,6 +92,7 @@ struct OperationViewModel {
     let pipelineContext: [KeyValueViewModel]?
     private let requests: [RequestViewModel]?
     private let responses: [ResponseViewModel]?
+    let exceptions: [ExceptionResponseViewModel]?
     let request: RequestViewModel?
     let clientMethodOptions: ClientMethodOptionsViewModel
 
@@ -111,6 +112,7 @@ struct OperationViewModel {
 
         var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
+        var exceptions = [ExceptionResponseViewModel]()
 
         assert(
             operation.requests?.count ?? 0 <= 1,
@@ -138,9 +140,16 @@ struct OperationViewModel {
             responses.append(ResponseViewModel(from: response, with: operation))
         }
 
+        for exception in operation.exceptions ?? [] {
+            exceptions.append(ExceptionResponseViewModel(from: exception))
+        }
+
         var statusCodes = [String]()
-        responses.forEach {
-            statusCodes.append(contentsOf: $0.statusCodes)
+        for response in responses {
+            statusCodes.append(contentsOf: response.statusCodes)
+        }
+        for exception in exceptions {
+            statusCodes.append(contentsOf: exception.statusCodes)
         }
 
         pipelineContext.append(KeyValueViewModel(
@@ -150,6 +159,7 @@ struct OperationViewModel {
 
         self.requests = requests
         self.responses = responses
+        self.exceptions = exceptions
 
         // current logic only supports a single request and response
         assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
