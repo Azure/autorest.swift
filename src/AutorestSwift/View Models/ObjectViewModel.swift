@@ -35,7 +35,6 @@ struct ObjectViewModel {
     let comment: ViewModelComment
     let objectType = "struct"
     let properties: [PropertyViewModel]
-    let hasDateProperty: Bool
     let isErrorType: Bool
 
     init(from schema: ObjectSchema) {
@@ -47,8 +46,6 @@ struct ObjectViewModel {
             props.append(PropertyViewModel(from: property))
         }
         self.properties = props
-
-        self.hasDateProperty = props.filter { $0.isDate == true }.count > 0
 
         self.isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
     }
