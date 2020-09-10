@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Yams/Yams.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:AutorestSwift.xcodeproj">
    </FileRef>
    <FileRef

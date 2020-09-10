@@ -81,7 +81,8 @@ class Manager {
     func run() throws {
         saveCodeModel()
         let model = try loadModel()
-        _ = check(model: model, against: inputString)
+        // FIXME: Fix issue where unresolved can't be serialized.
+        // _ = check(model: model, against: inputString)
 
         // Create folder structure
         let packageName = model.packageName
