@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
-/// User-configurable options for the `AutoRestSwaggerBATFileService.getEmptyFile` operation.
+/// User-configurable options for the `AutoRestSwaggerBATFileService.GetEmptyFile` operation.
 public struct GetEmptyFileOptions: AzureOptions {
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.

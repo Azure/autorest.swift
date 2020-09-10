@@ -38,7 +38,7 @@ struct ExceptionResponseViewModel {
         var statusCodes = [String]()
         httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
 
-        self.statusCodes = statusCodes
+        self.statusCodes = statusCodes.filter { $0 != "default" }
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
@@ -50,8 +50,6 @@ struct ExceptionResponseViewModel {
             errorResponseMetadata {
             guard objectType != nil
             else { fatalError("Did not find object type for error response") }
-        } else {
-            fatalError("Did not find object type for error response")
         }
     }
 }

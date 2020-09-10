@@ -1129,7 +1129,7 @@
          isa = "PBXFileReference";
          explicitFileType = "sourcecode.swift";
          name = "Package.swift";
-         path = "/Users/sacheu/Documents/GitHub/autorest.swift-4/test/integration/generated/head/.build/checkouts/azure-sdk-for-ios/Package.swift";
+         path = "/Users/sacheu/Documents/GitHub/autorest.swift-5/test/integration/generated/head/.build/checkouts/azure-sdk-for-ios/Package.swift";
          sourceTree = "<group>";
       };
       "OBJ_8" = {
@@ -1140,8 +1140,8 @@
       "OBJ_80" = {
          isa = "PBXGroup";
          children = (
-            "AzureSDK::AzureCore::Product",
-            "AutoRestHeadTest::AutoRestHeadTest::Product"
+            "AutoRestHeadTest::AutoRestHeadTest::Product",
+            "AzureSDK::AzureCore::Product"
          );
          name = "Products";
          path = "";
