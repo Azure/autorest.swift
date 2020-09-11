@@ -38,9 +38,9 @@ struct ReturnTypeViewModel {
 
     init(from responses: [ResponseViewModel]?) {
         var statusCodes = Set<String>()
-        var strategies = Set<String>()
+        var strategies = Set<ResponseBodyType>()
         for response in responses ?? [] {
-            strategies.insert(response.strategy.rawValue)
+            strategies.insert(response.strategy)
             for statusCode in response.statusCodes {
                 statusCodes.insert(statusCode)
             }
@@ -48,7 +48,7 @@ struct ReturnTypeViewModel {
 
         assert(strategies.count <= 1, "Different strategy in ResponseViewModel is currently not supported.")
         self.statusCodes = Array(statusCodes)
-        self.strategy = strategies.first ?? ResponseBodyType.noBody.rawValue
+        self.strategy = strategies.first?.rawValue ?? ResponseBodyType.noBody.rawValue
 
         let response = responses?.first
         self.pagingNames = response?.pagingNames
