@@ -43,7 +43,9 @@ class SchemaResponse: Response {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
+        if let dictionarySchema = try? container.decode(DictionarySchema.self, forKey: .schema) {
+            self.schema = dictionarySchema
+        } else if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
             self.schema = arraySchema
         } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
             self.schema = objectSchema

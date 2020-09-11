@@ -85,6 +85,12 @@ class Schema: Codable, LanguageShortcut {
         case AllSchemaTypes.choice,
              AllSchemaTypes.object:
             swiftType = name
+        case AllSchemaTypes.dictionary:
+            if let dictionarySchema = self as? DictionarySchema {
+                swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
+            } else {
+                swiftType = "[String:\(name)]"
+            }
         default:
             fatalError("Type \(type) not implemented")
         }
