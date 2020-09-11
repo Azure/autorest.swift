@@ -60,11 +60,11 @@ struct ResponseViewModel {
             let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
             guard arrayElements.count == 1
             else { fatalError("Did not find exactly one array type for paged collection.") }
-            self.strategy = ResponseBodyType.pagedBody
+            self.strategy = .pagedBody
             self.pagingNames = pagingNames
             self.pagedElementClassName = arrayElements.first?.elementType.name
         } else {
-            self.strategy = objectType != nil ? ResponseBodyType.body : ResponseBodyType.noBody
+            self.strategy = objectType != nil ? .body : .noBody
             self.pagingNames = nil
             self.pagedElementClassName = nil
         }
