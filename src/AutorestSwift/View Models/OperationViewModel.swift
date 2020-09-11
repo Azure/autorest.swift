@@ -145,7 +145,7 @@ struct OperationViewModel {
         var defaultException: ExceptionResponseViewModel?
         for exception in operation.exceptions ?? [] {
             let vm = ExceptionResponseViewModel(from: exception)
-            if vm.isDefault {
+            if vm.isDefaultStatusCode {
                 assert(
                     defaultException == nil,
                     "Multiple default exception per operation is currently not supported... \(operation.name)"
