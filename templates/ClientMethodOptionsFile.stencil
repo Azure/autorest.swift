@@ -21,6 +21,9 @@ public struct {{ model.name }}: AzureOptions {
     /// A token used to make a best-effort attempt at canceling a request.
     public let cancellationToken: CancellationToken?
 
+    /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+    public var dispatchQueue: DispatchQueue?
+
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
 {% for property in model.properties %}
@@ -28,17 +31,20 @@ public struct {{ model.name }}: AzureOptions {
 {% endfor %}
     ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+    ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     public init(
     {% for property in model.properties %}
         {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }},
     {% endfor %}
         clientRequestId: String? = nil,
-        cancellationToken: CancellationToken? = nil
+        cancellationToken: CancellationToken? = nil,
+        dispatchQueue: DispatchQueue? = nil
     ) {
     {% for property in model.properties %}
         self.{{ property.name }} = {{ property.name }}
     {% endfor %}
         self.clientRequestId = clientRequestId
         self.cancellationToken = cancellationToken
+        self.dispatchQueue = dispatchQueue
     }
 }

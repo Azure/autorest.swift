@@ -7,7 +7,7 @@ target 'AutorestSwift' do
   use_modular_headers!
 
   # Pods for AutorestSwift
-  pod 'Yams'
+  pod 'Yams', :git => 'https://github.com/tjprescott/Yams.git', :branch => 'CircularReferences'
   pod 'Stencil', :git => 'https://github.com/stencilproject/Stencil.git', :branch => 'trim_whitespace'
   pod 'SwiftFormat/CLI'
   pod 'SwiftLint'

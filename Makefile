@@ -46,5 +46,6 @@ test: copyTestResources
 
 clean:
 	rm -rf .build
+	rm Package.resolved
 
 .PHONY: run build test copyRunResources copyTestResources clean
