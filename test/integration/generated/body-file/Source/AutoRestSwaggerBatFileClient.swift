@@ -63,7 +63,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
 
     // MARK: Public Client Methods
 
-    // MARK: Files
+    // MARK: files
 
     /// Get file
     /// - Parameters:
@@ -109,14 +109,13 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -167,14 +166,13 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -225,14 +223,13 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }

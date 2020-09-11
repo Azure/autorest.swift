@@ -24,8 +24,6 @@ public struct AutoRestHeadTestClientOptions: AzureClientOptions {
     public let telemetryOptions: TelemetryOptions
     /// Global transport options
     public let transportOptions: TransportOptions
-    /// The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
-    public let dispatchQueue: DispatchQueue?
 
     /// Initialize a `AutoRestHeadTestClientOptions` structure.
     /// - Parameters:
@@ -33,18 +31,15 @@ public struct AutoRestHeadTestClientOptions: AzureClientOptions {
     ///   - logger: The `ClientLogger` to be used by this `AutoRestHeadTestClient`.
     ///   - telemetryOptions: Options for configuring telemetry sent by this `AutoRestHeadTestClient`.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
-    ///   - dispatchQueue: The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
     public init(
         apiVersion: AutoRestHeadTestClient.ApiVersion = .latest,
         logger: ClientLogger = ClientLoggers.default(tag: "AutoRestHeadTestClientClient"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
-        transportOptions: TransportOptions? = nil,
-        dispatchQueue: DispatchQueue? = nil
+        transportOptions: TransportOptions? = nil
     ) {
         self.apiVersion = apiVersion.rawValue
         self.logger = logger
         self.telemetryOptions = telemetryOptions
         self.transportOptions = transportOptions ?? TransportOptions()
-        self.dispatchQueue = dispatchQueue
     }
 }

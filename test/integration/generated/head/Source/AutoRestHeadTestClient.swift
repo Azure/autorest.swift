@@ -63,7 +63,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
     // MARK: Public Client Methods
 
-    // MARK: HttpSuccess
+    // MARK: httpSuccess
 
     /// Return 200 status code if successful
     /// - Parameters:
@@ -108,14 +108,13 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -165,14 +164,13 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -222,14 +220,13 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.success(()), httpResponse)
                 }
             case let .failure(error):
-                dispatchQueue.async {
+                DispatchQueue.main.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
