@@ -16,5 +16,6 @@ let context = PipelineContext.of(keyValues: [
 ])
 context.add(cancellationToken: options?.cancellationToken, applying: self.options)
 self.request(request, context: context) { result, httpResponse in
+    let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
     {% include "OperationResponseSnippet.stencil" op %}
 }

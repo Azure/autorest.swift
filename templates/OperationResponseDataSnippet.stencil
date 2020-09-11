@@ -1,6 +1,6 @@
 guard let data = data else {
     let noDataError = AzureError.sdk("Response data expected but not found.")
-    DispatchQueue.main.async {
+    dispatchQueue.async {
          completionHandler(.failure(noDataError), httpResponse)
     }
     return

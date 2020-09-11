@@ -15,6 +15,8 @@ public struct {{ model.name }}Options: AzureClientOptions {
     public let telemetryOptions: TelemetryOptions
     /// Global transport options
     public let transportOptions: TransportOptions
+    /// The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
+    public let dispatchQueue: DispatchQueue?
 
     /// Initialize a `{{ model.name }}Options` structure.
     /// - Parameters:
@@ -22,15 +24,18 @@ public struct {{ model.name }}Options: AzureClientOptions {
     ///   - logger: The `ClientLogger` to be used by this `{{ model.name }}`.
     ///   - telemetryOptions: Options for configuring telemetry sent by this `{{ model.name }}`.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+    ///   - dispatchQueue: The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
     public init(
         apiVersion: {{ model.name }}.ApiVersion = .latest,
         logger: ClientLogger = ClientLoggers.default(tag: "{{ model.name }}Client"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
-        transportOptions: TransportOptions? = nil
+        transportOptions: TransportOptions? = nil,
+        dispatchQueue: DispatchQueue? = nil
     ) {
         self.apiVersion = apiVersion.rawValue
         self.logger = logger
         self.telemetryOptions = telemetryOptions
         self.transportOptions = transportOptions ?? TransportOptions()
+        self.dispatchQueue = dispatchQueue
     }
 }
