@@ -161,9 +161,7 @@ struct OperationViewModel {
             statusCodes.append(contentsOf: response.statusCodes)
         }
         for exception in exceptions {
-            for statusCode in exception.statusCodes where statusCode != "default" {
-                statusCodes.append(statusCode)
-            }
+            statusCodes.append(contentsOf: exception.statusCodes)
         }
 
         pipelineContext.append(KeyValueViewModel(
