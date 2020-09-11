@@ -158,9 +158,7 @@ struct OperationViewModel {
 
         var statusCodes = [String]()
         for response in responses {
-            for statusCode in response.statusCodes where statusCode != "default" {
-                statusCodes.append(statusCode)
-            }
+            statusCodes.append(contentsOf: response.statusCodes)
         }
         for exception in exceptions {
             for statusCode in exception.statusCodes where statusCode != "default" {
