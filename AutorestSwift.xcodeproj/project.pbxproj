@@ -913,9 +913,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
+				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 			);
 			name = AutorestSwiftTest;
 			productName = AutorestSwiftTest;
