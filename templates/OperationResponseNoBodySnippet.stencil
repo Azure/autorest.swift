@@ -6,7 +6,7 @@ case let .success(data):
     {% include "OperationResponseStatusCodeSnippet.stencil" %}
     {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
     {
-        DispatchQueue.main.async {
+        dispatchQueue.async {
             completionHandler(.success(()), httpResponse)
         }
     }

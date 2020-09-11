@@ -9,11 +9,11 @@
         do {
             let decoder = JSONDecoder()
             let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
-            DispatchQueue.main.async {
+            dispatchQueue.async {
                 completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
             }
         } catch {
-            DispatchQueue.main.async {
+            dispatchQueue.async {
                 completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
             }
         }
