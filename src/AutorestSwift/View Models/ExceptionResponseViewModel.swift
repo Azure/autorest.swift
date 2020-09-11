@@ -32,7 +32,7 @@ struct ExceptionResponseViewModel {
     let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
     let description: String?
-    let isDefaultStatusCode: Bool
+    let defaultException: Bool
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -52,6 +52,6 @@ struct ExceptionResponseViewModel {
             else { fatalError("Did not find object type for error response") }
         }
 
-        self.isDefaultStatusCode = statusCodes.filter { $0 == "default" }.count > 0
+        self.defaultException = statusCodes.contains("default")
     }
 }
