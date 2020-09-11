@@ -1164,8 +1164,8 @@
       "OBJ_82" = {
          isa = "PBXGroup";
          children = (
-            "AzureSDK::AzureCore::Product",
-            "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile::Product"
+            "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile::Product",
+            "AzureSDK::AzureCore::Product"
          );
          name = "Products";
          path = "";
