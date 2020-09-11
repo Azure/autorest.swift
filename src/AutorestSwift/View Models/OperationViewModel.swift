@@ -144,11 +144,11 @@ struct OperationViewModel {
 
         var defaultException: ExceptionResponseViewModel?
         for exception in operation.exceptions ?? [] {
-            let exceptionResponseVM = ExceptionResponseViewModel(from: exception)
-            if exceptionResponseVM.defaultException { 
-                defaultException = exceptionResponseVM
+            let viewModel = ExceptionResponseViewModel(from: exception)
+            if viewModel.hasDefaultException {
+                defaultException = viewModel
             } else {
-                exceptions.append(exceptionResponseVM)
+                exceptions.append(viewModel)
             }
         }
 
