@@ -12,7 +12,5 @@ case let .success(data):
     }
     {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
-    dispatchQueue.async {
-        completionHandler(.failure(error), httpResponse)
-    }
+    {% include "OperationDefaultExceptionSnippet.stencil" %}
 }

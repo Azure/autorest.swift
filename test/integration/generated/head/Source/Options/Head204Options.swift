@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
-/// User-configurable options for the `AutoRestHeadTestService.head204` operation.
+/// User-configurable options for the `AutoRestHeadTestService.Head204` operation.
 public struct Head204Options: AzureOptions {
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
@@ -24,15 +24,21 @@ public struct Head204Options: AzureOptions {
     /// A token used to make a best-effort attempt at canceling a request.
     public let cancellationToken: CancellationToken?
 
+    /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+    public var dispatchQueue: DispatchQueue?
+
     /// Initialize a `Head204Options` structure.
     /// - Parameters:
     ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+    ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     public init(
         clientRequestId: String? = nil,
-        cancellationToken: CancellationToken? = nil
+        cancellationToken: CancellationToken? = nil,
+        dispatchQueue: DispatchQueue? = nil
     ) {
         self.clientRequestId = clientRequestId
         self.cancellationToken = cancellationToken
+        self.dispatchQueue = dispatchQueue
     }
 }

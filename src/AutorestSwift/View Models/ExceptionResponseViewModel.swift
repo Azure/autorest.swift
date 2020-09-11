@@ -32,26 +32,26 @@ struct ExceptionResponseViewModel {
     let objectType: String?
     /// Identifies the correct snippet to use when rendering the view model
     let description: String?
+    let hasDefaultException: Bool
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
         var statusCodes = [String]()
         httpResponse?.statusCodes.forEach { statusCodes.append($0.rawValue) }
 
-        self.statusCodes = statusCodes
+        self.statusCodes = statusCodes.filter { $0 != "default" }.sorted()
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
         self.objectType = schemaResponse?.schema.swiftType(optional: false)
-
         self.description = schemaResponse?.description
 
         if let errorResponseMetadata = response.extensions?["x-ms-error-response"]?.value as? Bool,
             errorResponseMetadata {
             guard objectType != nil
             else { fatalError("Did not find object type for error response") }
-        } else {
-            fatalError("Did not find object type for error response")
         }
+
+        self.hasDefaultException = statusCodes.contains("default")
     }
 }

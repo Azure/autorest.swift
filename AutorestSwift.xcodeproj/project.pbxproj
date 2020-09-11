@@ -168,6 +168,9 @@
 		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
 		F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */; };
 		F120004B250345C300797F1A /* OperationResponseExceptionSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */; };
+		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
+		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
+		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
 		F19B01CC25073E7F00121831 /* OperationResponseDataSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */; };
 		F19B01D52507E21100121831 /* ExceptionResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */; };
 		F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */; };
@@ -195,6 +198,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile";
 			remoteInfo = AutoRestSwaggerBatFile;
+		};
+		F18717CD250B184A00318867 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
+			remoteInfo = AzureCore;
 		};
 		F1A671B124F5E54100C2712C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -244,6 +254,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */,
+				F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */,
+				F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */,
 				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
 				F19B01E62507F3D300121831 /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
 				F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */,
@@ -374,6 +387,10 @@
 		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
 		F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
+		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
+		F18717CF250B184A00318867 /* OperationResponseFailureSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureSnippet.stencil; sourceTree = "<group>"; };
+		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
+		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; name = OperationResponseDataSnippet.stencil; path = templates/OperationResponseDataSnippet.stencil; sourceTree = SOURCE_ROOT; };
 		F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionResponseViewModel.swift; sourceTree = "<group>"; };
 		F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeSnippet.stencil; sourceTree = "<group>"; };
@@ -561,7 +578,11 @@
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
+				F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */,
 				F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */,
+				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
+				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
+				F18717CF250B184A00318867 /* OperationResponseFailureSnippet.stencil */,
 				F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */,
 				F19B01DA2507F17000121831 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
@@ -644,6 +665,7 @@
 			isa = PBXGroup;
 			children = (
 				F11304A124F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.framework */,
+				F18717CE250B184A00318867 /* AzureCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -893,9 +915,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
+				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 			);
 			name = AutorestSwiftTest;
 			productName = AutorestSwiftTest;
@@ -953,6 +975,13 @@
 			fileType = wrapper.framework;
 			path = AutoRestSwaggerBatFile.framework;
 			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F18717CE250B184A00318867 /* AzureCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCore.framework;
+			remoteRef = F18717CD250B184A00318867 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F1A671B224F5E54100C2712C /* AutoRestHeadTest.framework */ = {

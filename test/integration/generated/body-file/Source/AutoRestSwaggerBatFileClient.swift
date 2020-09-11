@@ -63,7 +63,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
 
     // MARK: Public Client Methods
 
-    // MARK: files
+    // MARK: Files
 
     /// Get file
     /// - Parameters:
@@ -109,14 +109,41 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    completionHandler(.success(()), httpResponse)
+            case let .success(data):
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -166,14 +193,41 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    completionHandler(.success(()), httpResponse)
+            case let .success(data):
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -223,14 +277,41 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    completionHandler(.success(()), httpResponse)
+            case let .success(data):
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }

@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Error: Codable {
+public struct Error: Codable, Swift.Error {
     public let status: Int?
 
     public let message: String?

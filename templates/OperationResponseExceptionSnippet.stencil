@@ -1,4 +1,5 @@
 {% for exception in op.exceptions %}
+    {% if exception.isDefaultStatusCode == false %}
     if [
     {% for statusCode in exception.statusCodes %}
       {{ statusCode }},
@@ -17,4 +18,5 @@
             }
         }
     }
+    {% endif %}
 {% endfor %}
