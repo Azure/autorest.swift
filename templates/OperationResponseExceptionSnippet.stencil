@@ -1,5 +1,5 @@
 {% for exception in op.exceptions %}
-    {% if exception.statusCodes.count > 0 %}
+    {% if exception.isDefaultStatusCode == false %}
     if [
     {% for statusCode in exception.statusCodes %}
       {{ statusCode }},

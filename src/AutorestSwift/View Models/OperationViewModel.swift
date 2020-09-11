@@ -144,15 +144,11 @@ struct OperationViewModel {
 
         var defaultException: ExceptionResponseViewModel?
         for exception in operation.exceptions ?? [] {
-            let vm = ExceptionResponseViewModel(from: exception)
-            if vm.isDefaultStatusCode {
-                assert(
-                    defaultException == nil,
-                    "Multiple default exception per operation is currently not supported... \(operation.name)"
-                )
-                defaultException = vm
+            let exceptionResponseViewModel = ExceptionResponseViewModel(from: exception)
+            if exceptionResponseViewModel.isDefaultStatusCode {
+                defaultException = exceptionResponseViewModel
             } else {
-                exceptions.append(vm)
+                exceptions.append(exceptionResponseViewModel)
             }
         }
 

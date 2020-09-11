@@ -24,6 +24,8 @@ public struct AutoRestSwaggerBatFileClientOptions: AzureClientOptions {
     public let telemetryOptions: TelemetryOptions
     /// Global transport options
     public let transportOptions: TransportOptions
+    /// The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
+    public let dispatchQueue: DispatchQueue?
 
     /// Initialize a `AutoRestSwaggerBatFileClientOptions` structure.
     /// - Parameters:
@@ -31,15 +33,18 @@ public struct AutoRestSwaggerBatFileClientOptions: AzureClientOptions {
     ///   - logger: The `ClientLogger` to be used by this `AutoRestSwaggerBatFileClient`.
     ///   - telemetryOptions: Options for configuring telemetry sent by this `AutoRestSwaggerBatFileClient`.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+    ///   - dispatchQueue: The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
     public init(
         apiVersion: AutoRestSwaggerBatFileClient.ApiVersion = .latest,
         logger: ClientLogger = ClientLoggers.default(tag: "AutoRestSwaggerBatFileClientClient"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
-        transportOptions: TransportOptions? = nil
+        transportOptions: TransportOptions? = nil,
+        dispatchQueue: DispatchQueue? = nil
     ) {
         self.apiVersion = apiVersion.rawValue
         self.logger = logger
         self.telemetryOptions = telemetryOptions
         self.transportOptions = transportOptions ?? TransportOptions()
+        self.dispatchQueue = dispatchQueue
     }
 }

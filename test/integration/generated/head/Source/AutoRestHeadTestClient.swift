@@ -108,25 +108,26 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case let .success(data):
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
                     return
                 }
                 if [
-                    404,
-                    200
+                    200,
+                    404
                 ].contains(statusCode) {
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.success(()), httpResponse)
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
+                dispatchQueue.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -176,25 +177,26 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case let .success(data):
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
                     return
                 }
                 if [
-                    204,
-                    404
+                    404,
+                    204
                 ].contains(statusCode) {
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.success(()), httpResponse)
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
+                dispatchQueue.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }
@@ -244,25 +246,26 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case let .success(data):
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
                     return
                 }
                 if [
-                    404,
-                    204
+                    204,
+                    404
                 ].contains(statusCode) {
-                    DispatchQueue.main.async {
+                    dispatchQueue.async {
                         completionHandler(.success(()), httpResponse)
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
+                dispatchQueue.async {
                     completionHandler(.failure(error), httpResponse)
                 }
             }

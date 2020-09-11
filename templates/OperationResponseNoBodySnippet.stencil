@@ -12,5 +12,5 @@ case let .success(data):
     }
     {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
-    {% include "OperationResponseFailureSnippet.stencil" %}
+    {% include "OperationDefaultExceptionSnippet.stencil" %}
 }
