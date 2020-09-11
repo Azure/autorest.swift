@@ -187,7 +187,6 @@ struct OperationViewModel {
         )
 
         self.request = requests.first
-        let response = responses.first
 
         // Construct the relevant view models
         if let bodyParam = operation.requests?.first?.bodyParam {
@@ -202,7 +201,7 @@ struct OperationViewModel {
             signaturePropertyViewModel.append(ParameterViewModel(from: $0))
         }
 
-        self.returnType = ReturnTypeViewModel(from: response)
+        self.returnType = ReturnTypeViewModel(from: self.responses)
 
         var signatureComments: [String] = []
         if let param = bodyParam {

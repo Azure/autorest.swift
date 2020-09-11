@@ -9,28 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>AutoRestHeadTest::AutoRestHeadTest</key>
+		<key>AutoRestHeadTestPackageDescription.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>primary</key>
-			<true/>
+			<key>orderHint</key>
+			<integer>18</integer>
 		</dict>
-		<key>AutoRestHeadTest::SwiftPMPackageDescription</key>
+		<key>AzureCore.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>primary</key>
-			<true/>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
-		<key>AzureSDK::AzureCore</key>
+		<key>AzureSDKPackageDescription.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AzureSDK::SwiftPMPackageDescription</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<key>orderHint</key>
+			<integer>19</integer>
 		</dict>
 	</dict>
 </dict>

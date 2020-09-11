@@ -36,14 +36,26 @@ struct ReturnTypeViewModel {
     let strategy: String
     let pagingNames: Language.PagingNames?
 
-    init(from response: ResponseViewModel?) {
-        self.strategy = response?.strategy.rawValue ?? ResponseBodyType.noBody.rawValue
+    init(from responses: [ResponseViewModel]?) {
+        var statusCodes = Set<String>()
+        var strategies = Set<String>()
+        for response in responses ?? [] {
+            strategies.insert(response.strategy.rawValue)
+            for statusCode in response.statusCodes {
+                statusCodes.insert(statusCode)
+            }
+        }
+
+        assert(strategies.count <= 1, "Different strategy in ResponseViewModel is currently not supported.")
+        self.statusCodes = Array(statusCodes)
+        self.strategy = strategies.first ?? ResponseBodyType.noBody.rawValue
+
+        let response = responses?.first
         self.pagingNames = response?.pagingNames
         if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
             self.name = "PagedCollection<\(elementType)>"
         } else {
             self.name = response?.objectType ?? "Void"
         }
-        self.statusCodes = response?.statusCodes ?? []
     }
 }

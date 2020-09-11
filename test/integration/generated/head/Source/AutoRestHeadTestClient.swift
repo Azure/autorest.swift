@@ -118,6 +118,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
+                    404,
                     200
                 ].contains(statusCode) {
                     DispatchQueue.main.async {
@@ -185,7 +186,8 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
-                    204
+                    204,
+                    404
                 ].contains(statusCode) {
                     DispatchQueue.main.async {
                         completionHandler(.success(()), httpResponse)
@@ -252,6 +254,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
+                    404,
                     204
                 ].contains(statusCode) {
                     DispatchQueue.main.async {
