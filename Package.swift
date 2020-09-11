@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.0"),
+        .package(url: "https://github.com/tjprescott/Yams.git", .branch("CircularReferences")),
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", .branch("master")),
