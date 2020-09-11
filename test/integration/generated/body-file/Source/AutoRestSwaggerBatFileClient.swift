@@ -111,13 +111,6 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             switch result {
             case let .success(data):
-                guard let data = data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     DispatchQueue.main.async {
@@ -133,8 +126,23 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(Error.self, from: data)
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -186,13 +194,6 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             switch result {
             case let .success(data):
-                guard let data = data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     DispatchQueue.main.async {
@@ -208,8 +209,23 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(Error.self, from: data)
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -261,13 +277,6 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             switch result {
             case let .success(data):
-                guard let data = data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     DispatchQueue.main.async {
@@ -283,8 +292,23 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                 }
             case let .failure(error):
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error), httpResponse)
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(Error.self, from: data)
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }

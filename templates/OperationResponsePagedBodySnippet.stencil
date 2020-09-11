@@ -29,7 +29,5 @@ case let .success(data):
     }
     {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
-    DispatchQueue.main.async {
-        completionHandler(.failure(error), httpResponse)
-    }
+    {% include "OperationResponseFailureSnippet.stencil" %}
 }

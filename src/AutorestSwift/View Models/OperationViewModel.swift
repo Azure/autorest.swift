@@ -95,6 +95,8 @@ struct OperationViewModel {
     let exceptions: [ExceptionResponseViewModel]?
     let request: RequestViewModel?
     let clientMethodOptions: ClientMethodOptionsViewModel
+    let defaultException: ExceptionResponseViewModel?
+    let defaultExceptionHasBody: Bool
 
     init(from operation: Operation, with model: CodeModel) {
         self.name = operationName(for: operation)
@@ -140,8 +142,18 @@ struct OperationViewModel {
             responses.append(ResponseViewModel(from: response, with: operation))
         }
 
+        var defaultException: ExceptionResponseViewModel?
         for exception in operation.exceptions ?? [] {
-            exceptions.append(ExceptionResponseViewModel(from: exception))
+            let vm = ExceptionResponseViewModel(from: exception)
+            if vm.isDefault {
+                assert(
+                    defaultException == nil,
+                    "Multiple default exception per operation is currently not supported... \(operation.name)"
+                )
+                defaultException = vm
+            } else {
+                exceptions.append(vm)
+            }
         }
 
         var statusCodes = [String]()
@@ -164,6 +176,8 @@ struct OperationViewModel {
         self.requests = requests
         self.responses = responses
         self.exceptions = exceptions
+        self.defaultException = defaultException
+        self.defaultExceptionHasBody = defaultException?.objectType != nil
 
         // current logic only supports a single request and response
         assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
@@ -171,6 +185,7 @@ struct OperationViewModel {
             responses.filter { $0.strategy != ResponseBodyType.noBody }.count <= 1,
             "Multiple Nobody responses per operation is currently not supported... \(operation.name)"
         )
+
         self.request = requests.first
         let response = responses.first
 
