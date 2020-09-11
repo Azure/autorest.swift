@@ -11,8 +11,8 @@
 		</dict>
 		<key>AutoRestSwaggerBatFilePackageDescription.xcscheme_^#shared#^_</key>
 		<dict>
-		    <key>orderHint</key>
-		    <integer>18</integer>
+			<key>orderHint</key>
+			<integer>18</integer>
 		</dict>
 		<key>AzureCore.xcscheme_^#shared#^_</key>
 		<dict>
