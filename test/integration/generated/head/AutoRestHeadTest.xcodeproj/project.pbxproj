@@ -1140,8 +1140,8 @@
       "OBJ_80" = {
          isa = "PBXGroup";
          children = (
-            "AutoRestHeadTest::AutoRestHeadTest::Product",
-            "AzureSDK::AzureCore::Product"
+	    "AzureSDK::AzureCore::Product"
+            "AutoRestHeadTest::AutoRestHeadTest::Product"
          );
          name = "Products";
          path = "";
