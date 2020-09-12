@@ -66,8 +66,8 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
     }
     
     func test_BodyFile_getEmptyFile() throws {
-           let expectation = XCTestExpectation(description: "Call getFile")
-           let failedExpectation = XCTestExpectation(description: "Call getFile failed")
+           let expectation = XCTestExpectation(description: "Call getEmptyFile")
+           let failedExpectation = XCTestExpectation(description: "Call getEmptyFile failed")
            failedExpectation.isInverted = true
            
         client.getEmptyFile() { result, httpResponse  in
@@ -89,8 +89,8 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
        }
     
     func test_BodyFile_getFileLarge() throws {
-           let expectation = XCTestExpectation(description: "Call getFile")
-           let failedExpectation = XCTestExpectation(description: "Call getFile failed")
+           let expectation = XCTestExpectation(description: "Call getFileLarge")
+           let failedExpectation = XCTestExpectation(description: "Call getFileLarge failed")
            failedExpectation.isInverted = true
            
         client.getFileLarge() { result, httpResponse  in
