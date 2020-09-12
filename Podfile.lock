@@ -18,7 +18,7 @@ PODS:
     - CNIOAtomics (= 2.20.2)
   - SwiftNIOFoundationCompat (2.20.2):
     - SwiftNIO (= 2.20.2)
-  - Yams (3.0.1)
+  - Yams (4.0.0)
 
 DEPENDENCIES:
   - Stencil (from `https://github.com/stencilproject/Stencil.git`, branch `trim_whitespace`)
@@ -26,7 +26,7 @@ DEPENDENCIES:
   - SwiftLint
   - SwiftNIO
   - SwiftNIOFoundationCompat
-  - Yams
+  - Yams (from `https://github.com/tjprescott/Yams.git`, branch `CircularReferences`)
 
 SPEC REPOS:
   trunk:
@@ -40,17 +40,22 @@ SPEC REPOS:
     - SwiftNIO
     - SwiftNIOConcurrencyHelpers
     - SwiftNIOFoundationCompat
-    - Yams
 
 EXTERNAL SOURCES:
   Stencil:
     :branch: trim_whitespace
     :git: https://github.com/stencilproject/Stencil.git
+  Yams:
+    :branch: CircularReferences
+    :git: https://github.com/tjprescott/Yams.git
 
 CHECKOUT OPTIONS:
   Stencil:
     :commit: 8e327cf073ba3b8bf2d1b88f9ad2158b67567063
     :git: https://github.com/stencilproject/Stencil.git
+  Yams:
+    :commit: 185d8aa8734319cd7aa6b86a0a92e17c0bb3773e
+    :git: https://github.com/tjprescott/Yams.git
 
 SPEC CHECKSUMS:
   CNIOAtomics: 7daf6423d00650104436c5f8a2a341679104ae83
@@ -64,8 +69,8 @@ SPEC CHECKSUMS:
   SwiftNIO: a3c1b37da3e97ce44b3cfafc61c05fe0cac540b8
   SwiftNIOConcurrencyHelpers: cd7afc3d1f1ceaf55bbd030e7d1a469d3024db92
   SwiftNIOFoundationCompat: 573f44d5b24f7ead54b6b111264c0a420fc6eccf
-  Yams: 4199a97883e0369046e3fe882fcc95e559966370
+  Yams: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
 
-PODFILE CHECKSUM: 9048c50822fb05425d0b1998c2be0086e31fb67e
+PODFILE CHECKSUM: b9d02b9d727aa8afdca85686ae509a2235ce05c6
 
 COCOAPODS: 1.9.3

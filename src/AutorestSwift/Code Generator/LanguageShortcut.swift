@@ -43,7 +43,12 @@ protocol LanguageShortcut {
 extension LanguageShortcut {
     var name: String {
         get {
-            return language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            let reserved = [
+                "Error": "ErrorType"
+            ]
+
+            let name = language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            return reserved[name] ?? name
         }
         set {
             language.swift.name = newValue
