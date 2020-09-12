@@ -42,4 +42,44 @@ class AutoRestReportTest: XCTestCase {
                                             withOptions: AutoRestReportClientOptions())
     }
 
+    func test_ReportFile_getReport() throws {
+        let expectation = XCTestExpectation(description: "Call getReport")
+        let failedExpectation = XCTestExpectation(description: "Call getReport failed")
+        failedExpectation.isInverted = true
+        
+        client.getReport() { result, _  in
+            switch result {
+                case let .success(data):
+                    XCTAssertEqual(data.count, 598)
+                    XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
+                    expectation.fulfill()
+               case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_ReportFile_getOptionalReport() throws {
+        let expectation = XCTestExpectation(description: "Call getOptionalReport")
+        let failedExpectation = XCTestExpectation(description: "Call getOptionalReport failed")
+        failedExpectation.isInverted = true
+        
+        client.getOptionalReport() { result, _  in
+            switch result {
+                case let .success(data):
+                    XCTAssertEqual(data.count, 41)
+                    XCTAssertEqual(data["getDecimalInvalid"], 0)
+                    expectation.fulfill()
+               case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
 }
