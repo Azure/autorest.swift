@@ -303,5 +303,5 @@ AutorestSwift.xcodeproj/xcuserdata/
 Pods/
 .build/
 .swiftpm/
-test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj/xcuserdata
-test/integration/generated/head/AutoRestHeadTest.xcodeproj/xcuserdata
+*.plist
+test/integration/generated/**/**/xcuserdata
