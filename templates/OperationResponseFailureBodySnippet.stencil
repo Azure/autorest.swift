@@ -1,6 +1,6 @@
 guard let data = httpResponse?.data else {
     let noDataError = AzureError.sdk("Response data expected but not found.")
-    DispatchQueue.main.async {
+    dispatchQueue.async {
         completionHandler(.failure(noDataError), httpResponse)
     }
     return
@@ -8,11 +8,11 @@ guard let data = httpResponse?.data else {
 do {
     let decoder = JSONDecoder()
     let decoded = try decoder.decode({{ op.defaultException.objectType }}.self, from: data)
-    DispatchQueue.main.async {
+    dispatchQueue.async {
         completionHandler(.failure(AzureError.service("{{ op.defaultException.description }}", decoded)), httpResponse)
     }
 } catch {
-     DispatchQueue.main.async {
+     dispatchQueue.async {
         completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
     }
 }

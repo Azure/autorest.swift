@@ -1,3 +1,3 @@
-DispatchQueue.main.async {
+dispatchQueue.async {
     completionHandler(.failure(error), httpResponse)
 }
