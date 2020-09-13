@@ -101,6 +101,14 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
 
                    case let .failure(error):
                         XCTAssertEqual(httpResponse?.statusCode, 404)
+                        if case let .service(_, innerError) = error,
+                            let notFoundErrorBase = innerError as? NotFoundErrorBase {
+                            XCTAssertEqual(notFoundErrorBase.reason, "the type of animal requested is not available")
+                            XCTAssertEqual(notFoundErrorBase.whatNotFound, "AnimalNotFound")
+                             expectation.fulfill()
+                        } else {
+                            failedExpectation.fulfill()
+                        }
                         expectation.fulfill()
                 }
             }
@@ -121,8 +129,15 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
 
                    case let .failure(error):
                         XCTAssertEqual(httpResponse?.statusCode, 404)
-                        expectation.fulfill()
-                }
+                        if case let .service(_, innerError) = error,
+                            let notFoundErrorBase = innerError as? NotFoundErrorBase {
+                            XCTAssertEqual(notFoundErrorBase.reason, "link to pet not found")
+                            XCTAssertEqual(notFoundErrorBase.whatNotFound, "InvalidResourceLink")
+                             expectation.fulfill()
+                        } else {
+                            failedExpectation.fulfill()
+                        }
+                    }
             }
             
             wait(for: [expectation], timeout: 5.0)
@@ -141,7 +156,13 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
 
                case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 501)
-                    expectation.fulfill()
+                    if case let .service(_, innerError) = error,
+                        let notFoundErrorBase = innerError as? Int {
+                        XCTAssertEqual(notFoundErrorBase, 123)
+                        expectation.fulfill()
+                    } else {
+                        failedExpectation.fulfill()
+                }
             }
         }
         

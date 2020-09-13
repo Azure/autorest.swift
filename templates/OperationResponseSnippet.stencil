@@ -2,17 +2,17 @@ switch result {
 case .success:
 {% include "OperationResponseDataSnippet.stencil" %}
 {% for response in op.responses %}
-{% if response.strategy == "pagedBody" %}
-    {% include "OperationResponsePagedBodySnippet.stencil" op %}
-{% elif response.strategy == "body" %}
-    {% include "OperationResponseBodySnippet.stencil" op %}
-{% elif response.strategy == "noBody" %}
-    {% include "OperationResponseNoBodySnippet.stencil" %}
-{% else %}
-    // TODO: Couldn't find template for {{ response.strategy }}
-{% endif %}
-    {% include "OperationResponseExceptionSnippet.stencil" %}
+    {% if response.strategy == "pagedBody" %}
+        {% include "OperationResponsePagedBodySnippet.stencil" op %}
+    {% elif response.strategy == "body" %}
+        {% include "OperationResponseBodySnippet.stencil" op %}
+    {% elif response.strategy == "noBody" %}
+        {% include "OperationResponseNoBodySnippet.stencil" %}
+    {% else %}
+        // TODO: Couldn't find template for {{ response.strategy }}
+    {% endif %}
 {% endfor %}
+    {% include "OperationResponseExceptionSnippet.stencil" %}
 case let .failure(error):
     {% include "OperationDefaultExceptionSnippet.stencil" %}
 }
