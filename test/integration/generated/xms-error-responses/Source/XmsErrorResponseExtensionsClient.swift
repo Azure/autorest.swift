@@ -74,7 +74,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
     public func getPetById(
         petId: String,
         withOptions options: GetPetByIdOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+        completionHandler: @escaping HTTPResultHandler<Any>
     ) {
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
@@ -112,8 +112,8 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case let .success(data):
-                guard let data = data else {
+            case .success:
+                guard let data = httpResponse?.data else {
                     let noDataError = AzureError.sdk("Response data expected but not found.")
                     dispatchQueue.async {
                         completionHandler(.failure(noDataError), httpResponse)
@@ -128,7 +128,66 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     return
                 }
                 if [
-                    200,
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Pet.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
+                    400
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(String.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
+                    404
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
+                    501
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Int.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
                     202
                 ].contains(statusCode) {
                     dispatchQueue.async {
@@ -235,8 +294,8 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case let .success(data):
-                guard let data = data else {
+            case .success:
+                guard let data = httpResponse?.data else {
                     let noDataError = AzureError.sdk("Response data expected but not found.")
                     dispatchQueue.async {
                         completionHandler(.failure(noDataError), httpResponse)
@@ -285,6 +344,13 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     let noDataError = AzureError.sdk("Response data expected but not found.")
                     dispatchQueue.async {
                         completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
                     return
                 }

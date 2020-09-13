@@ -110,7 +110,14 @@ public final class AutoRestHeadTestClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case let .success(data):
+            case .success:
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -119,7 +126,13 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
-                    200,
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
+                }
+                if [
                     404
                 ].contains(statusCode) {
                     dispatchQueue.async {
@@ -179,7 +192,14 @@ public final class AutoRestHeadTestClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case let .success(data):
+            case .success:
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -188,8 +208,14 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
-                    404,
                     204
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
+                }
+                if [
+                    404
                 ].contains(statusCode) {
                     dispatchQueue.async {
                         completionHandler(.success(()), httpResponse)
@@ -248,7 +274,14 @@ public final class AutoRestHeadTestClient: PipelineClient {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
-            case let .success(data):
+            case .success:
+                guard let data = httpResponse?.data else {
+                    let noDataError = AzureError.sdk("Response data expected but not found.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noDataError), httpResponse)
+                    }
+                    return
+                }
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -257,8 +290,14 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
-                    404,
                     204
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(.success(()), httpResponse)
+                    }
+                }
+                if [
+                    404
                 ].contains(statusCode) {
                     dispatchQueue.async {
                         completionHandler(.success(()), httpResponse)

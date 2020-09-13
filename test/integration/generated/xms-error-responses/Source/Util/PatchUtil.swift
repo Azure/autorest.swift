@@ -68,11 +68,3 @@ final class MergePatchObject: Encodable {
         operations.append(MergePatchOperation(operation: .test, from: nil, path: path, value: value))
     }
 }
-
-extension String: LocalizedError {
-    public var errorDescription: String? { return self }
-}
-
-extension Int: LocalizedError {
-    public var errorDescription: Int? { return self }
-}

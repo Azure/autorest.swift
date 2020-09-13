@@ -7,24 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		OBJ_153 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* Package.swift */; };
-		OBJ_159 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Animal.swift */; };
-		OBJ_160 /* AnimalNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AnimalNotFound.swift */; };
-		OBJ_161 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* BaseError.swift */; };
-		OBJ_162 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Enumerations.swift */; };
-		OBJ_163 /* LinkNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* LinkNotFound.swift */; };
-		OBJ_164 /* NotFoundErrorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* NotFoundErrorBase.swift */; };
-		OBJ_165 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Pet.swift */; };
-		OBJ_166 /* PetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* PetAction.swift */; };
-		OBJ_167 /* PetActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* PetActionError.swift */; };
-		OBJ_168 /* PetHungryOrThirstyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* PetHungryOrThirstyError.swift */; };
-		OBJ_169 /* PetSadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* PetSadError.swift */; };
-		OBJ_170 /* DoSomethingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* DoSomethingOptions.swift */; };
-		OBJ_171 /* GetPetByIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* GetPetByIdOptions.swift */; };
-		OBJ_172 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* XmsErrorResponseExtensionsClientOptions.swift */; };
-		OBJ_173 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* PatchUtil.swift */; };
-		OBJ_174 /* XmsErrorResponseExtensionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* XmsErrorResponseExtensionsClient.swift */; };
-		OBJ_183 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_154 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* Package.swift */; };
+		OBJ_160 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Animal.swift */; };
+		OBJ_161 /* AnimalNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AnimalNotFound.swift */; };
+		OBJ_162 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* BaseError.swift */; };
+		OBJ_163 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Enumerations.swift */; };
+		OBJ_164 /* LinkNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* LinkNotFound.swift */; };
+		OBJ_165 /* NotFoundErrorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* NotFoundErrorBase.swift */; };
+		OBJ_166 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Pet.swift */; };
+		OBJ_167 /* PetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* PetAction.swift */; };
+		OBJ_168 /* PetActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* PetActionError.swift */; };
+		OBJ_169 /* PetHungryOrThirstyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* PetHungryOrThirstyError.swift */; };
+		OBJ_170 /* PetSadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* PetSadError.swift */; };
+		OBJ_171 /* DoSomethingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* DoSomethingOptions.swift */; };
+		OBJ_172 /* GetPetByIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* GetPetByIdOptions.swift */; };
+		OBJ_173 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* XmsErrorResponseExtensionsClientOptions.swift */; };
+		OBJ_174 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* PatchUtil.swift */; };
+		OBJ_175 /* StringInt+ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* StringInt+ExtensionFile.swift */; };
+		OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* XmsErrorResponseExtensionsClient.swift */; };
+		OBJ_185 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,65 +43,66 @@
 		OBJ_22 /* GetPetByIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPetByIdOptions.swift; sourceTree = "<group>"; };
 		OBJ_23 /* XmsErrorResponseExtensionsClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsClientOptions.swift; sourceTree = "<group>"; };
 		OBJ_25 /* PatchUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUtil.swift; sourceTree = "<group>"; };
-		OBJ_26 /* XmsErrorResponseExtensionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsClient.swift; sourceTree = "<group>"; };
-		OBJ_32 /* AzureTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTask.swift; sourceTree = "<group>"; };
-		OBJ_33 /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
-		OBJ_35 /* CancellationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationToken.swift; sourceTree = "<group>"; };
-		OBJ_36 /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
-		OBJ_37 /* MatchCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCondition.swift; sourceTree = "<group>"; };
-		OBJ_38 /* XMLMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLMap.swift; sourceTree = "<group>"; };
-		OBJ_39 /* XMLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLModel.swift; sourceTree = "<group>"; };
-		OBJ_40 /* XMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTree.swift; sourceTree = "<group>"; };
-		OBJ_41 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		OBJ_43 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
-		OBJ_44 /* PipelineClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineClient.swift; sourceTree = "<group>"; };
-		OBJ_45 /* PipelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContext.swift; sourceTree = "<group>"; };
-		OBJ_46 /* PipelineRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineRequest.swift; sourceTree = "<group>"; };
-		OBJ_47 /* PipelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineResponse.swift; sourceTree = "<group>"; };
-		OBJ_48 /* PipelineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineStage.swift; sourceTree = "<group>"; };
-		OBJ_50 /* AddDatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDatePolicy.swift; sourceTree = "<group>"; };
-		OBJ_51 /* AuthenticationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPolicy.swift; sourceTree = "<group>"; };
-		OBJ_52 /* ContentDecodePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDecodePolicy.swift; sourceTree = "<group>"; };
-		OBJ_53 /* HeadersPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersPolicy.swift; sourceTree = "<group>"; };
-		OBJ_54 /* HeadersValidationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersValidationPolicy.swift; sourceTree = "<group>"; };
-		OBJ_55 /* LoggingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPolicy.swift; sourceTree = "<group>"; };
-		OBJ_56 /* NormalizeETagPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeETagPolicy.swift; sourceTree = "<group>"; };
-		OBJ_57 /* RequestIdPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestIdPolicy.swift; sourceTree = "<group>"; };
-		OBJ_58 /* UserAgentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentPolicy.swift; sourceTree = "<group>"; };
+		OBJ_26 /* StringInt+ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringInt+ExtensionFile.swift"; sourceTree = "<group>"; };
+		OBJ_27 /* XmsErrorResponseExtensionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsClient.swift; sourceTree = "<group>"; };
+		OBJ_33 /* AzureTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTask.swift; sourceTree = "<group>"; };
+		OBJ_34 /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
+		OBJ_36 /* CancellationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationToken.swift; sourceTree = "<group>"; };
+		OBJ_37 /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		OBJ_38 /* MatchCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCondition.swift; sourceTree = "<group>"; };
+		OBJ_39 /* XMLMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLMap.swift; sourceTree = "<group>"; };
+		OBJ_40 /* XMLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLModel.swift; sourceTree = "<group>"; };
+		OBJ_41 /* XMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTree.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		OBJ_44 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
+		OBJ_45 /* PipelineClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineClient.swift; sourceTree = "<group>"; };
+		OBJ_46 /* PipelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContext.swift; sourceTree = "<group>"; };
+		OBJ_47 /* PipelineRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineRequest.swift; sourceTree = "<group>"; };
+		OBJ_48 /* PipelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineResponse.swift; sourceTree = "<group>"; };
+		OBJ_49 /* PipelineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineStage.swift; sourceTree = "<group>"; };
+		OBJ_51 /* AddDatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDatePolicy.swift; sourceTree = "<group>"; };
+		OBJ_52 /* AuthenticationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPolicy.swift; sourceTree = "<group>"; };
+		OBJ_53 /* ContentDecodePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDecodePolicy.swift; sourceTree = "<group>"; };
+		OBJ_54 /* HeadersPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersPolicy.swift; sourceTree = "<group>"; };
+		OBJ_55 /* HeadersValidationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersValidationPolicy.swift; sourceTree = "<group>"; };
+		OBJ_56 /* LoggingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPolicy.swift; sourceTree = "<group>"; };
+		OBJ_57 /* NormalizeETagPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeETagPolicy.swift; sourceTree = "<group>"; };
+		OBJ_58 /* RequestIdPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestIdPolicy.swift; sourceTree = "<group>"; };
+		OBJ_59 /* UserAgentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentPolicy.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
-		OBJ_61 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
-		OBJ_62 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		OBJ_63 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
-		OBJ_64 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		OBJ_65 /* HTTPTransportStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTransportStage.swift; sourceTree = "<group>"; };
-		OBJ_66 /* TelemetryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryOptions.swift; sourceTree = "<group>"; };
-		OBJ_67 /* TransportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportOptions.swift; sourceTree = "<group>"; };
-		OBJ_68 /* URLHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHTTPResponse.swift; sourceTree = "<group>"; };
-		OBJ_69 /* URLSessionTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTransport.swift; sourceTree = "<group>"; };
-		OBJ_71 /* BundleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_72 /* DeviceProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProviders.swift; sourceTree = "<group>"; };
-		OBJ_73 /* LocaleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_74 /* PlatformInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_76 /* ApplicationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUtil.swift; sourceTree = "<group>"; };
-		OBJ_77 /* AzureCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureCodable.swift; sourceTree = "<group>"; };
-		OBJ_78 /* ConvertingInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingInitializers.swift; sourceTree = "<group>"; };
-		OBJ_79 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
-		OBJ_80 /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
-		OBJ_81 /* KeychainUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
-		OBJ_82 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
-		OBJ_83 /* ReachabilityManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManagerType.swift; sourceTree = "<group>"; };
-		OBJ_84 /* RegexUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
-		OBJ_85 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
-		OBJ_86 /* URLUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtil.swift; sourceTree = "<group>"; };
-		OBJ_88 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift-5/test/integration/generated/xms-error-responses/.build/checkouts/azure-sdk-for-ios/Package.swift"; sourceTree = "<group>"; };
+		OBJ_61 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
+		OBJ_62 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		OBJ_63 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		OBJ_64 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
+		OBJ_65 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		OBJ_66 /* HTTPTransportStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTransportStage.swift; sourceTree = "<group>"; };
+		OBJ_67 /* TelemetryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryOptions.swift; sourceTree = "<group>"; };
+		OBJ_68 /* TransportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportOptions.swift; sourceTree = "<group>"; };
+		OBJ_69 /* URLHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHTTPResponse.swift; sourceTree = "<group>"; };
+		OBJ_70 /* URLSessionTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTransport.swift; sourceTree = "<group>"; };
+		OBJ_72 /* BundleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_73 /* DeviceProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProviders.swift; sourceTree = "<group>"; };
+		OBJ_74 /* LocaleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_75 /* PlatformInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_77 /* ApplicationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUtil.swift; sourceTree = "<group>"; };
+		OBJ_78 /* AzureCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureCodable.swift; sourceTree = "<group>"; };
+		OBJ_79 /* ConvertingInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingInitializers.swift; sourceTree = "<group>"; };
+		OBJ_80 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
+		OBJ_81 /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
+		OBJ_82 /* KeychainUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
+		OBJ_83 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		OBJ_84 /* ReachabilityManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManagerType.swift; sourceTree = "<group>"; };
+		OBJ_85 /* RegexUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
+		OBJ_86 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
+		OBJ_87 /* URLUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtil.swift; sourceTree = "<group>"; };
+		OBJ_89 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift-5/test/integration/generated/xms-error-responses/.build/checkouts/azure-sdk-for-ios/Package.swift"; sourceTree = "<group>"; };
 		OBJ_9 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
-		OBJ_92 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_93 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		"XmsErrorResponseExtensions::XmsErrorResponseExtensions::Product" /* XmsErrorResponseExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XmsErrorResponseExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_175 /* Frameworks */ = {
+		OBJ_177 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -124,100 +126,85 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_25 /* PatchUtil.swift */,
+				OBJ_26 /* StringInt+ExtensionFile.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
 		};
-		OBJ_27 /* Tests */ = {
+		OBJ_28 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_28 /* Dependencies */ = {
+		OBJ_29 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_29 /* AzureSDK */,
+				OBJ_30 /* AzureSDK */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_29 /* AzureSDK */ = {
+		OBJ_30 /* AzureSDK */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_30 /* AzureCore */,
-				OBJ_87 /* AzureStorageBlob */,
-				OBJ_88 /* Package.swift */,
+				OBJ_31 /* AzureCore */,
+				OBJ_88 /* AzureStorageBlob */,
+				OBJ_89 /* Package.swift */,
 			);
 			name = AzureSDK;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_30 /* AzureCore */ = {
+		OBJ_31 /* AzureCore */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_31 /* Source */,
+				OBJ_32 /* Source */,
 			);
 			name = AzureCore;
 			path = ".build/checkouts/azure-sdk-for-ios/sdk/core/AzureCore";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_31 /* Source */ = {
+		OBJ_32 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_32 /* AzureTask.swift */,
-				OBJ_33 /* ClientLogger.swift */,
-				OBJ_34 /* DataStructures */,
-				OBJ_41 /* Errors.swift */,
-				OBJ_42 /* Pipeline */,
-				OBJ_70 /* Providers */,
-				OBJ_75 /* Util */,
+				OBJ_33 /* AzureTask.swift */,
+				OBJ_34 /* ClientLogger.swift */,
+				OBJ_35 /* DataStructures */,
+				OBJ_42 /* Errors.swift */,
+				OBJ_43 /* Pipeline */,
+				OBJ_71 /* Providers */,
+				OBJ_76 /* Util */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		OBJ_34 /* DataStructures */ = {
+		OBJ_35 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_35 /* CancellationToken.swift */,
-				OBJ_36 /* Collections.swift */,
-				OBJ_37 /* MatchCondition.swift */,
-				OBJ_38 /* XMLMap.swift */,
-				OBJ_39 /* XMLModel.swift */,
-				OBJ_40 /* XMLTree.swift */,
+				OBJ_36 /* CancellationToken.swift */,
+				OBJ_37 /* Collections.swift */,
+				OBJ_38 /* MatchCondition.swift */,
+				OBJ_39 /* XMLMap.swift */,
+				OBJ_40 /* XMLModel.swift */,
+				OBJ_41 /* XMLTree.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
 		};
-		OBJ_42 /* Pipeline */ = {
+		OBJ_43 /* Pipeline */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_43 /* Pipeline.swift */,
-				OBJ_44 /* PipelineClient.swift */,
-				OBJ_45 /* PipelineContext.swift */,
-				OBJ_46 /* PipelineRequest.swift */,
-				OBJ_47 /* PipelineResponse.swift */,
-				OBJ_48 /* PipelineStage.swift */,
-				OBJ_49 /* Policies */,
-				OBJ_59 /* Transport */,
+				OBJ_44 /* Pipeline.swift */,
+				OBJ_45 /* PipelineClient.swift */,
+				OBJ_46 /* PipelineContext.swift */,
+				OBJ_47 /* PipelineRequest.swift */,
+				OBJ_48 /* PipelineResponse.swift */,
+				OBJ_49 /* PipelineStage.swift */,
+				OBJ_50 /* Policies */,
+				OBJ_60 /* Transport */,
 			);
 			path = Pipeline;
-			sourceTree = "<group>";
-		};
-		OBJ_49 /* Policies */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_50 /* AddDatePolicy.swift */,
-				OBJ_51 /* AuthenticationPolicy.swift */,
-				OBJ_52 /* ContentDecodePolicy.swift */,
-				OBJ_53 /* HeadersPolicy.swift */,
-				OBJ_54 /* HeadersValidationPolicy.swift */,
-				OBJ_55 /* LoggingPolicy.swift */,
-				OBJ_56 /* NormalizeETagPolicy.swift */,
-				OBJ_57 /* RequestIdPolicy.swift */,
-				OBJ_58 /* UserAgentPolicy.swift */,
-			);
-			path = Policies;
 			sourceTree = "<group>";
 		};
 		OBJ_5 /*  */ = {
@@ -225,27 +212,43 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_27 /* Tests */,
-				OBJ_28 /* Dependencies */,
-				OBJ_89 /* Products */,
-				OBJ_92 /* README.md */,
+				OBJ_28 /* Tests */,
+				OBJ_29 /* Dependencies */,
+				OBJ_90 /* Products */,
+				OBJ_93 /* README.md */,
 			);
 			name = "";
 			sourceTree = "<group>";
 		};
-		OBJ_59 /* Transport */ = {
+		OBJ_50 /* Policies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_60 /* DataStringConvertible.swift */,
-				OBJ_61 /* HTTPHeader.swift */,
-				OBJ_62 /* HTTPMethod.swift */,
-				OBJ_63 /* HTTPRequest.swift */,
-				OBJ_64 /* HTTPResponse.swift */,
-				OBJ_65 /* HTTPTransportStage.swift */,
-				OBJ_66 /* TelemetryOptions.swift */,
-				OBJ_67 /* TransportOptions.swift */,
-				OBJ_68 /* URLHTTPResponse.swift */,
-				OBJ_69 /* URLSessionTransport.swift */,
+				OBJ_51 /* AddDatePolicy.swift */,
+				OBJ_52 /* AuthenticationPolicy.swift */,
+				OBJ_53 /* ContentDecodePolicy.swift */,
+				OBJ_54 /* HeadersPolicy.swift */,
+				OBJ_55 /* HeadersValidationPolicy.swift */,
+				OBJ_56 /* LoggingPolicy.swift */,
+				OBJ_57 /* NormalizeETagPolicy.swift */,
+				OBJ_58 /* RequestIdPolicy.swift */,
+				OBJ_59 /* UserAgentPolicy.swift */,
+			);
+			path = Policies;
+			sourceTree = "<group>";
+		};
+		OBJ_60 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_61 /* DataStringConvertible.swift */,
+				OBJ_62 /* HTTPHeader.swift */,
+				OBJ_63 /* HTTPMethod.swift */,
+				OBJ_64 /* HTTPRequest.swift */,
+				OBJ_65 /* HTTPResponse.swift */,
+				OBJ_66 /* HTTPTransportStage.swift */,
+				OBJ_67 /* TelemetryOptions.swift */,
+				OBJ_68 /* TransportOptions.swift */,
+				OBJ_69 /* URLHTTPResponse.swift */,
+				OBJ_70 /* URLSessionTransport.swift */,
 			);
 			path = Transport;
 			sourceTree = "<group>";
@@ -256,37 +259,37 @@
 				OBJ_8 /* Models */,
 				OBJ_20 /* Options */,
 				OBJ_24 /* Util */,
-				OBJ_26 /* XmsErrorResponseExtensionsClient.swift */,
+				OBJ_27 /* XmsErrorResponseExtensionsClient.swift */,
 			);
 			name = Sources;
 			path = Source;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_70 /* Providers */ = {
+		OBJ_71 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_71 /* BundleInfoProvider.swift */,
-				OBJ_72 /* DeviceProviders.swift */,
-				OBJ_73 /* LocaleInfoProvider.swift */,
-				OBJ_74 /* PlatformInfoProvider.swift */,
+				OBJ_72 /* BundleInfoProvider.swift */,
+				OBJ_73 /* DeviceProviders.swift */,
+				OBJ_74 /* LocaleInfoProvider.swift */,
+				OBJ_75 /* PlatformInfoProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		OBJ_75 /* Util */ = {
+		OBJ_76 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_76 /* ApplicationUtil.swift */,
-				OBJ_77 /* AzureCodable.swift */,
-				OBJ_78 /* ConvertingInitializers.swift */,
-				OBJ_79 /* Copyable.swift */,
-				OBJ_80 /* CryptoUtil.swift */,
-				OBJ_81 /* KeychainUtil.swift */,
-				OBJ_82 /* ReachabilityManager.swift */,
-				OBJ_83 /* ReachabilityManagerType.swift */,
-				OBJ_84 /* RegexUtil.swift */,
-				OBJ_85 /* StringUtil.swift */,
-				OBJ_86 /* URLUtil.swift */,
+				OBJ_77 /* ApplicationUtil.swift */,
+				OBJ_78 /* AzureCodable.swift */,
+				OBJ_79 /* ConvertingInitializers.swift */,
+				OBJ_80 /* Copyable.swift */,
+				OBJ_81 /* CryptoUtil.swift */,
+				OBJ_82 /* KeychainUtil.swift */,
+				OBJ_83 /* ReachabilityManager.swift */,
+				OBJ_84 /* ReachabilityManagerType.swift */,
+				OBJ_85 /* RegexUtil.swift */,
+				OBJ_86 /* StringUtil.swift */,
+				OBJ_87 /* URLUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -309,7 +312,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		OBJ_87 /* AzureStorageBlob */ = {
+		OBJ_88 /* AzureStorageBlob */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -317,7 +320,7 @@
 			path = ".build/checkouts/azure-sdk-for-ios/sdk/storage/AzureStorageBlob";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_89 /* Products */ = {
+		OBJ_90 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"XmsErrorResponseExtensions::XmsErrorResponseExtensions::Product" /* XmsErrorResponseExtensions.framework */,
@@ -330,9 +333,9 @@
 /* Begin PBXNativeTarget section */
 		"AzureSDK::SwiftPMPackageDescription" /* AzureSDKPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_149 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */;
+			buildConfigurationList = OBJ_150 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */;
 			buildPhases = (
-				OBJ_152 /* Sources */,
+				OBJ_153 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -344,9 +347,9 @@
 		};
 		"XmsErrorResponseExtensions::SwiftPMPackageDescription" /* XmsErrorResponseExtensionsPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_179 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */;
+			buildConfigurationList = OBJ_181 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */;
 			buildPhases = (
-				OBJ_182 /* Sources */,
+				OBJ_184 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -358,10 +361,10 @@
 		};
 		"XmsErrorResponseExtensions::XmsErrorResponseExtensions" /* XmsErrorResponseExtensions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_155 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */;
+			buildConfigurationList = OBJ_156 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */;
 			buildPhases = (
-				OBJ_158 /* Sources */,
-				OBJ_175 /* Frameworks */,
+				OBJ_159 /* Sources */,
+				OBJ_177 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -389,7 +392,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_89 /* Products */;
+			productRefGroup = OBJ_90 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -401,49 +404,50 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_152 /* Sources */ = {
+		OBJ_153 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_153 /* Package.swift in Sources */,
+				OBJ_154 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_158 /* Sources */ = {
+		OBJ_159 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_159 /* Animal.swift in Sources */,
-				OBJ_160 /* AnimalNotFound.swift in Sources */,
-				OBJ_161 /* BaseError.swift in Sources */,
-				OBJ_162 /* Enumerations.swift in Sources */,
-				OBJ_163 /* LinkNotFound.swift in Sources */,
-				OBJ_164 /* NotFoundErrorBase.swift in Sources */,
-				OBJ_165 /* Pet.swift in Sources */,
-				OBJ_166 /* PetAction.swift in Sources */,
-				OBJ_167 /* PetActionError.swift in Sources */,
-				OBJ_168 /* PetHungryOrThirstyError.swift in Sources */,
-				OBJ_169 /* PetSadError.swift in Sources */,
-				OBJ_170 /* DoSomethingOptions.swift in Sources */,
-				OBJ_171 /* GetPetByIdOptions.swift in Sources */,
-				OBJ_172 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */,
-				OBJ_173 /* PatchUtil.swift in Sources */,
-				OBJ_174 /* XmsErrorResponseExtensionsClient.swift in Sources */,
+				OBJ_160 /* Animal.swift in Sources */,
+				OBJ_161 /* AnimalNotFound.swift in Sources */,
+				OBJ_162 /* BaseError.swift in Sources */,
+				OBJ_163 /* Enumerations.swift in Sources */,
+				OBJ_164 /* LinkNotFound.swift in Sources */,
+				OBJ_165 /* NotFoundErrorBase.swift in Sources */,
+				OBJ_166 /* Pet.swift in Sources */,
+				OBJ_167 /* PetAction.swift in Sources */,
+				OBJ_168 /* PetActionError.swift in Sources */,
+				OBJ_169 /* PetHungryOrThirstyError.swift in Sources */,
+				OBJ_170 /* PetSadError.swift in Sources */,
+				OBJ_171 /* DoSomethingOptions.swift in Sources */,
+				OBJ_172 /* GetPetByIdOptions.swift in Sources */,
+				OBJ_173 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */,
+				OBJ_174 /* PatchUtil.swift in Sources */,
+				OBJ_175 /* StringInt+ExtensionFile.swift in Sources */,
+				OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_182 /* Sources */ = {
+		OBJ_184 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_183 /* Package.swift in Sources */,
+				OBJ_185 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_150 /* Debug */ = {
+		OBJ_151 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -452,7 +456,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_151 /* Release */ = {
+		OBJ_152 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -461,7 +465,7 @@
 			};
 			name = Release;
 		};
-		OBJ_156 /* Debug */ = {
+		OBJ_157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -489,7 +493,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_157 /* Release */ = {
+		OBJ_158 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -517,7 +521,7 @@
 			};
 			name = Release;
 		};
-		OBJ_180 /* Debug */ = {
+		OBJ_182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -526,7 +530,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_181 /* Release */ = {
+		OBJ_183 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -589,29 +593,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_149 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */ = {
+		OBJ_150 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_150 /* Debug */,
-				OBJ_151 /* Release */,
+				OBJ_151 /* Debug */,
+				OBJ_152 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_155 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */ = {
+		OBJ_156 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_156 /* Debug */,
-				OBJ_157 /* Release */,
+				OBJ_157 /* Debug */,
+				OBJ_158 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_179 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */ = {
+		OBJ_181 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_180 /* Debug */,
-				OBJ_181 /* Release */,
+				OBJ_182 /* Debug */,
+				OBJ_183 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
