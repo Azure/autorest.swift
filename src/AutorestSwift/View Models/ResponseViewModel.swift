@@ -38,9 +38,9 @@ enum ResponseBodyType: String {
 /// View Model for method response handling.
 struct ResponseViewModel {
     let statusCodes: [String]
-    let objectType: String?
+    let objectType: String
     /// Identifies the correct snippet to use when rendering the view model
-    let strategy: ResponseBodyType
+    let strategy: String
     let pagingNames: Language.PagingNames?
     let pagedElementClassName: String?
 
@@ -53,20 +53,33 @@ struct ResponseViewModel {
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
-        self.objectType = schemaResponse?.schema.swiftType(optional: false)
 
+        let strategy: ResponseBodyType
         if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
             let pagingNames = Language.PagingNames(from: pagingMetadata) {
             let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
             guard arrayElements.count == 1
             else { fatalError("Did not find exactly one array type for paged collection.") }
-            self.strategy = .pagedBody
+            strategy = .pagedBody
             self.pagingNames = pagingNames
             self.pagedElementClassName = arrayElements.first?.elementType.name
+
+            if let elementType = pagedElementClassName, self.pagingNames != nil {
+                self.objectType = "PagedCollection<\(elementType)>"
+            } else {
+                self.objectType = schemaResponse?.schema.swiftType(optional: false) ?? "Void"
+            }
         } else {
-            self.strategy = objectType != nil ? .body : .noBody
             self.pagingNames = nil
             self.pagedElementClassName = nil
+            if let objectType = schemaResponse?.schema.swiftType(optional: false) {
+                strategy = .body
+                self.objectType = objectType
+            } else {
+                strategy = .noBody
+                self.objectType = "Void"
+            }
         }
+        self.strategy = strategy.rawValue
     }
 }
