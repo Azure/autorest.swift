@@ -1,4 +1,5 @@
 {% if op.defaultExceptionHasBody == true %}
+{% include "OperationResponseDataSnippet.stencil" %}
 {% include "OperationResponseFailureBodySnippet.stencil" %}
 {% else %}
 {% include "OperationResponseFailureNoBodySnippet.stencil" %}
