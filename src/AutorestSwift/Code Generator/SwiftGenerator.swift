@@ -62,6 +62,13 @@ class SwiftGenerator: CodeGenerator {
             withFilename: "PatchUtil",
             andParams: [:]
         )
+        // Create StringInt+ExtensionFile.swift file
+        try render(
+            template: "StringInt+ExtensionFile",
+            toSubfolder: .util,
+            withFilename: "StringInt+ExtensionFile",
+            andParams: [:]
+        )
 
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)

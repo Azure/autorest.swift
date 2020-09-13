@@ -80,8 +80,16 @@ class Operation: Codable, LanguageShortcut {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
-            (try? container.decode([Response].self, forKey: .responses))
+
+        var responses = [Response]()
+        var responsesContainer = try container.nestedUnkeyedContainer(forKey: .responses)
+        while !responsesContainer.isAtEnd {
+            if let response = (try? responsesContainer.decode(SchemaResponse.self)) ??
+                (try? responsesContainer.decode(Response.self)) {
+                responses.append(response)
+            }
+        }
+        self.responses = responses
 
         var exceptions = [Response]()
         var exceptionContainer = try container.nestedUnkeyedContainer(forKey: .exceptions)
