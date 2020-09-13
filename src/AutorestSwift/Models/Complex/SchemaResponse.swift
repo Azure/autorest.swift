@@ -47,6 +47,8 @@ class SchemaResponse: Response {
             self.schema = arraySchema
         } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
             self.schema = objectSchema
+        } else if let stringSchema = try? container.decode(StringSchema.self, forKey: .schema) {
+            self.schema = stringSchema
         } else {
             self.schema = try container.decode(Schema.self, forKey: .schema)
         }
