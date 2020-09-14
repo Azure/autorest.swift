@@ -33,6 +33,7 @@ struct ExceptionResponseViewModel {
     /// Identifies the correct snippet to use when rendering the view model
     let description: String?
     let hasDefaultException: Bool
+    let strategy: String
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -50,6 +51,15 @@ struct ExceptionResponseViewModel {
             errorResponseMetadata {
             guard objectType != nil
             else { fatalError("Did not find object type for error response") }
+        }
+
+        switch objectType {
+        case "String":
+            self.strategy = ResponseBodyType.stringBody.rawValue
+        case "Int":
+            self.strategy = ResponseBodyType.intBody.rawValue
+        default:
+            self.strategy = ResponseBodyType.jsonBody.rawValue
         }
 
         self.hasDefaultException = statusCodes.contains("default")

@@ -157,8 +157,34 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
                case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 501)
                     if case let .service(_, innerError) = error,
-                        let notFoundErrorBase = innerError as? Int {
-                        XCTAssertEqual(notFoundErrorBase, 123)
+                        let errorNo = innerError as? Int {
+                        XCTAssertEqual(errorNo, 123)
+                        expectation.fulfill()
+                    } else {
+                        failedExpectation.fulfill()
+                }
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_XmsErrorResponseExtensions_getPetById400() throws {
+        let expectation = XCTestExpectation(description: "Call getPetById with ringo")
+        let failedExpectation = XCTestExpectation(description: "Call getPetById with ringo failed")
+        failedExpectation.isInverted = true
+        
+        client.getPetById(petId: "ringo") { result, httpResponse  in
+            switch result {
+                case .success:
+                    print("test failed.")
+                    failedExpectation.fulfill()
+
+               case let .failure(error):
+                    XCTAssertEqual(httpResponse?.statusCode, 400)
+                    if case let .service(_, innerError) = error,
+                        let errorString = innerError as? String {
+                        XCTAssert(errorString.contains("ringo is missing"))
                         expectation.fulfill()
                     } else {
                         failedExpectation.fulfill()

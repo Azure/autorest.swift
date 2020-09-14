@@ -33,6 +33,9 @@ enum ResponseBodyType: String {
     case body
     /// Service returns no response data, only a status code
     case noBody
+    case stringBody
+    case intBody
+    case jsonBody
 }
 
 /// View Model for method response handling.

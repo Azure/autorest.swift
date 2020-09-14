@@ -6,8 +6,15 @@
     ].contains(statusCode)
     {
         do {
-            let decoder = JSONDecoder()
-            let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
+            {% if exception.strategy == "intBody" %}
+                {% include "OperationResponseExceptionIntBodySnippet.stencil" %}
+            {% elif exception.strategy == "stringBody" %}
+                {% include "OperationResponseExceptionStringBodySnippet.stencil" %}
+            {% elif exception.strategy == "jsonBody" %}
+                {% include "OperationResponseExceptionJsonBodySnippet.stencil" %}
+            {% else %}
+                // TODO: Couldn't find template for {{ exception.strategy }}
+            {% endif %}
             dispatchQueue.async {
                 completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
             }

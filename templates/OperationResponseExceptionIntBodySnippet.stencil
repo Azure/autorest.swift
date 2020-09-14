@@ -1,0 +1,2 @@
+let decodedstr =  String(data: data, encoding: .utf8)
+let decoded =  Int(decodedstr ?? "")
