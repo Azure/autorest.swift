@@ -74,7 +74,7 @@ class Value: Codable, LanguageShortcut {
 
     enum CodingKeys: String, CodingKey {
         case schema
-        case required // = "required"
+        case required
         case nullable
         case assumedValue
         case clientDefaultValue

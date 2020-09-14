@@ -42,7 +42,7 @@ class Property: Value {
     let isDiscriminator: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case readOnly, serializedName, flattenedNames, isDiscriminator // , schema
+        case readOnly, serializedName, flattenedNames, isDiscriminator
     }
 
     // MARK: Codable
