@@ -57,7 +57,9 @@ class Property: Value {
 
         try super.init(from: decoder)
 
-        if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
+        if let dictionarySchema = try? container.decode(DictionarySchema.self, forKey: .schema) {
+            self.schema = dictionarySchema
+        } else if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
             super.schema = arraySchema
         } else if let numberSchema = try? container.decode(NumberSchema.self, forKey: .schema) {
             super.schema = numberSchema
