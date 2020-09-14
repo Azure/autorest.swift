@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		OBJ_154 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* Package.swift */; };
 		OBJ_160 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Animal.swift */; };
 		OBJ_161 /* AnimalNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AnimalNotFound.swift */; };
 		OBJ_162 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* BaseError.swift */; };
@@ -25,7 +24,6 @@
 		OBJ_174 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* PatchUtil.swift */; };
 		OBJ_175 /* StringInt+ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* StringInt+ExtensionFile.swift */; };
 		OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* XmsErrorResponseExtensionsClient.swift */; };
-		OBJ_185 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -331,34 +329,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		"AzureSDK::SwiftPMPackageDescription" /* AzureSDKPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_150 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */;
-			buildPhases = (
-				OBJ_153 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AzureSDKPackageDescription;
-			productName = AzureSDKPackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
-		"XmsErrorResponseExtensions::SwiftPMPackageDescription" /* XmsErrorResponseExtensionsPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_181 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */;
-			buildPhases = (
-				OBJ_184 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = XmsErrorResponseExtensionsPackageDescription;
-			productName = XmsErrorResponseExtensionsPackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
 		"XmsErrorResponseExtensions::XmsErrorResponseExtensions" /* XmsErrorResponseExtensions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_156 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */;
@@ -396,22 +366,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"AzureSDK::SwiftPMPackageDescription" /* AzureSDKPackageDescription */,
 				"XmsErrorResponseExtensions::XmsErrorResponseExtensions" /* XmsErrorResponseExtensions */,
-				"XmsErrorResponseExtensions::SwiftPMPackageDescription" /* XmsErrorResponseExtensionsPackageDescription */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_153 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_154 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_159 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -436,35 +396,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_184 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_185 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_151 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		OBJ_152 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		OBJ_157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -518,24 +452,6 @@
 				TARGET_NAME = XmsErrorResponseExtensions;
 				TVOS_DEPLOYMENT_TARGET = 12.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		OBJ_182 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		OBJ_183 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -593,29 +509,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_150 /* Build configuration list for PBXNativeTarget "AzureSDKPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_151 /* Debug */,
-				OBJ_152 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		OBJ_156 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_157 /* Debug */,
 				OBJ_158 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_181 /* Build configuration list for PBXNativeTarget "XmsErrorResponseExtensionsPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_182 /* Debug */,
-				OBJ_183 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
