@@ -171,6 +171,7 @@
 		F137B9D9250EECEB00A400F7 /* OperationResponseExceptionIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F137B9D7250EECCB00A400F7 /* OperationResponseExceptionIntBodySnippet.stencil */; };
 		F137B9DA250EECEB00A400F7 /* OperationResponseExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F137B9D0250EECCB00A400F7 /* OperationResponseExceptionJsonBodySnippet.stencil */; };
 		F137B9DB250EECEB00A400F7 /* OperationResponseExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F137B9D8250EECD800A400F7 /* OperationResponseExceptionStringBodySnippet.stencil */; };
+		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
@@ -209,18 +210,18 @@
 			remoteGlobalIDString = "AutoRestReport::AutoRestReport";
 			remoteInfo = AutoRestReport;
 		};
-		F186E903250FEAEC00723FA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
-			remoteInfo = AzureCore;
-		};
 		F186E905250FEAEC00723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = "XmsErrorResponseExtensions::XmsErrorResponseExtensions::Product";
+			remoteInfo = XmsErrorResponseExtensions;
+		};
+		F186E917250FF0E200723FA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "XmsErrorResponseExtensions::XmsErrorResponseExtensions";
 			remoteInfo = XmsErrorResponseExtensions;
 		};
 		F18718E9250C58B900318867 /* PBXContainerItemProxy */ = {
@@ -417,6 +418,7 @@
 		F137B9D7250EECCB00A400F7 /* OperationResponseExceptionIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F137B9D8250EECD800A400F7 /* OperationResponseExceptionStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionStringBodySnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
+		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
 		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
@@ -703,7 +705,6 @@
 		F186E8FD250FEAEC00723FA3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F186E904250FEAEC00723FA3 /* AzureCore.framework */,
 				F186E906250FEAEC00723FA3 /* XmsErrorResponseExtensions.framework */,
 			);
 			name = Products;
@@ -727,6 +728,7 @@
 				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
 				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
 				F18718F0250C592300318867 /* AutoRestReportTest.swift */,
+				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 			);
 			path = AutorestSwiftTest;
@@ -965,6 +967,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F186E918250FF0E200723FA3 /* PBXTargetDependency */,
 				F186E8E9250FE46100723FA3 /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
 				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
@@ -1034,13 +1037,6 @@
 			fileType = wrapper.framework;
 			path = AutoRestSwaggerBatFile.framework;
 			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F186E904250FEAEC00723FA3 /* AzureCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AzureCore.framework;
-			remoteRef = F186E903250FEAEC00723FA3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F186E906250FEAEC00723FA3 /* XmsErrorResponseExtensions.framework */ = {
@@ -1132,6 +1128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 				F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */,
@@ -1285,6 +1282,11 @@
 			isa = PBXTargetDependency;
 			name = AutoRestReport;
 			targetProxy = F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */;
+		};
+		F186E918250FF0E200723FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XmsErrorResponseExtensions;
+			targetProxy = F186E917250FF0E200723FA3 /* PBXContainerItemProxy */;
 		};
 		F1A671B624F5E5FA00C2712C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

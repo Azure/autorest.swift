@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		OBJ_90 /* AutoRestSwaggerBatFileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* AutoRestSwaggerBatFileClient.swift */; };
-		OBJ_91 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Error.swift */; };
 		OBJ_92 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ErrorType.swift */; };
 		OBJ_93 /* AutoRestSwaggerBatFileClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* AutoRestSwaggerBatFileClientOptions.swift */; };
 		OBJ_94 /* GetEmptyFileOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* GetEmptyFileOptions.swift */; };
@@ -203,7 +202,7 @@
 			path = Policies;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -213,7 +212,6 @@
 				OBJ_81 /* Products */,
 				OBJ_84 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Transport */ = {
@@ -334,7 +332,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_81 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -350,7 +348,6 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_90 /* AutoRestSwaggerBatFileClient.swift in Sources */,
-				OBJ_91 /* Error.swift in Sources */,
 				OBJ_92 /* ErrorType.swift in Sources */,
 				OBJ_93 /* AutoRestSwaggerBatFileClientOptions.swift in Sources */,
 				OBJ_94 /* GetEmptyFileOptions.swift in Sources */,
