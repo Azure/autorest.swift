@@ -2,7 +2,7 @@
 
 make install
 
-files=( "head" "body-file")
+files=( "head" "body-file" "report")
 for i in "${files[@]}"
 do
     rm ./test/integration/generated/$i/Package.resolved
