@@ -194,4 +194,79 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func test_XmsErrorResponseExtensions_doSomething200() throws {
+        let expectation = XCTestExpectation(description: "Call doSomething with stay")
+        let failedExpectation = XCTestExpectation(description: "Call doSomething with stay failed")
+        failedExpectation.isInverted = true
+        
+        client.doSomething(whatAction: "stay") { result, httpResponse  in
+            switch result {
+            case let .success(petAction):
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                    XCTAssertNil(petAction.actionResponse)
+                    expectation.fulfill()
+                
+               case .failure:
+                    print("test failed.")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_XmsErrorResponseExtensions_doSomething500() throws {
+           let expectation = XCTestExpectation(description: "Call doSomething with jump")
+           let failedExpectation = XCTestExpectation(description: "Call doSomething with jump failed")
+           failedExpectation.isInverted = true
+           
+           client.doSomething(whatAction: "jump") { result, httpResponse  in
+               switch result {
+               case .success:
+                       print("test failed.")
+                       failedExpectation.fulfill()
+
+                  case let .failure(error):
+                        if case let .service(_, innerError) = error,
+                            let patActionError = innerError as? PetActionError {
+                            XCTAssertEqual(httpResponse?.statusCode, 500)
+                            XCTAssertEqual(patActionError.errorType, "PetSadError" )
+                            XCTAssertEqual(patActionError.errorMessage,"casper aint happy")
+                            expectation.fulfill()
+                       } else {
+                           failedExpectation.fulfill()
+                       }
+               }
+           }
+           
+           wait(for: [expectation], timeout: 5.0)
+       }
+    
+    func test_XmsErrorResponseExtensions_doSomething404() throws {
+           let expectation = XCTestExpectation(description: "Call doSomething with fetch")
+           let failedExpectation = XCTestExpectation(description: "Call doSomething with fetch failed")
+           failedExpectation.isInverted = true
+           
+           client.doSomething(whatAction: "fetch") { result, httpResponse  in
+               switch result {
+               case .success:
+                       print("test failed.")
+                       failedExpectation.fulfill()
+
+                  case let .failure(error):
+                        if case let .service(_, innerError) = error,
+                            let patActionError = innerError as? PetActionError {
+                            XCTAssertEqual(httpResponse?.statusCode, 404)
+                            XCTAssertEqual(patActionError.errorType, "PetHungryOrThirstyError" )
+                            XCTAssertEqual(patActionError.errorMessage,"scooby is low")
+                            expectation.fulfill()
+                       } else {
+                           failedExpectation.fulfill()
+                       }
+               }
+           }
+           
+           wait(for: [expectation], timeout: 5.0)
+       }
 }

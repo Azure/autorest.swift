@@ -143,51 +143,6 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                 }
                 if [
-                    400
-                ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(String.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-                        }
-                    }
-                }
-                if [
-                    404
-                ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-                        }
-                    }
-                }
-                if [
-                    501
-                ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Int.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-                        }
-                    }
-                }
-                if [
                     202
                 ].contains(statusCode) {
                     dispatchQueue.async {
@@ -198,8 +153,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     400
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(String.self, from: data)
+                        let decoded = String(data: data, encoding: .utf8)
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                         }
@@ -228,8 +182,8 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     501
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Int.self, from: data)
+                        let decodedstr = String(data: data, encoding: .utf8)
+                        let decoded = Int(decodedstr ?? "")
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                         }
