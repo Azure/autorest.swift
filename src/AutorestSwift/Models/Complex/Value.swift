@@ -74,7 +74,7 @@ class Value: Codable, LanguageShortcut {
 
     enum CodingKeys: String, CodingKey {
         case schema
-        case internalRequired = "required"
+        case required // = "required"
         case nullable
         case assumedValue
         case clientDefaultValue
@@ -86,5 +86,68 @@ class Value: Codable, LanguageShortcut {
         case language
         case `protocol`
         case extensions
+    }
+
+    // MARK: Codable
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: .schema)
+        let type = try? schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
+
+        var schema: Schema?
+        switch type {
+        case .array:
+            schema = try? container.decode(ArraySchema.self, forKey: .schema)
+        case .dictionary:
+            schema = try? container.decode(DictionarySchema.self, forKey: .schema)
+        case .object:
+            schema = try? container.decode(ObjectSchema.self, forKey: .schema)
+        case .number:
+            schema = try? container.decode(NumberSchema.self, forKey: .schema)
+        case .choice:
+            schema = try? container.decode(ChoiceSchema.self, forKey: .schema)
+        case .dateTime:
+            schema = try? container.decode(DateTimeSchema.self, forKey: .schema)
+        case .string:
+            schema = try? container.decode(StringSchema.self, forKey: .schema)
+        default:
+            schema = try container.decode(Schema.self, forKey: .schema)
+        }
+
+        self.schema = try schema ?? container.decode(Schema.self, forKey: .schema)
+
+        self.internalRequired = try? container.decode(Bool.self, forKey: .required)
+        self.nullable = try? container.decode(Bool.self, forKey: .nullable)
+        self.assumedValue = try? container.decode(String.self, forKey: .assumedValue)
+        self.clientDefaultValue = try? container.decode(String.self, forKey: .clientDefaultValue)
+        self.summary = try? container.decode(String.self, forKey: .summary)
+        self.apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
+        self.deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
+        self.origin = try? container.decode(String.self, forKey: .origin)
+        self.externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
+        self.language = try container.decode(Languages.self, forKey: .language)
+        self.protocol = try container.decode(Protocols.self, forKey: .protocol)
+        self.extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(schema, forKey: .schema)
+
+        if internalRequired != nil { try container.encode(internalRequired, forKey: .required) }
+        if nullable != nil { try container.encode(nullable, forKey: .nullable) }
+        if assumedValue != nil { try container.encode(assumedValue, forKey: .assumedValue) }
+        if clientDefaultValue != nil { try container.encode(clientDefaultValue, forKey: .clientDefaultValue) }
+        if summary != nil { try container.encode(summary, forKey: .summary) }
+        if apiVersions != nil { try container.encode(apiVersions, forKey: .apiVersions) }
+        if deprecated != nil { try container.encode(deprecated, forKey: .deprecated) }
+        if origin != nil { try container.encode(origin, forKey: .origin) }
+        if externalDocs != nil { try container.encode(externalDocs, forKey: .externalDocs) }
+        try container.encode(language, forKey: .language)
+        try container.encode(`protocol`, forKey: .protocol)
+        if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
 }

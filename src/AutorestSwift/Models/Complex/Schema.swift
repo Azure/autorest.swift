@@ -65,6 +65,22 @@ class Schema: Codable, LanguageShortcut {
     /// Additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
 
+    enum CodingKeys: String, CodingKey {
+        case language
+        case type
+        case summary
+        case example
+        case defaultValue
+        case serialization
+        case apiVersions
+        case deprecated
+        case origin
+        case externalDocs
+        case `protocol`
+        case properties
+        case extensions
+    }
+
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
