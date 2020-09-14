@@ -72,12 +72,14 @@ class SwiftGenerator: CodeGenerator {
 
         // Create Enumerations.swift file
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)
-        try render(
-            template: "EnumerationFile",
-            toSubfolder: .models,
-            withFilename: "Enumerations",
-            andParams: ["models": enumViewModel]
-        )
+        if enumViewModel.enums.count > 0 {
+            try render(
+                template: "EnumerationFile",
+                toSubfolder: .models,
+                withFilename: "Enumerations",
+                andParams: ["models": enumViewModel]
+            )
+        }
 
         // Create model files
         for object in model.schemas.objects ?? [] {
