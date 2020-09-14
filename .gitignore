@@ -303,4 +303,4 @@ AutorestSwift.xcodeproj/xcuserdata/
 Pods/
 .build/
 .swiftpm/
-test/integration/generated/**/**/xcuserdata
+test/integration/generated/**/**/xcuserdata/
