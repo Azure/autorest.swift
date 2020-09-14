@@ -7,11 +7,13 @@
     {
         do {
             {% if exception.strategy == "intBody" %}
-                {% include "OperationResponseExceptionIntBodySnippet.stencil" %}
+                let decodedstr =  String(data: data, encoding: .utf8)
+                let decoded =  Int(decodedstr ?? "")
             {% elif exception.strategy == "stringBody" %}
-                {% include "OperationResponseExceptionStringBodySnippet.stencil" %}
+                let decoded =  String(data: data, encoding: .utf8)
             {% elif exception.strategy == "jsonBody" %}
-                {% include "OperationResponseExceptionJsonBodySnippet.stencil" %}
+                let decoder = JSONDecoder()
+                let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
             {% else %}
                 // TODO: Couldn't find template for {{ exception.strategy }}
             {% endif %}

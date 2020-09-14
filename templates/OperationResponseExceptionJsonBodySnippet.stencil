@@ -1,2 +1,0 @@
-let decoder = JSONDecoder()
-let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)

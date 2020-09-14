@@ -64,9 +64,9 @@ class SwiftGenerator: CodeGenerator {
         )
         // Create StringInt+ExtensionFile.swift file
         try render(
-            template: "StringInt+ExtensionFile",
+            template: "Primitives+ExtensionFile",
             toSubfolder: .util,
-            withFilename: "StringInt+ExtensionFile",
+            withFilename: "Primitives+ExtensionFile",
             andParams: [:]
         )
 
