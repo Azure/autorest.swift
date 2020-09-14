@@ -47,16 +47,67 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getFile failed")
         failedExpectation.isInverted = true
         
-        client.getFile() { result, _  in
+        client.getFile() { result, httpResponse  in
             switch result {
                 case .success:
-                 expectation.fulfill()
+                    guard let data = httpResponse?.data else {
+                        failedExpectation.fulfill()
+                        return
+                    }
+                    XCTAssertEqual(data.count, 8725)
+                    expectation.fulfill()
                case let .failure(error):
                 print("test failed. error=\(error.message)")
                 failedExpectation.fulfill()
             }
         }
         
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 10.0)
     }
+    
+    func test_BodyFile_getEmptyFile() throws {
+           let expectation = XCTestExpectation(description: "Call getEmptyFile")
+           let failedExpectation = XCTestExpectation(description: "Call getEmptyFile failed")
+           failedExpectation.isInverted = true
+           
+        client.getEmptyFile() { result, httpResponse  in
+               switch result {
+                   case .success:
+                       guard let data = httpResponse?.data else {
+                           failedExpectation.fulfill()
+                           return
+                       }
+                       XCTAssertTrue(data.isEmpty)
+                       expectation.fulfill()
+                  case let .failure(error):
+                   print("test failed. error=\(error.message)")
+                   failedExpectation.fulfill()
+               }
+           }
+           
+           wait(for: [expectation], timeout: 10.0)
+       }
+    
+    func test_BodyFile_getFileLarge() throws {
+           let expectation = XCTestExpectation(description: "Call getFileLarge")
+           let failedExpectation = XCTestExpectation(description: "Call getFileLarge failed")
+           failedExpectation.isInverted = true
+           
+        client.getFileLarge() { result, httpResponse  in
+               switch result {
+                   case .success:
+                       guard let data = httpResponse?.data else {
+                           failedExpectation.fulfill()
+                           return
+                       }
+                       XCTAssertEqual(data.count, 3000 * 1024 * 1024)
+                       expectation.fulfill()
+                  case let .failure(error):
+                   print("test failed. error=\(error.message)")
+                   failedExpectation.fulfill()
+               }
+           }
+           
+           wait(for: [expectation], timeout: 10.0)
+       }
 }

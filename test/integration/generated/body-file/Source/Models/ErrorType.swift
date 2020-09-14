@@ -15,12 +15,12 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Error: Codable, Swift.Error {
+public struct ErrorType: Codable, Swift.Error {
     public let status: Int?
 
     public let message: String?
 
-    /// Initialize a `Error` structure.
+    /// Initialize a `ErrorType` structure.
     /// - Parameters:
     ///   - status:
     ///   - message:
@@ -36,14 +36,14 @@ public struct Error: Codable, Swift.Error {
         case message
     }
 
-    /// Initialize a `Error` structure from decoder
+    /// Initialize a `ErrorType` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.status = try? container.decode(Int.self, forKey: .status)
         self.message = try? container.decode(String.self, forKey: .message)
     }
 
-    /// Encode a `Error` structure
+    /// Encode a `ErrorType` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if status != nil { try? container.encode(status, forKey: .status) }

@@ -396,7 +396,6 @@
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
 		F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
-		F18717CF250B184A00318867 /* OperationResponseFailureSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureSnippet.stencil; sourceTree = "<group>"; };
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestReport.xcodeproj; path = "test/integration/generated/body-file/../report/AutoRestReport.xcodeproj"; sourceTree = SOURCE_ROOT; };
@@ -592,7 +591,6 @@
 				F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */,
 				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
 				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
-				F18717CF250B184A00318867 /* OperationResponseFailureSnippet.stencil */,
 				F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */,
 				F19B01DA2507F17000121831 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
