@@ -200,12 +200,12 @@
 			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile";
 			remoteInfo = AutoRestSwaggerBatFile;
 		};
-		F18717CD250B184A00318867 /* PBXContainerItemProxy */ = {
+		F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
-			remoteInfo = AzureCore;
+			containerPortal = F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestReport::AutoRestReport";
+			remoteInfo = AutoRestReport;
 		};
 		F18718E9250C58B900318867 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -673,7 +673,6 @@
 			isa = PBXGroup;
 			children = (
 				F11304A124F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.framework */,
-				F18717CE250B184A00318867 /* AzureCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -933,8 +932,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
+				F186E8E9250FE46100723FA3 /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
+				F1A671B824F5E5FF00C2712C /* PBXTargetDependency */,
 				F11304A524F8BA30007FF3A3 /* PBXTargetDependency */,
 			);
 			name = AutorestSwiftTest;
@@ -997,13 +997,6 @@
 			fileType = wrapper.framework;
 			path = AutoRestSwaggerBatFile.framework;
 			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F18717CE250B184A00318867 /* AzureCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AzureCore.framework;
-			remoteRef = F18717CD250B184A00318867 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F18718EA250C58B900318867 /* AutoRestReport.framework */ = {
@@ -1236,6 +1229,11 @@
 			isa = PBXTargetDependency;
 			name = AutoRestSwaggerBatFile;
 			targetProxy = F11304A424F8BA30007FF3A3 /* PBXContainerItemProxy */;
+		};
+		F186E8E9250FE46100723FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestReport;
+			targetProxy = F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */;
 		};
 		F1A671B624F5E5FA00C2712C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
