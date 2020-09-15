@@ -96,6 +96,8 @@ class Schema: Codable, LanguageShortcut {
             }
         case AllSchemaTypes.dateTime:
             swiftType = "Date"
+        case AllSchemaTypes.unixTime:
+            swiftType = "Date"
         case AllSchemaTypes.integer:
             swiftType = "Int"
         case AllSchemaTypes.choice,
