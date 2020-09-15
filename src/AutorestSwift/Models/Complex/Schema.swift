@@ -65,6 +65,22 @@ class Schema: Codable, LanguageShortcut {
     /// Additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
 
+    enum CodingKeys: String, CodingKey {
+        case language
+        case type
+        case summary
+        case example
+        case defaultValue
+        case serialization
+        case apiVersions
+        case deprecated
+        case origin
+        case externalDocs
+        case `protocol`
+        case properties
+        case extensions
+    }
+
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
@@ -96,5 +112,36 @@ class Schema: Codable, LanguageShortcut {
         }
 
         return optional ? "\(swiftType)?" : swiftType
+    }
+
+    static func decode<Key>(
+        withContainer container: KeyedDecodingContainer<Key>
+    ) throws -> Schema? where Key: CodingKey {
+        var schema: Schema?
+        if let keyEnum = Key(stringValue: "schema") {
+            let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: keyEnum)
+            let type = try schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
+
+            switch type {
+            case .array:
+                schema = try? container.decode(ArraySchema.self, forKey: keyEnum)
+            case .dictionary:
+                schema = try? container.decode(DictionarySchema.self, forKey: keyEnum)
+            case .object:
+                schema = try? container.decode(ObjectSchema.self, forKey: keyEnum)
+            case .number:
+                schema = try? container.decode(NumberSchema.self, forKey: keyEnum)
+            case .choice:
+                schema = try? container.decode(ChoiceSchema.self, forKey: keyEnum)
+            case .dateTime:
+                schema = try? container.decode(DateTimeSchema.self, forKey: keyEnum)
+            case .string:
+                schema = try? container.decode(StringSchema.self, forKey: keyEnum)
+            default:
+                schema = try container.decode(Schema.self, forKey: keyEnum)
+            }
+        } else { fatalError ("Unable to decode to schema") }
+
+        return schema
     }
 }
