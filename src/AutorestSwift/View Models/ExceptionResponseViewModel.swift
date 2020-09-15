@@ -26,6 +26,12 @@
 
 import Foundation
 
+enum ExceptionResponseBodyType: String {
+    case stringBody
+    case intBody
+    case jsonBody
+}
+
 /// View Model for method exception response handling.
 struct ExceptionResponseViewModel {
     let statusCodes: [String]
@@ -55,11 +61,11 @@ struct ExceptionResponseViewModel {
 
         switch objectType {
         case "String":
-            self.strategy = ResponseBodyType.stringBody.rawValue
+            self.strategy = ExceptionResponseBodyType.stringBody.rawValue
         case "Int":
-            self.strategy = ResponseBodyType.intBody.rawValue
+            self.strategy = ExceptionResponseBodyType.intBody.rawValue
         default:
-            self.strategy = ResponseBodyType.jsonBody.rawValue
+            self.strategy = ExceptionResponseBodyType.jsonBody.rawValue
         }
 
         self.hasDefaultException = statusCodes.contains("default")

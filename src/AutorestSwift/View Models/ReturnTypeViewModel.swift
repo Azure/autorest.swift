@@ -47,13 +47,13 @@ struct ReturnTypeViewModel {
 
         // Only supprt at most 1 body or pageBody return type now.
         let withBodyStrategies = strategies.filter { $0 != "noBody" }
-        let hasNoBodyStratgies = strategies.contains { $0 == "noBody" }
+        let hasNoBodyStrategies = strategies.contains { $0 == "noBody" }
         assert(withBodyStrategies.count <= 1)
 
-        // since we only support 1 body/pagePage response, only need to take the first item fro objectTypes
+        // since we only support 1 body/pagePage response, only need to take the first item for objectTypes
         if let name = objectTypes.first {
-            self.name = hasNoBodyStratgies ? "\(name)?" : name
-            self.returnNil = hasNoBodyStratgies
+            self.name = hasNoBodyStrategies ? "\(name)?" : name
+            self.returnNil = hasNoBodyStrategies
         } else {
             self.name = "Void"
             self.returnNil = false
