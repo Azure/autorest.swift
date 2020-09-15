@@ -42,7 +42,7 @@ class Property: Value {
     let isDiscriminator: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case readOnly, serializedName, flattenedNames, isDiscriminator, schema
+        case readOnly, serializedName, flattenedNames, isDiscriminator
     }
 
     // MARK: Codable
@@ -56,24 +56,6 @@ class Property: Value {
         self.isDiscriminator = try? container.decode(Bool.self, forKey: .isDiscriminator)
 
         try super.init(from: decoder)
-
-        if let dictionarySchema = try? container.decode(DictionarySchema.self, forKey: .schema) {
-            self.schema = dictionarySchema
-        } else if let arraySchema = try? container.decode(ArraySchema.self, forKey: .schema) {
-            super.schema = arraySchema
-        } else if let numberSchema = try? container.decode(NumberSchema.self, forKey: .schema) {
-            super.schema = numberSchema
-        } else if let choiceSchema = try? container.decode(ChoiceSchema.self, forKey: .schema) {
-            super.schema = choiceSchema
-        } else if let dateTimeSchema = try? container.decode(DateTimeSchema.self, forKey: .schema) {
-            super.schema = dateTimeSchema
-        } else if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .schema) {
-            super.schema = objectSchema
-        } else if let stringSchema = try? container.decode(StringSchema.self, forKey: .schema) {
-            super.schema = stringSchema
-        } else {
-            super.schema = try container.decode(Schema.self, forKey: .schema)
-        }
     }
 
     override public func encode(to encoder: Encoder) throws {
