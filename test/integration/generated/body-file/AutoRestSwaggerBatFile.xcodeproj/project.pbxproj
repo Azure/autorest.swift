@@ -18,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		"AutoRestSwaggerBatFile::AutoRestSwaggerBatFile::Product" /* AutoRestSwaggerBatFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoRestSwaggerBatFile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 		OBJ_13 /* AutoRestSwaggerBatFileClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileClientOptions.swift; sourceTree = "<group>"; };
 		OBJ_14 /* GetEmptyFileOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmptyFileOptions.swift; sourceTree = "<group>"; };
@@ -291,7 +290,6 @@
 		OBJ_9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_10 /* Error.swift */,
 				OBJ_11 /* ErrorType.swift */,
 			);
 			path = Models;

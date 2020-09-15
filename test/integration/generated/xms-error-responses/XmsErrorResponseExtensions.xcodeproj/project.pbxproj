@@ -22,7 +22,6 @@
 		OBJ_172 /* GetPetByIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* GetPetByIdOptions.swift */; };
 		OBJ_173 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* XmsErrorResponseExtensionsClientOptions.swift */; };
 		OBJ_174 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* PatchUtil.swift */; };
-		OBJ_175 /* StringInt+ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* StringInt+ExtensionFile.swift */; };
 		OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* XmsErrorResponseExtensionsClient.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +40,6 @@
 		OBJ_22 /* GetPetByIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPetByIdOptions.swift; sourceTree = "<group>"; };
 		OBJ_23 /* XmsErrorResponseExtensionsClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsClientOptions.swift; sourceTree = "<group>"; };
 		OBJ_25 /* PatchUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUtil.swift; sourceTree = "<group>"; };
-		OBJ_26 /* StringInt+ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringInt+ExtensionFile.swift"; sourceTree = "<group>"; };
 		OBJ_27 /* XmsErrorResponseExtensionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsClient.swift; sourceTree = "<group>"; };
 		OBJ_33 /* AzureTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTask.swift; sourceTree = "<group>"; };
 		OBJ_34 /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_25 /* PatchUtil.swift */,
-				OBJ_26 /* StringInt+ExtensionFile.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -205,7 +202,7 @@
 			path = Pipeline;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -215,7 +212,6 @@
 				OBJ_90 /* Products */,
 				OBJ_93 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Policies */ = {
@@ -361,7 +357,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_90 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -391,7 +387,6 @@
 				OBJ_172 /* GetPetByIdOptions.swift in Sources */,
 				OBJ_173 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */,
 				OBJ_174 /* PatchUtil.swift in Sources */,
-				OBJ_175 /* StringInt+ExtensionFile.swift in Sources */,
 				OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

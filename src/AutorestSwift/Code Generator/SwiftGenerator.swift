@@ -62,11 +62,11 @@ class SwiftGenerator: CodeGenerator {
             withFilename: "PatchUtil",
             andParams: [:]
         )
-        // Create StringInt+ExtensionFile.swift file
+        // Create Primitives+Extension.swift file
         try render(
             template: "Primitives+ExtensionFile",
             toSubfolder: .util,
-            withFilename: "Primitives+ExtensionFile",
+            withFilename: "Primitives+Extension",
             andParams: [:]
         )
 
