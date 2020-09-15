@@ -19,7 +19,8 @@ let package = Package(
         .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
         .package(name: "AutoRestSwaggerBatFile", path: "./test/integration/generated/body-file/"),
         .package(name: "XmsErrorResponseExtensions", path: "./test/integration/generated/xms-error-responses/"),
-        .package(name: "AutoRestReport", path: "./test/integration/generated/report/")
+        .package(name: "AutoRestReport", path: "./test/integration/generated/report/"),
+        .package(name: "AutoRestIntegerTest", path: "./test/integration/generated/body-integer/"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -35,7 +36,7 @@ let package = Package(
         ),
         .testTarget(
             name: "AutorestSwiftTest",
-            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest", "AutoRestSwaggerBatFile", "XmsErrorResponseExtensions", "AutoRestReport"],
+            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest", "AutoRestSwaggerBatFile", "XmsErrorResponseExtensions", "AutoRestReport", "AutoRestIntegerTest"],
             path: "AutorestSwiftTest"
         )
     ],

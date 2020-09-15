@@ -200,7 +200,7 @@
 			path = Policies;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -210,7 +210,6 @@
 				OBJ_80 /* Products */,
 				OBJ_83 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Transport */ = {
@@ -331,7 +330,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_80 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

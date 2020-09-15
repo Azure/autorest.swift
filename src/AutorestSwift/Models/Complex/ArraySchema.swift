@@ -51,8 +51,8 @@ class ArraySchema: Schema {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.elementType =  try Schema.decode(withContainer: container, useKey: "elementType") ?? container
-                   .decode(Schema.self, forKey: .elementType)
+        self.elementType = try Schema.decode(withContainer: container, useKey: "elementType") ?? container
+            .decode(Schema.self, forKey: .elementType)
 
         self.maxItems = try? container.decode(Int.self, forKey: .maxItems)
         self.minItems = try? container.decode(Int.self, forKey: .minItems)

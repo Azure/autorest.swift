@@ -230,12 +230,12 @@
 			remoteGlobalIDString = "AutoRestIntegerTest::AutoRestIntegerTest::Product";
 			remoteInfo = AutoRestIntegerTest;
 		};
-		F186EB2B25116ADF00723FA3 /* PBXContainerItemProxy */ = {
+		F186EB2D25116BE200723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
-			remoteInfo = AzureCore;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestIntegerTest::AutoRestIntegerTest";
+			remoteInfo = AutoRestIntegerTest;
 		};
 		F18718E9250C58B900318867 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -723,7 +723,6 @@
 			isa = PBXGroup;
 			children = (
 				F186EB2A25116ADF00723FA3 /* AutoRestIntegerTest.framework */,
-				F186EB2C25116ADF00723FA3 /* AzureCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -987,6 +986,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F186EB2E25116BE200723FA3 /* PBXTargetDependency */,
 				F186E918250FF0E200723FA3 /* PBXTargetDependency */,
 				F186E8E9250FE46100723FA3 /* PBXTargetDependency */,
 				F1A671B624F5E5FA00C2712C /* PBXTargetDependency */,
@@ -1075,13 +1075,6 @@
 			fileType = wrapper.framework;
 			path = AutoRestIntegerTest.framework;
 			remoteRef = F186EB2925116ADF00723FA3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F186EB2C25116ADF00723FA3 /* AzureCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AzureCore.framework;
-			remoteRef = F186EB2B25116ADF00723FA3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F18718EA250C58B900318867 /* AutoRestReport.framework */ = {
@@ -1326,6 +1319,11 @@
 			isa = PBXTargetDependency;
 			name = XmsErrorResponseExtensions;
 			targetProxy = F186E917250FF0E200723FA3 /* PBXContainerItemProxy */;
+		};
+		F186EB2E25116BE200723FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestIntegerTest;
+			targetProxy = F186EB2D25116BE200723FA3 /* PBXContainerItemProxy */;
 		};
 		F1A671B624F5E5FA00C2712C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
