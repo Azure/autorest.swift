@@ -115,10 +115,11 @@ class Schema: Codable, LanguageShortcut {
     }
 
     static func decode<Key>(
-        withContainer container: KeyedDecodingContainer<Key>
+        withContainer container: KeyedDecodingContainer<Key>,
+        useKey keyName: String = "schema"
     ) throws -> Schema? where Key: CodingKey {
         var schema: Schema?
-        if let keyEnum = Key(stringValue: "schema") {
+        if let keyEnum = Key(stringValue: keyName) {
             let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: keyEnum)
             let type = try schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
 
@@ -137,10 +138,12 @@ class Schema: Codable, LanguageShortcut {
                 schema = try? container.decode(DateTimeSchema.self, forKey: keyEnum)
             case .string:
                 schema = try? container.decode(StringSchema.self, forKey: keyEnum)
+            case .constant:
+                schema = try? container.decode(ConstantSchema.self.self, forKey: keyEnum)
             default:
                 schema = try container.decode(Schema.self, forKey: keyEnum)
             }
-        } else { fatalError ("Unable to decode to schema") }
+        } else { fatalError("Unable to decode to schema") }
 
         return schema
     }

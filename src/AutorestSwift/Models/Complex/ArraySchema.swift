@@ -51,11 +51,9 @@ class ArraySchema: Schema {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let objectSchema = try? container.decode(ObjectSchema.self, forKey: .elementType) {
-            self.elementType = objectSchema
-        } else {
-            self.elementType = try container.decode(Schema.self, forKey: .elementType)
-        }
+        self.elementType =  try Schema.decode(withContainer: container, useKey: "elementType") ?? container
+                   .decode(Schema.self, forKey: .elementType)
+
         self.maxItems = try? container.decode(Int.self, forKey: .maxItems)
         self.minItems = try? container.decode(Int.self, forKey: .minItems)
         self.uniqueItems = try? container.decode(Bool.self, forKey: .uniqueItems)
