@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F186EB482511855B00723FA3 /* Primitives+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB472511855B00723FA3 /* Primitives+Extension.swift */; };
 		OBJ_160 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Animal.swift */; };
 		OBJ_161 /* AnimalNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AnimalNotFound.swift */; };
 		OBJ_162 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* BaseError.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F186EB472511855B00723FA3 /* Primitives+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Primitives+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* AnimalNotFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalNotFound.swift; sourceTree = "<group>"; };
 		OBJ_11 /* BaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_25 /* PatchUtil.swift */,
+				F186EB472511855B00723FA3 /* Primitives+Extension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				OBJ_173 /* XmsErrorResponseExtensionsClientOptions.swift in Sources */,
 				OBJ_174 /* PatchUtil.swift in Sources */,
 				OBJ_176 /* XmsErrorResponseExtensionsClient.swift in Sources */,
+				F186EB482511855B00723FA3 /* Primitives+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
