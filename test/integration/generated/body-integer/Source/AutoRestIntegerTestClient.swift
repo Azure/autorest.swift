@@ -1141,7 +1141,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getUnixTime(
         withOptions options: GetUnixTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
         let urlTemplate = "/int/unixtime"
@@ -1199,7 +1199,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Int.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1246,7 +1246,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        unixTimeDate: Int,
+        unixTimeDate: Date,
         withOptions options: PutUnixTimeDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1355,7 +1355,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getInvalidUnixTime(
         withOptions options: GetInvalidUnixTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
         let urlTemplate = "/int/invalidunixtime"
@@ -1413,7 +1413,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Int.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1461,7 +1461,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getNullUnixTime(
         withOptions options: GetNullUnixTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
         let urlTemplate = "/int/nullunixtime"
@@ -1519,7 +1519,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Int.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
