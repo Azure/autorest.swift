@@ -51,18 +51,6 @@ class Parameter: Value {
         groupedBy = try? container.decode(Parameter.self, forKey: .groupedBy)
 
         try super.init(from: decoder)
-
-        if let decoded = try? container.decode(ConstantSchema.self, forKey: .schema) {
-            super.schema = decoded
-        } else if let decoded = try? container.decode(NumberSchema.self, forKey: .schema) {
-            super.schema = decoded
-        } else if let decoded = try? container.decode(ObjectSchema.self, forKey: .schema) {
-            super.schema = decoded
-        } else if let decoded = try? container.decode(DateTimeSchema.self, forKey: .schema) {
-            super.schema = decoded
-        } else {
-            super.schema = try container.decode(Schema.self, forKey: .schema)
-        }
     }
 
     override public func encode(to encoder: Encoder) throws {

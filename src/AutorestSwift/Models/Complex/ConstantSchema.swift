@@ -43,7 +43,8 @@ class ConstantSchema: Schema {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        valueType = try container.decode(Schema.self, forKey: .valueType)
+        valueType = try Schema.decode(withContainer: container, useKey: "valueType") ?? container
+        .decode(Schema.self, forKey: .valueType)
         value = try container.decode(ConstantValue.self, forKey: .value)
 
         try super.init(from: decoder)

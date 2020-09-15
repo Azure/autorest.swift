@@ -45,7 +45,7 @@ class SchemaResponse: Response {
 
         self.schema = try Schema.decode(withContainer: container) ?? container
             .decode(Schema.self, forKey: .schema)
-        
+
         self.nullable = try? container.decode(Bool.self, forKey: .nullable)
 
         try super.init(from: decoder)
