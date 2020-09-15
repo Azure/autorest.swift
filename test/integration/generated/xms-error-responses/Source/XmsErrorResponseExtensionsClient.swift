@@ -76,7 +76,6 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         withOptions options: GetPetByIdOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
-        /// ba
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
@@ -128,10 +127,6 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
-                /// 7753 --- ----
-                /// 7753 --- ----
-                /// 778 --- ----
-                /// 778!#---Pet? ----
                 if [
                     200
                 ].contains(statusCode) {
@@ -147,11 +142,9 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                         }
                     }
                 }
-                /// 778 --- ----
-                /// 778!#---Pet? ----
                 if [
                     202
-                ].contains(statusCode) { /// 12346645456 -------
+                ].contains(statusCode) {
                     dispatchQueue.async {
                         completionHandler(
                             .success(nil),
@@ -211,7 +204,6 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         withOptions options: DoSomethingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
-        /// ba
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
@@ -263,10 +255,6 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
-                /// 7753 --- ----
-                /// 7753 --- ----
-                /// 778 --- ----
-                /// 778!#---PetAction ----
                 if [
                     200
                 ].contains(statusCode) {

@@ -75,7 +75,6 @@ public final class AutoRestReportClient: PipelineClient {
         withOptions options: GetReportOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: Int]>
     ) {
-        /// ba
         // Construct URL
         let urlTemplate = "/report"
         let pathParams = [
@@ -136,10 +135,6 @@ public final class AutoRestReportClient: PipelineClient {
                     }
                     return
                 }
-                /// 7753 --- ----
-                /// 7753 --- ----
-                /// 778 --- ----
-                /// 778!#---[String:Int] ----
                 if [
                     200
                 ].contains(statusCode) {
@@ -195,7 +190,6 @@ public final class AutoRestReportClient: PipelineClient {
         withOptions options: GetOptionalReportOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: Int]>
     ) {
-        /// ba
         // Construct URL
         let urlTemplate = "/report/optional"
         let pathParams = [
@@ -256,10 +250,6 @@ public final class AutoRestReportClient: PipelineClient {
                     }
                     return
                 }
-                /// 7753 --- ----
-                /// 7753 --- ----
-                /// 778 --- ----
-                /// 778!#---[String:Int] ----
                 if [
                     200
                 ].contains(statusCode) {
