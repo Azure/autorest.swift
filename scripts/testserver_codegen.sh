@@ -10,7 +10,7 @@ else
     exit
 fi
 
-files=( "head" "body-file" "report" "xms-error-responses")
+files=( "head" "body-file" "report" "xms-error-responses" "body-integer")
 for i in "${files[@]}"
 do
     echo "== Generate code for test server swagger $i.json =="

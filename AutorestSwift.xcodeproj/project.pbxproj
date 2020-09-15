@@ -170,6 +170,7 @@
 		F120004B250345C300797F1A /* OperationResponseExceptionSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
+		F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */; };
 		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
@@ -221,6 +222,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = "XmsErrorResponseExtensions::XmsErrorResponseExtensions";
 			remoteInfo = XmsErrorResponseExtensions;
+		};
+		F186EB2925116ADF00723FA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestIntegerTest::AutoRestIntegerTest::Product";
+			remoteInfo = AutoRestIntegerTest;
+		};
+		F186EB2B25116ADF00723FA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
+			remoteInfo = AzureCore;
 		};
 		F18718E9250C58B900318867 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -413,6 +428,8 @@
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
 		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
+		F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestBodyIntegerTest.swift; sourceTree = "<group>"; };
+		F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestIntegerTest.xcodeproj; path = "test/integration/generated/report/../body-integer/AutoRestIntegerTest.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
@@ -702,6 +719,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F186EB2325116ADF00723FA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F186EB2A25116ADF00723FA3 /* AutoRestIntegerTest.framework */,
+				F186EB2C25116ADF00723FA3 /* AzureCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F18718E1250C58B900318867 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,6 +739,7 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */,
 				F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */,
 				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
 				F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */,
@@ -721,6 +748,7 @@
 				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
 				F18718F0250C592300318867 /* AutoRestReportTest.swift */,
 				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
+				F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 			);
 			path = AutorestSwiftTest;
@@ -1003,6 +1031,10 @@
 					ProjectRef = F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */;
 				},
 				{
+					ProductGroup = F186EB2325116ADF00723FA3 /* Products */;
+					ProjectRef = F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */;
+				},
+				{
 					ProductGroup = F18718E1250C58B900318867 /* Products */;
 					ProjectRef = F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */;
 				},
@@ -1036,6 +1068,20 @@
 			fileType = wrapper.framework;
 			path = XmsErrorResponseExtensions.framework;
 			remoteRef = F186E905250FEAEC00723FA3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F186EB2A25116ADF00723FA3 /* AutoRestIntegerTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestIntegerTest.framework;
+			remoteRef = F186EB2925116ADF00723FA3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F186EB2C25116ADF00723FA3 /* AzureCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCore.framework;
+			remoteRef = F186EB2B25116ADF00723FA3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F18718EA250C58B900318867 /* AutoRestReport.framework */ = {
@@ -1122,6 +1168,7 @@
 			files = (
 				F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */,
+				F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 				F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */,
 			);
