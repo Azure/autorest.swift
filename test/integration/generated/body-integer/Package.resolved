@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AzureSDK",
+        "repositoryURL": "https://github.com/Azure/azure-sdk-for-ios.git",
+        "state": {
+          "branch": "master",
+          "revision": "581c7d6497ec514830316dc9e333cadb5b053b83",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
