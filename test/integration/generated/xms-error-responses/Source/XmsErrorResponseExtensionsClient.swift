@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class AutoRestHeadTestClient: PipelineClient {
+public final class XmsErrorResponseExtensionsClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
         /// API version ""
@@ -28,27 +28,27 @@ public final class AutoRestHeadTestClient: PipelineClient {
         }
     }
 
-    /// Options provided to configure this `AutoRestHeadTestClient`.
-    public let options: AutoRestHeadTestClientOptions
+    /// Options provided to configure this `XmsErrorResponseExtensionsClient`.
+    public let options: XmsErrorResponseExtensionsClientOptions
 
     // MARK: Initializers
 
-    /// Create a AutoRestHeadTestClient client.
+    /// Create a XmsErrorResponseExtensionsClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestHeadTestClient.
+    ///   - baseUrl: Base URL for the XmsErrorResponseExtensionsClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
         baseUrl: URL,
         authPolicy: Authenticating,
-        withOptions options: AutoRestHeadTestClientOptions
+        withOptions options: XmsErrorResponseExtensionsClientOptions
     ) throws {
         self.options = options
         super.init(
             baseUrl: baseUrl,
             transport: URLSessionTransport(),
             policies: [
-                UserAgentPolicy(for: AutoRestHeadTestClient.self, telemetryOptions: options.telemetryOptions),
+                UserAgentPolicy(for: XmsErrorResponseExtensionsClient.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
                 AddDatePolicy(),
                 authPolicy,
@@ -63,22 +63,23 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
     // MARK: Public Client Methods
 
-    // MARK: HttpSuccess
+    // MARK: Pet
 
-    /// Return 200 status code if successful
+    /// Gets pets by id.
     /// - Parameters:
-
+    ///    - petId : pet id
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func head200(
-        withOptions options: Head200Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getPetById(
+        petId: String,
+        withOptions options: GetPetByIdOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
         // Construct URL
-        let urlTemplate = "/http/success/200"
+        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
-            "": ""
+            "petId": petId
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -90,21 +91,22 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ]
 
         // Construct headers
-        let headers = HTTPHeaders()
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
             return
         }
 
-        guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
         }
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200, 404] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200, 202, 400, 404, 501] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
@@ -128,21 +130,59 @@ public final class AutoRestHeadTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Pet.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
+                    202
+                ].contains(statusCode) {
                     dispatchQueue.async {
                         completionHandler(
-                            .success(()),
+                            .success(nil),
                             httpResponse
                         )
                     }
                 }
                 if [
+                    400
+                ].contains(statusCode) {
+                    let decoded = String(data: data, encoding: .utf8)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                }
+                if [
                     404
                 ].contains(statusCode) {
+                    var decoded: Error?
+                    do {
+                        let decoder = JSONDecoder()
+                        decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
                     dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                }
+                if [
+                    501
+                ].contains(statusCode) {
+                    let decodedstr = String(data: data, encoding: .utf8)
+                    let decoded = Int(decodedstr ?? "")
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
             case let .failure(error):
@@ -153,20 +193,21 @@ public final class AutoRestHeadTestClient: PipelineClient {
         }
     }
 
-    /// Return 204 status code if successful
+    /// Asks pet to do something
     /// - Parameters:
-
+    ///    - whatAction : what action the pet should do
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func head204(
-        withOptions options: Head204Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func doSomething(
+        whatAction: String,
+        withOptions options: DoSomethingOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
         // Construct URL
-        let urlTemplate = "/http/success/204"
+        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
-            "": ""
+            "whatAction": whatAction
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -178,21 +219,22 @@ public final class AutoRestHeadTestClient: PipelineClient {
         ]
 
         // Construct headers
-        let headers = HTTPHeaders()
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
             return
         }
 
-        guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
         }
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
@@ -214,79 +256,37 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     return
                 }
                 if [
-                    204
+                    200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(PetAction.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
                 if [
-                    404
+                    500
                 ].contains(statusCode) {
+                    var decoded: Error?
+                    do {
+                        let decoder = JSONDecoder()
+                        decoded = try decoder.decode(PetActionError.self, from: data)
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
                     dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
             case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
-                }
-            }
-        }
-    }
-
-    /// Return 404 status code if successful
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func head404(
-        withOptions options: Head404Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/http/success/404"
-        let pathParams = [
-            "": ""
-        ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
-        // Construct query
-        let queryParams: [QueryParameter] = [
-            ("", "")
-        ]
-
-        // Construct headers
-        let headers = HTTPHeaders()
-        // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            switch result {
-            case .success:
                 guard let data = httpResponse?.data else {
                     let noDataError = AzureError.sdk("Response data expected but not found.")
                     dispatchQueue.async {
@@ -301,29 +301,16 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
-                if [
-                    204
-                ].contains(statusCode) {
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(PetActionError.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
-                }
-                if [
-                    404
-                ].contains(statusCode) {
+                } catch {
                     dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                     }
-                }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
                 }
             }
         }

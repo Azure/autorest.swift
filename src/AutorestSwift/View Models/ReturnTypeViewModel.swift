@@ -31,31 +31,32 @@ import Foundation
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
     let name: String
-    let statusCodes: [String]
-    /// Identifies the correct snippet to use when rendering the view model
-    let strategy: String
-    let pagingNames: Language.PagingNames?
+    // A flag to indicate in the generated code whether to return nil or void in the NoBody response stencil
+    // If the Return type of the function is nilable, we need to return nil. If the return type is Void, we return ()
+    let returnNil: Bool
 
     init(from responses: [ResponseViewModel]?) {
-        var statusCodes = Set<String>()
-        var strategies = Set<ResponseBodyType>()
+        var objectTypes = Set<String>()
+        var strategies = Set<String>()
         for response in responses ?? [] {
-            strategies.insert(response.strategy)
-            for statusCode in response.statusCodes {
-                statusCodes.insert(statusCode)
+            if response.strategy != "noBody" {
+                objectTypes.insert(response.objectType)
             }
+            strategies.insert(response.strategy)
         }
 
-        assert(strategies.count <= 1, "Different strategy in ResponseViewModel is currently not supported.")
-        self.statusCodes = Array(statusCodes)
-        self.strategy = strategies.first?.rawValue ?? ResponseBodyType.noBody.rawValue
+        // Only supprt at most 1 body or pageBody return type now.
+        let withBodyStrategies = strategies.filter { $0 != "noBody" }
+        let hasNoBodyStrategies = strategies.contains { $0 == "noBody" }
+        assert(withBodyStrategies.count <= 1)
 
-        let response = responses?.first
-        self.pagingNames = response?.pagingNames
-        if let elementType = response?.pagedElementClassName, response?.pagingNames != nil {
-            self.name = "PagedCollection<\(elementType)>"
+        // since we only support 1 body/pagePage response, only need to take the first item for objectTypes
+        if let name = objectTypes.first {
+            self.name = hasNoBodyStrategies ? "\(name)?" : name
+            self.returnNil = hasNoBodyStrategies
         } else {
-            self.name = response?.objectType ?? "Void"
+            self.name = "Void"
+            self.returnNil = false
         }
     }
 }

@@ -90,8 +90,7 @@ struct OperationViewModel {
     let returnType: ReturnTypeViewModel?
     let params: OperationParameters
     let pipelineContext: [KeyValueViewModel]?
-    private let requests: [RequestViewModel]?
-    private let responses: [ResponseViewModel]?
+    let responses: [ResponseViewModel]?
     let exceptions: [ExceptionResponseViewModel]?
     let request: RequestViewModel?
     let clientMethodOptions: ClientMethodOptionsViewModel
@@ -165,7 +164,6 @@ struct OperationViewModel {
             value: "[\(statusCodes.joined(separator: ","))]"
         ))
 
-        self.requests = requests
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
@@ -173,10 +171,6 @@ struct OperationViewModel {
 
         // current logic only supports a single request and response
         assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
-        assert(
-            responses.filter { $0.strategy != ResponseBodyType.noBody }.count <= 1,
-            "Multiple Nobody responses per operation is currently not supported... \(operation.name)"
-        )
 
         self.request = requests.first
 

@@ -80,24 +80,39 @@ class Operation: Codable, LanguageShortcut {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        responses = (try? container.decode([SchemaResponse].self, forKey: .responses)) ??
-            (try? container.decode([Response].self, forKey: .responses))
 
-        exceptions = (try? container.decode([SchemaResponse].self, forKey: .exceptions)) ??
-            (try? container.decode([Response].self, forKey: .exceptions))
+        var responses = [Response]()
+        var responsesContainer = try container.nestedUnkeyedContainer(forKey: .responses)
+        while !responsesContainer.isAtEnd {
+            if let response = (try? responsesContainer.decode(SchemaResponse.self)) ??
+                (try? responsesContainer.decode(Response.self)) {
+                responses.append(response)
+            }
+        }
+        self.responses = responses
 
-        parameters = try? container.decode([Parameter].self, forKey: .parameters)
-        signatureParameters = try? container.decode([Parameter].self, forKey: .signatureParameters)
-        requests = try? container.decode([Request].self, forKey: .requests)
-        profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
-        summary = try? container.decode(String.self, forKey: .summary)
-        apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
-        deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
-        origin = try? container.decode(String.self, forKey: .origin)
-        externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
-        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
-        language = try container.decode(Languages.self, forKey: .language)
-        `protocol` = try container.decode(Protocols.self, forKey: .protocol)
+        var exceptions = [Response]()
+        var exceptionContainer = try container.nestedUnkeyedContainer(forKey: .exceptions)
+        while !exceptionContainer.isAtEnd {
+            if let exception = (try? exceptionContainer.decode(SchemaResponse.self)) ??
+                (try? exceptionContainer.decode(Response.self)) {
+                exceptions.append(exception)
+            }
+        }
+        self.exceptions = exceptions
+
+        self.parameters = try? container.decode([Parameter].self, forKey: .parameters)
+        self.signatureParameters = try? container.decode([Parameter].self, forKey: .signatureParameters)
+        self.requests = try? container.decode([Request].self, forKey: .requests)
+        self.profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
+        self.summary = try? container.decode(String.self, forKey: .summary)
+        self.apiVersions = try? container.decode([ApiVersion].self, forKey: .apiVersions)
+        self.deprecated = try? container.decode(Deprecation.self, forKey: .deprecated)
+        self.origin = try? container.decode(String.self, forKey: .origin)
+        self.externalDocs = try? container.decode(ExternalDocumentation.self, forKey: .externalDocs)
+        self.extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
+        self.language = try container.decode(Languages.self, forKey: .language)
+        self.protocol = try container.decode(Protocols.self, forKey: .protocol)
     }
 
     public func encode(to encoder: Encoder) throws {

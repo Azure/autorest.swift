@@ -18,6 +18,7 @@ let package = Package(
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
         .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
         .package(name: "AutoRestSwaggerBatFile", path: "./test/integration/generated/body-file/"),
+        .package(name: "XmsErrorResponseExtensions", path: "./test/integration/generated/xms-error-responses/"),
         .package(name: "AutoRestReport", path: "./test/integration/generated/report/")
     ],
     targets: [
@@ -34,7 +35,7 @@ let package = Package(
         ),
         .testTarget(
             name: "AutorestSwiftTest",
-            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest", "AutoRestSwaggerBatFile", "AutoRestReport"],
+            dependencies: [.product(name: "AzureCore", package: "AzureSDK"), "AutoRestHeadTest", "AutoRestSwaggerBatFile", "XmsErrorResponseExtensions", "AutoRestReport"],
             path: "AutorestSwiftTest"
         )
     ],

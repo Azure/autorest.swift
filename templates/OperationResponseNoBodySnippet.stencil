@@ -1,16 +1,8 @@
-switch result {
-case let .success(data):
-    {% if op.exceptions.count > 0 %}
-    {% include "OperationResponseDataSnippet.stencil" %}
-    {% endif %}
-    {% include "OperationResponseStatusCodeSnippet.stencil" %}
-    {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
-    {
-        dispatchQueue.async {
-            completionHandler(.success(()), httpResponse)
-        }
+{% include "OperationResponseStatusCodeSnippet.stencil" %}
+{
+    {# TODO: Replace the if-else with binding to ReturnTypeModel. This is a workaround for stencil does not resolve the property value when the value has 'nil' or '()' #}
+    dispatchQueue.async {
+        completionHandler(.success({% if op.returnType.returnNil  %} nil {% else %} () {% endif %})
+        , httpResponse)
     }
-    {% include "OperationResponseExceptionSnippet.stencil" %}
-case let .failure(error):
-    {% include "OperationDefaultExceptionSnippet.stencil" %}
 }

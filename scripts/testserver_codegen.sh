@@ -2,7 +2,7 @@
 
 make install
 
-files=( "head" "body-file" "report")
+files=( "head" "body-file" "report" "xms-error-responses")
 for i in "${files[@]}"
 do
     rm ./test/integration/generated/$i/Package.resolved

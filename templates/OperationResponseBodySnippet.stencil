@@ -1,22 +1,14 @@
-switch result {
-case let .success(data):
-    {% include "OperationResponseDataSnippet.stencil" %}
-    {% include "OperationResponseStatusCodeSnippet.stencil" %}
-    {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
-    {
-        do {
-            let decoder = JSONDecoder()
-            let decoded = try decoder.decode({{ op.returnType.name }}.self, from: data)
-            dispatchQueue.async {
-                completionHandler(.success(decoded), httpResponse)
-            }
-        } catch {
-            dispatchQueue.async {
-                completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-            }
+{% include "OperationResponseStatusCodeSnippet.stencil" %}
+{
+    do {
+        let decoder = JSONDecoder()
+        let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } catch {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
         }
     }
-    {% include "OperationResponseExceptionSnippet.stencil" %}
-case let .failure(error):
-    {% include "OperationDefaultExceptionSnippet.stencil" %}
 }

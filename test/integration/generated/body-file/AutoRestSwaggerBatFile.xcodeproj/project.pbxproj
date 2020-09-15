@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		OBJ_90 /* AutoRestSwaggerBatFileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* AutoRestSwaggerBatFileClient.swift */; };
-		OBJ_91 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Error.swift */; };
 		OBJ_92 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ErrorType.swift */; };
 		OBJ_93 /* AutoRestSwaggerBatFileClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* AutoRestSwaggerBatFileClientOptions.swift */; };
 		OBJ_94 /* GetEmptyFileOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* GetEmptyFileOptions.swift */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		"AutoRestSwaggerBatFile::AutoRestSwaggerBatFile::Product" /* AutoRestSwaggerBatFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoRestSwaggerBatFile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 		OBJ_13 /* AutoRestSwaggerBatFileClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileClientOptions.swift; sourceTree = "<group>"; };
 		OBJ_14 /* GetEmptyFileOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmptyFileOptions.swift; sourceTree = "<group>"; };
@@ -203,7 +201,7 @@
 			path = Policies;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -213,7 +211,6 @@
 				OBJ_81 /* Products */,
 				OBJ_84 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Transport */ = {
@@ -293,7 +290,6 @@
 		OBJ_9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_10 /* Error.swift */,
 				OBJ_11 /* ErrorType.swift */,
 			);
 			path = Models;
@@ -334,7 +330,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_81 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -350,7 +346,6 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_90 /* AutoRestSwaggerBatFileClient.swift in Sources */,
-				OBJ_91 /* Error.swift in Sources */,
 				OBJ_92 /* ErrorType.swift in Sources */,
 				OBJ_93 /* AutoRestSwaggerBatFileClientOptions.swift in Sources */,
 				OBJ_94 /* GetEmptyFileOptions.swift in Sources */,

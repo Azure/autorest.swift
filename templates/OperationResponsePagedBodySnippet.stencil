@@ -1,33 +1,26 @@
-switch result {
-case let .success(data):
-    {% include "OperationResponseDataSnippet.stencil" %}
-    {% include "OperationResponseStatusCodeSnippet.stencil" %}
-    {% include "OperationResponseReturnTypeStatusCodeSnippet.stencil" %}
-    {
-        do {
-            let decoder = JSONDecoder()
-            let codingKeys = PagedCodingKeys(
-                items: "{{ op.returnType.pagingNames.itemName }}",
-                continuationToken: "{{ op.returnType.pagingNames.nextLinkName }}"
-            )
-            let paged = try {{ op.returnType.name }}(
-                client: self,
-                request: request,
-                context: context,
-                data: data,
-                codingKeys: codingKeys,
-                decoder: decoder
-            )
-            dispatchQueue.async {
-                completionHandler(.success(paged), httpResponse)
-            }
-        } catch {
-            dispatchQueue.async {
-                completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+{% include "OperationResponseStatusCodeSnippet.stencil" %}
+{
+    do {
+        let decoder = JSONDecoder()
+        let codingKeys = PagedCodingKeys(
+            items: "{{ response.pagingNames.itemName }}",
+            continuationToken: "{{ response.pagingNames.nextLinkName }}"
+        )
+        let paged = try {{ response.objectType }}(
+            client: self,
+            request: request,
+            context: context,
+            data: data,
+            codingKeys: codingKeys,
+            decoder: decoder
+        )
+        dispatchQueue.async {
+            completionHandler(.success(paged), httpResponse)
         }
+    } catch {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
         }
     }
-    {% include "OperationResponseExceptionSnippet.stencil" %}
-case let .failure(error):
-    {% include "OperationDefaultExceptionSnippet.stencil" %}
 }
+

@@ -26,6 +26,12 @@
 
 import Foundation
 
+enum ExceptionResponseBodyType: String {
+    case stringBody
+    case intBody
+    case jsonBody
+}
+
 /// View Model for method exception response handling.
 struct ExceptionResponseViewModel {
     let statusCodes: [String]
@@ -33,6 +39,7 @@ struct ExceptionResponseViewModel {
     /// Identifies the correct snippet to use when rendering the view model
     let description: String?
     let hasDefaultException: Bool
+    let strategy: String
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -50,6 +57,15 @@ struct ExceptionResponseViewModel {
             errorResponseMetadata {
             guard objectType != nil
             else { fatalError("Did not find object type for error response") }
+        }
+
+        switch objectType {
+        case "String":
+            self.strategy = ExceptionResponseBodyType.stringBody.rawValue
+        case "Int":
+            self.strategy = ExceptionResponseBodyType.intBody.rawValue
+        default:
+            self.strategy = ExceptionResponseBodyType.jsonBody.rawValue
         }
 
         self.hasDefaultException = statusCodes.contains("default")
