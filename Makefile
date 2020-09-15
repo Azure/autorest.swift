@@ -16,7 +16,7 @@ endif
 RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
 
 build: copyRunResources
-	swift build
+	swift build --target AutorestSwift
 
 copyRunResources:
 	mkdir -p ${RUN_RESOURCES_DIRECTORY}
