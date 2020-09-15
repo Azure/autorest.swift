@@ -5,25 +5,26 @@
     {% endfor  %}
     ].contains(statusCode)
     {
+        {% if exception.strategy == "intBody" %}
+        let decodedstr =  String(data: data, encoding: .utf8)
+        let decoded =  Int(decodedstr ?? "")
+        {% elif exception.strategy == "stringBody" %}
+        let decoded =  String(data: data, encoding: .utf8)
+        {% elif exception.strategy == "jsonBody" %}
+        var decoded: Error?
         do {
-            {% if exception.strategy == "intBody" %}
-                let decodedstr =  String(data: data, encoding: .utf8)
-                let decoded =  Int(decodedstr ?? "")
-            {% elif exception.strategy == "stringBody" %}
-                let decoded =  String(data: data, encoding: .utf8)
-            {% elif exception.strategy == "jsonBody" %}
-                let decoder = JSONDecoder()
-                let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
-            {% else %}
-                // TODO: Couldn't find template for {{ exception.strategy }}
-            {% endif %}
-            dispatchQueue.async {
-                completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
-            }
+            let decoder = JSONDecoder()
+            decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
         } catch {
             dispatchQueue.async {
                 completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
             }
+        }
+        {% else %}
+        // TODO: Couldn't find template for {{ exception.strategy }}
+        {% endif %}
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
         }
     }
 {% endfor %}

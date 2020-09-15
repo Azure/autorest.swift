@@ -75,6 +75,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         withOptions options: GetFileOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/files/stream/nonempty"
         let pathParams = [
@@ -126,11 +127,18 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     200
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):
@@ -173,6 +181,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         withOptions options: GetFileLargeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/files/stream/verylarge"
         let pathParams = [
@@ -224,11 +233,18 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     200
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):
@@ -271,6 +287,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         withOptions options: GetEmptyFileOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/files/stream/empty"
         let pathParams = [
@@ -322,11 +339,18 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     200
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):

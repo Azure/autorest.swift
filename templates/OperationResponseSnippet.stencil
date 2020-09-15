@@ -7,7 +7,7 @@ case .success:
     {% elif response.strategy == "body" %}
         {% include "OperationResponseBodySnippet.stencil" op %}
     {% elif response.strategy == "noBody" %}
-        {% include "OperationResponseNoBodySnippet.stencil" %}
+        {% include "OperationResponseNoBodySnippet.stencil" op %}
     {% else %}
         // TODO: Couldn't find template for {{ response.strategy }}
     {% endif %}

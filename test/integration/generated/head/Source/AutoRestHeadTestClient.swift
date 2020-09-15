@@ -75,6 +75,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
         withOptions options: Head200Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/http/success/200"
         let pathParams = [
@@ -125,18 +126,30 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     200
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     404
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):
@@ -157,6 +170,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
         withOptions options: Head204Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/http/success/204"
         let pathParams = [
@@ -207,18 +221,30 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     204
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     404
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):
@@ -239,6 +265,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
         withOptions options: Head404Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/http/success/404"
         let pathParams = [
@@ -289,18 +316,30 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     204
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
+                /// 778 --- ----
+                /// 778!#---Void ----
                 if [
                     404
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
                     }
                 }
             case let .failure(error):

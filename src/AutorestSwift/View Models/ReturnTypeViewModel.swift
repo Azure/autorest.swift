@@ -31,14 +31,32 @@ import Foundation
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
     let name: String
+    // A flag to indicate in the generated code whether to return nil or void in the NoBody response stencil
+    // If the Return type of the function is nilable, we need to return nil. If the return type is Void, we return ()
+    let returnNil: Bool
 
     init(from responses: [ResponseViewModel]?) {
-        var objectType = Set<String>()
+        var objectTypes = Set<String>()
+        var strategies = Set<String>()
         for response in responses ?? [] {
-            objectType.insert(response.objectType)
+            if response.strategy != "noBody" {
+                objectTypes.insert(response.objectType)
+            }
+            strategies.insert(response.strategy)
         }
 
-        let objectTypes = Array(objectType)
-        self.name = objectTypes.count > 1 ? "Any" : objectTypes.first ?? "Void"
+        // Only supprt at most 1 body or pageBody return type now.
+        let withBodyStrategies = strategies.filter { $0 != "noBody" }
+        let hasNoBodyStratgies = strategies.contains { $0 == "noBody" }
+        assert(withBodyStrategies.count <= 1)
+
+        // since we only support 1 body/pagePage response, only need to take the first item fro objectTypes
+        if let name = objectTypes.first {
+            self.name = hasNoBodyStratgies ? "\(name)?" : name
+            self.returnNil = hasNoBodyStratgies
+        } else {
+            self.name = "Void"
+            self.returnNil = false
+        }
     }
 }

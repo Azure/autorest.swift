@@ -74,8 +74,9 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
     public func getPetById(
         petId: String,
         withOptions options: GetPetByIdOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Any>
+        completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
@@ -127,6 +128,10 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---Pet? ----
                 if [
                     200
                 ].contains(statusCode) {
@@ -142,55 +147,49 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                         }
                     }
                 }
+                /// 778 --- ----
+                /// 778!#---Pet? ----
                 if [
                     202
-                ].contains(statusCode) {
+                ].contains(statusCode) { /// 12346645456 -------
                     dispatchQueue.async {
-                        completionHandler(.success(()), httpResponse)
+                        completionHandler(
+                            .success(nil),
+                            httpResponse
+                        )
                     }
                 }
                 if [
                     400
                 ].contains(statusCode) {
-                    do {
-                        let decoded = String(data: data, encoding: .utf8)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-                        }
+                    let decoded = String(data: data, encoding: .utf8)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
                 if [
                     404
                 ].contains(statusCode) {
+                    var decoded: Error?
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
+                        decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
                     }
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
                 }
                 if [
                     501
                 ].contains(statusCode) {
-                    do {
-                        let decodedstr = String(data: data, encoding: .utf8)
-                        let decoded = Int(decodedstr ?? "")
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-                        }
+                    let decodedstr = String(data: data, encoding: .utf8)
+                    let decoded = Int(decodedstr ?? "")
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
             case let .failure(error):
@@ -212,6 +211,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         withOptions options: DoSomethingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
+        /// ba
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
@@ -263,6 +263,10 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
+                /// 7753 --- ----
+                /// 7753 --- ----
+                /// 778 --- ----
+                /// 778!#---PetAction ----
                 if [
                     200
                 ].contains(statusCode) {
@@ -281,16 +285,17 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                 if [
                     500
                 ].contains(statusCode) {
+                    var decoded: Error?
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(PetActionError.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                        }
+                        decoded = try decoder.decode(PetActionError.self, from: data)
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
+                    }
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
             case let .failure(error):

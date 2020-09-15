@@ -1,6 +1,7 @@
 {% include "OperationResponseStatusCodeSnippet.stencil" %}
 {
     dispatchQueue.async {
-        completionHandler(.success(()), httpResponse)
+        completionHandler(.success({% if op.returnType.returnNil  %} nil {% else %} () {% endif %})
+        , httpResponse)
     }
 }
