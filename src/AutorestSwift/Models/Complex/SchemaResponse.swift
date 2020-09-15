@@ -43,22 +43,9 @@ class SchemaResponse: Response {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: .schema)
-        let type = try? schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
-
-        var schema: Schema?
-        switch type {
-        case .array:
-            schema = try? container.decode(ArraySchema.self, forKey: .schema)
-        case .dictionary:
-            schema = try? container.decode(DictionarySchema.self, forKey: .schema)
-        case .object:
-            schema = try? container.decode(ObjectSchema.self, forKey: .schema)
-        default:
-            schema = try container.decode(Schema.self, forKey: .schema)
-        }
-
-        self.schema = try schema ?? container.decode(Schema.self, forKey: .schema)
+        self.schema = try Schema.decode(withContainer: container) ?? container
+            .decode(Schema.self, forKey: .schema)
+        
         self.nullable = try? container.decode(Bool.self, forKey: .nullable)
 
         try super.init(from: decoder)
