@@ -166,7 +166,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
             }
         }
         
-        wait(for: [expectation], timeout: 155.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func test_XmsErrorResponseExtensions_getPetById400() throws {
