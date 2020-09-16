@@ -9,4 +9,3 @@ if let decodedstr = String(data: data, encoding: .utf8),
         completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
     }
 }
-{% include "OperationExceptionNullableBodyEndSnippet.stencil" %}

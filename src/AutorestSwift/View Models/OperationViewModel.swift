@@ -167,7 +167,7 @@ struct OperationViewModel {
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
-        self.defaultExceptionHasBody = defaultException?.objectType != "Void"
+        self.defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
 
         // current logic only supports a single request and response
         assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
