@@ -82,4 +82,15 @@ class NumberSchema: PrimitiveSchema {
 
         try super.encode(to: encoder)
     }
+
+    override func swiftType(optional _: Bool = false) -> String {
+        switch precision {
+        case 32:
+            return "Int32"
+        case 64:
+            return "Int64"
+        default:
+            return "Int"
+        }
+    }
 }

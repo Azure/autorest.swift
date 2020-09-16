@@ -42,7 +42,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
 
     func test_XmsErrorResponseExtensions_getPetById200() throws {
-        let expectation = XCTestExpectation(description: "Call getPetById with tommy")
+        let expectation = XCTestExpectation(description: "Call getPetById with tommy succeed")
         let failedExpectation = XCTestExpectation(description: "Call getPetById with tommy failed")
         failedExpectation.isInverted = true
         
@@ -66,7 +66,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
     
     func test_XmsErrorResponseExtensions_getPetById202() throws {
-           let expectation = XCTestExpectation(description: "Call getPetById with django")
+           let expectation = XCTestExpectation(description: "Call getPetById with django succeed")
            let failedExpectation = XCTestExpectation(description: "Call getPetById with django failed")
            failedExpectation.isInverted = true
            
@@ -89,7 +89,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
        }
     
     func test_XmsErrorResponseExtensions_getPetById404_1() throws {
-            let expectation = XCTestExpectation(description: "Call getPetById with coyoteUgly")
+            let expectation = XCTestExpectation(description: "Call getPetById with coyoteUgly succeed")
             let failedExpectation = XCTestExpectation(description: "Call getPetById with coyoteUgly failed")
             failedExpectation.isInverted = true
             
@@ -117,7 +117,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
     
     func test_XmsErrorResponseExtensions_getPetById404_2() throws {
-            let expectation = XCTestExpectation(description: "Call getPetById with weirdAlYankovic")
+            let expectation = XCTestExpectation(description: "Call getPetById with weirdAlYankovic succeed")
             let failedExpectation = XCTestExpectation(description: "Call getPetById with weirdAlYankovic failed")
             failedExpectation.isInverted = true
             
@@ -144,7 +144,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         }
     
     func test_XmsErrorResponseExtensions_getPetById501() throws {
-        let expectation = XCTestExpectation(description: "Call getPetById with alien123")
+        let expectation = XCTestExpectation(description: "Call getPetById with alien123 succeed")
         let failedExpectation = XCTestExpectation(description: "Call getPetById with alien123 failed")
         failedExpectation.isInverted = true
         
@@ -157,7 +157,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
                case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 501)
                     if case let .service(_, innerError) = error,
-                        let errorNo = innerError as? Int {
+                        let errorNo = innerError as? Int32 {
                         XCTAssertEqual(errorNo, 123)
                         expectation.fulfill()
                     } else {
@@ -170,7 +170,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
     
     func test_XmsErrorResponseExtensions_getPetById400() throws {
-        let expectation = XCTestExpectation(description: "Call getPetById with ringo")
+        let expectation = XCTestExpectation(description: "Call getPetById with ringo succeed")
         let failedExpectation = XCTestExpectation(description: "Call getPetById with ringo failed")
         failedExpectation.isInverted = true
         
@@ -196,7 +196,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
     
     func test_XmsErrorResponseExtensions_doSomething200() throws {
-        let expectation = XCTestExpectation(description: "Call doSomething with stay")
+        let expectation = XCTestExpectation(description: "Call doSomething with stay succeed")
         let failedExpectation = XCTestExpectation(description: "Call doSomething with stay failed")
         failedExpectation.isInverted = true
         
@@ -217,7 +217,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     }
     
     func test_XmsErrorResponseExtensions_doSomething500() throws {
-           let expectation = XCTestExpectation(description: "Call doSomething with jump")
+           let expectation = XCTestExpectation(description: "Call doSomething with jump succeed")
            let failedExpectation = XCTestExpectation(description: "Call doSomething with jump failed")
            failedExpectation.isInverted = true
            
@@ -244,7 +244,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
        }
     
     func test_XmsErrorResponseExtensions_doSomething404() throws {
-           let expectation = XCTestExpectation(description: "Call doSomething with fetch")
+           let expectation = XCTestExpectation(description: "Call doSomething with fetch succeed")
            let failedExpectation = XCTestExpectation(description: "Call doSomething with fetch failed")
            failedExpectation.isInverted = true
            

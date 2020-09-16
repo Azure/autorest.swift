@@ -1,0 +1,9 @@
+{% if response.isNullable == true %}
+if data.count == 0 {
+    dispatchQueue.async {
+        completionHandler(.success(nil), httpResponse)
+    }
+    return
+}
+{% endif %}
+

@@ -43,7 +43,7 @@ class AutoRestReportTest: XCTestCase {
     }
 
     func test_ReportFile_getReport() throws {
-        let expectation = XCTestExpectation(description: "Call getReport")
+        let expectation = XCTestExpectation(description: "Call getReport succeed")
         let failedExpectation = XCTestExpectation(description: "Call getReport failed")
         failedExpectation.isInverted = true
         
@@ -63,7 +63,7 @@ class AutoRestReportTest: XCTestCase {
     }
     
     func test_ReportFile_getOptionalReport() throws {
-        let expectation = XCTestExpectation(description: "Call getOptionalReport")
+        let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
         let failedExpectation = XCTestExpectation(description: "Call getOptionalReport failed")
         failedExpectation.isInverted = true
         

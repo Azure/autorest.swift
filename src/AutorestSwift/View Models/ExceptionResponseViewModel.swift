@@ -26,20 +26,15 @@
 
 import Foundation
 
-enum ExceptionResponseBodyType: String {
-    case stringBody
-    case intBody
-    case jsonBody
-}
-
 /// View Model for method exception response handling.
 struct ExceptionResponseViewModel {
     let statusCodes: [String]
-    let objectType: String?
+    let objectType: String
     /// Identifies the correct snippet to use when rendering the view model
     let description: String?
     let hasDefaultException: Bool
     let strategy: String
+    let isNullable: Bool
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -50,22 +45,21 @@ struct ExceptionResponseViewModel {
 
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
-        self.objectType = schemaResponse?.schema.swiftType(optional: false)
         self.description = schemaResponse?.description
+        self.isNullable = schemaResponse?.nullable ?? false
+
+        if let objectType = schemaResponse?.schema.swiftType(optional: false) {
+            self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
+            self.objectType = objectType
+        } else {
+            self.strategy = ResponseBodyType.noBody.rawValue
+            self.objectType = "Void"
+        }
 
         if let errorResponseMetadata = response.extensions?["x-ms-error-response"]?.value as? Bool,
             errorResponseMetadata {
-            guard objectType != nil
+            guard objectType != "Void"
             else { fatalError("Did not find object type for error response") }
-        }
-
-        switch objectType {
-        case "String":
-            self.strategy = ExceptionResponseBodyType.stringBody.rawValue
-        case "Int":
-            self.strategy = ExceptionResponseBodyType.intBody.rawValue
-        default:
-            self.strategy = ExceptionResponseBodyType.jsonBody.rawValue
         }
 
         self.hasDefaultException = statusCodes.contains("default")

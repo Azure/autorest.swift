@@ -4,12 +4,10 @@ case .success:
 {% for response in op.responses %}
     {% if response.strategy == "pagedBody" %}
         {% include "OperationResponsePagedBodySnippet.stencil" op %}
-    {% elif response.strategy == "body" %}
-        {% include "OperationResponseBodySnippet.stencil" op %}
     {% elif response.strategy == "noBody" %}
         {% include "OperationResponseNoBodySnippet.stencil" op %}
     {% else %}
-        // TODO: Couldn't find template for {{ response.strategy }}
+        {% include "OperationResponseBodySnippet.stencil" op %}
     {% endif %}
 {% endfor %}
     {% include "OperationResponseExceptionSnippet.stencil" %}

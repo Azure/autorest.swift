@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct ErrorType: Codable, Swift.Error {
-    public let status: Int?
+    public let status: Int32?
 
     public let message: String?
 
@@ -25,7 +25,7 @@ public struct ErrorType: Codable, Swift.Error {
     ///   - status:
     ///   - message:
     public init(
-        status: Int? = nil, message: String? = nil
+        status: Int32? = nil, message: String? = nil
     ) {
         self.status = status
         self.message = message
@@ -39,7 +39,7 @@ public struct ErrorType: Codable, Swift.Error {
     /// Initialize a `ErrorType` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.status = try? container.decode(Int.self, forKey: .status)
+        self.status = try? container.decode(Int32.self, forKey: .status)
         self.message = try? container.decode(String.self, forKey: .message)
     }
 

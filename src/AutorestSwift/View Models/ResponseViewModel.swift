@@ -29,10 +29,24 @@ import Foundation
 enum ResponseBodyType: String {
     /// Service returns a pageable response
     case pagedBody
-    /// Service returns some kind of deserializable object
-    case body
     /// Service returns no response data, only a status code
     case noBody
+    /// Service returns a String
+    case stringBody
+    /// Service returns an Int
+    case intBody
+    /// Service returns a JSON body
+    case jsonBody
+
+    static func strategy(for input: String) -> ResponseBodyType {
+        if input == "String" {
+            return .stringBody
+        } else if input.starts(with: "Int") {
+            return .intBody
+        } else {
+            return .jsonBody
+        }
+    }
 }
 
 /// View Model for method response handling.
@@ -43,6 +57,7 @@ struct ResponseViewModel {
     let strategy: String
     let pagingNames: Language.PagingNames?
     let pagedElementClassName: String?
+    let isNullable: Bool
 
     init(from response: Response, with operation: Operation) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -54,13 +69,13 @@ struct ResponseViewModel {
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
 
-        let strategy: ResponseBodyType
+        self.isNullable = schemaResponse?.nullable ?? false
         if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
             let pagingNames = Language.PagingNames(from: pagingMetadata) {
             let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
             guard arrayElements.count == 1
             else { fatalError("Did not find exactly one array type for paged collection.") }
-            strategy = .pagedBody
+            self.strategy = ResponseBodyType.pagedBody.rawValue
             self.pagingNames = pagingNames
             self.pagedElementClassName = arrayElements.first?.elementType.name
 
@@ -73,13 +88,12 @@ struct ResponseViewModel {
             self.pagingNames = nil
             self.pagedElementClassName = nil
             if let objectType = schemaResponse?.schema.swiftType(optional: false) {
-                strategy = .body
+                self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
                 self.objectType = objectType
             } else {
-                strategy = .noBody
+                self.strategy = ResponseBodyType.noBody.rawValue
                 self.objectType = "Void"
             }
         }
-        self.strategy = strategy.rawValue
     }
 }

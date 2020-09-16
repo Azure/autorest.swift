@@ -1,0 +1,12 @@
+{% include "OperationResponseNullableBodySnippet.stencil" %}
+do {
+    let decoder = JSONDecoder()
+    let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
+    }
+} catch {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+    }
+}

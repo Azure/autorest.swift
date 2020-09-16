@@ -96,6 +96,8 @@ class Schema: Codable, LanguageShortcut {
             }
         case AllSchemaTypes.dateTime:
             swiftType = "Date"
+        case AllSchemaTypes.unixTime:
+            swiftType = "Date"
         case AllSchemaTypes.integer:
             swiftType = "Int"
         case AllSchemaTypes.choice,
@@ -130,7 +132,7 @@ class Schema: Codable, LanguageShortcut {
                 schema = try? container.decode(DictionarySchema.self, forKey: keyEnum)
             case .object:
                 schema = try? container.decode(ObjectSchema.self, forKey: keyEnum)
-            case .number:
+            case .number, .integer:
                 schema = try? container.decode(NumberSchema.self, forKey: keyEnum)
             case .choice:
                 schema = try? container.decode(ChoiceSchema.self, forKey: keyEnum)

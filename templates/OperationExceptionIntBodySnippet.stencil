@@ -1,0 +1,11 @@
+{% include "OperationExceptionNullableBodyStartSnippet.stencil" %}
+if let decodedstr = String(data: data, encoding: .utf8),
+    let decoded = {{ exception.objectType }}(decodedstr) {
+        dispatchQueue.async {
+        completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
+    }
+} else {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+    }
+}

@@ -38,21 +38,24 @@ struct ReturnTypeViewModel {
     init(from responses: [ResponseViewModel]?) {
         var objectTypes = Set<String>()
         var strategies = Set<String>()
+        var hasNullableResponse = false
         for response in responses ?? [] {
             if response.strategy != "noBody" {
                 objectTypes.insert(response.objectType)
             }
             strategies.insert(response.strategy)
+            hasNullableResponse = hasNullableResponse || response.isNullable
         }
 
         // Only supprt at most 1 body or pageBody return type now.
         let withBodyStrategies = strategies.filter { $0 != "noBody" }
-        let hasNoBodyStrategies = strategies.contains { $0 == "noBody" }
         assert(withBodyStrategies.count <= 1)
+
+        let hasNoBodyStrategies = strategies.contains { $0 == "noBody" }
 
         // since we only support 1 body/pagePage response, only need to take the first item for objectTypes
         if let name = objectTypes.first {
-            self.name = hasNoBodyStrategies ? "\(name)?" : name
+            self.name = (hasNoBodyStrategies || hasNullableResponse) ? "\(name)?" : name
             self.returnNil = hasNoBodyStrategies
         } else {
             self.name = "Void"
