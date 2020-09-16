@@ -157,7 +157,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
                case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 501)
                     if case let .service(_, innerError) = error,
-                        let errorNo = innerError as? Int {
+                        let errorNo = innerError as? Int32 {
                         XCTAssertEqual(errorNo, 123)
                         expectation.fulfill()
                     } else {
@@ -166,7 +166,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
             }
         }
         
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 155.0)
     }
     
     func test_XmsErrorResponseExtensions_getPetById400() throws {
