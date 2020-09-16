@@ -178,18 +178,15 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                 if [
                     501
                 ].contains(statusCode) {
-                    print("get 501")
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                         }
                     } else {
-                        print("get 501 failed to decode")
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
                         }
-                        print("get 5012 failed to decode")
                     }
                 }
             case let .failure(error):

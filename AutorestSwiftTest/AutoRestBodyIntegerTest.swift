@@ -41,15 +41,15 @@ class AutoRestIntegerTest: XCTestCase {
                                             withOptions: AutoRestIntegerTestClientOptions())
     }
 
-    func Atest_BodyInteger_getNull200() throws {
+    func test_BodyInteger_getNull200() throws {
         let expectation = XCTestExpectation(description: "Call getNull succeed")
         let failedExpectation = XCTestExpectation(description: "Call getNull failed")
         failedExpectation.isInverted = true
         
-        
         client.getNull() { result, httpResponse  in
             switch result {
-                case .success:
+                case let .success(data):
+                    XCTAssert(data == nil)
                     XCTAssertEqual(httpResponse?.statusCode, 200)
                     expectation.fulfill()
                case let .failure(error):
@@ -61,7 +61,7 @@ class AutoRestIntegerTest: XCTestCase {
         wait(for: [expectation], timeout: 15.0)
     }
  
-    func Btest_BodyInteger_getInvalid200() throws {
+    func test_BodyInteger_getInvalid200() throws {
         let expectation = XCTestExpectation(description: "Call getInvalid succeed")
         let failedExpectation = XCTestExpectation(description: "Call getInvalid failed")
         failedExpectation.isInverted = true
@@ -70,11 +70,10 @@ class AutoRestIntegerTest: XCTestCase {
         client.getInvalid() { result, httpResponse  in
             switch result {
                 case .success:
+                    failedExpectation.fulfill()
+               case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 200)
                     expectation.fulfill()
-               case let .failure(error):
-                    print("test failed. error=\(error.message)")
-                    failedExpectation.fulfill()
             }
         }
         

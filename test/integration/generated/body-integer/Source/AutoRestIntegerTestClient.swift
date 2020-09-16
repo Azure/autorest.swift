@@ -73,7 +73,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getNull(
         withOptions options: GetNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int32>
+        completionHandler: @escaping HTTPResultHandler<Int32?>
     ) {
         // Construct URL
         let urlTemplate = "/int/null"
@@ -129,14 +129,20 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                    if data.count == 0 {
                         dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                            completionHandler(.success(nil), httpResponse)
                         }
                     } else {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        if let decodedstr = String(data: data, encoding: .utf8),
+                            let decoded = Int32(decodedstr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            }
                         }
                     }
                 }
@@ -1455,7 +1461,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getNullUnixTime(
         withOptions options: GetNullUnixTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Date?>
     ) {
         // Construct URL
         let urlTemplate = "/int/nullunixtime"
@@ -1513,7 +1519,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = (data.count > 0) ? try decoder.decode(Date.self, from: data) : nil
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
