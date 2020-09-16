@@ -1,6 +1,10 @@
 do {
     let decoder = JSONDecoder()
+    {% if response.isNullable == true %}
+    let decoded = (data.count > 0) ? try decoder.decode({{ response.objectType }}.self, from: data) : nil
+    {% else %}
     let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
+    {% endif %}
     dispatchQueue.async {
         completionHandler(.success(decoded), httpResponse)
     }

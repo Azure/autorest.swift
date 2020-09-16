@@ -47,6 +47,7 @@ struct ResponseViewModel {
     let strategy: String
     let pagingNames: Language.PagingNames?
     let pagedElementClassName: String?
+    let isNullable: Bool
 
     init(from response: Response, with operation: Operation) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -58,6 +59,7 @@ struct ResponseViewModel {
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
 
+        self.isNullable = schemaResponse?.nullable ?? false
         if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
             let pagingNames = Language.PagingNames(from: pagingMetadata) {
             let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }

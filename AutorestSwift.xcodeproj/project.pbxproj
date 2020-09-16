@@ -172,6 +172,8 @@
 		F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */; };
 		F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */; };
 		F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */; };
+		F15150D42512701C00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */; };
+		F15150D52512701C00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
 		F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */; };
@@ -296,9 +298,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F19B01E62507F3D300121831 /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
+				F15150D42512701C00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil in CopyFiles */,
+				F15150D52512701C00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil in CopyFiles */,
 				F15150692511CA8A00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil in CopyFiles */,
 				F151506A2511CA8A00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil in CopyFiles */,
-				F19B01E62507F3D300121831 /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
 				F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */,
 				F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */,
 				F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */,
@@ -440,6 +444,8 @@
 		F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStringBodySnippet.stencil; sourceTree = "<group>"; };
+		F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodyEndSnippet.stencil; sourceTree = "<group>"; };
+		F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodyStartSnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
 		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
@@ -645,6 +651,8 @@
 				F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */,
 				F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */,
 				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
+				F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */,
+				F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
 				F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */,
 				F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */,
