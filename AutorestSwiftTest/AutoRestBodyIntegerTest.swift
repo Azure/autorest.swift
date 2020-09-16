@@ -60,5 +60,24 @@ class AutoRestIntegerTest: XCTestCase {
         
         wait(for: [expectation], timeout: 15.0)
     }
-    
+ 
+    func test_BodyInteger_getInvalid200() throws {
+        let expectation = XCTestExpectation(description: "Call getInvalid succeed")
+        let failedExpectation = XCTestExpectation(description: "Call getInvalid failed")
+        failedExpectation.isInverted = true
+        
+        
+        client.getInvalid() { result, httpResponse  in
+            switch result {
+                case .success:
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                    expectation.fulfill()
+               case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 15.0)
+    }
 }
