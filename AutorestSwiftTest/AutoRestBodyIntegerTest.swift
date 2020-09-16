@@ -49,16 +49,16 @@ class AutoRestIntegerTest: XCTestCase {
         
         client.getNull() { result, httpResponse  in
             switch result {
-                case let .success(data):
-                        XCTAssertEqual(httpResponse?.statusCode, 200)
-                        expectation.fulfill()
+                case .success:
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                    expectation.fulfill()
                case let .failure(error):
                     print("test failed. error=\(error.message)")
                     failedExpectation.fulfill()
             }
         }
         
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 15.0)
     }
     
 }
