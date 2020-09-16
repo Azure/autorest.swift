@@ -3,6 +3,7 @@ if data.count == 0 {
     dispatchQueue.async {
         completionHandler(.success(nil), httpResponse)
     }
-} else {
+    return
+}
 {% endif %}
 

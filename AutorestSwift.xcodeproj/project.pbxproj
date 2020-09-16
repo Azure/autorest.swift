@@ -167,13 +167,15 @@
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
 		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
 		F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */; };
-		F15150692511CA8A00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150652511C9CA00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil */; };
-		F151506A2511CA8A00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150632511C9CA00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil */; };
 		F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */; };
 		F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */; };
 		F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */; };
-		F15150D42512701C00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */; };
-		F15150D52512701C00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */; };
+		F15150D52512701C00DF0B9F /* OperationResponseNullableBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */; };
+		F151510825128E2D00DF0B9F /* OperationExceptionIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */; };
+		F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510325128E0B00DF0B9F /* OperationExceptionJsonBodySnippet.stencil */; };
+		F151510A25128E2D00DF0B9F /* OperationExceptionNullableBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510625128E0B00DF0B9F /* OperationExceptionNullableBodySnippet.stencil */; };
+		F151510B25128E2D00DF0B9F /* OperationExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */; };
+		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
 		F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */; };
@@ -184,7 +186,6 @@
 		F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18718F0250C592300318867 /* AutoRestReportTest.swift */; };
 		F19B01D52507E21100121831 /* ExceptionResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */; };
 		F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */; };
-		F19B01E62507F3D300121831 /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */; };
 		F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */; };
 		F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */; };
 		F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */; };
@@ -298,11 +299,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F19B01E62507F3D300121831 /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
-				F15150D42512701C00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil in CopyFiles */,
-				F15150D52512701C00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil in CopyFiles */,
-				F15150692511CA8A00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil in CopyFiles */,
-				F151506A2511CA8A00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil in CopyFiles */,
+				F151510825128E2D00DF0B9F /* OperationExceptionIntBodySnippet.stencil in CopyFiles */,
+				F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
+				F151510A25128E2D00DF0B9F /* OperationExceptionNullableBodySnippet.stencil in CopyFiles */,
+				F151510B25128E2D00DF0B9F /* OperationExceptionSnippet.stencil in CopyFiles */,
+				F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */,
+				F15150D52512701C00DF0B9F /* OperationResponseNullableBodySnippet.stencil in CopyFiles */,
 				F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */,
 				F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */,
 				F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */,
@@ -437,15 +439,15 @@
 		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
 		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
-		F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
-		F15150632511C9CA00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
-		F15150642511C9CA00DF0B9F /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
-		F15150652511C9CA00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStringBodySnippet.stencil; sourceTree = "<group>"; };
-		F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodyEndSnippet.stencil; sourceTree = "<group>"; };
-		F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodyStartSnippet.stencil; sourceTree = "<group>"; };
+		F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodySnippet.stencil; sourceTree = "<group>"; };
+		F151510325128E0B00DF0B9F /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
+		F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionStringBodySnippet.stencil; sourceTree = "<group>"; };
+		F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionIntBodySnippet.stencil; sourceTree = "<group>"; };
+		F151510625128E0B00DF0B9F /* OperationExceptionNullableBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionNullableBodySnippet.stencil; sourceTree = "<group>"; };
+		F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
 		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
@@ -632,6 +634,11 @@
 				F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */,
 				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
 				F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */,
+				F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */,
+				F151510325128E0B00DF0B9F /* OperationExceptionJsonBodySnippet.stencil */,
+				F151510625128E0B00DF0B9F /* OperationExceptionNullableBodySnippet.stencil */,
+				F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */,
+				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
@@ -642,17 +649,12 @@
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */,
-				F120004A250345C300797F1A /* OperationResponseExceptionSnippet.stencil */,
-				F15150652511C9CA00DF0B9F /* OperationResponseExceptionIntBodySnippet.stencil */,
-				F15150632511C9CA00DF0B9F /* OperationResponseExceptionJsonBodySnippet.stencil */,
-				F15150642511C9CA00DF0B9F /* OperationResponseExceptionSnippet.stencil */,
 				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
 				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
 				F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */,
 				F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */,
 				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
-				F15150D22512700D00DF0B9F /* OperationResponseNullableBodyEndSnippet.stencil */,
-				F15150D32512700D00DF0B9F /* OperationResponseNullableBodyStartSnippet.stencil */,
+				F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
 				F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */,
 				F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */,

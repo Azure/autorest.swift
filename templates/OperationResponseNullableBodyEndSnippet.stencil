@@ -1,3 +1,0 @@
-{% if response.isNullable == true %}
-}
-{% endif %}

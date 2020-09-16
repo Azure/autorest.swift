@@ -1,6 +1,10 @@
 do {
     let decoder = JSONDecoder()
+    {% if response.isNullable == true %}
+    let decoded = (data.count > 0) ? try decoder.decode({{ exception.objectType }}.self, from: data) : nil
+    {% else %}
     let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
+    {% endif %}
         dispatchQueue.async {
             completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
         }

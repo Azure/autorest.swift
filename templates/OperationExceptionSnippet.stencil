@@ -6,11 +6,11 @@
     ].contains(statusCode)
     {
         {% if exception.strategy == "intBody" %}
-        {% include "OperationResponseExceptionIntBodySnippet.stencil" exception %}
+        {% include "OperationExceptionIntBodySnippet.stencil" exception %}
         {% elif exception.strategy == "stringBody" %}
-        {% include "OperationResponseExceptionStringBodySnippet.stencil" exception %}
+        {% include "OperationExceptionStringBodySnippet.stencil" exception %}
         {% elif exception.strategy == "jsonBody" %}
-        {% include "OperationResponseExceptionJsonBodySnippet.stencil" exception %}
+        {% include "OperationExceptionJsonBodySnippet.stencil" exception %}
         {% else %}
         // TODO: Couldn't find template for {{ exception.strategy }}
         {% endif %}

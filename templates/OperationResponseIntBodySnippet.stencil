@@ -1,4 +1,4 @@
-{% include "OperationResponseNullableBodyStartSnippet.stencil" %}
+{% include "OperationResponseNullableBodySnippet.stencil" %}
 if let decodedstr = String(data: data, encoding: .utf8),
     let decoded = {{ response.objectType }}(decodedstr) {
     dispatchQueue.async {
@@ -9,4 +9,3 @@ if let decodedstr = String(data: data, encoding: .utf8),
         completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
     }
 }
-{% include "OperationResponseNullableBodyEndSnippet.stencil" %}
