@@ -1,9 +1,0 @@
-{% if exception.isNullable == true %}
-if data.count == 0 {
-    dispatchQueue.async {
-        completionHandler(.failure(nil), httpResponse)
-    }
-    return
-}
-{% endif %}
-

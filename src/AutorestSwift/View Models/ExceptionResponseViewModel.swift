@@ -34,7 +34,6 @@ struct ExceptionResponseViewModel {
     let description: String?
     let hasDefaultException: Bool
     let strategy: String
-    let isNullable: Bool
 
     init(from response: Response) {
         let httpResponse = response.protocol.http as? HttpResponse
@@ -46,7 +45,6 @@ struct ExceptionResponseViewModel {
         // check if the request body schema type is object, store the object type of the response body
         let schemaResponse = response as? SchemaResponse
         self.description = schemaResponse?.description
-        self.isNullable = schemaResponse?.nullable ?? false
 
         if let objectType = schemaResponse?.schema.swiftType(optional: false) {
             self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
