@@ -7,7 +7,7 @@
     {
         {% if exception.strategy == "intBody" %}
         let decodedstr =  String(data: data, encoding: .utf8)
-        let decoded =  Int(decodedstr ?? "")
+        let decoded =  Int(decodedstr ?? "") ?? -1
         {% elif exception.strategy == "stringBody" %}
         let decoded =  String(data: data, encoding: .utf8)
         {% elif exception.strategy == "jsonBody" %}
@@ -19,6 +19,7 @@
             dispatchQueue.async {
                 completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
             }
+            return
         }
         {% else %}
         // TODO: Couldn't find template for {{ exception.strategy }}

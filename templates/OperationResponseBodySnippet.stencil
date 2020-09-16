@@ -1,14 +1,25 @@
 {% include "OperationResponseStatusCodeSnippet.stencil" %}
 {
+    {% if response.strategy == "intBody" %}
+    let decodedstr =  String(data: data, encoding: .utf8)
+    let decoded =  Int(decodedstr ?? "") ?? -1
+    {% elif response.strategy == "stringBody" %}
+    let decoded =  String(data: data, encoding: .utf8)
+    {% elif response.strategy == "jsonBody" %}
+    var decoded: {{ response.objectType }}
     do {
         let decoder = JSONDecoder()
-        let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
-        dispatchQueue.async {
-            completionHandler(.success(decoded), httpResponse)
-        }
+        decoded = try decoder.decode({{ response.objectType }}.self, from: data)
     } catch {
         dispatchQueue.async {
             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
         }
+        return
+    }
+    {% else %}
+    // TODO: Couldn't find template for {{ exception.strategy }}
+    {% endif %}
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
     }
 }
