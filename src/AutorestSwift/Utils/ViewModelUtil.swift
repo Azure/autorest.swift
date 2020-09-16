@@ -29,12 +29,11 @@ import Foundation
 import Stencil
 
 public func getStrategy(_ objectType: String) -> String {
-    switch objectType {
-    case "String":
+    if objectType == "String" {
         return ResponseBodyType.stringBody.rawValue
-    case "Int":
+    } else if objectType.starts(with: "Int") {
         return ResponseBodyType.intBody.rawValue
-    default:
+    } else {
         return ResponseBodyType.jsonBody.rawValue
     }
 }

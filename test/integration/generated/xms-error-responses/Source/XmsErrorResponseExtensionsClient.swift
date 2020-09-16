@@ -130,18 +130,16 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: Pet
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(Pet.self, from: data)
+                        let decoded = try decoder.decode(Pet.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
                 if [
@@ -165,27 +163,30 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                 if [
                     404
                 ].contains(statusCode) {
-                    var decoded: Error?
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
+                        let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
                 if [
                     501
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -261,35 +262,31 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: PetAction
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(PetAction.self, from: data)
+                        let decoded = try decoder.decode(PetAction.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
                 if [
                     500
                 ].contains(statusCode) {
-                    var decoded: Error?
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(PetActionError.self, from: data)
+                        let decoded = try decoder.decode(PetActionError.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
             case let .failure(error):

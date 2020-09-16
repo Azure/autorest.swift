@@ -73,7 +73,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getNull(
         withOptions options: GetNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
         let urlTemplate = "/int/null"
@@ -129,10 +129,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -173,7 +178,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getInvalid(
         withOptions options: GetInvalidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
         let urlTemplate = "/int/invalid"
@@ -229,10 +234,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -273,7 +283,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getOverflowInt32(
         withOptions options: GetOverflowInt32Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
         let urlTemplate = "/int/overflowint32"
@@ -329,10 +339,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -373,7 +388,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getUnderflowInt32(
         withOptions options: GetUnderflowInt32Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
         let urlTemplate = "/int/underflowint32"
@@ -429,10 +444,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -473,7 +493,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getOverflowInt64(
         withOptions options: GetOverflowInt64Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
         // Construct URL
         let urlTemplate = "/int/overflowint64"
@@ -529,10 +549,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int64(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -573,7 +598,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///     success.
     public func getUnderflowInt64(
         withOptions options: GetUnderflowInt64Options? = nil,
-        completionHandler: @escaping HTTPResultHandler<Int>
+        completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
         // Construct URL
         let urlTemplate = "/int/underflowint64"
@@ -629,10 +654,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    let decodedstr = String(data: data, encoding: .utf8)
-                    let decoded = Int(decodedstr ?? "") ?? -1
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int64(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
                     }
                 }
             case let .failure(error):
@@ -672,7 +702,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        max32: Int,
+        max32: Int32,
         withOptions options: PutMax32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -780,7 +810,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        max64: Int,
+        max64: Int64,
         withOptions options: PutMax64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -888,7 +918,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        min32: Int,
+        min32: Int32,
         withOptions options: PutMin32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -996,7 +1026,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        min64: Int,
+        min64: Int64,
         withOptions options: PutMin64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1161,18 +1191,16 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: Date
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
             case let .failure(error):
@@ -1377,18 +1405,16 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: Date
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
             case let .failure(error):
@@ -1485,18 +1511,16 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: Date
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
             case let .failure(error):

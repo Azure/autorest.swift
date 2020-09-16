@@ -138,18 +138,16 @@ public final class AutoRestReportClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: [String: Int]
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
             case let .failure(error):
@@ -255,18 +253,16 @@ public final class AutoRestReportClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    var decoded: [String: Int]
                     do {
                         let decoder = JSONDecoder()
-                        decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
                         }
-                        return
-                    }
-                    dispatchQueue.async {
-                        completionHandler(.success(decoded), httpResponse)
                     }
                 }
             case let .failure(error):
