@@ -1,0 +1,4 @@
+let decoded = String(data: data, encoding: .utf8)
+dispatchQueue.async {
+    completionHandler(.success(decoded), httpResponse)
+}

@@ -1,34 +1,11 @@
 {% include "OperationResponseStatusCodeSnippet.stencil" %}
 {
     {% if response.strategy == "intBody" %}
-    if let decodedstr = String(data: data, encoding: .utf8),
-        let decoded = Int(decodedstr) {
-        dispatchQueue.async {
-            completionHandler(.success(decoded), httpResponse)
-        }
-    } else {
-        dispatchQueue.async {
-            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
-        }
-    }
+    {% include "OperationResponseIntBodySnippet.stencil" response %}
     {% elif response.strategy == "stringBody" %}
-    let decoded = String(data: data, encoding: .utf8)
-    dispatchQueue.async {
-        completionHandler(.success(decoded), httpResponse)
-    }
+    {% include "OperationResponseStringBodySnippet.stencil" response %}
     {% elif response.strategy == "jsonBody" %}
-    do {
-        let decoder = JSONDecoder()
-        let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
-        dispatchQueue.async {
-            completionHandler(.success(decoded), httpResponse)
-        }
-    } catch {
-        dispatchQueue.async {
-            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-        }
-        return
-    }
+    {% include "OperationResponseJsonBodySnippet.stencil" response %}
     {% else %}
     // TODO: Couldn't find template for {{ exception.strategy }}
     {% endif %}

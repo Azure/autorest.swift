@@ -1,7 +1,7 @@
 if let decodedstr = String(data: data, encoding: .utf8),
     let decoded = Int(decodedstr) {
-        dispatchQueue.async {
-        completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
     }
 } else {
     dispatchQueue.async {
