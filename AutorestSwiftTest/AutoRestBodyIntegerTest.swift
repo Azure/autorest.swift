@@ -49,7 +49,7 @@ class AutoRestIntegerTest: XCTestCase {
         client.getNull() { result, httpResponse  in
             switch result {
                 case let .success(data):
-                    XCTAssert(data == nil)
+                    XCTAssertEqual(data, nil)
                     XCTAssertEqual(httpResponse?.statusCode, 200)
                     expectation.fulfill()
                case let .failure(error):
@@ -71,9 +71,16 @@ class AutoRestIntegerTest: XCTestCase {
             switch result {
                 case .success:
                     failedExpectation.fulfill()
-               case let .failure(error):
+                case let .failure(error):
                     XCTAssertEqual(httpResponse?.statusCode, 200)
-                    expectation.fulfill()
+                    XCTAssert(error.message.contains("Decoding error."))
+                    if let data = httpResponse?.data,
+                        let dataStr =  String(data: data, encoding: .utf8) {
+                        XCTAssert(dataStr == "123jkl")
+                         expectation.fulfill()
+                    } else {
+                        failedExpectation.fulfill()
+                    }
             }
         }
         
