@@ -26,12 +26,6 @@
 
 import Foundation
 
-enum ExceptionResponseBodyType: String {
-    case stringBody
-    case intBody
-    case jsonBody
-}
-
 /// View Model for method exception response handling.
 struct ExceptionResponseViewModel {
     let statusCodes: [String]
@@ -55,7 +49,7 @@ struct ExceptionResponseViewModel {
         self.isNullable = schemaResponse?.nullable ?? false
 
         if let objectType = schemaResponse?.schema.swiftType(optional: false) {
-            self.strategy = getStrategy(objectType)
+            self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
             self.objectType = objectType
         } else {
             self.strategy = ResponseBodyType.noBody.rawValue

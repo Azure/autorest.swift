@@ -179,7 +179,6 @@
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
 		F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */; };
-		F186EB4A25118ABF00723FA3 /* ViewModelUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB4925118ABF00723FA3 /* ViewModelUtil.swift */; };
 		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
@@ -453,7 +452,6 @@
 		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
 		F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestBodyIntegerTest.swift; sourceTree = "<group>"; };
 		F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestIntegerTest.xcodeproj; path = "test/integration/generated/report/../body-integer/AutoRestIntegerTest.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		F186EB4925118ABF00723FA3 /* ViewModelUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelUtil.swift; sourceTree = "<group>"; };
 		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
@@ -673,7 +671,6 @@
 		0A22B07724CB721900EC018E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				F186EB4925118ABF00723FA3 /* ViewModelUtil.swift */,
 				0A22B07824CB721900EC018E /* StencilUtil.swift */,
 				0A22B07924CB721900EC018E /* String+Extensions.swift */,
 				0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */,
@@ -1310,7 +1307,6 @@
 				0A22B13D24D3671E00EC018E /* Contact.swift in Sources */,
 				0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */,
 				0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */,
-				F186EB4A25118ABF00723FA3 /* ViewModelUtil.swift in Sources */,
 				0A22B14024D3671E00EC018E /* ExternalDocumentation.swift in Sources */,
 				0A22B14124D3671F00EC018E /* FlagValue.swift in Sources */,
 				0A22B14224D3671F00EC018E /* HttpHeader.swift in Sources */,

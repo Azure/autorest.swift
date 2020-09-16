@@ -37,6 +37,16 @@ enum ResponseBodyType: String {
     case intBody
     /// Service returns a JSON body
     case jsonBody
+
+    static func strategy(for input: String) -> ResponseBodyType {
+        if input == "String" {
+            return .stringBody
+        } else if input.starts(with: "Int") {
+            return .intBody
+        } else {
+            return .jsonBody
+        }
+    }
 }
 
 /// View Model for method response handling.
@@ -78,7 +88,7 @@ struct ResponseViewModel {
             self.pagingNames = nil
             self.pagedElementClassName = nil
             if let objectType = schemaResponse?.schema.swiftType(optional: false) {
-                self.strategy = getStrategy(objectType)
+                self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
                 self.objectType = objectType
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue

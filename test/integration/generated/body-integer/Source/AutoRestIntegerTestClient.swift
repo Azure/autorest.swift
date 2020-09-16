@@ -133,16 +133,17 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                         dispatchQueue.async {
                             completionHandler(.success(nil), httpResponse)
                         }
+                        return
+                    }
+
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
                     } else {
-                        if let decodedstr = String(data: data, encoding: .utf8),
-                            let decoded = Int32(decodedstr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
-                            }
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1517,9 +1518,16 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = (data.count > 0) ? try decoder.decode(Date.self, from: data) : nil
+                        let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
