@@ -115,4 +115,68 @@ extension Array where Element == ParameterType {
         // no match found
         return nil
     }
+
+    /// Returns the required items that should be in the method signature
+    var inSignature: [ParameterType] {
+        return filter { param in
+            guard param.implementation == ImplementationLocation.method,
+                param.schema.type != .constant,
+                param.flattened == false
+            else { return false }
+            return param.required
+        }
+    }
+
+    /// Returns the optional items that should be in the method's Options object
+    var inOptions: [ParameterType] {
+        return filter { param in
+            guard param.implementation == ImplementationLocation.method,
+                param.schema.type != .constant,
+                param.flattened == false
+            else { return false }
+            return !param.required
+        }
+    }
+
+    /// Returns the items that should be passed in the query string
+    var inQuery: [ParameterType] {
+        return filter { param in
+            guard param.implementation == ImplementationLocation.method,
+                param.schema.type != .constant
+            else { return false }
+            if let httpParam = param.protocol.http as? HttpParameter {
+                return httpParam.in == .query
+            } else {
+                return false
+            }
+        }
+    }
+
+    /// Returns the items that should be passed in the request header
+    var inHeader: [ParameterType] {
+        return filter { param in
+            guard param.implementation == ImplementationLocation.method,
+                param.schema.type != .constant
+            else { return false }
+            if let httpParam = param.protocol.http as? HttpParameter {
+                return httpParam.in == .header
+            } else {
+                return false
+            }
+        }
+    }
+
+    /// Returns the items that should be passed in the path
+    var inPath: [ParameterType] {
+        return filter { param in
+            guard param.implementation == ImplementationLocation.method,
+                param.schema.type != .constant
+            else { return false }
+            if let httpParam = param.protocol.http as? HttpParameter {
+                return httpParam.in == .path
+            } else {
+                return false
+            }
+        }
+    }
 }

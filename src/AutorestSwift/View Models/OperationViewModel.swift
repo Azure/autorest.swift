@@ -30,19 +30,14 @@ struct OperationParameters {
     var header: Params
     var query: Params
     var path: [KeyValueViewModel]
-    var hasOptionalsParams: Bool = false
+    var hasOptionalParams: Bool
 
     /// Build a list of required and optional query params and headers from a list of parameters
-    init(
-        parameters: [ParameterType]?,
-        operation: Operation,
-        operationParameters: OperationParameters? = nil
-    ) {
-        self.header = operationParameters?.header ?? Params()
-        self.query = operationParameters?.query ?? Params()
-        self.path = operationParameters?.path ?? [KeyValueViewModel]()
-
-        for param in parameters ?? [] {
+    init(parameters: [ParameterType], operation: Operation) {
+        var header = Params()
+        var query = Params()
+        var path = [KeyValueViewModel]()
+        for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
             let viewModel = KeyValueViewModel(from: param, with: operation)
@@ -60,6 +55,25 @@ struct OperationParameters {
                 continue
             }
         }
+
+        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
+        if query.required.isEmpty {
+            query.required.append(KeyValueViewModel(key: "", value: "\"\""))
+        }
+        if path.isEmpty {
+            path.append(KeyValueViewModel(key: "", value: "\"\""))
+        }
+
+        // If there is no optional query params, change query param declaration to 'let'
+        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
+        // header parameters will be initialized out of header initializer
+        query.declaration = query.optional.isEmpty ? "let" : "var"
+        header.declaration = header.isEmpty ? "let" : "var"
+
+        self.header = header
+        self.query = query
+        self.path = path
+        self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty)
     }
 }
 
@@ -75,6 +89,10 @@ struct Params {
         self.required = params?.required ?? [KeyValueViewModel]()
         self.optional = params?.optional ?? [KeyValueViewModel]()
     }
+
+    var isEmpty: Bool {
+        return required.isEmpty && optional.isEmpty
+    }
 }
 
 /// View Model for an operation.
@@ -82,63 +100,45 @@ struct Params {
 ///     // a simple endpoint
 ///     public func simpleEndpoint(param: String? = nil, completionHandler: @escaping HTTPResultHandler<ReturnType>) { ... }
 struct OperationViewModel {
+    /// Name of the operation
     let name: String
+
+    /// Comment association with the operation
     let comment: ViewModelComment
+
     let signatureComment: ViewModelComment
-    let bodyParam: ParameterViewModel?
     let signatureParams: [ParameterViewModel]
-    let returnType: ReturnTypeViewModel?
+    let bodyParam: ParameterViewModel?
     let params: OperationParameters
+
+    let returnType: ReturnTypeViewModel?
+
+    let clientMethodOptions: ClientMethodOptionsViewModel
+
     let pipelineContext: [KeyValueViewModel]?
+
+    let request: RequestViewModel
     let responses: [ResponseViewModel]?
     let exceptions: [ExceptionResponseViewModel]?
-    let request: RequestViewModel?
-    let clientMethodOptions: ClientMethodOptionsViewModel
+
     let defaultException: ExceptionResponseViewModel?
     let defaultExceptionHasBody: Bool
 
     init(from operation: Operation, with model: CodeModel) {
+        guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
+        self.request = RequestViewModel(from: request, with: operation)
+
         self.name = operationName(for: operation)
         self.comment = ViewModelComment(from: operation.description)
 
-        var pipelineContext = [KeyValueViewModel]()
+        let params = operation.allParams
 
-        var params = OperationParameters(
-            parameters: operation.parameters,
-            operation: operation
-        )
-
-        var signatureParams = filterParams(for: operation.signatureParameters, with: [.path, .uri])
-        var optionsParams = filterParams(for: operation.signatureParameters, with: [.header, .query])
-
-        var requests = [RequestViewModel]()
         var responses = [ResponseViewModel]()
-        var exceptions = [ExceptionResponseViewModel]()
-
-        guard let request = operation.request else {
-            fatalError("Request not found for operation \(operation.name).")
-        }
-        requests.append(RequestViewModel(from: request, with: operation))
-
-        let requestSignatureParams = filterParams(for: request.signatureParameters, with: [.path, .uri])
-        let requestOptionsParams = filterParams(
-            for: request.signatureParameters,
-            with: [.header, .query]
-        )
-
-        optionsParams.append(contentsOf: requestOptionsParams)
-        signatureParams.append(contentsOf: requestSignatureParams)
-
-        params = OperationParameters(
-            parameters: request.parameters,
-            operation: operation,
-            operationParameters: params
-        )
-
         for response in operation.responses ?? [] {
             responses.append(ResponseViewModel(from: response, with: operation))
         }
 
+        var exceptions = [ExceptionResponseViewModel]()
         var defaultException: ExceptionResponseViewModel?
         for exception in operation.exceptions ?? [] {
             let viewModel = ExceptionResponseViewModel(from: exception)
@@ -149,40 +149,38 @@ struct OperationViewModel {
             }
         }
 
+        // Build up allowable status codes that can be returned from the service.
         var statusCodes = [String]()
         for response in responses {
-            statusCodes.append(contentsOf: response.statusCodes)
+            statusCodes += response.statusCodes
         }
         for exception in exceptions {
-            statusCodes.append(contentsOf: exception.statusCodes)
+            statusCodes += exception.statusCodes
         }
 
+        // Configure PipelineContext
+        var pipelineContext = [KeyValueViewModel]()
         pipelineContext.append(KeyValueViewModel(
             key: "ContextKey.allowedStatusCodes.rawValue",
             value: "[\(statusCodes.joined(separator: ","))]"
         ))
+        self.pipelineContext = pipelineContext
 
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
         self.defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
 
-        // current logic only supports a single request and response
-        assert(requests.count <= 1, "Multiple requests per operation is currently not supported... \(operation.name)")
-
-        self.request = requests.first
-
-        // Construct the relevant view models
-        if let bodyParam = operation.requests?.first?.bodyParam {
-            let bodyParamName = operation.requests?.first?.bodyParamName(for: operation)
+        if let bodyParam = operation.request?.bodyParam {
+            let bodyParamName = operation.request?.bodyParamName(for: operation)
             self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
         } else {
             self.bodyParam = nil
         }
 
         var signaturePropertyViewModel = [ParameterViewModel]()
-        signatureParams.forEach {
-            signaturePropertyViewModel.append(ParameterViewModel(from: $0))
+        for param in params.inSignature {
+            signaturePropertyViewModel.append(ParameterViewModel(from: param))
         }
 
         self.returnType = ReturnTypeViewModel(from: self.responses)
@@ -191,37 +189,20 @@ struct OperationViewModel {
         if let param = bodyParam {
             signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
         }
-        for param in signatureParams where param.description != "" {
+        for param in params.inSignature where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
         self.signatureParams = signaturePropertyViewModel
 
-        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
-        if params.query.required.count == 0 { params.query.required.append(KeyValueViewModel(key: "", value: "\"\"")) }
-        if params.path.count == 0 { params.path.append(KeyValueViewModel(key: "", value: "\"\"")) }
-
-        // If there is no optional query params, change query param declaration to 'let'
-        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
-        // header parameters will be initialized out of header initializer
-        params.query.declaration = params.query.optional.count == 0 ? "let" : "var"
-        params.header.declaration = params.header.optional.count == 0 && params.header.required
-            .count == 0 ? "let" : "var"
-        params.hasOptionalsParams = params.query.optional.count + params.header.optional.count > 0
-
-        self.params = params
-        self.pipelineContext = pipelineContext
+        // create help struct to manage required and optional params in headers/query/path, etc.
+        self.params = OperationParameters(parameters: params, operation: operation)
 
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
-            parameters: optionsParams
+            parameters: params.inOptions
         )
-
-        // validate our assumption that there won't be any "required options"
-        for param in optionsParams {
-            assert(param.required == false, "Unexpectedly found a required 'option'... \(param.name)")
-        }
     }
 }
 

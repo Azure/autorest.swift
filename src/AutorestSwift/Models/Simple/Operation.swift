@@ -79,6 +79,16 @@ class Operation: Codable, LanguageShortcut {
         return requests?.first
     }
 
+    /// Returns the combine list of `ParameterType` objects.
+    var allParams: [ParameterType] {
+        let paramList = (signatureParameters ?? []) + (parameters ?? []) + (request?.allParams ?? [])
+        var params = [String: ParameterType]()
+        for param in paramList {
+            params[param.name] = param
+        }
+        return Array(params.values)
+    }
+
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {

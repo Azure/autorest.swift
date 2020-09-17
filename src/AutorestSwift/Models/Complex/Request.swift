@@ -74,6 +74,16 @@ extension Request {
         return bodyParams.first
     }
 
+    /// Return a unique list of all `ParameterType` objects.
+    var allParams: [ParameterType] {
+        let paramList = (signatureParameters ?? []) + (parameters ?? [])
+        var params = [String: ParameterType]()
+        for param in paramList {
+            params[param.name] = param
+        }
+        return Array(params.values)
+    }
+
     /// Gets the Swift name for the body-encoded parameter, if there is one. Fails if there is more than one.
     func bodyParamName(for operation: Operation) -> String? {
         guard bodyParam != nil else { return nil }
