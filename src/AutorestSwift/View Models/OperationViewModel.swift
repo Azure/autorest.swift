@@ -30,6 +30,9 @@ struct OperationParameters {
     var header: Params
     var query: Params
     var path: [KeyValueViewModel]
+    var body: BodyParams?
+    var signature: [ParameterViewModel]
+
     var hasOptionalParams: Bool
 
     /// Build a list of required and optional query params and headers from a list of parameters
@@ -70,6 +73,26 @@ struct OperationParameters {
         query.declaration = query.optional.isEmpty ? "let" : "var"
         header.declaration = header.isEmpty ? "let" : "var"
 
+        // Set the body param, if applicable
+        if let bodyParam = operation.request?.bodyParam {
+            let bodyParamName = operation.request?.bodyParamName(for: operation)
+            let virtualParams = parameters.virtual
+
+            self.body = BodyParams(
+                param: ParameterViewModel(from: bodyParam, withName: bodyParamName),
+                strategy: bodyParam.flattened ? .flattened : .plain,
+                children: virtualParams.map { VirtualParam(from: $0) }
+            )
+        } else {
+            self.body = nil
+        }
+
+        var signaturePropertyViewModel = [ParameterViewModel]()
+        for param in parameters.inSignature {
+            signaturePropertyViewModel.append(ParameterViewModel(from: param))
+        }
+        self.signature = signaturePropertyViewModel
+
         self.header = header
         self.query = query
         self.path = path
@@ -95,6 +118,39 @@ struct Params {
     }
 }
 
+enum BodyParamStrategy: String {
+    case plain
+    case flattened
+}
+
+struct BodyParams {
+    var param: ParameterViewModel
+    var strategy: String
+    var children: [VirtualParam]
+
+    init(param: ParameterViewModel, strategy: BodyParamStrategy, children: [VirtualParam]) {
+        self.param = param
+        self.strategy = strategy.rawValue
+        self.children = children
+        // Suppress comma on final child
+        if !children.isEmpty {
+            self.children[children.count - 1].separator = ""
+        }
+    }
+}
+
+struct VirtualParam {
+    var name: String
+    var path: String
+    var separator: String
+
+    init(from param: VirtualParameter) {
+        self.name = param.name
+        self.path = param.required ? param.name : "options?.\(param.name)"
+        self.separator = ","
+    }
+}
+
 /// View Model for an operation.
 /// Example:
 ///     // a simple endpoint
@@ -107,8 +163,8 @@ struct OperationViewModel {
     let comment: ViewModelComment
 
     let signatureComment: ViewModelComment
-    let signatureParams: [ParameterViewModel]
-    let bodyParam: ParameterViewModel?
+    //    let signatureParams: [ParameterViewModel]
+    //    let bodyParam: ParameterViewModel?
     let params: OperationParameters
 
     let returnType: ReturnTypeViewModel?
@@ -171,32 +227,20 @@ struct OperationViewModel {
         self.defaultException = defaultException
         self.defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
 
-        if let bodyParam = operation.request?.bodyParam {
-            let bodyParamName = operation.request?.bodyParamName(for: operation)
-            self.bodyParam = ParameterViewModel(from: bodyParam, withName: bodyParamName)
-        } else {
-            self.bodyParam = nil
-        }
-
-        var signaturePropertyViewModel = [ParameterViewModel]()
-        for param in params.inSignature {
-            signaturePropertyViewModel.append(ParameterViewModel(from: param))
-        }
-
         self.returnType = ReturnTypeViewModel(from: self.responses)
 
+        // create help struct to manage required and optional params in
+        // headers/query/path, etc.
+        self.params = OperationParameters(parameters: params, operation: operation)
+
         var signatureComments: [String] = []
-        if let param = bodyParam {
+        if let param = self.params.body?.param {
             signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
         }
         for param in params.inSignature where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
-        self.signatureParams = signaturePropertyViewModel
-
-        // create help struct to manage required and optional params in headers/query/path, etc.
-        self.params = OperationParameters(parameters: params, operation: operation)
 
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,

@@ -116,13 +116,27 @@ extension Array where Element == ParameterType {
         return nil
     }
 
+    /// Returns the subset of `ParameterType` that are `VirtualParameter` types.
+    var virtual: [VirtualParameter] {
+        return compactMap { param in
+            if case let ParameterType.virtual(virtParam) = param {
+                return virtParam
+            }
+            return nil
+        }
+    }
+
     /// Returns the required items that should be in the method signature
     var inSignature: [ParameterType] {
         return filter { param in
             guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant,
-                param.flattened == false
+                param.schema.type != .constant
             else { return false }
+            // We track body params in a special way, so always omit them generally from the signature.
+            // If they belong in the signature, they will be added in a way to ensure they come first.
+            if let httpParam = param.protocol.http as? HttpParameter {
+                guard httpParam.in != .body else { return false }
+            }
             return param.required
         }
     }

@@ -45,9 +45,7 @@ struct BodyParamViewModel {
         self.name = operation.request?.bodyParamName(for: operation) ?? parameter.name
         self.type = parameter.schema.name
         self.flattened = parameter.flattened
-        var properties = [ParameterViewModel]()
-        // FIXME: Create metadata for the virtual properties
-        self.properties = properties
+        self.properties = [ParameterViewModel]()
     }
 }
 

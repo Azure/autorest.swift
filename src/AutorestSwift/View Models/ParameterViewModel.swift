@@ -33,7 +33,6 @@ struct ParameterViewModel {
     let name: String
     let type: String
     let optional: Bool
-    let flattened: Bool
     let defaultValue: ViewModelDefault
     let comment: ViewModelComment
 
@@ -43,6 +42,5 @@ struct ParameterViewModel {
         self.type = param.schema.swiftType(optional: optional)
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true)
         self.comment = ViewModelComment(from: param.description)
-        self.flattened = param.flattened
     }
 }
