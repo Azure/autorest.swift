@@ -119,6 +119,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -144,13 +145,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -220,6 +215,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -245,13 +241,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -321,6 +311,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -346,13 +337,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)

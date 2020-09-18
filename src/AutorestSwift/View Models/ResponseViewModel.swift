@@ -37,12 +37,16 @@ enum ResponseBodyType: String {
     case intBody
     /// Service returns a JSON body
     case jsonBody
+    /// Service returns a unixTime body
+    case unixTimeBody
 
-    static func strategy(for input: String) -> ResponseBodyType {
+    static func strategy(for input: String, and type: AllSchemaTypes) -> ResponseBodyType {
         if input == "String" {
             return .stringBody
         } else if input.starts(with: "Int") {
             return .intBody
+        } else if input == "Date", type == .unixTime {
+            return .unixTimeBody
         } else {
             return .jsonBody
         }
@@ -87,8 +91,9 @@ struct ResponseViewModel {
         } else {
             self.pagingNames = nil
             self.pagedElementClassName = nil
-            if let objectType = schemaResponse?.schema.swiftType(optional: false) {
-                self.strategy = ResponseBodyType.strategy(for: objectType).rawValue
+            if let objectType = schemaResponse?.schema.swiftType(optional: false),
+                let type = schemaResponse?.schema.type {
+                self.strategy = ResponseBodyType.strategy(for: objectType, and: type).rawValue
                 self.objectType = objectType
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue

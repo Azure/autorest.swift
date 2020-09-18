@@ -119,6 +119,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -155,13 +156,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -231,6 +226,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -260,13 +256,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -336,6 +326,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -365,13 +356,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -441,6 +426,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -470,13 +456,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -546,6 +526,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -575,13 +556,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -651,6 +626,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -680,13 +656,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -763,6 +733,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -788,13 +759,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -871,6 +836,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -896,13 +862,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -979,6 +939,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1004,13 +965,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -1087,6 +1042,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1112,13 +1068,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -1188,6 +1138,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1198,15 +1149,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Date.self, from: data)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let double = Double(decodedstr) {
+                        let decoded = Date(timeIntervalSince1970: double)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
-                    } catch {
+                    } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1218,13 +1169,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -1301,6 +1246,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1326,13 +1272,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -1402,6 +1342,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1412,15 +1353,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                 if [
                     200
                 ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Date.self, from: data)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let double = Double(decodedstr) {
+                        let decoded = Date(timeIntervalSince1970: double)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
-                    } catch {
+                    } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1432,13 +1373,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
@@ -1508,6 +1443,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -1525,15 +1461,15 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                         return
                     }
 
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Date.self, from: data)
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let double = Double(decodedstr) {
+                        let decoded = Date(timeIntervalSince1970: double)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
-                    } catch {
+                    } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1545,13 +1481,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
