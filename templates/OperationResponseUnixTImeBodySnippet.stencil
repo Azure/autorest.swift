@@ -1,0 +1,12 @@
+{% include "OperationResponseNullableBodySnippet.stencil" %}
+if let decodedstr = String(data: data, encoding: .utf8),
+    let double = Double(decodedstr) {
+    let decoded = Date(timeIntervalSince1970: double) 
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
+    }
+} else {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+    }
+}

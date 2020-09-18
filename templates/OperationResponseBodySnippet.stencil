@@ -6,6 +6,8 @@
     {% include "OperationResponseStringBodySnippet.stencil" response %}
     {% elif response.strategy == "jsonBody" %}
     {% include "OperationResponseJsonBodySnippet.stencil" response %}
+    {% elif response.strategy == "unixTimeBody" %}
+    {% include "OperationResponseUnixTImeBodySnippet.stencil" response %}
     {% else %}
     // TODO: Couldn't find template for {{ exception.strategy }}
     {% endif %}
