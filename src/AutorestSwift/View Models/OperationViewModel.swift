@@ -163,8 +163,7 @@ struct OperationViewModel {
     let comment: ViewModelComment
 
     let signatureComment: ViewModelComment
-    //    let signatureParams: [ParameterViewModel]
-    //    let bodyParam: ParameterViewModel?
+
     let params: OperationParameters
 
     let returnType: ReturnTypeViewModel?
@@ -282,11 +281,11 @@ private func operationName(for operation: Operation) -> String {
     }
     operationName = nameComps.joined()
 
-    // Strip off the body param name, if there is one.
+    // Strip off the body param name, if there is one and the parameter is not flattened.
     // (ex: `createCat(...)` becomes `create(cat:...)`
-    if let bodyParamName = operation.requests?.first?.bodyParamName(for: operation) {
+    if let bodyParamName = operation.request?.bodyParamName(for: operation) {
         let suffix = bodyParamName.prefix(1).uppercased() + bodyParamName.dropFirst()
-        if operationName.hasSuffix(suffix) {
+        if operationName.hasSuffix(suffix), !(operation.request?.bodyParam?.flattened ?? false) {
             operationName = String(operationName.dropLast(suffix.count))
         }
     }

@@ -104,6 +104,22 @@ enum ParameterType: Codable {
     }
 }
 
+extension ParameterType: Equatable {
+    static func == (lhs: ParameterType, rhs: ParameterType) -> Bool {
+        switch lhs {
+        case let .regular(lparam):
+            if case let ParameterType.regular(rparam) = rhs {
+                return lparam == rparam
+            }
+        case let .virtual(lparam):
+            if case let ParameterType.virtual(rparam) = rhs {
+                return lparam == rparam
+            }
+        }
+        return false
+    }
+}
+
 extension Array where Element == ParameterType {
     func first(named: String) -> Element? {
         for param in self {

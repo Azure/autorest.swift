@@ -82,11 +82,13 @@ class Operation: Codable, LanguageShortcut {
     /// Returns the combine list of `ParameterType` objects.
     var allParams: [ParameterType] {
         let paramList = (signatureParameters ?? []) + (parameters ?? []) + (request?.allParams ?? [])
-        var params = [String: ParameterType]()
+        var params = [ParameterType]()
         for param in paramList {
-            params[param.name] = param
+            if !params.contains(param) {
+                params.append(param)
+            }
         }
-        return Array(params.values)
+        return params
     }
 
     // MARK: Codable

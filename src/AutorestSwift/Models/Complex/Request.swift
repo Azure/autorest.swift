@@ -62,32 +62,34 @@ class Request: Metadata {
 extension Request {
     /// Retrieves a single body-encoded parameter, if there is one. Fails if there is more than one.
     var bodyParam: ParameterType? {
-        // using a dictionary allows us to eliminate duplicates in a rudimentary fashion. A Set<T> would be
-        // better, but requires model class to conform to Hashable
-        var bodyParams = [String: ParameterType]()
+        var bodyParams = [ParameterType]()
         for param in signatureParameters ?? [] {
             if case let ParameterType.virtual(virtParam) = param {
                 let originalParam = ParameterType.regular(virtParam.originalParameter)
-                bodyParams[originalParam.name] = originalParam
+                if !bodyParams.contains(originalParam) {
+                    bodyParams.append(originalParam)
+                }
             }
             if let httpParam = param.protocol.http as? HttpParameter,
                 httpParam.in == .body {
-                bodyParams[param.name] = param
+                bodyParams.append(param)
             }
         }
         // current logic only supports a single request per operation
         assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(name)")
-        return Array(bodyParams.values).first
+        return bodyParams.first
     }
 
     /// Return a unique list of all `ParameterType` objects.
     var allParams: [ParameterType] {
         let paramList = (signatureParameters ?? []) + (parameters ?? [])
-        var params = [String: ParameterType]()
+        var params = [ParameterType]()
         for param in paramList {
-            params[param.name] = param
+            if !params.contains(param) {
+                params.append(param)
+            }
         }
-        return Array(params.values)
+        return params
     }
 
     /// Gets the Swift name for the body-encoded parameter, if there is one. Fails if there is more than one.

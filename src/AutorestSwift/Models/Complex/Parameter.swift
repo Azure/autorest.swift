@@ -67,3 +67,11 @@ class Parameter: Value, CustomDebugStringConvertible {
         return debugString() ?? description
     }
 }
+
+extension Parameter: Equatable {
+    static func == (lhs: Parameter, rhs: Parameter) -> Bool {
+        // TODO: Improve this? This is technically the same assumption being
+        // made when using a dictionary.
+        return lhs.name == rhs.name
+    }
+}
