@@ -60,7 +60,7 @@ class AutoRestIntegerTest: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getInvalid200() throws {
@@ -85,7 +85,7 @@ class AutoRestIntegerTest: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getOverflowInt32_200() throws {
@@ -110,7 +110,7 @@ class AutoRestIntegerTest: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getUnderflowInt32_200() throws {
@@ -135,7 +135,7 @@ class AutoRestIntegerTest: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getOverflowInt64_200() throws {
@@ -160,7 +160,7 @@ class AutoRestIntegerTest: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getUnderflowInt64_200() throws {
@@ -184,12 +184,12 @@ class AutoRestIntegerTest: XCTestCase {
                 }
             }
         }
-        wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
     }
 
     func test_BodyInteger_getUnixTime_200() throws {
-        let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
+        let expectation = XCTestExpectation(description: "Call getUnixTime succeed")
+        let failedExpectation = XCTestExpectation(description: "Call getUnixTime failed")
         failedExpectation.isInverted = true
 
         client.getUnixTime { result, httpResponse in
@@ -204,6 +204,49 @@ class AutoRestIntegerTest: XCTestCase {
                 failedExpectation.fulfill()
             }
         }
-             wait(for: [expectation], timeout: 15.0)
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_getInvalidUnixTime_200() throws {
+        let expectation = XCTestExpectation(description: "Call getInvalidUnixTime succeed")
+        let failedExpectation = XCTestExpectation(description: "Call getInvalidUnixTime failed")
+        failedExpectation.isInverted = true
+
+        client.getInvalidUnixTime { result, httpResponse in
+            switch result {
+            case .success:
+                failedExpectation.fulfill()
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssert(error.message.contains("Decoding error."))
+                if let data = httpResponse?.data,
+                    let dataStr = String(data: data, encoding: .utf8) {
+                    XCTAssert(dataStr == "123jkl")
+                    expectation.fulfill()
+                } else {
+                    failedExpectation.fulfill()
+                }
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_getNullUnixTime_200() throws {
+        let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
+        let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
+        failedExpectation.isInverted = true
+
+        client.getNullUnixTime { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, nil)
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                failedExpectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
     }
 }
