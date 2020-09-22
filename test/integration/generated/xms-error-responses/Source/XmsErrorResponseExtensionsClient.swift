@@ -120,6 +120,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -252,6 +253,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -297,13 +299,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
                     }
                     return
                 }
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
+
                 do {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(PetActionError.self, from: data)

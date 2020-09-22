@@ -17,6 +17,7 @@ RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
 
 build: copyRunResources
 	swift build --target AutorestSwift
+	./scripts/swiftlint.sh
 
 copyRunResources:
 	mkdir -p ${RUN_RESOURCES_DIRECTORY}

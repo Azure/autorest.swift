@@ -118,6 +118,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -206,6 +207,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -294,6 +296,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
                     }
                     return
                 }
+
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {

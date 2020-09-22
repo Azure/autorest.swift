@@ -1,6 +1,7 @@
 switch result {
 case .success:
 {% include "OperationResponseDataSnippet.stencil" %}
+{% include "OperationResponseStatusCodeDeclareSnippet.stencil" %}
 {% for response in op.responses %}
     {% if response.strategy == "pagedBody" %}
         {% include "OperationResponsePagedBodySnippet.stencil" op %}
