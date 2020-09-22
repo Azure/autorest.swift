@@ -149,6 +149,7 @@
 		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
+		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
 		0AA2BA1B24EC951700CEA1D6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1A24EC951700CEA1D6 /* Client.swift */; };
 		0AA2BA1D24EC956C00CEA1D6 /* CodableCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1C24EC956C00CEA1D6 /* CodableCodec.swift */; };
@@ -158,6 +159,8 @@
 		0AA2BA2524ED829600CEA1D6 /* Model+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */; };
 		0AA2BA2924EDB4ED00CEA1D6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2824EDB4ED00CEA1D6 /* Common.swift */; };
 		0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */; };
+		0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */; };
+		0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -411,6 +414,7 @@
 		0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtilFile.stencil; sourceTree = "<group>"; };
 		0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BodyParamSnippet.stencil; sourceTree = "<group>"; };
 		0A22B46324E1E64900EC018E /* JazzyFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = JazzyFile.stencil; sourceTree = "<group>"; };
+		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
 		0AA2B98824E5FD6500CEA1D6 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorestPlugin.swift; sourceTree = "<group>"; };
 		0AA2BA1A24EC951700CEA1D6 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 		0AA2BA2424ED829600CEA1D6 /* Model+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Extensions.swift"; sourceTree = "<group>"; };
 		0AA2BA2824EDB4ED00CEA1D6 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLengthHeader.swift; sourceTree = "<group>"; };
+		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
+		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -481,7 +487,6 @@
 		OBJ_108 /* SerializationFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializationFormats.swift; sourceTree = "<group>"; };
 		OBJ_109 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
-		OBJ_118 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = SOURCE_ROOT; };
 		OBJ_120 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = SOURCE_ROOT; };
 		OBJ_122 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		OBJ_124 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -593,6 +598,7 @@
 		0A22B05A24CA4C9300EC018E /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */,
 				0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */,
 				0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
@@ -846,6 +852,7 @@
 				OBJ_47 /* OperationGroup.swift */,
 				OBJ_48 /* OrSchema.swift */,
 				OBJ_49 /* Parameter.swift */,
+				0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */,
 				OBJ_50 /* PrimitiveSchema.swift */,
 				OBJ_51 /* Property.swift */,
 				OBJ_52 /* Protocol.swift */,
@@ -864,6 +871,7 @@
 				OBJ_65 /* UuidSchema.swift */,
 				OBJ_66 /* Value.swift */,
 				OBJ_67 /* ValueSchema.swift */,
+				0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */,
 				OBJ_68 /* XmlSerializationFormat.swift */,
 				OBJ_69 /* XorSchema.swift */,
 			);
@@ -880,7 +888,6 @@
 				OBJ_7 /* Sources */,
 				F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */,
 				OBJ_114 /* Products */,
-				OBJ_118 /* tests */,
 				OBJ_120 /* scripts */,
 				0A22B06F24CB71E100EC018E /* templates */,
 				F106830224CF9226007EB4D5 /* tools */,
@@ -1226,6 +1233,7 @@
 				0A22B0F324D3671E00EC018E /* Manager.swift in Sources */,
 				0A22B0F424D3671E00EC018E /* SwiftGenerator.swift in Sources */,
 				0A22B0F524D3671E00EC018E /* AnySchema.swift in Sources */,
+				0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */,
 				0A22B0F624D3671E00EC018E /* ArraySchema.swift in Sources */,
 				0A22B0F724D3671E00EC018E /* BinarySchema.swift in Sources */,
 				0A22B0F824D3671E00EC018E /* BooleanSchema.swift in Sources */,
@@ -1262,6 +1270,7 @@
 				0A22B11424D3671E00EC018E /* Parameter.swift in Sources */,
 				0A22B11524D3671E00EC018E /* PrimitiveSchema.swift in Sources */,
 				0A22B11624D3671E00EC018E /* Property.swift in Sources */,
+				0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */,
 				0A22B11724D3671E00EC018E /* Protocol.swift in Sources */,
 				0A22B11824D3671E00EC018E /* Request.swift in Sources */,
 				0A22B11924D3671E00EC018E /* Response.swift in Sources */,
@@ -1321,6 +1330,7 @@
 				0A22B14A24D3671F00EC018E /* Schemas.swift in Sources */,
 				0A22B14B24D3671F00EC018E /* Security.swift in Sources */,
 				0A22B14C24D3671F00EC018E /* SecurityRequirement.swift in Sources */,
+				0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */,
 				0A22B14D24D3671F00EC018E /* SerializationFormats.swift in Sources */,
 				0A22B14E24D3671F00EC018E /* StencilUtil.swift in Sources */,
 				0A22B14F24D3671F00EC018E /* String+Extensions.swift in Sources */,
@@ -1503,7 +1513,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AutorestSwift.xcodeproj/AutorestSwift_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = "$(inherited)";
@@ -1532,7 +1542,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AutorestSwift.xcodeproj/AutorestSwift_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = "$(inherited)";

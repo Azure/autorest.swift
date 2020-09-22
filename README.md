@@ -39,7 +39,7 @@ modelerfour:
   flatten-models: true
 
   # this will flatten parameters when payload-flattening-threshold is specified (or marked in the input spec)
-  flatten-payloads: false
+  flatten-payloads: true
 
   # this will make the content-type parameter always specified
   always-create-content-type-parameter: true

@@ -736,14 +736,13 @@ public final class AutoRestIntegerTestClient: PipelineClient {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+            self.options.logger.error("Failed to append query parameters to URL")
             return
         }
 
         guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct Http request")
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -844,14 +843,13 @@ public final class AutoRestIntegerTestClient: PipelineClient {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+            self.options.logger.error("Failed to append query parameters to URL")
             return
         }
 
         guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct Http request")
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -952,14 +950,13 @@ public final class AutoRestIntegerTestClient: PipelineClient {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+            self.options.logger.error("Failed to append query parameters to URL")
             return
         }
 
         guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct Http request")
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1060,14 +1057,13 @@ public final class AutoRestIntegerTestClient: PipelineClient {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+            self.options.logger.error("Failed to append query parameters to URL")
             return
         }
 
         guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct Http request")
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1274,14 +1270,13 @@ public final class AutoRestIntegerTestClient: PipelineClient {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+            self.options.logger.error("Failed to append query parameters to URL")
             return
         }
 
         guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct Http request")
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 

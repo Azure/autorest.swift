@@ -6,7 +6,7 @@
 ///     success.
 public func {{ op.name }}(
     {% include "BodyParamSnippet.stencil" op %}
-    {% for param in op.signatureParams %}
+    {% for param in op.params.signature %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
     {% endfor %}
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
@@ -15,7 +15,7 @@ public func {{ op.name }}(
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}
-    {% if op.params.hasOptionalsParams %}
+    {% if op.params.hasOptionalParams %}
     {% include "OperationOptionsSnippet.stencil" op %}
     {% endif %}
     {% include "OperationSendRequestSnippet.stencil" op %}

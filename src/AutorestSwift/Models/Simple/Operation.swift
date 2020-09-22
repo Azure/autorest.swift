@@ -29,10 +29,10 @@ import Foundation
 /// represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
 class Operation: Codable, LanguageShortcut {
     /// common parameters when there are multiple requests
-    let parameters: [Parameter]?
+    let parameters: [ParameterType]?
 
     /// a common filtered list of parameters that is (assumably) the actual method signature parameters
-    let signatureParameters: [Parameter]?
+    let signatureParameters: [ParameterType]?
 
     /// the different possibilities to build the request.
     let requests: [Request]?
@@ -70,13 +70,34 @@ class Operation: Codable, LanguageShortcut {
     /// additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
 
+    /// The request corresponding to this operation
+    var request: Request? {
+        assert(
+            requests?.count ?? 0 <= 1,
+            "Multiple requests per operation is currently not supported. Operation: \(name)"
+        )
+        return requests?.first
+    }
+
+    /// Returns the combine list of `ParameterType` objects.
+    var allParams: [ParameterType] {
+        let paramList = (signatureParameters ?? []) + (parameters ?? []) + (request?.allParams ?? [])
+        var params = [ParameterType]()
+        for param in paramList {
+            if !params.contains(param) {
+                params.append(param)
+            }
+        }
+        return params
+    }
+
+    // MARK: Codable
+
     enum CodingKeys: String, CodingKey {
         case parameters, signatureParameters, requests, responses, exceptions, profile, summary, apiVersions,
             deprecated,
             origin, externalDocs, language, `protocol`, extensions
     }
-
-    // MARK: Codable
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -101,8 +122,8 @@ class Operation: Codable, LanguageShortcut {
         }
         self.exceptions = exceptions
 
-        self.parameters = try? container.decode([Parameter].self, forKey: .parameters)
-        self.signatureParameters = try? container.decode([Parameter].self, forKey: .signatureParameters)
+        self.parameters = try? container.decode([ParameterType].self, forKey: .parameters)
+        self.signatureParameters = try? container.decode([ParameterType].self, forKey: .signatureParameters)
         self.requests = try? container.decode([Request].self, forKey: .requests)
         self.profile = try? container.decode([String: ApiVersion].self, forKey: .profile)
         self.summary = try? container.decode(String.self, forKey: .summary)
@@ -134,12 +155,12 @@ class Operation: Codable, LanguageShortcut {
     }
 
     /// Lookup a signatureParameter by name.
-    func signatureParameter(for name: String) -> Parameter? {
-        return signatureParameters?.first { $0.name == name }
+    func signatureParameter(for name: String) -> ParameterType? {
+        return signatureParameters?.first(named: name)
     }
 
     /// Lookup a parameter by name.
-    func parameter(for name: String) -> Parameter? {
-        return parameters?.first { $0.name == name }
+    func parameter(for name: String) -> ParameterType? {
+        return parameters?.first(named: name)
     }
 }

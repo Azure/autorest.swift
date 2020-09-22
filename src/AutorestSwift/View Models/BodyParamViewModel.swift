@@ -26,22 +26,17 @@
 
 import Foundation
 
-class GroupProperty: Property {
-    let originalParameter: [ParameterType]
+/// View Model for the body param.
+struct BodyParamViewModel {
+    let name: String
+    let type: String
+    let flattened: Bool
+    let properties: [ParameterViewModel]
 
-    enum CodingKeys: String, CodingKey {
-        case originalParameter
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        originalParameter = try container.decode([ParameterType].self, forKey: .originalParameter)
-        try super.init(from: decoder)
-    }
-
-    override public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(originalParameter, forKey: .originalParameter)
-        try super.encode(to: encoder)
+    init(from parameter: ParameterType, with operation: Operation) {
+        self.name = operation.request?.bodyParamName(for: operation) ?? parameter.name
+        self.type = parameter.schema.name
+        self.flattened = parameter.flattened
+        self.properties = [ParameterViewModel]()
     }
 }
