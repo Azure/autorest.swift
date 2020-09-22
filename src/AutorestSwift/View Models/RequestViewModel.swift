@@ -35,20 +35,6 @@ enum RequestBodyType: String {
     case patchBody
 }
 
-struct BodyParamViewModel {
-    let name: String
-    let type: String
-    let flattened: Bool
-    let properties: [ParameterViewModel]
-
-    init(from parameter: ParameterType, with operation: Operation) {
-        self.name = operation.request?.bodyParamName(for: operation) ?? parameter.name
-        self.type = parameter.schema.name
-        self.flattened = parameter.flattened
-        self.properties = [ParameterViewModel]()
-    }
-}
-
 /// View Model for the method request creation.
 struct RequestViewModel {
     let path: String

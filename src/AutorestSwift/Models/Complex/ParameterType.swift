@@ -102,6 +102,27 @@ enum ParameterType: Codable {
             return virt as Parameter
         }
     }
+
+    // MARK: Methods
+
+    /// Returns whether the given parameter is located in the specified location.
+    internal func located(in location: ParameterLocation) -> Bool {
+        if let httpParam = self.protocol.http as? HttpParameter {
+            return httpParam.in == location
+        } else {
+            return false
+        }
+    }
+
+    /// Returns whether the given parameter is located in any of the specified locations.
+    internal func located(in locations: [ParameterLocation]) -> Bool {
+        for location in locations {
+            if located(in: location) {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 extension ParameterType: Equatable {
@@ -168,17 +189,12 @@ extension Array where Element == ParameterType {
         }
     }
 
-    /// Returns the items that should be passed in the query string
     var inQuery: [ParameterType] {
         return filter { param in
             guard param.implementation == ImplementationLocation.method,
                 param.schema.type != .constant
             else { return false }
-            if let httpParam = param.protocol.http as? HttpParameter {
-                return httpParam.in == .query
-            } else {
-                return false
-            }
+            return param.located(in: .query)
         }
     }
 
@@ -188,11 +204,7 @@ extension Array where Element == ParameterType {
             guard param.implementation == ImplementationLocation.method,
                 param.schema.type != .constant
             else { return false }
-            if let httpParam = param.protocol.http as? HttpParameter {
-                return httpParam.in == .header
-            } else {
-                return false
-            }
+            return param.located(in: .header)
         }
     }
 
@@ -202,11 +214,7 @@ extension Array where Element == ParameterType {
             guard param.implementation == ImplementationLocation.method,
                 param.schema.type != .constant
             else { return false }
-            if let httpParam = param.protocol.http as? HttpParameter {
-                return httpParam.in == .path
-            } else {
-                return false
-            }
+            return param.located(in: .path)
         }
     }
 }
