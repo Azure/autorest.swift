@@ -157,10 +157,6 @@ class Manager {
                     .warn(
                         "Discrepancies found in round-tripped code model. Run a diff on 'before.json' and 'after.json' to troubleshoot."
                     )
-                SharedLogger
-                    .warn("beforeJsonUrl=\(beforeJsonUrl)")
-                SharedLogger
-                    .warn("afterJsonUrl=\(afterJsonUrl)")
             } catch {
                 SharedLogger.warn(
                     "Discrepancies found in round-tripped code model. Error saving files: \(error)"
