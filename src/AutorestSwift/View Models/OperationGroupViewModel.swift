@@ -40,7 +40,7 @@ struct OperationGroupViewModel {
         self.comment = ViewModelComment(from: group.description)
         var items = [OperationViewModel]()
         for operation in group.operations {
-            items.append(OperationViewModel(from: operation, with: model))
+            items.append(OperationViewModel(from: operation, with: model, key: group.key))
         }
         self.operations = items
     }

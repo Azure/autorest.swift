@@ -32,7 +32,7 @@ struct OperationParameters {
     var path: [KeyValueViewModel]
     var body: BodyParams?
     var signature: [ParameterViewModel]
-
+    var method: [GlobalParameterViewModel]
     var hasOptionalParams: Bool
 
     /// Build a list of required and optional query params and headers from a list of parameters
@@ -40,9 +40,16 @@ struct OperationParameters {
         var header = Params()
         var query = Params()
         var path = [KeyValueViewModel]()
+        var method = [GlobalParameterViewModel]()
+
         for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
 
+            if param.implementation == ImplementationLocation.method {
+                if let methodViewModel = try? GlobalParameterViewModel(from: param) {
+                    method.append(methodViewModel)
+                }
+            }
             let viewModel = KeyValueViewModel(from: param, with: operation)
 
             switch httpParam.in {
@@ -93,6 +100,7 @@ struct OperationParameters {
         }
         self.signature = signatureParameterViewModel
 
+        self.method = method
         self.header = header
         self.query = query
         self.path = path
@@ -180,7 +188,7 @@ struct OperationViewModel {
     let defaultExceptionHasBody: Bool
     let needHttpResponseData: Bool
 
-    init(from operation: Operation, with model: CodeModel) {
+    init(from operation: Operation, with model: CodeModel, key: String) {
         guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
         self.request = RequestViewModel(from: request, with: operation)
 
@@ -245,7 +253,8 @@ struct OperationViewModel {
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
-            parameters: params.inOptions
+            parameters: params.inOptions,
+            key: key
         )
 
         self.returnType = returnType

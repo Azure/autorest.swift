@@ -51,11 +51,24 @@ struct KeyValueViewModel {
     init(from param: ParameterType, with operation: Operation) {
         self.key = param.serializedName ?? param.name
 
-        if let constantSchema = param.schema as? ConstantSchema {
-            let isString: Bool = constantSchema.valueType.type == AllSchemaTypes.string
-            let val: String = constantSchema.value.value
-
-            self.value = isString ? "\"\(val)\"" : "\(val)"
+        if param.implementation == ImplementationLocation.method {
+            if let constantSchema = param.schema as? ConstantSchema {
+                let value = key // method variable name
+                self.value = convertValue(type: constantSchema.valueType.type, val: value)
+                self.optional = false
+                self.paramName = nil
+            } else {
+                self.value = convertValue(type: param.schema.type, val: key) // pull from option object
+                self.optional = true
+                self.paramName = key
+            }
+        } else if param.implementation == ImplementationLocation.client {
+            self.value = "Client.\(param.serializedName ?? param.name)"
+            self.optional = false
+            self.paramName = nil
+        } else if let constantSchema = param.schema as? ConstantSchema {
+            let value: String = constantSchema.value.value
+            self.value = convertValue(type: constantSchema.valueType.type, val: value)
             self.optional = false
             self.paramName = nil
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
@@ -89,5 +102,29 @@ struct KeyValueViewModel {
         self.value = value
         self.optional = false
         self.paramName = nil
+    }
+}
+
+func convertValue(type: AllSchemaTypes, val: String) -> String {
+    switch type {
+    case AllSchemaTypes.string:
+        return "\"\(val)\""
+    case AllSchemaTypes.integer,
+         AllSchemaTypes.number:
+        return "String(\(val))"
+    case AllSchemaTypes.date,
+         AllSchemaTypes.dateTime:
+        return "String(\"\(val)\")"
+    case AllSchemaTypes.choice,
+         AllSchemaTypes.sealedChoice:
+        return "\(val).rawValue"
+    case AllSchemaTypes.boolean:
+        return "String(\(val))"
+    case AllSchemaTypes.array:
+        return "\(val).map { String($0) }.joined(separator: \",\") "
+    case AllSchemaTypes.byteArray:
+        return "String(bytes: \(val), encoding: .utf8)"
+    default:
+        return "\(val)"
     }
 }

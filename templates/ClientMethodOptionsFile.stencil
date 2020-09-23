@@ -6,6 +6,11 @@
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
+{% if model.extensionName != "" %}
+extension {{ model.extensionName  }}
+{
+{% endif %}
+
 /// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
 public struct {{ model.name }}: AzureOptions {
 
@@ -48,3 +53,7 @@ public struct {{ model.name }}: AzureOptions {
         self.dispatchQueue = dispatchQueue
     }
 }
+
+{% if model.extensionName != "" %}
+}
+{% endif %}

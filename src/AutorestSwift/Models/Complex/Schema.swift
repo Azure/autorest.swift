@@ -100,14 +100,18 @@ class Schema: Codable, LanguageShortcut {
             } else {
                 swiftType = "[\(name)]"
             }
-        case AllSchemaTypes.dateTime:
+        case AllSchemaTypes.dateTime,
+             AllSchemaTypes.date:
             swiftType = "Date"
+        case AllSchemaTypes.byteArray:
+            swiftType = "[UInt8]"
         case AllSchemaTypes.unixTime:
             swiftType = "Date"
         case AllSchemaTypes.integer:
             swiftType = "Int"
         case AllSchemaTypes.choice,
-             AllSchemaTypes.object:
+             AllSchemaTypes.object,
+             AllSchemaTypes.sealedChoice:
             swiftType = name
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {

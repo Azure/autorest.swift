@@ -35,18 +35,34 @@ struct ServiceClientFileViewModel {
     let apiVersionName: String
     let protocols: String
     let paging: Language.PagingNames?
+    let globalParameters: [GlobalParameterViewModel]
+    let keyOperationGroups: [String: OperationGroupViewModel]
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
         self.comment = ViewModelComment(from: model.description)
-        var items = [OperationGroupViewModel]()
+        var operationGroups = [OperationGroupViewModel]()
+        var keyOperationGroups = [String: OperationGroupViewModel]()
         for group in model.operationGroups {
-            items.append(OperationGroupViewModel(from: group, with: model))
+            let viewMdoel = OperationGroupViewModel(from: group, with: model)
+            if group.key.isEmpty {
+                operationGroups.append(viewMdoel)
+            } else {
+                keyOperationGroups[group.key] = viewMdoel
+            }
         }
-        self.operationGroups = items
+        self.operationGroups = operationGroups
+        self.keyOperationGroups = keyOperationGroups
         self.apiVersion = model.getApiVersion()
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
+        var globalParameters = [GlobalParameterViewModel]()
+        for globalParameter in model.globalParameters ?? [] {
+            if let vm = try? GlobalParameterViewModel(from: globalParameter) {
+                globalParameters.append(vm)
+            }
+        }
+        self.globalParameters = globalParameters
     }
 }

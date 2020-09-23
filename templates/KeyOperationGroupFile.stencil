@@ -1,0 +1,38 @@
+{% include "HeaderSnippet.stencil" %}
+
+{% include "ImportSnippet.stencil" %}
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+
+{{ group.comment }}
+public final class {{ group.name }} {
+
+    public let client: {{ model.name }}
+    
+    public let commonOptions: AzureClientOptions
+
+    /// Options provided to configure this `{{ model.name }}`.
+    public let options: {{ model.name }}Options
+
+    init(client: AutoRestUrlTestClient) {
+        self.client = client
+        self.options = client.options
+        self.commonOptions = client.commonOptions
+    }
+
+    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs)
+    }
+    
+    public func request(_ request: HTTPRequest, context: PipelineContext?, completionHandler: @escaping HTTPResultHandler<Data?>
+    ) {
+        return client.request(request, context: context, completionHandler: completionHandler)
+    }
+
+    {% for op in group.operations %}
+        {% include "OperationSnippet.stencil" op %}
+    {% endfor %}
+}
