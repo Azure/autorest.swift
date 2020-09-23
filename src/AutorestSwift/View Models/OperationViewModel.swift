@@ -87,11 +87,11 @@ struct OperationParameters {
             self.body = nil
         }
 
-        var signaturePropertyViewModel = [ParameterViewModel]()
+        var signatureParameterViewModel = [ParameterViewModel]()
         for param in parameters.inSignature {
-            signaturePropertyViewModel.append(ParameterViewModel(from: param))
+            signatureParameterViewModel.append(ParameterViewModel(from: param))
         }
-        self.signature = signaturePropertyViewModel
+        self.signature = signatureParameterViewModel
 
         self.header = header
         self.query = query

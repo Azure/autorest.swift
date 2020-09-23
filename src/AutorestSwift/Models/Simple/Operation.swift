@@ -112,16 +112,18 @@ class Operation: Codable, LanguageShortcut {
         }
         self.responses = responses
 
-        var exceptions = [Response]()
         if var exceptionContainer = try? container.nestedUnkeyedContainer(forKey: .exceptions) {
+            var exceptions = [Response]()
             while !exceptionContainer.isAtEnd {
                 if let exception = (try? exceptionContainer.decode(SchemaResponse.self)) ??
                     (try? exceptionContainer.decode(Response.self)) {
                     exceptions.append(exception)
                 }
             }
+            self.exceptions = exceptions
+        } else {
+            self.exceptions = nil
         }
-        self.exceptions = exceptions
 
         self.parameters = try? container.decode([ParameterType].self, forKey: .parameters)
         self.signatureParameters = try? container.decode([ParameterType].self, forKey: .signatureParameters)

@@ -90,7 +90,13 @@ class Schema: Codable, LanguageShortcut {
             swiftType = "Bool"
         case AllSchemaTypes.array:
             if let arraySchema = self as? ArraySchema {
-                swiftType = "[\(arraySchema.elementType.name)]"
+                // If array element is String type, return an array of String instead of an array of Element Name and
+                // then create a typealias for the ElementName and String
+                if arraySchema.elementType as? StringSchema != nil {
+                    swiftType = "[String]"
+                } else {
+                    swiftType = "[\(arraySchema.elementType.name)]"
+                }
             } else {
                 swiftType = "[\(name)]"
             }
