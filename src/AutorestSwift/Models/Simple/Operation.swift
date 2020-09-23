@@ -113,11 +113,12 @@ class Operation: Codable, LanguageShortcut {
         self.responses = responses
 
         var exceptions = [Response]()
-        var exceptionContainer = try container.nestedUnkeyedContainer(forKey: .exceptions)
-        while !exceptionContainer.isAtEnd {
-            if let exception = (try? exceptionContainer.decode(SchemaResponse.self)) ??
-                (try? exceptionContainer.decode(Response.self)) {
-                exceptions.append(exception)
+        if var exceptionContainer = try? container.nestedUnkeyedContainer(forKey: .exceptions) {
+            while !exceptionContainer.isAtEnd {
+                if let exception = (try? exceptionContainer.decode(SchemaResponse.self)) ??
+                    (try? exceptionContainer.decode(Response.self)) {
+                    exceptions.append(exception)
+                }
             }
         }
         self.exceptions = exceptions
