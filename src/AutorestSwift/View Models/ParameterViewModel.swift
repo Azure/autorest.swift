@@ -36,8 +36,12 @@ struct ParameterViewModel {
     let defaultValue: ViewModelDefault
     let comment: ViewModelComment
 
-    init(from param: ParameterType, withName name: String? = nil) {
-        self.name = name ?? param.name
+    init(from param: ParameterType, withName specificName: String? = nil) {
+        if let name = specificName, !name.isEmpty {
+            self.name = name
+        } else {
+            self.name = param.name
+        }
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true)

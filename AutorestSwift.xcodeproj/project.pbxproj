@@ -186,6 +186,8 @@
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
 		F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18718F0250C592300318867 /* AutoRestReportTest.swift */; };
+		F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */; };
+		F198F81D251BC456009CB4E5 /* OperationResponseUnixTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */; };
 		F19B01D52507E21100121831 /* ExceptionResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */; };
 		F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */; };
 		F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */; };
@@ -301,6 +303,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */,
+				F198F81D251BC456009CB4E5 /* OperationResponseUnixTimeBodySnippet.stencil in CopyFiles */,
 				F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
 				F151510825128E2D00DF0B9F /* OperationExceptionIntBodySnippet.stencil in CopyFiles */,
 				F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
@@ -475,7 +479,7 @@
 		F1A6719624F5CCCC00C2712C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestHeadTest.xcodeproj; path = test/integration/generated/head/AutoRestHeadTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeDeclareSnippet.stencil; sourceTree = "<group>"; };
-		F1DE649F251304FE00B2C864 /* OperationResponseUnixTImeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseUnixTImeBodySnippet.stencil; sourceTree = "<group>"; };
+		F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseUnixTimeBodySnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -665,7 +669,7 @@
 				F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */,
 				F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */,
 				F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */,
-				F1DE649F251304FE00B2C864 /* OperationResponseUnixTImeBodySnippet.stencil */,
+				F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
 				F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */,
