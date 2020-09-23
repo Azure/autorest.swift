@@ -18,28 +18,49 @@ import Foundation
 public struct LinkNotFound: Codable, Swift.Error {
     public let whatSubAddress: String?
 
+    public let reason: String?
+
+    public let whatNotFound: String
+
+    public let someBaseProp: String?
+
     /// Initialize a `LinkNotFound` structure.
     /// - Parameters:
     ///   - whatSubAddress:
+    ///   - reason:
+    ///   - whatNotFound:
+    ///   - someBaseProp:
     public init(
-        whatSubAddress: String? = nil
+        whatSubAddress: String? = nil, reason: String? = nil, whatNotFound: String, someBaseProp: String? = nil
     ) {
         self.whatSubAddress = whatSubAddress
+        self.reason = reason
+        self.whatNotFound = whatNotFound
+        self.someBaseProp = someBaseProp
     }
 
     enum CodingKeys: String, CodingKey {
         case whatSubAddress
+        case reason
+        case whatNotFound
+        case someBaseProp
     }
 
     /// Initialize a `LinkNotFound` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.whatSubAddress = try? container.decode(String.self, forKey: .whatSubAddress)
+        self.reason = try? container.decode(String.self, forKey: .reason)
+        self.whatNotFound = try container.decode(String.self, forKey: .whatNotFound)
+        self.someBaseProp = try? container.decode(String.self, forKey: .someBaseProp)
     }
 
     /// Encode a `LinkNotFound` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if whatSubAddress != nil { try? container.encode(whatSubAddress, forKey: .whatSubAddress) }
+        if reason != nil { try? container.encode(reason, forKey: .reason) }
+        try container.encode(whatNotFound, forKey: .whatNotFound)
+        if someBaseProp != nil { try? container.encode(someBaseProp, forKey: .someBaseProp) }
     }
 }

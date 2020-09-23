@@ -25,6 +25,7 @@
 // --------------------------------------------------------------------------
 
 import Foundation
+import Yams
 
 class Schema: Codable, LanguageShortcut {
     /// Per-language information for Schema
@@ -65,6 +66,36 @@ class Schema: Codable, LanguageShortcut {
     /// Additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
 
+    internal init(
+        language: Languages,
+        type: AllSchemaTypes,
+        summary: String?,
+        example: String?,
+        defaultValue: String?,
+        serialization: SerializationFormats?,
+        apiVersions: [ApiVersion]?,
+        deprecated: Deprecation?,
+        origin: String?,
+        externalDocs: ExternalDocumentation?,
+        protocol: Protocols,
+        properties: [Property]?,
+        extensions: [String: AnyCodable]?
+    ) {
+        self.language = language
+        self.type = type
+        self.summary = summary
+        self.example = example
+        self.defaultValue = defaultValue
+        self.serialization = serialization
+        self.apiVersions = apiVersions
+        self.deprecated = deprecated
+        self.origin = origin
+        self.externalDocs = externalDocs
+        self.protocol = `protocol`
+        self.properties = properties
+        self.extensions = extensions
+    }
+
     enum CodingKeys: String, CodingKey {
         case language
         case type
@@ -100,7 +131,7 @@ class Schema: Codable, LanguageShortcut {
                 if arraySchema.elementType as? StringSchema != nil {
                     swiftType = "[String]"
                 } else {
-                    swiftType = "[\(arraySchema.elementType.name)]"
+                    swiftType = "[\(arraySchema.elementType?.name ?? "BANOODLE")]"
                 }
             } else {
                 swiftType = "[\(name)]"
@@ -115,7 +146,8 @@ class Schema: Codable, LanguageShortcut {
             swiftType = "Int"
         case AllSchemaTypes.choice,
              AllSchemaTypes.object,
-             AllSchemaTypes.sealedChoice:
+             AllSchemaTypes.sealedChoice,
+             AllSchemaTypes.group:
             swiftType = name
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
@@ -123,6 +155,11 @@ class Schema: Codable, LanguageShortcut {
             } else {
                 swiftType = "[String:\(name)]"
             }
+        case AllSchemaTypes.constant:
+            guard let constant = self as? ConstantSchema else {
+                fatalError("Type mismatch. Expected constant type but got \(self)")
+            }
+            swiftType = constant.valueType.swiftType()
         default:
             fatalError("Type \(type) not implemented")
         }
@@ -135,25 +172,27 @@ class Schema: Codable, LanguageShortcut {
         useKey keyName: String = "schema"
     ) throws -> Schema? where Key: CodingKey {
         var schema: Schema?
-        if let keyEnum = Key(stringValue: keyName) {
+        guard let keyEnum = Key(stringValue: keyName) else {
+            fatalError("Unable to find key enum.")
+        }
+        do {
             let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: keyEnum)
             let type = try schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
-
             switch type {
             case .array:
-                schema = try? container.decode(ArraySchema.self, forKey: keyEnum)
+                schema = try container.decode(ArraySchema.self, forKey: keyEnum)
             case .dictionary:
-                schema = try? container.decode(DictionarySchema.self, forKey: keyEnum)
+                schema = try container.decode(DictionarySchema.self, forKey: keyEnum)
             case .object:
-                schema = try? container.decode(ObjectSchema.self, forKey: keyEnum)
+                schema = try container.decode(ObjectSchema.self, forKey: keyEnum)
             case .number, .integer:
-                schema = try? container.decode(NumberSchema.self, forKey: keyEnum)
+                schema = try container.decode(NumberSchema.self, forKey: keyEnum)
             case .choice:
-                schema = try? container.decode(ChoiceSchema.self, forKey: keyEnum)
+                schema = try container.decode(ChoiceSchema.self, forKey: keyEnum)
             case .dateTime:
-                schema = try? container.decode(DateTimeSchema.self, forKey: keyEnum)
+                schema = try container.decode(DateTimeSchema.self, forKey: keyEnum)
             case .string:
-                schema = try? container.decode(StringSchema.self, forKey: keyEnum)
+                schema = try container.decode(StringSchema.self, forKey: keyEnum)
             case .constant:
                 schema = try? container.decode(ConstantSchema.self, forKey: keyEnum)
             case .byteArray:
@@ -163,8 +202,13 @@ class Schema: Codable, LanguageShortcut {
             default:
                 schema = try container.decode(Schema.self, forKey: keyEnum)
             }
-        } else { fatalError("Unable to decode to schema") }
-
-        return schema
+            return schema
+        } catch {
+            guard "\(error)".contains("but found Unresolved instead") else {
+                throw error
+            }
+            // return ReferenceSchema(name: "dummy", summary: "dummy reference")
+            return nil
+        }
     }
 }

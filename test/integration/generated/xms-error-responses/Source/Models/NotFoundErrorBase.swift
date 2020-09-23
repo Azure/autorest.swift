@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct NotFoundErrorBase: Codable, Swift.Error {
+public struct NotFoundErrorBase: Codable {
     public let reason: String?
 
     public let whatNotFound: String

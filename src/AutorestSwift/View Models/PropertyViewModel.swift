@@ -48,7 +48,7 @@ struct PropertyViewModel {
         assert(!name.isEmpty)
         self.name = name
         self.comment = ViewModelComment(from: schema.description)
-        self.className = schema.schema.swiftType()
+        self.className = schema.schema?.swiftType() ?? "BANOODLE"
         self.optional = !schema.required
         self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)

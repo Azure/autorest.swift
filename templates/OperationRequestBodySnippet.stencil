@@ -5,9 +5,9 @@ guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name 
     return
 }
 {% elif op.params.body.strategy == "flattened" %}
-let body = {{ op.params.body.param.type }}(
+let body = {{ op.params.body.param.typeName }}(
     {% for child in op.params.body.children %}
-    {{ child.name }}: {{ child.path }}{{ child.separator }}
+    {{ child.name }}: {{ child.path }}{% ifnot forloop.last %},{% endif%}
     {% endfor %}
 )
 guard let requestBody = try? JSONEncoder().encode(body) else {

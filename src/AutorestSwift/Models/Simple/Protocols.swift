@@ -55,6 +55,13 @@ class Protocols: Codable {
         self.jsonrpc = nil
     }
 
+    internal init() {
+        self.http = nil
+        self.amqp = nil
+        self.mqtt = nil
+        self.jsonrpc = nil
+    }
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 

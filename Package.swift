@@ -22,6 +22,7 @@ let package = Package(
         .package(name: "AutoRestReport", path: "./test/integration/generated/report/"),
         .package(name: "AutoRestIntegerTest", path: "./test/integration/generated/body-integer/"),
         .package(name: "AutoRestUrlTest", path: "./test/integration/generated/url/"),
+        .package(name: "AutoRestResourceFlatteningTest", path: "./test/integration/generated/model-flattening/"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

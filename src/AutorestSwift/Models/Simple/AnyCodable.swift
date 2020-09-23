@@ -56,68 +56,80 @@ struct AnyCodable: Decodable {
         self.value = value
     }
 
-    public init(from decoder: Decoder) throws {
-        if let container = try? decoder.container(keyedBy: CodingKeys.self) {
-            var result = [String: Any]()
-            try container.allKeys.forEach { (key) throws in
-                result[key.stringValue] = try container.decode(AnyCodable.self, forKey: key).value
-            }
-            self.value = result
-        } else if var container = try? decoder.unkeyedContainer() {
-            var result = [Any]()
-            while !container.isAtEnd {
-                result.append(try container.decode(AnyCodable.self).value)
-            }
-            self.value = result
-        } else if let container = try? decoder.singleValueContainer() {
-            let currentCodingKey = container.codingPath[container.codingPath.count - 1]
+    private func decodeDictionary(withDecoder decoder: Decoder) throws -> [String: Any] {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        var result = [String: Any]()
+        try container.allKeys.forEach { (key) throws in
+            result[key.stringValue] = try container.decode(AnyCodable.self, forKey: key).value
+        }
+        return result
+    }
 
-            let extensionKeys = decoder.userInfo[AnyCodable.extensionStringDecodedKey] as? ExtensionStringDecodeKeys
-            let stringDecodedKeys = extensionKeys?.stringDecodedKeys
+    private func decodeArray(withDecoder decoder: Decoder) throws -> [Any] {
+        var container = try decoder.unkeyedContainer()
+        var result = [Any]()
+        while !container.isAtEnd {
+            result.append(try container.decode(AnyCodable.self).value)
+        }
+        return result
+    }
 
-            // if the current coding key is part of the stringDecodedKeys, always decode as String. This is because
-            // the values of these properties are always digits, they will be deocded as Int instead of string by default
-            let shouldDecodedAsString = stringDecodedKeys?.contains(currentCodingKey.stringValue) ?? false
+    private func decodeSimple(withDecoder decoder: Decoder) throws -> Any {
+        let container = try decoder.singleValueContainer()
+        let currentCodingKey = container.codingPath[container.codingPath.count - 1]
 
-            if shouldDecodedAsString {
-                if let stringVal = try? container.decode(String.self) {
-                    self.value = stringVal
-                } else {
-                    throw DecodingError.dataCorruptedError(
-                        in: container,
-                        debugDescription: "the container contains nothing serialisable"
-                    )
-                }
-            } else if let intVal = try? container.decode(Int.self) {
-                if let stringVal = try? container.decode(String.self) {
-                    // If the decode int value is only partial of the string value, use string value instead
-                    if String(intVal) == stringVal {
-                        self.value = intVal
-                    } else {
-                        self.value = stringVal
-                    }
-                } else {
-                    self.value = intVal
-                }
-            } else if let doubleVal = try? container.decode(Double.self) {
-                self.value = doubleVal
-            } else if let boolVal = try? container.decode(Bool.self) {
-                self.value = boolVal
-            } else if let stringVal = try? container.decode(String.self) {
-                self.value = stringVal
+        let extensionKeys = decoder.userInfo[AnyCodable.extensionStringDecodedKey] as? ExtensionStringDecodeKeys
+        let stringDecodedKeys = extensionKeys?.stringDecodedKeys
+
+        // if the current coding key is part of the stringDecodedKeys, always decode as String. This is because
+        // the values of these properties are always digits, they will be deocded as Int instead of string by default
+        let shouldDecodedAsString = stringDecodedKeys?.contains(currentCodingKey.stringValue) ?? false
+
+        if shouldDecodedAsString {
+            if let stringVal = try? container.decode(String.self) {
+                return stringVal
             } else {
                 throw DecodingError.dataCorruptedError(
                     in: container,
-                    debugDescription: "the container contains nothing serialisable"
+                    debugDescription: "the container contains nothing serializable"
                 )
             }
+        } else if let intVal = try? container.decode(Int.self) {
+            if let stringVal = try? container.decode(String.self) {
+                // If the decode int value is only partial of the string value, use string value instead
+                if String(intVal) == stringVal {
+                    return intVal
+                } else {
+                    return stringVal
+                }
+            } else {
+                return intVal
+            }
+        } else if let doubleVal = try? container.decode(Double.self) {
+            return doubleVal
+        } else if let boolVal = try? container.decode(Bool.self) {
+            return boolVal
+        } else if let stringVal = try? container.decode(String.self) {
+            return stringVal
         } else {
-            throw DecodingError
-                .dataCorrupted(
-                    DecodingError
-                        .Context(codingPath: decoder.codingPath, debugDescription: "Could not serialise")
-                )
+            throw DecodingError.dataCorruptedError(
+                in: container,
+                debugDescription: "the container contains nothing serializable"
+            )
         }
+    }
+
+    public init(from decoder: Decoder) throws {
+        self.value = "" as Any
+        let dictVal = try? decodeDictionary(withDecoder: decoder)
+        let arrayVal = try? decodeArray(withDecoder: decoder)
+        let simpleVal = try? decodeSimple(withDecoder: decoder)
+        guard let value = dictVal ?? arrayVal ?? simpleVal else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Could not serialise")
+            )
+        }
+        self.value = value
     }
 }
 

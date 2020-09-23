@@ -32,6 +32,7 @@ import Foundation
 struct ParameterViewModel {
     let name: String
     let type: String
+    let typeName: String
     let optional: Bool
     let defaultValue: ViewModelDefault
     let comment: ViewModelComment
@@ -44,6 +45,7 @@ struct ParameterViewModel {
         }
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)
+        self.typeName = param.schema.swiftType(optional: false)
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true)
         self.comment = ViewModelComment(from: param.description)
     }

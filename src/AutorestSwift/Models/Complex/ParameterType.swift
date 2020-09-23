@@ -58,7 +58,7 @@ enum ParameterType: Codable {
     }
 
     var schema: Schema {
-        return common.schema
+        return common.schema!
     }
 
     var value: Value {
@@ -85,12 +85,20 @@ enum ParameterType: Codable {
         return common.implementation
     }
 
+    var paramLocation: ParameterLocation? {
+        return common.paramLocation
+    }
+
     var clientDefaultValue: String? {
         return common.clientDefaultValue
     }
 
     var flattened: Bool {
         return common.flattened ?? false
+    }
+
+    var groupedBy: Parameter? {
+        return common.groupedBy
     }
 
     /// Return the common base class Parameter properties
@@ -122,6 +130,14 @@ enum ParameterType: Codable {
             }
         }
         return false
+    }
+
+    internal func belongsInSignature() -> Bool {
+        return common.belongsInSignature()
+    }
+
+    internal func belongsInOptions() -> Bool {
+        return common.belongsInOptions()
     }
 }
 
@@ -165,30 +181,12 @@ extension Array where Element == ParameterType {
 
     /// Returns the required items that should be in the method signature
     var inSignature: [ParameterType] {
-        return filter { param in
-            guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant
-            else { return false }
-            // We track body params in a special way, so always omit them generally from the signature.
-            // If they belong in the signature, they will be added in a way to ensure they come first.
-            if let httpParam = param.protocol.http as? HttpParameter {
-                guard httpParam.in != .body else { return false }
-                // All path parameter are required
-                guard httpParam.in != .path else { return true }
-            }
-            return param.required
-        }
+        return filter { $0.belongsInSignature() }
     }
 
     /// Returns the optional items that should be in the method's Options object
     var inOptions: [ParameterType] {
-        return filter { param in
-            guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant,
-                param.flattened == false
-            else { return false }
-            return !param.required
-        }
+        return filter { $0.belongsInOptions() }
     }
 
     var inQuery: [ParameterType] {

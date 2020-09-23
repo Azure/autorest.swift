@@ -71,4 +71,18 @@ class Language: Codable {
         self.namespace = original.namespace
         self.paging = original.paging
     }
+
+    internal init(
+        name: String,
+        description: String,
+        summary: String?,
+        serializedName: String?,
+        namespace: String?
+    ) {
+        self.name = name
+        self.description = description
+        self.summary = summary
+        self.serializedName = serializedName
+        self.namespace = namespace
+    }
 }

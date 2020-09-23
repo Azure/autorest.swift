@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetSadError: Codable, Swift.Error {
+public struct PetSadError: Codable {
     /// why is the pet sad
     public let reason: String?
 

@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetActionError: Codable, Swift.Error {
+public struct PetActionError: Codable {
     public let errorType: String
     /// the error message
     public let errorMessage: String?

@@ -54,7 +54,7 @@ CHECKOUT OPTIONS:
     :commit: 8e327cf073ba3b8bf2d1b88f9ad2158b67567063
     :git: https://github.com/stencilproject/Stencil.git
   Yams:
-    :commit: 185d8aa8734319cd7aa6b86a0a92e17c0bb3773e
+    :commit: 9baf4735fbe4fa45050e0e8b0e03420f2f323f2d
     :git: https://github.com/tjprescott/Yams.git
 
 SPEC CHECKSUMS:

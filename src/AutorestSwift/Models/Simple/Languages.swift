@@ -62,6 +62,16 @@ class Languages: Codable {
         objectiveC = try? container.decode(Language.self, forKey: .objectiveC)
     }
 
+    internal init(name: String) {
+        self.default = Language(
+            name: name,
+            description: "",
+            summary: nil,
+            serializedName: nil,
+            namespace: nil
+        )
+    }
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 

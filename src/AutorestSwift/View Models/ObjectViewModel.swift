@@ -32,21 +32,95 @@ import Foundation
 ///   public struct ModelObject { ... }
 struct ObjectViewModel {
     let name: String
+    let inheritance: String
     let comment: ViewModelComment
-    let objectType = "struct"
+    var objectType = "struct"
     let properties: [PropertyViewModel]
+    let constants: [PropertyViewModel]
     let isErrorType: Bool
 
     init(from schema: ObjectSchema) {
         self.name = schema.name
         self.comment = ViewModelComment(from: schema.description)
 
+        // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
-        for property in schema.properties ?? [] {
-            props.append(PropertyViewModel(from: property))
+        var consts = [PropertyViewModel]()
+        for property in schema.flattenedProperties ?? [] {
+            if property.schema as? ConstantSchema != nil {
+                consts.append(PropertyViewModel(from: property))
+            } else {
+                props.append(PropertyViewModel(from: property))
+            }
         }
         self.properties = props
+        self.constants = consts
 
-        self.isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
+        let isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
+        self.isErrorType = isErrorType
+        let parents = isErrorType ? ["Codable", "Swift.Error"] : ["Codable"]
+        self.inheritance = parents.joined(separator: ", ")
+        checkForCircularReferences(withSchema: schema)
+    }
+
+    init(from schema: GroupSchema) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+
+        var props = [PropertyViewModel]()
+        var consts = [PropertyViewModel]()
+        for property in schema.properties ?? [] {
+            if property.schema as? ConstantSchema != nil {
+                consts.append(PropertyViewModel(from: property))
+            } else {
+                props.append(PropertyViewModel(from: property))
+            }
+        }
+        self.properties = props
+        self.constants = consts
+
+        let isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
+        self.isErrorType = isErrorType
+        let parents = isErrorType ? ["Codable", "Swift.Error"] : ["Codable"]
+        self.inheritance = parents.joined(separator: ", ")
+        checkForCircularReferences()
+    }
+
+    init(from schema: Schema) {
+        self.name = schema.name
+        self.comment = ViewModelComment(from: schema.description)
+
+        var props = [PropertyViewModel]()
+        var consts = [PropertyViewModel]()
+        for property in schema.properties ?? [] {
+            if property.schema as? ConstantSchema != nil {
+                consts.append(PropertyViewModel(from: property))
+            } else {
+                props.append(PropertyViewModel(from: property))
+            }
+        }
+        self.properties = props
+        self.constants = consts
+        self.isErrorType = false
+
+        self.inheritance = "Codable"
+        checkForCircularReferences()
+    }
+
+    private mutating func checkForCircularReferences(withSchema _: ObjectSchema? = nil) {
+        // a struct cannot contain a circular reference, so these must be class types
+        for property in properties {
+            // remove any ? optionality
+            var type = property.type
+            if type.hasSuffix("?") {
+                type.removeLast()
+            }
+            type = type.trimmingCharacters(in: .whitespacesAndNewlines)
+            let key = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            if key == type {
+                objectType = "final class"
+                return
+            }
+        }
     }
 }

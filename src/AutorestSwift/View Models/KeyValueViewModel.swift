@@ -70,9 +70,12 @@ struct KeyValueViewModel {
             self.init(param: param, constantSchema: constantSchema, name: name)
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             self.init(signatureParameter: signatureParameter, name: name)
+        } else if let groupedBy = param.groupedBy?.name {
+            self.init(key: name, value: "\(groupedBy).\(name)")
+        } else if param.implementation == .client {
+            self.init(key: name, value: "client.\(name)")
         } else {
-            let value = (param.implementation == ImplementationLocation.client) ? "client.\(name)" : ""
-            self.init(key: name, value: value)
+            self.init(key: name, value: "")
         }
     }
 

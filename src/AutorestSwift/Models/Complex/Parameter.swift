@@ -37,6 +37,14 @@ class Parameter: Value, CustomDebugStringConvertible {
     /// when a parameter is grouped into another, this will tell where the parameter got grouped into
     let groupedBy: Parameter?
 
+    /// Helper to retrieve the HTTP parameter location, if applicable.
+    var paramLocation: ParameterLocation? {
+        if let httpParam = self.protocol.http as? HttpParameter {
+            return httpParam.in
+        }
+        return nil
+    }
+
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
@@ -65,6 +73,31 @@ class Parameter: Value, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return debugString() ?? description
+    }
+
+    internal func belongsInSignature() -> Bool {
+        // We track body params in a special way, so always omit them generally from the signature.
+        // If they belong in the signature, they will be added in a way to ensure they come first.
+        guard paramLocation != .body else { return false }
+
+        // All path parameter are required
+        guard paramLocation != .path else { return true }
+
+        // Default logic
+        let inMethod = implementation == .method
+        let notConstant = schema?.type != .constant
+        let notGrouped = groupedBy == nil
+        let isRequired = required
+        return isRequired && inMethod && notConstant && notGrouped
+    }
+
+    internal func belongsInOptions() -> Bool {
+        let inMethod = implementation == .method
+        let notConstant = schema?.type != .constant
+        let notFlattened = flattened != true
+        let notGrouped = groupedBy == nil
+        let notRequired = required == false
+        return notRequired && inMethod && notConstant && notFlattened && notGrouped
     }
 }
 

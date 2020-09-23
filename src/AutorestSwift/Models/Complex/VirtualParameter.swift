@@ -61,4 +61,29 @@ class VirtualParameter: Parameter {
 
         try super.encode(to: encoder)
     }
+
+    override internal func belongsInSignature() -> Bool {
+        let name = self.name
+
+        // We track body params in a special way, so always omit them generally from the signature.
+        // If they belong in the signature, they will be added in a way to ensure they come first.
+        guard paramLocation != .body else { return false }
+
+        // All path parameter are required
+        guard paramLocation != .path else { return true }
+
+        // Default logic
+        let inMethod = implementation == .method
+        let notConstant = schema?.type != .constant
+        let notGrouped = groupedBy == nil
+        return inMethod && notConstant && notGrouped
+    }
+
+    override internal func belongsInOptions() -> Bool {
+        let inMethod = implementation == .method
+        let notConstant = schema?.type != .constant
+        let notFlattened = flattened != true
+        let notGrouped = groupedBy == nil
+        return inMethod && notConstant && notFlattened && notGrouped
+    }
 }

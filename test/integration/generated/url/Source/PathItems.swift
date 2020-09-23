@@ -46,12 +46,14 @@ public final class PathItems {
     /// - Parameters:
     ///    - pathItemStringPath : A string value 'pathItemStringPath' that appears in the path
     ///    - localStringPath : should contain value 'localStringPath'
+    ///    - GlobalStringPath : A string value 'globalItemStringPath' that appears in the path
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func listAllWithValues(
         pathItemStringPath: String,
         localStringPath: String,
+        globalStringPath _: String,
         withOptions options: GetAllWithValuesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -156,12 +158,14 @@ public final class PathItems {
     /// - Parameters:
     ///    - pathItemStringPath : A string value 'pathItemStringPath' that appears in the path
     ///    - localStringPath : should contain value 'localStringPath'
+    ///    - GlobalStringPath : A string value 'globalItemStringPath' that appears in the path
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getGlobalQueryNull(
         pathItemStringPath: String,
         localStringPath: String,
+        globalStringPath _: String,
         withOptions options: GetGlobalQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -266,12 +270,14 @@ public final class PathItems {
     /// - Parameters:
     ///    - pathItemStringPath : A string value 'pathItemStringPath' that appears in the path
     ///    - localStringPath : should contain value 'localStringPath'
+    ///    - GlobalStringPath : A string value 'globalItemStringPath' that appears in the path
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getGlobalAndLocalQueryNull(
         pathItemStringPath: String,
         localStringPath: String,
+        globalStringPath _: String,
         withOptions options: GetGlobalAndLocalQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -376,12 +382,14 @@ public final class PathItems {
     /// - Parameters:
     ///    - pathItemStringPath : A string value 'pathItemStringPath' that appears in the path
     ///    - localStringPath : should contain value 'localStringPath'
+    ///    - GlobalStringPath : A string value 'globalItemStringPath' that appears in the path
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getLocalPathItemQueryNull(
         pathItemStringPath: String,
         localStringPath: String,
+        globalStringPath _: String,
         withOptions options: GetLocalPathItemQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

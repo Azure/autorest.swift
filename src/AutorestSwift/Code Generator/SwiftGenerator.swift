@@ -83,12 +83,36 @@ class SwiftGenerator: CodeGenerator {
 
         // Create model files
         for object in model.schemas.objects ?? [] {
-            let structViewModel = ObjectViewModel(from: object)
+            let viewModel = ObjectViewModel(from: object)
             try render(
                 template: "ModelFile",
                 toSubfolder: .models,
                 withFilename: object.name,
-                andParams: ["model": structViewModel]
+                andParams: ["model": viewModel]
+            )
+
+            if let immediates = object.parents?.immediate {
+                // render any immediate parents of the object schema
+                for parent in immediates {
+                    let viewModel = ObjectViewModel(from: parent)
+                    try render(
+                        template: "ModelFile",
+                        toSubfolder: .models,
+                        withFilename: parent.name,
+                        andParams: ["model": viewModel]
+                    )
+                }
+            }
+        }
+
+        // Create group model files
+        for group in model.schemas.groups ?? [] {
+            let viewModel = ObjectViewModel(from: group)
+            try render(
+                template: "ModelFile",
+                toSubfolder: .models,
+                withFilename: group.name,
+                andParams: ["model": viewModel]
             )
         }
 
