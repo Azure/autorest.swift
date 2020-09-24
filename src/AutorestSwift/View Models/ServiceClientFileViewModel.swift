@@ -35,7 +35,7 @@ struct ServiceClientFileViewModel {
     let apiVersionName: String
     let protocols: String
     let paging: Language.PagingNames?
-    let globalParameters: [GlobalParameterViewModel]
+    let globalParameters: [PropertyViewModel]
     let keyOperationGroups: [String: OperationGroupViewModel]
 
     init(from model: CodeModel) {
@@ -57,9 +57,9 @@ struct ServiceClientFileViewModel {
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
-        var globalParameters = [GlobalParameterViewModel]()
+        var globalParameters = [PropertyViewModel]()
         for globalParameter in model.globalParameters ?? [] {
-            if let vm = try? GlobalParameterViewModel(from: globalParameter) {
+            if let vm = try? PropertyViewModel(from: globalParameter) {
                 globalParameters.append(vm)
             }
         }

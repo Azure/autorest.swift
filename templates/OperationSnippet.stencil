@@ -13,7 +13,7 @@ public func {{ op.name }}(
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     {% for method in op.params.method %}
-       let {{ method.name }} : {{ method.type }} = {{ method.value }}
+       let {{ method.name }} : {{ method.type }} {{ method.defaultValue }}
     {% endfor %}
 
     {% include "OperationUrlSnippet.stencil" %}

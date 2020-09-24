@@ -113,7 +113,7 @@ class SwiftGenerator: CodeGenerator {
             try render(
                 template: "KeyOperationGroupFile",
                 toSubfolder: .source,
-                withFilename: "\(key)",
+                withFilename: "\(key.capitalized)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
             try render(for: operationGroup, key: key)

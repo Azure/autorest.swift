@@ -54,11 +54,11 @@ struct KeyValueViewModel {
         if param.implementation == ImplementationLocation.method {
             if let constantSchema = param.schema as? ConstantSchema {
                 let value = key // method variable name
-                self.value = convertValue(type: constantSchema.valueType.type, val: value)
+                self.value = convertValueToStringInSwift(type: constantSchema.valueType.type, val: value)
                 self.optional = false
                 self.paramName = nil
             } else {
-                self.value = convertValue(type: param.schema.type, val: key) // pull from option object
+                self.value = convertValueToStringInSwift(type: param.schema.type, val: key) // pull from option object
                 self.optional = true
                 self.paramName = key
             }
@@ -68,7 +68,7 @@ struct KeyValueViewModel {
             self.paramName = nil
         } else if let constantSchema = param.schema as? ConstantSchema {
             let value: String = constantSchema.value.value
-            self.value = convertValue(type: constantSchema.valueType.type, val: value)
+            self.value = convertValueToStringInSwift(type: constantSchema.valueType.type, val: value)
             self.optional = false
             self.paramName = nil
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
@@ -105,7 +105,7 @@ struct KeyValueViewModel {
     }
 }
 
-func convertValue(type: AllSchemaTypes, val: String) -> String {
+func convertValueToStringInSwift(type: AllSchemaTypes, val: String) -> String {
     switch type {
     case AllSchemaTypes.string:
         return "\"\(val)\""

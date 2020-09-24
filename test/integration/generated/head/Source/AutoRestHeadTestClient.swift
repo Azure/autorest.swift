@@ -8,23 +8,26 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import AzureCore
 import Foundation
+import AzureCore
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
+
 public final class AutoRestHeadTestClient: PipelineClient {
+
+
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
         /// API version ""
         case v = ""
 
-        /// The most recent API version of the
+        /// The most recent API version of the 
         public static var latest: ApiVersion {
-            return .v
+             return .v
         }
     }
 

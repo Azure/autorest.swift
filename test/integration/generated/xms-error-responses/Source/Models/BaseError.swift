@@ -8,38 +8,39 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import AzureCore
 import Foundation
+import AzureCore
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct BaseError: Codable, Swift.Error {
+
+public struct BaseError : Codable, Swift.Error {
+    
     public let someBaseProp: String?
 
     /// Initialize a `BaseError` structure.
     /// - Parameters:
-    ///   - someBaseProp:
+    ///   - someBaseProp: 
     public init(
-        someBaseProp: String? = nil
-    ) {
+        someBaseProp: String? = nil    ) {
         self.someBaseProp = someBaseProp
     }
+    
+enum CodingKeys: String, CodingKey {
+       case someBaseProp
+}
 
-    enum CodingKeys: String, CodingKey {
-        case someBaseProp
-    }
+/// Initialize a `BaseError` structure from decoder
+public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+self.someBaseProp = try? container.decode(String.self, forKey: .someBaseProp)
+}
 
-    /// Initialize a `BaseError` structure from decoder
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.someBaseProp = try? container.decode(String.self, forKey: .someBaseProp)
-    }
-
-    /// Encode a `BaseError` structure
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        if someBaseProp != nil { try? container.encode(someBaseProp, forKey: .someBaseProp) }
-    }
+/// Encode a `BaseError` structure
+public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+if someBaseProp != nil { try? container.encode(someBaseProp , forKey: .someBaseProp) }
+}
 }

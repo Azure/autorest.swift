@@ -42,11 +42,17 @@ struct ClientMethodOptionsViewModel {
 
     let extensionName: String
 
-    init(from operation: Operation, with model: CodeModel, parameters: [ParameterType], key: String) {
+    init(
+        from operation: Operation,
+        with model: CodeModel,
+        parameters: [ParameterType],
+        key _: String,
+        groupName: String
+    ) {
         self.clientName = model.name
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
-        self.extensionName = key.capitalized
+        self.extensionName = groupName
         var properties = [PropertyViewModel]()
         parameters.forEach {
             properties.append(PropertyViewModel(from: $0.value))

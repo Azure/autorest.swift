@@ -56,7 +56,7 @@ struct GlobalParameterViewModel {
 
                 self.value = constantSchema.value.value
                 print(
-                    "default 3333 name: \(name) type: \(constantSchema.valueType.type.rawValue)  value: \(value)"
+                    "default 3333 name: \(name) type: \(constantSchema.valueType.type.rawValue) swiftType: \(swiftType) value: \(value)"
                 )
             }
 

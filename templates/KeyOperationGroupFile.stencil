@@ -17,7 +17,7 @@ public final class {{ group.name }} {
     /// Options provided to configure this `{{ model.name }}`.
     public let options: {{ model.name }}Options
 
-    init(client: AutoRestUrlTestClient) {
+    init(client: {{ model.name }}) {
         self.client = client
         self.options = client.options
         self.commonOptions = client.commonOptions

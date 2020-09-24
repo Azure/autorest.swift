@@ -86,11 +86,11 @@ class NumberSchema: PrimitiveSchema {
     override func swiftType(optional _: Bool = false) -> String {
         switch precision {
         case 32:
-            return "Int32"
+            return (type == AllSchemaTypes.integer) ? "Int32" : "Float"
         case 64:
-            return "Int64"
+            return (type == AllSchemaTypes.integer) ? "Int64" : "Double"
         default:
-            return "Int"
+            return (type == AllSchemaTypes.integer) ? "Int" : "Float"
         }
     }
 }

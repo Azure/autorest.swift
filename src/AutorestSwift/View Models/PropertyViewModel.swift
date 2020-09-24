@@ -34,7 +34,9 @@ struct PropertyViewModel {
     let name: String
     let comment: ViewModelComment
     let type: String
+    // default value of the proeprty
     let defaultValue: ViewModelDefault
+    // default value of the property in the init(). Valid values are either nil (for optoinal property) or "" (i.e. not specfied for required property in init() method.)
     let initDefaultValue: String
     let isDate: Bool
     let optional: Bool
@@ -48,6 +50,57 @@ struct PropertyViewModel {
         self.optional = !schema.required
         self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
+        self.initDefaultValue = optional ? "= nil" : ""
+        self.isDate = type.contains("Date")
+    }
+
+    init(from param: ParameterType) throws {
+        var defaultValue: String
+        self.name = param.serializedName ?? param.name
+        self.comment = ViewModelComment(from: param.schema.description)
+        if let constantSchema = param.schema as? ConstantSchema {
+            // self.optional = !constantSchema.required
+            let swiftType = constantSchema.valueType.swiftType()
+            self.type = swiftType
+            self.className = type
+            let value = constantSchema.value.value
+
+            switch constantSchema.valueType.type {
+            case AllSchemaTypes.boolean:
+                defaultValue = constantSchema.value.value
+            case AllSchemaTypes.string:
+                defaultValue = "\"\(constantSchema.value.value))\""
+            case AllSchemaTypes.date,
+                 AllSchemaTypes.dateTime:
+                defaultValue = "DateFormatter().date(from:(\"\(value)\"))"
+            default:
+
+                defaultValue = constantSchema.value.value
+                print(
+                    "default 3333 name: \(name) type: \(constantSchema.valueType.type.rawValue) swiftType: \(swiftType) value: \(value)"
+                )
+            }
+
+            print(
+                "222 name: \(name) type: \(constantSchema.valueType.type.rawValue)  value: \(defaultValue)"
+            )
+            /* } else if let stringSchema = param.schema as? StringSchema {
+             // self.optional = !stringSchema.required
+             let swiftType = stringSchema.swiftType()
+             self.type = swiftType
+             self.className = type
+             assert(stringSchema.type == AllSchemaTypes.string)
+             defaultValue = "\"unknown\""
+
+             print(
+                 "333 hard code to a unknown name: \(name) type: \(param.schema.type.rawValue)  value: \(defaultValue)"
+             ) */
+        } else {
+            throw CodeGenerationError.general("value not round")
+        }
+
+        self.optional = false
+        self.defaultValue = ViewModelDefault(from: defaultValue, isString: false)
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
     }
