@@ -46,7 +46,6 @@ struct ClientMethodOptionsViewModel {
         from operation: Operation,
         with model: CodeModel,
         parameters: [ParameterType],
-        key _: String,
         groupName: String
     ) {
         self.clientName = model.name

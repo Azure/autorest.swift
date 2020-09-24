@@ -65,7 +65,7 @@ public final class AutoRestReportClient: PipelineClient {
     }
 
     // MARK: Public Client Methods
-<<<<<<< HEAD
+
 
     // MARK: AutoRestReportService
 
@@ -272,6 +272,4 @@ public final class AutoRestReportClient: PipelineClient {
             }
         }
     }
-=======
->>>>>>> e563152... Progress 2
 }

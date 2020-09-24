@@ -36,7 +36,7 @@ struct ServiceClientFileViewModel {
     let protocols: String
     let paging: Language.PagingNames?
     let globalParameters: [PropertyViewModel]
-    let keyOperationGroups: [String: OperationGroupViewModel]
+    let namedOperationGroups: [String: OperationGroupViewModel]
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
@@ -48,11 +48,11 @@ struct ServiceClientFileViewModel {
             if group.key.isEmpty {
                 operationGroups.append(viewMdoel)
             } else {
-                keyOperationGroups[group.key] = viewMdoel
+                keyOperationGroups[group.name] = viewMdoel
             }
         }
         self.operationGroups = operationGroups
-        self.keyOperationGroups = keyOperationGroups
+        self.namedOperationGroups = keyOperationGroups
         self.apiVersion = model.getApiVersion()
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames

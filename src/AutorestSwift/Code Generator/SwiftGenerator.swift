@@ -109,14 +109,14 @@ class SwiftGenerator: CodeGenerator {
         }
 
         // Create ClientKeyOperationGroup.swift file
-        for (key, operationGroup) in clientViewModel.keyOperationGroups {
+        for (name, operationGroup) in clientViewModel.namedOperationGroups {
             try render(
-                template: "KeyOperationGroupFile",
+                template: "NamedOperationGroupFile",
                 toSubfolder: .source,
-                withFilename: "\(key.capitalized)",
+                withFilename: "\(name)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try render(for: operationGroup, key: key)
+            try render(for: operationGroup, name: name)
         }
 
         // Create ClientOptions.swift file
@@ -167,12 +167,12 @@ class SwiftGenerator: CodeGenerator {
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 
-    fileprivate func render(for operationGroup: OperationGroupViewModel, key: String? = nil) throws {
+    private func render(for operationGroup: OperationGroupViewModel, name: String? = nil) throws {
         for operation in operationGroup.operations {
             let clientMethodOptions = operation.clientMethodOptions
             var fileName: String
-            if let k = key {
-                fileName = "\(k.capitalized + "." + clientMethodOptions.name.capitalized).swift"
+            if let n = name {
+                fileName = "\(n + "." + clientMethodOptions.name.capitalized).swift"
             } else {
                 fileName = "\(clientMethodOptions.name.capitalized).swift"
             }

@@ -188,7 +188,7 @@ struct OperationViewModel {
     let defaultExceptionHasBody: Bool
     let needHttpResponseData: Bool
 
-    init(from operation: Operation, with model: CodeModel, key: String, groupName: String) {
+    init(from operation: Operation, with model: CodeModel, groupName: String) {
         guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
         self.request = RequestViewModel(from: request, with: operation)
 
@@ -254,7 +254,6 @@ struct OperationViewModel {
             from: operation,
             with: model,
             parameters: params.inOptions,
-            key: key,
             groupName: groupName
         )
 
