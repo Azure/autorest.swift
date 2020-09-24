@@ -109,16 +109,9 @@ public final class AutoRestHeadTestClient: PipelineClient {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+
             switch result {
             case .success:
-                guard let data = httpResponse?.data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
-
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -198,16 +191,9 @@ public final class AutoRestHeadTestClient: PipelineClient {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+
             switch result {
             case .success:
-                guard let data = httpResponse?.data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
-
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
@@ -287,16 +273,9 @@ public final class AutoRestHeadTestClient: PipelineClient {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+
             switch result {
             case .success:
-                guard let data = httpResponse?.data else {
-                    let noDataError = AzureError.sdk("Response data expected but not found.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noDataError), httpResponse)
-                    }
-                    return
-                }
-
                 guard let statusCode = httpResponse?.statusCode else {
                     let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {

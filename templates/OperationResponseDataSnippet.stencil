@@ -1,3 +1,4 @@
+{% if op.needHttpResponseData %}
 guard let data = httpResponse?.data else {
     let noDataError = AzureError.sdk("Response data expected but not found.")
     dispatchQueue.async {
@@ -5,4 +6,5 @@ guard let data = httpResponse?.data else {
     }
     return
 }
+{% endif %}
 

@@ -166,18 +166,19 @@ struct OperationViewModel {
 
     let params: OperationParameters
 
-    let returnType: ReturnTypeViewModel?
+    let returnType: ReturnTypeViewModel
 
     let clientMethodOptions: ClientMethodOptionsViewModel
 
-    let pipelineContext: [KeyValueViewModel]?
+    let pipelineContext: [KeyValueViewModel]
 
     let request: RequestViewModel
-    let responses: [ResponseViewModel]?
-    let exceptions: [ExceptionResponseViewModel]?
+    let responses: [ResponseViewModel]
+    let exceptions: [ExceptionResponseViewModel]
 
     let defaultException: ExceptionResponseViewModel?
     let defaultExceptionHasBody: Bool
+    let needHttpResponseData: Bool
 
     init(from operation: Operation, with model: CodeModel) {
         guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
@@ -224,9 +225,9 @@ struct OperationViewModel {
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
-        self.defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
+        let defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
 
-        self.returnType = ReturnTypeViewModel(from: self.responses)
+        let returnType = ReturnTypeViewModel(from: self.responses)
 
         // create help struct to manage required and optional params in
         // headers/query/path, etc.
@@ -246,6 +247,10 @@ struct OperationViewModel {
             with: model,
             parameters: params.inOptions
         )
+
+        self.returnType = returnType
+        self.defaultExceptionHasBody = defaultExceptionHasBody
+        self.needHttpResponseData = exceptions.count > 1 || (returnType.name != "Void") || defaultExceptionHasBody
     }
 }
 
