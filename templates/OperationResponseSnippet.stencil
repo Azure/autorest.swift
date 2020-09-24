@@ -1,6 +1,6 @@
+{% include "OperationResponseDataSnippet.stencil" %}
 switch result {
 case .success:
-{% include "OperationResponseDataSnippet.stencil" %}
 {% include "OperationResponseStatusCodeDeclareSnippet.stencil" %}
 {% for response in op.responses %}
     {% if response.strategy == "pagedBody" %}
@@ -12,6 +12,5 @@ case .success:
     {% endif %}
 {% endfor %}
     {% include "OperationResponseExceptionSnippet.stencil" %}
-case let .failure(error):
-    {% include "OperationDefaultExceptionSnippet.stencil" %}
+{% include "OperationDefaultExceptionSnippet.stencil" %}
 }
