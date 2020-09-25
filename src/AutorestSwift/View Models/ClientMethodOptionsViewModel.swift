@@ -59,7 +59,7 @@ struct ClientMethodOptionsViewModel {
         }
 
         properties.forEach {
-            print("name = \($0.name)")
+            print("clientname = \(model.name) name = \($0.name)")
         }
         self.properties = properties
     }

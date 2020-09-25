@@ -3,6 +3,21 @@ if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
     if let {{ param.paramName }} = options.{{ param.paramName }} {
+        // inside 1
+        {% if param.keyValueType == "date" %}
+        guard let {{ param.key }} = Date({{ param.paramName }} , format: Date.Format.iso8601) else {
+            self.options.logger.error("Failed to construct Date from {{ param.key }}")
+            return
+        }
+        let {{ param.key }}String = DateFormatter().string(from: {{ param.key }})
+        {% elif param.keyValueType == "byeArray" %}
+        guard let {{ param.key  }}String = String(bytes: {{ param.paramName }} , encoding: .utf8) else {
+            self.options.logger.error("Failed to construct Str from {{ param.key }}")
+            return
+        }
+        {% else %}
+        // should not reach here
+        {% endif %}
         queryParams.append("{{ param.key }}", {{ param.value}})
     }
     {% endfor %}

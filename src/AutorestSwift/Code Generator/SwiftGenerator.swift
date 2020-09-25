@@ -103,7 +103,7 @@ class SwiftGenerator: CodeGenerator {
             ]
         )
 
-        // Render OperationGroup in Client.swift file
+        // Create ClientMethodOptions.swift file
         for operationGroup in clientViewModel.operationGroups {
             try renderClientMethodOptionsFile(for: operationGroup)
         }
