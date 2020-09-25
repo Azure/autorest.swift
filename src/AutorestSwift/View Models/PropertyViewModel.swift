@@ -41,6 +41,7 @@ struct PropertyViewModel {
     let isDate: Bool
     let optional: Bool
     let className: String
+    let isByteArray: Bool
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
@@ -52,12 +53,15 @@ struct PropertyViewModel {
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
+        self.isByteArray = schema.schema.type == AllSchemaTypes.byteArray
     }
 
     init(from param: ParameterType) throws {
         var defaultValue: String
         self.name = param.serializedName ?? param.name
         self.comment = ViewModelComment(from: param.schema.description)
+
+        var includeEqualSign: Bool = true
         if let constantSchema = param.schema as? ConstantSchema {
             // self.optional = !constantSchema.required
             let swiftType = constantSchema.valueType.swiftType()
@@ -72,7 +76,9 @@ struct PropertyViewModel {
                 defaultValue = "\"\(constantSchema.value.value))\""
             case AllSchemaTypes.date,
                  AllSchemaTypes.dateTime:
-                defaultValue = "DateFormatter().date(from:(\"\(value)\"))"
+                defaultValue = "\"\(constantSchema.value.value))\"" // "DateFormatter().date(from:(\"\(value)\"))"
+
+                includeEqualSign = false
             default:
 
                 defaultValue = constantSchema.value.value
@@ -84,24 +90,20 @@ struct PropertyViewModel {
             print(
                 "222 name: \(name) type: \(constantSchema.valueType.type.rawValue)  value: \(defaultValue)"
             )
-            /* } else if let stringSchema = param.schema as? StringSchema {
-             // self.optional = !stringSchema.required
-             let swiftType = stringSchema.swiftType()
-             self.type = swiftType
-             self.className = type
-             assert(stringSchema.type == AllSchemaTypes.string)
-             defaultValue = "\"unknown\""
 
-             print(
-                 "333 hard code to a unknown name: \(name) type: \(param.schema.type.rawValue)  value: \(defaultValue)"
-             ) */
         } else {
             throw CodeGenerationError.general("value not round")
         }
 
         self.optional = false
-        self.defaultValue = ViewModelDefault(from: defaultValue, isString: false)
-        self.initDefaultValue = optional ? "= nil" : ""
+        //  if (constantSchema.valueType.type == AllSchemaTypes.date ||
+        //      const) {
+        //      self.defaultValue = ViewModelDefault(from: defaultValue, isString: false, includeEqualSign: false)
+        //  } else {
+        self.defaultValue = ViewModelDefault(from: defaultValue, isString: false, includeEqualSign: includeEqualSign)
+        // }
+        self.initDefaultValue = ""
         self.isDate = type.contains("Date")
+        self.isByteArray = type.contains("[UInt")
     }
 }

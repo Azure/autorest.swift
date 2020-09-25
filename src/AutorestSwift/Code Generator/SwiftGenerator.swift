@@ -105,18 +105,18 @@ class SwiftGenerator: CodeGenerator {
 
         // Render OperationGroup in Client.swift file
         for operationGroup in clientViewModel.operationGroups {
-            try render(for: operationGroup)
+            try renderClientMethodOptionsFile(for: operationGroup)
         }
 
-        // Create ClientKeyOperationGroup.swift file
-        for (name, operationGroup) in clientViewModel.namedOperationGroups {
+        // Create ClientOperationGroup.swift file for each operation group with name
+        for (groupName, operationGroup) in clientViewModel.namedOperationGroups {
             try render(
                 template: "NamedOperationGroupFile",
                 toSubfolder: .source,
-                withFilename: "\(name)",
+                withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try render(for: operationGroup, name: name)
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName)
         }
 
         // Create ClientOptions.swift file
@@ -167,15 +167,18 @@ class SwiftGenerator: CodeGenerator {
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
     }
 
-    private func render(for operationGroup: OperationGroupViewModel, name: String? = nil) throws {
+    private func renderClientMethodOptionsFile(
+        for operationGroup: OperationGroupViewModel,
+        with groupName: String? = nil
+    ) throws {
         for operation in operationGroup.operations {
             let clientMethodOptions = operation.clientMethodOptions
-            var fileName: String
-            if let n = name {
-                fileName = "\(n + "." + clientMethodOptions.name.capitalized).swift"
-            } else {
-                fileName = "\(clientMethodOptions.name.capitalized).swift"
+            var fileName = ""
+            if let groupName = groupName {
+                fileName = "\(groupName + ".")"
             }
+
+            fileName += "\(clientMethodOptions.name.capitalized).swift"
 
             try render(
                 template: "ClientMethodOptionsFile",

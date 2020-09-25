@@ -53,8 +53,13 @@ struct ClientMethodOptionsViewModel {
         self.name = "\(operation.name)Options"
         self.extensionName = groupName
         var properties = [PropertyViewModel]()
+        print("ClientName = \(clientName)")
         parameters.forEach {
             properties.append(PropertyViewModel(from: $0.value))
+        }
+
+        properties.forEach {
+            print("name = \($0.name)")
         }
         self.properties = properties
     }

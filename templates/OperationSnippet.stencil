@@ -13,8 +13,58 @@ public func {{ op.name }}(
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     {% for method in op.params.method %}
-       let {{ method.name }} : {{ method.type }} {{ method.defaultValue }}
+        {% if method.isDate %}
+        guard let {{ method.name }} : {{ method.type }} = Date({{ method.defaultValue }}, format: Date.Format.iso8601) else {
+            self.options.logger.error("Failed to construct Date from {{ method.name }}")
+            return
+        }
+        let datePathString = DateFormatter().string(from: {{ method.name }})
+        {% elif method.isByteArray %}
+        guard let {{ method.name }}Str : {{ method.type }} =  String(bytes: {{ method.name }}, encoding: .utf8) else {
+            self.options.logger.error("Failed to construct Str from {{ method.name }}")
+            return
+        }
+        {% else %}
+        let {{ method.name }} : {{ method.type }} {{ method.defaultValue }}
+        {% endif %}
     {% endfor %}
+    // Deserialize to String 1
+    {% for method in op.params.needDeserialieToStringOption %}
+        {% if method.isDate %}
+        guard let {{ method.key }} = Date({{ method.value }}, format: Date.Format.iso8601) else {
+            self.options.logger.error("Failed to construct Date from {{ method.name }}")
+            return
+        }
+        let datePathString = DateFormatter().string(from: {{ method.name }})
+        {% elif method.isByteArray %}
+        guard let {{ method.key  }}Str = String(bytes: option.{{ method.value }}, encoding: .utf8) else {
+            self.options.logger.error("Failed to construct Str from {{ method.key }}")
+            return
+        }
+        {% else %}
+        let {{ method.name }} : {{ method.type }} {{ method.defaultValue }}
+        {% endif %}
+    {% endfor %}
+    // end Deserialize to String
+    
+        // Deserialize to String 2
+    {% for method in op.params.needDeserialieToStringSig %}
+        {% if method.isDate %}
+        guard let {{ method.key }} = Date({{ method.value }}, format: Date.Format.iso8601) else {
+            self.options.logger.error("Failed to construct Date from {{ method.name }}")
+            return
+        }
+        let datePathString = DateFormatter().string(from: {{ method.name }})
+        {% elif method.isByteArray %}
+        guard let {{ method.key  }}Str = String(bytes: {{ method.value }}, encoding: .utf8) else {
+            self.options.logger.error("Failed to construct Str from {{ method.key }}")
+            return
+        }
+        {% else %}
+        let {{ method.name }} : {{ method.type }} {{ method.defaultValue }}
+        {% endif %}
+    {% endfor %}
+    // end Deserialize to String
 
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}

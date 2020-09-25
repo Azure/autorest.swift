@@ -39,6 +39,10 @@ struct KeyValueViewModel {
     // Flag indicates if value is optional
     let optional: Bool
 
+    let type: AllSchemaTypes
+    let isDate: Bool
+    let isByteArray: Bool
+    var fromOption: Bool
     /**
         Create a ViewModel with a Key and Value pair
 
@@ -53,24 +57,38 @@ struct KeyValueViewModel {
 
         if param.implementation == ImplementationLocation.method {
             if let constantSchema = param.schema as? ConstantSchema {
+                self.type = constantSchema.valueType.type
                 let value = key // method variable name
                 self.value = convertValueToStringInSwift(type: constantSchema.valueType.type, val: value)
                 self.optional = false
                 self.paramName = nil
+                self.isDate = constantSchema.valueType.type == AllSchemaTypes.date || constantSchema.valueType
+                    .type == AllSchemaTypes.dateTime
+                self.isByteArray = constantSchema.valueType.type == AllSchemaTypes.byteArray
             } else {
                 self.value = convertValueToStringInSwift(type: param.schema.type, val: key) // pull from option object
                 self.optional = true
                 self.paramName = key
+                self.type = param.schema.type
+                self.isDate = param.schema.type == AllSchemaTypes.date || param.schema.type == AllSchemaTypes.dateTime
+                self.isByteArray = param.schema.type == AllSchemaTypes.byteArray
             }
         } else if param.implementation == ImplementationLocation.client {
             self.value = "Client.\(param.serializedName ?? param.name)"
             self.optional = false
             self.paramName = nil
+            self.type = param.schema.type
+            self.isDate = false
+            self.isByteArray = false
         } else if let constantSchema = param.schema as? ConstantSchema {
+            self.type = constantSchema.valueType.type
             let value: String = constantSchema.value.value
             self.value = convertValueToStringInSwift(type: constantSchema.valueType.type, val: value)
             self.optional = false
             self.paramName = nil
+            self.isDate = constantSchema.valueType.type == AllSchemaTypes.date || constantSchema.valueType
+                .type == AllSchemaTypes.dateTime
+            self.isByteArray = constantSchema.valueType.type == AllSchemaTypes.byteArray
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             // value is referring a signautre parameter, no need to wrap as String
             self.paramName = param.name
@@ -84,16 +102,24 @@ struct KeyValueViewModel {
                 // Convert into String in generated code
                 self.value = "String(\(param.name))"
             }
+            self.type = param.schema.type
+            self.isDate = false
+            self.isByteArray = false
         } else {
             self.value = ""
             self.optional = false
             self.paramName = nil
+            self.type = param.schema.type
+            self.isDate = false
+            self.isByteArray = false
         }
+        self.fromOption = false
+        // self.type = param.schema.type
+        // self.isDate = self.type == AllSchemaTypes.date || self.type == AllSchemaTypes.dateTime
     }
 
     /**
         Create a ViewModel with a Key and Value pair
-
         - Parameter key: Key String in the Key value pair
         - Parameter value: the value string
      */
@@ -102,6 +128,10 @@ struct KeyValueViewModel {
         self.value = value
         self.optional = false
         self.paramName = nil
+        self.type = AllSchemaTypes.not
+        self.isDate = false
+        self.isByteArray = false
+        self.fromOption = false
     }
 }
 
@@ -123,7 +153,8 @@ func convertValueToStringInSwift(type: AllSchemaTypes, val: String) -> String {
     case AllSchemaTypes.array:
         return "\(val).map { String($0) }.joined(separator: \",\") "
     case AllSchemaTypes.byteArray:
-        return "String(bytes: \(val), encoding: .utf8)"
+        // return "String(bytes: \(val), encoding: .utf8)"
+        return "\(val)Str"
     default:
         return "\(val)"
     }

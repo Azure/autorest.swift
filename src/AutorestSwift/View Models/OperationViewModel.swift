@@ -34,6 +34,8 @@ struct OperationParameters {
     var signature: [ParameterViewModel]
     var method: [PropertyViewModel]
     var hasOptionalParams: Bool
+    var needDeserialieToStringOption: [KeyValueViewModel]
+    var needDeserialieToStringSig: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(parameters: [ParameterType], operation: Operation) {
@@ -41,6 +43,8 @@ struct OperationParameters {
         var query = Params()
         var path = [KeyValueViewModel]()
         var method = [PropertyViewModel]()
+        var needDeserialieToStringOption = [KeyValueViewModel]()
+        var needDeserialieToStringSig = [KeyValueViewModel]()
 
         for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
@@ -49,20 +53,44 @@ struct OperationParameters {
                 if let methodViewModel = try? PropertyViewModel(from: param) {
                     method.append(methodViewModel)
                 }
-            }
-            let viewModel = KeyValueViewModel(from: param, with: operation)
+            } else {
+                let viewModel = KeyValueViewModel(from: param, with: operation)
 
-            switch httpParam.in {
-            case .query:
-                viewModel.optional ? query.optional.append(viewModel) : query.required
-                    .append(viewModel)
-            case .header:
-                viewModel.optional ? header.optional.append(viewModel) : header.required
-                    .append(viewModel)
-            case .path:
-                path.append(viewModel)
-            default:
-                continue
+                switch httpParam.in {
+                case .query:
+                    viewModel.optional ? query.optional.append(viewModel) : query.required
+                        .append(viewModel)
+                case .header:
+                    viewModel.optional ? header.optional.append(viewModel) : header.required
+                        .append(viewModel)
+                case .path:
+                    path.append(viewModel)
+                default:
+                    continue
+                }
+            }
+        }
+
+        /*  for param in path {
+             if param.value.contains("Date") || param.value.contains("[") {
+                 needDeserialieToString.append(param)
+             }
+         } */
+        for param in query.optional {
+            if param.type == AllSchemaTypes.date ||
+                param.type == AllSchemaTypes.dateTime ||
+                param.type == AllSchemaTypes.byteArray {
+                //  param.fromOption = true
+                needDeserialieToStringOption.append(param)
+            }
+        }
+
+        for param in path {
+            if param.type == AllSchemaTypes.date ||
+                param.type == AllSchemaTypes.dateTime ||
+                param.type == AllSchemaTypes.byteArray {
+                //  param.fromOption = true
+                needDeserialieToStringSig.append(param)
             }
         }
 
@@ -105,6 +133,8 @@ struct OperationParameters {
         self.query = query
         self.path = path
         self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty)
+        self.needDeserialieToStringOption = needDeserialieToStringOption
+        self.needDeserialieToStringSig = needDeserialieToStringSig
     }
 }
 
