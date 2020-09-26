@@ -50,10 +50,10 @@ struct ViewModelComment: CustomStringConvertible {
 struct ViewModelDefault: CustomStringConvertible {
     var description: String
 
-    init(from defaultValue: String?, isString: Bool, includeEqualSign: Bool = true) {
+    init(from defaultValue: String?, isString: Bool) {
         self.description = ""
         guard let val = defaultValue else { return }
         guard val.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
-        self.description = (includeEqualSign ? " = " : "") + (isString ? "\"\(val)\"" : "\(val)")
+        self.description = isString ? " = \"\(val)\"" : " = \(val)"
     }
 }
