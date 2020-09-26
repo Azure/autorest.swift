@@ -8,15 +8,14 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct Pet : Codable {
+public struct Pet: Codable {
     /// Gets the Pet by id.
     public let name: String?
 
@@ -24,23 +23,24 @@ public struct Pet : Codable {
     /// - Parameters:
     ///   - name: Gets the Pet by id.
     public init(
-        name: String? = nil    ) {
+        name: String? = nil
+    ) {
         self.name = name
     }
-    
-enum CodingKeys: String, CodingKey {
-       case name
-}
 
-/// Initialize a `Pet` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.name = try? container.decode(String.self, forKey: .name)
-}
+    enum CodingKeys: String, CodingKey {
+        case name
+    }
 
-/// Encode a `Pet` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if name != nil { try? container.encode(name , forKey: .name) }
-}
+    /// Initialize a `Pet` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try? container.decode(String.self, forKey: .name)
+    }
+
+    /// Encode a `Pet` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if name != nil { try? container.encode(name, forKey: .name) }
+    }
 }

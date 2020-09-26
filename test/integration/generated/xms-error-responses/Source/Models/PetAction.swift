@@ -8,15 +8,14 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct PetAction : Codable {
+public struct PetAction: Codable {
     /// action feedback
     public let actionResponse: String?
 
@@ -24,23 +23,24 @@ public struct PetAction : Codable {
     /// - Parameters:
     ///   - actionResponse: action feedback
     public init(
-        actionResponse: String? = nil    ) {
+        actionResponse: String? = nil
+    ) {
         self.actionResponse = actionResponse
     }
-    
-enum CodingKeys: String, CodingKey {
-       case actionResponse
-}
 
-/// Initialize a `PetAction` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.actionResponse = try? container.decode(String.self, forKey: .actionResponse)
-}
+    enum CodingKeys: String, CodingKey {
+        case actionResponse
+    }
 
-/// Encode a `PetAction` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if actionResponse != nil { try? container.encode(actionResponse , forKey: .actionResponse) }
-}
+    /// Initialize a `PetAction` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.actionResponse = try? container.decode(String.self, forKey: .actionResponse)
+    }
+
+    /// Encode a `PetAction` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if actionResponse != nil { try? container.encode(actionResponse, forKey: .actionResponse) }
+    }
 }

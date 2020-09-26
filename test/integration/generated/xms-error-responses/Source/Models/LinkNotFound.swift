@@ -8,39 +8,38 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct LinkNotFound : Codable, Swift.Error {
-    
+public struct LinkNotFound: Codable, Swift.Error {
     public let whatSubAddress: String?
 
     /// Initialize a `LinkNotFound` structure.
     /// - Parameters:
-    ///   - whatSubAddress: 
+    ///   - whatSubAddress:
     public init(
-        whatSubAddress: String? = nil    ) {
+        whatSubAddress: String? = nil
+    ) {
         self.whatSubAddress = whatSubAddress
     }
-    
-enum CodingKeys: String, CodingKey {
-       case whatSubAddress
-}
 
-/// Initialize a `LinkNotFound` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.whatSubAddress = try? container.decode(String.self, forKey: .whatSubAddress)
-}
+    enum CodingKeys: String, CodingKey {
+        case whatSubAddress
+    }
 
-/// Encode a `LinkNotFound` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if whatSubAddress != nil { try? container.encode(whatSubAddress , forKey: .whatSubAddress) }
-}
+    /// Initialize a `LinkNotFound` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.whatSubAddress = try? container.decode(String.self, forKey: .whatSubAddress)
+    }
+
+    /// Encode a `LinkNotFound` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if whatSubAddress != nil { try? container.encode(whatSubAddress, forKey: .whatSubAddress) }
+    }
 }

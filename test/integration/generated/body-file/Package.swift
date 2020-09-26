@@ -19,12 +19,12 @@ let package = Package(
         .macOS(.v10_15), .iOS(.v12), .tvOS(.v12)
     ],
     products: [
-        .library(name: "AutoRestSwaggerBatFile", type: .static ,targets: ["AutoRestSwaggerBatFile"])
+        .library(name: "AutoRestSwaggerBatFile", type: .static, targets: ["AutoRestSwaggerBatFile"])
     ],
     dependencies: [
         .package(
             url: "https://github.com/Azure/azure-sdk-for-ios.git",
-               .branch("master")
+            .branch("master")
         )
     ],
     targets: [
@@ -33,14 +33,14 @@ let package = Package(
             name: "AutoRestSwaggerBatFile",
             dependencies: ["AzureCore"],
             path: "Source"
-        ),
+        )
         // TODO: Add test targets when test code is generated
         // Test targets
-        //.testTarget(
+        // .testTarget(
         //    name: "AutoRestSwaggerBatFileTests",
         //    dependencies: ["AutoRestSwaggerBatFile"],
         //    sources: ["Tests"]
-        //),
+        // ),
     ],
     swiftLanguageVersions: [.v5]
 )

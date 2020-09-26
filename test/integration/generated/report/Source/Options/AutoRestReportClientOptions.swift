@@ -8,8 +8,8 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length

@@ -15,4 +15,3 @@ extension Int32: LocalizedError {
 extension Int64: LocalizedError {
     public var errorDescription: String? { return String(self) }
 }
-

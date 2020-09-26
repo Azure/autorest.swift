@@ -8,46 +8,45 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct NotFoundErrorBase : Codable, Swift.Error {
-    
+public struct NotFoundErrorBase: Codable, Swift.Error {
     public let reason: String?
-    
+
     public let whatNotFound: String
 
     /// Initialize a `NotFoundErrorBase` structure.
     /// - Parameters:
-    ///   - reason: 
-    ///   - whatNotFound: 
+    ///   - reason:
+    ///   - whatNotFound:
     public init(
-        reason: String? = nil,        whatNotFound: String     ) {
+        reason: String? = nil, whatNotFound: String
+    ) {
         self.reason = reason
         self.whatNotFound = whatNotFound
     }
-    
-enum CodingKeys: String, CodingKey {
-       case reason
-       case whatNotFound
-}
 
-/// Initialize a `NotFoundErrorBase` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.reason = try? container.decode(String.self, forKey: .reason)
-self.whatNotFound = try container.decode(String.self, forKey: .whatNotFound)
-}
+    enum CodingKeys: String, CodingKey {
+        case reason
+        case whatNotFound
+    }
 
-/// Encode a `NotFoundErrorBase` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if reason != nil { try? container.encode(reason , forKey: .reason) }
-try container.encode(whatNotFound, forKey: .whatNotFound)
-}
+    /// Initialize a `NotFoundErrorBase` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.reason = try? container.decode(String.self, forKey: .reason)
+        self.whatNotFound = try container.decode(String.self, forKey: .whatNotFound)
+    }
+
+    /// Encode a `NotFoundErrorBase` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if reason != nil { try? container.encode(reason, forKey: .reason) }
+        try container.encode(whatNotFound, forKey: .whatNotFound)
+    }
 }

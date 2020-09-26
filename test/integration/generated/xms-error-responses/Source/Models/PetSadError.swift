@@ -8,15 +8,14 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct PetSadError : Codable, Swift.Error {
+public struct PetSadError: Codable, Swift.Error {
     /// why is the pet sad
     public let reason: String?
 
@@ -24,23 +23,24 @@ public struct PetSadError : Codable, Swift.Error {
     /// - Parameters:
     ///   - reason: why is the pet sad
     public init(
-        reason: String? = nil    ) {
+        reason: String? = nil
+    ) {
         self.reason = reason
     }
-    
-enum CodingKeys: String, CodingKey {
-       case reason
-}
 
-/// Initialize a `PetSadError` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.reason = try? container.decode(String.self, forKey: .reason)
-}
+    enum CodingKeys: String, CodingKey {
+        case reason
+    }
 
-/// Encode a `PetSadError` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if reason != nil { try? container.encode(reason , forKey: .reason) }
-}
+    /// Initialize a `PetSadError` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.reason = try? container.decode(String.self, forKey: .reason)
+    }
+
+    /// Encode a `PetSadError` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if reason != nil { try? container.encode(reason, forKey: .reason) }
+    }
 }

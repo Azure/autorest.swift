@@ -19,12 +19,12 @@ let package = Package(
         .macOS(.v10_15), .iOS(.v12), .tvOS(.v12)
     ],
     products: [
-        .library(name: "AutoRestIntegerTest", type: .static ,targets: ["AutoRestIntegerTest"])
+        .library(name: "AutoRestIntegerTest", type: .static, targets: ["AutoRestIntegerTest"])
     ],
     dependencies: [
         .package(
             url: "https://github.com/Azure/azure-sdk-for-ios.git",
-               .branch("master")
+            .branch("master")
         )
     ],
     targets: [
@@ -33,14 +33,14 @@ let package = Package(
             name: "AutoRestIntegerTest",
             dependencies: ["AzureCore"],
             path: "Source"
-        ),
+        )
         // TODO: Add test targets when test code is generated
         // Test targets
-        //.testTarget(
+        // .testTarget(
         //    name: "AutoRestIntegerTestTests",
         //    dependencies: ["AutoRestIntegerTest"],
         //    sources: ["Tests"]
-        //),
+        // ),
     ],
     swiftLanguageVersions: [.v5]
 )

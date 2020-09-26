@@ -8,46 +8,45 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct PetActionError : Codable, Swift.Error {
-    
+public struct PetActionError: Codable, Swift.Error {
     public let errorType: String
     /// the error message
     public let errorMessage: String?
 
     /// Initialize a `PetActionError` structure.
     /// - Parameters:
-    ///   - errorType: 
+    ///   - errorType:
     ///   - errorMessage: the error message
     public init(
-        errorType: String ,        errorMessage: String? = nil    ) {
+        errorType: String, errorMessage: String? = nil
+    ) {
         self.errorType = errorType
         self.errorMessage = errorMessage
     }
-    
-enum CodingKeys: String, CodingKey {
-       case errorType
-       case errorMessage
-}
 
-/// Initialize a `PetActionError` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.errorType = try container.decode(String.self, forKey: .errorType)
-self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
-}
+    enum CodingKeys: String, CodingKey {
+        case errorType
+        case errorMessage
+    }
 
-/// Encode a `PetActionError` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-try container.encode(errorType, forKey: .errorType)
-if errorMessage != nil { try? container.encode(errorMessage , forKey: .errorMessage) }
-}
+    /// Initialize a `PetActionError` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.errorType = try container.decode(String.self, forKey: .errorType)
+        self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
+    }
+
+    /// Encode a `PetActionError` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(errorType, forKey: .errorType)
+        if errorMessage != nil { try? container.encode(errorMessage, forKey: .errorMessage) }
+    }
 }

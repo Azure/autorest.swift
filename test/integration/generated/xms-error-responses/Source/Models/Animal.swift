@@ -8,39 +8,38 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-
-public struct Animal : Codable {
-    
+public struct Animal: Codable {
     public let aniType: String?
 
     /// Initialize a `Animal` structure.
     /// - Parameters:
-    ///   - aniType: 
+    ///   - aniType:
     public init(
-        aniType: String? = nil    ) {
+        aniType: String? = nil
+    ) {
         self.aniType = aniType
     }
-    
-enum CodingKeys: String, CodingKey {
-       case aniType
-}
 
-/// Initialize a `Animal` structure from decoder
-public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-self.aniType = try? container.decode(String.self, forKey: .aniType)
-}
+    enum CodingKeys: String, CodingKey {
+        case aniType
+    }
 
-/// Encode a `Animal` structure
-public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-if aniType != nil { try? container.encode(aniType , forKey: .aniType) }
-}
+    /// Initialize a `Animal` structure from decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.aniType = try? container.decode(String.self, forKey: .aniType)
+    }
+
+    /// Encode a `Animal` structure
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if aniType != nil { try? container.encode(aniType, forKey: .aniType) }
+    }
 }
