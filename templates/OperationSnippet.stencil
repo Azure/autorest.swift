@@ -17,18 +17,15 @@ public func {{ op.name }}(
     {% for method in op.params.method %}
         // inside 2
         {% if method.keyValueType == "date" %}
-        guard let {{ method.key }} = Date({{ method.value }}, format: Date.Format.iso8601) else {
+        guard let {{ method.key }} = Date({{ method.defaultValue }}, format: Date.Format.iso8601) else {
             self.options.logger.error("Failed to construct Date from {{ method.value }}")
             return
         }
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
-        {% elif method.keyValueType == "byeArray" %}
-        guard let {{ method.key }}String = String(bytes: {{ method.value }}, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct Str from {{ method.key }}")
-            return
-        }
+        {% elif method.keyValueType == "byteArray" %}
+        let {{ method.key }} = Array( {{ method.defaultValue }}.utf8)
         {% else %}
-        let {{ method.key }} = {{ method.value }}
+        let {{ method.key }} = {{ method.defaultValue }}
         {% endif %}
     {% endfor %}
     // end Deserialize to String 2

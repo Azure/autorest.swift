@@ -35,7 +35,6 @@ struct OperationParameters {
     var method: [KeyValueViewModel]
     var hasOptionalParams: Bool
     var needDeserialieToStringOption: [KeyValueViewModel]
-    var needDeserialieToStringSig: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(parameters: [ParameterType], operation: Operation) {
@@ -44,16 +43,9 @@ struct OperationParameters {
         var path = [KeyValueViewModel]()
         var method = [KeyValueViewModel]()
         var needDeserialieToStringOption = [KeyValueViewModel]()
-        var needDeserialieToStringSig = [KeyValueViewModel]()
 
         for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-
-            /*       if param.implementation == ImplementationLocation.method {
-                 if let methodViewModel = try? PropertyViewModel(from: param) {
-                     method.append(methodViewModel)
-                 }
-             } else { */
             let viewModel = KeyValueViewModel(from: param, with: operation)
 
             switch httpParam.in {
@@ -73,15 +65,13 @@ struct OperationParameters {
 
         for param in query.optional {
             if param.keyValueType == KeyValueType.date.rawValue ||
-                param.keyValueType == KeyValueType.byeArray.rawValue {
-                //  param.fromOption = true
+                param.keyValueType == KeyValueType.byteArray.rawValue {
                 needDeserialieToStringOption.append(param)
             }
         }
 
         for param in query.required {
             if param.implementedInMethod {
-                //  param.fromOption = true
                 method.append(param)
             }
         }

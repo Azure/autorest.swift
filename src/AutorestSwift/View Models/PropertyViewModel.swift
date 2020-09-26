@@ -41,7 +41,6 @@ struct PropertyViewModel {
     let isDate: Bool
     let optional: Bool
     let className: String
-    let isByteArray: Bool
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
@@ -53,7 +52,6 @@ struct PropertyViewModel {
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
-        self.isByteArray = schema.schema.type == AllSchemaTypes.byteArray
     }
 
     init(from param: ParameterType) throws {
@@ -63,7 +61,6 @@ struct PropertyViewModel {
 
         var includeEqualSign: Bool = true
         if let constantSchema = param.schema as? ConstantSchema {
-            // self.optional = !constantSchema.required
             let swiftType = constantSchema.valueType.swiftType()
             self.type = swiftType
             self.className = type
@@ -77,10 +74,8 @@ struct PropertyViewModel {
             case AllSchemaTypes.date,
                  AllSchemaTypes.dateTime:
                 defaultValue = "\"\(constantSchema.value.value))\"" // "DateFormatter().date(from:(\"\(value)\"))"
-
                 includeEqualSign = false
             default:
-
                 defaultValue = constantSchema.value.value
                 print(
                     "default 3333 name: \(name) type: \(constantSchema.valueType.type.rawValue) swiftType: \(swiftType) value: \(value)"
@@ -96,14 +91,9 @@ struct PropertyViewModel {
         }
 
         self.optional = false
-        //  if (constantSchema.valueType.type == AllSchemaTypes.date ||
-        //      const) {
-        //      self.defaultValue = ViewModelDefault(from: defaultValue, isString: false, includeEqualSign: false)
-        //  } else {
         self.defaultValue = ViewModelDefault(from: defaultValue, isString: false, includeEqualSign: includeEqualSign)
-        // }
+
         self.initDefaultValue = ""
         self.isDate = type.contains("Date")
-        self.isByteArray = type.contains("[UInt")
     }
 }
