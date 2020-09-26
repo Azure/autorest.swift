@@ -64,7 +64,7 @@ struct KeyValueViewModel {
         let name = param.serializedName ?? param.name
         self.key = name
         var keyValueType = KeyValueType.none
-  
+
         if let constantSchema = param.schema as? ConstantSchema {
             let val: String = constantSchema.value.value
 

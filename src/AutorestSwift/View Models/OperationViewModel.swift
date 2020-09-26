@@ -116,7 +116,6 @@ struct OperationParameters {
         self.path = path
         self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty)
         self.needDeserialieToStringOption = needDeserialieToStringOption
-        self.needDeserialieToStringSig = needDeserialieToStringSig
     }
 }
 

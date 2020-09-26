@@ -53,47 +53,4 @@ struct PropertyViewModel {
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
     }
-
-    init(from param: ParameterType) throws {
-        var defaultValue: String
-        self.name = param.serializedName ?? param.name
-        self.comment = ViewModelComment(from: param.schema.description)
-
-        var includeEqualSign: Bool = true
-        if let constantSchema = param.schema as? ConstantSchema {
-            let swiftType = constantSchema.valueType.swiftType()
-            self.type = swiftType
-            self.className = type
-            let value = constantSchema.value.value
-
-            switch constantSchema.valueType.type {
-            case AllSchemaTypes.boolean:
-                defaultValue = constantSchema.value.value
-            case AllSchemaTypes.string:
-                defaultValue = "\"\(constantSchema.value.value))\""
-            case AllSchemaTypes.date,
-                 AllSchemaTypes.dateTime:
-                defaultValue = "\"\(constantSchema.value.value))\"" // "DateFormatter().date(from:(\"\(value)\"))"
-                includeEqualSign = false
-            default:
-                defaultValue = constantSchema.value.value
-                print(
-                    "default 3333 name: \(name) type: \(constantSchema.valueType.type.rawValue) swiftType: \(swiftType) value: \(value)"
-                )
-            }
-
-            print(
-                "222 name: \(name) type: \(constantSchema.valueType.type.rawValue)  value: \(defaultValue)"
-            )
-
-        } else {
-            throw CodeGenerationError.general("value not round")
-        }
-
-        self.optional = false
-        self.defaultValue = ViewModelDefault(from: defaultValue, isString: false, includeEqualSign: includeEqualSign)
-
-        self.initDefaultValue = ""
-        self.isDate = type.contains("Date")
-    }
 }
