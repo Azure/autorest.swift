@@ -12,10 +12,7 @@ public func {{ op.name }}(
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
-    
-    // Deserialize to String 2
     {% for method in op.params.method %}
-        // inside 2
         {% if method.keyValueType == "date" %}
         guard let {{ method.key }} = Date({{ method.defaultValue }}, format: Date.Format.iso8601) else {
             self.options.logger.error("Failed to construct Date from {{ method.value }}")
@@ -23,13 +20,13 @@ public func {{ op.name }}(
         }
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
         {% elif method.keyValueType == "byteArray" %}
-        let {{ method.key }} = Array( {{ method.defaultValue }}.utf8)
+        let {{ method.key }} =  {{ method.defaultValue }}.utf8
+        let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8)
         {% else %}
         let {{ method.key }} = {{ method.defaultValue }}
         {% endif %}
     {% endfor %}
-    // end Deserialize to String 2
- 
+
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}

@@ -32,9 +32,9 @@ struct OperationParameters {
     var path: [KeyValueViewModel]
     var body: BodyParams?
     var signature: [ParameterViewModel]
-    var method: [KeyValueViewModel]
     var hasOptionalParams: Bool
     var needDeserialieToStringOption: [KeyValueViewModel]
+    var method: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(parameters: [ParameterType], operation: Operation) {
