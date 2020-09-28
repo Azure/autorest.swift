@@ -22,14 +22,14 @@ public func {{ op.name }}(
         {% elif method.keyValueType == "byteArray" %}
         let {{ method.key }} = {{ method.defaultValue }}.utf8
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct Date from {{ method.key }}")
+            self.options.logger.error("Failed to construct String from {{ method.key }}")
             return
         }
         {% elif method.keyValueType == "sigDate" %}
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
         {% elif method.keyValueType == "sigByteArray" %}
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct Date from {{ method.key }}")
+            self.options.logger.error("Failed to construct String from {{ method.key }}")
             return
         }
         {% else %}
