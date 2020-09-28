@@ -65,51 +65,55 @@ struct KeyValueViewModel {
         var keyValueType = KeyValueType.default
 
         if let constantSchema = param.schema as? ConstantSchema {
-            let val: String = constantSchema.value.value
-
             self.optional = false
             self.implementedInMethod = param.implementation == ImplementationLocation.method
 
-            var value: String
-            (value, keyValueType) = convertValueToStringInSwift(
+            let constantValue: String = constantSchema.value.value
+            var value = convertValueToStringInSwift(
                 type: constantSchema.valueType.type,
-                val: val,
+                val: constantValue,
                 key: name
             )
 
-            if constantSchema.valueType.type == AllSchemaTypes.string {
+            switch constantSchema.valueType.type {
+            case .string:
                 value = "\"\(value)\""
-                self.defaultValue = "\"\(val)\""
-            } else if (constantSchema.valueType.type == AllSchemaTypes.date) ||
-                (constantSchema.valueType.type == AllSchemaTypes.dateTime) ||
-                (constantSchema.valueType.type == AllSchemaTypes.byteArray) {
+                self.defaultValue = "\"\(constantValue)\""
+            case .date,
+                 .dateTime:
                 value = "\(value)"
-                self.defaultValue = "\"\(val)\""
-            } else {
+                self.defaultValue = "\"\(constantValue)\""
+                keyValueType = .date
+            case .byteArray:
                 value = "\(value)"
-                self.defaultValue = val
+                self.defaultValue = "\"\(constantValue)\""
+                keyValueType = .byteArray
+            default:
+                value = "\(value)"
+                self.defaultValue = constantValue
             }
+
             self.value = value
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             // value is referring a signautre parameter, no need to wrap as String
-
             self.optional = !signatureParameter.required
-
-            (self.value, keyValueType) = convertValueToStringInSwift(
-                type: signatureParameter.schema.type,
-                val: name,
-                key: name
-            )
             self.defaultValue = nil
-            if (signatureParameter.schema.type == AllSchemaTypes.date) ||
-                (signatureParameter.schema.type == AllSchemaTypes.unixTime) ||
-                (signatureParameter.schema.type == AllSchemaTypes.dateTime) {
+
+            self.value = convertValueToStringInSwift(
+                type: signatureParameter.schema.type,
+                val: name
+            )
+
+            switch signatureParameter.schema.type {
+            case .date,
+                 .unixTime,
+                 .dateTime:
                 keyValueType = signatureParameter.required ? .sigDate : .date
                 self.implementedInMethod = true
-            } else if signatureParameter.schema.type == AllSchemaTypes.byteArray {
+            case .byteArray:
                 keyValueType = signatureParameter.required ? .sigByteArray : .byteArray
                 self.implementedInMethod = true
-            } else {
+            default:
                 self.implementedInMethod = false
             }
         } else {
@@ -139,27 +143,27 @@ struct KeyValueViewModel {
     }
 }
 
-func convertValueToStringInSwift(type: AllSchemaTypes, val: String, key: String? = nil) -> (String, KeyValueType) {
+func convertValueToStringInSwift(type: AllSchemaTypes, val: String, key: String? = nil) -> String {
     switch type {
     case AllSchemaTypes.string:
-        return ("\(val)", .default)
+        return "\(val)"
     case AllSchemaTypes.integer,
          AllSchemaTypes.number:
-        return ("String(\(val))", .default)
+        return "String(\(val))"
     case AllSchemaTypes.date,
          AllSchemaTypes.unixTime,
          AllSchemaTypes.dateTime:
-        return ("\(key ?? val)String", .date)
+        return "\(key ?? val)String"
     case AllSchemaTypes.choice,
          AllSchemaTypes.sealedChoice:
-        return ("\(val).rawValue", .default)
+        return "\(val).rawValue"
     case AllSchemaTypes.boolean:
-        return ("String(\(val))", .default)
+        return "String(\(val))"
     case AllSchemaTypes.array:
-        return ("\(val).map { String($0) }.joined(separator: \",\") ", .default)
+        return "\(val).map { String($0) }.joined(separator: \",\") "
     case AllSchemaTypes.byteArray:
-        return ("\(key ?? val)String", .byteArray)
+        return "\(key ?? val)String"
     default:
-        return ("\(val)", .default)
+        return "\(val)"
     }
 }
