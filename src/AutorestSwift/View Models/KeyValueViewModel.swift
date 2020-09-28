@@ -42,8 +42,7 @@ struct KeyValueViewModel {
     let key: String
     /// value of the Key-Value pair
     let value: String
-    /// nane of the parameter where the 'value' is retrieved from.
-    let paramName: String?
+
     // Flag indicates if value is optional
     let optional: Bool
 
@@ -69,7 +68,6 @@ struct KeyValueViewModel {
             let val: String = constantSchema.value.value
 
             self.optional = false
-            self.paramName = nil
             self.implementedInMethod = param.implementation == ImplementationLocation.method
 
             var value: String
@@ -87,7 +85,7 @@ struct KeyValueViewModel {
 
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             // value is referring a signautre parameter, no need to wrap as String
-            self.paramName = param.serializedName ?? param.name
+
             self.optional = !signatureParameter.required
 
             let name = param.serializedName ?? param.name
@@ -112,7 +110,6 @@ struct KeyValueViewModel {
         } else {
             self.value = ""
             self.optional = false
-            self.paramName = nil
             self.implementedInMethod = false
             self.defaultValue = nil
         }
@@ -129,7 +126,6 @@ struct KeyValueViewModel {
         self.key = key
         self.value = value
         self.optional = false
-        self.paramName = nil
 
         self.keyValueType = KeyValueType.none.rawValue
         self.implementedInMethod = false
