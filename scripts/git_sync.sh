@@ -42,9 +42,9 @@ echo "Switching to: " $SDK_REPO_ROOT
 cd $SDK_REPO_ROOT
 
 echo
-echo "Checking out communication/ChatService branch"
+echo "Checking out feature/communication branch"
 git reset
-git checkout communication/ChatService
+git checkout feature/communication
 
 cd $REPO_ROOT
 
