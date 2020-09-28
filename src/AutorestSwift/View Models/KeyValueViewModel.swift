@@ -46,7 +46,7 @@ struct KeyValueViewModel {
     // Flag indicates if value is optional
     let optional: Bool
 
-    let keyValueType: String
+    let strategy: String
     let implementedInMethod: Bool
     let defaultValue: String?
 
@@ -117,7 +117,7 @@ struct KeyValueViewModel {
         }
 
         self.key = name
-        self.keyValueType = keyValueType.rawValue
+        self.strategy = keyValueType.rawValue
     }
 
     /**
@@ -130,7 +130,7 @@ struct KeyValueViewModel {
         self.value = value
         self.optional = false
 
-        self.keyValueType = KeyValueType.none.rawValue
+        self.strategy = KeyValueType.none.rawValue
         self.implementedInMethod = false
         self.defaultValue = nil
     }

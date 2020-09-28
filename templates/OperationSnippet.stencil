@@ -13,21 +13,21 @@ public func {{ op.name }}(
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
     {% for method in op.params.method %}
-        {% if method.keyValueType == "date" %}
+        {% if method.strategy == "date" %}
         guard let {{ method.key }} = Date({{ method.defaultValue }}, format: Date.Format.iso8601) else {
             self.options.logger.error("Failed to construct Date from {{ method.value }}")
             return
         }
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
-        {% elif method.keyValueType == "byteArray" %}
+        {% elif method.strategy == "byteArray" %}
         let {{ method.key }} = {{ method.defaultValue }}.utf8
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String from {{ method.key }}")
             return
         }
-        {% elif method.keyValueType == "sigDate" %}
+        {% elif method.strategy == "sigDate" %}
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
-        {% elif method.keyValueType == "sigByteArray" %}
+        {% elif method.strategy == "sigByteArray" %}
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String from {{ method.key }}")
             return

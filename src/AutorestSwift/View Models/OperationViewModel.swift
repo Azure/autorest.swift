@@ -64,8 +64,8 @@ struct OperationParameters {
         }
 
         for param in query.optional {
-            if param.keyValueType == KeyValueType.date.rawValue ||
-                param.keyValueType == KeyValueType.byteArray.rawValue {
+            if param.strategy == KeyValueType.date.rawValue ||
+                param.strategy == KeyValueType.byteArray.rawValue {
                 needDeserialieToStringOption.append(param)
             }
         }
