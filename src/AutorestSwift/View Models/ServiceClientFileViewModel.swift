@@ -45,7 +45,7 @@ struct ServiceClientFileViewModel {
         var keyOperationGroups = [String: OperationGroupViewModel]()
         for group in model.operationGroups {
             let viewMdoel = OperationGroupViewModel(from: group, with: model)
-            if group.key.isEmpty {
+            if group.key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 operationGroups.append(viewMdoel)
             } else {
                 keyOperationGroups[group.name] = viewMdoel
@@ -59,9 +59,7 @@ struct ServiceClientFileViewModel {
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
         var globalParameters = [ParameterViewModel]()
         for globalParameter in model.globalParameters ?? [] {
-            if let vm = try? ParameterViewModel(from: globalParameter) {
-                globalParameters.append(vm)
-            }
+            globalParameters.append(ParameterViewModel(from: globalParameter))
         }
         self.globalParameters = globalParameters
     }

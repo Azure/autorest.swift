@@ -15,7 +15,7 @@ public func {{ op.name }}(
     {% for method in op.params.method %}
         {% if method.strategy == "date" %}
         guard let {{ method.key }} = Date({{ method.constantValue }}, format: Date.Format.iso8601) else {
-            self.options.logger.error("Failed to construct Date from {{ method.value }}")
+            self.options.logger.error("Failed to construct Date for {{ method.key }}")
             return
         }
         {% elif method.strategy == "byteArray" %}
@@ -25,7 +25,7 @@ public func {{ op.name }}(
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
         {% elif method.strategy == "sigByteArray" or method.strategy == "byteArray" %}
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String from {{ method.key }}")
+            self.options.logger.error("Failed to construct String for {{ method.key }}")
             return
         }
         {% else %}

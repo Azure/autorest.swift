@@ -77,7 +77,7 @@ struct KeyValueViewModel {
 
             switch constantSchema.valueType.type {
             case .string:
-                self.value = "\"\(value)\""
+                self.value = "\(value)"
                 self.constantValue = "\"\(constantValue)\""
             case .date,
                  .dateTime,
@@ -97,12 +97,14 @@ struct KeyValueViewModel {
             self.optional = !signatureParameter.required
             self.constantValue = nil
 
-            // value is referring a signautre parameter, no need to wrap as String
+            // value is referring a signature parameter, no need to wrap as String
             self.value = convertValueToStringInSwift(
                 type: signatureParameter.schema.type,
                 value: name
             )
 
+            // if parameter is from method signature (not from option) and type is date or byteArray,
+            // add decoding logic to string in the method and specify the right decoding strategy
             switch signatureParameter.schema.type {
             case .date,
                  .unixTime,
@@ -115,6 +117,11 @@ struct KeyValueViewModel {
             default:
                 self.implementedInMethod = false
             }
+        } else if param.implementation == ImplementationLocation.client {
+            self.value = "client.\(name.firstCapitalized)"
+            self.optional = false
+            self.implementedInMethod = false
+            self.constantValue = nil
         } else {
             self.value = ""
             self.optional = false
@@ -142,13 +149,13 @@ struct KeyValueViewModel {
     }
 }
 
-func convertValueToStringInSwift(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
+private func convertValueToStringInSwift(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
     switch type {
     case AllSchemaTypes.string:
-        return "\(value)"
+        return "\(key ?? value)"
     case AllSchemaTypes.integer,
          AllSchemaTypes.number:
-        return "String(\(value))"
+        return "String(\(key ?? value))"
     case AllSchemaTypes.date,
          AllSchemaTypes.unixTime,
          AllSchemaTypes.dateTime:
@@ -157,7 +164,7 @@ func convertValueToStringInSwift(type: AllSchemaTypes, value: String, key: Strin
          AllSchemaTypes.sealedChoice:
         return "\(value).rawValue"
     case AllSchemaTypes.boolean:
-        return "String(\(value))"
+        return "String(\(key ?? value))"
     case AllSchemaTypes.array:
         return "\(value).map { String($0) }.joined(separator: \",\") "
     case AllSchemaTypes.byteArray:

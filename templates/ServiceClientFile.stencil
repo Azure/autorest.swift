@@ -60,6 +60,10 @@ public final class {{ model.name }}: {{ model.protocols }} {
         )
     }
 
+{% for param in model.globalParameters %}
+    public var {{ param.name }} : {{ param.type }}
+{% endfor %}
+
     // MARK: Public Client Methods
 {% for group in model.operationGroups %}
     {% include "OperationGroupSnippet.stencil" group %}
