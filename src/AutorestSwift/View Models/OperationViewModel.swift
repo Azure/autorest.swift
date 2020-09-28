@@ -70,7 +70,8 @@ struct OperationParameters {
             }
         }
 
-        for param in query.required {
+        let allParams = query.required + path
+        for param in allParams {
             if param.implementedInMethod {
                 method.append(param)
             }

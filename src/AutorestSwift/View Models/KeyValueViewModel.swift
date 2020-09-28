@@ -28,10 +28,10 @@ import Foundation
 
 enum KeyValueType: String {
     case date
-
     case byteArray
-
     case none
+    case sigDate
+    case sigByteArray
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -100,8 +100,17 @@ struct KeyValueViewModel {
                 key: key
             )
             self.defaultValue = nil
-            self.implementedInMethod = false
-
+            if (signatureParameter.schema.type == AllSchemaTypes.date) ||
+                (signatureParameter.schema.type == AllSchemaTypes.unixTime) ||
+                (signatureParameter.schema.type == AllSchemaTypes.dateTime) {
+                keyValueType = signatureParameter.required ? .sigDate : .date
+                self.implementedInMethod = true
+            } else if signatureParameter.schema.type == AllSchemaTypes.byteArray {
+                keyValueType = signatureParameter.required ? .sigByteArray : .byteArray
+                self.implementedInMethod = true
+            } else {
+                self.implementedInMethod = false
+            }
         } else {
             self.value = ""
             self.optional = false
@@ -140,6 +149,7 @@ func convertValueToStringInSwift(type: AllSchemaTypes, val: String, key: String?
          AllSchemaTypes.number:
         return ("String(\(val))", .none)
     case AllSchemaTypes.date,
+         AllSchemaTypes.unixTime,
          AllSchemaTypes.dateTime:
         return ("\(key ?? val)String", .date)
     case AllSchemaTypes.choice,
