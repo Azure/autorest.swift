@@ -33,7 +33,6 @@ struct OperationParameters {
     var body: BodyParams?
     var signature: [ParameterViewModel]
     var hasOptionalParams: Bool
-    var needDeserialieToStringOption: [KeyValueViewModel]
     var method: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
@@ -42,7 +41,6 @@ struct OperationParameters {
         var query = Params()
         var path = [KeyValueViewModel]()
         var method = [KeyValueViewModel]()
-        var needDeserialieToStringOption = [KeyValueViewModel]()
 
         for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
@@ -63,18 +61,9 @@ struct OperationParameters {
             }
         }
 
-        for param in query.optional {
-            if param.strategy == KeyValueType.date.rawValue ||
-                param.strategy == KeyValueType.byteArray.rawValue {
-                needDeserialieToStringOption.append(param)
-            }
-        }
-
         let allParams = query.required + path
-        for param in allParams {
-            if param.implementedInMethod {
-                method.append(param)
-            }
+        for param in allParams where param.implementedInMethod {
+            method.append(param)
         }
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
@@ -116,7 +105,6 @@ struct OperationParameters {
         self.query = query
         self.path = path
         self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty)
-        self.needDeserialieToStringOption = needDeserialieToStringOption
     }
 }
 
