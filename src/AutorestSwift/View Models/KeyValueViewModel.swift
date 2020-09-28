@@ -82,9 +82,9 @@ struct KeyValueViewModel {
                 (constantSchema.valueType.type == AllSchemaTypes.date) ||
                 (constantSchema.valueType.type == AllSchemaTypes.dateTime) ||
                 (constantSchema.valueType.type == AllSchemaTypes.byteArray) {
-                self.defaultValue = "\"\(constantSchema.value.value)\""
+                self.defaultValue = "\"\(val)\""
             } else {
-                self.defaultValue = constantSchema.value.value
+                self.defaultValue = val
             }
 
         } else if let signatureParameter = operation.signatureParameter(for: name) {
