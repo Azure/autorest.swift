@@ -38,10 +38,20 @@ public final class {{ model.name }}: {{ model.protocols }} {
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
+    {% for param in model.globalParameters %}
+    {% if param.optional == false %}
+        {{ param.name }} : {{ param.type }},
+    {% endif %}
+    {% endfor %}
         baseUrl: URL,
         authPolicy: Authenticating,
         withOptions options: {{ model.name }}Options
     ) throws {
+        {% for param in model.globalParameters %}
+        {% if param.optional == false %}
+        self.{{ param.name }} = {{ param.name }}
+        {% endif %}
+        {% endfor %}
         self.options = options
         super.init(
             baseUrl: baseUrl,
@@ -61,7 +71,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
     }
 
 {% for param in model.globalParameters %}
-    public var {{ param.name }} : {{ param.type }}
+    public var {{ param.name }} : {{ param.type }}{{ param.defaultValue }}
 {% endfor %}
 
     // MARK: Public Client Methods

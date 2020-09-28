@@ -121,7 +121,7 @@ struct KeyValueViewModel {
                 self.implementedInMethod = false
             }
         } else if param.implementation == ImplementationLocation.client {
-            self.value = "client.\(name.firstCapitalized)"
+            self.value = "client.\(name)"
             self.optional = false
             self.implementedInMethod = false
             self.constantValue = nil
