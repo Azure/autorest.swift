@@ -61,7 +61,7 @@ struct KeyValueViewModel {
      */
     init(from param: ParameterType, with operation: Operation) {
         let name = param.serializedName ?? param.name
-        self.key = name
+
         var keyValueType = KeyValueType.none
 
         if let constantSchema = param.schema as? ConstantSchema {
@@ -71,7 +71,11 @@ struct KeyValueViewModel {
             self.implementedInMethod = param.implementation == ImplementationLocation.method
 
             var value: String
-            (value, keyValueType) = convertValueToStringInSwift(type: constantSchema.valueType.type, val: val, key: key)
+            (value, keyValueType) = convertValueToStringInSwift(
+                type: constantSchema.valueType.type,
+                val: val,
+                key: name
+            )
             self.value = (constantSchema.valueType.type == AllSchemaTypes.string) ? "\"\(value)\"" : "\(value)"
 
             if (constantSchema.valueType.type == AllSchemaTypes.string) ||
@@ -88,12 +92,10 @@ struct KeyValueViewModel {
 
             self.optional = !signatureParameter.required
 
-            let name = param.serializedName ?? param.name
-
             (self.value, keyValueType) = convertValueToStringInSwift(
                 type: signatureParameter.schema.type,
                 val: name,
-                key: key
+                key: name
             )
             self.defaultValue = nil
             if (signatureParameter.schema.type == AllSchemaTypes.date) ||
@@ -114,6 +116,7 @@ struct KeyValueViewModel {
             self.defaultValue = nil
         }
 
+        self.key = name
         self.keyValueType = keyValueType.rawValue
     }
 
