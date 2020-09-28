@@ -11,8 +11,8 @@ done
 REPO_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. >/dev/null 2>&1 && pwd )"
 
 # TODO: make this not hard coded
-SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios/"
-SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios/sdk/communication/"
+SDK_REPO_ROOT="/Users/travisprescott/repos/azure-sdk-for-ios/"
+SDK_PACKAGE_ROOT="/Users/travisprescott/repos/azure-sdk-for-ios/sdk/communication/"
 SDK_SRC="/Users/travisprescott/Documents/generated/sdk"
 
 # FIXME: The build step fails when run with makefile.
@@ -28,7 +28,7 @@ SDK_SRC="/Users/travisprescott/Documents/generated/sdk"
 #swift run --package-path $REPO_ROOT
 
 echo
-echo "==~ Copying generated code to azure-sdk-for-ios-pr ~=="
+echo "==~ Copying generated code to azure-sdk-for-ios ~=="
 PACKAGE_NAME=$(ls  -1 -t $SDK_SRC | head -1)
 
 # copy the jazzy files from the generated package into the SDK root
