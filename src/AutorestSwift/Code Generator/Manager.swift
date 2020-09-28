@@ -102,7 +102,7 @@ class Manager {
         try generator.generate()
 
         // Run SwiftLint and SwiftFormat on generated files
-        // formatCode(atBaseUrl: packageUrl)
+        formatCode(atBaseUrl: packageUrl)
     }
 
     /// Decodes the YAML code model file into Swift objects and evaluates model consistency

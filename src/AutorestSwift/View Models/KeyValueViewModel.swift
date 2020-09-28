@@ -27,11 +27,11 @@
 import Foundation
 
 enum KeyValueType: String {
-    case date
-    case byteArray
+    case dateFromConstant
+    case byteArrayFromConstant
     case `default`
-    case sigDate
-    case sigByteArray
+    case dateFromSignature
+    case byteArrayFromSignature
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -84,11 +84,11 @@ struct KeyValueViewModel {
                  .unixTime:
                 self.value = "\(value)"
                 self.constantValue = "\"\(constantValue)\""
-                keyValueType = .date
+                keyValueType = .dateFromConstant
             case .byteArray:
                 self.value = "\(value)"
                 self.constantValue = "\"\(constantValue)\""
-                keyValueType = .byteArray
+                keyValueType = .byteArrayFromConstant
             case .number:
                 self.value = "\(value)"
                 self.constantValue = "Double(\(constantValue))"
@@ -112,10 +112,10 @@ struct KeyValueViewModel {
             case .date,
                  .unixTime,
                  .dateTime:
-                keyValueType = signatureParameter.required ? .sigDate : .date
+                keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromConstant
                 self.implementedInMethod = true
             case .byteArray:
-                keyValueType = signatureParameter.required ? .sigByteArray : .byteArray
+                keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromConstant
                 self.implementedInMethod = true
             default:
                 self.implementedInMethod = false
