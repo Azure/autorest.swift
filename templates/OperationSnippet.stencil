@@ -18,16 +18,12 @@ public func {{ op.name }}(
             self.options.logger.error("Failed to construct Date from {{ method.value }}")
             return
         }
-        let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
         {% elif method.strategy == "byteArray" %}
         let {{ method.key }} = {{ method.constantValue }}.utf8
-        guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String from {{ method.key }}")
-            return
-        }
-        {% elif method.strategy == "sigDate" %}
+        {% endif %}
+        {% if method.strategy == "sigDate" or method.strategy == "date" %}
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
-        {% elif method.strategy == "sigByteArray" %}
+        {% elif method.strategy == "sigByteArray" or method.strategy == "byteArray" %}
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String from {{ method.key }}")
             return
