@@ -71,7 +71,7 @@ struct KeyValueViewModel {
             let constantValue: String = constantSchema.value.value
             let value = convertValueToStringInSwift(
                 type: constantSchema.valueType.type,
-                val: constantValue,
+                value: constantValue,
                 key: name
             )
 
@@ -94,13 +94,13 @@ struct KeyValueViewModel {
                 self.constantValue = constantValue
             }
         } else if let signatureParameter = operation.signatureParameter(for: name) {
-            // value is referring a signautre parameter, no need to wrap as String
             self.optional = !signatureParameter.required
             self.constantValue = nil
 
+            // value is referring a signautre parameter, no need to wrap as String
             self.value = convertValueToStringInSwift(
                 type: signatureParameter.schema.type,
-                val: name
+                value: name
             )
 
             switch signatureParameter.schema.type {
@@ -142,27 +142,27 @@ struct KeyValueViewModel {
     }
 }
 
-func convertValueToStringInSwift(type: AllSchemaTypes, val: String, key: String? = nil) -> String {
+func convertValueToStringInSwift(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
     switch type {
     case AllSchemaTypes.string:
-        return "\(val)"
+        return "\(value)"
     case AllSchemaTypes.integer,
          AllSchemaTypes.number:
-        return "String(\(val))"
+        return "String(\(value))"
     case AllSchemaTypes.date,
          AllSchemaTypes.unixTime,
          AllSchemaTypes.dateTime:
-        return "\(key ?? val)String"
+        return "\(key ?? value)String"
     case AllSchemaTypes.choice,
          AllSchemaTypes.sealedChoice:
-        return "\(val).rawValue"
+        return "\(value).rawValue"
     case AllSchemaTypes.boolean:
-        return "String(\(val))"
+        return "String(\(value))"
     case AllSchemaTypes.array:
-        return "\(val).map { String($0) }.joined(separator: \",\") "
+        return "\(value).map { String($0) }.joined(separator: \",\") "
     case AllSchemaTypes.byteArray:
-        return "\(key ?? val)String"
+        return "\(key ?? value)String"
     default:
-        return "\(val)"
+        return "\(value)"
     }
 }

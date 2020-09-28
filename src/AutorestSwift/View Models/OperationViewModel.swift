@@ -56,7 +56,6 @@ struct OperationParameters {
             case .path:
                 path.append(viewModel)
             default:
-                print("http Param not handle \(httpParam.in).rawValue")
                 continue
             }
         }
