@@ -11,8 +11,8 @@ done
 REPO_ROOT="$( cd -P "$( dirname "$SOURCE" )"/.. >/dev/null 2>&1 && pwd )"
 
 # TODO: make this not hard coded
-SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/"
-SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios-pr/sdk/secret/"
+SDK_REPO_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios/"
+SDK_PACKAGE_ROOT="/Users/travisprescott/Documents/repos/azure-sdk-for-ios/sdk/communication/"
 SDK_SRC="/Users/travisprescott/Documents/generated/sdk"
 
 # FIXME: The build step fails when run with makefile.
@@ -42,9 +42,9 @@ echo "Switching to: " $SDK_REPO_ROOT
 cd $SDK_REPO_ROOT
 
 echo
-echo "Checking out preview/SecretSDK branch"
+echo "Checking out communication/ChatService branch"
 git reset
-git checkout preview/SecretSDK
+git checkout communication/ChatService
 
 cd $REPO_ROOT
 
