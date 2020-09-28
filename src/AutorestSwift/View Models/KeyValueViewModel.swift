@@ -29,7 +29,7 @@ import Foundation
 enum KeyValueType: String {
     case date
     case byteArray
-    case none
+    case `default`
     case sigDate
     case sigByteArray
 }
@@ -62,7 +62,7 @@ struct KeyValueViewModel {
     init(from param: ParameterType, with operation: Operation) {
         let name = param.serializedName ?? param.name
 
-        var keyValueType = KeyValueType.none
+        var keyValueType = KeyValueType.default
 
         if let constantSchema = param.schema as? ConstantSchema {
             let val: String = constantSchema.value.value
@@ -76,17 +76,20 @@ struct KeyValueViewModel {
                 val: val,
                 key: name
             )
-            self.value = (constantSchema.valueType.type == AllSchemaTypes.string) ? "\"\(value)\"" : "\(value)"
 
-            if (constantSchema.valueType.type == AllSchemaTypes.string) ||
-                (constantSchema.valueType.type == AllSchemaTypes.date) ||
+            if constantSchema.valueType.type == AllSchemaTypes.string {
+                value = "\"\(value)\""
+                self.defaultValue = "\"\(val)\""
+            } else if (constantSchema.valueType.type == AllSchemaTypes.date) ||
                 (constantSchema.valueType.type == AllSchemaTypes.dateTime) ||
                 (constantSchema.valueType.type == AllSchemaTypes.byteArray) {
+                value = "\(value)"
                 self.defaultValue = "\"\(val)\""
             } else {
+                value = "\(value)"
                 self.defaultValue = val
             }
-
+            self.value = value
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             // value is referring a signautre parameter, no need to wrap as String
 
@@ -130,7 +133,7 @@ struct KeyValueViewModel {
         self.value = value
         self.optional = false
 
-        self.strategy = KeyValueType.none.rawValue
+        self.strategy = KeyValueType.default.rawValue
         self.implementedInMethod = false
         self.defaultValue = nil
     }
@@ -139,24 +142,24 @@ struct KeyValueViewModel {
 func convertValueToStringInSwift(type: AllSchemaTypes, val: String, key: String? = nil) -> (String, KeyValueType) {
     switch type {
     case AllSchemaTypes.string:
-        return ("\(val)", .none)
+        return ("\(val)", .default)
     case AllSchemaTypes.integer,
          AllSchemaTypes.number:
-        return ("String(\(val))", .none)
+        return ("String(\(val))", .default)
     case AllSchemaTypes.date,
          AllSchemaTypes.unixTime,
          AllSchemaTypes.dateTime:
         return ("\(key ?? val)String", .date)
     case AllSchemaTypes.choice,
          AllSchemaTypes.sealedChoice:
-        return ("\(val).rawValue", .none)
+        return ("\(val).rawValue", .default)
     case AllSchemaTypes.boolean:
-        return ("String(\(val))", .none)
+        return ("String(\(val))", .default)
     case AllSchemaTypes.array:
-        return ("\(val).map { String($0) }.joined(separator: \",\") ", .none)
+        return ("\(val).map { String($0) }.joined(separator: \",\") ", .default)
     case AllSchemaTypes.byteArray:
         return ("\(key ?? val)String", .byteArray)
     default:
-        return ("\(val)", .none)
+        return ("\(val)", .default)
     }
 }
