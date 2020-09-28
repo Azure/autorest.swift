@@ -89,6 +89,9 @@ struct KeyValueViewModel {
                 self.value = "\(value)"
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .byteArray
+            case .number:
+                self.value = "\(value)"
+                self.constantValue = "Double(\(constantValue))"
             default:
                 self.value = "\(value)"
                 self.constantValue = constantValue

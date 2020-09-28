@@ -58,7 +58,7 @@ struct ServiceClientFileViewModel {
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
         var globalParameters = [ParameterViewModel]()
-        for globalParameter in model.globalParameters ?? [] {
+        for globalParameter in model.globalParameters ?? [] where !globalParameter.name.starts(with: "$") {
             globalParameters.append(ParameterViewModel(from: globalParameter))
         }
         self.globalParameters = globalParameters
