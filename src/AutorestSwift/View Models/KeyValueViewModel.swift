@@ -50,7 +50,7 @@ struct KeyValueViewModel {
     let keyValueType: String
     let implementedInMethod: Bool
     let defaultValue: String?
-    let type: String
+
     /**
         Create a ViewModel with a Key and Value pair
 
@@ -76,7 +76,6 @@ struct KeyValueViewModel {
             (value, keyValueType) = convertValueToStringInSwift(type: constantSchema.valueType.type, val: val, key: key)
             self.value = (constantSchema.valueType.type == AllSchemaTypes.string) ? "\"\(value)\"" : "\(value)"
 
-            self.type = constantSchema.valueType.swiftType(optional: optional)
             if (constantSchema.valueType.type == AllSchemaTypes.string) ||
                 (constantSchema.valueType.type == AllSchemaTypes.date) ||
                 (constantSchema.valueType.type == AllSchemaTypes.dateTime) ||
@@ -90,7 +89,6 @@ struct KeyValueViewModel {
             // value is referring a signautre parameter, no need to wrap as String
             self.paramName = param.serializedName ?? param.name
             self.optional = !signatureParameter.required
-            self.type = signatureParameter.schema.swiftType(optional: optional)
 
             let name = param.serializedName ?? param.name
 
@@ -117,7 +115,6 @@ struct KeyValueViewModel {
             self.paramName = nil
             self.implementedInMethod = false
             self.defaultValue = nil
-            self.type = ""
         }
 
         self.keyValueType = keyValueType.rawValue
@@ -137,7 +134,6 @@ struct KeyValueViewModel {
         self.keyValueType = KeyValueType.none.rawValue
         self.implementedInMethod = false
         self.defaultValue = nil
-        self.type = ""
     }
 }
 
