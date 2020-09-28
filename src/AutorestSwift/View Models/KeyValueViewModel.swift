@@ -48,7 +48,7 @@ struct KeyValueViewModel {
 
     let strategy: String
     let implementedInMethod: Bool
-    let defaultValue: String?
+    let constantValue: String?
 
     /**
         Create a ViewModel with a Key and Value pair
@@ -69,7 +69,7 @@ struct KeyValueViewModel {
             self.implementedInMethod = param.implementation == ImplementationLocation.method
 
             let constantValue: String = constantSchema.value.value
-            var value = convertValueToStringInSwift(
+            let value = convertValueToStringInSwift(
                 type: constantSchema.valueType.type,
                 val: constantValue,
                 key: name
@@ -77,27 +77,26 @@ struct KeyValueViewModel {
 
             switch constantSchema.valueType.type {
             case .string:
-                value = "\"\(value)\""
-                self.defaultValue = "\"\(constantValue)\""
+                self.value = "\"\(value)\""
+                self.constantValue = "\"\(constantValue)\""
             case .date,
-                 .dateTime:
-                value = "\(value)"
-                self.defaultValue = "\"\(constantValue)\""
+                 .dateTime,
+                 .unixTime:
+                self.value = "\(value)"
+                self.constantValue = "\"\(constantValue)\""
                 keyValueType = .date
             case .byteArray:
-                value = "\(value)"
-                self.defaultValue = "\"\(constantValue)\""
+                self.value = "\(value)"
+                self.constantValue = "\"\(constantValue)\""
                 keyValueType = .byteArray
             default:
-                value = "\(value)"
-                self.defaultValue = constantValue
+                self.value = "\(value)"
+                self.constantValue = constantValue
             }
-
-            self.value = value
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             // value is referring a signautre parameter, no need to wrap as String
             self.optional = !signatureParameter.required
-            self.defaultValue = nil
+            self.constantValue = nil
 
             self.value = convertValueToStringInSwift(
                 type: signatureParameter.schema.type,
@@ -120,7 +119,7 @@ struct KeyValueViewModel {
             self.value = ""
             self.optional = false
             self.implementedInMethod = false
-            self.defaultValue = nil
+            self.constantValue = nil
         }
 
         self.key = name
@@ -139,7 +138,7 @@ struct KeyValueViewModel {
 
         self.strategy = KeyValueType.default.rawValue
         self.implementedInMethod = false
-        self.defaultValue = nil
+        self.constantValue = nil
     }
 }
 

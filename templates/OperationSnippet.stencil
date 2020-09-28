@@ -14,13 +14,13 @@ public func {{ op.name }}(
 ) {
     {% for method in op.params.method %}
         {% if method.strategy == "date" %}
-        guard let {{ method.key }} = Date({{ method.defaultValue }}, format: Date.Format.iso8601) else {
+        guard let {{ method.key }} = Date({{ method.constantValue }}, format: Date.Format.iso8601) else {
             self.options.logger.error("Failed to construct Date from {{ method.value }}")
             return
         }
         let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
         {% elif method.strategy == "byteArray" %}
-        let {{ method.key }} = {{ method.defaultValue }}.utf8
+        let {{ method.key }} = {{ method.constantValue }}.utf8
         guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String from {{ method.key }}")
             return
@@ -33,7 +33,7 @@ public func {{ op.name }}(
             return
         }
         {% else %}
-        let {{ method.key }} = {{ method.defaultValue }}
+        let {{ method.key }} = {{ method.constantValue }}
         {% endif %}
     {% endfor %}
     {% include "OperationUrlSnippet.stencil" %}
