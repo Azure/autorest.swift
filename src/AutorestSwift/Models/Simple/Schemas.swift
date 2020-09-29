@@ -47,7 +47,7 @@ class Schemas: Codable {
     let strings: [StringSchema]?
 
     /// UnixTime
-    let unixTimes: [UnixTimeSchema]?
+    let unixtimes: [UnixTimeSchema]?
 
     /// an array of bytes
     let byteArrays: [ByteArraySchema]?

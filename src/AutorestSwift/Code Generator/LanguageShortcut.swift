@@ -44,7 +44,8 @@ extension LanguageShortcut {
     var name: String {
         get {
             let reserved = [
-                "Error": "ErrorType"
+                "Error": "ErrorType",
+                "Int": "IntType"
             ]
 
             let name = language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)

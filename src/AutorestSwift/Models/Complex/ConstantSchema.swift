@@ -38,6 +38,10 @@ class ConstantSchema: Schema {
         case valueType, value
     }
 
+    enum ValueCodingKeys: String, CodingKey {
+        case value
+    }
+
     // MARK: Codable
 
     public required init(from decoder: Decoder) throws {
@@ -54,7 +58,28 @@ class ConstantSchema: Schema {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(valueType, forKey: .valueType)
-        try container.encode(value, forKey: .value)
+
+        var valueContainer = container
+            .nestedContainer(keyedBy: ValueCodingKeys.self, forKey: .value)
+
+        switch valueType.type {
+        case .boolean:
+            try valueContainer.encode(Bool(value.value), forKey: .value)
+        case .integer:
+            try valueContainer.encode(Int(value.value), forKey: .value)
+        case .number:
+            if let numberSchema = valueType as? NumberSchema {
+                if numberSchema.precision >= 32 {
+                    try valueContainer.encode(Double(value.value), forKey: .value)
+                } else {
+                    try valueContainer.encode(value.value, forKey: .value)
+                }
+            } else {
+                try valueContainer.encode(Double(value.value), forKey: .value)
+            }
+        default:
+            try valueContainer.encode(value.value, forKey: .value)
+        }
 
         try super.encode(to: encoder)
     }
