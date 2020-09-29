@@ -44,7 +44,9 @@ struct PropertyViewModel {
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
-        self.name = schema.serializedName ?? schema.name
+        let name = schema.serializedName ?? schema.name
+        assert(!name.isEmpty)
+        self.name = name
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema.swiftType()
         self.optional = !schema.required
