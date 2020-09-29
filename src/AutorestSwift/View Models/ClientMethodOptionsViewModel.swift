@@ -46,7 +46,11 @@ struct ClientMethodOptionsViewModel {
         self.clientName = model.name
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
-        self.extensionName = groupName
+        if model.object(for: groupName) != nil {
+            self.extensionName = groupName + "Operation"
+        } else {
+            self.extensionName = groupName
+        }
         var properties = [PropertyViewModel]()
 
         parameters.forEach {

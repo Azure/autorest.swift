@@ -42,17 +42,23 @@ struct ServiceClientFileViewModel {
         self.name = "\(model.packageName)Client"
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
-        var keyOperationGroups = [String: OperationGroupViewModel]()
+        var namedOperationGroups = [String: OperationGroupViewModel]()
         for group in model.operationGroups {
-            let viewMdoel = OperationGroupViewModel(from: group, with: model)
-            if group.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                operationGroups.append(viewMdoel)
+            var viewModel = OperationGroupViewModel(from: group, with: model)
+            var groupName = group.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            if groupName.isEmpty {
+                operationGroups.append(viewModel)
+                // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
+            } else if model.object(for: groupName) != nil {
+                groupName += "Operation"
+                viewModel.name = groupName
+                namedOperationGroups[groupName] = viewModel
             } else {
-                keyOperationGroups[group.name] = viewMdoel
+                namedOperationGroups[groupName] = viewModel
             }
         }
         self.operationGroups = operationGroups
-        self.namedOperationGroups = keyOperationGroups
+        self.namedOperationGroups = namedOperationGroups
         self.apiVersion = model.getApiVersion()
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames

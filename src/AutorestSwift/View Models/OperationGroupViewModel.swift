@@ -31,7 +31,7 @@ import Foundation
 ///     // MARK: OperationGroupName
 ///     ...
 struct OperationGroupViewModel {
-    let name: String
+    var name: String
     let operations: [OperationViewModel]
     let comment: ViewModelComment
 

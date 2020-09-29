@@ -47,6 +47,16 @@ class CodeModel: Codable, LanguageShortcut {
         return globalParameters?.first(named: name)
     }
 
+    /// Lookup a model by name
+    func object(for name: String) -> ObjectSchema? {
+        for object in schemas.objects ?? [] {
+            if object.name == name {
+                return object
+            }
+        }
+        return nil
+    }
+
     func getApiVersion() -> String {
         if let constantSchema = globalParameter(for: "api-version")?.schema as? ConstantSchema {
             return constantSchema.value.value
