@@ -61,5 +61,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         )
     }
 
+    public var files: Files?
+
     // MARK: Public Client Methods
 }

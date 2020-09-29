@@ -61,5 +61,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         )
     }
 
+    public var petoperation: PetOperation?
+
     // MARK: Public Client Methods
 }

@@ -61,5 +61,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
         )
     }
 
+    public var httpsuccess: HttpSuccess?
+
     // MARK: Public Client Methods
 }

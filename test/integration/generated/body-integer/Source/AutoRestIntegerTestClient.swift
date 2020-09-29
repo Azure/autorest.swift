@@ -61,5 +61,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
         )
     }
 
+    public var inttype: IntType?
+
     // MARK: Public Client Methods
 }

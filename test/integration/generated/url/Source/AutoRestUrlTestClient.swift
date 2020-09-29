@@ -63,8 +63,14 @@ public final class AutoRestUrlTestClient: PipelineClient {
         )
     }
 
+    // /// A string value 'globalItemStringPath' that appears in the path
     public var globalStringPath: String
+    // /// should contain value null
     public var globalStringQuery: String?
+
+    public var paths: Paths?
+    public var pathitems: PathItems?
+    public var queries: Queries?
 
     // MARK: Public Client Methods
 }
