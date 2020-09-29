@@ -105,7 +105,7 @@ class SwiftGenerator: CodeGenerator {
 
         // Create ClientMethodOptions.swift file
         for operationGroup in clientViewModel.operationGroups {
-            try renderClientMethodOptionsFile(for: operationGroup)
+            try renderClientMethodOptionsFile(for: operationGroup, using: "ClientMethodOptionsFile")
         }
 
         // Create ClientOperationGroup.swift file for each operation group with name
@@ -116,7 +116,7 @@ class SwiftGenerator: CodeGenerator {
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try renderClientMethodOptionsFile(for: operationGroup, with: groupName)
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethodOptionsFile")
         }
 
         // Create ClientOptions.swift file
@@ -169,7 +169,8 @@ class SwiftGenerator: CodeGenerator {
 
     private func renderClientMethodOptionsFile(
         for operationGroup: OperationGroupViewModel,
-        with groupName: String? = nil
+        with groupName: String? = nil,
+        using template: String
     ) throws {
         for operation in operationGroup.operations {
             let clientMethodOptions = operation.clientMethodOptions
@@ -181,7 +182,7 @@ class SwiftGenerator: CodeGenerator {
             fileName += "\(clientMethodOptions.name.capitalized).swift"
 
             try render(
-                template: "ClientMethodOptionsFile",
+                template: template,
                 toSubfolder: .options,
                 withFilename: fileName,
                 andParams: ["model": clientMethodOptions]

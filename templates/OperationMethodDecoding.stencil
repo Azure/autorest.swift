@@ -1,0 +1,22 @@
+{% for method in op.params.methodDecoding %}
+    {% if method.strategy == "dateFromConstant" %}
+    guard let {{ method.key }} = Date({{ method.constantValue }}, format: Date.Format.iso8601) else {
+        self.options.logger.error("Failed to construct Date for {{ method.key }}")
+        return
+    }
+    {% elif method.strategy == "byteArrayFromConstant" %}
+    let {{ method.key }} = {{ method.constantValue }}.utf8
+    {% endif %}
+    {% if method.strategy == "dateFromSignature" or method.strategy == "dateFromConstant" %}
+    let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
+    {% elif method.strategy == "byteArrayFromSignature" or method.strategy == "byteArrayFromConstant" %}
+    guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
+        self.options.logger.error("Failed to construct String for {{ method.key }}")
+        return
+    }
+    {% else %}
+    let {{ method.key }} = {{ method.constantValue }}
+    {% endif %}
+{% endfor %}
+
+
