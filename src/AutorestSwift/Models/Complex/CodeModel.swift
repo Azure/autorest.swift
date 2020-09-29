@@ -49,7 +49,9 @@ class CodeModel: Codable, LanguageShortcut {
 
     /// Lookup a model by name
     func object(for name: String) -> ObjectSchema? {
-        return schemas.objects?.first(where: { $0.name == name })
+        let values = schemas.objects?.filter { $0.name == name }
+        assert(values.count <= 1, "Expected, at most, one item.")
+        return values.first
     }
 
     func getApiVersion() -> String {
