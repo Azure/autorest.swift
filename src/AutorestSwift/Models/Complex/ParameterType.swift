@@ -174,7 +174,7 @@ extension Array where Element == ParameterType {
             if let httpParam = param.protocol.http as? HttpParameter {
                 guard httpParam.in != .body else { return false }
                 // All path parameter are required
-                return httpParam.in == .path ? true : param.required
+                guard httpParam.in != .path else { return true}
             }
             return param.required
         }
