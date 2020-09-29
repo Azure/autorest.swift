@@ -48,17 +48,11 @@ struct ServiceClientFileViewModel {
         var namedOperationGroups = [String: OperationGroupViewModel]()
         var namedOperationGroupProperties = [KeyValueViewModel]()
         for group in model.operationGroups {
-            var viewModel = OperationGroupViewModel(from: group, with: model)
-            var groupName = group.name.trimmingCharacters(in: .whitespacesAndNewlines)
-            if groupName.isEmpty {
+            let viewModel = OperationGroupViewModel(from: group, with: model)
+            if viewModel.name.isEmpty {
                 operationGroups.append(viewModel)
-                // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
-            } else if model.object(for: groupName) != nil {
-                groupName += "Operation"
-                viewModel.name = groupName
-                namedOperationGroups[groupName] = viewModel
             } else {
-                namedOperationGroups[groupName] = viewModel
+                namedOperationGroups[viewModel.name] = viewModel
             }
         }
         self.operationGroups = operationGroups

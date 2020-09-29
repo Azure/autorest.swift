@@ -176,7 +176,7 @@ class SwiftGenerator: CodeGenerator {
             let clientMethodOptions = operation.clientMethodOptions
             var fileName = ""
             if let groupName = groupName {
-                fileName = "\(groupName + ".")"
+                fileName = "\(groupName + "+")"
             }
 
             fileName += "\(clientMethodOptions.name.capitalized).swift"

@@ -85,5 +85,5 @@ extension String {
         return self[firstElementIndex ..< lastElementIndex.base]
     }
 
-    var firstLowerCased: String { return prefix(1).lowercased() + dropFirst() }
+    var lowercasedFirst: String { return prefix(1).lowercased() + dropFirst() }
 }

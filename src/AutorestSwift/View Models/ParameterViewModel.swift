@@ -38,9 +38,9 @@ struct ParameterViewModel {
 
     init(from param: ParameterType, withName specificName: String? = nil) {
         if let name = specificName, !name.isEmpty {
-            self.name = name.firstLowerCased
+            self.name = name.lowercasedFirst
         } else {
-            self.name = param.name.firstLowerCased
+            self.name = param.name.lowercasedFirst
         }
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)

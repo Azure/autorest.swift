@@ -84,9 +84,13 @@ class Schema: Codable, LanguageShortcut {
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
-        case AllSchemaTypes.string,
-             AllSchemaTypes.constant:
+        case AllSchemaTypes.string:
             swiftType = "String"
+        case AllSchemaTypes.constant:
+            guard let constant = self as? ConstantSchema else {
+                fatalError("Type mismatch. Expected constant type but got \(self)")
+            }
+            swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.boolean:
             swiftType = "Bool"
         case AllSchemaTypes.array:

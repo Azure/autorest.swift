@@ -31,12 +31,20 @@ import Foundation
 ///     // MARK: OperationGroupName
 ///     ...
 struct OperationGroupViewModel {
-    var name: String
+    let name: String
     let operations: [OperationViewModel]
     let comment: ViewModelComment
 
     init(from group: OperationGroup, with model: CodeModel) {
-        self.name = group.name.isEmpty ? model.name : group.name
+        let name = group.name.isEmpty ? model.name : group.name
+
+        var groupName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if model.object(for: groupName) != nil {
+            // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
+            groupName += "Operation"
+        }
+        self.name = groupName
+
         self.comment = ViewModelComment(from: group.description)
         var items = [OperationViewModel]()
         for operation in group.operations {

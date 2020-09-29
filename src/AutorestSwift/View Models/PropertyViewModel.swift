@@ -36,7 +36,7 @@ struct PropertyViewModel {
     let type: String
     // default value of the proeprty
     let defaultValue: ViewModelDefault
-    // default value of the property in the init(). Valid values are either nil (for optoinal property) or "" (i.e. not specfied for required property in init() method.)
+    // default value of the property in the init(). Valid values are either nil (for optional property) or "" (i.e. not specfied for required property in init() method.)
     let initDefaultValue: String
     let isDate: Bool
     let optional: Bool

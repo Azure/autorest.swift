@@ -76,7 +76,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
 {% endfor %}
 
 {% for property in model.namedOperationGroupProperties %}
-    public lazy var {{ property.value }}: {{ property.key }} = {{ property.key }}(client: self)
+    private(set) lazy var {{ property.value }}: {{ property.key }} = {{ property.key }}(client: self)
 {%endfor %}
 
     // MARK: Public Client Methods
