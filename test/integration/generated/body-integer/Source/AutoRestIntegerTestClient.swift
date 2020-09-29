@@ -61,7 +61,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
         )
     }
 
-    public var inttype: IntType?
+    public lazy var inttype: IntType = IntType(client: self)
 
     // MARK: Public Client Methods
 }

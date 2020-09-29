@@ -61,7 +61,7 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
         )
     }
 
-    public var files: Files?
+    public lazy var files: Files = Files(client: self)
 
     // MARK: Public Client Methods
 }
