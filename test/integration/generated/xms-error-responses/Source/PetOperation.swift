@@ -16,93 +16,60 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class AutoRestReportClient: PipelineClient {
-    /// API version of the  to invoke. Defaults to the latest.
-    public enum ApiVersion: String {
-        /// API version ""
-        case v = ""
+public final class PetOperation {
+    public let client: XmsErrorResponseExtensionsClient
 
-        /// The most recent API version of the
-        public static var latest: ApiVersion {
-            return .v
-        }
+    public let commonOptions: AzureClientOptions
+
+    /// Options provided to configure this `XmsErrorResponseExtensionsClient`.
+    public let options: XmsErrorResponseExtensionsClientOptions
+
+    init(client: XmsErrorResponseExtensionsClient) {
+        self.client = client
+        self.options = client.options
+        self.commonOptions = client.commonOptions
     }
 
-    /// Options provided to configure this `AutoRestReportClient`.
-    public let options: AutoRestReportClientOptions
-
-    // MARK: Initializers
-
-    /// Create a AutoRestReportClient client.
-    /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestReportClient.
-    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
-    ///   - options: Options used to configure the client.
-    public init(
-        baseUrl: URL,
-        authPolicy: Authenticating,
-        withOptions options: AutoRestReportClientOptions
-    ) throws {
-        self.options = options
-        super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
-            policies: [
-                UserAgentPolicy(for: AutoRestReportClient.self, telemetryOptions: options.telemetryOptions),
-                RequestIdPolicy(),
-                AddDatePolicy(),
-                authPolicy,
-                ContentDecodePolicy(),
-                LoggingPolicy(),
-                NormalizeETagPolicy()
-            ],
-            logger: options.logger,
-            options: options
-        )
+    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs)
     }
 
-    // MARK: Public Client Methods
+    public func request(
+        _ request: HTTPRequest,
+        context: PipelineContext?,
+        completionHandler: @escaping HTTPResultHandler<Data?>
+    ) {
+        return client.request(request, context: context, completionHandler: completionHandler)
+    }
 
-    // MARK: AutoRestReportService
-
-    /// Get test coverage report
+    /// Gets pets by id.
     /// - Parameters:
-
+    ///    - petId : pet id
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getReport(
-        withOptions options: GetReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int]>
+    public func getPetById(
+        petId: String,
+        withOptions options: GetPetByIdOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
         // Construct URL
-        let urlTemplate = "/report"
+        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
-            "": ""
+            "petId": petId
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
             return
         }
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
             ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        if let options = options {
-            // Query options
-            if let qualifier = options.qualifier {
-                // TODO: Couldn't find template for default
-
-                queryParams.append("qualifier", qualifier)
-            }
-
-            // Header options
-        }
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -116,7 +83,7 @@ public final class AutoRestReportClient: PipelineClient {
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200, 202, 400, 404, 501] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
@@ -143,7 +110,7 @@ public final class AutoRestReportClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode(Pet.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -153,74 +120,103 @@ public final class AutoRestReportClient: PipelineClient {
                         }
                     }
                 }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                if [
+                    202
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(
+                            .success(nil),
+                            httpResponse
+                        )
+                    }
+                }
+                if [
+                    400
+                ].contains(statusCode) {
+                    let decoded = String(data: data, encoding: .utf8)
                     dispatchQueue.async {
                         completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                }
+                if [
+                    404
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
                     }
+                }
+                if [
+                    501
+                ].contains(statusCode) {
+                    if let decodedstr = String(data: data, encoding: .utf8),
+                        let decoded = Int32(decodedstr) {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        }
+                    } else {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                        }
+                    }
+                }
+            case let .failure(error):
+                dispatchQueue.async {
+                    completionHandler(.failure(error), httpResponse)
                 }
             }
         }
     }
 
-    /// Get optional test coverage report
+    /// Asks pet to do something
     /// - Parameters:
-
+    ///    - whatAction : what action the pet should do
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getOptionalReport(
-        withOptions options: GetOptionalReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int]>
+    public func doSomething(
+        whatAction: String,
+        withOptions options: DoSomethingOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
         // Construct URL
-        let urlTemplate = "/report/optional"
+        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
-            "": ""
+            "whatAction": whatAction
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
             return
         }
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
             ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        if let options = options {
-            // Query options
-            if let qualifier = options.qualifier {
-                // TODO: Couldn't find template for default
-
-                queryParams.append("qualifier", qualifier)
-            }
-
-            // Header options
-        }
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
         }
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
@@ -247,9 +243,24 @@ public final class AutoRestReportClient: PipelineClient {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode(PetAction.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+                if [
+                    500
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(PetActionError.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -260,7 +271,7 @@ public final class AutoRestReportClient: PipelineClient {
             case .failure:
                 do {
                     let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    let decoded = try decoder.decode(PetActionError.self, from: data)
                     dispatchQueue.async {
                         completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }

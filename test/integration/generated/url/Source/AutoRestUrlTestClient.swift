@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class XmsErrorResponseExtensionsClient: PipelineClient {
+public final class AutoRestUrlTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
         /// API version ""
@@ -28,27 +28,29 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         }
     }
 
-    /// Options provided to configure this `XmsErrorResponseExtensionsClient`.
-    public let options: XmsErrorResponseExtensionsClientOptions
+    /// Options provided to configure this `AutoRestUrlTestClient`.
+    public let options: AutoRestUrlTestClientOptions
 
     // MARK: Initializers
 
-    /// Create a XmsErrorResponseExtensionsClient client.
+    /// Create a AutoRestUrlTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the XmsErrorResponseExtensionsClient.
+    ///   - baseUrl: Base URL for the AutoRestUrlTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
+        globalStringPath: String,
         baseUrl: URL,
         authPolicy: Authenticating,
-        withOptions options: XmsErrorResponseExtensionsClientOptions
+        withOptions options: AutoRestUrlTestClientOptions
     ) throws {
+        self.globalStringPath = globalStringPath
         self.options = options
         super.init(
             baseUrl: baseUrl,
             transport: URLSessionTransport(),
             policies: [
-                UserAgentPolicy(for: XmsErrorResponseExtensionsClient.self, telemetryOptions: options.telemetryOptions),
+                UserAgentPolicy(for: AutoRestUrlTestClient.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
                 AddDatePolicy(),
                 authPolicy,
@@ -60,6 +62,9 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
             options: options
         )
     }
+
+    public var globalStringPath: String
+    public var globalStringQuery: String?
 
     // MARK: Public Client Methods
 }
