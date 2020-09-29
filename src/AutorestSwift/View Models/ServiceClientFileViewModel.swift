@@ -36,13 +36,17 @@ struct ServiceClientFileViewModel {
     let protocols: String
     let paging: Language.PagingNames?
     let globalParameters: [ParameterViewModel]
+    // A dictionary of all the named operation group. Key is the group name , Value is the operation group view model.
     let namedOperationGroups: [String: OperationGroupViewModel]
+    // A key,Value pairs of all the named operation group for stencil template engine
+    let namedOperationGroupProperties: [KeyValueViewModel]
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
         var namedOperationGroups = [String: OperationGroupViewModel]()
+        var namedOperationGroupProperties = [KeyValueViewModel]()
         for group in model.operationGroups {
             var viewModel = OperationGroupViewModel(from: group, with: model)
             var groupName = group.name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -68,5 +72,9 @@ struct ServiceClientFileViewModel {
             globalParameters.append(ParameterViewModel(from: globalParameter))
         }
         self.globalParameters = globalParameters
+        for key in namedOperationGroups.keys {
+            namedOperationGroupProperties.append(KeyValueViewModel(key: key, value: key.lowercased()))
+        }
+        self.namedOperationGroupProperties = namedOperationGroupProperties
     }
 }

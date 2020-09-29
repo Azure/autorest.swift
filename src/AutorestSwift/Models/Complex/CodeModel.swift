@@ -49,12 +49,7 @@ class CodeModel: Codable, LanguageShortcut {
 
     /// Lookup a model by name
     func object(for name: String) -> ObjectSchema? {
-        for object in schemas.objects ?? [] {
-            if object.name == name {
-                return object
-            }
-        }
-        return nil
+        return schemas.objects?.first(where: { $0.name == name })
     }
 
     func getApiVersion() -> String {

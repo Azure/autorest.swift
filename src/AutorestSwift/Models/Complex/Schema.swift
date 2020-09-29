@@ -84,7 +84,8 @@ class Schema: Codable, LanguageShortcut {
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
-        case AllSchemaTypes.string:
+        case AllSchemaTypes.string,
+             AllSchemaTypes.constant:
             swiftType = "String"
         case AllSchemaTypes.boolean:
             swiftType = "Bool"

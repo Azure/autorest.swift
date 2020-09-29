@@ -71,8 +71,13 @@ public final class {{ model.name }}: {{ model.protocols }} {
     }
 
 {% for param in model.globalParameters %}
-    public var {{ param.name }} : {{ param.type }}{{ param.defaultValue }}
+    // {{ param.comment }}
+    public var {{ param.name }}: {{ param.type }}{{ param.defaultValue }}
 {% endfor %}
+
+{% for property in model.namedOperationGroupProperties %}
+    public var {{ property.value }}: {{ property.key }}?
+{%endfor %}
 
     // MARK: Public Client Methods
 {% for group in model.operationGroups %}
