@@ -45,7 +45,7 @@ struct ServiceClientFileViewModel {
         var keyOperationGroups = [String: OperationGroupViewModel]()
         for group in model.operationGroups {
             let viewMdoel = OperationGroupViewModel(from: group, with: model)
-            if group.key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if group.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 operationGroups.append(viewMdoel)
             } else {
                 keyOperationGroups[group.name] = viewMdoel

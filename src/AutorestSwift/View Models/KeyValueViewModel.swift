@@ -67,10 +67,10 @@ struct KeyValueViewModel {
 
         if let constantSchema = param.schema as? ConstantSchema {
             self.optional = false
-            self.needDecodingInMethod = param.implementation == ImplementationLocation.method
+            var needDecodingInMethod = param.implementation == ImplementationLocation.method
 
             let constantValue: String = constantSchema.value.value
-            self.value = convertValueToStringInSwift(
+            let value = convertValueToStringInSwift(
                 type: constantSchema.valueType.type,
                 value: constantValue,
                 key: name
@@ -78,20 +78,27 @@ struct KeyValueViewModel {
 
             switch constantSchema.valueType.type {
             case .string:
+                self.value = "\"\(constantValue)\""
                 self.constantValue = "\"\(constantValue)\""
+                needDecodingInMethod = false
             case .date,
                  .dateTime,
                  .unixTime:
+                self.value = value
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .dateFromConstant
             case .byteArray:
+                self.value = value
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .byteArrayFromConstant
             case .number:
+                self.value = value
                 self.constantValue = "Double(\(constantValue))"
             default:
+                self.value = value
                 self.constantValue = constantValue
             }
+            self.needDecodingInMethod = needDecodingInMethod
         } else if let signatureParameter = operation.signatureParameter(for: name) {
             self.optional = !signatureParameter.required
             self.constantValue = nil
