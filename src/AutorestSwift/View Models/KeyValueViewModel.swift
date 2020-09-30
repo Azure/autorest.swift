@@ -78,20 +78,20 @@ struct KeyValueViewModel {
         self.key = name
         let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
+        let type = constantSchema.valueType.type
 
-        if constantSchema.valueType.type == .string {
+        if type == .string {
             self.value = "\"\(constantValue)\""
             self.constantValue = "\"\(constantValue)\""
             self.needDecodingInMethod = false
         } else {
-            self.value = KeyValueViewModel.formatValueFroType(
-                type: constantSchema.valueType.type,
+            self.value = KeyValueViewModel.formatValueForType(
+                type: type,
                 value: constantValue,
                 key: name
             )
             self.needDecodingInMethod = param.implementation == ImplementationLocation.method
-
-            switch constantSchema.valueType.type {
+            switch type {
             case .date,
                  .dateTime,
                  .unixTime:
@@ -114,16 +114,17 @@ struct KeyValueViewModel {
         self.optional = !signatureParameter.required
         self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default
+        let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValueFroType(
-            type: signatureParameter.schema.type,
+        self.value = KeyValueViewModel.formatValueForType(
+            type: type,
             value: name
         )
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
-        switch signatureParameter.schema.type {
+        switch type {
         case .date,
              .unixTime,
              .dateTime:
@@ -156,7 +157,7 @@ struct KeyValueViewModel {
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueFroType(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
+    private static func formatValueForType(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
         switch type {
         case .string:
             return "\(key ?? value)"
