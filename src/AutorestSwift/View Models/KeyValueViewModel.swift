@@ -27,8 +27,8 @@
 import Foundation
 
 enum KeyValueDecodeStrategy: String {
-    case dateFromConstant
-    case byteArrayFromConstant
+    case dateFromParam
+    case byteArrayFromParam
     case `default`
     case dateFromSignature
     case byteArrayFromSignature
@@ -96,10 +96,10 @@ struct KeyValueViewModel {
                  .dateTime,
                  .unixTime:
                 self.constantValue = "\"\(constantValue)\""
-                keyValueType = .dateFromConstant
+                keyValueType = .dateFromParam
             case .byteArray:
                 self.constantValue = "\"\(constantValue)\""
-                keyValueType = .byteArrayFromConstant
+                keyValueType = .byteArrayFromParam
             case .number:
                 self.constantValue = "Double(\(constantValue))"
             default:
@@ -127,10 +127,10 @@ struct KeyValueViewModel {
         case .date,
              .unixTime,
              .dateTime:
-            keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromConstant
+            keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromParam
             self.needDecodingInMethod = true
         case .byteArray:
-            keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromConstant
+            keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromParam
             self.needDecodingInMethod = true
         default:
             self.needDecodingInMethod = false
