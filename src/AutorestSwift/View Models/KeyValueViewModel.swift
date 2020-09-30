@@ -63,79 +63,78 @@ struct KeyValueViewModel {
     init(from param: ParameterType, with operation: Operation) {
         let name = param.serializedName ?? param.name
 
+        if let constantSchema = param.schema as? ConstantSchema {
+            self.init(param: param, constantSchema: constantSchema, name: name)
+        } else if let signatureParameter = operation.signatureParameter(for: name) {
+            self.init(signatureParameter: signatureParameter, name: name)
+        } else {
+            let value = (param.implementation == ImplementationLocation.client) ? "client.\(name)" : ""
+            self.init(key: name, value: value)
+        }
+    }
+
+    init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
+        self.optional = false
+        self.key = name
+        let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
 
-        if let constantSchema = param.schema as? ConstantSchema {
-            self.optional = false
-            var needDecodingInMethod = param.implementation == ImplementationLocation.method
-
-            let constantValue: String = constantSchema.value.value
-            let value = convertValueToStringInSwift(
+        if constantSchema.valueType.type == .string {
+            self.value = "\"\(constantValue)\""
+            self.constantValue = "\"\(constantValue)\""
+            self.needDecodingInMethod = false
+        } else {
+            self.value = KeyValueViewModel.formatValueFroType(
                 type: constantSchema.valueType.type,
                 value: constantValue,
                 key: name
             )
+            self.needDecodingInMethod = param.implementation == ImplementationLocation.method
 
             switch constantSchema.valueType.type {
-            case .string:
-                self.value = "\"\(constantValue)\""
-                self.constantValue = "\"\(constantValue)\""
-                needDecodingInMethod = false
             case .date,
                  .dateTime,
                  .unixTime:
-                self.value = value
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .dateFromConstant
             case .byteArray:
-                self.value = value
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .byteArrayFromConstant
             case .number:
-                self.value = value
                 self.constantValue = "Double(\(constantValue))"
             default:
-                self.value = value
                 self.constantValue = constantValue
             }
-            self.needDecodingInMethod = needDecodingInMethod
-        } else if let signatureParameter = operation.signatureParameter(for: name) {
-            self.optional = !signatureParameter.required
-            self.constantValue = nil
+        }
+        self.strategy = keyValueType.rawValue
+    }
 
-            // value is referring a signature parameter, no need to wrap as String
-            self.value = convertValueToStringInSwift(
-                type: signatureParameter.schema.type,
-                value: name
-            )
+    init(signatureParameter: ParameterType, name: String) {
+        self.key = name
+        self.optional = !signatureParameter.required
+        self.constantValue = nil
+        var keyValueType = KeyValueDecodeStrategy.default
 
-            // if parameter is from method signature (not from option) and type is date or byteArray,
-            // add decoding logic to string in the method and specify the right decoding strategy
-            switch signatureParameter.schema.type {
-            case .date,
-                 .unixTime,
-                 .dateTime:
-                keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromConstant
-                self.needDecodingInMethod = true
-            case .byteArray:
-                keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromConstant
-                self.needDecodingInMethod = true
-            default:
-                self.needDecodingInMethod = false
-            }
-        } else if param.implementation == ImplementationLocation.client {
-            self.value = "client.\(name)"
-            self.optional = false
-            self.constantValue = nil
-            self.needDecodingInMethod = false
-        } else {
-            self.value = ""
-            self.optional = false
-            self.constantValue = nil
+        // value is referring a signature parameter, no need to wrap as String
+        self.value = KeyValueViewModel.formatValueFroType(
+            type: signatureParameter.schema.type,
+            value: name
+        )
+
+        // if parameter is from method signature (not from option) and type is date or byteArray,
+        // add decoding logic to string in the method and specify the right decoding strategy
+        switch signatureParameter.schema.type {
+        case .date,
+             .unixTime,
+             .dateTime:
+            keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromConstant
+            self.needDecodingInMethod = true
+        case .byteArray:
+            keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromConstant
+            self.needDecodingInMethod = true
+        default:
             self.needDecodingInMethod = false
         }
-
-        self.key = name
         self.strategy = keyValueType.rawValue
     }
 
@@ -153,31 +152,31 @@ struct KeyValueViewModel {
         self.needDecodingInMethod = false
         self.constantValue = nil
     }
-}
 
-/**
- Convert the type into String format in Swift
- */
-private func convertValueToStringInSwift(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
-    switch type {
-    case .string:
-        return "\(key ?? value)"
-    case .integer,
-         .number,
-         .boolean:
-        return "String(\(key ?? value))"
-    // For these types, a variable will be created in the method using the naming convention `{key|value}String`
-    case .date,
-         .unixTime,
-         .dateTime,
-         .byteArray:
-        return "\(key ?? value)String"
-    case .choice,
-         .sealedChoice:
-        return "\(value).rawValue"
-    case .array:
-        return "\(value).map { String($0) }.joined(separator: \",\") "
-    default:
-        return "\(value)"
+    /**
+     Convert the type into String format in Swift
+     */
+    private static func formatValueFroType(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
+        switch type {
+        case .string:
+            return "\(key ?? value)"
+        case .integer,
+             .number,
+             .boolean:
+            return "String(\(key ?? value))"
+        // For these types, a variable will be created in the method using the naming convention `{key|value}String`
+        case .date,
+             .unixTime,
+             .dateTime,
+             .byteArray:
+            return "\(key ?? value)String"
+        case .choice,
+             .sealedChoice:
+            return "\(value).rawValue"
+        case .array:
+            return "\(value).map { String($0) }.joined(separator: \",\") "
+        default:
+            return "\(value)"
+        }
     }
 }

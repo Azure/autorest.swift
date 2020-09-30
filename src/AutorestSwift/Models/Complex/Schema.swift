@@ -109,7 +109,7 @@ class Schema: Codable, LanguageShortcut {
              AllSchemaTypes.date:
             swiftType = "Date"
         case AllSchemaTypes.byteArray:
-            swiftType = "[UInt8]"
+            swiftType = "Data"
         case AllSchemaTypes.unixTime:
             swiftType = "Date"
         case AllSchemaTypes.integer:
