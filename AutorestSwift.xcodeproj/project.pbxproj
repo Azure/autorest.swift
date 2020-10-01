@@ -103,7 +103,6 @@
 		0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* ApiVersion.swift */; };
 		0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* ChoiceValue.swift */; };
 		0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* ConditionalValue.swift */; };
-		0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* ConstantValue.swift */; };
 		0A22B13D24D3671E00EC018E /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* Contact.swift */; };
 		0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* Deprecation.swift */; };
 		0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* Discriminator.swift */; };
@@ -586,7 +585,6 @@
 		OBJ_88 /* ApiVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiVersion.swift; sourceTree = "<group>"; };
 		OBJ_89 /* ChoiceValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceValue.swift; sourceTree = "<group>"; };
 		OBJ_90 /* ConditionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalValue.swift; sourceTree = "<group>"; };
-		OBJ_91 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		OBJ_92 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		OBJ_93 /* Deprecation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecation.swift; sourceTree = "<group>"; };
 		OBJ_94 /* Discriminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discriminator.swift; sourceTree = "<group>"; };
@@ -981,7 +979,6 @@
 				OBJ_88 /* ApiVersion.swift */,
 				OBJ_89 /* ChoiceValue.swift */,
 				OBJ_90 /* ConditionalValue.swift */,
-				OBJ_91 /* ConstantValue.swift */,
 				OBJ_92 /* Contact.swift */,
 				OBJ_93 /* Deprecation.swift */,
 				OBJ_94 /* Discriminator.swift */,
@@ -1340,7 +1337,6 @@
 				0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */,
 				0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */,
 				0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */,
-				0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */,
 				0A22B13D24D3671E00EC018E /* Contact.swift in Sources */,
 				0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */,
 				0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */,

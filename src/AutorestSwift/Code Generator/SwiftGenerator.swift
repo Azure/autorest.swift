@@ -179,7 +179,7 @@ class SwiftGenerator: CodeGenerator {
                 fileName = "\(groupName + "+")"
             }
 
-            fileName += "\(clientMethodOptions.name.capitalized).swift"
+            fileName += "\(clientMethodOptions.name).swift"
 
             try render(
                 template: template,
