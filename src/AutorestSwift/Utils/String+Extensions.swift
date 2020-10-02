@@ -84,4 +84,6 @@ extension String {
         let lastElementIndex = reversed().firstIndex(where: { !$0.isWhitespace })!
         return self[firstElementIndex ..< lastElementIndex.base]
     }
+
+    var lowercasedFirst: String { return prefix(1).lowercased() + dropFirst() }
 }
