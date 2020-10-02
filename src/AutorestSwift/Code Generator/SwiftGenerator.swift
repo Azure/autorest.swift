@@ -105,15 +105,18 @@ class SwiftGenerator: CodeGenerator {
 
         // Create ClientMethodOptions.swift file
         for operationGroup in clientViewModel.operationGroups {
-            for operation in operationGroup.operations {
-                let clientMethodOptions = operation.clientMethodOptions
-                try render(
-                    template: "ClientMethodOptionsFile",
-                    toSubfolder: .options,
-                    withFilename: "\(clientMethodOptions.name)",
-                    andParams: ["model": clientMethodOptions]
-                )
-            }
+            try renderClientMethodOptionsFile(for: operationGroup, using: "ClientMethodOptionsFile")
+        }
+
+        // Create ClientOperationGroup.swift file for each operation group with name
+        for (groupName, operationGroup) in clientViewModel.namedOperationGroups {
+            try render(
+                template: "NamedOperationGroupFile",
+                toSubfolder: .source,
+                withFilename: "\(groupName)",
+                andParams: ["model": clientViewModel, "group": operationGroup]
+            )
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethodOptionsFile")
         }
 
         // Create ClientOptions.swift file
@@ -162,5 +165,28 @@ class SwiftGenerator: CodeGenerator {
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
         let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
         try fileContent.write(to: fileUrl, atomically: true, encoding: .utf8)
+    }
+
+    private func renderClientMethodOptionsFile(
+        for operationGroup: OperationGroupViewModel,
+        with groupName: String? = nil,
+        using template: String
+    ) throws {
+        for operation in operationGroup.operations {
+            let clientMethodOptions = operation.clientMethodOptions
+            var fileName = ""
+            if let groupName = groupName {
+                fileName = "\(groupName + "+")"
+            }
+
+            fileName += "\(clientMethodOptions.name).swift"
+
+            try render(
+                template: template,
+                toSubfolder: .options,
+                withFilename: fileName,
+                andParams: ["model": clientMethodOptions]
+            )
+        }
     }
 }

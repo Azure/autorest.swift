@@ -32,17 +32,18 @@ struct OperationParameters {
     var path: [KeyValueViewModel]
     var body: BodyParams?
     var signature: [ParameterViewModel]
-
     var hasOptionalParams: Bool
+    var methodDecoding: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(parameters: [ParameterType], operation: Operation) {
         var header = Params()
         var query = Params()
         var path = [KeyValueViewModel]()
+        var methodDecoding = [KeyValueViewModel]()
+
         for param in parameters {
             guard let httpParam = param.protocol.http as? HttpParameter else { continue }
-
             let viewModel = KeyValueViewModel(from: param, with: operation)
 
             switch httpParam.in {
@@ -57,6 +58,11 @@ struct OperationParameters {
             default:
                 continue
             }
+        }
+
+        let allParams = query.required + path
+        for param in allParams where param.needDecodingInMethod {
+            methodDecoding.append(param)
         }
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
@@ -93,6 +99,7 @@ struct OperationParameters {
         }
         self.signature = signatureParameterViewModel
 
+        self.methodDecoding = methodDecoding
         self.header = header
         self.query = query
         self.path = path
@@ -180,7 +187,7 @@ struct OperationViewModel {
     let defaultExceptionHasBody: Bool
     let needHttpResponseData: Bool
 
-    init(from operation: Operation, with model: CodeModel) {
+    init(from operation: Operation, with model: CodeModel, groupName: String) {
         guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
         self.request = RequestViewModel(from: request, with: operation)
 
@@ -245,7 +252,8 @@ struct OperationViewModel {
         self.clientMethodOptions = ClientMethodOptionsViewModel(
             from: operation,
             with: model,
-            parameters: params.inOptions
+            parameters: params.inOptions,
+            groupName: groupName
         )
 
         self.returnType = returnType

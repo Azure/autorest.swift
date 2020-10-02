@@ -103,7 +103,6 @@
 		0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* ApiVersion.swift */; };
 		0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* ChoiceValue.swift */; };
 		0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* ConditionalValue.swift */; };
-		0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* ConstantValue.swift */; };
 		0A22B13D24D3671E00EC018E /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* Contact.swift */; };
 		0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* Deprecation.swift */; };
 		0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* Discriminator.swift */; };
@@ -179,6 +178,10 @@
 		F151510B25128E2D00DF0B9F /* OperationExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */; };
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
+		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
+		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
+		F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */; };
+		F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
 		F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */; };
@@ -188,6 +191,7 @@
 		F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18718F0250C592300318867 /* AutoRestReportTest.swift */; };
 		F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */; };
 		F198F81D251BC456009CB4E5 /* OperationResponseUnixTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */; };
+		F198F975251C570B009CB4E5 /* NamedOperationGroupFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */; };
 		F19B01D52507E21100121831 /* ExceptionResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */; };
 		F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */; };
 		F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */; };
@@ -303,6 +307,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
+				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
+				F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */,
+				F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */,
+				F198F975251C570B009CB4E5 /* NamedOperationGroupFile.stencil in CopyFiles */,
 				F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */,
 				F198F81D251BC456009CB4E5 /* OperationResponseUnixTimeBodySnippet.stencil in CopyFiles */,
 				F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */,
@@ -457,6 +466,11 @@
 		F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
+		F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedOperationGroupFile.stencil; sourceTree = "<group>"; };
+		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
+		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
+		F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecoding.stencil; sourceTree = "<group>"; };
+		F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationOptionsDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
 		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
@@ -571,7 +585,6 @@
 		OBJ_88 /* ApiVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiVersion.swift; sourceTree = "<group>"; };
 		OBJ_89 /* ChoiceValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceValue.swift; sourceTree = "<group>"; };
 		OBJ_90 /* ConditionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalValue.swift; sourceTree = "<group>"; };
-		OBJ_91 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		OBJ_92 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		OBJ_93 /* Deprecation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecation.swift; sourceTree = "<group>"; };
 		OBJ_94 /* Discriminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discriminator.swift; sourceTree = "<group>"; };
@@ -637,12 +650,15 @@
 				0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */,
 				0A22B07024CB71E100EC018E /* ImportSnippet.stencil */,
 				0A22B46324E1E64900EC018E /* JazzyFile.stencil */,
+				F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */,
 				F1A5FD7D24DCFECB00A5CC6C /* ModelDecoderDateProperty.stencil */,
 				F1A5FD7A24DCFECB00A5CC6C /* ModelDecoderEncoderSnippet.stencil */,
 				F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */,
 				F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */,
 				F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */,
 				0A22B07324CB71E100EC018E /* ModelFile.stencil */,
+				F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */,
+				F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */,
 				F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */,
 				F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */,
 				F151510325128E0B00DF0B9F /* OperationExceptionJsonBodySnippet.stencil */,
@@ -650,6 +666,8 @@
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
+				F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */,
+				F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */,
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
@@ -961,7 +979,6 @@
 				OBJ_88 /* ApiVersion.swift */,
 				OBJ_89 /* ChoiceValue.swift */,
 				OBJ_90 /* ConditionalValue.swift */,
-				OBJ_91 /* ConstantValue.swift */,
 				OBJ_92 /* Contact.swift */,
 				OBJ_93 /* Deprecation.swift */,
 				OBJ_94 /* Discriminator.swift */,
@@ -1320,7 +1337,6 @@
 				0A22B13924D3671E00EC018E /* ApiVersion.swift in Sources */,
 				0A22B13A24D3671E00EC018E /* ChoiceValue.swift in Sources */,
 				0A22B13B24D3671E00EC018E /* ConditionalValue.swift in Sources */,
-				0A22B13C24D3671E00EC018E /* ConstantValue.swift in Sources */,
 				0A22B13D24D3671E00EC018E /* Contact.swift in Sources */,
 				0A22B13E24D3671E00EC018E /* Deprecation.swift in Sources */,
 				0A22B13F24D3671E00EC018E /* Discriminator.swift in Sources */,

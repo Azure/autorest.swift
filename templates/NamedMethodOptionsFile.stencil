@@ -6,4 +6,7 @@
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
-{% include "MethodOptionsSnippet.stencil" %}
+extension {{ model.extensionName  }}
+{
+    {% include "MethodOptionsSnippet.stencil" %}
+}

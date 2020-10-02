@@ -40,14 +40,23 @@ struct ClientMethodOptionsViewModel {
     // The list of properites for the options object
     let properties: [PropertyViewModel]
 
-    init(from operation: Operation, with model: CodeModel, parameters: [ParameterType]) {
+    let extensionName: String
+
+    init(from operation: Operation, with model: CodeModel, parameters: [ParameterType], groupName: String) {
         self.clientName = model.name
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
+        if model.object(for: groupName) != nil {
+            self.extensionName = groupName + "Operation"
+        } else {
+            self.extensionName = groupName
+        }
         var properties = [PropertyViewModel]()
+
         parameters.forEach {
             properties.append(PropertyViewModel(from: $0.value))
         }
+
         self.properties = properties
     }
 }

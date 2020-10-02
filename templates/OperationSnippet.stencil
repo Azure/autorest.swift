@@ -12,6 +12,7 @@ public func {{ op.name }}(
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
+    {% include "OperationMethodDecoding.stencil" %}
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}

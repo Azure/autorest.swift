@@ -86,6 +86,11 @@ class Schema: Codable, LanguageShortcut {
         switch type {
         case AllSchemaTypes.string:
             swiftType = "String"
+        case AllSchemaTypes.constant:
+            guard let constant = self as? ConstantSchema else {
+                fatalError("Type mismatch. Expected constant type but got \(self)")
+            }
+            swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.boolean:
             swiftType = "Bool"
         case AllSchemaTypes.array:
@@ -100,14 +105,17 @@ class Schema: Codable, LanguageShortcut {
             } else {
                 swiftType = "[\(name)]"
             }
-        case AllSchemaTypes.dateTime:
+        case AllSchemaTypes.dateTime,
+             AllSchemaTypes.date,
+             AllSchemaTypes.unixTime:
             swiftType = "Date"
-        case AllSchemaTypes.unixTime:
-            swiftType = "Date"
+        case AllSchemaTypes.byteArray:
+            swiftType = "Data"
         case AllSchemaTypes.integer:
             swiftType = "Int"
         case AllSchemaTypes.choice,
-             AllSchemaTypes.object:
+             AllSchemaTypes.object,
+             AllSchemaTypes.sealedChoice:
             swiftType = name
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
@@ -147,7 +155,11 @@ class Schema: Codable, LanguageShortcut {
             case .string:
                 schema = try? container.decode(StringSchema.self, forKey: keyEnum)
             case .constant:
-                schema = try? container.decode(ConstantSchema.self.self, forKey: keyEnum)
+                schema = try? container.decode(ConstantSchema.self, forKey: keyEnum)
+            case .byteArray:
+                schema = try? container.decode(ByteArraySchema.self, forKey: keyEnum)
+            case .sealedChoice:
+                schema = try? container.decode(SealedChoiceSchema.self, forKey: keyEnum)
             default:
                 schema = try container.decode(Schema.self, forKey: keyEnum)
             }

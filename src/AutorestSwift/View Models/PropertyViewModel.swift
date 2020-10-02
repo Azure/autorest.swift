@@ -34,7 +34,9 @@ struct PropertyViewModel {
     let name: String
     let comment: ViewModelComment
     let type: String
+    // default value of the proeprty
     let defaultValue: ViewModelDefault
+    // default value of the property in the init(). Valid values are either nil (for optional property) or "" (i.e. not specfied for required property in init() method.)
     let initDefaultValue: String
     let isDate: Bool
     let optional: Bool
@@ -42,7 +44,9 @@ struct PropertyViewModel {
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
-        self.name = schema.name
+        let name = schema.serializedName ?? schema.name
+        assert(!name.isEmpty)
+        self.name = name
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema.swiftType()
         self.optional = !schema.required

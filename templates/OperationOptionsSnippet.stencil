@@ -2,14 +2,15 @@
 if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
-    if let {{ param.paramName }} = options.{{ param.paramName }} {
+    if let {{ param.key }} = options.{{ param.key }} {
+        {% include "OperationOptionsDecodingSnippet.stencil" %}
         queryParams.append("{{ param.key }}", {{ param.value}})
     }
     {% endfor %}
 
     // Header options
     {% for header in op.params.header.optional %}
-    if let {{ header.paramName }} = options.{{ header.paramName }} {
+    if let {{ header.key }} = options.{{ header.key }} {
         headers["{{ header.key }}"] = {{ header.value}}
     }
     {% endfor %}

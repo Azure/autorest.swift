@@ -1,0 +1,8 @@
+{% if param.strategy == "dateFromParam" %}
+let {{ param.key }}String = DateFormatter().string(from: {{ param.key }})
+{% elif param.strategy == "byteArrayFromParam" %}
+let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8)
+{% else %}
+{# No need to decode the parameter to String. Leave this blank #}
+{% endif %}
+

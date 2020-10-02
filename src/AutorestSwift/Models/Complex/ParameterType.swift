@@ -173,6 +173,8 @@ extension Array where Element == ParameterType {
             // If they belong in the signature, they will be added in a way to ensure they come first.
             if let httpParam = param.protocol.http as? HttpParameter {
                 guard httpParam.in != .body else { return false }
+                // All path parameter are required
+                guard httpParam.in != .path else { return true }
             }
             return param.required
         }
