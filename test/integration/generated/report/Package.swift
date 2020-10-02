@@ -34,13 +34,6 @@ let package = Package(
             dependencies: ["AzureCore"],
             path: "Source"
         )
-        // TODO: Add test targets when test code is generated
-        // Test targets
-        // .testTarget(
-        //    name: "AutoRestReportTests",
-        //    dependencies: ["AutoRestReport"],
-        //    sources: ["Tests"]
-        // ),
     ],
     swiftLanguageVersions: [.v5]
 )

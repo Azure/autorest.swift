@@ -47,7 +47,7 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getFile failed")
         failedExpectation.isInverted = true
         
-        client.getFile() { result, httpResponse  in
+        client.files.getFile() { result, httpResponse  in
             switch result {
                 case .success:
                     guard let data = httpResponse?.data else {
@@ -70,7 +70,7 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
            let failedExpectation = XCTestExpectation(description: "Call getEmptyFile failed")
            failedExpectation.isInverted = true
            
-        client.getEmptyFile() { result, httpResponse  in
+        client.files.getEmptyFile() { result, httpResponse  in
                switch result {
                    case .success:
                        guard let data = httpResponse?.data else {
@@ -93,7 +93,7 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
            let failedExpectation = XCTestExpectation(description: "Call getFileLarge failed")
            failedExpectation.isInverted = true
            
-        client.getFileLarge() { result, httpResponse  in
+        client.files.getFileLarge() { result, httpResponse  in
                switch result {
                    case .success:
                        guard let data = httpResponse?.data else {

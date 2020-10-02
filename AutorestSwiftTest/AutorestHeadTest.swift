@@ -46,7 +46,7 @@ class AutoRestHeadTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call head200 failed")
         failedExpectation.isInverted = true
         
-        client.head200() { result, _  in
+        client.httpsuccess.head200() { result, _  in
             switch result {
                 case .success:
                  expectation.fulfill()
@@ -64,7 +64,7 @@ class AutoRestHeadTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call head204 failed")
         failedExpectation.isInverted = true
         
-        client.head204() { result, _  in
+        client.httpsuccess.head204() { result, _  in
             switch result {
                 case .success:
                  expectation.fulfill()
@@ -82,7 +82,7 @@ class AutoRestHeadTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call head404 failed")
         failedExpectation.isInverted = true
         
-        client.head404() { result, _  in
+        client.httpsuccess.head404() { result, _  in
             switch result {
                 case .success:
                  expectation.fulfill()
