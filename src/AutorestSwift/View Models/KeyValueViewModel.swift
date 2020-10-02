@@ -48,7 +48,8 @@ struct KeyValueViewModel {
     let needDecodingInMethod: Bool
     // An enum indicates what kind of decoding strategy will be used in the method implementation
     let strategy: String
-    // Value for the Constant. Ony valid if the key-value is from a Constant schema
+    // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
+    // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
     let constantValue: String?
 
     /**

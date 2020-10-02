@@ -39,14 +39,14 @@ struct ServiceClientFileViewModel {
     // A dictionary of all the named operation group. Key is the group name , Value is the operation group view model.
     let namedOperationGroups: [String: OperationGroupViewModel]
     // A key,Value pairs of all the named operation group for stencil template engine
-    let namedOperationGroupProperties: [KeyValueViewModel]
+    let namedOperationGroupShortcuts: [KeyValueViewModel]
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
         var namedOperationGroups = [String: OperationGroupViewModel]()
-        var namedOperationGroupProperties = [KeyValueViewModel]()
+        var namedOperationGroupShortcuts = [KeyValueViewModel]()
         for group in model.operationGroups {
             let viewModel = OperationGroupViewModel(from: group, with: model)
             if viewModel.name.isEmpty {
@@ -67,8 +67,8 @@ struct ServiceClientFileViewModel {
         }
         self.globalParameters = globalParameters
         for key in namedOperationGroups.keys {
-            namedOperationGroupProperties.append(KeyValueViewModel(key: key, value: key.lowercased()))
+            namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }
-        self.namedOperationGroupProperties = namedOperationGroupProperties
+        self.namedOperationGroupShortcuts = namedOperationGroupShortcuts
     }
 }

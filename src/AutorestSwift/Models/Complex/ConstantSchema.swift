@@ -99,13 +99,14 @@ class ConstantSchema: Schema {
             try valueContainer.encode(Int(value.value), forKey: .value)
         case .number:
             if let numberSchema = valueType as? NumberSchema {
-                if numberSchema.precision >= 32 {
+                // For number in format like '-1.034e-20', convert to a Double before encode so that it does not wrapped with "" in the output
+                if numberSchema.precision > 32 || value.value.contains("e") {
                     try valueContainer.encode(Double(value.value), forKey: .value)
                 } else {
                     try valueContainer.encode(value.value, forKey: .value)
                 }
             } else {
-                try valueContainer.encode(Double(value.value), forKey: .value)
+                try valueContainer.encode(value.value, forKey: .value)
             }
         default:
             try valueContainer.encode(value.value, forKey: .value)
