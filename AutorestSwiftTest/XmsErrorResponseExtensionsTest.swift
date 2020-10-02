@@ -46,10 +46,10 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getPetById with tommy failed")
         failedExpectation.isInverted = true
         
-        client.getPetById(petId: "tommy") { result, httpResponse  in
+        client.petoperation.getPetById(petId: "tommy") { result, httpResponse  in
             switch result {
                 case let .success(data):
-                    if let pet = data as? Pet {
+                    if let pet = data {
                         XCTAssertEqual(httpResponse?.statusCode, 200)
                         XCTAssertEqual(pet.name, "Tommy Tomson")
                         expectation.fulfill()
@@ -70,15 +70,11 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
            let failedExpectation = XCTestExpectation(description: "Call getPetById with django failed")
            failedExpectation.isInverted = true
            
-           client.getPetById(petId: "django") { result, httpResponse  in
+           client.petoperation.getPetById(petId: "django") { result, httpResponse  in
                switch result {
-                   case let .success(data):
-                    if ((data as? Pet) != nil) {
-                            failedExpectation.fulfill()
-                       } else {
-                            XCTAssertEqual(httpResponse?.statusCode, 202)
-                            expectation.fulfill()
-                       }
+                   case let .success(pet):
+                        XCTAssertEqual(httpResponse?.statusCode, 202)
+                        expectation.fulfill()
                   case let .failure(error):
                        print("test failed. error=\(error.message)")
                        failedExpectation.fulfill()
@@ -93,7 +89,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
             let failedExpectation = XCTestExpectation(description: "Call getPetById with coyoteUgly failed")
             failedExpectation.isInverted = true
             
-            client.getPetById(petId: "coyoteUgly") { result, httpResponse  in
+            client.petoperation.getPetById(petId: "coyoteUgly") { result, httpResponse  in
                 switch result {
                     case .success:
                         print("test failed.")
@@ -121,7 +117,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
             let failedExpectation = XCTestExpectation(description: "Call getPetById with weirdAlYankovic failed")
             failedExpectation.isInverted = true
             
-            client.getPetById(petId: "weirdAlYankovic") { result, httpResponse  in
+            client.petoperation.getPetById(petId: "weirdAlYankovic") { result, httpResponse  in
                 switch result {
                     case .success:
                         print("test failed.")
@@ -148,7 +144,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getPetById with alien123 failed")
         failedExpectation.isInverted = true
         
-        client.getPetById(petId: "alien123") { result, httpResponse  in
+        client.petoperation.getPetById(petId: "alien123") { result, httpResponse  in
             switch result {
                 case .success:
                     print("test failed.")
@@ -174,7 +170,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getPetById with ringo failed")
         failedExpectation.isInverted = true
         
-        client.getPetById(petId: "ringo") { result, httpResponse  in
+        client.petoperation.getPetById(petId: "ringo") { result, httpResponse  in
             switch result {
                 case .success:
                     print("test failed.")
@@ -200,7 +196,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call doSomething with stay failed")
         failedExpectation.isInverted = true
         
-        client.doSomething(whatAction: "stay") { result, httpResponse  in
+        client.petoperation.doSomething(whatAction: "stay") { result, httpResponse  in
             switch result {
             case let .success(petAction):
                     XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -221,7 +217,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
            let failedExpectation = XCTestExpectation(description: "Call doSomething with jump failed")
            failedExpectation.isInverted = true
            
-           client.doSomething(whatAction: "jump") { result, httpResponse  in
+           client.petoperation.doSomething(whatAction: "jump") { result, httpResponse  in
                switch result {
                case .success:
                        print("test failed.")
@@ -248,7 +244,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
            let failedExpectation = XCTestExpectation(description: "Call doSomething with fetch failed")
            failedExpectation.isInverted = true
            
-           client.doSomething(whatAction: "fetch") { result, httpResponse  in
+           client.petoperation.doSomething(whatAction: "fetch") { result, httpResponse  in
                switch result {
                case .success:
                        print("test failed.")

@@ -47,7 +47,7 @@ class AutoRestReportTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getReport failed")
         failedExpectation.isInverted = true
         
-        client.getReport() { result, _  in
+        client.autorestreportservice.getReport() { result, _  in
             switch result {
                 case let .success(data):
                     XCTAssertEqual(data.count, 598)
@@ -67,7 +67,7 @@ class AutoRestReportTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOptionalReport failed")
         failedExpectation.isInverted = true
         
-        client.getOptionalReport() { result, _  in
+        client.autorestreportservice.getOptionalReport() { result, _  in
             switch result {
                 case let .success(data):
                     XCTAssertEqual(data.count, 41)

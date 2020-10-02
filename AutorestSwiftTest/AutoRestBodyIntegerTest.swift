@@ -48,7 +48,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getNull failed")
         failedExpectation.isInverted = true
 
-        client.getNull { result, httpResponse in
+        client.inttype.getNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, nil)
@@ -68,7 +68,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getInvalid failed")
         failedExpectation.isInverted = true
 
-        client.getInvalid { result, httpResponse in
+        client.inttype.getInvalid { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -93,7 +93,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
         failedExpectation.isInverted = true
 
-        client.getOverflowInt32 { result, httpResponse in
+        client.inttype.getOverflowInt32 { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -118,7 +118,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
         failedExpectation.isInverted = true
 
-        client.getUnderflowInt32 { result, httpResponse in
+        client.inttype.getUnderflowInt32 { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -143,7 +143,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
         failedExpectation.isInverted = true
 
-        client.getOverflowInt64 { result, httpResponse in
+        client.inttype.getOverflowInt64 { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -168,7 +168,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
         failedExpectation.isInverted = true
 
-        client.getUnderflowInt64 { result, httpResponse in
+        client.inttype.getUnderflowInt64 { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -192,7 +192,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getUnixTime failed")
         failedExpectation.isInverted = true
 
-        client.getUnixTime { result, httpResponse in
+        client.inttype.getUnixTime { result, httpResponse in
             switch result {
                 case let .success(data):
                     XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -212,7 +212,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getInvalidUnixTime failed")
         failedExpectation.isInverted = true
 
-        client.getInvalidUnixTime { result, httpResponse in
+        client.inttype.getInvalidUnixTime { result, httpResponse in
             switch result {
             case .success:
                 failedExpectation.fulfill()
@@ -236,7 +236,7 @@ class AutoRestIntegerTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call getOverflowInt32 failed")
         failedExpectation.isInverted = true
 
-        client.getNullUnixTime { result, httpResponse in
+        client.inttype.getNullUnixTime { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, nil)
