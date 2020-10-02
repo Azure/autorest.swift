@@ -36,7 +36,11 @@ struct EnumerationChoiceViewModel {
     let value: String
 
     init(from schema: ChoiceValue) {
-        self.name = schema.name
+        // Model4 passed in ChoiceValue name with first letter in Upper case despite the setting 
+        // for ChoiceValue is set to `camelcase` in README.md
+        // Enum value starts with an Upper case will cause swiftlint error and swiftlint autocorrect will not fix this issue.
+        // As a workaround, we lower caes the first letter of ChoiceValue in the view model.
+        self.name = schema.name.lowercasedFirst
         self.comment = ViewModelComment(from: schema.description)
         self.value = schema.value
     }
