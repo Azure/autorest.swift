@@ -7,66 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		OBJ_107 /* AzureTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* AzureTask.swift */; };
-		OBJ_108 /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ClientLogger.swift */; };
-		OBJ_109 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* CancellationToken.swift */; };
-		OBJ_110 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Collections.swift */; };
-		OBJ_111 /* MatchCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* MatchCondition.swift */; };
-		OBJ_112 /* XMLMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* XMLMap.swift */; };
-		OBJ_113 /* XMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* XMLModel.swift */; };
-		OBJ_114 /* XMLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* XMLTree.swift */; };
-		OBJ_115 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Errors.swift */; };
-		OBJ_116 /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Pipeline.swift */; };
-		OBJ_117 /* PipelineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* PipelineClient.swift */; };
-		OBJ_118 /* PipelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* PipelineContext.swift */; };
-		OBJ_119 /* PipelineRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* PipelineRequest.swift */; };
-		OBJ_120 /* PipelineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* PipelineResponse.swift */; };
-		OBJ_121 /* PipelineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* PipelineStage.swift */; };
-		OBJ_122 /* AddDatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* AddDatePolicy.swift */; };
-		OBJ_123 /* AuthenticationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* AuthenticationPolicy.swift */; };
-		OBJ_124 /* ContentDecodePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* ContentDecodePolicy.swift */; };
-		OBJ_125 /* HeadersPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* HeadersPolicy.swift */; };
-		OBJ_126 /* HeadersValidationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* HeadersValidationPolicy.swift */; };
-		OBJ_127 /* LoggingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* LoggingPolicy.swift */; };
-		OBJ_128 /* NormalizeETagPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* NormalizeETagPolicy.swift */; };
-		OBJ_129 /* RequestIdPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* RequestIdPolicy.swift */; };
-		OBJ_130 /* UserAgentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* UserAgentPolicy.swift */; };
-		OBJ_131 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* DataStringConvertible.swift */; };
-		OBJ_132 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* HTTPHeader.swift */; };
-		OBJ_133 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* HTTPMethod.swift */; };
-		OBJ_134 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* HTTPRequest.swift */; };
-		OBJ_135 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* HTTPResponse.swift */; };
-		OBJ_136 /* HTTPTransportStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* HTTPTransportStage.swift */; };
-		OBJ_137 /* TelemetryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* TelemetryOptions.swift */; };
-		OBJ_138 /* TransportOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* TransportOptions.swift */; };
-		OBJ_139 /* URLHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* URLHTTPResponse.swift */; };
-		OBJ_140 /* URLSessionTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* URLSessionTransport.swift */; };
-		OBJ_141 /* BundleInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* BundleInfoProvider.swift */; };
-		OBJ_142 /* DeviceProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* DeviceProviders.swift */; };
-		OBJ_143 /* LocaleInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* LocaleInfoProvider.swift */; };
-		OBJ_144 /* PlatformInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* PlatformInfoProvider.swift */; };
-		OBJ_145 /* ApplicationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ApplicationUtil.swift */; };
-		OBJ_146 /* AzureCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* AzureCodable.swift */; };
-		OBJ_147 /* ConvertingInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* ConvertingInitializers.swift */; };
-		OBJ_148 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Copyable.swift */; };
-		OBJ_149 /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* CryptoUtil.swift */; };
-		OBJ_150 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* KeychainUtil.swift */; };
-		OBJ_151 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* ReachabilityManager.swift */; };
-		OBJ_152 /* ReachabilityManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* ReachabilityManagerType.swift */; };
-		OBJ_153 /* RegexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* RegexUtil.swift */; };
-		OBJ_154 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* StringUtil.swift */; };
-		OBJ_155 /* URLUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* URLUtil.swift */; };
-		OBJ_87 /* AutoRestHeadTestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* AutoRestHeadTestClient.swift */; };
-		OBJ_88 /* AutoRestHeadTestClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AutoRestHeadTestClientOptions.swift */; };
-		OBJ_89 /* Head200Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Head200Options.swift */; };
-		OBJ_90 /* Head204Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Head204Options.swift */; };
-		OBJ_91 /* Head404Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Head404Options.swift */; };
-		OBJ_92 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* PatchUtil.swift */; };
-		OBJ_94 /* AzureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AzureSDK::AzureCore::Product" /* AzureCore.framework */; };
+		OBJ_111 /* AzureTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* AzureTask.swift */; };
+		OBJ_112 /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ClientLogger.swift */; };
+		OBJ_113 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* CancellationToken.swift */; };
+		OBJ_114 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Collections.swift */; };
+		OBJ_115 /* MatchCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MatchCondition.swift */; };
+		OBJ_116 /* XMLMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* XMLMap.swift */; };
+		OBJ_117 /* XMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* XMLModel.swift */; };
+		OBJ_118 /* XMLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* XMLTree.swift */; };
+		OBJ_119 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Errors.swift */; };
+		OBJ_120 /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Pipeline.swift */; };
+		OBJ_121 /* PipelineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* PipelineClient.swift */; };
+		OBJ_122 /* PipelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* PipelineContext.swift */; };
+		OBJ_123 /* PipelineRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* PipelineRequest.swift */; };
+		OBJ_124 /* PipelineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* PipelineResponse.swift */; };
+		OBJ_125 /* PipelineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* PipelineStage.swift */; };
+		OBJ_126 /* AddDatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* AddDatePolicy.swift */; };
+		OBJ_127 /* AuthenticationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* AuthenticationPolicy.swift */; };
+		OBJ_128 /* ContentDecodePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* ContentDecodePolicy.swift */; };
+		OBJ_129 /* HeadersPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* HeadersPolicy.swift */; };
+		OBJ_130 /* HeadersValidationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* HeadersValidationPolicy.swift */; };
+		OBJ_131 /* LoggingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* LoggingPolicy.swift */; };
+		OBJ_132 /* NormalizeETagPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* NormalizeETagPolicy.swift */; };
+		OBJ_133 /* RequestIdPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* RequestIdPolicy.swift */; };
+		OBJ_134 /* UserAgentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* UserAgentPolicy.swift */; };
+		OBJ_135 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* DataStringConvertible.swift */; };
+		OBJ_136 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* HTTPHeader.swift */; };
+		OBJ_137 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* HTTPMethod.swift */; };
+		OBJ_138 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* HTTPRequest.swift */; };
+		OBJ_139 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* HTTPResponse.swift */; };
+		OBJ_140 /* HTTPTransportStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* HTTPTransportStage.swift */; };
+		OBJ_141 /* TelemetryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* TelemetryOptions.swift */; };
+		OBJ_142 /* TransportOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* TransportOptions.swift */; };
+		OBJ_143 /* URLHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* URLHTTPResponse.swift */; };
+		OBJ_144 /* URLSessionTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* URLSessionTransport.swift */; };
+		OBJ_145 /* BundleInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* BundleInfoProvider.swift */; };
+		OBJ_146 /* DeviceProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* DeviceProviders.swift */; };
+		OBJ_147 /* LocaleInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* LocaleInfoProvider.swift */; };
+		OBJ_148 /* PlatformInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* PlatformInfoProvider.swift */; };
+		OBJ_149 /* ApplicationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* ApplicationUtil.swift */; };
+		OBJ_150 /* AzureCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* AzureCodable.swift */; };
+		OBJ_151 /* ConvertingInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* ConvertingInitializers.swift */; };
+		OBJ_152 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Copyable.swift */; };
+		OBJ_153 /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* CryptoUtil.swift */; };
+		OBJ_154 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* KeychainUtil.swift */; };
+		OBJ_155 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* ReachabilityManager.swift */; };
+		OBJ_156 /* ReachabilityManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* ReachabilityManagerType.swift */; };
+		OBJ_157 /* RegexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* RegexUtil.swift */; };
+		OBJ_158 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* StringUtil.swift */; };
+		OBJ_159 /* URLUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* URLUtil.swift */; };
+		OBJ_89 /* AutoRestHeadTestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* AutoRestHeadTestClient.swift */; };
+		OBJ_90 /* HttpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* HttpSuccess.swift */; };
+		OBJ_91 /* AutoRestHeadTestClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* AutoRestHeadTestClientOptions.swift */; };
+		OBJ_92 /* HttpSuccess+Head200Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* HttpSuccess+Head200Options.swift */; };
+		OBJ_93 /* HttpSuccess+Head204Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* HttpSuccess+Head204Options.swift */; };
+		OBJ_94 /* HttpSuccess+Head404Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* HttpSuccess+Head404Options.swift */; };
+		OBJ_95 /* PatchUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* PatchUtil.swift */; };
+		OBJ_96 /* Primitives+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Primitives+Extension.swift */; };
+		OBJ_98 /* AzureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AzureSDK::AzureCore::Product" /* AzureCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F186E8E3250FDC7F00723FA3 /* PBXContainerItemProxy */ = {
+		F13C47AF2527E9D6004E7CCF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -78,200 +80,197 @@
 /* Begin PBXFileReference section */
 		"AutoRestHeadTest::AutoRestHeadTest::Product" /* AutoRestHeadTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoRestHeadTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AzureSDK::AzureCore::Product" /* AzureCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AzureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* AutoRestHeadTestClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestHeadTestClientOptions.swift; sourceTree = "<group>"; };
-		OBJ_11 /* Head200Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Head200Options.swift; sourceTree = "<group>"; };
-		OBJ_12 /* Head204Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Head204Options.swift; sourceTree = "<group>"; };
-		OBJ_13 /* Head404Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Head404Options.swift; sourceTree = "<group>"; };
-		OBJ_15 /* PatchUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUtil.swift; sourceTree = "<group>"; };
-		OBJ_21 /* AzureTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTask.swift; sourceTree = "<group>"; };
-		OBJ_22 /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
-		OBJ_24 /* CancellationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationToken.swift; sourceTree = "<group>"; };
-		OBJ_25 /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
-		OBJ_26 /* MatchCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCondition.swift; sourceTree = "<group>"; };
-		OBJ_27 /* XMLMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLMap.swift; sourceTree = "<group>"; };
-		OBJ_28 /* XMLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLModel.swift; sourceTree = "<group>"; };
-		OBJ_29 /* XMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTree.swift; sourceTree = "<group>"; };
-		OBJ_30 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		OBJ_32 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
-		OBJ_33 /* PipelineClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineClient.swift; sourceTree = "<group>"; };
-		OBJ_34 /* PipelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContext.swift; sourceTree = "<group>"; };
-		OBJ_35 /* PipelineRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineRequest.swift; sourceTree = "<group>"; };
-		OBJ_36 /* PipelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineResponse.swift; sourceTree = "<group>"; };
-		OBJ_37 /* PipelineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineStage.swift; sourceTree = "<group>"; };
-		OBJ_39 /* AddDatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDatePolicy.swift; sourceTree = "<group>"; };
-		OBJ_40 /* AuthenticationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPolicy.swift; sourceTree = "<group>"; };
-		OBJ_41 /* ContentDecodePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDecodePolicy.swift; sourceTree = "<group>"; };
-		OBJ_42 /* HeadersPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersPolicy.swift; sourceTree = "<group>"; };
-		OBJ_43 /* HeadersValidationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersValidationPolicy.swift; sourceTree = "<group>"; };
-		OBJ_44 /* LoggingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPolicy.swift; sourceTree = "<group>"; };
-		OBJ_45 /* NormalizeETagPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeETagPolicy.swift; sourceTree = "<group>"; };
-		OBJ_46 /* RequestIdPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestIdPolicy.swift; sourceTree = "<group>"; };
-		OBJ_47 /* UserAgentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentPolicy.swift; sourceTree = "<group>"; };
-		OBJ_49 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
-		OBJ_50 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
-		OBJ_51 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		OBJ_52 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
-		OBJ_53 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		OBJ_54 /* HTTPTransportStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTransportStage.swift; sourceTree = "<group>"; };
-		OBJ_55 /* TelemetryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryOptions.swift; sourceTree = "<group>"; };
-		OBJ_56 /* TransportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportOptions.swift; sourceTree = "<group>"; };
-		OBJ_57 /* URLHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHTTPResponse.swift; sourceTree = "<group>"; };
-		OBJ_58 /* URLSessionTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTransport.swift; sourceTree = "<group>"; };
+		OBJ_11 /* AutoRestHeadTestClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestHeadTestClientOptions.swift; sourceTree = "<group>"; };
+		OBJ_12 /* HttpSuccess+Head200Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpSuccess+Head200Options.swift"; sourceTree = "<group>"; };
+		OBJ_13 /* HttpSuccess+Head204Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpSuccess+Head204Options.swift"; sourceTree = "<group>"; };
+		OBJ_14 /* HttpSuccess+Head404Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpSuccess+Head404Options.swift"; sourceTree = "<group>"; };
+		OBJ_16 /* PatchUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUtil.swift; sourceTree = "<group>"; };
+		OBJ_17 /* Primitives+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Primitives+Extension.swift"; sourceTree = "<group>"; };
+		OBJ_23 /* AzureTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureTask.swift; sourceTree = "<group>"; };
+		OBJ_24 /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
+		OBJ_26 /* CancellationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationToken.swift; sourceTree = "<group>"; };
+		OBJ_27 /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		OBJ_28 /* MatchCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCondition.swift; sourceTree = "<group>"; };
+		OBJ_29 /* XMLMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLMap.swift; sourceTree = "<group>"; };
+		OBJ_30 /* XMLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLModel.swift; sourceTree = "<group>"; };
+		OBJ_31 /* XMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTree.swift; sourceTree = "<group>"; };
+		OBJ_32 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		OBJ_34 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
+		OBJ_35 /* PipelineClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineClient.swift; sourceTree = "<group>"; };
+		OBJ_36 /* PipelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContext.swift; sourceTree = "<group>"; };
+		OBJ_37 /* PipelineRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineRequest.swift; sourceTree = "<group>"; };
+		OBJ_38 /* PipelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineResponse.swift; sourceTree = "<group>"; };
+		OBJ_39 /* PipelineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineStage.swift; sourceTree = "<group>"; };
+		OBJ_41 /* AddDatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDatePolicy.swift; sourceTree = "<group>"; };
+		OBJ_42 /* AuthenticationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationPolicy.swift; sourceTree = "<group>"; };
+		OBJ_43 /* ContentDecodePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDecodePolicy.swift; sourceTree = "<group>"; };
+		OBJ_44 /* HeadersPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersPolicy.swift; sourceTree = "<group>"; };
+		OBJ_45 /* HeadersValidationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersValidationPolicy.swift; sourceTree = "<group>"; };
+		OBJ_46 /* LoggingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingPolicy.swift; sourceTree = "<group>"; };
+		OBJ_47 /* NormalizeETagPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeETagPolicy.swift; sourceTree = "<group>"; };
+		OBJ_48 /* RequestIdPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestIdPolicy.swift; sourceTree = "<group>"; };
+		OBJ_49 /* UserAgentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentPolicy.swift; sourceTree = "<group>"; };
+		OBJ_51 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
+		OBJ_52 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		OBJ_53 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		OBJ_54 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
+		OBJ_55 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		OBJ_56 /* HTTPTransportStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTransportStage.swift; sourceTree = "<group>"; };
+		OBJ_57 /* TelemetryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryOptions.swift; sourceTree = "<group>"; };
+		OBJ_58 /* TransportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportOptions.swift; sourceTree = "<group>"; };
+		OBJ_59 /* URLHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHTTPResponse.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* BundleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_61 /* DeviceProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProviders.swift; sourceTree = "<group>"; };
-		OBJ_62 /* LocaleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_63 /* PlatformInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfoProvider.swift; sourceTree = "<group>"; };
-		OBJ_65 /* ApplicationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUtil.swift; sourceTree = "<group>"; };
-		OBJ_66 /* AzureCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureCodable.swift; sourceTree = "<group>"; };
-		OBJ_67 /* ConvertingInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingInitializers.swift; sourceTree = "<group>"; };
-		OBJ_68 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
-		OBJ_69 /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
-		OBJ_70 /* KeychainUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
-		OBJ_71 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
-		OBJ_72 /* ReachabilityManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManagerType.swift; sourceTree = "<group>"; };
-		OBJ_73 /* RegexUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
-		OBJ_74 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
-		OBJ_75 /* URLUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtil.swift; sourceTree = "<group>"; };
-		OBJ_77 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift-5/test/integration/generated/head/.build/checkouts/azure-sdk-for-ios/Package.swift"; sourceTree = "<group>"; };
+		OBJ_60 /* URLSessionTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTransport.swift; sourceTree = "<group>"; };
+		OBJ_62 /* BundleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_63 /* DeviceProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProviders.swift; sourceTree = "<group>"; };
+		OBJ_64 /* LocaleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_65 /* PlatformInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfoProvider.swift; sourceTree = "<group>"; };
+		OBJ_67 /* ApplicationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUtil.swift; sourceTree = "<group>"; };
+		OBJ_68 /* AzureCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureCodable.swift; sourceTree = "<group>"; };
+		OBJ_69 /* ConvertingInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingInitializers.swift; sourceTree = "<group>"; };
+		OBJ_70 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
+		OBJ_71 /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
+		OBJ_72 /* KeychainUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
+		OBJ_73 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		OBJ_74 /* ReachabilityManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManagerType.swift; sourceTree = "<group>"; };
+		OBJ_75 /* RegexUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexUtil.swift; sourceTree = "<group>"; };
+		OBJ_76 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
+		OBJ_77 /* URLUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtil.swift; sourceTree = "<group>"; };
+		OBJ_79 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift/test/integration/generated/head/.build/checkouts/azure-sdk-for-ios/Package.swift"; sourceTree = "<group>"; };
 		OBJ_8 /* AutoRestHeadTestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestHeadTestClient.swift; sourceTree = "<group>"; };
-		OBJ_81 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_83 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_9 /* HttpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpSuccess.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_156 /* Frameworks */ = {
+		OBJ_160 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_93 /* Frameworks */ = {
+		OBJ_97 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_94 /* AzureCore.framework in Frameworks */,
+				OBJ_98 /* AzureCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_14 /* Util */ = {
+		OBJ_10 /* Options */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_15 /* PatchUtil.swift */,
+				OBJ_11 /* AutoRestHeadTestClientOptions.swift */,
+				OBJ_12 /* HttpSuccess+Head200Options.swift */,
+				OBJ_13 /* HttpSuccess+Head204Options.swift */,
+				OBJ_14 /* HttpSuccess+Head404Options.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
+		OBJ_15 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* PatchUtil.swift */,
+				OBJ_17 /* Primitives+Extension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
 		};
-		OBJ_16 /* Tests */ = {
+		OBJ_18 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_17 /* Dependencies */ = {
+		OBJ_19 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* AzureSDK */,
+				OBJ_20 /* AzureSDK */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_18 /* AzureSDK */ = {
+		OBJ_20 /* AzureSDK */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_19 /* AzureCore */,
-				OBJ_76 /* AzureStorageBlob */,
-				OBJ_77 /* Package.swift */,
+				OBJ_21 /* AzureCore */,
+				OBJ_78 /* AzureStorageBlob */,
+				OBJ_79 /* Package.swift */,
 			);
 			name = AzureSDK;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_19 /* AzureCore */ = {
+		OBJ_21 /* AzureCore */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_20 /* Source */,
+				OBJ_22 /* Source */,
 			);
 			name = AzureCore;
 			path = ".build/checkouts/azure-sdk-for-ios/sdk/core/AzureCore";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_20 /* Source */ = {
+		OBJ_22 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_21 /* AzureTask.swift */,
-				OBJ_22 /* ClientLogger.swift */,
-				OBJ_23 /* DataStructures */,
-				OBJ_30 /* Errors.swift */,
-				OBJ_31 /* Pipeline */,
-				OBJ_59 /* Providers */,
-				OBJ_64 /* Util */,
+				OBJ_23 /* AzureTask.swift */,
+				OBJ_24 /* ClientLogger.swift */,
+				OBJ_25 /* DataStructures */,
+				OBJ_32 /* Errors.swift */,
+				OBJ_33 /* Pipeline */,
+				OBJ_61 /* Providers */,
+				OBJ_66 /* Util */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		OBJ_23 /* DataStructures */ = {
+		OBJ_25 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_24 /* CancellationToken.swift */,
-				OBJ_25 /* Collections.swift */,
-				OBJ_26 /* MatchCondition.swift */,
-				OBJ_27 /* XMLMap.swift */,
-				OBJ_28 /* XMLModel.swift */,
-				OBJ_29 /* XMLTree.swift */,
+				OBJ_26 /* CancellationToken.swift */,
+				OBJ_27 /* Collections.swift */,
+				OBJ_28 /* MatchCondition.swift */,
+				OBJ_29 /* XMLMap.swift */,
+				OBJ_30 /* XMLModel.swift */,
+				OBJ_31 /* XMLTree.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
 		};
-		OBJ_31 /* Pipeline */ = {
+		OBJ_33 /* Pipeline */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_32 /* Pipeline.swift */,
-				OBJ_33 /* PipelineClient.swift */,
-				OBJ_34 /* PipelineContext.swift */,
-				OBJ_35 /* PipelineRequest.swift */,
-				OBJ_36 /* PipelineResponse.swift */,
-				OBJ_37 /* PipelineStage.swift */,
-				OBJ_38 /* Policies */,
-				OBJ_48 /* Transport */,
+				OBJ_34 /* Pipeline.swift */,
+				OBJ_35 /* PipelineClient.swift */,
+				OBJ_36 /* PipelineContext.swift */,
+				OBJ_37 /* PipelineRequest.swift */,
+				OBJ_38 /* PipelineResponse.swift */,
+				OBJ_39 /* PipelineStage.swift */,
+				OBJ_40 /* Policies */,
+				OBJ_50 /* Transport */,
 			);
 			path = Pipeline;
 			sourceTree = "<group>";
 		};
-		OBJ_38 /* Policies */ = {
+		OBJ_40 /* Policies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_39 /* AddDatePolicy.swift */,
-				OBJ_40 /* AuthenticationPolicy.swift */,
-				OBJ_41 /* ContentDecodePolicy.swift */,
-				OBJ_42 /* HeadersPolicy.swift */,
-				OBJ_43 /* HeadersValidationPolicy.swift */,
-				OBJ_44 /* LoggingPolicy.swift */,
-				OBJ_45 /* NormalizeETagPolicy.swift */,
-				OBJ_46 /* RequestIdPolicy.swift */,
-				OBJ_47 /* UserAgentPolicy.swift */,
+				OBJ_41 /* AddDatePolicy.swift */,
+				OBJ_42 /* AuthenticationPolicy.swift */,
+				OBJ_43 /* ContentDecodePolicy.swift */,
+				OBJ_44 /* HeadersPolicy.swift */,
+				OBJ_45 /* HeadersValidationPolicy.swift */,
+				OBJ_46 /* LoggingPolicy.swift */,
+				OBJ_47 /* NormalizeETagPolicy.swift */,
+				OBJ_48 /* RequestIdPolicy.swift */,
+				OBJ_49 /* UserAgentPolicy.swift */,
 			);
 			path = Policies;
-			sourceTree = "<group>";
-		};
-		OBJ_48 /* Transport */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_49 /* DataStringConvertible.swift */,
-				OBJ_50 /* HTTPHeader.swift */,
-				OBJ_51 /* HTTPMethod.swift */,
-				OBJ_52 /* HTTPRequest.swift */,
-				OBJ_53 /* HTTPResponse.swift */,
-				OBJ_54 /* HTTPTransportStage.swift */,
-				OBJ_55 /* TelemetryOptions.swift */,
-				OBJ_56 /* TransportOptions.swift */,
-				OBJ_57 /* URLHTTPResponse.swift */,
-				OBJ_58 /* URLSessionTransport.swift */,
-			);
-			path = Transport;
 			sourceTree = "<group>";
 		};
 		OBJ_5 /*  */ = {
@@ -279,39 +278,56 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_16 /* Tests */,
-				OBJ_17 /* Dependencies */,
-				OBJ_78 /* Products */,
-				OBJ_81 /* README.md */,
+				OBJ_18 /* Tests */,
+				OBJ_19 /* Dependencies */,
+				OBJ_80 /* Products */,
+				OBJ_83 /* README.md */,
 			);
 			name = "";
 			sourceTree = "<group>";
 		};
-		OBJ_59 /* Providers */ = {
+		OBJ_50 /* Transport */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_60 /* BundleInfoProvider.swift */,
-				OBJ_61 /* DeviceProviders.swift */,
-				OBJ_62 /* LocaleInfoProvider.swift */,
-				OBJ_63 /* PlatformInfoProvider.swift */,
+				OBJ_51 /* DataStringConvertible.swift */,
+				OBJ_52 /* HTTPHeader.swift */,
+				OBJ_53 /* HTTPMethod.swift */,
+				OBJ_54 /* HTTPRequest.swift */,
+				OBJ_55 /* HTTPResponse.swift */,
+				OBJ_56 /* HTTPTransportStage.swift */,
+				OBJ_57 /* TelemetryOptions.swift */,
+				OBJ_58 /* TransportOptions.swift */,
+				OBJ_59 /* URLHTTPResponse.swift */,
+				OBJ_60 /* URLSessionTransport.swift */,
+			);
+			path = Transport;
+			sourceTree = "<group>";
+		};
+		OBJ_61 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_62 /* BundleInfoProvider.swift */,
+				OBJ_63 /* DeviceProviders.swift */,
+				OBJ_64 /* LocaleInfoProvider.swift */,
+				OBJ_65 /* PlatformInfoProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		OBJ_64 /* Util */ = {
+		OBJ_66 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_65 /* ApplicationUtil.swift */,
-				OBJ_66 /* AzureCodable.swift */,
-				OBJ_67 /* ConvertingInitializers.swift */,
-				OBJ_68 /* Copyable.swift */,
-				OBJ_69 /* CryptoUtil.swift */,
-				OBJ_70 /* KeychainUtil.swift */,
-				OBJ_71 /* ReachabilityManager.swift */,
-				OBJ_72 /* ReachabilityManagerType.swift */,
-				OBJ_73 /* RegexUtil.swift */,
-				OBJ_74 /* StringUtil.swift */,
-				OBJ_75 /* URLUtil.swift */,
+				OBJ_67 /* ApplicationUtil.swift */,
+				OBJ_68 /* AzureCodable.swift */,
+				OBJ_69 /* ConvertingInitializers.swift */,
+				OBJ_70 /* Copyable.swift */,
+				OBJ_71 /* CryptoUtil.swift */,
+				OBJ_72 /* KeychainUtil.swift */,
+				OBJ_73 /* ReachabilityManager.swift */,
+				OBJ_74 /* ReachabilityManagerType.swift */,
+				OBJ_75 /* RegexUtil.swift */,
+				OBJ_76 /* StringUtil.swift */,
+				OBJ_77 /* URLUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -320,14 +336,15 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* AutoRestHeadTestClient.swift */,
-				OBJ_9 /* Options */,
-				OBJ_14 /* Util */,
+				OBJ_9 /* HttpSuccess.swift */,
+				OBJ_10 /* Options */,
+				OBJ_15 /* Util */,
 			);
 			name = Sources;
 			path = Source;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_76 /* AzureStorageBlob */ = {
+		OBJ_78 /* AzureStorageBlob */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -335,40 +352,29 @@
 			path = ".build/checkouts/azure-sdk-for-ios/sdk/storage/AzureStorageBlob";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_78 /* Products */ = {
+		OBJ_80 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"AutoRestHeadTest::AutoRestHeadTest::Product" /* AutoRestHeadTest.framework */,
 				"AzureSDK::AzureCore::Product" /* AzureCore.framework */,
+				"AutoRestHeadTest::AutoRestHeadTest::Product" /* AutoRestHeadTest.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		OBJ_9 /* Options */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_10 /* AutoRestHeadTestClientOptions.swift */,
-				OBJ_11 /* Head200Options.swift */,
-				OBJ_12 /* Head204Options.swift */,
-				OBJ_13 /* Head404Options.swift */,
-			);
-			path = Options;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		"AutoRestHeadTest::AutoRestHeadTest" /* AutoRestHeadTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_83 /* Build configuration list for PBXNativeTarget "AutoRestHeadTest" */;
+			buildConfigurationList = OBJ_85 /* Build configuration list for PBXNativeTarget "AutoRestHeadTest" */;
 			buildPhases = (
-				OBJ_86 /* Sources */,
-				OBJ_93 /* Frameworks */,
+				OBJ_88 /* Sources */,
+				OBJ_97 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_95 /* PBXTargetDependency */,
+				OBJ_99 /* PBXTargetDependency */,
 			);
 			name = AutoRestHeadTest;
 			productName = AutoRestHeadTest;
@@ -377,10 +383,10 @@
 		};
 		"AzureSDK::AzureCore" /* AzureCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_103 /* Build configuration list for PBXNativeTarget "AzureCore" */;
+			buildConfigurationList = OBJ_107 /* Build configuration list for PBXNativeTarget "AzureCore" */;
 			buildPhases = (
-				OBJ_106 /* Sources */,
-				OBJ_156 /* Frameworks */,
+				OBJ_110 /* Sources */,
+				OBJ_160 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -408,7 +414,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_78 /* Products */;
+			productRefGroup = OBJ_80 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -419,87 +425,89 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_106 /* Sources */ = {
+		OBJ_110 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_107 /* AzureTask.swift in Sources */,
-				OBJ_108 /* ClientLogger.swift in Sources */,
-				OBJ_109 /* CancellationToken.swift in Sources */,
-				OBJ_110 /* Collections.swift in Sources */,
-				OBJ_111 /* MatchCondition.swift in Sources */,
-				OBJ_112 /* XMLMap.swift in Sources */,
-				OBJ_113 /* XMLModel.swift in Sources */,
-				OBJ_114 /* XMLTree.swift in Sources */,
-				OBJ_115 /* Errors.swift in Sources */,
-				OBJ_116 /* Pipeline.swift in Sources */,
-				OBJ_117 /* PipelineClient.swift in Sources */,
-				OBJ_118 /* PipelineContext.swift in Sources */,
-				OBJ_119 /* PipelineRequest.swift in Sources */,
-				OBJ_120 /* PipelineResponse.swift in Sources */,
-				OBJ_121 /* PipelineStage.swift in Sources */,
-				OBJ_122 /* AddDatePolicy.swift in Sources */,
-				OBJ_123 /* AuthenticationPolicy.swift in Sources */,
-				OBJ_124 /* ContentDecodePolicy.swift in Sources */,
-				OBJ_125 /* HeadersPolicy.swift in Sources */,
-				OBJ_126 /* HeadersValidationPolicy.swift in Sources */,
-				OBJ_127 /* LoggingPolicy.swift in Sources */,
-				OBJ_128 /* NormalizeETagPolicy.swift in Sources */,
-				OBJ_129 /* RequestIdPolicy.swift in Sources */,
-				OBJ_130 /* UserAgentPolicy.swift in Sources */,
-				OBJ_131 /* DataStringConvertible.swift in Sources */,
-				OBJ_132 /* HTTPHeader.swift in Sources */,
-				OBJ_133 /* HTTPMethod.swift in Sources */,
-				OBJ_134 /* HTTPRequest.swift in Sources */,
-				OBJ_135 /* HTTPResponse.swift in Sources */,
-				OBJ_136 /* HTTPTransportStage.swift in Sources */,
-				OBJ_137 /* TelemetryOptions.swift in Sources */,
-				OBJ_138 /* TransportOptions.swift in Sources */,
-				OBJ_139 /* URLHTTPResponse.swift in Sources */,
-				OBJ_140 /* URLSessionTransport.swift in Sources */,
-				OBJ_141 /* BundleInfoProvider.swift in Sources */,
-				OBJ_142 /* DeviceProviders.swift in Sources */,
-				OBJ_143 /* LocaleInfoProvider.swift in Sources */,
-				OBJ_144 /* PlatformInfoProvider.swift in Sources */,
-				OBJ_145 /* ApplicationUtil.swift in Sources */,
-				OBJ_146 /* AzureCodable.swift in Sources */,
-				OBJ_147 /* ConvertingInitializers.swift in Sources */,
-				OBJ_148 /* Copyable.swift in Sources */,
-				OBJ_149 /* CryptoUtil.swift in Sources */,
-				OBJ_150 /* KeychainUtil.swift in Sources */,
-				OBJ_151 /* ReachabilityManager.swift in Sources */,
-				OBJ_152 /* ReachabilityManagerType.swift in Sources */,
-				OBJ_153 /* RegexUtil.swift in Sources */,
-				OBJ_154 /* StringUtil.swift in Sources */,
-				OBJ_155 /* URLUtil.swift in Sources */,
+				OBJ_111 /* AzureTask.swift in Sources */,
+				OBJ_112 /* ClientLogger.swift in Sources */,
+				OBJ_113 /* CancellationToken.swift in Sources */,
+				OBJ_114 /* Collections.swift in Sources */,
+				OBJ_115 /* MatchCondition.swift in Sources */,
+				OBJ_116 /* XMLMap.swift in Sources */,
+				OBJ_117 /* XMLModel.swift in Sources */,
+				OBJ_118 /* XMLTree.swift in Sources */,
+				OBJ_119 /* Errors.swift in Sources */,
+				OBJ_120 /* Pipeline.swift in Sources */,
+				OBJ_121 /* PipelineClient.swift in Sources */,
+				OBJ_122 /* PipelineContext.swift in Sources */,
+				OBJ_123 /* PipelineRequest.swift in Sources */,
+				OBJ_124 /* PipelineResponse.swift in Sources */,
+				OBJ_125 /* PipelineStage.swift in Sources */,
+				OBJ_126 /* AddDatePolicy.swift in Sources */,
+				OBJ_127 /* AuthenticationPolicy.swift in Sources */,
+				OBJ_128 /* ContentDecodePolicy.swift in Sources */,
+				OBJ_129 /* HeadersPolicy.swift in Sources */,
+				OBJ_130 /* HeadersValidationPolicy.swift in Sources */,
+				OBJ_131 /* LoggingPolicy.swift in Sources */,
+				OBJ_132 /* NormalizeETagPolicy.swift in Sources */,
+				OBJ_133 /* RequestIdPolicy.swift in Sources */,
+				OBJ_134 /* UserAgentPolicy.swift in Sources */,
+				OBJ_135 /* DataStringConvertible.swift in Sources */,
+				OBJ_136 /* HTTPHeader.swift in Sources */,
+				OBJ_137 /* HTTPMethod.swift in Sources */,
+				OBJ_138 /* HTTPRequest.swift in Sources */,
+				OBJ_139 /* HTTPResponse.swift in Sources */,
+				OBJ_140 /* HTTPTransportStage.swift in Sources */,
+				OBJ_141 /* TelemetryOptions.swift in Sources */,
+				OBJ_142 /* TransportOptions.swift in Sources */,
+				OBJ_143 /* URLHTTPResponse.swift in Sources */,
+				OBJ_144 /* URLSessionTransport.swift in Sources */,
+				OBJ_145 /* BundleInfoProvider.swift in Sources */,
+				OBJ_146 /* DeviceProviders.swift in Sources */,
+				OBJ_147 /* LocaleInfoProvider.swift in Sources */,
+				OBJ_148 /* PlatformInfoProvider.swift in Sources */,
+				OBJ_149 /* ApplicationUtil.swift in Sources */,
+				OBJ_150 /* AzureCodable.swift in Sources */,
+				OBJ_151 /* ConvertingInitializers.swift in Sources */,
+				OBJ_152 /* Copyable.swift in Sources */,
+				OBJ_153 /* CryptoUtil.swift in Sources */,
+				OBJ_154 /* KeychainUtil.swift in Sources */,
+				OBJ_155 /* ReachabilityManager.swift in Sources */,
+				OBJ_156 /* ReachabilityManagerType.swift in Sources */,
+				OBJ_157 /* RegexUtil.swift in Sources */,
+				OBJ_158 /* StringUtil.swift in Sources */,
+				OBJ_159 /* URLUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_86 /* Sources */ = {
+		OBJ_88 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_87 /* AutoRestHeadTestClient.swift in Sources */,
-				OBJ_88 /* AutoRestHeadTestClientOptions.swift in Sources */,
-				OBJ_89 /* Head200Options.swift in Sources */,
-				OBJ_90 /* Head204Options.swift in Sources */,
-				OBJ_91 /* Head404Options.swift in Sources */,
-				OBJ_92 /* PatchUtil.swift in Sources */,
+				OBJ_89 /* AutoRestHeadTestClient.swift in Sources */,
+				OBJ_90 /* HttpSuccess.swift in Sources */,
+				OBJ_91 /* AutoRestHeadTestClientOptions.swift in Sources */,
+				OBJ_92 /* HttpSuccess+Head200Options.swift in Sources */,
+				OBJ_93 /* HttpSuccess+Head204Options.swift in Sources */,
+				OBJ_94 /* HttpSuccess+Head404Options.swift in Sources */,
+				OBJ_95 /* PatchUtil.swift in Sources */,
+				OBJ_96 /* Primitives+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_95 /* PBXTargetDependency */ = {
+		OBJ_99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "AzureSDK::AzureCore" /* AzureCore */;
-			targetProxy = F186E8E3250FDC7F00723FA3 /* PBXContainerItemProxy */;
+			targetProxy = F13C47AF2527E9D6004E7CCF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_104 /* Debug */ = {
+		OBJ_108 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -527,7 +535,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_105 /* Release */ = {
+		OBJ_109 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -606,7 +614,7 @@
 			};
 			name = Release;
 		};
-		OBJ_84 /* Debug */ = {
+		OBJ_86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -634,7 +642,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_85 /* Release */ = {
+		OBJ_87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -665,11 +673,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_103 /* Build configuration list for PBXNativeTarget "AzureCore" */ = {
+		OBJ_107 /* Build configuration list for PBXNativeTarget "AzureCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_104 /* Debug */,
-				OBJ_105 /* Release */,
+				OBJ_108 /* Debug */,
+				OBJ_109 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -683,11 +691,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_83 /* Build configuration list for PBXNativeTarget "AutoRestHeadTest" */ = {
+		OBJ_85 /* Build configuration list for PBXNativeTarget "AutoRestHeadTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_84 /* Debug */,
-				OBJ_85 /* Release */,
+				OBJ_86 /* Debug */,
+				OBJ_87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

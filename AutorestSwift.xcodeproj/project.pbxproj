@@ -217,6 +217,20 @@
 			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile";
 			remoteInfo = AutoRestSwaggerBatFile;
 		};
+		F13C48112527EB86004E7CCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestUrlTest::AutoRestUrlTest::Product";
+			remoteInfo = AutoRestUrlTest;
+		};
+		F13C48132527EB86004E7CCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
+			remoteInfo = AzureCore;
+		};
 		F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */;
@@ -457,6 +471,7 @@
 		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
 		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
+		F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStringBodySnippet.stencil; sourceTree = "<group>"; };
@@ -773,6 +788,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F13C480A2527EB86004E7CCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F13C48122527EB86004E7CCF /* AutoRestUrlTest.framework */,
+				F13C48142527EB86004E7CCF /* AzureCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F186E8FD250FEAEC00723FA3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,9 +824,10 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
+				F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */,
 				F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */,
 				F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */,
-				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
 				F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */,
 				F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */,
 				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
@@ -1105,6 +1130,10 @@
 					ProjectRef = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
 				},
 				{
+					ProductGroup = F13C480A2527EB86004E7CCF /* Products */;
+					ProjectRef = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
+				},
+				{
 					ProductGroup = F186E8FD250FEAEC00723FA3 /* Products */;
 					ProjectRef = F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */;
 				},
@@ -1123,6 +1152,20 @@
 			fileType = wrapper.framework;
 			path = AutoRestSwaggerBatFile.framework;
 			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F13C48122527EB86004E7CCF /* AutoRestUrlTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestUrlTest.framework;
+			remoteRef = F13C48112527EB86004E7CCF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F13C48142527EB86004E7CCF /* AzureCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AzureCore.framework;
+			remoteRef = F13C48132527EB86004E7CCF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F186E906250FEAEC00723FA3 /* XmsErrorResponseExtensions.framework */ = {
