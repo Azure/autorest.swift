@@ -224,13 +224,6 @@
 			remoteGlobalIDString = "AutoRestUrlTest::AutoRestUrlTest::Product";
 			remoteInfo = AutoRestUrlTest;
 		};
-		F13C48132527EB86004E7CCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "AzureSDK::AzureCore::Product";
-			remoteInfo = AzureCore;
-		};
 		F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */;
@@ -792,7 +785,6 @@
 			isa = PBXGroup;
 			children = (
 				F13C48122527EB86004E7CCF /* AutoRestUrlTest.framework */,
-				F13C48142527EB86004E7CCF /* AzureCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1069,6 +1061,7 @@
 				F1A6718E24F5CCCC00C2712C /* Sources */,
 				F1A6718F24F5CCCC00C2712C /* Frameworks */,
 				F1A6719024F5CCCC00C2712C /* Resources */,
+				F1E19A70252CD48500BB6D90 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1161,13 +1154,6 @@
 			remoteRef = F13C48112527EB86004E7CCF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F13C48142527EB86004E7CCF /* AzureCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AzureCore.framework;
-			remoteRef = F13C48132527EB86004E7CCF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		F186E906250FEAEC00723FA3 /* XmsErrorResponseExtensions.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1254,6 +1240,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "BUILD_PATH=$(pwd)\n$BUILD_PATH/Scripts/swiftlint.sh $BUILD_PATH\n";
+		};
+		F1E19A70252CD48500BB6D90 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_PATH=$(pwd)\necho $BUILD_PATH\n$BUILD_PATH/Scripts/swiftlint.sh $BUILD_PATH\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
