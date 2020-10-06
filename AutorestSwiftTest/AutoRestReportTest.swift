@@ -46,8 +46,6 @@ class AutoRestReportTest: XCTestCase {
 
     func test_ReportFile_getReport() throws {
         let expectation = XCTestExpectation(description: "Call getReport succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getReport failed")
-        failedExpectation.isInverted = true
 
         client.autorestreportservice.getReport { result, _ in
             switch result {
@@ -57,7 +55,7 @@ class AutoRestReportTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call getReport failed")
             }
         }
 
@@ -66,8 +64,6 @@ class AutoRestReportTest: XCTestCase {
 
     func test_ReportFile_getOptionalReport() throws {
         let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getOptionalReport failed")
-        failedExpectation.isInverted = true
 
         client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
@@ -77,7 +73,7 @@ class AutoRestReportTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call getOptionalReport failed")
             }
         }
 

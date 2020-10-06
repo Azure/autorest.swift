@@ -45,8 +45,6 @@ class AutoRestHeadTest: XCTestCase {
 
     func test_Head_success200() throws {
         let expectation = XCTestExpectation(description: "Call head200 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head200 failed")
-        failedExpectation.isInverted = true
 
         client.httpsuccess.head200 { result, _ in
             switch result {
@@ -54,7 +52,7 @@ class AutoRestHeadTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head200 failed")
             }
         }
 
@@ -63,8 +61,6 @@ class AutoRestHeadTest: XCTestCase {
 
     func test_Head_success204() throws {
         let expectation = XCTestExpectation(description: "Call head204 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head204 failed")
-        failedExpectation.isInverted = true
 
         client.httpsuccess.head204 { result, _ in
             switch result {
@@ -72,7 +68,7 @@ class AutoRestHeadTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head204 failed")
             }
         }
 
@@ -81,8 +77,6 @@ class AutoRestHeadTest: XCTestCase {
 
     func test_Head_success404() throws {
         let expectation = XCTestExpectation(description: "Call head404 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head404 failed")
-        failedExpectation.isInverted = true
 
         client.httpsuccess.head404 { result, _ in
             switch result {
@@ -90,7 +84,7 @@ class AutoRestHeadTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head404 failed")
             }
         }
 
