@@ -188,7 +188,6 @@ class AutoRestIntegerTest: XCTestCase {
                 expectation.fulfill()
             case .failure:
                 XCTFail("Call getUnixTime failed")
-                // print("Call getUnixTime failed")
             }
         }
         wait(for: [expectation], timeout: 5.0)
