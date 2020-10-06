@@ -81,7 +81,11 @@ class Manager {
     private static func sanitize(yaml: String) -> String {
         // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed.
         // Replaces empty string with a single space.
-        return yaml.replacingOccurrences(of: ": ''", with: ": ' '")
+        // Keep the empty string for Value. Replace all empty string for value with PreserveEmptyString. After globally replace
+        // '' with ' ', replace PreserveEmptyString with ''
+        let preserveEmptyValue = yaml.replacingOccurrences(of: "value: ''", with: "value: PreserveEmptyString")
+        let removedGlobalEmpty = preserveEmptyValue.replacingOccurrences(of: ": ''", with: ": ' '")
+        return removedGlobalEmpty.replacingOccurrences(of: "value: PreserveEmptyString", with: "value: ''")
     }
 
     func run() throws {

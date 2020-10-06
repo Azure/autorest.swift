@@ -10,7 +10,7 @@
     {% if method.strategy == "dateFromSignature" or method.strategy == "dateFromParam" %}
     let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
     {% elif method.strategy == "byteArrayFromSignature" or method.strategy == "byteArrayFromParam" %}
-    guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
+    guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8)?.data(using:.utf8)?.base64EncodedString() else {
         self.options.logger.error("Failed to construct String for {{ method.key }}")
         return
     }

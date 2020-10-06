@@ -1,7 +1,10 @@
 {% if param.strategy == "dateFromParam" %}
 let {{ param.key }}String = DateFormatter().string(from: {{ param.key }})
 {% elif param.strategy == "byteArrayFromParam" %}
-let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8)
+guard let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8)?.data(using:.utf8)?.base64EncodedString() else {
+    self.options.logger.error("Failed to construct String for {{ param.key }}")
+    return
+}
 {% else %}
 {# No need to decode the parameter to String. Leave this blank #}
 {% endif %}
