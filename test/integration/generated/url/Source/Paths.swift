@@ -1219,7 +1219,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let pathParams = [
-            "stringPath": " "
+            "stringPath": ""
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -1572,7 +1572,8 @@ public final class Paths {
         withOptions options: ByteMultiByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
+        guard let bytePathString = String(bytes: bytePath, encoding: .utf8)?.data(using: .utf8)?.base64EncodedString()
+        else {
             self.options.logger.error("Failed to construct String for bytePath")
             return
         }
@@ -1665,8 +1666,9 @@ public final class Paths {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let bytePath = " ".utf8
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
+        let bytePath = "".utf8
+        guard let bytePathString = String(bytes: bytePath, encoding: .utf8)?.data(using: .utf8)?.base64EncodedString()
+        else {
             self.options.logger.error("Failed to construct String for bytePath")
             return
         }
@@ -1760,7 +1762,8 @@ public final class Paths {
         withOptions options: ByteNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
+        guard let bytePathString = String(bytes: bytePath, encoding: .utf8)?.data(using: .utf8)?.base64EncodedString()
+        else {
             self.options.logger.error("Failed to construct String for bytePath")
             return
         }
@@ -2224,7 +2227,8 @@ public final class Paths {
         withOptions options: Base64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let base64UrlPathString = String(bytes: base64UrlPath, encoding: .utf8) else {
+        guard let base64UrlPathString = String(bytes: base64UrlPath, encoding: .utf8)?.data(using: .utf8)?
+            .base64EncodedString() else {
             self.options.logger.error("Failed to construct String for base64UrlPath")
             return
         }

@@ -1624,7 +1624,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", " ")
+            ("stringQuery", "")
         ]
 
         // Construct headers
@@ -2013,7 +2013,11 @@ public final class Queries {
         if let options = options {
             // Query options
             if let byteQuery = options.byteQuery {
-                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+                guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8)?.data(using: .utf8)?
+                    .base64EncodedString() else {
+                    self.options.logger.error("Failed to construct String for byteQuery")
+                    return
+                }
 
                 queryParams.append("byteQuery", byteQueryString)
             }
@@ -2091,8 +2095,9 @@ public final class Queries {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let byteQuery = " ".utf8
-        guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
+        let byteQuery = "".utf8
+        guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8)?.data(using: .utf8)?
+            .base64EncodedString() else {
             self.options.logger.error("Failed to construct String for byteQuery")
             return
         }
@@ -2206,7 +2211,11 @@ public final class Queries {
         if let options = options {
             // Query options
             if let byteQuery = options.byteQuery {
-                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+                guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8)?.data(using: .utf8)?
+                    .base64EncodedString() else {
+                    self.options.logger.error("Failed to construct String for byteQuery")
+                    return
+                }
 
                 queryParams.append("byteQuery", byteQueryString)
             }
