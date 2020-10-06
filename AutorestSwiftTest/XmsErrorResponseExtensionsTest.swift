@@ -157,21 +157,6 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func dummyTest() {
-        guard let test = "猼둺撔狛壬셓좔鵷".data(using: .utf8) else {
-            return
-        }
-        guard let testString = String(bytes: test, encoding: .utf8)?.base64EncodedString() else {
-            return
-        }
-        print(testString)
-
-        guard let test2String = String(bytes: test, encoding: .utf8)?.data(using: .utf8)?.base64EncodedString() else {
-            return
-        }
-        print(test2String)
-    }
-
     func test_XmsErrorResponseExtensions_getPetById400() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with ringo succeed")
 
