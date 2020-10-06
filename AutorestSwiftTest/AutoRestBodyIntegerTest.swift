@@ -194,12 +194,12 @@ class AutoRestIntegerTest: XCTestCase {
 
         client.inttype.getUnixTime { result, httpResponse in
             switch result {
-                case let .success(data):
-                    XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
 
-                    let expectedDate = ISO8601DateFormatter().date(from: "2016-04-13T00:00:00Z")
-                    XCTAssertEqual(expectedDate, data)
-                    expectation.fulfill()
+                let expectedDate = ISO8601DateFormatter().date(from: "2016-04-13T00:00:00Z")
+                XCTAssertEqual(expectedDate, data)
+                expectation.fulfill()
             case .failure:
                 failedExpectation.fulfill()
             }
