@@ -47,12 +47,12 @@ class AutoRestUrlTest: XCTestCase {
         let failedExpectation = XCTestExpectation(description: "Call paths.byteNull failed")
         failedExpectation.isInverted = true
         
-        client.paths.byteNull(bytePath: Data()) { result, _  in
+        client.paths.byteNull(bytePath: Data()) { result, _ in
             switch result {
                 case .success:
                     failedExpectation.fulfill()
                 case .failure:
-                    failedExpectation.fulfill()
+                    expectation.fulfill()
             }
         }
         
@@ -60,11 +60,11 @@ class AutoRestUrlTest: XCTestCase {
     }
     
     func test_Paths_byteEmpty200() throws {
-        let expectation = XCTestExpectation(description: "Call byteEmpty succeed")
-        let failedExpectation = XCTestExpectation(description: "Call byteEmpty failed")
+        let expectation = XCTestExpectation(description: "Call paths.byteEmpty succeed")
+        let failedExpectation = XCTestExpectation(description: "Call paths.byteEmpty failed")
         failedExpectation.isInverted = true
         
-        client.paths.byteEmpty() { result, httpResponse  in
+        client.paths.byteEmpty() { result, _  in
             switch result {
                 case .success:
                     expectation.fulfill()
@@ -77,14 +77,14 @@ class AutoRestUrlTest: XCTestCase {
     }
     
     func test_Paths_byteMultiByte200() throws {
-        let expectation = XCTestExpectation(description: "Call byteMultiByte succeed")
-        let failedExpectation = XCTestExpectation(description: "Call byteMultiByte failed")
+        let expectation = XCTestExpectation(description: "Call paths.byteMultiByte succeed")
+        let failedExpectation = XCTestExpectation(description: "Call paths.byteMultiByte failed")
         failedExpectation.isInverted = true
         
-        guard let byptePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8) else {
+        guard let bytePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8) else {
             return
         }
-        client.paths.byteMultiByte(bytePath: byptePath) { result, httpResponse  in
+        client.paths.byteMultiByte(bytePath: bytePath) { result, _  in
             switch result {
                 case .success:
                     expectation.fulfill()
@@ -97,11 +97,121 @@ class AutoRestUrlTest: XCTestCase {
     }
 
     func test_Paths_getBooleanTrue200() throws {
-        let expectation = XCTestExpectation(description: "Call getBooleanTrue succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getBooleanTrue failed")
+        let expectation = XCTestExpectation(description: "Call paths.getBooleanTrue succeed")
+        let failedExpectation = XCTestExpectation(description: "Call paths.getBooleanTrue failed")
         failedExpectation.isInverted = true
         
         client.paths.getBooleanTrue() { result, _  in
+            switch result {
+                case .success:
+                    expectation.fulfill()
+                case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Paths_getBooleanFalse200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.getBooleanFalse succeed")
+        let failedExpectation = XCTestExpectation(description: "Call paths.getBooleanFalse failed")
+        failedExpectation.isInverted = true
+        
+        client.paths.getBooleanFalse() { result, _  in
+            switch result {
+                case .success:
+                    expectation.fulfill()
+                case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_byteNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
+        let failedExpectation = XCTestExpectation(description: "Call queries.byteNull failed")
+        failedExpectation.isInverted = true
+        
+        let options = Queries.ByteNullOptions(byteQuery: Data())
+        client.queries.byteNull(withOptions: options) { result, _ in
+            switch result {
+                case .success:
+                    failedExpectation.fulfill()
+                case .failure:
+                    expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_byteEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.byteEmpty succeed")
+        let failedExpectation = XCTestExpectation(description: "Call queries.byteEmpty failed")
+        failedExpectation.isInverted = true
+        
+        client.queries.byteEmpty() { result, _  in
+            switch result {
+                case .success:
+                    expectation.fulfill()
+                case .failure:
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_byteMultiByte200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.byteMultiByte succeed")
+        let failedExpectation = XCTestExpectation(description: "Call queries.byteMultiByte failed")
+        failedExpectation.isInverted = true
+        
+        guard let byteQuery = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8) else {
+            return
+        }
+        let options = Queries.ByteMultiByteOptions(byteQuery: byteQuery)
+        client.queries.byteMultiByte(withOptions: options) { result, httpResponse in
+            switch result {
+                case .success:
+                    expectation.fulfill()
+                case .failure:
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_getBooleanTrue200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getBooleanTrue succeed")
+        let failedExpectation = XCTestExpectation(description: "Call queries.getBooleanTrue failed")
+        failedExpectation.isInverted = true
+        
+        client.queries.getBooleanTrue() { result, _  in
+            switch result {
+                case .success:
+                    expectation.fulfill()
+                case let .failure(error):
+                    print("test failed. error=\(error.message)")
+                    failedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_getBooleanFalse200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getBooleanFalse succeed")
+        let failedExpectation = XCTestExpectation(description: "Call queries.getBooleanFalse failed")
+        failedExpectation.isInverted = true
+        
+        client.queries.getBooleanFalse() { result, _  in
             switch result {
                 case .success:
                     expectation.fulfill()
