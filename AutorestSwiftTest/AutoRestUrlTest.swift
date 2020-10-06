@@ -77,7 +77,7 @@ class AutoRestUrlTest: XCTestCase {
     func test_Paths_byteMultiByte200() throws {
         let expectation = XCTestExpectation(description: "Call paths.byteMultiByte succeed")
 
-        guard let bytePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8) else {
+        guard let bytePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
             return
         }
         client.paths.byteMultiByte(bytePath: bytePath) { result, _ in
@@ -158,7 +158,7 @@ class AutoRestUrlTest: XCTestCase {
     func test_Queries_byteMultiByte200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteMultiByte succeed")
 
-        guard let byteQuery = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8) else {
+        guard let byteQuery = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
             return
         }
         let options = Queries.ByteMultiByteOptions(byteQuery: byteQuery)
