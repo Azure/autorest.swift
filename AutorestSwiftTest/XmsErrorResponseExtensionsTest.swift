@@ -72,9 +72,13 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
            
            client.petoperation.getPetById(petId: "django") { result, httpResponse  in
                switch result {
-                   case let .success(pet):
+                case let .success(data):
+                    if ((data as? Pet) != nil) {
+                        failedExpectation.fulfill()
+                    } else {
                         XCTAssertEqual(httpResponse?.statusCode, 202)
                         expectation.fulfill()
+                    }
                   case let .failure(error):
                        print("test failed. error=\(error.message)")
                        failedExpectation.fulfill()
