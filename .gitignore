@@ -304,3 +304,4 @@ Pods/
 .build/
 .swiftpm/
 test/integration/generated/**/**/xcuserdata/
+**/Package.resolved
