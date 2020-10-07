@@ -40,6 +40,9 @@ struct ServiceClientFileViewModel {
     let namedOperationGroups: [String: OperationGroupViewModel]
     // A key,Value pairs of all the named operation group for stencil template engine
     let namedOperationGroupShortcuts: [KeyValueViewModel]
+    // Base Url of the service client. Retrieve value from $host in code model
+    let baseUrl: String
+    let skipUrlEncoding: Bool
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
@@ -62,13 +65,27 @@ struct ServiceClientFileViewModel {
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
         var globalParameters = [ParameterViewModel]()
-        for globalParameter in model.globalParameters ?? [] where !globalParameter.name.starts(with: "$") {
-            globalParameters.append(ParameterViewModel(from: globalParameter))
+        var baseUrl: String?
+        var skipUrlEncoding: Bool?
+        for globalParameter in model.globalParameters ?? [] {
+            if globalParameter.name == "$host" {
+                if let httpParam = globalParameter.protocol.http as? HttpParameter,
+                    httpParam.in == .uri {
+                    baseUrl = globalParameter.value.clientDefaultValue ?? ""
+                    if let value = globalParameter.value.extensions?["x-ms-skip-url-encoding"] {
+                        skipUrlEncoding = value.value as? Bool
+                    }
+                }
+            } else {
+                globalParameters.append(ParameterViewModel(from: globalParameter))
+            }
         }
         self.globalParameters = globalParameters
         for key in namedOperationGroups.keys {
             namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }
         self.namedOperationGroupShortcuts = namedOperationGroupShortcuts
+        self.baseUrl = baseUrl ?? ""
+        self.skipUrlEncoding = skipUrlEncoding ?? false
     }
 }
