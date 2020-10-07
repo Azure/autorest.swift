@@ -24,74 +24,70 @@
 //
 // --------------------------------------------------------------------------
 
-import XCTest
-import AzureCore
 import AutoRestHeadTest
+import AzureCore
+import XCTest
 
 class AutoRestHeadTest: XCTestCase {
     var client: AutoRestHeadTestClient!
-    
+
     override func setUpWithError() throws {
         guard let baseUrl = URL(string: "http://localhost:3000") else {
             fatalError("Unable to form base URL")
         }
-        
-        client = try AutoRestHeadTestClient(baseUrl: baseUrl,
-                                            authPolicy: AnonymousAccessPolicy(),
-                                            withOptions: AutoRestHeadTestClientOptions())
+
+        client = try AutoRestHeadTestClient(
+            baseUrl: baseUrl,
+            authPolicy: AnonymousAccessPolicy(),
+            withOptions: AutoRestHeadTestClientOptions()
+        )
     }
 
     func test_Head_success200() throws {
         let expectation = XCTestExpectation(description: "Call head200 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head200 failed")
-        failedExpectation.isInverted = true
-        
-        client.httpsuccess.head200() { result, _  in
+
+        client.httpsuccess.head200 { result, _ in
             switch result {
-                case .success:
-                 expectation.fulfill()
-               case let .failure(error):
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head200 failed")
             }
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Head_success204() throws {
         let expectation = XCTestExpectation(description: "Call head204 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head204 failed")
-        failedExpectation.isInverted = true
-        
-        client.httpsuccess.head204() { result, _  in
+
+        client.httpsuccess.head204 { result, _ in
             switch result {
-                case .success:
-                 expectation.fulfill()
-               case let .failure(error):
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head204 failed")
             }
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Head_success404() throws {
         let expectation = XCTestExpectation(description: "Call head404 succeed")
-        let failedExpectation = XCTestExpectation(description: "Call head404 failed")
-        failedExpectation.isInverted = true
-        
-        client.httpsuccess.head404() { result, _  in
+
+        client.httpsuccess.head404 { result, _ in
             switch result {
-                case .success:
-                 expectation.fulfill()
-               case let .failure(error):
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
                 print("test failed. error=\(error.message)")
-                failedExpectation.fulfill()
+                XCTFail("Call head404 failed")
             }
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
 }

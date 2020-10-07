@@ -16,6 +16,8 @@ echo
 if which swiftformat >/dev/null; then
     echo "Formatting Swift files at: $REPO_ROOT/src"
     swiftformat --quiet --config "$REPO_ROOT/.swiftformat" "$REPO_ROOT/src" &> /dev/null
+    echo "Formatting Swift files at: $REPO_ROOT/AutorestSwiftTest"
+    swiftformat --quiet --config "$REPO_ROOT/.swiftformat" "$REPO_ROOT/AutorestSwiftTest" &> /dev/null
 else
     echo "warning: SwiftFormat not installed. Download from https://github.com/nicklockwood/SwiftFormat"
 fi
@@ -25,6 +27,10 @@ if which swiftlint >/dev/null; then
     swiftlint autocorrect --quiet --config "$REPO_ROOT/.swiftlint.yml" "$REPO_ROOT/src" &> /dev/null
     echo "Linting Swift files at: $REPO_ROOT/src"
     swiftlint lint --quiet --config "$REPO_ROOT/.swiftlint.yml" "$REPO_ROOT/src"
+    echo "Correcting Swift files at: $REPO_ROOT/AutorestSwiftTest"
+    swiftlint autocorrect --quiet --config "$REPO_ROOT/.swiftlint.yml" "$REPO_ROOT/AutorestSwiftTest" &> /dev/null
+    echo "Linting Swift files at: $REPO_ROOT/AutorestSwiftTest"
+    swiftlint lint --quiet --config "$REPO_ROOT/.swiftlint.yml" "$REPO_ROOT/AutorestSwiftTest"
 else
     echo "warning: SwiftLint not installed. Download from https://github.com/realm/SwiftLint"
 fi

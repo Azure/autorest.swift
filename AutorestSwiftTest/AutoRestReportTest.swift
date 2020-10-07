@@ -24,62 +24,59 @@
 //
 // --------------------------------------------------------------------------
 
+import AutoRestReport
+import AzureCore
 import Foundation
 import XCTest
-import AzureCore
-import AutoRestReport
 
 class AutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
-    
+
     override func setUpWithError() throws {
         guard let baseUrl = URL(string: "http://localhost:3000") else {
             fatalError("Unable to form base URL")
         }
-        
-        client = try AutoRestReportClient(baseUrl: baseUrl,
-                                            authPolicy: AnonymousAccessPolicy(),
-                                            withOptions: AutoRestReportClientOptions())
+
+        client = try AutoRestReportClient(
+            baseUrl: baseUrl,
+            authPolicy: AnonymousAccessPolicy(),
+            withOptions: AutoRestReportClientOptions()
+        )
     }
 
     func test_ReportFile_getReport() throws {
         let expectation = XCTestExpectation(description: "Call getReport succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getReport failed")
-        failedExpectation.isInverted = true
-        
-        client.autorestreportservice.getReport() { result, _  in
+
+        client.autorestreportservice.getReport { result, _ in
             switch result {
-                case let .success(data):
-                    XCTAssertEqual(data.count, 598)
-                    XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
-                    expectation.fulfill()
-               case let .failure(error):
-                    print("test failed. error=\(error.message)")
-                    failedExpectation.fulfill()
+            case let .success(data):
+                XCTAssertEqual(data.count, 598)
+                XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call getReport failed")
             }
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_ReportFile_getOptionalReport() throws {
         let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
-        let failedExpectation = XCTestExpectation(description: "Call getOptionalReport failed")
-        failedExpectation.isInverted = true
-        
-        client.autorestreportservice.getOptionalReport() { result, _  in
+
+        client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
-                case let .success(data):
-                    XCTAssertEqual(data.count, 41)
-                    XCTAssertEqual(data["getDecimalInvalid"], 0)
-                    expectation.fulfill()
-               case let .failure(error):
-                    print("test failed. error=\(error.message)")
-                    failedExpectation.fulfill()
+            case let .success(data):
+                XCTAssertEqual(data.count, 41)
+                XCTAssertEqual(data["getDecimalInvalid"], 0)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call getOptionalReport failed")
             }
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
-    
 }
