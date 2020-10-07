@@ -54,7 +54,7 @@ class Manager {
         self.mode = .commandLine
 
         let yamlString = try String(contentsOf: input)
-        self.inputString = Manager.sanitize(yaml: yamlString)
+        self.inputString = yamlString
         self.packageUrl = nil
 
         // TODO: Make this configurable
@@ -69,7 +69,7 @@ class Manager {
     /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
     init(withString string: String) {
         self.mode = .autorest
-        self.inputString = Manager.sanitize(yaml: string)
+        self.inputString = string
         // for autorest mode, create a temp directory using a random Guid as the directory name
         self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
             .appendingPathComponent(UUID().uuidString)
@@ -77,12 +77,6 @@ class Manager {
     }
 
     // MARK: Methods
-
-    private static func sanitize(yaml: String) -> String {
-        // TODO: Remove when issue (https://github.com/Azure/autorest.swift/issues/47) is fixed.
-        // Replaces empty string with a single space.
-        return yaml.replacingOccurrences(of: ": ''", with: ": ' '")
-    }
 
     func run() throws {
         saveCodeModel()

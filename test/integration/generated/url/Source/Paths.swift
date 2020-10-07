@@ -1219,7 +1219,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let pathParams = [
-            "stringPath": " "
+            "stringPath": ""
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -1665,7 +1665,7 @@ public final class Paths {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let bytePath = " ".utf8
+        let bytePath = "".utf8
         guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for bytePath")
             return

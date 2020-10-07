@@ -1624,7 +1624,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", " ")
+            ("stringQuery", "")
         ]
 
         // Construct headers
@@ -2091,7 +2091,7 @@ public final class Queries {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let byteQuery = " ".utf8
+        let byteQuery = "".utf8
         guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for byteQuery")
             return
