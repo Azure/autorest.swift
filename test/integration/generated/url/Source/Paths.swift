@@ -55,7 +55,10 @@ public final class Paths {
         let boolPath = true
 
         // Construct URL
-        let urlTemplate = "/paths/bool/true/{boolPath}"
+        guard let urlTemplate = "/paths/bool/true/{boolPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "boolPath": String(boolPath)
         ]
@@ -145,7 +148,10 @@ public final class Paths {
         let boolPath = false
 
         // Construct URL
-        let urlTemplate = "/paths/bool/false/{boolPath}"
+        guard let urlTemplate = "/paths/bool/false/{boolPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "boolPath": String(boolPath)
         ]
@@ -235,7 +241,10 @@ public final class Paths {
         let intPath = 1_000_000
 
         // Construct URL
-        let urlTemplate = "/paths/int/1000000/{intPath}"
+        guard let urlTemplate = "/paths/int/1000000/{intPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "intPath": String(intPath)
         ]
@@ -325,7 +334,10 @@ public final class Paths {
         let intPath = -1_000_000
 
         // Construct URL
-        let urlTemplate = "/paths/int/-1000000/{intPath}"
+        guard let urlTemplate = "/paths/int/-1000000/{intPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "intPath": String(intPath)
         ]
@@ -415,7 +427,10 @@ public final class Paths {
         let longPath = 10_000_000_000
 
         // Construct URL
-        let urlTemplate = "/paths/long/10000000000/{longPath}"
+        guard let urlTemplate = "/paths/long/10000000000/{longPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "longPath": String(longPath)
         ]
@@ -505,7 +520,10 @@ public final class Paths {
         let longPath = -10_000_000_000
 
         // Construct URL
-        let urlTemplate = "/paths/long/-10000000000/{longPath}"
+        guard let urlTemplate = "/paths/long/-10000000000/{longPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "longPath": String(longPath)
         ]
@@ -595,7 +613,10 @@ public final class Paths {
         let floatPath = Double(103_400_000_000_000_000_000)
 
         // Construct URL
-        let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
+        guard let urlTemplate = "/paths/float/1.034E+20/{floatPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "floatPath": String(floatPath)
         ]
@@ -685,7 +706,10 @@ public final class Paths {
         let floatPath = Double(-1.034e-20)
 
         // Construct URL
-        let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
+        guard let urlTemplate = "/paths/float/-1.034E-20/{floatPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "floatPath": String(floatPath)
         ]
@@ -775,7 +799,10 @@ public final class Paths {
         let doublePath = Double(9_999_999.999)
 
         // Construct URL
-        let urlTemplate = "/paths/double/9999999.999/{doublePath}"
+        guard let urlTemplate = "/paths/double/9999999.999/{doublePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "doublePath": String(doublePath)
         ]
@@ -865,7 +892,10 @@ public final class Paths {
         let doublePath = Double(-9_999_999.999)
 
         // Construct URL
-        let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
+        guard let urlTemplate = "/paths/double/-9999999.999/{doublePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "doublePath": String(doublePath)
         ]
@@ -953,7 +983,10 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/unicode/{stringPath}"
+        guard let urlTemplate = "/paths/string/unicode/{stringPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "stringPath": "啊齄丂狛狜隣郎隣兀﨩"
         ]
@@ -1041,7 +1074,12 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
+        guard let urlTemplate =
+            "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "stringPath": "begin!*'();:@ &=+$,/?#[]end"
         ]
@@ -1129,9 +1167,12 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
+        guard let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
-            "stringPath": "begin!*'();:@&=+$,end"
+            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? "begin!*'();:@&=+$,end"
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -1217,7 +1258,10 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/empty/{stringPath}"
+        guard let urlTemplate = "/paths/string/empty/{stringPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "stringPath": ""
         ]
@@ -1306,7 +1350,10 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/null/{stringPath}"
+        guard let urlTemplate = "/paths/string/null/{stringPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "stringPath": stringPath
         ]
@@ -1395,7 +1442,10 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/enum/green%20color/{enumPath}"
+        guard let urlTemplate = "/paths/enum/green%20color/{enumPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "enumPath": enumPath.rawValue
         ]
@@ -1484,7 +1534,10 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/null/{enumPath}"
+        guard let urlTemplate = "/paths/string/null/{enumPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "enumPath": enumPath.rawValue
         ]
@@ -1578,7 +1631,10 @@ public final class Paths {
         }
 
         // Construct URL
-        let urlTemplate = "/paths/byte/multibyte/{bytePath}"
+        guard let urlTemplate = "/paths/byte/multibyte/{bytePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "bytePath": bytePathString
         ]
@@ -1672,7 +1728,10 @@ public final class Paths {
         }
 
         // Construct URL
-        let urlTemplate = "/paths/byte/empty/{bytePath}"
+        guard let urlTemplate = "/paths/byte/empty/{bytePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "bytePath": bytePathString
         ]
@@ -1766,7 +1825,10 @@ public final class Paths {
         }
 
         // Construct URL
-        let urlTemplate = "/paths/byte/null/{bytePath}"
+        guard let urlTemplate = "/paths/byte/null/{bytePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "bytePath": bytePathString
         ]
@@ -1860,7 +1922,10 @@ public final class Paths {
         let datePathString = DateFormatter().string(from: datePath)
 
         // Construct URL
-        let urlTemplate = "/paths/date/2012-01-01/{datePath}"
+        guard let urlTemplate = "/paths/date/2012-01-01/{datePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "datePath": datePathString
         ]
@@ -1951,7 +2016,10 @@ public final class Paths {
         let datePathString = DateFormatter().string(from: datePath)
 
         // Construct URL
-        let urlTemplate = "/paths/date/null/{datePath}"
+        guard let urlTemplate = "/paths/date/null/{datePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "datePath": datePathString
         ]
@@ -2045,7 +2113,10 @@ public final class Paths {
         let dateTimePathString = DateFormatter().string(from: dateTimePath)
 
         // Construct URL
-        let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
+        guard let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "dateTimePath": dateTimePathString
         ]
@@ -2136,7 +2207,10 @@ public final class Paths {
         let dateTimePathString = DateFormatter().string(from: dateTimePath)
 
         // Construct URL
-        let urlTemplate = "/paths/datetime/null/{dateTimePath}"
+        guard let urlTemplate = "/paths/datetime/null/{dateTimePath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "dateTimePath": dateTimePathString
         ]
@@ -2230,7 +2304,10 @@ public final class Paths {
         }
 
         // Construct URL
-        let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
+        guard let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "base64UrlPath": base64UrlPathString
         ]
@@ -2319,8 +2396,12 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate =
+        guard let urlTemplate =
             "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "arrayPath": arrayPath.map { String($0) }.joined(separator: ",")
         ]
@@ -2411,7 +2492,10 @@ public final class Paths {
         let unixTimeUrlPathString = DateFormatter().string(from: unixTimeUrlPath)
 
         // Construct URL
-        let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
+        guard let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "unixTimeUrlPath": unixTimeUrlPathString
         ]

@@ -37,7 +37,7 @@ class AutoRestUrlTest: XCTestCase {
         }
 
         client = try AutoRestUrlTestClient(
-            globalStringPath: "",
+            globalStringPath: "globalStringPath",
             baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestUrlTestClientOptions()
@@ -200,6 +200,23 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.getBooleanFalse failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_enumValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.enumValid succeed")
+
+        let options = Queries.EnumValidOptions(enumQuery: .greenColor)
+        client.queries.enumValid(withOptions: options) { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.enumValid failed")
             }
         }
 

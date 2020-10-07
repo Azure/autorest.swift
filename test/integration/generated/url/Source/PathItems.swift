@@ -56,8 +56,12 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate =
+        guard let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
@@ -162,8 +166,12 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate =
+        guard let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
@@ -268,8 +276,12 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate =
+        guard let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
@@ -374,8 +386,12 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate =
+        guard let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null"
+                .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,

@@ -54,7 +54,10 @@ public final class PetOperation {
         completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
         // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
+        guard let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "petId": petId
         ]
@@ -187,7 +190,10 @@ public final class PetOperation {
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
         // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
+        guard let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "whatAction": whatAction
         ]

@@ -53,7 +53,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/files/stream/nonempty"
+        guard let urlTemplate = "/files/stream/nonempty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -141,7 +144,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/files/stream/verylarge"
+        guard let urlTemplate = "/files/stream/verylarge".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -229,7 +235,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/files/stream/empty"
+        guard let urlTemplate = "/files/stream/empty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]

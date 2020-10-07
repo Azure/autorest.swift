@@ -55,7 +55,10 @@ public final class Queries {
         let boolQuery = true
 
         // Construct URL
-        let urlTemplate = "/queries/bool/true"
+        guard let urlTemplate = "/queries/bool/true".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -145,7 +148,10 @@ public final class Queries {
         let boolQuery = false
 
         // Construct URL
-        let urlTemplate = "/queries/bool/false"
+        guard let urlTemplate = "/queries/bool/false".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -233,7 +239,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/bool/null"
+        guard let urlTemplate = "/queries/bool/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -332,7 +341,10 @@ public final class Queries {
         let intQuery = 1_000_000
 
         // Construct URL
-        let urlTemplate = "/queries/int/1000000"
+        guard let urlTemplate = "/queries/int/1000000".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -422,7 +434,10 @@ public final class Queries {
         let intQuery = -1_000_000
 
         // Construct URL
-        let urlTemplate = "/queries/int/-1000000"
+        guard let urlTemplate = "/queries/int/-1000000".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -510,7 +525,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/int/null"
+        guard let urlTemplate = "/queries/int/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -609,7 +627,10 @@ public final class Queries {
         let longQuery = 10_000_000_000
 
         // Construct URL
-        let urlTemplate = "/queries/long/10000000000"
+        guard let urlTemplate = "/queries/long/10000000000".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -699,7 +720,10 @@ public final class Queries {
         let longQuery = -10_000_000_000
 
         // Construct URL
-        let urlTemplate = "/queries/long/-10000000000"
+        guard let urlTemplate = "/queries/long/-10000000000".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -787,7 +811,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/long/null"
+        guard let urlTemplate = "/queries/long/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -886,7 +913,10 @@ public final class Queries {
         let floatQuery = Double(103_400_000_000_000_000_000)
 
         // Construct URL
-        let urlTemplate = "/queries/float/1.034E+20"
+        guard let urlTemplate = "/queries/float/1.034E+20".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -976,7 +1006,10 @@ public final class Queries {
         let floatQuery = Double(-1.034e-20)
 
         // Construct URL
-        let urlTemplate = "/queries/float/-1.034E-20"
+        guard let urlTemplate = "/queries/float/-1.034E-20".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1064,7 +1097,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/float/null"
+        guard let urlTemplate = "/queries/float/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1163,7 +1199,10 @@ public final class Queries {
         let doubleQuery = Double(9_999_999.999)
 
         // Construct URL
-        let urlTemplate = "/queries/double/9999999.999"
+        guard let urlTemplate = "/queries/double/9999999.999".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1253,7 +1292,10 @@ public final class Queries {
         let doubleQuery = Double(-9_999_999.999)
 
         // Construct URL
-        let urlTemplate = "/queries/double/-9999999.999"
+        guard let urlTemplate = "/queries/double/-9999999.999".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1341,7 +1383,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/double/null"
+        guard let urlTemplate = "/queries/double/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1438,7 +1483,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/unicode/"
+        guard let urlTemplate = "/queries/string/unicode/".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1526,7 +1574,11 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend"
+        guard let urlTemplate = "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend"
+            .removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1614,7 +1666,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/empty"
+        guard let urlTemplate = "/queries/string/empty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1702,7 +1757,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/null"
+        guard let urlTemplate = "/queries/string/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1799,7 +1857,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/enum/green%20color"
+        guard let urlTemplate = "/queries/enum/green%20color".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1896,7 +1957,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/enum/null"
+        guard let urlTemplate = "/queries/enum/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1993,7 +2057,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/byte/multibyte"
+        guard let urlTemplate = "/queries/byte/multibyte".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2098,7 +2165,10 @@ public final class Queries {
         }
 
         // Construct URL
-        let urlTemplate = "/queries/byte/empty"
+        guard let urlTemplate = "/queries/byte/empty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2186,7 +2256,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/byte/null"
+        guard let urlTemplate = "/queries/byte/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2291,7 +2364,10 @@ public final class Queries {
         let dateQueryString = DateFormatter().string(from: dateQuery)
 
         // Construct URL
-        let urlTemplate = "/queries/date/2012-01-01"
+        guard let urlTemplate = "/queries/date/2012-01-01".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2379,7 +2455,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/date/null"
+        guard let urlTemplate = "/queries/date/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2484,7 +2563,10 @@ public final class Queries {
         let dateTimeQueryString = DateFormatter().string(from: dateTimeQuery)
 
         // Construct URL
-        let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z"
+        guard let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2572,7 +2654,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/datetime/null"
+        guard let urlTemplate = "/queries/datetime/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2671,7 +2756,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/valid"
+        guard let urlTemplate = "/queries/array/csv/string/valid".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2768,7 +2856,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/null"
+        guard let urlTemplate = "/queries/array/csv/string/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2865,7 +2956,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/empty"
+        guard let urlTemplate = "/queries/array/csv/string/empty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -2962,7 +3056,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/none/string/empty"
+        guard let urlTemplate = "/queries/array/none/string/empty".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -3059,7 +3156,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/ssv/string/valid"
+        guard let urlTemplate = "/queries/array/ssv/string/valid".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -3156,7 +3256,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/tsv/string/valid"
+        guard let urlTemplate = "/queries/array/tsv/string/valid".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -3253,7 +3356,10 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/pipes/string/valid"
+        guard let urlTemplate = "/queries/array/pipes/string/valid".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]

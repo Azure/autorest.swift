@@ -43,9 +43,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
         {{ param.name }} : {{ param.type }},
     {% endif %}
     {% endfor %}
-        {% if model.baseUrl == "" %}
         baseUrl: URL,
-        {% endif %}
         authPolicy: Authenticating,
         withOptions options: {{ model.name }}Options
     ) throws {
@@ -55,9 +53,6 @@ public final class {{ model.name }}: {{ model.protocols }} {
         {% endif %}
         {% endfor %}
         self.options = options
-        guard let baseUrl = URL(string: "{{ model.baseUrl }}") else {
-            fatalError("Unable to form base URL")
-        }
         super.init(
             baseUrl: baseUrl,
             transport: URLSessionTransport(),
@@ -71,8 +66,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
                 NormalizeETagPolicy()
             ],
             logger: options.logger,
-            options: options,
-            skipUrlEncoding: {{ model.skipUrlEncoding}}
+            options: options
         )
     }
 

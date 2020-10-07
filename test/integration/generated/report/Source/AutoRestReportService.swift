@@ -53,7 +53,10 @@ public final class AutoRestReportService {
         completionHandler: @escaping HTTPResultHandler<[String: Int]>
     ) {
         // Construct URL
-        let urlTemplate = "/report"
+        guard let urlTemplate = "/report".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -155,7 +158,10 @@ public final class AutoRestReportService {
         completionHandler: @escaping HTTPResultHandler<[String: Int]>
     ) {
         // Construct URL
-        let urlTemplate = "/report/optional"
+        guard let urlTemplate = "/report/optional".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
