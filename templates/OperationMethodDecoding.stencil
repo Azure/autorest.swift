@@ -1,14 +1,27 @@
 {% for method in op.params.methodDecoding %}
-    {% if method.strategy == "dateFromParam" %}
+    {% if method.strategy == "dateTimeFromParam" %}
     guard let {{ method.key }} = Date({{ method.constantValue }}, format: Date.Format.iso8601) else {
+        self.options.logger.error("Failed to construct Date for {{ method.key }}")
+        return
+    }
+    {% elif method.strategy == "dateFromParam" %}
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    guard let {{ method.key }} = dateFormatter.date(from: {{ method.constantValue }}) else {
         self.options.logger.error("Failed to construct Date for {{ method.key }}")
         return
     }
     {% elif method.strategy == "byteArrayFromParam" %}
     let {{ method.key }} = {{ method.constantValue }}.utf8
     {% endif %}
-    {% if method.strategy == "dateFromSignature" or method.strategy == "dateFromParam" %}
-    let {{ method.key }}String = DateFormatter().string(from: {{ method.key }})
+    {% if method.strategy == "dateFromParam" %}
+    let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
+    {% elif method.strategy == "dateFromSignature" %}
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
+    {% elif method.strategy == "dateTimeFromSignature" or method.strategy == "dateTimeFromParam" %}
+    let {{ method.key }}String = Date.Format.iso8601.formatter.string(from: {{ method.key }})
     {% elif method.strategy == "byteArrayFromSignature" or method.strategy == "byteArrayFromParam" %}
     guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
         self.options.logger.error("Failed to construct String for {{ method.key }}")

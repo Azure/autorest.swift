@@ -1915,11 +1915,13 @@ public final class Paths {
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let datePath = Date("2012-01-01", format: Date.Format.iso8601) else {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let datePath = dateFormatter.date(from: "2012-01-01") else {
             self.options.logger.error("Failed to construct Date for datePath")
             return
         }
-        let datePathString = DateFormatter().string(from: datePath)
+        let datePathString = dateFormatter.string(from: datePath)
 
         // Construct URL
         guard let urlTemplate = "/paths/date/2012-01-01/{datePath}".removingPercentEncoding else {
@@ -2013,7 +2015,9 @@ public final class Paths {
         withOptions options: DateNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let datePathString = DateFormatter().string(from: datePath)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let datePathString = dateFormatter.string(from: datePath)
 
         // Construct URL
         guard let urlTemplate = "/paths/date/null/{datePath}".removingPercentEncoding else {
@@ -2110,7 +2114,7 @@ public final class Paths {
             self.options.logger.error("Failed to construct Date for dateTimePath")
             return
         }
-        let dateTimePathString = DateFormatter().string(from: dateTimePath)
+        let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
 
         // Construct URL
         guard let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}".removingPercentEncoding else {
@@ -2204,7 +2208,7 @@ public final class Paths {
         withOptions options: DateTimeNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateTimePathString = DateFormatter().string(from: dateTimePath)
+        let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
 
         // Construct URL
         guard let urlTemplate = "/paths/datetime/null/{dateTimePath}".removingPercentEncoding else {
@@ -2489,7 +2493,9 @@ public final class Paths {
         withOptions options: UnixTimeUrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let unixTimeUrlPathString = DateFormatter().string(from: unixTimeUrlPath)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let unixTimeUrlPathString = dateFormatter.string(from: unixTimeUrlPath)
 
         // Construct URL
         guard let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}".removingPercentEncoding else {

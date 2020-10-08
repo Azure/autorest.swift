@@ -2357,11 +2357,13 @@ public final class Queries {
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let dateQuery = Date("2012-01-01", format: Date.Format.iso8601) else {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let dateQuery = dateFormatter.date(from: "2012-01-01") else {
             self.options.logger.error("Failed to construct Date for dateQuery")
             return
         }
-        let dateQueryString = DateFormatter().string(from: dateQuery)
+        let dateQueryString = dateFormatter.string(from: dateQuery)
 
         // Construct URL
         guard let urlTemplate = "/queries/date/2012-01-01".removingPercentEncoding else {
@@ -2560,7 +2562,7 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateTimeQuery")
             return
         }
-        let dateTimeQueryString = DateFormatter().string(from: dateTimeQuery)
+        let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
 
         // Construct URL
         guard let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z".removingPercentEncoding else {
@@ -2677,7 +2679,7 @@ public final class Queries {
         if let options = options {
             // Query options
             if let dateTimeQuery = options.dateTimeQuery {
-                let dateTimeQueryString = DateFormatter().string(from: dateTimeQuery)
+                let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
 
                 queryParams.append("dateTimeQuery", dateTimeQueryString)
             }
