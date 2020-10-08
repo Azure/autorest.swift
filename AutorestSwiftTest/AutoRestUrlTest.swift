@@ -171,6 +171,7 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 
@@ -296,6 +297,22 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.dateTimeValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_floatScientificPositive200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.floatScientificPositive succeed")
+
+        client.queries.floatScientificPositive { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatScientificPositive failed")
             }
         }
 
