@@ -124,6 +124,22 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Paths_enumValid200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.enumValid succeed")
+
+        client.paths.enumValid(enumPath: .greenColor) { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.enumValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 
