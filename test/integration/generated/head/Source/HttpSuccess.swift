@@ -53,7 +53,10 @@ public final class HttpSuccess {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/http/success/200"
+        guard let urlTemplate = "/http/success/200".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -135,7 +138,10 @@ public final class HttpSuccess {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/http/success/204"
+        guard let urlTemplate = "/http/success/204".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -217,7 +223,10 @@ public final class HttpSuccess {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/http/success/404"
+        guard let urlTemplate = "/http/success/404".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]

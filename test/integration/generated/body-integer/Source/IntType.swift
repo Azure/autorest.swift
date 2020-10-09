@@ -53,7 +53,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int32?>
     ) {
         // Construct URL
-        let urlTemplate = "/int/null"
+        guard let urlTemplate = "/int/null".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -152,7 +155,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
-        let urlTemplate = "/int/invalid"
+        guard let urlTemplate = "/int/invalid".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -244,7 +250,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
-        let urlTemplate = "/int/overflowint32"
+        guard let urlTemplate = "/int/overflowint32".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -336,7 +345,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
         // Construct URL
-        let urlTemplate = "/int/underflowint32"
+        guard let urlTemplate = "/int/underflowint32".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -428,7 +440,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
         // Construct URL
-        let urlTemplate = "/int/overflowint64"
+        guard let urlTemplate = "/int/overflowint64".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -520,7 +535,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
         // Construct URL
-        let urlTemplate = "/int/underflowint64"
+        guard let urlTemplate = "/int/underflowint64".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -613,7 +631,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/int/max/32"
+        guard let urlTemplate = "/int/max/32".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -707,7 +728,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/int/max/64"
+        guard let urlTemplate = "/int/max/64".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -801,7 +825,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/int/min/32"
+        guard let urlTemplate = "/int/min/32".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -895,7 +922,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/int/min/64"
+        guard let urlTemplate = "/int/min/64".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -988,7 +1018,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/int/unixtime"
+        guard let urlTemplate = "/int/unixtime".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1082,7 +1115,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/int/unixtime"
+        guard let urlTemplate = "/int/unixtime".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1175,7 +1211,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/int/invalidunixtime"
+        guard let urlTemplate = "/int/invalidunixtime".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]
@@ -1268,7 +1307,10 @@ public final class IntType {
         completionHandler: @escaping HTTPResultHandler<Date?>
     ) {
         // Construct URL
-        let urlTemplate = "/int/nullunixtime"
+        guard let urlTemplate = "/int/nullunixtime".removingPercentEncoding else {
+            self.options.logger.error("Failed to construct url")
+            return
+        }
         let pathParams = [
             "": ""
         ]

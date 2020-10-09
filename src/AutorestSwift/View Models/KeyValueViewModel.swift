@@ -82,8 +82,12 @@ struct KeyValueViewModel {
         let type = constantSchema.valueType.type
 
         if type == .string {
-            self.value = "\"\(constantValue)\""
-            self.constantValue = "\"\(constantValue)\""
+            if param.value.isSkipUrlEncoding {
+                self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
+            } else {
+                self.value = "\"\(constantValue)\""
+            }
+            self.constantValue = value
             self.needDecodingInMethod = false
         } else {
             self.value = KeyValueViewModel.formatValueForType(
