@@ -128,4 +128,12 @@ class Value: Codable, LanguageShortcut {
         try container.encode(`protocol`, forKey: .protocol)
         if extensions != nil { try container.encode(extensions, forKey: .extensions) }
     }
+
+    var isSkipUrlEncoding: Bool {
+        var skipUrlEncoding: Bool?
+        if let value = extensions?["x-ms-skip-url-encoding"] {
+            skipUrlEncoding = value.value as? Bool
+        }
+        return skipUrlEncoding ?? false
+    }
 }
