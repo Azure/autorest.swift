@@ -1922,6 +1922,7 @@ public final class Paths {
             self.options.logger.error("Failed to construct Date for datePath")
             return
         }
+
         let datePathString = dateFormatter.string(from: datePath)
 
         // Construct URL
@@ -2115,10 +2116,7 @@ public final class Paths {
             self.options.logger.error("Failed to construct Date for dateTimePath")
             return
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
         let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
 
         // Construct URL
