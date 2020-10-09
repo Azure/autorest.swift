@@ -28,6 +28,8 @@ import AutoRestUrlTest
 import AzureCore
 import XCTest
 
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
@@ -172,6 +174,118 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Paths_getIntOneMillion200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.getIntOneMillion succeed")
+
+        client.paths.getIntOneMillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.getIntOneMillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_getIntNegativeOneMillion200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.getIntNegativeOneMillion succeed")
+
+        client.paths.getIntNegativeOneMillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.getIntOneMillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_getTenBillion200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.getTenBillion succeed")
+
+        client.paths.getTenBillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.getTenBillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_getNegativeTenBillion200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.getNegativeTenBillion succeed")
+
+        client.paths.getNegativeTenBillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.getTenBillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_doubleDecimalPositive200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalPositive succeed")
+
+        client.paths.doubleDecimalPositive { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.doubleDecimalPositive failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_doubleDecimalNegative200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalNegative succeed")
+
+        client.paths.doubleDecimalNegative { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.doubleDecimalNegative failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_floatScientificNegative200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.floatScientificNegative succeed")
+
+        client.paths.floatScientificNegative { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.floatScientificNegative failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 
@@ -297,6 +411,198 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.dateTimeValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_getIntOneMillion200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getIntOneMillion succeed")
+
+        client.queries.getIntOneMillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.getIntOneMillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_getIntNegativeOneMillion200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getIntNegativeOneMillion succeed")
+
+        client.queries.getIntNegativeOneMillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.getIntOneMillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_getTenBillion200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getTenBillion succeed")
+
+        client.queries.getTenBillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.getTenBillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_getNegativeTenBillion200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getNegativeTenBillion succeed")
+
+        client.queries.getNegativeTenBillion { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.getTenBillion failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_doubleDecimalPositive200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.doubleDecimalPositive succeed")
+
+        client.queries.doubleDecimalPositive { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.doubleDecimalPositive failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_doubleDecimalNegative200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.doubleDecimalNegative succeed")
+
+        client.queries.doubleDecimalNegative { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.doubleDecimalNegative failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_floatScientificNegative200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.floatScientificNegative succeed")
+
+        client.queries.floatScientificNegative { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatScientificNegative failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_enumNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.enumNull succeed")
+
+        client.queries.enumNull { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.enumNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_dateNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.dateNull succeed")
+
+        client.queries.dateNull { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.dateNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_dateTimeNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.dateTimeNull succeed")
+
+        client.queries.dateTimeNull { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.dateTimeNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_floatNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.floatNull succeed")
+
+        client.queries.floatNull { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_doubleNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.doubleNull succeed")
+
+        client.queries.doubleNull { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatNull failed")
             }
         }
 
