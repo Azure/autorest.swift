@@ -2364,6 +2364,7 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateQuery")
             return
         }
+
         let dateQueryString = dateFormatter.string(from: dateQuery)
 
         // Construct URL
@@ -2563,6 +2564,7 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateTimeQuery")
             return
         }
+
         let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
 
         // Construct URL
