@@ -2159,6 +2159,7 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let byteQuery = "".utf8
+
         guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for byteQuery")
             return

@@ -1722,6 +1722,7 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let bytePath = "".utf8
+
         guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for bytePath")
             return
