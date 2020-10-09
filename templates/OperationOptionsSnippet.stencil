@@ -3,7 +3,7 @@ if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
     if let {{ param.key }} = options.{{ param.key }} {
-        {% include "OperationOptionsDecodingSnippet.stencil" param %}
+        {% include "OperationOptionsDecodingSnippet.stencil" %}
         queryParams.append("{{ param.key }}", {{ param.value}})
     }
     {% endfor %}

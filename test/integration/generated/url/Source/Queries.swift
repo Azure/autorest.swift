@@ -2080,6 +2080,8 @@ public final class Queries {
         if let options = options {
             // Query options
             if let byteQuery = options.byteQuery {
+                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+
                 queryParams.append("byteQuery", byteQueryString)
             }
 
@@ -2157,6 +2159,7 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let byteQuery = "".utf8
+
         guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for byteQuery")
             return
@@ -2277,6 +2280,8 @@ public final class Queries {
         if let options = options {
             // Query options
             if let byteQuery = options.byteQuery {
+                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+
                 queryParams.append("byteQuery", byteQueryString)
             }
 
@@ -2359,6 +2364,7 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateQuery")
             return
         }
+
         let dateQueryString = dateFormatter.string(from: dateQuery)
 
         // Construct URL
@@ -2476,6 +2482,8 @@ public final class Queries {
         if let options = options {
             // Query options
             if let dateQuery = options.dateQuery {
+                let dateQueryString = DateFormatter().string(from: dateQuery)
+
                 queryParams.append("dateQuery", dateQueryString)
             }
 
@@ -2556,6 +2564,7 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateTimeQuery")
             return
         }
+
         let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
 
         // Construct URL
@@ -2673,6 +2682,8 @@ public final class Queries {
         if let options = options {
             // Query options
             if let dateTimeQuery = options.dateTimeQuery {
+                let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
+
                 queryParams.append("dateTimeQuery", dateTimeQueryString)
             }
 

@@ -14,6 +14,7 @@
     {% elif method.strategy == "byteArrayFromParam" %}
     let {{ method.key }} = {{ method.constantValue }}.utf8
     {% endif %}
+    {# Technically, we can include OperationOptionsDecodingSnippnet.stencil. But we can't get passing in a context when include in stencil to work. As a result, we dublicate the snippet here below. #}
     {% if method.strategy == "dateFromParam" %}
     let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
     {% elif method.strategy == "dateFromSignature" %}
