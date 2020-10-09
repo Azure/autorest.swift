@@ -1172,7 +1172,7 @@ public final class Paths {
             return
         }
         let pathParams = [
-            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? "begin!*'();:@&=+$,end"
+            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
