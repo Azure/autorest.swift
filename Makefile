@@ -46,7 +46,7 @@ test: copyTestResources
 	swift test
 
 clean:
-	find . -name \.build -type d -delete
+	find . -name \.build -type d -exec rm -rf \;
 	find . -name \Package.resolved -type f -delete
 
 .PHONY: run build test copyRunResources copyTestResources clean
