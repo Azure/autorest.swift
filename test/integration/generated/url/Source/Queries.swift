@@ -2159,6 +2159,7 @@ public final class Queries {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let byteQuery = "".utf8
+
         guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
             self.options.logger.error("Failed to construct String for byteQuery")
             return
@@ -2363,6 +2364,10 @@ public final class Queries {
             self.options.logger.error("Failed to construct Date for dateQuery")
             return
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         let dateQueryString = dateFormatter.string(from: dateQuery)
 
         // Construct URL
