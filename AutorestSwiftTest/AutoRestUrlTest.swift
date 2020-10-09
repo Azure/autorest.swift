@@ -28,6 +28,8 @@ import AutoRestUrlTest
 import AzureCore
 import XCTest
 
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
@@ -530,7 +532,7 @@ class AutoRestUrlTest: XCTestCase {
     func test_Queries_enumNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.enumNull succeed")
 
-        client.queries.enumNull() { result, _ in
+        client.queries.enumNull { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -542,11 +544,11 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_dateNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateNull succeed")
 
-        client.queries.dateNull() { result, _ in
+        client.queries.dateNull { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -558,11 +560,11 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_dateTimeNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateTimeNull succeed")
 
-        client.queries.dateTimeNull() { result, _ in
+        client.queries.dateTimeNull { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -574,11 +576,11 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_floatNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.floatNull succeed")
 
-        client.queries.floatNull() { result, _ in
+        client.queries.floatNull { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -590,11 +592,11 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_doubleNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.doubleNull succeed")
 
-        client.queries.doubleNull() { result, _ in
+        client.queries.doubleNull { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
