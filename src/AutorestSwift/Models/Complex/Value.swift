@@ -130,10 +130,10 @@ class Value: Codable, LanguageShortcut {
     }
 
     var isSkipUrlEncoding: Bool {
-        var skipUrlEncoding: Bool?
-        if let value = extensions?["x-ms-skip-url-encoding"] {
-            skipUrlEncoding = value.value as? Bool
+        var skipUrlEncoding = false
+        if let value = extensions?["x-ms-skip-url-encoding"]?.value as? Bool {
+            skipUrlEncoding = value
         }
-        return skipUrlEncoding ?? false
+        return skipUrlEncoding
     }
 }
