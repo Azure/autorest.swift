@@ -28,10 +28,12 @@ import Foundation
 
 enum KeyValueDecodeStrategy: String {
     case dateFromParam
-    case byteArrayFromParam
-    case `default`
     case dateFromSignature
+    case byteArrayFromParam
     case byteArrayFromSignature
+    case `default`
+    case dateTimeFromSignature
+    case dateTimeFromParam
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -98,10 +100,12 @@ struct KeyValueViewModel {
             self.needDecodingInMethod = param.implementation == ImplementationLocation.method
             switch type {
             case .date,
-                 .dateTime,
                  .unixTime:
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .dateFromParam
+            case .dateTime:
+                self.constantValue = "\"\(constantValue)\""
+                keyValueType = .dateTimeFromParam
             case .byteArray:
                 self.constantValue = "\"\(constantValue)\""
                 keyValueType = .byteArrayFromParam
@@ -131,9 +135,11 @@ struct KeyValueViewModel {
         // add decoding logic to string in the method and specify the right decoding strategy
         switch type {
         case .date,
-             .unixTime,
-             .dateTime:
+             .unixTime:
             keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromParam
+            self.needDecodingInMethod = true
+        case .dateTime:
+            keyValueType = signatureParameter.required ? .dateTimeFromSignature : .dateTimeFromParam
             self.needDecodingInMethod = true
         case .byteArray:
             keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromParam

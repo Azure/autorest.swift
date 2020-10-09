@@ -140,6 +140,38 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Paths_dateValid200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.dateValid succeed")
+
+        client.paths.dateValid { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.dateValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_dateTimeValid200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.dateTimeValid succeed")
+
+        client.paths.dateTimeValid { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.dateTimeValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 
@@ -233,6 +265,38 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.enumValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_dateValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.dateValid succeed")
+
+        client.queries.dateValid { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.dateValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_dateTimeValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.dateTimeValid succeed")
+
+        client.queries.dateTimeValid { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.dateTimeValid failed")
             }
         }
 
