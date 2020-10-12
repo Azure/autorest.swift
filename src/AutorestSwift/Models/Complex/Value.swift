@@ -29,7 +29,7 @@ import Foundation
 /// Common base interface for properties, parameters and the like.
 class Value: Codable, LanguageShortcut {
     /// the schema of this Value
-    public var schema: Schema?
+    public var schema: Schema
 
     // these properties we can set
     private var internalRequired: Bool?
@@ -93,7 +93,7 @@ class Value: Codable, LanguageShortcut {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.schema = try? Schema.decode(withContainer: container)
+        self.schema = try Schema.decode(withContainer: container)!
         self.internalRequired = try? container.decode(Bool.self, forKey: .required)
         self.nullable = try? container.decode(Bool.self, forKey: .nullable)
         self.assumedValue = try? container.decode(String.self, forKey: .assumedValue)

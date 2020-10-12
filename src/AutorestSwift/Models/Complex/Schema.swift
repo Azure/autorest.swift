@@ -95,7 +95,7 @@ class Schema: Codable, LanguageShortcut {
                 if arraySchema.elementType as? StringSchema != nil {
                     swiftType = "[String]"
                 } else {
-                    swiftType = "[\(arraySchema.elementType!.name)]"
+                    swiftType = "[\(arraySchema.elementType.name)]"
                 }
             } else {
                 swiftType = "[\(name)]"
@@ -171,7 +171,7 @@ class Schema: Codable, LanguageShortcut {
             guard "\(error)".contains("but found Unresolved instead") else {
                 throw error
             }
-            return nil
+            return try? container.decode(Schema.self, forKey: keyEnum)
         }
     }
 }

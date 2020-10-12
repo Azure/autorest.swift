@@ -28,7 +28,7 @@ import Foundation
 
 class ArraySchema: Schema {
     /// elementType of the array
-    let elementType: Schema?
+    let elementType: Schema
 
     /// maximum number of elements in the array
     let maxItems: Int?
@@ -50,7 +50,7 @@ class ArraySchema: Schema {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.elementType = try? Schema.decode(withContainer: container, useKey: "elementType")
+        self.elementType = try Schema.decode(withContainer: container, useKey: "elementType")!
         self.maxItems = try? container.decode(Int.self, forKey: .maxItems)
         self.minItems = try? container.decode(Int.self, forKey: .minItems)
         self.uniqueItems = try? container.decode(Bool.self, forKey: .uniqueItems)

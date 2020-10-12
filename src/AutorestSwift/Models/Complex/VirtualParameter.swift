@@ -69,14 +69,14 @@ class VirtualParameter: Parameter {
 
         // Default logic
         let inMethod = implementation == .method
-        let notConstant = schema?.type != .constant
+        let notConstant = schema.type != .constant
         let notGrouped = groupedBy == nil
         return inMethod && notConstant && notGrouped
     }
 
     override internal func belongsInOptions() -> Bool {
         let inMethod = implementation == .method
-        let notConstant = schema?.type != .constant
+        let notConstant = schema.type != .constant
         let notFlattened = flattened != true
         let notGrouped = groupedBy == nil
         return inMethod && notConstant && notFlattened && notGrouped

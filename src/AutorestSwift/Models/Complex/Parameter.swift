@@ -82,7 +82,7 @@ class Parameter: Value, CustomDebugStringConvertible {
 
         // Default logic
         let inMethod = implementation == .method
-        let notConstant = schema?.type != .constant
+        let notConstant = schema.type != .constant
         let notGrouped = groupedBy == nil
         let isRequired = required
         return isRequired && inMethod && notConstant && notGrouped
@@ -90,7 +90,7 @@ class Parameter: Value, CustomDebugStringConvertible {
 
     internal func belongsInOptions() -> Bool {
         let inMethod = implementation == .method
-        let notConstant = schema?.type != .constant
+        let notConstant = schema.type != .constant
         let notFlattened = flattened != true
         let notGrouped = groupedBy == nil
         let notRequired = required == false

@@ -81,7 +81,7 @@ struct ResponseViewModel {
             else { fatalError("Did not find exactly one array type for paged collection.") }
             self.strategy = ResponseBodyType.pagedBody.rawValue
             self.pagingNames = pagingNames
-            self.pagedElementClassName = arrayElements.first?.elementType!.name
+            self.pagedElementClassName = arrayElements.first!.elementType.name
 
             if let elementType = pagedElementClassName, self.pagingNames != nil {
                 self.objectType = "PagedCollection<\(elementType)>"
