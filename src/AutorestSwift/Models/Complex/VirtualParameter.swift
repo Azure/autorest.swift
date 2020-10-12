@@ -63,14 +63,9 @@ class VirtualParameter: Parameter {
     }
 
     override internal func belongsInSignature() -> Bool {
-        let name = self.name
-
         // We track body params in a special way, so always omit them generally from the signature.
         // If they belong in the signature, they will be added in a way to ensure they come first.
         guard paramLocation != .body else { return false }
-
-        // All path parameter are required
-        guard paramLocation != .path else { return true }
 
         // Default logic
         let inMethod = implementation == .method

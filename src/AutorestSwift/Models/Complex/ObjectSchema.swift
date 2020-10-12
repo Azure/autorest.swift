@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a type with child properties.
-class ObjectSchema: ComplexSchema {
+class ObjectSchema: ComplexSchema, UsageSchema {
     /// the property of the polymorphic descriminator for this type, if there is one
     let discriminator: Discriminator?
 

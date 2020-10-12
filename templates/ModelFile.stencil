@@ -8,10 +8,21 @@
 
 {{ model.comment }}
 public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
+    // MARK: Properties
     {% for property in model.properties %}
     {{ property.comment }}
     public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
     {% endfor %}
+
+    {% if model.hasConstants %}
+    // MARK: Constants
+    {% for constant in model.constants %}
+    {{ constant.comment }}
+    public let {{ constant.name }}{{constant.defaultValue}}
+    {% endfor %}
+    {% endif %}
+
+    // MARK: Initializers
 
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
@@ -27,6 +38,8 @@ public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
         self.{{ property.name }} = {{ property.name }}
     {% endfor %}
     }
-    
+
+    // MARK: Codable
+
     {% include "ModelDecoderEncoderSnippet.stencil" model %}
 }

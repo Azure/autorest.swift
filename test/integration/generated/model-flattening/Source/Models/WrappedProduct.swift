@@ -17,8 +17,12 @@ import Foundation
 
 /// The wrapped produc.
 public struct WrappedProduct: Codable {
+    // MARK: Properties
+
     /// the product value
     public let value: String?
+
+    // MARK: Initializers
 
     /// Initialize a `WrappedProduct` structure.
     /// - Parameters:
@@ -28,6 +32,8 @@ public struct WrappedProduct: Codable {
     ) {
         self.value = value
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case value

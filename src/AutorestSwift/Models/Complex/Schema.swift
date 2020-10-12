@@ -25,7 +25,6 @@
 // --------------------------------------------------------------------------
 
 import Foundation
-import Yams
 
 class Schema: Codable, LanguageShortcut {
     /// Per-language information for Schema
@@ -66,36 +65,6 @@ class Schema: Codable, LanguageShortcut {
     /// Additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
 
-    internal init(
-        language: Languages,
-        type: AllSchemaTypes,
-        summary: String?,
-        example: String?,
-        defaultValue: String?,
-        serialization: SerializationFormats?,
-        apiVersions: [ApiVersion]?,
-        deprecated: Deprecation?,
-        origin: String?,
-        externalDocs: ExternalDocumentation?,
-        protocol: Protocols,
-        properties: [Property]?,
-        extensions: [String: AnyCodable]?
-    ) {
-        self.language = language
-        self.type = type
-        self.summary = summary
-        self.example = example
-        self.defaultValue = defaultValue
-        self.serialization = serialization
-        self.apiVersions = apiVersions
-        self.deprecated = deprecated
-        self.origin = origin
-        self.externalDocs = externalDocs
-        self.protocol = `protocol`
-        self.properties = properties
-        self.extensions = extensions
-    }
-
     enum CodingKeys: String, CodingKey {
         case language
         case type
@@ -117,11 +86,6 @@ class Schema: Codable, LanguageShortcut {
         switch type {
         case AllSchemaTypes.string:
             swiftType = "String"
-        case AllSchemaTypes.constant:
-            guard let constant = self as? ConstantSchema else {
-                fatalError("Type mismatch. Expected constant type but got \(self)")
-            }
-            swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.boolean:
             swiftType = "Bool"
         case AllSchemaTypes.array:
@@ -131,7 +95,7 @@ class Schema: Codable, LanguageShortcut {
                 if arraySchema.elementType as? StringSchema != nil {
                     swiftType = "[String]"
                 } else {
-                    swiftType = "[\(arraySchema.elementType?.name ?? "BANOODLE")]"
+                    swiftType = "[\(arraySchema.elementType!.name)]"
                 }
             } else {
                 swiftType = "[\(name)]"
@@ -207,7 +171,6 @@ class Schema: Codable, LanguageShortcut {
             guard "\(error)".contains("but found Unresolved instead") else {
                 throw error
             }
-            // return ReferenceSchema(name: "dummy", summary: "dummy reference")
             return nil
         }
     }

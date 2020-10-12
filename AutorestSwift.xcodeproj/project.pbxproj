@@ -149,9 +149,10 @@
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
-		0A5F424C251D39F20079C1F0 /* ReferenceSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F424B251D39F20079C1F0 /* ReferenceSchema.swift */; };
 		0A7477012527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7477002527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift */; };
 		0A747B24252E897300819FC9 /* AutoRestUrlTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747B22252E897200819FC9 /* AutoRestUrlTest.swift */; };
+		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
+		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
 		0AA2BA1B24EC951700CEA1D6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1A24EC951700CEA1D6 /* Client.swift */; };
 		0AA2BA1D24EC956C00CEA1D6 /* CodableCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1C24EC956C00CEA1D6 /* CodableCodec.swift */; };
@@ -466,11 +467,12 @@
 		0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BodyParamSnippet.stencil; sourceTree = "<group>"; };
 		0A22B46324E1E64900EC018E /* JazzyFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = JazzyFile.stencil; sourceTree = "<group>"; };
 		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
-		0A5F424B251D39F20079C1F0 /* ReferenceSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceSchema.swift; sourceTree = "<group>"; };
 		0A7476E82527CDAC00819FC9 /* AutoRestResourceFlatteningTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestResourceFlatteningTest.xcodeproj; path = "test/integration/generated/model-flattening/AutoRestResourceFlatteningTest.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		0A7477002527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestResourceFlatteningTest.swift; sourceTree = "<group>"; };
 		0A7477222527D15F00819FC9 /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0A747B22252E897200819FC9 /* AutoRestUrlTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestUrlTest.swift; sourceTree = "<group>"; };
+		0A747F992534AA1C00819FC9 /* UsageSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSchema.swift; sourceTree = "<group>"; };
+		0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantViewModel.swift; sourceTree = "<group>"; };
 		0AA2B98824E5FD6500CEA1D6 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorestPlugin.swift; sourceTree = "<group>"; };
 		0AA2BA1A24EC951700CEA1D6 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 			children = (
 				0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */,
 				0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */,
+				0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */,
 				0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
 				0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */,
@@ -954,7 +957,6 @@
 				OBJ_50 /* PrimitiveSchema.swift */,
 				OBJ_51 /* Property.swift */,
 				OBJ_52 /* Protocol.swift */,
-				0A5F424B251D39F20079C1F0 /* ReferenceSchema.swift */,
 				OBJ_53 /* Request.swift */,
 				OBJ_54 /* Response.swift */,
 				OBJ_55 /* Schema.swift */,
@@ -1082,6 +1084,7 @@
 				OBJ_13 /* Logger.swift */,
 				OBJ_14 /* Manager.swift */,
 				OBJ_15 /* SwiftGenerator.swift */,
+				0A747F992534AA1C00819FC9 /* UsageSchema.swift */,
 			);
 			path = "Code Generator";
 			sourceTree = "<group>";
@@ -1393,6 +1396,7 @@
 				0A22B0F924D3671E00EC018E /* ByteArraySchema.swift in Sources */,
 				0A22B0FA24D3671E00EC018E /* CharSchema.swift in Sources */,
 				0A22B0FB24D3671E00EC018E /* ChoiceSchema.swift in Sources */,
+				0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */,
 				0A22B0FC24D3671E00EC018E /* CodeModel.swift in Sources */,
 				0A22B0FD24D3671E00EC018E /* ComplexSchema.swift in Sources */,
 				0A22B0FE24D3671E00EC018E /* ConditionalSchema.swift in Sources */,
@@ -1427,7 +1431,6 @@
 				0A22B11724D3671E00EC018E /* Protocol.swift in Sources */,
 				0A22B11824D3671E00EC018E /* Request.swift in Sources */,
 				0A22B11924D3671E00EC018E /* Response.swift in Sources */,
-				0A5F424C251D39F20079C1F0 /* ReferenceSchema.swift in Sources */,
 				0AA2BA1F24EC958600CEA1D6 /* Model.swift in Sources */,
 				0A22B11A24D3671E00EC018E /* Schema.swift in Sources */,
 				0A22B11B24D3671E00EC018E /* SchemaResponse.swift in Sources */,
@@ -1478,6 +1481,7 @@
 				0A22B14524D3671F00EC018E /* Languages.swift in Sources */,
 				0A22B14624D3671F00EC018E /* License.swift in Sources */,
 				0A22B14724D3671F00EC018E /* Operation.swift in Sources */,
+				0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */,
 				0A22B14824D3671F00EC018E /* Protocols.swift in Sources */,
 				0A22B14924D3671F00EC018E /* Relations.swift in Sources */,
 				0A22B14A24D3671F00EC018E /* Schemas.swift in Sources */,

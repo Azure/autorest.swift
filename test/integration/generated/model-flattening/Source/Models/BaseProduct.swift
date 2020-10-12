@@ -17,10 +17,14 @@ import Foundation
 
 /// The product documentation.
 public struct BaseProduct: Codable {
+    // MARK: Properties
+
     /// Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
     public let productId: String
     /// Description of product.
     public let description: String?
+
+    // MARK: Initializers
 
     /// Initialize a `BaseProduct` structure.
     /// - Parameters:
@@ -32,6 +36,8 @@ public struct BaseProduct: Codable {
         self.productId = productId
         self.description = description
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case productId

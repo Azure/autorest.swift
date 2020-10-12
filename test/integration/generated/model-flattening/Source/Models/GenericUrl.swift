@@ -17,8 +17,12 @@ import Foundation
 
 /// The Generic URL.
 public struct GenericUrl: Codable {
+    // MARK: Properties
+
     /// Generic URL value.
     public let genericValue: String?
+
+    // MARK: Initializers
 
     /// Initialize a `GenericUrl` structure.
     /// - Parameters:
@@ -28,6 +32,8 @@ public struct GenericUrl: Codable {
     ) {
         self.genericValue = genericValue
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case genericValue

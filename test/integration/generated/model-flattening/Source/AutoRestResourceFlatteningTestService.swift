@@ -1032,13 +1032,11 @@ public final class AutoRestResourceFlatteningTestService {
 
     /// Put Simple Product with client flattening true on the model
     /// - Parameters:
-    ///    - name : Product name with value 'groupproduct'
     ///    - flattenParameterGroup : Parameter group
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func putSimpleProductWithGrouping(
-        name _: String,
         flattenParameterGroup: FlattenParameterGroup,
         withOptions options: PutSimpleProductWithGroupingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>

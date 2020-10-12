@@ -15,10 +15,14 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetActionError: Codable {
+public struct PetActionError: Codable, Swift.Error {
+    // MARK: Properties
+
     public let errorType: String
     /// the error message
     public let errorMessage: String?
+
+    // MARK: Initializers
 
     /// Initialize a `PetActionError` structure.
     /// - Parameters:
@@ -30,6 +34,8 @@ public struct PetActionError: Codable {
         self.errorType = errorType
         self.errorMessage = errorMessage
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case errorType

@@ -17,6 +17,8 @@ import Foundation
 
 /// Parameter group
 public struct FlattenParameterGroup: Codable {
+    // MARK: Properties
+
     /// Product name with value 'groupproduct'
     public let name: String
     /// Simple body product to put
@@ -31,6 +33,8 @@ public struct FlattenParameterGroup: Codable {
     public let genericValue: String?
     /// URL value.
     public let odataValue: String?
+
+    // MARK: Initializers
 
     /// Initialize a `FlattenParameterGroup` structure.
     /// - Parameters:
@@ -53,6 +57,8 @@ public struct FlattenParameterGroup: Codable {
         self.genericValue = genericValue
         self.odataValue = odataValue
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case name

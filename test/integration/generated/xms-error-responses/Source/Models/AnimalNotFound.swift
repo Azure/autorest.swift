@@ -16,6 +16,8 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct AnimalNotFound: Codable, Swift.Error {
+    // MARK: Properties
+
     public let name: String?
 
     public let reason: String?
@@ -23,6 +25,8 @@ public struct AnimalNotFound: Codable, Swift.Error {
     public let whatNotFound: String
 
     public let someBaseProp: String?
+
+    // MARK: Initializers
 
     /// Initialize a `AnimalNotFound` structure.
     /// - Parameters:
@@ -38,6 +42,8 @@ public struct AnimalNotFound: Codable, Swift.Error {
         self.whatNotFound = whatNotFound
         self.someBaseProp = someBaseProp
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case name

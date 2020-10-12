@@ -17,6 +17,8 @@ import Foundation
 
 /// Flattened product.
 public struct FlattenedProduct: Codable {
+    // MARK: Properties
+
     public let pName: String?
 
     public let typePropertiesType: String?
@@ -34,6 +36,8 @@ public struct FlattenedProduct: Codable {
     public let location: String?
     /// Resource Name
     public let name: String?
+
+    // MARK: Initializers
 
     /// Initialize a `FlattenedProduct` structure.
     /// - Parameters:
@@ -62,6 +66,8 @@ public struct FlattenedProduct: Codable {
         self.location = location
         self.name = name
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case pName

@@ -17,10 +17,14 @@ import Foundation
 
 /// The product URL.
 public struct ProductUrl: Codable {
+    // MARK: Properties
+
     /// URL value.
     public let odataValue: String?
     /// Generic URL value.
     public let genericValue: String?
+
+    // MARK: Initializers
 
     /// Initialize a `ProductUrl` structure.
     /// - Parameters:
@@ -32,6 +36,8 @@ public struct ProductUrl: Codable {
         self.odataValue = odataValue
         self.genericValue = genericValue
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case odataValue

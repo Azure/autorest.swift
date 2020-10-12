@@ -16,10 +16,14 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct Pet: Codable {
+    // MARK: Properties
+
     /// Gets the Pet by id.
     public let name: String?
 
     public let aniType: String?
+
+    // MARK: Initializers
 
     /// Initialize a `Pet` structure.
     /// - Parameters:
@@ -31,6 +35,8 @@ public struct Pet: Codable {
         self.name = name
         self.aniType = aniType
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case name

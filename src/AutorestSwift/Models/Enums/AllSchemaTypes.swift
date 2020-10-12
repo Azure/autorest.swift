@@ -58,6 +58,4 @@ enum AllSchemaTypes: String, Codable {
     case uri
     case uuid
     case xor
-    // placeholder for a circular reference
-    case reference
 }

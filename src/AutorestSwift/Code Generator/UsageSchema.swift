@@ -26,26 +26,7 @@
 
 import Foundation
 
-class ReferenceSchema: Schema {
-    init(name: String, summary: String? = nil) {
-        super.init(
-            language: Languages(name: name),
-            type: .reference,
-            summary: summary,
-            example: nil,
-            defaultValue: nil,
-            serialization: nil,
-            apiVersions: nil,
-            deprecated: nil,
-            origin: nil,
-            externalDocs: nil,
-            protocol: Protocols(),
-            properties: nil,
-            extensions: nil
-        )
-    }
-
-    required init(from _: Decoder) {
-        fatalError("Cannot init from decoder")
-    }
+/// Protocol that delinates models with a usage property
+protocol UsageSchema {
+    var usage: [SchemaContext] { get }
 }

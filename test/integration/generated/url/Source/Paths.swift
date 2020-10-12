@@ -44,12 +44,11 @@ public final class Paths {
 
     /// Get true Boolean value on path
     /// - Parameters:
-    ///    - boolPath : true boolean value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getBooleanTrue(
-        boolPath: Bool,
         withOptions options: GetBooleanTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -138,12 +137,11 @@ public final class Paths {
 
     /// Get false Boolean value on path
     /// - Parameters:
-    ///    - boolPath : false boolean value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getBooleanFalse(
-        boolPath: Bool,
         withOptions options: GetBooleanFalseOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -232,12 +230,11 @@ public final class Paths {
 
     /// Get '1000000' integer value
     /// - Parameters:
-    ///    - intPath : '1000000' integer value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getIntOneMillion(
-        intPath: Int32,
         withOptions options: GetIntOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -326,12 +323,11 @@ public final class Paths {
 
     /// Get '-1000000' integer value
     /// - Parameters:
-    ///    - intPath : '-1000000' integer value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getIntNegativeOneMillion(
-        intPath: Int32,
         withOptions options: GetIntNegativeOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -420,12 +416,11 @@ public final class Paths {
 
     /// Get '10000000000' 64 bit integer value
     /// - Parameters:
-    ///    - longPath : '10000000000' 64 bit integer value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getTenBillion(
-        longPath: Int64,
         withOptions options: GetTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -514,12 +509,11 @@ public final class Paths {
 
     /// Get '-10000000000' 64 bit integer value
     /// - Parameters:
-    ///    - longPath : '-10000000000' 64 bit integer value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getNegativeTenBillion(
-        longPath: Int64,
         withOptions options: GetNegativeTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -608,12 +602,11 @@ public final class Paths {
 
     /// Get '1.034E+20' numeric value
     /// - Parameters:
-    ///    - floatPath : '1.034E+20'numeric value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func floatScientificPositive(
-        floatPath: Float,
         withOptions options: FloatScientificPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -702,12 +695,11 @@ public final class Paths {
 
     /// Get '-1.034E-20' numeric value
     /// - Parameters:
-    ///    - floatPath : '-1.034E-20'numeric value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func floatScientificNegative(
-        floatPath: Float,
         withOptions options: FloatScientificNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -796,12 +788,11 @@ public final class Paths {
 
     /// Get '9999999.999' numeric value
     /// - Parameters:
-    ///    - doublePath : '9999999.999'numeric value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func doubleDecimalPositive(
-        doublePath: Double,
         withOptions options: DoubleDecimalPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -890,12 +881,11 @@ public final class Paths {
 
     /// Get '-9999999.999' numeric value
     /// - Parameters:
-    ///    - doublePath : '-9999999.999'numeric value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func doubleDecimalNegative(
-        doublePath: Double,
         withOptions options: DoubleDecimalNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -984,12 +974,11 @@ public final class Paths {
 
     /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
     /// - Parameters:
-    ///    - stringPath : '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func stringUnicode(
-        stringPath _: String,
         withOptions options: StringUnicodeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1076,12 +1065,11 @@ public final class Paths {
 
     /// Get 'begin!*'();:@ &=+$,/?#[]end
     /// - Parameters:
-    ///    - stringPath : 'begin!*'();:@ &=+$,/?#[]end' url encoded string value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func stringUrlEncoded(
-        stringPath _: String,
         withOptions options: StringUrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1170,12 +1158,11 @@ public final class Paths {
 
     /// https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded
     /// - Parameters:
-    ///    - stringPath : 'begin!*'();:@&=+$,end' url encoded string value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func stringUrlNonEncoded(
-        stringPath _: String,
         withOptions options: StringUrlNonEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1262,12 +1249,11 @@ public final class Paths {
 
     /// Get ''
     /// - Parameters:
-    ///    - stringPath : '' string value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func stringEmpty(
-        stringPath _: String,
         withOptions options: StringEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1727,12 +1713,11 @@ public final class Paths {
 
     /// Get '' as byte array
     /// - Parameters:
-    ///    - bytePath : '' as byte array
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func byteEmpty(
-        bytePath: Data,
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1923,12 +1908,11 @@ public final class Paths {
 
     /// Get '2012-01-01' as date
     /// - Parameters:
-    ///    - datePath : '2012-01-01' as date
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func dateValid(
-        datePath: Date,
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2120,12 +2104,11 @@ public final class Paths {
 
     /// Get '2012-01-01T01:01:01Z' as date-time
     /// - Parameters:
-    ///    - dateTimePath : '2012-01-01T01:01:01Z' as date-time
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func dateTimeValid(
-        dateTimePath: Date,
         withOptions options: DateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

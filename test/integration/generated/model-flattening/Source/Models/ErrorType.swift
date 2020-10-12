@@ -16,11 +16,15 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public final class ErrorType: Codable, Swift.Error {
+    // MARK: Properties
+
     public let status: Int32?
 
     public let message: String?
 
     public let parentError: ErrorType?
+
+    // MARK: Initializers
 
     /// Initialize a `ErrorType` structure.
     /// - Parameters:
@@ -34,6 +38,8 @@ public final class ErrorType: Codable, Swift.Error {
         self.message = message
         self.parentError = parentError
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case status

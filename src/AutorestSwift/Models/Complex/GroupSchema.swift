@@ -26,7 +26,7 @@
 
 import Foundation
 
-class GroupSchema: Schema {
+class GroupSchema: Schema, UsageSchema {
     /// contexts in which the schema is used
     let usage: [SchemaContext]
 

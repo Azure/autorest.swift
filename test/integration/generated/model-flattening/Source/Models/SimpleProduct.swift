@@ -17,6 +17,8 @@ import Foundation
 
 /// The product documentation.
 public struct SimpleProduct: Codable {
+    // MARK: Properties
+
     /// Display name of product.
     public let maxProductDisplayName: String?
     /// Generic URL value.
@@ -27,6 +29,13 @@ public struct SimpleProduct: Codable {
     public let productId: String
     /// Description of product.
     public let description: String?
+
+    // MARK: Constants
+
+    /// Capacity of product. For example, 4 people.
+    public let capacity = "Large"
+
+    // MARK: Initializers
 
     /// Initialize a `SimpleProduct` structure.
     /// - Parameters:
@@ -45,6 +54,8 @@ public struct SimpleProduct: Codable {
         self.productId = productId
         self.description = description
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case maxProductDisplayName

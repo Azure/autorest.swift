@@ -15,32 +15,52 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetSadError: Codable {
+public struct PetSadError: Codable, Swift.Error {
+    // MARK: Properties
+
     /// why is the pet sad
     public let reason: String?
+
+    public let errorType: String
+    /// the error message
+    public let errorMessage: String?
+
+    // MARK: Initializers
 
     /// Initialize a `PetSadError` structure.
     /// - Parameters:
     ///   - reason: why is the pet sad
+    ///   - errorType:
+    ///   - errorMessage: the error message
     public init(
-        reason: String? = nil
+        reason: String? = nil, errorType: String, errorMessage: String? = nil
     ) {
         self.reason = reason
+        self.errorType = errorType
+        self.errorMessage = errorMessage
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case reason
+        case errorType
+        case errorMessage
     }
 
     /// Initialize a `PetSadError` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.reason = try? container.decode(String.self, forKey: .reason)
+        self.errorType = try container.decode(String.self, forKey: .errorType)
+        self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
     }
 
     /// Encode a `PetSadError` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if reason != nil { try? container.encode(reason, forKey: .reason) }
+        try container.encode(errorType, forKey: .errorType)
+        if errorMessage != nil { try? container.encode(errorMessage, forKey: .errorMessage) }
     }
 }

@@ -16,6 +16,8 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct Resource: Codable {
+    // MARK: Properties
+
     /// Resource Id
     public let id: String?
     /// Resource Type
@@ -26,6 +28,8 @@ public struct Resource: Codable {
     public let location: String?
     /// Resource Name
     public let name: String?
+
+    // MARK: Initializers
 
     /// Initialize a `Resource` structure.
     /// - Parameters:
@@ -44,6 +48,8 @@ public struct Resource: Codable {
         self.location = location
         self.name = name
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case id

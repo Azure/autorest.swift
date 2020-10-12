@@ -80,9 +80,6 @@ class Parameter: Value, CustomDebugStringConvertible {
         // If they belong in the signature, they will be added in a way to ensure they come first.
         guard paramLocation != .body else { return false }
 
-        // All path parameter are required
-        guard paramLocation != .path else { return true }
-
         // Default logic
         let inMethod = implementation == .method
         let notConstant = schema?.type != .constant

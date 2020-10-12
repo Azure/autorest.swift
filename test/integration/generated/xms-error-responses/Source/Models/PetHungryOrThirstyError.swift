@@ -16,6 +16,8 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct PetHungryOrThirstyError: Codable, Swift.Error {
+    // MARK: Properties
+
     /// is the pet hungry or thirsty or both
     public let hungryOrThirsty: String?
     /// why is the pet sad
@@ -24,6 +26,8 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
     public let errorType: String
     /// the error message
     public let errorMessage: String?
+
+    // MARK: Initializers
 
     /// Initialize a `PetHungryOrThirstyError` structure.
     /// - Parameters:
@@ -39,6 +43,8 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
         self.errorType = errorType
         self.errorMessage = errorMessage
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case hungryOrThirsty

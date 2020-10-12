@@ -16,12 +16,16 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct ResourceCollection: Codable {
+    // MARK: Properties
+
     /// Flattened product.
     public let productresource: FlattenedProduct?
 
     public let arrayofresources: [FlattenedProduct]?
     /// Dictionary of <FlattenedProduct>
     public let dictionaryofresources: [String: FlattenedProduct]?
+
+    // MARK: Initializers
 
     /// Initialize a `ResourceCollection` structure.
     /// - Parameters:
@@ -36,6 +40,8 @@ public struct ResourceCollection: Codable {
         self.arrayofresources = arrayofresources
         self.dictionaryofresources = dictionaryofresources
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case productresource
