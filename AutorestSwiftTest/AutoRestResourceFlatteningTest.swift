@@ -76,8 +76,8 @@ class AutoRestResourceFlatteningTest: XCTestCase {
                 description: "Call autorestresourceflatteningtestservice.putArray succeed"
             )
         let array = [
-            Resource(id: nil, type: nil, tags: ["tag1": "value1", "tag2": "value3"], location: "West US", name: nil),
-            Resource(id: nil, type: nil, tags: nil, location: "Building 44", name: nil)
+            Resource(tags: ["tag1": "value1", "tag2": "value3"], location: "West US"),
+            Resource(location: "Building 44")
         ]
         client.autorestresourceflatteningtestservice.put(array: array) { result, httpResponse in
             switch result {
@@ -115,28 +115,18 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             )
         let dictionary = [
             "Resource1": FlattenedProduct(
-                pName: nil,
-                typePropertiesType: nil,
-                provisioningStateValues: nil,
-                provisioningState: nil,
-                id: nil,
                 type: "Flat",
                 tags: ["tag1": "value1", "tag2": "value3"],
                 location: "West US",
                 name: "Product1"
             ),
             "Resource2": FlattenedProduct(
-                pName: nil,
-                typePropertiesType: nil,
-                provisioningStateValues: nil,
-                provisioningState: nil,
-                id: nil,
                 type: "Flat",
-                tags: nil,
                 location: "Building 44",
                 name: "Product2"
             )
         ]
+        // FIXME: Flattened parameters should be sent on the wire under "properties" object
         client.autorestresourceflatteningtestservice.put(dictionary: dictionary) { result, httpResponse in
             switch result {
             case .success:
@@ -173,40 +163,29 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             )
         let collection = ResourceCollection(
             productresource: FlattenedProduct(
-                pName: nil,
-                typePropertiesType: nil,
-                provisioningStateValues: nil,
-                provisioningState: nil,
-                id: nil,
-                type: nil,
-                tags: ["tag1": "value1", "tag2": "value3"],
-                location: "West US",
-                name: "Product1"
+                type: "Flat",
+                location: "India",
+                name: "Azure"
             ),
             arrayofresources: [
                 FlattenedProduct(
-                    pName: nil,
-                    typePropertiesType: nil,
-                    provisioningStateValues: nil,
-                    provisioningState: nil,
-                    id: nil,
-                    type: nil,
-                    tags: ["tag1": "value1", "tag2": "value3"],
-                    location: "Building 44",
-                    name: "Product2"
-                )
-            ],
-            dictionaryofresources: [
-                "Product1": FlattenedProduct(
-                    pName: nil,
-                    typePropertiesType: nil,
-                    provisioningStateValues: nil,
-                    provisioningState: nil,
-                    id: nil,
-                    type: nil,
+                    type: "Flat",
                     tags: ["tag1": "value1", "tag2": "value3"],
                     location: "West US",
                     name: "Product1"
+                )
+            ],
+            dictionaryofresources: [
+                "Resource1": FlattenedProduct(
+                    type: "Flat",
+                    tags: ["tag1": "value1", "tag2": "value3"],
+                    location: "West US",
+                    name: "Product1"
+                ),
+                "Resource2": FlattenedProduct(
+                    type: "Flat",
+                    location: "Building 44",
+                    name: "Product2"
                 )
             ]
         )
@@ -266,9 +245,6 @@ class AutoRestResourceFlatteningTest: XCTestCase {
                 description: "Call autorestresourceflatteningtestservice.putSimpleProduct succeed"
             )
         let product = SimpleProduct(
-            maxProductDisplayName: nil,
-            genericValue: nil,
-            odataValue: nil,
             productId: "Product1",
             description: "Description"
         )
@@ -293,20 +269,12 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         let group = FlattenParameterGroup(
             name: "name",
             simpleBodyProduct: SimpleProduct(
-                maxProductDisplayName: nil,
-                genericValue: nil,
-                odataValue: nil,
                 productId: "Product1",
                 description: "Description"
-            ),
-            productId: "Product1",
-            description: nil,
-            maxProductDisplayName: nil,
-            genericValue: nil,
-            odataValue: "Description"
+            )
         )
         client.autorestresourceflatteningtestservice
-            .putSimpleProductWithGrouping(flattenParameterGroup: group) { result, httpResponse in
+            .putSimpleProduct(withGrouping: group) { result, httpResponse in
                 switch result {
                 case .success:
                     expectation.fulfill()
@@ -328,10 +296,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             )
         client.autorestresourceflatteningtestservice.postFlattenedSimpleProduct(
             productId: "Product1",
-            description: "Description",
-            maxProductDisplayName: nil,
-            genericValue: nil,
-            odataValue: nil
+            description: "Description"
         ) { result, httpResponse in
             switch result {
             case .success:
