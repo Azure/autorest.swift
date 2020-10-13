@@ -50,7 +50,7 @@ public final class AutoRestReportService {
     ///     success.
     public func getReport(
         withOptions options: GetReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
         // Construct URL
         guard let urlTemplate = "/report".removingPercentEncoding else {
@@ -121,7 +121,7 @@ public final class AutoRestReportService {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode([String: Int32].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -155,7 +155,7 @@ public final class AutoRestReportService {
     ///     success.
     public func getOptionalReport(
         withOptions options: GetOptionalReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
         // Construct URL
         guard let urlTemplate = "/report/optional".removingPercentEncoding else {
@@ -226,7 +226,7 @@ public final class AutoRestReportService {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int].self, from: data)
+                        let decoded = try decoder.decode([String: Int32].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

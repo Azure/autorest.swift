@@ -82,12 +82,11 @@ struct OperationParameters {
         // Set the body param, if applicable
         if let bodyParam = operation.request?.bodyParam {
             let bodyParamName = operation.request?.bodyParamName(for: operation)
-            let virtualParams = parameters.virtual
 
             self.body = BodyParams(
-                param: ParameterViewModel(from: bodyParam, withName: bodyParamName),
-                strategy: bodyParam.flattened ? .flattened : .plain,
-                children: virtualParams.map { VirtualParam(from: $0) }
+                from: bodyParam,
+                withName: bodyParamName!,
+                parameters: parameters
             )
         } else {
             self.body = nil
@@ -135,26 +134,39 @@ struct BodyParams {
     var strategy: String
     var children: [VirtualParam]
 
-    init(param: ParameterViewModel, strategy: BodyParamStrategy, children: [VirtualParam]) {
-        self.param = param
-        self.strategy = strategy.rawValue
-        self.children = children
-        // Suppress comma on final child
-        if !children.isEmpty {
-            self.children[children.count - 1].separator = ""
+    var flattened: Bool {
+        return !children.isEmpty
+    }
+
+    init(from param: ParameterType, withName name: String, parameters: [ParameterType]) {
+        self.param = ParameterViewModel(from: param, withName: name)
+        var properties = param.schema.properties
+        if let objectSchema = param.schema as? ObjectSchema {
+            properties = objectSchema.flattenedProperties
         }
+        var virtParams = [VirtualParam]()
+        for child in properties ?? [] {
+            guard child.schema as? ConstantSchema == nil else { continue }
+            if let virtParam = parameters.virtual.first(where: { $0.name == child.name }) {
+                virtParams.append(VirtualParam(from: virtParam))
+            }
+        }
+        self.strategy = param.flattened ? "flattened" : "plain"
+        self.children = virtParams
     }
 }
 
 struct VirtualParam {
     var name: String
+    var type: String
+    var defaultValue: String
     var path: String
-    var separator: String
 
     init(from param: VirtualParameter) {
         self.name = param.name
-        self.path = param.required ? param.name : "options?.\(param.name)"
-        self.separator = ","
+        self.path = param.targetProperty.name
+        self.type = param.schema.swiftType(optional: !param.required)
+        self.defaultValue = param.required ? "" : " = nil"
     }
 }
 
@@ -241,8 +253,10 @@ struct OperationViewModel {
         self.params = OperationParameters(parameters: params, operation: operation)
 
         var signatureComments: [String] = []
-        if let param = self.params.body?.param {
-            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
+        if let bodyParam = self.params.body {
+            if !bodyParam.flattened {
+                signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
+            }
         }
         for param in params.inSignature where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")

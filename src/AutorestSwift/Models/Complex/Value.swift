@@ -93,9 +93,7 @@ class Value: Codable, LanguageShortcut {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.schema = try Schema.decode(withContainer: container) ?? container
-            .decode(Schema.self, forKey: .schema)
-
+        self.schema = try Schema.decode(withContainer: container)!
         self.internalRequired = try? container.decode(Bool.self, forKey: .required)
         self.nullable = try? container.decode(Bool.self, forKey: .nullable)
         self.assumedValue = try? container.decode(String.self, forKey: .assumedValue)
@@ -113,8 +111,7 @@ class Value: Codable, LanguageShortcut {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encode(schema, forKey: .schema)
-
+        if schema != nil { try container.encode(schema, forKey: .schema) }
         if internalRequired != nil { try container.encode(internalRequired, forKey: .required) }
         if nullable != nil { try container.encode(nullable, forKey: .nullable) }
         if assumedValue != nil { try container.encode(assumedValue, forKey: .assumedValue) }

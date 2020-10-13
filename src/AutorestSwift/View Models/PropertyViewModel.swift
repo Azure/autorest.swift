@@ -26,7 +26,7 @@
 
 import Foundation
 
-/// View Model for an struct property.
+/// View Model for a model property.
 /// Example:
 ///     // a simple property
 ///     let simple: String = "default"

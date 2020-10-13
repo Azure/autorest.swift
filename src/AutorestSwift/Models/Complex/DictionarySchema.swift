@@ -40,8 +40,8 @@ class DictionarySchema: ComplexSchema {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        elementType = try container.decode(Schema.self, forKey: .elementType)
-        nullableItems = try? container.decode(Bool?.self, forKey: .nullableItems)
+        elementType = try Schema.decode(withContainer: container, useKey: "elementType")!
+        self.nullableItems = try? container.decode(Bool?.self, forKey: .nullableItems)
         try super.init(from: decoder)
     }
 

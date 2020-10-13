@@ -16,8 +16,12 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct PetAction: Codable {
+    // MARK: Properties
+
     /// action feedback
     public let actionResponse: String?
+
+    // MARK: Initializers
 
     /// Initialize a `PetAction` structure.
     /// - Parameters:
@@ -27,6 +31,8 @@ public struct PetAction: Codable {
     ) {
         self.actionResponse = actionResponse
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case actionResponse

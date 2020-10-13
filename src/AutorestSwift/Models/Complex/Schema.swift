@@ -86,11 +86,6 @@ class Schema: Codable, LanguageShortcut {
         switch type {
         case AllSchemaTypes.string:
             swiftType = "String"
-        case AllSchemaTypes.constant:
-            guard let constant = self as? ConstantSchema else {
-                fatalError("Type mismatch. Expected constant type but got \(self)")
-            }
-            swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.boolean:
             swiftType = "Bool"
         case AllSchemaTypes.array:
@@ -115,7 +110,8 @@ class Schema: Codable, LanguageShortcut {
             swiftType = "Int"
         case AllSchemaTypes.choice,
              AllSchemaTypes.object,
-             AllSchemaTypes.sealedChoice:
+             AllSchemaTypes.sealedChoice,
+             AllSchemaTypes.group:
             swiftType = name
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
@@ -123,6 +119,11 @@ class Schema: Codable, LanguageShortcut {
             } else {
                 swiftType = "[String:\(name)]"
             }
+        case AllSchemaTypes.constant:
+            guard let constant = self as? ConstantSchema else {
+                fatalError("Type mismatch. Expected constant type but got \(self)")
+            }
+            swiftType = constant.valueType.swiftType()
         default:
             fatalError("Type \(type) not implemented")
         }
@@ -135,36 +136,42 @@ class Schema: Codable, LanguageShortcut {
         useKey keyName: String = "schema"
     ) throws -> Schema? where Key: CodingKey {
         var schema: Schema?
-        if let keyEnum = Key(stringValue: keyName) {
+        guard let keyEnum = Key(stringValue: keyName) else {
+            fatalError("Unable to find key enum.")
+        }
+        do {
             let schemaContainer = try container.nestedContainer(keyedBy: Schema.CodingKeys.self, forKey: keyEnum)
             let type = try schemaContainer.decode(AllSchemaTypes.self, forKey: Schema.CodingKeys.type)
-
             switch type {
             case .array:
-                schema = try? container.decode(ArraySchema.self, forKey: keyEnum)
+                schema = try container.decode(ArraySchema.self, forKey: keyEnum)
             case .dictionary:
-                schema = try? container.decode(DictionarySchema.self, forKey: keyEnum)
+                schema = try container.decode(DictionarySchema.self, forKey: keyEnum)
             case .object:
-                schema = try? container.decode(ObjectSchema.self, forKey: keyEnum)
+                schema = try container.decode(ObjectSchema.self, forKey: keyEnum)
             case .number, .integer:
-                schema = try? container.decode(NumberSchema.self, forKey: keyEnum)
+                schema = try container.decode(NumberSchema.self, forKey: keyEnum)
             case .choice:
-                schema = try? container.decode(ChoiceSchema.self, forKey: keyEnum)
+                schema = try container.decode(ChoiceSchema.self, forKey: keyEnum)
             case .dateTime:
-                schema = try? container.decode(DateTimeSchema.self, forKey: keyEnum)
+                schema = try container.decode(DateTimeSchema.self, forKey: keyEnum)
             case .string:
-                schema = try? container.decode(StringSchema.self, forKey: keyEnum)
+                schema = try container.decode(StringSchema.self, forKey: keyEnum)
             case .constant:
-                schema = try? container.decode(ConstantSchema.self, forKey: keyEnum)
+                schema = try container.decode(ConstantSchema.self, forKey: keyEnum)
             case .byteArray:
-                schema = try? container.decode(ByteArraySchema.self, forKey: keyEnum)
+                schema = try container.decode(ByteArraySchema.self, forKey: keyEnum)
             case .sealedChoice:
-                schema = try? container.decode(SealedChoiceSchema.self, forKey: keyEnum)
+                schema = try container.decode(SealedChoiceSchema.self, forKey: keyEnum)
             default:
                 schema = try container.decode(Schema.self, forKey: keyEnum)
             }
-        } else { fatalError("Unable to decode to schema") }
-
-        return schema
+            return schema
+        } catch {
+            guard "\(error)".contains("but found Unresolved instead") else {
+                throw error
+            }
+            return try? container.decode(Schema.self, forKey: keyEnum)
+        }
     }
 }

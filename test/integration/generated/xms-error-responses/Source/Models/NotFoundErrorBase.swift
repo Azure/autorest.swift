@@ -16,24 +16,35 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct NotFoundErrorBase: Codable, Swift.Error {
+    // MARK: Properties
+
     public let reason: String?
 
     public let whatNotFound: String
+
+    public let someBaseProp: String?
+
+    // MARK: Initializers
 
     /// Initialize a `NotFoundErrorBase` structure.
     /// - Parameters:
     ///   - reason:
     ///   - whatNotFound:
+    ///   - someBaseProp:
     public init(
-        reason: String? = nil, whatNotFound: String
+        reason: String? = nil, whatNotFound: String, someBaseProp: String? = nil
     ) {
         self.reason = reason
         self.whatNotFound = whatNotFound
+        self.someBaseProp = someBaseProp
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case reason
         case whatNotFound
+        case someBaseProp
     }
 
     /// Initialize a `NotFoundErrorBase` structure from decoder
@@ -41,6 +52,7 @@ public struct NotFoundErrorBase: Codable, Swift.Error {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.reason = try? container.decode(String.self, forKey: .reason)
         self.whatNotFound = try container.decode(String.self, forKey: .whatNotFound)
+        self.someBaseProp = try? container.decode(String.self, forKey: .someBaseProp)
     }
 
     /// Encode a `NotFoundErrorBase` structure
@@ -48,5 +60,6 @@ public struct NotFoundErrorBase: Codable, Swift.Error {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if reason != nil { try? container.encode(reason, forKey: .reason) }
         try container.encode(whatNotFound, forKey: .whatNotFound)
+        if someBaseProp != nil { try? container.encode(someBaseProp, forKey: .someBaseProp) }
     }
 }

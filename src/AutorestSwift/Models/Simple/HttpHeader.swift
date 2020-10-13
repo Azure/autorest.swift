@@ -38,9 +38,8 @@ class HttpHeader: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         header = try container.decode(String.self, forKey: .header)
-        schema = try Schema.decode(withContainer: container) ?? container
-            .decode(Schema.self, forKey: .schema)
-        extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
+        schema = try Schema.decode(withContainer: container)!
+        self.extensions = try? container.decode([String: AnyCodable].self, forKey: .extensions)
     }
 
     public func encode(to encoder: Encoder) throws {

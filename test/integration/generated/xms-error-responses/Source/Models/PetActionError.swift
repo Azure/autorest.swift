@@ -16,9 +16,13 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct PetActionError: Codable, Swift.Error {
+    // MARK: Properties
+
     public let errorType: String
     /// the error message
     public let errorMessage: String?
+
+    // MARK: Initializers
 
     /// Initialize a `PetActionError` structure.
     /// - Parameters:
@@ -30,6 +34,8 @@ public struct PetActionError: Codable, Swift.Error {
         self.errorType = errorType
         self.errorMessage = errorMessage
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case errorType

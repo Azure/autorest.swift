@@ -16,31 +16,44 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct Pet: Codable {
+    // MARK: Properties
+
     /// Gets the Pet by id.
     public let name: String?
+
+    public let aniType: String?
+
+    // MARK: Initializers
 
     /// Initialize a `Pet` structure.
     /// - Parameters:
     ///   - name: Gets the Pet by id.
+    ///   - aniType:
     public init(
-        name: String? = nil
+        name: String? = nil, aniType: String? = nil
     ) {
         self.name = name
+        self.aniType = aniType
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case name
+        case aniType
     }
 
     /// Initialize a `Pet` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try? container.decode(String.self, forKey: .name)
+        self.aniType = try? container.decode(String.self, forKey: .aniType)
     }
 
     /// Encode a `Pet` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if name != nil { try? container.encode(name, forKey: .name) }
+        if aniType != nil { try? container.encode(aniType, forKey: .aniType) }
     }
 }

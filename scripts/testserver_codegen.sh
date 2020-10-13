@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "== Compile AutoRest Swift =="
+
 make install > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
@@ -10,7 +11,7 @@ else
     exit
 fi
 
-files=( "head" "body-file" "report" "xms-error-responses" "body-integer" "url")
+files=( "head" "body-file" "report" "xms-error-responses" "body-integer" "url" "model-flattening" )
 for i in "${files[@]}"
 do
     echo "== Generate code for test server swagger $i.json =="

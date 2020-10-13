@@ -16,7 +16,11 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 public struct BaseError: Codable, Swift.Error {
+    // MARK: Properties
+
     public let someBaseProp: String?
+
+    // MARK: Initializers
 
     /// Initialize a `BaseError` structure.
     /// - Parameters:
@@ -26,6 +30,8 @@ public struct BaseError: Codable, Swift.Error {
     ) {
         self.someBaseProp = someBaseProp
     }
+
+    // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
         case someBaseProp

@@ -27,7 +27,7 @@
 import Foundation
 
 /// a schema that represents a type with child properties.
-class ObjectSchema: ComplexSchema {
+class ObjectSchema: ComplexSchema, UsageSchema {
     /// the property of the polymorphic descriminator for this type, if there is one
     let discriminator: Discriminator?
 
@@ -49,6 +49,21 @@ class ObjectSchema: ComplexSchema {
 
     /// Known media types in which this schema can be serialized
     let serializationFormats: [KnownMediaType]
+
+    /// Returns the properties of the model and any parent models.
+    var flattenedProperties: [Property]? {
+        var props = [Property]()
+        for prop in properties ?? [] {
+            props.append(prop)
+        }
+        for parent in parents?.all ?? [] {
+            for prop in parent.properties ?? [] {
+                props.append(prop)
+            }
+        }
+        if props.count == 0 { return nil }
+        return props
+    }
 
     // MARK: Codable
 

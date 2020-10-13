@@ -43,6 +43,72 @@ class SwiftGenerator: CodeGenerator {
 
     // MARK: Methods
 
+    fileprivate func generateModels() throws {
+        // Simple dictionary (for fast lookup) to determine if a model has already been written.
+        // Skips regenerating a file with a less specific schema (Schema vs ObjectSchema, for example)
+        // but keeps track of the number of times the model name appears for debugging purposes.
+        var modelsWritten = [String: Int]()
+
+        // Create model files
+        for object in model.schemas.objects ?? [] {
+            let name = object.name
+            guard modelsWritten[name] == nil else {
+                SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
+                modelsWritten[name]! += 1
+                continue
+            }
+            let viewModel = ObjectViewModel(from: object)
+            try render(
+                template: "ModelFile",
+                toSubfolder: .models,
+                withFilename: name,
+                andParams: ["model": viewModel]
+            )
+            modelsWritten[name] = 1
+
+            if let immediates = object.parents?.immediate {
+                // render any immediate parents of the object schema
+                for parent in immediates {
+                    let name = object.name
+                    guard modelsWritten[name] == nil else {
+                        SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
+                        modelsWritten[name]! += 1
+                        continue
+                    }
+                    guard let parentSchema = parent as? ObjectSchema else {
+                        fatalError("Expected ObjectSchema but found \(type(of: parent))")
+                    }
+                    let viewModel = ObjectViewModel(from: parentSchema)
+                    try render(
+                        template: "ModelFile",
+                        toSubfolder: .models,
+                        withFilename: name,
+                        andParams: ["model": viewModel]
+                    )
+                    modelsWritten[name] = 1
+                }
+            }
+        }
+
+        // Create group model files
+        for group in model.schemas.groups ?? [] {
+            let name = group.name
+            guard modelsWritten[name] == nil else {
+                SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
+                modelsWritten[name]! += 1
+                continue
+            }
+            let viewModel = ObjectViewModel(from: group)
+            try render(
+                template: "ModelFile",
+                toSubfolder: .models,
+                withFilename: name,
+                andParams: ["model": viewModel]
+            )
+            modelsWritten[name] = 1
+        }
+    }
+
     /// Begin code generation process
     func generate() throws {
         let modelUrl = baseUrl.with(subfolder: .models)
@@ -81,16 +147,7 @@ class SwiftGenerator: CodeGenerator {
             )
         }
 
-        // Create model files
-        for object in model.schemas.objects ?? [] {
-            let structViewModel = ObjectViewModel(from: object)
-            try render(
-                template: "ModelFile",
-                toSubfolder: .models,
-                withFilename: object.name,
-                andParams: ["model": structViewModel]
-            )
-        }
+        try generateModels()
 
         // Create Client.swift file
         let clientViewModel = ServiceClientFileViewModel(from: model)
