@@ -165,7 +165,7 @@ struct VirtualParam {
     init(from param: VirtualParameter) {
         self.name = param.name
         self.path = param.targetProperty.name
-        self.type = param.schema.swiftType(optional: !param.required)
+        self.type = param.schema!.swiftType(optional: !param.required)
         self.defaultValue = param.required ? "" : " = nil"
     }
 }

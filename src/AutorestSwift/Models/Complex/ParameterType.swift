@@ -58,7 +58,7 @@ enum ParameterType: Codable {
     }
 
     var schema: Schema {
-        return common.schema
+        return common.schema!
     }
 
     var value: Value {
