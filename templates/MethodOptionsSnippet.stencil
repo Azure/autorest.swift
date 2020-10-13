@@ -3,7 +3,7 @@ public struct {{ model.name }}: AzureOptions {
 
 {% for property in model.properties %}
     {{ property.comment }}
-    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
+    public let {{ property.name }}: {{ property.type }}
 {% endfor %}
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.

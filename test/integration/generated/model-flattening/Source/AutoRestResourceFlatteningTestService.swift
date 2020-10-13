@@ -49,7 +49,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        array: [Resource]?,
+        array: [Resource]? = nil,
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -242,7 +242,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        wrappedArray: [WrappedProduct]?,
+        wrappedArray: [WrappedProduct]? = nil,
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -435,7 +435,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionary: [String: FlattenedProduct]?,
+        dictionary: [String: FlattenedProduct]? = nil,
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -628,7 +628,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        resourceCollection: ResourceCollection?,
+        resourceCollection: ResourceCollection? = nil,
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -821,7 +821,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        simpleProduct: SimpleProduct?,
+        simpleProduct: SimpleProduct? = nil,
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
@@ -928,10 +928,10 @@ public final class AutoRestResourceFlatteningTestService {
     ///     success.
     public func postFlattenedSimpleProduct(
         productId: String,
-        description: String?,
-        maxProductDisplayName: String?,
-        genericValue: String?,
-        odataValue: String?,
+        description: String? = nil,
+        maxProductDisplayName: String? = nil,
+        genericValue: String? = nil,
+        odataValue: String? = nil,
         withOptions options: PostFlattenedSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {

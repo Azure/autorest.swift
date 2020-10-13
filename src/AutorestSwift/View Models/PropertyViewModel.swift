@@ -51,7 +51,7 @@ struct PropertyViewModel {
         self.className = schema.schema!.swiftType()
         self.optional = !schema.required
         self.type = optional ? "\(className)?" : className
-        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true)
+        self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
     }

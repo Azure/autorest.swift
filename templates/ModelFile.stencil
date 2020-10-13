@@ -11,7 +11,7 @@ public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
     // MARK: Properties
     {% for property in model.properties %}
     {{ property.comment }}
-    public let {{ property.name }}: {{ property.type }}{{property.defaultValue}}
+    public let {{ property.name }}: {{ property.type }}
     {% endfor %}
 
     {% if model.hasConstants %}

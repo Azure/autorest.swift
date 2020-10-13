@@ -50,8 +50,8 @@ struct ViewModelComment: CustomStringConvertible {
 struct ViewModelDefault: CustomStringConvertible {
     var description: String
 
-    init(from defaultValue: String?, isString: Bool) {
-        self.description = ""
+    init(from defaultValue: String?, isString: Bool, isOptional: Bool) {
+        self.description = isOptional ? " = nil" : ""
         guard let val = defaultValue else { return }
         guard val.trimmingCharacters(in: .whitespacesAndNewlines) != "" else { return }
         self.description = isString ? " = \"\(val)\"" : " = \(val)"
