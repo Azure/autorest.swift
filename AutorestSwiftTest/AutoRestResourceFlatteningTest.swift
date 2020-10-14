@@ -268,13 +268,11 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             )
         let group = FlattenParameterGroup(
             name: "name",
-            simpleBodyProduct: SimpleProduct(
-                productId: "Product1",
-                description: "Description"
-            )
+            productId: "Product1",
+            description: "Description"
         )
         client.autorestresourceflatteningtestservice
-            .putSimpleProduct(withGrouping: group) { result, httpResponse in
+            .putSimpleProductWithGrouping(flattenParameterGroup: group) { result, httpResponse in
                 switch result {
                 case .success:
                     expectation.fulfill()

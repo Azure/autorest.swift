@@ -69,3 +69,11 @@ class Property: Value {
         try super.encode(to: encoder)
     }
 }
+
+extension Property: Equatable {
+    static func == (lhs: Property, rhs: Property) -> Bool {
+        // TODO: Improve this? This is technically the same assumption being
+        // made when using a dictionary.
+        return lhs.name == rhs.name
+    }
+}

@@ -55,4 +55,13 @@ struct PropertyViewModel {
         self.initDefaultValue = optional ? "= nil" : ""
         self.isDate = type.contains("Date")
     }
+
+    init(from schema: PropertyType) {
+        switch schema {
+        case let .regular(reg):
+            self.init(from: reg)
+        case let .grouped(group):
+            self.init(from: group)
+        }
+    }
 }

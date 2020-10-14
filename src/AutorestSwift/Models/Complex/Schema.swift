@@ -60,7 +60,7 @@ class Schema: Codable, LanguageShortcut {
     /// Per-protocol information for this aspect
     let `protocol`: Protocols
 
-    let properties: [Property]?
+    let properties: [PropertyType]?
 
     /// Additional metadata extensions dictionary
     let extensions: [String: AnyCodable]?
