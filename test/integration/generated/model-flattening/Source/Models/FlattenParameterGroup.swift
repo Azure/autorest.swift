@@ -21,8 +21,6 @@ public struct FlattenParameterGroup: Codable {
 
     /// Product name with value 'groupproduct'
     public let name: String
-    /// Simple body product to put
-    public let simpleBodyProduct: SimpleProduct?
     /// Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
     public let productId: String
     /// Description of product.
@@ -39,18 +37,16 @@ public struct FlattenParameterGroup: Codable {
     /// Initialize a `FlattenParameterGroup` structure.
     /// - Parameters:
     ///   - name: Product name with value 'groupproduct'
-    ///   - simpleBodyProduct: Simple body product to put
     ///   - productId: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
     ///   - description: Description of product.
     ///   - maxProductDisplayName: Display name of product.
     ///   - genericValue: Generic URL value.
     ///   - odataValue: URL value.
     public init(
-        name: String, simpleBodyProduct: SimpleProduct? = nil, productId: String, description: String? = nil,
-        maxProductDisplayName: String? = nil, genericValue: String? = nil, odataValue: String? = nil
+        name: String, productId: String, description: String? = nil, maxProductDisplayName: String? = nil,
+        genericValue: String? = nil, odataValue: String? = nil
     ) {
         self.name = name
-        self.simpleBodyProduct = simpleBodyProduct
         self.productId = productId
         self.description = description
         self.maxProductDisplayName = maxProductDisplayName
@@ -62,7 +58,6 @@ public struct FlattenParameterGroup: Codable {
 
     enum CodingKeys: String, CodingKey {
         case name
-        case simpleBodyProduct
         case productId
         case description
         case maxProductDisplayName
@@ -74,7 +69,6 @@ public struct FlattenParameterGroup: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
-        self.simpleBodyProduct = try? container.decode(SimpleProduct.self, forKey: .simpleBodyProduct)
         self.productId = try container.decode(String.self, forKey: .productId)
         self.description = try? container.decode(String.self, forKey: .description)
         self.maxProductDisplayName = try? container.decode(String.self, forKey: .maxProductDisplayName)
@@ -86,7 +80,6 @@ public struct FlattenParameterGroup: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        if simpleBodyProduct != nil { try? container.encode(simpleBodyProduct, forKey: .simpleBodyProduct) }
         try container.encode(productId, forKey: .productId)
         if description != nil { try? container.encode(description, forKey: .description) }
         if maxProductDisplayName != nil { try? container.encode(maxProductDisplayName, forKey: .maxProductDisplayName) }

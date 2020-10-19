@@ -164,6 +164,7 @@
 		0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */; };
 		0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */; };
 		0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */; };
+		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -485,6 +486,7 @@
 		0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLengthHeader.swift; sourceTree = "<group>"; };
 		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
 		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
+		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
 		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -956,6 +958,7 @@
 				0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */,
 				OBJ_50 /* PrimitiveSchema.swift */,
 				OBJ_51 /* Property.swift */,
+				0AEFC3412537647A00C6B087 /* PropertyType.swift */,
 				OBJ_52 /* Protocol.swift */,
 				OBJ_53 /* Request.swift */,
 				OBJ_54 /* Response.swift */,
@@ -1391,6 +1394,7 @@
 				0A22B0F524D3671E00EC018E /* AnySchema.swift in Sources */,
 				0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */,
 				0A22B0F624D3671E00EC018E /* ArraySchema.swift in Sources */,
+				0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */,
 				0A22B0F724D3671E00EC018E /* BinarySchema.swift in Sources */,
 				0A22B0F824D3671E00EC018E /* BooleanSchema.swift in Sources */,
 				0A22B0F924D3671E00EC018E /* ByteArraySchema.swift in Sources */,

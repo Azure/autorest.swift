@@ -51,8 +51,8 @@ class ObjectSchema: ComplexSchema, UsageSchema {
     let serializationFormats: [KnownMediaType]
 
     /// Returns the properties of the model and any parent models.
-    var flattenedProperties: [Property]? {
-        var props = [Property]()
+    var flattenedProperties: [PropertyType]? {
+        var props = [PropertyType]()
         for prop in properties ?? [] {
             props.append(prop)
         }

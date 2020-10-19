@@ -87,7 +87,17 @@ struct ObjectViewModel {
         // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
         var consts = [ConstantViewModel]()
-        for property in schema.properties ?? [] {
+        let groupedProperties = schema.properties?.grouped ?? []
+        assert(
+            groupedProperties.count == (schema.properties?.count ?? 0),
+            "Expected all properties to be group properties."
+        )
+        for property in groupedProperties {
+            // the source of flattened parameters should not be included in the view model
+            assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
+            if property.originalParameter.first?.flattened ?? false {
+                continue
+            }
             if let constSchema = property.schema as? ConstantSchema {
                 consts.append(ConstantViewModel(from: constSchema))
             } else {

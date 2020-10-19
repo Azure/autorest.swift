@@ -26,19 +26,19 @@
 
 import Foundation
 
-enum ParameterType: Codable {
-    case regular(Parameter)
-    case virtual(VirtualParameter)
+enum PropertyType: Codable {
+    case regular(Property)
+    case grouped(GroupProperty)
 
     // MARK: Codable
 
     init(from decoder: Decoder) throws {
-        if let decoded = try? VirtualParameter(from: decoder) {
-            self = .virtual(decoded)
-        } else if let decoded = try? Parameter(from: decoder) {
+        if let decoded = try? GroupProperty(from: decoder) {
+            self = .grouped(decoded)
+        } else if let decoded = try? Property(from: decoder) {
             self = .regular(decoded)
         } else {
-            fatalError("Unable to decode ParameterType")
+            fatalError("Unable to decode PropertyType")
         }
     }
 
@@ -46,7 +46,7 @@ enum ParameterType: Codable {
         switch self {
         case let .regular(param):
             try param.encode(to: encoder)
-        case let .virtual(param):
+        case let .grouped(param):
             try param.encode(to: encoder)
         }
     }
@@ -81,33 +81,28 @@ enum ParameterType: Codable {
         return common.protocol
     }
 
-    var implementation: ImplementationLocation? {
-        return common.implementation
-    }
-
-    var paramLocation: ParameterLocation? {
-        return common.paramLocation
-    }
-
     var clientDefaultValue: String? {
         return common.clientDefaultValue
     }
 
-    var flattened: Bool {
-        return common.flattened ?? false
+    var readOnly: Bool? {
+        return common.readOnly
     }
 
-    var groupedBy: Parameter? {
-        return common.groupedBy
+    var flattenedNames: [String]? {
+        return common.flattenedNames
     }
 
-    /// Return the common base class Parameter properties
-    private var common: Parameter {
+    var isDiscriminator: Bool? {
+        return common.isDiscriminator
+    }
+
+    private var common: Property {
         switch self {
         case let .regular(reg):
             return reg
-        case let .virtual(virt):
-            return virt as Parameter
+        case let .grouped(virt):
+            return virt as GroupProperty
         }
     }
 
@@ -131,25 +126,17 @@ enum ParameterType: Codable {
         }
         return false
     }
-
-    internal func belongsInSignature() -> Bool {
-        return common.belongsInSignature()
-    }
-
-    internal func belongsInOptions() -> Bool {
-        return common.belongsInOptions()
-    }
 }
 
-extension ParameterType: Equatable {
-    static func == (lhs: ParameterType, rhs: ParameterType) -> Bool {
+extension PropertyType: Equatable {
+    static func == (lhs: PropertyType, rhs: PropertyType) -> Bool {
         switch lhs {
         case let .regular(lparam):
-            if case let ParameterType.regular(rparam) = rhs {
+            if case let PropertyType.regular(rparam) = rhs {
                 return lparam == rparam
             }
-        case let .virtual(lparam):
-            if case let ParameterType.virtual(rparam) = rhs {
+        case let .grouped(lparam):
+            if case let PropertyType.grouped(rparam) = rhs {
                 return lparam == rparam
             }
         }
@@ -157,7 +144,7 @@ extension ParameterType: Equatable {
     }
 }
 
-extension Array where Element == ParameterType {
+extension Array where Element == PropertyType {
     func first(named: String) -> Element? {
         for param in self {
             let name = param.serializedName ?? param.name
@@ -169,52 +156,13 @@ extension Array where Element == ParameterType {
         return nil
     }
 
-    /// Returns the subset of `ParameterType` that are `VirtualParameter` types.
-    var virtual: [VirtualParameter] {
-        return compactMap { param in
-            if case let ParameterType.virtual(virtParam) = param {
-                return virtParam
+    /// Returns the subset of `PropertyType` that are `GroupProperty` types.
+    var grouped: [GroupProperty] {
+        return compactMap { prop in
+            if case let PropertyType.grouped(groupProp) = prop {
+                return groupProp
             }
             return nil
-        }
-    }
-
-    /// Returns the required items that should be in the method signature
-    var inSignature: [ParameterType] {
-        return filter { $0.belongsInSignature() }
-    }
-
-    /// Returns the optional items that should be in the method's Options object
-    var inOptions: [ParameterType] {
-        return filter { $0.belongsInOptions() }
-    }
-
-    var inQuery: [ParameterType] {
-        return filter { param in
-            guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant
-            else { return false }
-            return param.located(in: .query)
-        }
-    }
-
-    /// Returns the items that should be passed in the request header
-    var inHeader: [ParameterType] {
-        return filter { param in
-            guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant
-            else { return false }
-            return param.located(in: .header)
-        }
-    }
-
-    /// Returns the items that should be passed in the path
-    var inPath: [ParameterType] {
-        return filter { param in
-            guard param.implementation == ImplementationLocation.method,
-                param.schema.type != .constant
-            else { return false }
-            return param.located(in: .path)
         }
     }
 }

@@ -49,7 +49,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        array: [Resource]?,
+        array: [Resource]? = nil,
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -96,6 +96,13 @@ public final class AutoRestResourceFlatteningTestService {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.sdk("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
 
             switch result {
             case .success:
@@ -116,9 +123,17 @@ public final class AutoRestResourceFlatteningTestService {
                         )
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -204,9 +219,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -219,7 +242,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        wrappedArray: [WrappedProduct]?,
+        wrappedArray: [WrappedProduct]? = nil,
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -266,6 +289,13 @@ public final class AutoRestResourceFlatteningTestService {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.sdk("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
 
             switch result {
             case .success:
@@ -286,9 +316,17 @@ public final class AutoRestResourceFlatteningTestService {
                         )
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -374,9 +412,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -389,7 +435,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionary: [String: FlattenedProduct]?,
+        dictionary: [String: FlattenedProduct]? = nil,
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -436,6 +482,13 @@ public final class AutoRestResourceFlatteningTestService {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.sdk("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
 
             switch result {
             case .success:
@@ -456,9 +509,17 @@ public final class AutoRestResourceFlatteningTestService {
                         )
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -544,9 +605,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -559,7 +628,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        resourceCollection: ResourceCollection?,
+        resourceCollection: ResourceCollection? = nil,
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -606,6 +675,13 @@ public final class AutoRestResourceFlatteningTestService {
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.sdk("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
 
             switch result {
             case .success:
@@ -626,9 +702,17 @@ public final class AutoRestResourceFlatteningTestService {
                         )
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -714,9 +798,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -729,7 +821,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        simpleProduct: SimpleProduct?,
+        simpleProduct: SimpleProduct? = nil,
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
@@ -808,9 +900,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -828,10 +928,10 @@ public final class AutoRestResourceFlatteningTestService {
     ///     success.
     public func postFlattenedSimpleProduct(
         productId: String,
-        description: String?,
-        maxProductDisplayName: String?,
-        genericValue: String?,
-        odataValue: String?,
+        description: String? = nil,
+        maxProductDisplayName: String? = nil,
+        genericValue: String? = nil,
+        odataValue: String? = nil,
         withOptions options: PostFlattenedSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
@@ -914,9 +1014,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }
@@ -1005,9 +1113,17 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     }
                 }
-            case let .failure(error):
-                dispatchQueue.async {
-                    completionHandler(.failure(error), httpResponse)
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                    }
                 }
             }
         }

@@ -42,6 +42,6 @@ struct ConstantViewModel {
         assert(!name.isEmpty)
         self.name = name
         self.comment = ViewModelComment(from: schema.description)
-        self.defaultValue = ViewModelDefault(from: schema.value.value, isString: true)
+        self.defaultValue = ViewModelDefault(from: schema.value.value, isString: true, isOptional: false)
     }
 }

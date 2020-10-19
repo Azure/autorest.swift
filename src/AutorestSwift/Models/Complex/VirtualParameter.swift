@@ -32,7 +32,7 @@ class VirtualParameter: Parameter {
     let originalParameter: Parameter
 
     /// if this parameter is for a nested property, this is the path of properties it takes to get there
-    let pathToProperty: [Property]
+    let pathToProperty: [PropertyType]
 
     /// the target property this virtual parameter represents
     let targetProperty: Property
@@ -47,7 +47,7 @@ class VirtualParameter: Parameter {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         originalParameter = try container.decode(Parameter.self, forKey: .originalParameter)
-        pathToProperty = try container.decode([Property].self, forKey: .pathToProperty)
+        pathToProperty = try container.decode([PropertyType].self, forKey: .pathToProperty)
         targetProperty = try container.decode(Property.self, forKey: .targetProperty)
 
         try super.init(from: decoder)
@@ -69,14 +69,14 @@ class VirtualParameter: Parameter {
 
         // Default logic
         let inMethod = implementation == .method
-        let notConstant = schema.type != .constant
+        let notConstant = schema!.type != .constant
         let notGrouped = groupedBy == nil
         return inMethod && notConstant && notGrouped
     }
 
     override internal func belongsInOptions() -> Bool {
         let inMethod = implementation == .method
-        let notConstant = schema.type != .constant
+        let notConstant = schema!.type != .constant
         let notFlattened = flattened != true
         let notGrouped = groupedBy == nil
         return inMethod && notConstant && notFlattened && notGrouped

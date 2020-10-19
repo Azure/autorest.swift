@@ -44,21 +44,279 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         )
     }
 
-//    func test_Head_success200() throws {
-//        let expectation = XCTestExpectation(description: "Call head200 succeed")
-//        let failedExpectation = XCTestExpectation(description: "Call head200 failed")
-//        failedExpectation.isInverted = true
-//
-//        client.head200() { result, _  in
+    private func errorDetails(for error: AzureError, withResponse response: HTTPResponse?) -> String {
+        var details: String
+        if let data = response?.data {
+            details = String(data: data, encoding: .utf8)!
+        } else {
+            details = error.message
+        }
+        return details
+    }
+
+    func test_resourceFlattening_getArray() throws {
+        let expectation = XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getArray succeed")
+
+        client.autorestresourceflatteningtestservice.getArray { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.getArray failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_resourceFlattening_putArray() throws {
+        let expectation =
+            XCTestExpectation(
+                description: "Call autorestresourceflatteningtestservice.putArray succeed"
+            )
+        let array = [
+            Resource(tags: ["tag1": "value1", "tag2": "value3"], location: "West US"),
+            Resource(location: "Building 44")
+        ]
+        client.autorestresourceflatteningtestservice.put(array: array) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.putArray failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_resourceFlattening_getDictionary() throws {
+        let expectation =
+            XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getDictionary succeed")
+        client.autorestresourceflatteningtestservice.getDictionary { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.getDictionary failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+//    func test_resourceFlattening_putDictionary() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.putDictionary succeed"
+//            )
+//        let dictionary = [
+//            "Resource1": FlattenedProduct(
+//                type: "Flat",
+//                tags: ["tag1": "value1", "tag2": "value3"],
+//                location: "West US",
+//                name: "Product1"
+//            ),
+//            "Resource2": FlattenedProduct(
+//                type: "Flat",
+//                location: "Building 44",
+//                name: "Product2"
+//            )
+//        ]
+//        // FIXME: Flattened parameters should be sent on the wire under "properties" object
+//        client.autorestresourceflatteningtestservice.put(dictionary: dictionary) { result, httpResponse in
 //            switch result {
-//                case .success:
-//                 expectation.fulfill()
-//               case let .failure(error):
-//                print("test failed. error=\(error.message)")
-//                failedExpectation.fulfill()
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.putDictionary failed")
 //            }
 //        }
-//
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+    func test_resourceFlattening_getResourceCollection() throws {
+        let expectation =
+            XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getResourceCollection succeed")
+        client.autorestresourceflatteningtestservice.getResourceCollection { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.getResourceCollection failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+//    func test_resourceFlattening_putResourceCollection() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.putResourceCollection succeed"
+//            )
+//        let collection = ResourceCollection(
+//            productresource: FlattenedProduct(
+//                type: "Flat",
+//                location: "India",
+//                name: "Azure"
+//            ),
+//            arrayofresources: [
+//                FlattenedProduct(
+//                    type: "Flat",
+//                    tags: ["tag1": "value1", "tag2": "value3"],
+//                    location: "West US",
+//                    name: "Product1"
+//                )
+//            ],
+//            dictionaryofresources: [
+//                "Resource1": FlattenedProduct(
+//                    type: "Flat",
+//                    tags: ["tag1": "value1", "tag2": "value3"],
+//                    location: "West US",
+//                    name: "Product1"
+//                ),
+//                "Resource2": FlattenedProduct(
+//                    type: "Flat",
+//                    location: "Building 44",
+//                    name: "Product2"
+//                )
+//            ]
+//        )
+//        // FIXME: Flattened parameters should be sent on the wire under "properties" object
+//        client.autorestresourceflatteningtestservice.put(resourceCollection: collection) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.putResourceCollection failed")
+//            }
+//        }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+//    func test_resourceFlattening_getWrappedArray() throws {
+//        let expectation =
+//            XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getWrappedArray succeed")
+//        // FIXME: Request path must container array, dictionary or resourcecollection
+//        client.autorestresourceflatteningtestservice.getWrappedArray { result, httpResponse in
+//            switch result {
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.getWrappedArray failed")
+//            }
+//        }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+//    func test_resourceFlattening_putWrappedArray() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.putWrappedArray succeed"
+//            )
+//        let wrapped = [
+//            WrappedProduct(value: "test")
+//        ]
+//        // FIXME: Timeout fails
+//        client.autorestresourceflatteningtestservice.put(wrappedArray: wrapped) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.putWrappedArray failed")
+//            }
+//        }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+//    func test_resourceFlattening_putSimpleProduct() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.putSimpleProduct succeed"
+//            )
+//        let product = SimpleProduct(
+//            maxProductDisplayName: "max name",
+//            odataValue: "http://foo",
+//            productId: "123",
+//            description: "product description"
+//        )
+//        // FIXME: Serialization of flattened object to the wire needs fixing
+//        client.autorestresourceflatteningtestservice.put(simpleProduct: product) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.putSimpleProduct failed")
+//            }
+//        }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+//    func test_resourceFlattening_putSimpleProductWithGroupingFlattenParameterGroup() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.putSimpleProductWithGroupingFlattenParameterGroup succeed"
+//            )
+//        let group = FlattenParameterGroup(
+//            name: "groupproduct",
+//            productId: "123",
+//            description: "product description",
+//            maxProductDisplayName: "max name",
+//            odataValue: "http://foo"
+//        )
+//        // FIXME: Received body is {} (empty)
+//        client.autorestresourceflatteningtestservice
+//            .putSimpleProductWithGrouping(flattenParameterGroup: group) { result, httpResponse in
+//                switch result {
+//                case .success:
+//                    expectation.fulfill()
+//                case let .failure(error):
+//                    let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                    print("test failed. error=\(details)")
+//                    XCTFail(
+//                        "Call autorestresourceflatteningtestservice.putSimpleProductWithGroupingFlattenParameterGroup failed"
+//                    )
+//                }
+//            }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+
+//    func test_resourceFlattening_postFlattenedSimpleProduct() throws {
+//        let expectation =
+//            XCTestExpectation(
+//                description: "Call autorestresourceflatteningtestservice.postFlattenedSimpleProduct succeed"
+//            )
+//        // FIXME: Serialization of flattened object to the wire needs fixing
+//        client.autorestresourceflatteningtestservice.postFlattenedSimpleProduct(
+//            productId: "123",
+//            description: "product description",
+//            maxProductDisplayName: "max name",
+//            odataValue: "http://foo"
+//        ) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                expectation.fulfill()
+//            case let .failure(error):
+//                let details = self.errorDetails(for: error, withResponse: httpResponse)
+//                print("test failed. error=\(details)")
+//                XCTFail("Call autorestresourceflatteningtestservice.postFlattenedSimpleProduct failed")
+//            }
+//        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
 }
