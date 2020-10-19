@@ -50,7 +50,7 @@ class AutoRestReportTest: XCTestCase {
         client.autorestreportservice.getReport { result, _ in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data.count, 597)
+                XCTAssertEqual(data.count, 598)
                 XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
                 expectation.fulfill()
             case let .failure(error):
@@ -68,7 +68,7 @@ class AutoRestReportTest: XCTestCase {
         client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data.count, 39)
+                XCTAssertEqual(data.count, 41)
                 XCTAssertEqual(data["getDecimalInvalid"], 0)
                 expectation.fulfill()
             case let .failure(error):

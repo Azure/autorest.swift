@@ -44,7 +44,8 @@ let package = Package(
             "XmsErrorResponseExtensions",
             "AutoRestReport",
             "AutoRestIntegerTest",
-            "AutoRestUrlTest",],
+            "AutoRestUrlTest",
+            "AutoRestResourceFlatteningTest"],
             path: "AutorestSwiftTest"
         )
     ],

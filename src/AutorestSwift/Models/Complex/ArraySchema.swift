@@ -62,7 +62,7 @@ class ArraySchema: Schema {
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        if elementType != nil { try container.encode(elementType, forKey: .elementType) }
+        try container.encode(elementType, forKey: .elementType)
         if maxItems != nil { try container.encode(maxItems, forKey: .maxItems) }
         if minItems != nil { try container.encode(minItems, forKey: .minItems) }
         if uniqueItems != nil { try container.encode(uniqueItems, forKey: .uniqueItems) }
