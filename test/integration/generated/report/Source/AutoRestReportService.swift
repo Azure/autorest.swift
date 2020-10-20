@@ -66,7 +66,6 @@ public final class AutoRestReportService {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -170,7 +169,6 @@ public final class AutoRestReportService {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers

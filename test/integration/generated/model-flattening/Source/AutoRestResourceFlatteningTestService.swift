@@ -67,7 +67,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -163,7 +162,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -260,7 +258,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -356,7 +353,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -453,7 +449,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -549,7 +544,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -646,7 +640,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -742,7 +735,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -839,7 +831,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -949,7 +940,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1056,7 +1046,6 @@ public final class AutoRestResourceFlatteningTestService {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers

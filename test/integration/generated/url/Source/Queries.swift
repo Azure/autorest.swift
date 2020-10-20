@@ -252,7 +252,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -537,7 +536,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -822,7 +820,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1107,7 +1104,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1392,7 +1388,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1765,7 +1760,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1864,7 +1858,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1963,7 +1956,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2062,7 +2054,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2261,7 +2252,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2462,7 +2452,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2661,7 +2650,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2762,7 +2750,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2861,7 +2848,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -2960,7 +2946,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -3059,7 +3044,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -3158,7 +3142,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -3257,7 +3240,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -3356,7 +3338,6 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers

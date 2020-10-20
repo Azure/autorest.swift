@@ -65,10 +65,7 @@ struct OperationParameters {
             methodDecoding.append(param)
         }
 
-        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
-        if query.required.isEmpty {
-            query.required.append(KeyValueViewModel(key: "", value: "\"\""))
-        }
+        // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
         if path.isEmpty {
             path.append(KeyValueViewModel(key: "", value: "\"\""))
         }

@@ -73,7 +73,6 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         if let globalStringQuery = client.globalStringQuery {
@@ -185,7 +184,6 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         if let globalStringQuery = client.globalStringQuery {
@@ -297,7 +295,6 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         if let globalStringQuery = client.globalStringQuery {
@@ -409,7 +406,6 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         if let globalStringQuery = client.globalStringQuery {

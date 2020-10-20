@@ -66,7 +66,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -168,7 +167,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -263,7 +261,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -358,7 +355,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -453,7 +449,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -548,7 +543,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -644,7 +638,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -741,7 +734,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -838,7 +830,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -935,7 +926,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1031,7 +1021,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1128,7 +1117,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1224,7 +1212,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -1320,7 +1307,6 @@ public final class IntType {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers

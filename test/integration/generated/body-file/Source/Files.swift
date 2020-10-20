@@ -66,7 +66,6 @@ public final class Files {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -157,7 +156,6 @@ public final class Files {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -248,7 +246,6 @@ public final class Files {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
