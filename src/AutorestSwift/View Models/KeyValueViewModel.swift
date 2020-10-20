@@ -36,6 +36,11 @@ enum KeyValueDecodeStrategy: String {
     case dateTimeFromParam
 }
 
+enum Implmentation: String {
+    case client
+    case options
+}
+
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
@@ -48,12 +53,13 @@ struct KeyValueViewModel {
     let optional: Bool
     // Flag indicates if the key/value pair need decoding code in method to convert the variable into a String
     let needDecodingInMethod: Bool
-    // An enum indicates what kind of decoding strategy will be used in the method implementation
+    // An enum raw value indicates what kind of decoding strategy will be used in the method implementation
     let strategy: String
     // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
     // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
     let constantValue: String?
-
+    // An enum raw value indicatse whether the value is from client property or from options struct
+    let implementation: String
     /**
         Create a ViewModel with a Key and Value pair
 
@@ -73,7 +79,12 @@ struct KeyValueViewModel {
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
-            self.init(key: name, value: "client.\(name)")
+            self.init(
+                key: name,
+                value: name,
+                optional: !param.required,
+                implmentation: (param.implementation == .client) ? .client : .options
+            )
         } else {
             self.init(key: name, value: "")
         }
@@ -81,6 +92,7 @@ struct KeyValueViewModel {
 
     init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
+        self.implementation = Implmentation.options.rawValue
         self.key = name
         let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
@@ -123,6 +135,7 @@ struct KeyValueViewModel {
 
     init(signatureParameter: ParameterType, name: String) {
         self.key = name
+        self.implementation = Implmentation.options.rawValue
         self.optional = !signatureParameter.required
         self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default
@@ -158,11 +171,11 @@ struct KeyValueViewModel {
         - Parameter key: Key String in the Key value pair
         - Parameter value: the value string
      */
-    init(key: String, value: String) {
+    init(key: String, value: String, optional: Bool = false, implmentation: Implmentation = .options) {
         self.key = key
         self.value = value
-        self.optional = false
-
+        self.optional = optional
+        self.implementation = implmentation.rawValue
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
         self.constantValue = nil

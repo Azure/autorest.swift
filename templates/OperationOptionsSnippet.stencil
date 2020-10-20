@@ -2,12 +2,13 @@
 if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
+    {% if param.implementation == "options" %}
     if let {{ param.key }} = options.{{ param.key }} {
         {% include "OperationOptionsDecodingSnippet.stencil" %}
         queryParams.append("{{ param.key }}", {{ param.value}})
     }
+    {% endif %}
     {% endfor %}
-
     // Header options
     {% for header in op.params.header.optional %}
     if let {{ header.key }} = options.{{ header.key }} {

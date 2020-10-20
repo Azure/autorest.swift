@@ -78,7 +78,6 @@ public final class AutoRestReportService {
             if let qualifier = options.qualifier {
                 queryParams.append("qualifier", qualifier)
             }
-
             // Header options
         }
         // Construct request
@@ -183,7 +182,6 @@ public final class AutoRestReportService {
             if let qualifier = options.qualifier {
                 queryParams.append("qualifier", qualifier)
             }
-
             // Header options
         }
         // Construct request

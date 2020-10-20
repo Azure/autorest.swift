@@ -264,7 +264,6 @@ public final class Queries {
             if let boolQuery = options.boolQuery {
                 queryParams.append("boolQuery", String(boolQuery))
             }
-
             // Header options
         }
         // Construct request
@@ -550,7 +549,6 @@ public final class Queries {
             if let intQuery = options.intQuery {
                 queryParams.append("intQuery", String(intQuery))
             }
-
             // Header options
         }
         // Construct request
@@ -836,7 +834,6 @@ public final class Queries {
             if let longQuery = options.longQuery {
                 queryParams.append("longQuery", String(longQuery))
             }
-
             // Header options
         }
         // Construct request
@@ -1122,7 +1119,6 @@ public final class Queries {
             if let floatQuery = options.floatQuery {
                 queryParams.append("floatQuery", String(floatQuery))
             }
-
             // Header options
         }
         // Construct request
@@ -1408,7 +1404,6 @@ public final class Queries {
             if let doubleQuery = options.doubleQuery {
                 queryParams.append("doubleQuery", String(doubleQuery))
             }
-
             // Header options
         }
         // Construct request
@@ -1782,7 +1777,6 @@ public final class Queries {
             if let stringQuery = options.stringQuery {
                 queryParams.append("stringQuery", stringQuery)
             }
-
             // Header options
         }
         // Construct request
@@ -1882,7 +1876,6 @@ public final class Queries {
             if let enumQuery = options.enumQuery {
                 queryParams.append("enumQuery", enumQuery.rawValue)
             }
-
             // Header options
         }
         // Construct request
@@ -1982,7 +1975,6 @@ public final class Queries {
             if let enumQuery = options.enumQuery {
                 queryParams.append("enumQuery", enumQuery.rawValue)
             }
-
             // Header options
         }
         // Construct request
@@ -2084,7 +2076,6 @@ public final class Queries {
 
                 queryParams.append("byteQuery", byteQueryString)
             }
-
             // Header options
         }
         // Construct request
@@ -2284,7 +2275,6 @@ public final class Queries {
 
                 queryParams.append("byteQuery", byteQueryString)
             }
-
             // Header options
         }
         // Construct request
@@ -2486,7 +2476,6 @@ public final class Queries {
 
                 queryParams.append("dateQuery", dateQueryString)
             }
-
             // Header options
         }
         // Construct request
@@ -2686,7 +2675,6 @@ public final class Queries {
 
                 queryParams.append("dateTimeQuery", dateTimeQueryString)
             }
-
             // Header options
         }
         // Construct request
@@ -2786,7 +2774,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -2886,7 +2873,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -2986,7 +2972,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -3086,7 +3071,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -3186,7 +3170,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -3286,7 +3269,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request
@@ -3386,7 +3368,6 @@ public final class Queries {
             if let arrayQuery = options.arrayQuery {
                 queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
             }
-
             // Header options
         }
         // Construct request

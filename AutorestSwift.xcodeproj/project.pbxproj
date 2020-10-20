@@ -540,6 +540,7 @@
 		F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutorestSwiftTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A6719624F5CCCC00C2712C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestHeadTest.xcodeproj; path = test/integration/generated/head/AutoRestHeadTest.xcodeproj; sourceTree = SOURCE_ROOT; };
+		F1D5D6A6253E8D6500815EF3 /* OperationQueryParamFromClientPropertySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamFromClientPropertySnippet.stencil; sourceTree = "<group>"; };
 		F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeDeclareSnippet.stencil; sourceTree = "<group>"; };
 		F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseUnixTimeBodySnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -723,6 +724,7 @@
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
+				F1D5D6A6253E8D6500815EF3 /* OperationQueryParamFromClientPropertySnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */,
 				F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */,

@@ -73,9 +73,12 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("globalStringQuery", client.globalStringQuery)
+            ("", "")
         ]
 
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -88,7 +91,6 @@ public final class PathItems {
             if let localStringQuery = options.localStringQuery {
                 queryParams.append("localStringQuery", localStringQuery)
             }
-
             // Header options
         }
         // Construct request
@@ -183,9 +185,12 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("globalStringQuery", client.globalStringQuery)
+            ("", "")
         ]
 
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -198,7 +203,6 @@ public final class PathItems {
             if let localStringQuery = options.localStringQuery {
                 queryParams.append("localStringQuery", localStringQuery)
             }
-
             // Header options
         }
         // Construct request
@@ -293,9 +297,12 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("globalStringQuery", client.globalStringQuery)
+            ("", "")
         ]
 
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -308,7 +315,6 @@ public final class PathItems {
             if let localStringQuery = options.localStringQuery {
                 queryParams.append("localStringQuery", localStringQuery)
             }
-
             // Header options
         }
         // Construct request
@@ -403,9 +409,12 @@ public final class PathItems {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("globalStringQuery", client.globalStringQuery)
+            ("", "")
         ]
 
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -418,7 +427,6 @@ public final class PathItems {
             if let localStringQuery = options.localStringQuery {
                 queryParams.append("localStringQuery", localStringQuery)
             }
-
             // Header options
         }
         // Construct request
