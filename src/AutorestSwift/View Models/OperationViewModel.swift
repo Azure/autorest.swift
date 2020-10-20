@@ -48,8 +48,12 @@ struct OperationParameters {
 
             switch httpParam.in {
             case .query:
-                viewModel.optional ? query.optional.append(viewModel) : query.required
-                    .append(viewModel)
+                if param.implementation == .client {
+                    query.optionalClientProperty.append(viewModel)
+                } else {
+                    viewModel.optional ? query.optional.append(viewModel) : query.required
+                        .append(viewModel)
+                }
             case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
@@ -67,7 +71,7 @@ struct OperationParameters {
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
         if path.isEmpty {
-            path.append(KeyValueViewModel(key: "", value: "\"\""))
+            path.append(KeyValueViewModel(key: "", value: "\"\"", path: "\"\""))
         }
 
         // If there is no optional query params, change query param declaration to 'let'
@@ -106,14 +110,17 @@ struct OperationParameters {
 struct Params {
     // Query Params/Header in initializer
     var required: [KeyValueViewModel]
-    // Query Params/Header need to add Nil check
+    // Query Params/Header which is pull from Options struct need to add Nil check
     var optional: [KeyValueViewModel]
+    // Query Params/Header which is pull from Optional Client property. It need to add Nil check
+    var optionalClientProperty: [KeyValueViewModel]
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"
 
-    init(from params: Params? = nil) {
-        self.required = params?.required ?? [KeyValueViewModel]()
-        self.optional = params?.optional ?? [KeyValueViewModel]()
+    init() {
+        self.required = [KeyValueViewModel]()
+        self.optional = [KeyValueViewModel]()
+        self.optionalClientProperty = [KeyValueViewModel]()
     }
 
     var isEmpty: Bool {

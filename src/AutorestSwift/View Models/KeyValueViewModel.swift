@@ -36,11 +36,6 @@ enum KeyValueDecodeStrategy: String {
     case dateTimeFromParam
 }
 
-enum Implmentation: String {
-    case client
-    case options
-}
-
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
@@ -58,8 +53,8 @@ struct KeyValueViewModel {
     // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
     // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
     let constantValue: String?
-    // An enum raw value indicatse whether the value is from client property or from options struct
-    let implementation: String
+    // A string to specify if the value comes from client property or from options struct or from signature
+    let path: String
     /**
         Create a ViewModel with a Key and Value pair
 
@@ -81,9 +76,9 @@ struct KeyValueViewModel {
         } else if param.implementation == .client {
             self.init(
                 key: name,
-                value: name,
+                value: param.required ? "client.\(name)" : name,
                 optional: !param.required,
-                implmentation: (param.implementation == .client) ? .client : .options
+                path: "client.\(name)"
             )
         } else {
             self.init(key: name, value: "")
@@ -92,7 +87,7 @@ struct KeyValueViewModel {
 
     init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
-        self.implementation = Implmentation.options.rawValue
+        self.path = name
         self.key = name
         let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
@@ -135,7 +130,7 @@ struct KeyValueViewModel {
 
     init(signatureParameter: ParameterType, name: String) {
         self.key = name
-        self.implementation = Implmentation.options.rawValue
+        self.path = signatureParameter.required ? name : "options.\(name)"
         self.optional = !signatureParameter.required
         self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default
@@ -170,12 +165,14 @@ struct KeyValueViewModel {
         Create a ViewModel with a Key and Value pair
         - Parameter key: Key String in the Key value pair
         - Parameter value: the value string
+        - Parameter optional: a flag indicates if the Key/Value pair is optional
+        - Parameter implementation: an enum indicates if the value is from Client property or from Options struct
      */
-    init(key: String, value: String, optional: Bool = false, implmentation: Implmentation = .options) {
+    init(key: String, value: String, optional: Bool = false, path: String? = nil) {
         self.key = key
         self.value = value
         self.optional = optional
-        self.implementation = implmentation.rawValue
+        self.path = path ?? "options.\(key)"
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
         self.constantValue = nil

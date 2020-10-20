@@ -15,7 +15,9 @@ public func {{ op.name }}(
     {% include "OperationMethodDecoding.stencil" %}
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
-    {% include "OperationQueryParamFromClientPropertySnippet.stencil" op %}
+    {% for param in op.params.query.optionalClientProperty %}
+    {% include "OperationOptionalQueryParamSnippet.stencil" %}
+    {% endfor %}
     {% include "OperationHeaderSnippet.stencil" %}
     {% if op.params.hasOptionalParams %}
     {% include "OperationOptionsSnippet.stencil" op %}

@@ -69,6 +69,7 @@ struct ServiceClientFileViewModel {
         for key in namedOperationGroups.keys {
             namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }
+        namedOperationGroupShortcuts.sort(by: { $0.key > $1.key })
         self.namedOperationGroupShortcuts = namedOperationGroupShortcuts
     }
 }
