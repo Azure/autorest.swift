@@ -103,6 +103,12 @@ struct OperationParameters {
     }
 }
 
+enum BodyParamStrategy: String {
+    case plain
+    case flattened
+    case unixTime
+}
+
 struct Params {
     // Query Params/Header in initializer
     var required: [KeyValueViewModel]
@@ -144,8 +150,9 @@ struct BodyParams {
             }
         }
 
-        self.strategy = param.flattened ? "flattened" : param.schema.type == AllSchemaTypes
-            .unixTime ? "unixTime" : "plain"
+        let strategy: BodyParamStrategy = param.flattened ? .flattened : param.schema.type == AllSchemaTypes
+            .unixTime ? .unixTime : .plain
+        self.strategy = strategy.rawValue
         self.children = virtParams
     }
 }
