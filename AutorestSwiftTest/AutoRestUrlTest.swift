@@ -621,12 +621,13 @@ class AutoRestUrlTest: XCTestCase {
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
-        ) { result, _ in
+        ) { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
                 XCTFail("Call pathitems_getGlobalQueryNull failed")
             }
         }
@@ -642,12 +643,13 @@ class AutoRestUrlTest: XCTestCase {
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
-        ) { result, _ in
+        ) { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
                 XCTFail("Call pathitems.getGlobalAndLocalQueryNull failed")
             }
         }
@@ -661,12 +663,13 @@ class AutoRestUrlTest: XCTestCase {
         client.pathitems.getLocalPathItemQueryNull(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath"
-        ) { result, _ in
+        ) { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
                 XCTFail("Call pathitems_getLocalPathItemQueryNull failed")
             }
         }
@@ -685,12 +688,13 @@ class AutoRestUrlTest: XCTestCase {
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
-        ) { result, _ in
+        ) { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
                 XCTFail("Call pathitems_listAllWithValues failed")
             }
         }
