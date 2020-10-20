@@ -62,25 +62,34 @@ struct ServiceClientFileViewModel {
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
-        var globalParameters = [ParameterViewModel]()
-        var host: String?
-        for globalParameter in model.globalParameters ?? [] {
-            if globalParameter.name == "$host" {
-                host = globalParameter.value.clientDefaultValue
-            } else {
-                globalParameters.append(ParameterViewModel(from: globalParameter))
-            }
-        }
-        self.globalParameters = globalParameters
-        if let hostValue = host {
-            self.host = "\"\(hostValue)\""
-        } else {
-            self.host = ""
-        }
+
+        (self.globalParameters, self.host) = resolveGlobalParameters(from: model)
+
         for key in namedOperationGroups.keys {
             namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }
         namedOperationGroupShortcuts.sort(by: { $0.key > $1.key })
         self.namedOperationGroupShortcuts = namedOperationGroupShortcuts
     }
+}
+
+func resolveGlobalParameters(from model: CodeModel) -> ([ParameterViewModel], String) {
+    var globalParameters = [ParameterViewModel]()
+    var host: String?
+    var hostString: String
+    for globalParameter in model.globalParameters ?? [] {
+        if globalParameter.name == "$host" {
+            host = globalParameter.value.clientDefaultValue
+        } else {
+            globalParameters.append(ParameterViewModel(from: globalParameter))
+        }
+    }
+
+    if let hostValue = host {
+        hostString = "\"\(hostValue)\""
+    } else {
+        hostString = ""
+    }
+
+    return (globalParameters, hostString)
 }
