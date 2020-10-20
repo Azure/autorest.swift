@@ -27,7 +27,7 @@ do
 	echo "autorest code generation succeed."
     else
 	echo "autorest code generation failed. Revert the generated code."
-	#git restore ./test/integration/generated/$i
+	git restore ./test/integration/generated/$i
     fi
     cd ./test/integration/generated/$i
     swift build  > /dev/null 2>&1

@@ -41,15 +41,14 @@ public final class AutoRestReportClient: PipelineClient {
         authPolicy: Authenticating,
         withOptions options: AutoRestReportClientOptions
     ) throws {
-        // let components = URLComponents()
-        // components.scheme = "http"
-        // components.host = self.host
-        // self.init(baseUrl: components.url, authPolicy: authPolicy, withOptions: options)
-
         guard let baseUrl = URL(string: "http://localhost:3000") else {
             fatalError("Unable to form base URL")
         }
-        try self.init(baseUrl: baseUrl, authPolicy: authPolicy, withOptions: options)
+        try self.init(
+            baseUrl: baseUrl,
+            authPolicy: authPolicy,
+            withOptions: options
+        )
     }
 
     /// Create a AutoRestReportClient client.
