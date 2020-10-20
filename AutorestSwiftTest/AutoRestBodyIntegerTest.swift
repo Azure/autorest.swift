@@ -299,17 +299,17 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_putUnixtime_200() throws {
         let expectation = XCTestExpectation(description: "Call putUnixTime succeed")
 
-         let decoded = Date(timeIntervalSince1970: Double(1_460_505_600))
+        let decoded = Date(timeIntervalSince1970: Double(1_460_505_600))
 
-         client.inttype.put(unixTimeDate: decoded) { result, httpResponse in
-             switch result {
-             case .success:
-                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                 expectation.fulfill()
-             case let .failure(error):
-                 print("test failed. error=\(error.message)")
-                 XCTFail("Call putUnixTime failed")
-             }
-         }
+        client.inttype.put(unixTimeDate: decoded) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putUnixTime failed")
+            }
+        }
     }
 }

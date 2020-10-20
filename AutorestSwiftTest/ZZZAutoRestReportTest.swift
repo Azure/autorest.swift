@@ -29,7 +29,7 @@ import AzureCore
 import Foundation
 import XCTest
 
-class AutoRestReportTest: XCTestCase {
+class ZZZAutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
 
     override func setUpWithError() throws {
@@ -44,14 +44,18 @@ class AutoRestReportTest: XCTestCase {
         )
     }
 
+    private func printReport(report: [String: Int32]) {
+        let totalTest = report.count
+    }
+
     func test_ReportFile_getReport() throws {
         let expectation = XCTestExpectation(description: "Call getReport succeed")
 
         client.autorestreportservice.getReport { result, _ in
             switch result {
-            case let .success(data):
-                XCTAssertEqual(data.count, 598)
-                XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
+            case let .success(report):
+                print("Coverage:")
+                self.printReport(report: report)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
