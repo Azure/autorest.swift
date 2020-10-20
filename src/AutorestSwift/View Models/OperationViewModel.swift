@@ -121,11 +121,6 @@ struct Params {
     }
 }
 
-enum BodyParamStrategy: String {
-    case plain
-    case flattened
-}
-
 struct BodyParams {
     var param: ParameterViewModel
     var strategy: String
@@ -148,7 +143,9 @@ struct BodyParams {
                 virtParams.append(VirtualParam(from: virtParam))
             }
         }
-        self.strategy = param.flattened ? "flattened" : "plain"
+
+        self.strategy = param.flattened ? "flattened" : param.schema.type == AllSchemaTypes
+            .unixTime ? "unixTime" : "plain"
         self.children = virtParams
     }
 }
