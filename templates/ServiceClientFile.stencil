@@ -31,6 +31,9 @@ public final class {{ model.name }}: {{ model.protocols }} {
     public let options: {{ model.name }}Options
 
     // MARK: Initializers
+    {% if model.host != nil %}
+    {% include "ClientConvenienceInitSnippet.stencil" %}
+    {% endif %}
 
     /// Create a {{ model.name }} client.
     /// - Parameters:
