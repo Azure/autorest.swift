@@ -35,6 +35,25 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
     /// Create a AutoRestHeadTestClient client.
     /// - Parameters:
+    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
+    ///   - options: Options used to configure the client.
+    public convenience init(
+        authPolicy: Authenticating,
+        withOptions options: AutoRestHeadTestClientOptions
+    ) throws {
+        // let components = URLComponents()
+        // components.scheme = "http"
+        // components.host = self.host
+        // self.init(baseUrl: components.url, authPolicy: authPolicy, withOptions: options)
+
+        guard let baseUrl = URL(string: "http://localhost:3000") else {
+            fatalError("Unable to form base URL")
+        }
+        try self.init(baseUrl: baseUrl, authPolicy: authPolicy, withOptions: options)
+    }
+
+    /// Create a AutoRestHeadTestClient client.
+    /// - Parameters:
     ///   - baseUrl: Base URL for the AutoRestHeadTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.

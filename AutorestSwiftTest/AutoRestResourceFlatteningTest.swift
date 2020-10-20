@@ -33,12 +33,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
     var client: AutoRestResourceFlatteningTestClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-
         client = try AutoRestResourceFlatteningTestClient(
-            baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestResourceFlatteningTestClientOptions()
         )

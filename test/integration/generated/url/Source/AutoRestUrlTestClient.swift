@@ -8,26 +8,23 @@
 // regenerated.
 // --------------------------------------------------------------------------
 
-import Foundation
 import AzureCore
+import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-
 public final class AutoRestUrlTestClient: PipelineClient {
-
-
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
         /// API version ""
         case v = ""
 
-        /// The most recent API version of the 
+        /// The most recent API version of the
         public static var latest: ApiVersion {
-             return .v
+            return .v
         }
     }
 
@@ -35,25 +32,26 @@ public final class AutoRestUrlTestClient: PipelineClient {
     public let options: AutoRestUrlTestClientOptions
 
     // MARK: Initializers
-/// Create a AutoRestUrlTestClient client.
-/// - Parameters:
-///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
-///   - options: Options used to configure the client.
-public convenience init(
-    globalStringPath : String,
-    authPolicy: Authenticating,
-    withOptions options: AutoRestUrlTestClientOptions
-) throws {
-    //let components = URLComponents()
-    //components.scheme = "http"
-    //components.host = self.host
-    //self.init(baseUrl: components.url, authPolicy: authPolicy, withOptions: options)
-    
-    guard let baseUrl = URL(string: http://localhost:3000) else {
-        fatalError("Unable to form base URL")
+
+    /// Create a AutoRestUrlTestClient client.
+    /// - Parameters:
+    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
+    ///   - options: Options used to configure the client.
+    public convenience init(
+        globalStringPath: String,
+        authPolicy: Authenticating,
+        withOptions options: AutoRestUrlTestClientOptions
+    ) throws {
+        guard let baseUrl = URL(string: "http://localhost:3000") else {
+            fatalError("Unable to form base URL")
+        }
+        try self.init(
+            globalStringPath: globalStringPath,
+            baseUrl: baseUrl,
+            authPolicy: authPolicy,
+            withOptions: options
+        )
     }
-    self.init(baseUrl: components.url, authPolicy: authPolicy, withOptions: options)
-}
 
     /// Create a AutoRestUrlTestClient client.
     /// - Parameters:
@@ -61,7 +59,7 @@ public convenience init(
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        globalStringPath : String,
+        globalStringPath: String,
         baseUrl: URL,
         authPolicy: Authenticating,
         withOptions options: AutoRestUrlTestClientOptions
@@ -88,7 +86,7 @@ public convenience init(
     // /// A string value 'globalItemStringPath' that appears in the path
     public var globalStringPath: String
     // /// should contain value null
-    public var globalStringQuery: String? = nil
+    public var globalStringQuery: String?
 
     public lazy var queries: Queries = Queries(client: self)
     public lazy var paths: Paths = Paths(client: self)

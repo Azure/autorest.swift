@@ -40,7 +40,7 @@ struct ServiceClientFileViewModel {
     let namedOperationGroups: [String: OperationGroupViewModel]
     // A key,Value pairs of all the named operation group for stencil template engine
     let namedOperationGroupShortcuts: [KeyValueViewModel]
-    let host: String?
+    let host: String
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
@@ -72,7 +72,11 @@ struct ServiceClientFileViewModel {
             }
         }
         self.globalParameters = globalParameters
-        self.host = host
+        if let hostValue = host {
+            self.host = "\"\(hostValue)\""
+        } else {
+            self.host = ""
+        }
         for key in namedOperationGroups.keys {
             namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }

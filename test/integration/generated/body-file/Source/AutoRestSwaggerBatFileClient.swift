@@ -35,6 +35,25 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
 
     /// Create a AutoRestSwaggerBatFileClient client.
     /// - Parameters:
+    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
+    ///   - options: Options used to configure the client.
+    public convenience init(
+        authPolicy: Authenticating,
+        withOptions options: AutoRestSwaggerBatFileClientOptions
+    ) throws {
+        // let components = URLComponents()
+        // components.scheme = "http"
+        // components.host = self.host
+        // self.init(baseUrl: components.url, authPolicy: authPolicy, withOptions: options)
+
+        guard let baseUrl = URL(string: "http://localhost:3000") else {
+            fatalError("Unable to form base URL")
+        }
+        try self.init(baseUrl: baseUrl, authPolicy: authPolicy, withOptions: options)
+    }
+
+    /// Create a AutoRestSwaggerBatFileClient client.
+    /// - Parameters:
     ///   - baseUrl: Base URL for the AutoRestSwaggerBatFileClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.

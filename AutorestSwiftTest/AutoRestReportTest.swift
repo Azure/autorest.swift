@@ -33,12 +33,7 @@ class AutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-
         client = try AutoRestReportClient(
-            baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestReportClientOptions()
         )
