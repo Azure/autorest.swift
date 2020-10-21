@@ -106,7 +106,7 @@ struct OperationParameters {
 struct Params {
     // Query Params/Header in initializer
     var required: [KeyValueViewModel]
-    // Query Params/Header which is pull from Options struct need to add Nil check
+    // Query Params/Header need to add Nil check
     var optional: [KeyValueViewModel]
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"
