@@ -48,12 +48,8 @@ struct OperationParameters {
 
             switch httpParam.in {
             case .query:
-                if param.implementation == .client {
-                    query.optionalClientProperty.append(viewModel)
-                } else {
-                    viewModel.optional ? query.optional.append(viewModel) : query.required
-                        .append(viewModel)
-                }
+                viewModel.optional ? query.optional.append(viewModel) : query.required
+                    .append(viewModel)
             case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
@@ -118,14 +114,12 @@ struct Params {
     var required: [KeyValueViewModel]
     // Query Params/Header which is pull from Options struct need to add Nil check
     var optional: [KeyValueViewModel]
-    var optionalClientProperty: [KeyValueViewModel]
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"
 
     init() {
         self.required = [KeyValueViewModel]()
         self.optional = [KeyValueViewModel]()
-        self.optionalClientProperty = [KeyValueViewModel]()
     }
 
     var isEmpty: Bool {
