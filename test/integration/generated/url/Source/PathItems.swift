@@ -75,23 +75,21 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let pathItemStringQuery = options.pathItemStringQuery {
-                queryParams.append("pathItemStringQuery", pathItemStringQuery)
-            }
-            if let localStringQuery = options.localStringQuery {
-                queryParams.append("localStringQuery", localStringQuery)
-            }
-            // Header options
+        // Query options
+        if let pathItemStringQuery = options?.pathItemStringQuery {
+            queryParams.append("pathItemStringQuery", pathItemStringQuery)
         }
+        if let localStringQuery = options?.localStringQuery {
+            queryParams.append("localStringQuery", localStringQuery)
+        }
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -186,23 +184,21 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let pathItemStringQuery = options.pathItemStringQuery {
-                queryParams.append("pathItemStringQuery", pathItemStringQuery)
-            }
-            if let localStringQuery = options.localStringQuery {
-                queryParams.append("localStringQuery", localStringQuery)
-            }
-            // Header options
+        // Query options
+        if let pathItemStringQuery = options?.pathItemStringQuery {
+            queryParams.append("pathItemStringQuery", pathItemStringQuery)
         }
+        if let localStringQuery = options?.localStringQuery {
+            queryParams.append("localStringQuery", localStringQuery)
+        }
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -297,23 +293,21 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let pathItemStringQuery = options.pathItemStringQuery {
-                queryParams.append("pathItemStringQuery", pathItemStringQuery)
-            }
-            if let localStringQuery = options.localStringQuery {
-                queryParams.append("localStringQuery", localStringQuery)
-            }
-            // Header options
+        // Query options
+        if let pathItemStringQuery = options?.pathItemStringQuery {
+            queryParams.append("pathItemStringQuery", pathItemStringQuery)
         }
+        if let localStringQuery = options?.localStringQuery {
+            queryParams.append("localStringQuery", localStringQuery)
+        }
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -408,23 +402,21 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let pathItemStringQuery = options.pathItemStringQuery {
-                queryParams.append("pathItemStringQuery", pathItemStringQuery)
-            }
-            if let localStringQuery = options.localStringQuery {
-                queryParams.append("localStringQuery", localStringQuery)
-            }
-            // Header options
+        // Query options
+        if let pathItemStringQuery = options?.pathItemStringQuery {
+            queryParams.append("pathItemStringQuery", pathItemStringQuery)
         }
+        if let localStringQuery = options?.localStringQuery {
+            queryParams.append("localStringQuery", localStringQuery)
+        }
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
+        }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")

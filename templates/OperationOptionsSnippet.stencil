@@ -1,10 +1,7 @@
 // Process endpoint options
-if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
-    {% if param.path == "options." %}
     {% include "OperationOptionalQueryParamSnippet.stencil" %}
-    {% endif %}
     {% endfor %}
     // Header options
     {% for header in op.params.header.optional %}
@@ -12,4 +9,3 @@ if let options = options {
         headers["{{ header.key }}"] = {{ header.value}}
     }
     {% endfor %}
-}

@@ -85,6 +85,7 @@ struct KeyValueViewModel: Comparable {
 
     private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
+        self.needDecodingInMethod = false
         self.path = ""
         self.key = name
         let constantValue: String = constantSchema.value.value
@@ -97,9 +98,7 @@ struct KeyValueViewModel: Comparable {
             } else {
                 self.value = "\"\(constantValue)\""
             }
-            self.needDecodingInMethod = false
         } else {
-            self.needDecodingInMethod = param.implementation == ImplementationLocation.method
             switch type {
             case .date,
                  .unixTime:
@@ -122,7 +121,7 @@ struct KeyValueViewModel: Comparable {
 
     private init(signatureParameter: ParameterType, name: String) {
         self.key = name
-        self.path = signatureParameter.belongsInOptions() ? "options." : ""
+        self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
