@@ -168,11 +168,11 @@ struct KeyValueViewModel {
         - Parameter optional: a flag indicates if the Key/Value pair is optional
         - Parameter implementation: an enum indicates if the value is from Client property or from Options struct
      */
-    init(key: String, value: String, optional: Bool = false, path: String? = nil) {
+    init(key: String, value: String, optional: Bool = false, path: String = "") {
         self.key = key
         self.value = value
         self.optional = optional
-        self.path = path ?? "options.\(key)"
+        self.path = path
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
         self.constantValue = nil
