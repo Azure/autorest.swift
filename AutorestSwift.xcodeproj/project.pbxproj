@@ -186,7 +186,7 @@
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
-		F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */; };
+		F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */; };
 		F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
@@ -350,7 +350,7 @@
 			files = (
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
-				F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */,
+				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,
 				F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */,
 				F198F975251C570B009CB4E5 /* NamedOperationGroupFile.stencil in CopyFiles */,
 				F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */,
@@ -519,7 +519,7 @@
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
-		F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecoding.stencil; sourceTree = "<group>"; };
+		F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationOptionsDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
@@ -718,7 +718,7 @@
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
-				F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */,
+				F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */,
 				F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */,
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,

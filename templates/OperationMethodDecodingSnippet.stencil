@@ -16,20 +16,20 @@
     {% endif %}
     {# Technically, we can include OperationOptionsDecodingSnippnet.stencil. But we can't get passing in a context when include in stencil to work. As a result, we dublicate the snippet here below. #}
     {% if method.strategy == "dateFromParam" %}
-    let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
+    let {{ method.key }}String = dateFormatter.string(from: {{ method.value }})
     {% elif method.strategy == "dateFromSignature" %}
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
+    let {{ method.key }}String = dateFormatter.string(from: {{ method.value }})
     {% elif method.strategy == "dateTimeFromSignature" or method.strategy == "dateTimeFromParam" %}
-    let {{ method.key }}String = Date.Format.iso8601.formatter.string(from: {{ method.key }})
+    let {{ method.key }}String = Date.Format.iso8601.formatter.string(from: {{ method.value }})
     {% elif method.strategy == "byteArrayFromSignature" or method.strategy == "byteArrayFromParam" %}
-    guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
+    guard let {{ method.key }}String = String(bytes: {{ method.value }}, encoding: .utf8) else {
         self.options.logger.error("Failed to construct String for {{ method.key }}")
         return
     }
     {% else %}
-    {# do nothting #} {# let {{ method.key }} = {{ method.value }} #}
+    {# do nothing #}
     {% endif %}
 {% endfor %}
 

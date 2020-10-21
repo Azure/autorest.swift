@@ -110,11 +110,6 @@ struct KeyValueViewModel: Comparable {
             }
             self.needDecodingInMethod = false
         } else {
-            let value = KeyValueViewModel.formatValueForType(
-                type: type,
-                value: constantValue,
-                key: name
-            )
             self.needDecodingInMethod = param.implementation == ImplementationLocation.method
             switch type {
             case .date,
@@ -147,7 +142,7 @@ struct KeyValueViewModel: Comparable {
 
         // value is referring a signature parameter, no need to wrap as String
         self.value = KeyValueViewModel.formatValueForType(
-            type: type,
+            signatureParameter: signatureParameter,
             value: name
         )
 
@@ -190,20 +185,21 @@ struct KeyValueViewModel: Comparable {
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueForType(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
+    private static func formatValueForType(signatureParameter: ParameterType, value: String) -> String {
+        let type = signatureParameter.schema.type
         switch type {
         case .string:
-            return "\(key ?? value)"
+            return "\(value)"
         case .integer,
              .number,
              .boolean:
-            return "String(\(key ?? value))"
+            return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
              .unixTime,
              .dateTime,
              .byteArray:
-            return "\(key ?? value)String"
+            return "\(value)String"
         case .choice,
              .sealedChoice:
             return "\(value).rawValue"
