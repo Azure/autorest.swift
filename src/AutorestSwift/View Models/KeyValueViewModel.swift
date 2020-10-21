@@ -142,7 +142,7 @@ struct KeyValueViewModel: Comparable {
 
         // value is referring a signature parameter, no need to wrap as String
         self.value = KeyValueViewModel.formatValueForType(
-            signatureParameter: signatureParameter,
+            type: type,
             value: name
         )
 
@@ -185,8 +185,7 @@ struct KeyValueViewModel: Comparable {
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueForType(signatureParameter: ParameterType, value: String) -> String {
-        let type = signatureParameter.schema.type
+    private static func formatValueForType(type: AllSchemaTypes, value: String) -> String {
         switch type {
         case .string:
             return "\(value)"
