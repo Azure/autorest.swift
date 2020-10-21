@@ -142,8 +142,9 @@ struct KeyValueViewModel: Comparable {
 
     private init(signatureParameter: ParameterType, name: String) {
         self.key = name
-        self.path = signatureParameter.required ? "" : "options."
-        self.source = signatureParameter.required ? ValueSource.signature.rawValue : ValueSource.options.rawValue
+        self.path = signatureParameter.belongsInOptions() ? "options." : ""
+        self.source = signatureParameter.belongsInOptions() ? ValueSource.options.rawValue : ValueSource.signature
+            .rawValue
         self.optional = !signatureParameter.required
         self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default
