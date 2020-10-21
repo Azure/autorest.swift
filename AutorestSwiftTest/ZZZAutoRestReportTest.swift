@@ -29,8 +29,29 @@ import AzureCore
 import Foundation
 import XCTest
 
+extension Dictionary {
+    func difference(from other: Dictionary) -> Dictionary {
+        let thisKeys = Set(keys)
+        let otherKeys = Set(other.keys)
+        let differentKeys = thisKeys.symmetricDifference(otherKeys)
+        return filter { differentKeys.contains($0.key) }
+    }
+}
+
 class ZZZAutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
+
+    let mobileTestsPrefix = [
+        // custom-baseUrl.json
+        "CustomBase",
+        // xms-error-response.json
+        "expected", "animalNotFoundError", "linkNotFoundError", "stringError", "intError",
+        // body-integer.json
+        "putInteger", "putLong", "putUnixTime", "getInteger", "getLong", "getUnixTime", "getInvalidUnixTime",
+        "getNullUnixTime",
+        // url.json
+        "UrlPathItem", "UrlQueries", "UrlPaths"
+    ]
 
     override func setUpWithError() throws {
         guard let baseUrl = URL(string: "http://localhost:3000") else {
@@ -45,7 +66,55 @@ class ZZZAutoRestReportTest: XCTestCase {
     }
 
     private func printReport(report: [String: Int32]) {
-        let totalTest = report.count
+        let mobileTest = getMobileTests(with: report)
+        let passedTest = report.filter { $0.value > 0 }
+        let mobilePassedTest = mobileTest.filter { $0.value > 0 }
+        let mobileFailedTest = mobileTest.filter { $0.value == 0 }
+
+        let totalTestCount = report.count
+        let passedCount = passedTest.count
+
+        let mobileTestCount = mobileTest.count
+        let mobilePassedCount = mobilePassedTest.count
+
+        let coverage: Float = Float(passedCount) / Float(totalTestCount)
+
+        if mobileTestCount > 0 {
+            let mobileCoverage: Float = Float(mobilePassedCount) / Float(mobileTestCount)
+
+            if mobilePassedTest.count > 0 {
+                print("Passed mobile tests")
+                print("-------------------")
+                for test in mobilePassedTest { print(test.key) }
+            }
+
+            if mobileFailedTest.count > 0 {
+                print("Failed mobile tests")
+                print("-------------------")
+                for test in mobileFailedTest { print(test.key) }
+            }
+
+            print("Mobile Passed Test=\(mobilePassedCount) Mobile Test=\(mobileTestCount) Coverage=\(mobileCoverage)")
+        }
+
+        let otherPassedTest = passedTest.difference(from: mobilePassedTest)
+        if otherPassedTest.count > 0 {
+            print("\nOther passed tests")
+            print("-------------------")
+            for test in otherPassedTest { print(test.key) }
+        }
+        print("\nPass Test=\(passedCount) Total Test=\(totalTestCount) Coverage=\(coverage)")
+    }
+
+    private func getMobileTests(with report: [String: Int32]) -> [String: Int32] {
+        return report.filter {
+            for prefix in mobileTestsPrefix {
+                if $0.key.contains(prefix) {
+                    return true
+                }
+            }
+            return false
+        }
     }
 
     func test_ReportFile_getReport() throws {
@@ -71,9 +140,9 @@ class ZZZAutoRestReportTest: XCTestCase {
 
         client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
-            case let .success(data):
-                XCTAssertEqual(data.count, 41)
-                XCTAssertEqual(data["getDecimalInvalid"], 0)
+            case let .success(optionalReport):
+                print("Optional Coverage:")
+                self.printReport(report: optionalReport)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
