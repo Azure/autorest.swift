@@ -35,35 +35,19 @@ public final class AutoRestUrlTestClient: PipelineClient {
 
     /// Create a AutoRestUrlTestClient client.
     /// - Parameters:
-    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
-    ///   - options: Options used to configure the client.
-    public convenience init(
-        globalStringPath: String,
-        authPolicy: Authenticating,
-        withOptions options: AutoRestUrlTestClientOptions
-    ) throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-        try self.init(
-            globalStringPath: globalStringPath,
-            baseUrl: baseUrl,
-            authPolicy: authPolicy,
-            withOptions: options
-        )
-    }
-
-    /// Create a AutoRestUrlTestClient client.
-    /// - Parameters:
     ///   - baseUrl: Base URL for the AutoRestUrlTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
         globalStringPath: String,
-        baseUrl: URL,
+        url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: AutoRestUrlTestClientOptions
     ) throws {
+        let defaultHost = URL(string: "http://localhost:3000")
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
         self.globalStringPath = globalStringPath
         self.options = options
         super.init(

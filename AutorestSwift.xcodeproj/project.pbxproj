@@ -184,7 +184,6 @@
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
-		F170D499253F8DEC00A569A0 /* ClientConvenienceInitSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F170D351253F859800A569A0 /* ClientConvenienceInitSnippet.stencil */; };
 		F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1D5D6A6253E8D6500815EF3 /* OperationOptionalQueryParamSnippet.stencil */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -350,7 +349,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F170D499253F8DEC00A569A0 /* ClientConvenienceInitSnippet.stencil in CopyFiles */,
 				F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
@@ -521,7 +519,6 @@
 		F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedOperationGroupFile.stencil; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		F170D351253F859800A569A0 /* ClientConvenienceInitSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClientConvenienceInitSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
 		F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecoding.stencil; sourceTree = "<group>"; };
@@ -701,7 +698,6 @@
 			isa = PBXGroup;
 			children = (
 				0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */,
-				F170D351253F859800A569A0 /* ClientConvenienceInitSnippet.stencil */,
 				0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */,
 				0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */,
 				0A22B07624CB71E100EC018E /* EnumerationFile.stencil */,

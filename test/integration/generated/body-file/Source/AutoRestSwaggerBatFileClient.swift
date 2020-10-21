@@ -35,32 +35,18 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
 
     /// Create a AutoRestSwaggerBatFileClient client.
     /// - Parameters:
-    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
-    ///   - options: Options used to configure the client.
-    public convenience init(
-        authPolicy: Authenticating,
-        withOptions options: AutoRestSwaggerBatFileClientOptions
-    ) throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-        try self.init(
-            baseUrl: baseUrl,
-            authPolicy: authPolicy,
-            withOptions: options
-        )
-    }
-
-    /// Create a AutoRestSwaggerBatFileClient client.
-    /// - Parameters:
     ///   - baseUrl: Base URL for the AutoRestSwaggerBatFileClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        baseUrl: URL,
+        url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: AutoRestSwaggerBatFileClientOptions
     ) throws {
+        let defaultHost = URL(string: "http://localhost:3000")
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
         self.options = options
         super.init(
             baseUrl: baseUrl,

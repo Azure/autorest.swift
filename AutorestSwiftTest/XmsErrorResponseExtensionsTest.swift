@@ -37,7 +37,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         }
 
         client = try XmsErrorResponseExtensionsClient(
-            baseUrl: baseUrl,
+            url: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: XmsErrorResponseExtensionsClientOptions()
         )

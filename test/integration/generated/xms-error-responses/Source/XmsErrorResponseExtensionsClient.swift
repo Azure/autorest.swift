@@ -35,32 +35,18 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
 
     /// Create a XmsErrorResponseExtensionsClient client.
     /// - Parameters:
-    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
-    ///   - options: Options used to configure the client.
-    public convenience init(
-        authPolicy: Authenticating,
-        withOptions options: XmsErrorResponseExtensionsClientOptions
-    ) throws {
-        guard let baseUrl = URL(string: "http://localhost") else {
-            fatalError("Unable to form base URL")
-        }
-        try self.init(
-            baseUrl: baseUrl,
-            authPolicy: authPolicy,
-            withOptions: options
-        )
-    }
-
-    /// Create a XmsErrorResponseExtensionsClient client.
-    /// - Parameters:
     ///   - baseUrl: Base URL for the XmsErrorResponseExtensionsClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        baseUrl: URL,
+        url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: XmsErrorResponseExtensionsClientOptions
     ) throws {
+        let defaultHost = URL(string: "http://localhost")
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
         self.options = options
         super.init(
             baseUrl: baseUrl,

@@ -31,10 +31,6 @@ public final class {{ model.name }}: {{ model.protocols }} {
     public let options: {{ model.name }}Options
 
     // MARK: Initializers
-    {% if model.host != "" %}
-    {% include "ClientConvenienceInitSnippet.stencil" %}
-    {% endif %}
-
     /// Create a {{ model.name }} client.
     /// - Parameters:
     ///   - baseUrl: Base URL for the {{ model.name }}.
@@ -46,10 +42,20 @@ public final class {{ model.name }}: {{ model.protocols }} {
         {{ param.name }} : {{ param.type }},
     {% endif %}
     {% endfor %}
+        {% if model.host != "" %}
+        url: URL? = nil,
+        {% else %}
         baseUrl: URL,
+        {% endif %}
         authPolicy: Authenticating,
         withOptions options: {{ model.name }}Options
     ) throws {
+        {% if model.host != "" %}
+        let defaultHost = URL(string: {{ model.host }})
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
+        {% endif %}
         {% for param in model.globalParameters %}
         {% if param.optional == false %}
         self.{{ param.name }} = {{ param.name }}
