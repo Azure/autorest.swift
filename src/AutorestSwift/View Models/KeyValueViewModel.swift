@@ -36,13 +36,6 @@ enum KeyValueDecodeStrategy: String {
     case dateTimeFromParam
 }
 
-enum ValueSource: String {
-    case options
-    case clientProperty
-    case signature
-    case constant
-}
-
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
@@ -59,8 +52,6 @@ struct KeyValueViewModel: Comparable {
     let strategy: String
     // The full path to the value property
     let path: String
-    // An enum raw value indicates the source of the valur property
-    let source: String
 
     /**
         Create a ViewModel with a Key and Value pair
@@ -85,8 +76,7 @@ struct KeyValueViewModel: Comparable {
                 key: name,
                 value: name,
                 optional: !param.required,
-                path: "client.",
-                source: .clientProperty
+                path: "client."
             )
         } else {
             self.init(key: name, value: "")
@@ -96,7 +86,6 @@ struct KeyValueViewModel: Comparable {
     private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
         self.path = ""
-        self.source = ValueSource.constant.rawValue
         self.key = name
         let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
@@ -134,8 +123,6 @@ struct KeyValueViewModel: Comparable {
     private init(signatureParameter: ParameterType, name: String) {
         self.key = name
         self.path = signatureParameter.belongsInOptions() ? "options." : ""
-        self.source = signatureParameter.belongsInOptions() ? ValueSource.options.rawValue : ValueSource.signature
-            .rawValue
         self.optional = !signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
@@ -172,12 +159,11 @@ struct KeyValueViewModel: Comparable {
         - Parameter optional: a flag indicates if the Key/Value pair is optional
         - Parameter path: the full path to the value property
      */
-    init(key: String, value: String, optional: Bool = false, path: String = "", source: ValueSource = .constant) {
+    init(key: String, value: String, optional: Bool = false, path: String = "") {
         self.key = key
         self.value = value
         self.optional = optional
         self.path = path
-        self.source = source.rawValue
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
     }

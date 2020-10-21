@@ -2,7 +2,7 @@
 if let options = options {
     // Query options
     {% for param in op.params.query.optional %}
-    {% if param.source == "options" %}
+    {% if param.path == "options." %}
     {% include "OperationOptionalQueryParamSnippet.stencil" %}
     {% endif %}
     {% endfor %}
