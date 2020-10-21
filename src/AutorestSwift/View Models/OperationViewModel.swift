@@ -71,7 +71,7 @@ struct OperationParameters {
 
         // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
         if path.isEmpty {
-            path.append(KeyValueViewModel(key: "", value: "\"\"", path: "\"\""))
+            path.append(KeyValueViewModel(key: "", value: "\"\"", path: ""))
         }
 
         // If there is no optional query params, change query param declaration to 'let'
@@ -112,7 +112,6 @@ struct Params {
     var required: [KeyValueViewModel]
     // Query Params/Header which is pull from Options struct need to add Nil check
     var optional: [KeyValueViewModel]
-    // Query Params/Header which is pull from Optional Client property. It need to add Nil check
     var optionalClientProperty: [KeyValueViewModel]
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"

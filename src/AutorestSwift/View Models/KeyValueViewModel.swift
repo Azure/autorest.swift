@@ -53,7 +53,7 @@ struct KeyValueViewModel {
     // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
     // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
     let constantValue: String?
-    // A string to specify if the value comes from client property or from options struct or from signature
+    // A string to specify the full path to the value property
     let path: String
     /**
         Create a ViewModel with a Key and Value pair
@@ -76,9 +76,9 @@ struct KeyValueViewModel {
         } else if param.implementation == .client {
             self.init(
                 key: name,
-                value: param.required ? "client.\(name)" : name,
+                value: name,
                 optional: !param.required,
-                path: "client.\(name)"
+                path: "client."
             )
         } else {
             self.init(key: name, value: "")
@@ -87,7 +87,7 @@ struct KeyValueViewModel {
 
     init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
-        self.path = name
+        self.path = ""
         self.key = name
         let constantValue: String = constantSchema.value.value
         var keyValueType = KeyValueDecodeStrategy.default
@@ -130,7 +130,7 @@ struct KeyValueViewModel {
 
     init(signatureParameter: ParameterType, name: String) {
         self.key = name
-        self.path = signatureParameter.required ? name : "options.\(name)"
+        self.path = signatureParameter.required ? "" : "options."
         self.optional = !signatureParameter.required
         self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default

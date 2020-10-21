@@ -5,7 +5,7 @@ guard let urlTemplate = "{{ op.request.path }}".removingPercentEncoding else {
 }
 let pathParams = [
     {% for param in op.params.path %}
-        "{{ param.key }}" : {{ param.value }},
+        "{{ param.key }}" : {{ param.path}}{{ param.value }},
     {% endfor %}
 ]
 guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
