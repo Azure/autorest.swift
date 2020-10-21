@@ -52,8 +52,6 @@ public final class Queries {
         withOptions options: GetBooleanTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolQuery = true
-
         // Construct URL
         guard let urlTemplate = "/queries/bool/true".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -68,7 +66,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(boolQuery))
+            ("boolQuery", String(true))
         ]
 
         // Construct headers
@@ -145,8 +143,6 @@ public final class Queries {
         withOptions options: GetBooleanFalseOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolQuery = false
-
         // Construct URL
         guard let urlTemplate = "/queries/bool/false".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -161,7 +157,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(boolQuery))
+            ("boolQuery", String(false))
         ]
 
         // Construct headers
@@ -336,8 +332,6 @@ public final class Queries {
         withOptions options: GetIntOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intQuery = 1_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/int/1000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -352,7 +346,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(intQuery))
+            ("intQuery", String(1_000_000))
         ]
 
         // Construct headers
@@ -429,8 +423,6 @@ public final class Queries {
         withOptions options: GetIntNegativeOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intQuery = -1_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/int/-1000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -445,7 +437,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(intQuery))
+            ("intQuery", String(-1_000_000))
         ]
 
         // Construct headers
@@ -620,8 +612,6 @@ public final class Queries {
         withOptions options: GetTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longQuery = 10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/long/10000000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -636,7 +626,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(longQuery))
+            ("longQuery", String(10_000_000_000))
         ]
 
         // Construct headers
@@ -713,8 +703,6 @@ public final class Queries {
         withOptions options: GetNegativeTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longQuery = -10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/long/-10000000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -729,7 +717,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(longQuery))
+            ("longQuery", String(-10_000_000_000))
         ]
 
         // Construct headers
@@ -904,8 +892,6 @@ public final class Queries {
         withOptions options: FloatScientificPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatQuery = Double(103_400_000_000_000_000_000)
-
         // Construct URL
         guard let urlTemplate = "/queries/float/1.034E+20".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -920,7 +906,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(floatQuery))
+            ("floatQuery", String(Double(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
@@ -997,8 +983,6 @@ public final class Queries {
         withOptions options: FloatScientificNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatQuery = Double(-1.034e-20)
-
         // Construct URL
         guard let urlTemplate = "/queries/float/-1.034E-20".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1013,7 +997,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(floatQuery))
+            ("floatQuery", String(Double(-1.034e-20)))
         ]
 
         // Construct headers
@@ -1188,8 +1172,6 @@ public final class Queries {
         withOptions options: DoubleDecimalPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doubleQuery = Double(9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/queries/double/9999999.999".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1204,7 +1186,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(doubleQuery))
+            ("doubleQuery", String(Double(9_999_999.999)))
         ]
 
         // Construct headers
@@ -1281,8 +1263,6 @@ public final class Queries {
         withOptions options: DoubleDecimalNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doubleQuery = Double(-9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/queries/double/-9999999.999".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1297,7 +1277,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(doubleQuery))
+            ("doubleQuery", String(Double(-9_999_999.999)))
         ]
 
         // Construct headers
@@ -2161,7 +2141,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("byteQuery", byteQueryString)
+            ("byteQuery", "")
         ]
 
         // Construct headers
@@ -2361,7 +2341,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateQuery", dateQueryString)
+            ("dateQuery", "2012-01-01")
         ]
 
         // Construct headers
@@ -2559,7 +2539,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateTimeQuery", dateTimeQueryString)
+            ("dateTimeQuery", "2012-01-01T01:01:01Z")
         ]
 
         // Construct headers

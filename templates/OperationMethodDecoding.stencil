@@ -1,18 +1,18 @@
 {% for method in op.params.methodDecoding %}
     {% if method.strategy == "dateTimeFromParam" %}
-    guard let {{ method.key }} = Date({{ method.constantValue }}, format: Date.Format.iso8601) else {
+    guard let {{ method.key }} = Date({{ method.value }}, format: Date.Format.iso8601) else {
         self.options.logger.error("Failed to construct Date for {{ method.key }}")
         return
     }
     {% elif method.strategy == "dateFromParam" %}
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    guard let {{ method.key }} = dateFormatter.date(from: {{ method.constantValue }}) else {
+    guard let {{ method.key }} = dateFormatter.date(from: {{ method.value }}) else {
         self.options.logger.error("Failed to construct Date for {{ method.key }}")
         return
     }
     {% elif method.strategy == "byteArrayFromParam" %}
-    let {{ method.key }} = {{ method.constantValue }}.utf8
+    let {{ method.key }} = {{ method.value }}.utf8
     {% endif %}
     {# Technically, we can include OperationOptionsDecodingSnippnet.stencil. But we can't get passing in a context when include in stencil to work. As a result, we dublicate the snippet here below. #}
     {% if method.strategy == "dateFromParam" %}
@@ -29,7 +29,7 @@
         return
     }
     {% else %}
-    let {{ method.key }} = {{ method.constantValue }}
+    {# do nothting #} {# let {{ method.key }} = {{ method.value }} #}
     {% endif %}
 {% endfor %}
 

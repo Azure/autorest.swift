@@ -57,9 +57,6 @@ struct KeyValueViewModel: Comparable {
     let needDecodingInMethod: Bool
     // An enum raw value indicates what kind of decoding strategy will be used in the method implementation
     let strategy: String
-    // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
-    // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
-    let constantValue: String?
     // The full path to the value property
     let path: String
     // An enum raw value indicates the source of the valur property
@@ -111,10 +108,9 @@ struct KeyValueViewModel: Comparable {
             } else {
                 self.value = "\"\(constantValue)\""
             }
-            self.constantValue = value
             self.needDecodingInMethod = false
         } else {
-            self.value = KeyValueViewModel.formatValueForType(
+            let value = KeyValueViewModel.formatValueForType(
                 type: type,
                 value: constantValue,
                 key: name
@@ -123,18 +119,18 @@ struct KeyValueViewModel: Comparable {
             switch type {
             case .date,
                  .unixTime:
-                self.constantValue = "\"\(constantValue)\""
+                self.value = "\"\(constantValue)\""
                 keyValueType = .dateFromParam
             case .dateTime:
-                self.constantValue = "\"\(constantValue)\""
+                self.value = "\"\(constantValue)\""
                 keyValueType = .dateTimeFromParam
             case .byteArray:
-                self.constantValue = "\"\(constantValue)\""
+                self.value = "\"\(constantValue)\""
                 keyValueType = .byteArrayFromParam
             case .number:
-                self.constantValue = "Double(\(constantValue))"
+                self.value = "String(Double(\(constantValue)))"
             default:
-                self.constantValue = constantValue
+                self.value = "String(\(constantValue))"
             }
         }
         self.strategy = keyValueType.rawValue
@@ -146,7 +142,6 @@ struct KeyValueViewModel: Comparable {
         self.source = signatureParameter.belongsInOptions() ? ValueSource.options.rawValue : ValueSource.signature
             .rawValue
         self.optional = !signatureParameter.required
-        self.constantValue = nil
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
 
@@ -190,7 +185,6 @@ struct KeyValueViewModel: Comparable {
         self.source = source.rawValue
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
-        self.constantValue = nil
     }
 
     /**
