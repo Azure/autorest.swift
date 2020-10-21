@@ -72,13 +72,11 @@ public final class AutoRestReportService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let qualifier = options.qualifier {
-                queryParams.append("qualifier", qualifier)
-            }
-            // Header options
+        // Query options
+        if let qualifier = options?.qualifier {
+            queryParams.append("qualifier", qualifier)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -175,13 +173,11 @@ public final class AutoRestReportService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let qualifier = options.qualifier {
-                queryParams.append("qualifier", qualifier)
-            }
-            // Header options
+        // Query options
+        if let qualifier = options?.qualifier {
+            queryParams.append("qualifier", qualifier)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
