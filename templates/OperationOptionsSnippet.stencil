@@ -1,11 +1,14 @@
 // Process endpoint options
-    // Query options
-    {% for param in op.params.query.optional %}
-    {% include "OperationOptionalQueryParamSnippet.stencil" %}
-    {% endfor %}
-    // Header options
-    {% for header in op.params.header.optional %}
-    if let {{ header.key }} = options.{{ header.key }} {
-        headers["{{ header.key }}"] = {{ header.value}}
-    }
-    {% endfor %}
+// Query options
+{% for param in op.params.query.optional %}
+if let {{ param.key }} = {{ param.path }}{{ param.key }} {
+    {% include "OperationOptionsDecodingSnippet.stencil" %}
+    queryParams.append("{{ param.key }}", {{ param.value }})
+}
+{% endfor %}
+// Header options
+{% for header in op.params.header.optional %}
+if let {{ header.key }} = {{ param.path }}{{ header.key }} {
+    headers["{{ header.key }}"] = {{ header.value}}
+}
+{% endfor %}

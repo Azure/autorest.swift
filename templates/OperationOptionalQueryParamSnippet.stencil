@@ -1,4 +1,0 @@
-if let {{ param.key }} = {{ param.path }}{{ param.key }} {
-    {% include "OperationOptionsDecodingSnippet.stencil" %}
-    queryParams.append("{{ param.key }}", {{ param.value }})
-}
