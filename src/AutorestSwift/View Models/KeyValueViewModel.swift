@@ -33,11 +33,6 @@ enum KeyValueDecodeStrategy: String {
     case `default`
 }
 
-enum Implmentation: String {
-    case client
-    case options
-}
-
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
