@@ -119,10 +119,7 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValueForType(
-            type: type,
-            value: name
-        )
+        self.value = KeyValueViewModel.formatValueForType(type: type, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
@@ -130,15 +127,15 @@ struct KeyValueViewModel: Comparable {
         case .date,
              .unixTime:
             keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromParam
-            self.needDecodingInMethod = true
+            self.needDecodingInMethod = signatureParameter.required
         case .dateTime:
             keyValueType = signatureParameter.required ? .dateTimeFromSignature : .dateTimeFromParam
-            self.needDecodingInMethod = true
+            self.needDecodingInMethod = signatureParameter.required
         case .byteArray:
             keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromParam
-            self.needDecodingInMethod = true
+            self.needDecodingInMethod = signatureParameter.required
         default:
-            self.needDecodingInMethod = false
+            self.needDecodingInMethod = signatureParameter.required
         }
         self.strategy = keyValueType.rawValue
     }
