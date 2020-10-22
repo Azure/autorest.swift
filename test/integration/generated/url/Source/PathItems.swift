@@ -75,9 +75,6 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -187,9 +184,6 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -299,9 +293,6 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
@@ -411,9 +402,6 @@ public final class PathItems {
         var queryParams: [QueryParameter] = [
         ]
 
-        if let globalStringQuery = client.globalStringQuery {
-            queryParams.append("globalStringQuery", globalStringQuery)
-        }
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"

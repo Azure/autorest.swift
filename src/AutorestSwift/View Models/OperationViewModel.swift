@@ -103,12 +103,6 @@ struct OperationParameters {
     }
 }
 
-enum BodyParamStrategy: String {
-    case plain
-    case flattened
-    case unixTime
-}
-
 struct Params {
     // Query Params/Header in initializer
     var required: [KeyValueViewModel]
