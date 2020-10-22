@@ -184,6 +184,7 @@
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
+		F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1D5D6A6253E8D6500815EF3 /* OperationOptionalQueryParamSnippet.stencil */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
 		F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */; };
@@ -348,6 +349,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
 				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,

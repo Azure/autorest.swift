@@ -40,6 +40,7 @@ struct ServiceClientFileViewModel {
     let namedOperationGroups: [String: OperationGroupViewModel]
     // A key,Value pairs of all the named operation group for stencil template engine
     let namedOperationGroupShortcuts: [KeyValueViewModel]
+    let host: String
 
     init(from model: CodeModel) {
         self.name = "\(model.packageName)Client"
@@ -61,14 +62,33 @@ struct ServiceClientFileViewModel {
         self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
-        var globalParameters = [ParameterViewModel]()
-        for globalParameter in model.globalParameters ?? [] where !globalParameter.name.starts(with: "$") {
-            globalParameters.append(ParameterViewModel(from: globalParameter))
-        }
-        self.globalParameters = globalParameters
+
+        (self.globalParameters, self.host) = resolveGlobalParameters(from: model)
+
         for key in namedOperationGroups.keys {
             namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
         }
         self.namedOperationGroupShortcuts = namedOperationGroupShortcuts.sorted()
     }
+}
+
+func resolveGlobalParameters(from model: CodeModel) -> ([ParameterViewModel], String) {
+    var globalParameters = [ParameterViewModel]()
+    var host: String?
+    var hostString: String
+    for globalParameter in model.globalParameters ?? [] {
+        if globalParameter.name == "$host" {
+            host = globalParameter.value.clientDefaultValue
+        } else {
+            globalParameters.append(ParameterViewModel(from: globalParameter))
+        }
+    }
+
+    if let hostValue = host {
+        hostString = "\"\(hostValue)\""
+    } else {
+        hostString = ""
+    }
+
+    return (globalParameters, hostString)
 }
