@@ -29,18 +29,15 @@ import AzureCore
 import Foundation
 import XCTest
 
-extension Dictionary {
-    func difference(from other: Dictionary) -> Dictionary {
-        let thisKeys = Set(keys)
-        let otherKeys = Set(other.keys)
-        let differentKeys = thisKeys.symmetricDifference(otherKeys)
-        return filter { differentKeys.contains($0.key) }
-    }
-}
-
 class ZZZAutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
 
+    // The 4 mobile test swerver swagger are:
+    // 1. custom-baseUrl.json
+    // 2. xms-error-response.json
+    // 3. body-integer.json
+    // 4. url.json
+    // The follow strings are the prefix of the mobile tests from TestServer report
     let mobileTestsPrefix = [
         // custom-baseUrl.json
         "CustomBase",
@@ -65,6 +62,8 @@ class ZZZAutoRestReportTest: XCTestCase {
         )
     }
 
+    // Calculate the Mobile Test Coverage, Total Test Coverage
+    // List the Mobile Test which passed and failed
     private func printReport(report: [String: Int32]) {
         let mobileTest = getMobileTests(with: report)
         let passedTest = report.filter { $0.value > 0 }
@@ -97,6 +96,7 @@ class ZZZAutoRestReportTest: XCTestCase {
             print("Mobile Passed Test=\(mobilePassedCount) Mobile Test=\(mobileTestCount) Coverage=\(mobileCoverage)")
         }
 
+        // List all passed tests which are not part of the mobile tests
         let otherPassedTest = passedTest.difference(from: mobilePassedTest)
         if otherPassedTest.count > 0 {
             print("\nOther passed tests")
@@ -106,6 +106,7 @@ class ZZZAutoRestReportTest: XCTestCase {
         print("\nPass Test=\(passedCount) Total Test=\(totalTestCount) Coverage=\(coverage)")
     }
 
+    // Return the list of Tests with the Mobile Test prefix
     private func getMobileTests(with report: [String: Int32]) -> [String: Int32] {
         return report.filter {
             for prefix in mobileTestsPrefix {
@@ -123,6 +124,7 @@ class ZZZAutoRestReportTest: XCTestCase {
         client.autorestreportservice.getReport { result, _ in
             switch result {
             case let .success(report):
+                XCTAssert(report.count > 0)
                 print("Coverage:")
                 self.printReport(report: report)
                 expectation.fulfill()
@@ -141,6 +143,7 @@ class ZZZAutoRestReportTest: XCTestCase {
         client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
             case let .success(optionalReport):
+                XCTAssert(optionalReport.count > 0)
                 print("Optional Coverage:")
                 self.printReport(report: optionalReport)
                 expectation.fulfill()
