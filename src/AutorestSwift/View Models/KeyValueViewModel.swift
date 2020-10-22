@@ -89,34 +89,26 @@ struct KeyValueViewModel: Comparable {
         self.path = ""
         self.key = name
         let constantValue: String = constantSchema.value.value
-        var keyValueType = KeyValueDecodeStrategy.default
+        self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type
 
-        if type == .string {
-            if param.value.isSkipUrlEncoding {
-                self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
-            } else {
-                self.value = "\"\(constantValue)\""
-            }
+        if type == .string,
+            param.value.isSkipUrlEncoding {
+            self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
         } else {
             switch type {
             case .date,
-                 .unixTime:
+                 .unixTime,
+                 .dateTime,
+                 .byteArray,
+                 .string:
                 self.value = "\"\(constantValue)\""
-                keyValueType = .dateFromParam
-            case .dateTime:
-                self.value = "\"\(constantValue)\""
-                keyValueType = .dateTimeFromParam
-            case .byteArray:
-                self.value = "\"\(constantValue)\""
-                keyValueType = .byteArrayFromParam
             case .number:
                 self.value = "String(Double(\(constantValue)))"
             default:
                 self.value = "String(\(constantValue))"
             }
         }
-        self.strategy = keyValueType.rawValue
     }
 
     private init(signatureParameter: ParameterType, name: String) {
