@@ -27,19 +27,16 @@
 import Foundation
 
 enum KeyValueDecodeStrategy: String {
-    case dateFromParam
-    case dateFromSignature
-    case byteArrayFromParam
-    case byteArrayFromSignature
+    case byteArray
+    case date
+    case dateTime
     case `default`
-    case dateTimeFromSignature
-    case dateTimeFromParam
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
-struct KeyValueViewModel {
+struct KeyValueViewModel: Comparable {
     /// key of the Key-Value pair
     let key: String
     /// value of the Key-Value pair
@@ -48,11 +45,10 @@ struct KeyValueViewModel {
     let optional: Bool
     // Flag indicates if the key/value pair need decoding code in method to convert the variable into a String
     let needDecodingInMethod: Bool
-    // An enum indicates what kind of decoding strategy will be used in the method implementation
+    // An enum raw value indicates what kind of decoding strategy will be used in the method implementation
     let strategy: String
-    // This is for Method Decoding stencil to pull in the value of the Constant when create a variable for the constant
-    // Valid if the key-value is from a Constant schema. Otherwise, it will be nil
-    let constantValue: String?
+    // The full path to the value property
+    let path: String
 
     /**
         Create a ViewModel with a Key and Value pair
@@ -73,82 +69,68 @@ struct KeyValueViewModel {
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
-            self.init(key: name, value: "client.\(name)")
+            self.init(
+                key: name,
+                value: name,
+                optional: !param.required,
+                path: "client."
+            )
         } else {
             self.init(key: name, value: "")
         }
     }
 
-    init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
+        self.needDecodingInMethod = false
+        self.path = ""
         self.key = name
         let constantValue: String = constantSchema.value.value
-        var keyValueType = KeyValueDecodeStrategy.default
+        self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type
 
-        if type == .string {
-            if param.value.isSkipUrlEncoding {
-                self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
-            } else {
-                self.value = "\"\(constantValue)\""
-            }
-            self.constantValue = value
-            self.needDecodingInMethod = false
+        if type == .string,
+            param.value.isSkipUrlEncoding {
+            self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
         } else {
-            self.value = KeyValueViewModel.formatValueForType(
-                type: type,
-                value: constantValue,
-                key: name
-            )
-            self.needDecodingInMethod = param.implementation == ImplementationLocation.method
             switch type {
             case .date,
-                 .unixTime:
-                self.constantValue = "\"\(constantValue)\""
-                keyValueType = .dateFromParam
-            case .dateTime:
-                self.constantValue = "\"\(constantValue)\""
-                keyValueType = .dateTimeFromParam
-            case .byteArray:
-                self.constantValue = "\"\(constantValue)\""
-                keyValueType = .byteArrayFromParam
+                 .unixTime,
+                 .dateTime,
+                 .byteArray,
+                 .string:
+                self.value = "\"\(constantValue)\""
             case .number:
-                self.constantValue = "Double(\(constantValue))"
+                self.value = "String(Double(\(constantValue)))"
             default:
-                self.constantValue = constantValue
+                self.value = "String(\(constantValue))"
             }
         }
-        self.strategy = keyValueType.rawValue
     }
 
-    init(signatureParameter: ParameterType, name: String) {
+    private init(signatureParameter: ParameterType, name: String) {
         self.key = name
+        self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
-        self.constantValue = nil
+        self.needDecodingInMethod = signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValueForType(
-            type: type,
-            value: name
-        )
+        self.value = KeyValueViewModel.formatValueForType(type: type, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
         switch type {
         case .date,
              .unixTime:
-            keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromParam
-            self.needDecodingInMethod = true
+            keyValueType = .date
         case .dateTime:
-            keyValueType = signatureParameter.required ? .dateTimeFromSignature : .dateTimeFromParam
-            self.needDecodingInMethod = true
+            keyValueType = .dateTime
         case .byteArray:
-            keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromParam
-            self.needDecodingInMethod = true
+            keyValueType = .byteArray
         default:
-            self.needDecodingInMethod = false
+            keyValueType = .default
         }
         self.strategy = keyValueType.rawValue
     }
@@ -157,34 +139,35 @@ struct KeyValueViewModel {
         Create a ViewModel with a Key and Value pair
         - Parameter key: Key String in the Key value pair
         - Parameter value: the value string
+        - Parameter optional: a flag indicates if the Key/Value pair is optional
+        - Parameter path: the full path to the value property
      */
-    init(key: String, value: String) {
+    init(key: String, value: String, optional: Bool = false, path: String = "") {
         self.key = key
         self.value = value
-        self.optional = false
-
+        self.optional = optional
+        self.path = path
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
-        self.constantValue = nil
     }
 
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueForType(type: AllSchemaTypes, value: String, key: String? = nil) -> String {
+    private static func formatValueForType(type: AllSchemaTypes, value: String) -> String {
         switch type {
         case .string:
-            return "\(key ?? value)"
+            return "\(value)"
         case .integer,
              .number,
              .boolean:
-            return "String(\(key ?? value))"
+            return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
              .unixTime,
              .dateTime,
              .byteArray:
-            return "\(key ?? value)String"
+            return "\(value)String"
         case .choice,
              .sealedChoice:
             return "\(value).rawValue"
@@ -193,5 +176,9 @@ struct KeyValueViewModel {
         default:
             return "\(value)"
         }
+    }
+
+    static func < (lhs: KeyValueViewModel, rhs: KeyValueViewModel) -> Bool {
+        return lhs.key < rhs.key
     }
 }

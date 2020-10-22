@@ -67,7 +67,6 @@ public final class PetOperation {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -203,7 +202,6 @@ public final class PetOperation {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers

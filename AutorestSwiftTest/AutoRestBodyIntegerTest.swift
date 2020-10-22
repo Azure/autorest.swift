@@ -131,12 +131,12 @@ class AutoRestIntegerTest: XCTestCase {
     }
 
     func test_BodyInteger_getOverflowInt64_200() throws {
-        let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
+        let expectation = XCTestExpectation(description: "Call getOverflowInt64 succeed")
 
         client.inttype.getOverflowInt64 { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call getOverflowInt32 failed")
+                XCTFail("Call getOverflowInt64 failed")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 XCTAssert(error.message.contains("Decoding error."))
@@ -145,7 +145,7 @@ class AutoRestIntegerTest: XCTestCase {
                     XCTAssert(dataStr == "9223372036854775910")
                     expectation.fulfill()
                 } else {
-                    XCTFail("Call getOverflowInt32 failed")
+                    XCTFail("Call getOverflowInt64 failed")
                 }
             }
         }
@@ -216,7 +216,7 @@ class AutoRestIntegerTest: XCTestCase {
     }
 
     func test_BodyInteger_getNullUnixTime_200() throws {
-        let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
+        let expectation = XCTestExpectation(description: "Call getNullUnixTime succeed")
 
         client.inttype.getNullUnixTime { result, httpResponse in
             switch result {
@@ -226,9 +226,90 @@ class AutoRestIntegerTest: XCTestCase {
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                XCTFail("Call getOverflowInt32 failed")
+                XCTFail("Call getNullUnixTime failed")
             }
         }
         wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_putMax32_200() throws {
+        let expectation = XCTestExpectation(description: "Call putMax32 succeed")
+
+        client.inttype.put(max32: Int32.max) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putMax32 failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_putMax64_200() throws {
+        let expectation = XCTestExpectation(description: "Call putMax64 succeed")
+
+        client.inttype.put(max64: Int64.max) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putMax64 failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_putMin32_200() throws {
+        let expectation = XCTestExpectation(description: "Call putMin32 succeed")
+
+        client.inttype.put(min32: Int32.min) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putMin32 failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_putMin64_200() throws {
+        let expectation = XCTestExpectation(description: "Call putMin64 succeed")
+
+        client.inttype.put(min64: Int64.min) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putMax64 failed")
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_BodyInteger_putUnixtime_200() throws {
+        let expectation = XCTestExpectation(description: "Call putUnixTime succeed")
+
+        let decoded = Date(timeIntervalSince1970: Double(1_460_505_600))
+
+        client.inttype.put(unixTimeDate: decoded) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call putUnixTime failed")
+            }
+        }
     }
 }

@@ -65,10 +65,7 @@ struct OperationParameters {
             methodDecoding.append(param)
         }
 
-        // Add a blank key,value in order for Stencil generates an empty dictionary for QueryParams and PathParams constructor
-        if query.required.isEmpty {
-            query.required.append(KeyValueViewModel(key: "", value: "\"\""))
-        }
+        // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
         if path.isEmpty {
             path.append(KeyValueViewModel(key: "", value: "\"\""))
         }
@@ -114,9 +111,9 @@ struct Params {
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"
 
-    init(from params: Params? = nil) {
-        self.required = params?.required ?? [KeyValueViewModel]()
-        self.optional = params?.optional ?? [KeyValueViewModel]()
+    init() {
+        self.required = [KeyValueViewModel]()
+        self.optional = [KeyValueViewModel]()
     }
 
     var isEmpty: Bool {
@@ -127,6 +124,7 @@ struct Params {
 enum BodyParamStrategy: String {
     case plain
     case flattened
+    case unixTime
 }
 
 struct BodyParams {
@@ -151,7 +149,10 @@ struct BodyParams {
                 virtParams.append(VirtualParam(from: virtParam))
             }
         }
-        self.strategy = param.flattened ? "flattened" : "plain"
+
+        let strategy: BodyParamStrategy = param.flattened ? .flattened : param.schema.type == AllSchemaTypes
+            .unixTime ? .unixTime : .plain
+        self.strategy = strategy.rawValue
         self.children = virtParams
     }
 }

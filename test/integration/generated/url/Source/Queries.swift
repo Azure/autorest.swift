@@ -52,8 +52,6 @@ public final class Queries {
         withOptions options: GetBooleanTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolQuery = true
-
         // Construct URL
         guard let urlTemplate = "/queries/bool/true".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -68,7 +66,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(boolQuery))
+            ("boolQuery", String(true))
         ]
 
         // Construct headers
@@ -145,8 +143,6 @@ public final class Queries {
         withOptions options: GetBooleanFalseOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolQuery = false
-
         // Construct URL
         guard let urlTemplate = "/queries/bool/false".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -161,7 +157,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(boolQuery))
+            ("boolQuery", String(false))
         ]
 
         // Construct headers
@@ -252,21 +248,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let boolQuery = options.boolQuery {
-                queryParams.append("boolQuery", String(boolQuery))
-            }
-
-            // Header options
+        // Query options
+        if let boolQuery = options?.boolQuery {
+            queryParams.append("boolQuery", String(boolQuery))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -338,8 +330,6 @@ public final class Queries {
         withOptions options: GetIntOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intQuery = 1_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/int/1000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -354,7 +344,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(intQuery))
+            ("intQuery", String(1_000_000))
         ]
 
         // Construct headers
@@ -431,8 +421,6 @@ public final class Queries {
         withOptions options: GetIntNegativeOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intQuery = -1_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/int/-1000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -447,7 +435,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(intQuery))
+            ("intQuery", String(-1_000_000))
         ]
 
         // Construct headers
@@ -538,21 +526,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let intQuery = options.intQuery {
-                queryParams.append("intQuery", String(intQuery))
-            }
-
-            // Header options
+        // Query options
+        if let intQuery = options?.intQuery {
+            queryParams.append("intQuery", String(intQuery))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -624,8 +608,6 @@ public final class Queries {
         withOptions options: GetTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longQuery = 10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/long/10000000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -640,7 +622,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(longQuery))
+            ("longQuery", String(10_000_000_000))
         ]
 
         // Construct headers
@@ -717,8 +699,6 @@ public final class Queries {
         withOptions options: GetNegativeTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longQuery = -10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/queries/long/-10000000000".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -733,7 +713,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(longQuery))
+            ("longQuery", String(-10_000_000_000))
         ]
 
         // Construct headers
@@ -824,21 +804,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let longQuery = options.longQuery {
-                queryParams.append("longQuery", String(longQuery))
-            }
-
-            // Header options
+        // Query options
+        if let longQuery = options?.longQuery {
+            queryParams.append("longQuery", String(longQuery))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -910,8 +886,6 @@ public final class Queries {
         withOptions options: FloatScientificPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatQuery = Double(103_400_000_000_000_000_000)
-
         // Construct URL
         guard let urlTemplate = "/queries/float/1.034E+20".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -926,7 +900,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(floatQuery))
+            ("floatQuery", String(Double(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
@@ -1003,8 +977,6 @@ public final class Queries {
         withOptions options: FloatScientificNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatQuery = Double(-1.034e-20)
-
         // Construct URL
         guard let urlTemplate = "/queries/float/-1.034E-20".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1019,7 +991,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(floatQuery))
+            ("floatQuery", String(Double(-1.034e-20)))
         ]
 
         // Construct headers
@@ -1110,21 +1082,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let floatQuery = options.floatQuery {
-                queryParams.append("floatQuery", String(floatQuery))
-            }
-
-            // Header options
+        // Query options
+        if let floatQuery = options?.floatQuery {
+            queryParams.append("floatQuery", String(floatQuery))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -1196,8 +1164,6 @@ public final class Queries {
         withOptions options: DoubleDecimalPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doubleQuery = Double(9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/queries/double/9999999.999".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1212,7 +1178,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(doubleQuery))
+            ("doubleQuery", String(Double(9_999_999.999)))
         ]
 
         // Construct headers
@@ -1289,8 +1255,6 @@ public final class Queries {
         withOptions options: DoubleDecimalNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doubleQuery = Double(-9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/queries/double/-9999999.999".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -1305,7 +1269,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(doubleQuery))
+            ("doubleQuery", String(Double(-9_999_999.999)))
         ]
 
         // Construct headers
@@ -1396,21 +1360,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let doubleQuery = options.doubleQuery {
-                queryParams.append("doubleQuery", String(doubleQuery))
-            }
-
-            // Header options
+        // Query options
+        if let doubleQuery = options?.doubleQuery {
+            queryParams.append("doubleQuery", String(doubleQuery))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -1770,21 +1730,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let stringQuery = options.stringQuery {
-                queryParams.append("stringQuery", stringQuery)
-            }
-
-            // Header options
+        // Query options
+        if let stringQuery = options?.stringQuery {
+            queryParams.append("stringQuery", stringQuery)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -1870,21 +1826,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let enumQuery = options.enumQuery {
-                queryParams.append("enumQuery", enumQuery.rawValue)
-            }
-
-            // Header options
+        // Query options
+        if let enumQuery = options?.enumQuery {
+            queryParams.append("enumQuery", enumQuery.rawValue)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -1970,21 +1922,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let enumQuery = options.enumQuery {
-                queryParams.append("enumQuery", enumQuery.rawValue)
-            }
-
-            // Header options
+        // Query options
+        if let enumQuery = options?.enumQuery {
+            queryParams.append("enumQuery", enumQuery.rawValue)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2070,23 +2018,19 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let byteQuery = options.byteQuery {
-                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+        // Query options
+        if let byteQuery = options?.byteQuery {
+            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
 
-                queryParams.append("byteQuery", byteQueryString)
-            }
-
-            // Header options
+            queryParams.append("byteQuery", byteQueryString)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2158,13 +2102,6 @@ public final class Queries {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let byteQuery = "".utf8
-
-        guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for byteQuery")
-            return
-        }
-
         // Construct URL
         guard let urlTemplate = "/queries/byte/empty".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -2179,7 +2116,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("byteQuery", byteQueryString)
+            ("byteQuery", "")
         ]
 
         // Construct headers
@@ -2270,23 +2207,19 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let byteQuery = options.byteQuery {
-                let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+        // Query options
+        if let byteQuery = options?.byteQuery {
+            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
 
-                queryParams.append("byteQuery", byteQueryString)
-            }
-
-            // Header options
+            queryParams.append("byteQuery", byteQueryString)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2358,15 +2291,6 @@ public final class Queries {
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let dateQuery = dateFormatter.date(from: "2012-01-01") else {
-            self.options.logger.error("Failed to construct Date for dateQuery")
-            return
-        }
-
-        let dateQueryString = dateFormatter.string(from: dateQuery)
-
         // Construct URL
         guard let urlTemplate = "/queries/date/2012-01-01".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -2381,7 +2305,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateQuery", dateQueryString)
+            ("dateQuery", "2012-01-01")
         ]
 
         // Construct headers
@@ -2472,23 +2396,19 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let dateQuery = options.dateQuery {
-                let dateQueryString = DateFormatter().string(from: dateQuery)
+        // Query options
+        if let dateQuery = options?.dateQuery {
+            let dateQueryString = DateFormatter().string(from: dateQuery)
 
-                queryParams.append("dateQuery", dateQueryString)
-            }
-
-            // Header options
+            queryParams.append("dateQuery", dateQueryString)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2560,13 +2480,6 @@ public final class Queries {
         withOptions options: DateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let dateTimeQuery = Date("2012-01-01T01:01:01Z", format: Date.Format.iso8601) else {
-            self.options.logger.error("Failed to construct Date for dateTimeQuery")
-            return
-        }
-
-        let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
-
         // Construct URL
         guard let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
@@ -2581,7 +2494,7 @@ public final class Queries {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateTimeQuery", dateTimeQueryString)
+            ("dateTimeQuery", "2012-01-01T01:01:01Z")
         ]
 
         // Construct headers
@@ -2672,23 +2585,19 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let dateTimeQuery = options.dateTimeQuery {
-                let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
+        // Query options
+        if let dateTimeQuery = options?.dateTimeQuery {
+            let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
 
-                queryParams.append("dateTimeQuery", dateTimeQueryString)
-            }
-
-            // Header options
+            queryParams.append("dateTimeQuery", dateTimeQueryString)
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2774,21 +2683,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2874,21 +2779,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -2974,21 +2875,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -3074,21 +2971,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -3174,21 +3067,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -3274,21 +3163,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")
@@ -3374,21 +3259,17 @@ public final class Queries {
         }
         // Construct query
         var queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Process endpoint options
-        if let options = options {
-            // Query options
-            if let arrayQuery = options.arrayQuery {
-                queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-            }
-
-            // Header options
+        // Query options
+        if let arrayQuery = options?.arrayQuery {
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+        // Header options
         // Construct request
         guard let requestUrl = url.appendingQueryParameters(queryParams) else {
             self.options.logger.error("Failed to append query parameters to url")

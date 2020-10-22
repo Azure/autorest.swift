@@ -66,7 +66,6 @@ public final class HttpSuccess {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -151,7 +150,6 @@ public final class HttpSuccess {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
@@ -236,7 +234,6 @@ public final class HttpSuccess {
         }
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("", "")
         ]
 
         // Construct headers
