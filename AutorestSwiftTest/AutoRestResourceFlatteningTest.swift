@@ -33,25 +33,10 @@ class AutoRestResourceFlatteningTest: XCTestCase {
     var client: AutoRestResourceFlatteningTestClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-
         client = try AutoRestResourceFlatteningTestClient(
-            baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestResourceFlatteningTestClientOptions()
         )
-    }
-
-    private func errorDetails(for error: AzureError, withResponse response: HTTPResponse?) -> String {
-        var details: String
-        if let data = response?.data {
-            details = String(data: data, encoding: .utf8)!
-        } else {
-            details = error.message
-        }
-        return details
     }
 
     func test_resourceFlattening_getArray() throws {
@@ -62,7 +47,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getArray failed")
             }
@@ -84,7 +69,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.putArray failed")
             }
@@ -100,7 +85,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getDictionary failed")
             }
@@ -148,7 +133,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             case .success:
                 expectation.fulfill()
             case let .failure(error):
-                let details = self.errorDetails(for: error, withResponse: httpResponse)
+                let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getResourceCollection failed")
             }

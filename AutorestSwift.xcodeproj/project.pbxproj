@@ -184,9 +184,10 @@
 		F151510B25128E2D00DF0B9F /* OperationExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */; };
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
+		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
-		F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */; };
+		F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */; };
 		F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */; };
 		F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */; };
 		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
@@ -348,9 +349,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
-				F1731F342522E531006CDED8 /* OperationMethodDecoding.stencil in CopyFiles */,
+				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,
 				F1731F352522E531006CDED8 /* OperationOptionsDecodingSnippet.stencil in CopyFiles */,
 				F198F975251C570B009CB4E5 /* NamedOperationGroupFile.stencil in CopyFiles */,
 				F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */,
@@ -517,9 +519,10 @@
 		F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedOperationGroupFile.stencil; sourceTree = "<group>"; };
+		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
-		F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecoding.stencil; sourceTree = "<group>"; };
+		F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationMethodDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationOptionsDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmsErrorResponseExtensions.xcodeproj; path = "../test/integration/generated/xms-error-responses/XmsErrorResponseExtensions.xcodeproj"; sourceTree = "<group>"; };
 		F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmsErrorResponseExtensionsTest.swift; sourceTree = "<group>"; };
@@ -718,7 +721,7 @@
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
-				F1731F302522E50E006CDED8 /* OperationMethodDecoding.stencil */,
+				F1731F302522E50E006CDED8 /* OperationMethodDecodingSnippet.stencil */,
 				F1731F312522E51F006CDED8 /* OperationOptionsDecodingSnippet.stencil */,
 				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
 				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
@@ -893,6 +896,7 @@
 				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
 				F18718F0250C592300318867 /* ZZZAutoRestReportTest.swift */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
+				F170D321253F786800A569A0 /* Util.swift */,
 			);
 			path = AutorestSwiftTest;
 			sourceTree = "<group>";
@@ -1361,6 +1365,8 @@
 				F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */,
+				F170D322253F786800A569A0 /* Util.swift in Sources */,
+				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 				0A7477012527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F18718F1250C592300318867 /* ZZZAutoRestReportTest.swift in Sources */,
 				0A747B24252E897300819FC9 /* AutoRestUrlTest.swift in Sources */,

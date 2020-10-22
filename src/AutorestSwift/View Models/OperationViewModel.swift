@@ -117,14 +117,20 @@ struct Params {
     // Whether to 'var' or 'let' in generated code for the param declaration
     var declaration: String = "var"
 
-    init(from params: Params? = nil) {
-        self.required = params?.required ?? [KeyValueViewModel]()
-        self.optional = params?.optional ?? [KeyValueViewModel]()
+    init() {
+        self.required = [KeyValueViewModel]()
+        self.optional = [KeyValueViewModel]()
     }
 
     var isEmpty: Bool {
         return required.isEmpty && optional.isEmpty
     }
+}
+
+enum BodyParamStrategy: String {
+    case plain
+    case flattened
+    case unixTime
 }
 
 struct BodyParams {

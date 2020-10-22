@@ -24,62 +24,51 @@
 //
 // --------------------------------------------------------------------------
 
-import AutoRestHeadTest
+import AutoRestReport
 import AzureCore
+import Foundation
 import XCTest
 
-class AutoRestHeadTest: XCTestCase {
-    var client: AutoRestHeadTestClient!
+class AutoRestReportTest: XCTestCase {
+    var client: AutoRestReportClient!
 
     override func setUpWithError() throws {
-        client = try AutoRestHeadTestClient(
+        client = try AutoRestReportClient(
             authPolicy: AnonymousAccessPolicy(),
-            withOptions: AutoRestHeadTestClientOptions()
+            withOptions: AutoRestReportClientOptions()
         )
     }
 
-    func test_Head_success200() throws {
-        let expectation = XCTestExpectation(description: "Call head200 succeed")
+    func test_ReportFile_getReport() throws {
+        let expectation = XCTestExpectation(description: "Call getReport succeed")
 
-        client.httpsuccess.head200 { result, _ in
+        client.autorestreportservice.getReport { result, _ in
             switch result {
-            case .success:
+            case let .success(data):
+                XCTAssertEqual(data.count, 598)
+                XCTAssertEqual(data["MultipleInheritanceCatGet"], 0)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                XCTFail("Call head200 failed")
+                XCTFail("Call getReport failed")
             }
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Head_success204() throws {
-        let expectation = XCTestExpectation(description: "Call head204 succeed")
+    func test_ReportFile_getOptionalReport() throws {
+        let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
 
-        client.httpsuccess.head204 { result, _ in
+        client.autorestreportservice.getOptionalReport { result, _ in
             switch result {
-            case .success:
+            case let .success(data):
+                XCTAssertEqual(data.count, 41)
+                XCTAssertEqual(data["getDecimalInvalid"], 0)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
-                XCTFail("Call head204 failed")
-            }
-        }
-
-        wait(for: [expectation], timeout: 5.0)
-    }
-
-    func test_Head_success404() throws {
-        let expectation = XCTestExpectation(description: "Call head404 succeed")
-
-        client.httpsuccess.head404 { result, _ in
-            switch result {
-            case .success:
-                expectation.fulfill()
-            case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call head404 failed")
+                XCTFail("Call getOptionalReport failed")
             }
         }
 

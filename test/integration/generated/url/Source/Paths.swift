@@ -52,15 +52,13 @@ public final class Paths {
         withOptions options: GetBooleanTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolPath = true
-
         // Construct URL
         guard let urlTemplate = "/paths/bool/true/{boolPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "boolPath": String(boolPath)
+            "boolPath": String(true)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -144,15 +142,13 @@ public final class Paths {
         withOptions options: GetBooleanFalseOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let boolPath = false
-
         // Construct URL
         guard let urlTemplate = "/paths/bool/false/{boolPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "boolPath": String(boolPath)
+            "boolPath": String(false)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -236,15 +232,13 @@ public final class Paths {
         withOptions options: GetIntOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intPath = 1_000_000
-
         // Construct URL
         guard let urlTemplate = "/paths/int/1000000/{intPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "intPath": String(intPath)
+            "intPath": String(1_000_000)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -328,15 +322,13 @@ public final class Paths {
         withOptions options: GetIntNegativeOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let intPath = -1_000_000
-
         // Construct URL
         guard let urlTemplate = "/paths/int/-1000000/{intPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "intPath": String(intPath)
+            "intPath": String(-1_000_000)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -420,15 +412,13 @@ public final class Paths {
         withOptions options: GetTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longPath = 10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/paths/long/10000000000/{longPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "longPath": String(longPath)
+            "longPath": String(10_000_000_000)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -512,15 +502,13 @@ public final class Paths {
         withOptions options: GetNegativeTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let longPath = -10_000_000_000
-
         // Construct URL
         guard let urlTemplate = "/paths/long/-10000000000/{longPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "longPath": String(longPath)
+            "longPath": String(-10_000_000_000)
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -604,15 +592,13 @@ public final class Paths {
         withOptions options: FloatScientificPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatPath = Double(103_400_000_000_000_000_000)
-
         // Construct URL
         guard let urlTemplate = "/paths/float/1.034E+20/{floatPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "floatPath": String(floatPath)
+            "floatPath": String(Double(103_400_000_000_000_000_000))
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -696,15 +682,13 @@ public final class Paths {
         withOptions options: FloatScientificNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let floatPath = Double(-1.034e-20)
-
         // Construct URL
         guard let urlTemplate = "/paths/float/-1.034E-20/{floatPath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "floatPath": String(floatPath)
+            "floatPath": String(Double(-1.034e-20))
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -788,15 +772,13 @@ public final class Paths {
         withOptions options: DoubleDecimalPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doublePath = Double(9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/paths/double/9999999.999/{doublePath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "doublePath": String(doublePath)
+            "doublePath": String(Double(9_999_999.999))
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -880,15 +862,13 @@ public final class Paths {
         withOptions options: DoubleDecimalNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let doublePath = Double(-9_999_999.999)
-
         // Construct URL
         guard let urlTemplate = "/paths/double/-9999999.999/{doublePath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "doublePath": String(doublePath)
+            "doublePath": String(Double(-9_999_999.999))
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -1703,20 +1683,13 @@ public final class Paths {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let bytePath = "".utf8
-
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for bytePath")
-            return
-        }
-
         // Construct URL
         guard let urlTemplate = "/paths/byte/empty/{bytePath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "bytePath": bytePathString
+            "bytePath": ""
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -1896,22 +1869,13 @@ public final class Paths {
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let datePath = dateFormatter.date(from: "2012-01-01") else {
-            self.options.logger.error("Failed to construct Date for datePath")
-            return
-        }
-
-        let datePathString = dateFormatter.string(from: datePath)
-
         // Construct URL
         guard let urlTemplate = "/paths/date/2012-01-01/{datePath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "datePath": datePathString
+            "datePath": "2012-01-01"
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")
@@ -2090,20 +2054,13 @@ public final class Paths {
         withOptions options: DateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let dateTimePath = Date("2012-01-01T01:01:01Z", format: Date.Format.iso8601) else {
-            self.options.logger.error("Failed to construct Date for dateTimePath")
-            return
-        }
-
-        let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
-
         // Construct URL
         guard let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}".removingPercentEncoding else {
             self.options.logger.error("Failed to construct url")
             return
         }
         let pathParams = [
-            "dateTimePath": dateTimePathString
+            "dateTimePath": "2012-01-01T01:01:01Z"
         ]
         guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
             self.options.logger.error("Failed to construct url")

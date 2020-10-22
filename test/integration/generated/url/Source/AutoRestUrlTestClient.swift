@@ -40,10 +40,14 @@ public final class AutoRestUrlTestClient: PipelineClient {
     ///   - options: Options used to configure the client.
     public init(
         globalStringPath: String,
-        baseUrl: URL,
+        url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: AutoRestUrlTestClientOptions
     ) throws {
+        let defaultHost = URL(string: "http://localhost:3000")
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
         self.globalStringPath = globalStringPath
         self.options = options
         super.init(
@@ -68,9 +72,9 @@ public final class AutoRestUrlTestClient: PipelineClient {
     // /// should contain value null
     public var globalStringQuery: String?
 
-    public lazy var queries: Queries = Queries(client: self)
-    public lazy var paths: Paths = Paths(client: self)
     public lazy var pathitems: PathItems = PathItems(client: self)
+    public lazy var paths: Paths = Paths(client: self)
+    public lazy var queries: Queries = Queries(client: self)
 
     // MARK: Public Client Methods
 }
