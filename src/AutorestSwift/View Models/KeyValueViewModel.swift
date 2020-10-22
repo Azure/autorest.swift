@@ -27,13 +27,10 @@
 import Foundation
 
 enum KeyValueDecodeStrategy: String {
-    case dateFromParam
-    case dateFromSignature
-    case byteArrayFromParam
-    case byteArrayFromSignature
+    case byteArray
+    case date
+    case dateTime
     case `default`
-    case dateTimeFromSignature
-    case dateTimeFromParam
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -115,6 +112,7 @@ struct KeyValueViewModel: Comparable {
         self.key = name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
+        self.needDecodingInMethod = signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
 
@@ -126,16 +124,13 @@ struct KeyValueViewModel: Comparable {
         switch type {
         case .date,
              .unixTime:
-            keyValueType = signatureParameter.required ? .dateFromSignature : .dateFromParam
-            self.needDecodingInMethod = signatureParameter.required
+            keyValueType = .date
         case .dateTime:
-            keyValueType = signatureParameter.required ? .dateTimeFromSignature : .dateTimeFromParam
-            self.needDecodingInMethod = signatureParameter.required
+            keyValueType = .dateTime
         case .byteArray:
-            keyValueType = signatureParameter.required ? .byteArrayFromSignature : .byteArrayFromParam
-            self.needDecodingInMethod = signatureParameter.required
+            keyValueType = .byteArray
         default:
-            self.needDecodingInMethod = signatureParameter.required
+            keyValueType = .default
         }
         self.strategy = keyValueType.rawValue
     }
