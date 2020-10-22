@@ -32,12 +32,12 @@ import XCTest
 class ZZZAutoRestReportTest: XCTestCase {
     var client: AutoRestReportClient!
 
-    // The 4 mobile test swerver swagger are:
+    // The 4 mobile test swerver swaggers are:
     // 1. custom-baseUrl.json
     // 2. xms-error-response.json
     // 3. body-integer.json
     // 4. url.json
-    // The follow strings are the prefix of the mobile tests from TestServer report
+    // The following strings are the prefix of the mobile tests from AutoRest TestServer
     let mobileTestsPrefix = [
         // custom-baseUrl.json
         "CustomBase",
@@ -57,13 +57,12 @@ class ZZZAutoRestReportTest: XCTestCase {
         )
     }
 
-    // Calculate the Mobile Test Coverage, Total Test Coverage
-    // List the Mobile Test which passed and failed
+    // Calculate the nobile test coverage & total test coverage
+    // List the mobile tests which passed and failed
     private func printReport(report: [String: Int32]) {
         let mobileTest = getMobileTests(with: report)
         let passedTest = report.filter { $0.value > 0 }
         let mobilePassedTest = mobileTest.filter { $0.value > 0 }
-        let mobileFailedTest = mobileTest.filter { $0.value == 0 }
 
         let totalTestCount = report.count
         let passedCount = passedTest.count
@@ -71,37 +70,47 @@ class ZZZAutoRestReportTest: XCTestCase {
         let mobileTestCount = mobileTest.count
         let mobilePassedCount = mobilePassedTest.count
 
-        let coverage: Float = Float(passedCount) / Float(totalTestCount)
+        let coverage: Float = Float(passedCount) / Float(totalTestCount) * 100
 
         if mobileTestCount > 0 {
-            let mobileCoverage: Float = Float(mobilePassedCount) / Float(mobileTestCount)
+            let mobileCoverage: Float = Float(mobilePassedCount) / Float(mobileTestCount) * 100
 
-            if mobilePassedTest.count > 0 {
-                print("Passed mobile tests")
-                print("-------------------")
-                for test in mobilePassedTest { print(test.key) }
-            }
+            /* Uncomment this to print the list of passed/failed tests */
+            /*
+             let mobileFailedTest = mobileTest.filter { $0.value == 0 }
 
-            if mobileFailedTest.count > 0 {
-                print("Failed mobile tests")
-                print("-------------------")
-                for test in mobileFailedTest { print(test.key) }
-            }
+             if mobilePassedTest.count > 0 {
+                 print("Passed mobile tests")
+                 print("-------------------")
+                 for test in mobilePassedTest { print(test.key) }
+             }
 
-            print("Mobile Passed Test=\(mobilePassedCount) Mobile Test=\(mobileTestCount) Coverage=\(mobileCoverage)")
+             if mobileFailedTest.count > 0 {
+                 print("Failed mobile tests")
+                 print("-------------------")
+                 for test in mobileFailedTest { print(test.key) }
+             }
+             */
+
+            print(
+                "Mobile Passed Test=\(mobilePassedCount), Mobile Total Test=\(mobileTestCount), Coverage=\(String(format: "%.2f", mobileCoverage))%"
+            )
         }
 
         // List all passed tests which are not part of the mobile tests
-        let otherPassedTest = passedTest.difference(from: mobilePassedTest)
-        if otherPassedTest.count > 0 {
-            print("\nOther passed tests")
-            print("-------------------")
-            for test in otherPassedTest { print(test.key) }
-        }
-        print("\nPass Test=\(passedCount) Total Test=\(totalTestCount) Coverage=\(coverage)")
+        /* Uncomment this to print the list of passed/failed tests */
+        /*
+         let otherPassedTest = passedTest.difference(from: mobilePassedTest)
+         if otherPassedTest.count > 0 {
+             print("\nOther passed tests")
+             print("-------------------")
+             for test in otherPassedTest { print(test.key) }
+         }
+         */
+        print("Pass Test=\(passedCount), Total Test=\(totalTestCount), Coverage=\(String(format: "%.2f", coverage))%")
     }
 
-    // Return the list of Tests with the Mobile Test prefix
+    // Return the list of mobile tests
     private func getMobileTests(with report: [String: Int32]) -> [String: Int32] {
         return report.filter {
             for prefix in mobileTestsPrefix {
@@ -120,7 +129,7 @@ class ZZZAutoRestReportTest: XCTestCase {
             switch result {
             case let .success(report):
                 XCTAssert(report.count > 0)
-                print("Coverage:")
+                print("\nCoverage:")
                 self.printReport(report: report)
                 expectation.fulfill()
             case let .failure(error):
