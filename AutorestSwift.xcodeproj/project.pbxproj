@@ -348,6 +348,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
 				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,

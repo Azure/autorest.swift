@@ -32,12 +32,7 @@ class AutoRestHeadTest: XCTestCase {
     var client: AutoRestHeadTestClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-
         client = try AutoRestHeadTestClient(
-            baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestHeadTestClientOptions()
         )
