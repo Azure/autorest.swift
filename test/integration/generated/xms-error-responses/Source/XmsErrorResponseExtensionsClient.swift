@@ -74,19 +74,27 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
-        //  var template = templateIn
-        //   if template.hasPrefix("/") { template = String(template.dropFirst()) }
-        var urlString = baseUrl.absoluteString + templateIn
-        //   if template.starts(with: urlString) {
-        //        urlString = template
-        //    } else {
-        //        urlString += template
-        //    }
+        var template = templateIn
+        if template.hasPrefix("/") { template = String(template.dropFirst()) }
+
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
-                urlString = urlString.replacingOccurrences(of: "{\(key)}", with: value)
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+                    template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
             }
         }
+        // guard let encodedTemplate = template.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+        //    return nil
+        // }
+
+        var urlString = baseUrl.absoluteString
+
+        // if template.starts(with: urlString) {
+        //    urlString = template
+        // } else {
+        urlString += template
+        // }
         guard let url = URL(string: urlString) else {
             return nil
         }
