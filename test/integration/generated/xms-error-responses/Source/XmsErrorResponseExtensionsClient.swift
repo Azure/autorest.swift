@@ -43,10 +43,14 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        baseUrl: URL,
+        url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: XmsErrorResponseExtensionsClientOptions
     ) throws {
+        let defaultHost = URL(string: "http://localhost")
+        guard let baseUrl = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
         self.options = options
         super.init(
             baseUrl: baseUrl,

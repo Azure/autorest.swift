@@ -40,13 +40,8 @@ class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://localhost:3000") else {
-            fatalError("Unable to form base URL")
-        }
-
         client = try AutoRestUrlTestClient(
             globalStringPath: "globalStringPath",
-            baseUrl: baseUrl,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestUrlTestClientOptions()
         )
