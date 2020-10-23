@@ -665,6 +665,23 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Queries_stringUnicoded200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringUnicode succeed")
+
+        client.queries.stringUnicode { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.stringUnicode failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_floatScientificPositive200() throws {
         let expectation = XCTestExpectation(description: "Call queries.floatScientificPositive succeed")
 
