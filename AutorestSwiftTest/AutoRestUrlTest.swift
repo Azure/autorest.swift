@@ -287,6 +287,23 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Paths_stringUrlEncoded200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.stringUrlEncoded succeed")
+
+        client.paths.stringUrlEncoded { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call paths.stringUrlEncoded failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 

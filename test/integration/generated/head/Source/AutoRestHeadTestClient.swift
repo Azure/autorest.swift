@@ -18,6 +18,7 @@ import Foundation
 
 extension CharacterSet {
     static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?#[]"))
+    static let urlPathAllowed4 = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/"))
 }
 
 public final class AutoRestHeadTestClient: PipelineClient {
@@ -79,14 +80,11 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
-                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed4) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
                 }
             }
         }
-        // guard let encodedTemplate = template.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-        //    return nil
-        // }
 
         var urlString = baseUrl.absoluteString
 
