@@ -30,8 +30,12 @@ public final class Files {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs)
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -53,17 +57,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate = "/files/stream/nonempty".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/files/stream/nonempty"
         let pathParams = [
             "": ""
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         let queryParams: [QueryParameter] = [
         ]
@@ -72,8 +69,8 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -143,17 +140,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate = "/files/stream/verylarge".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/files/stream/verylarge"
         let pathParams = [
             "": ""
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         let queryParams: [QueryParameter] = [
         ]
@@ -162,8 +152,8 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -233,17 +223,10 @@ public final class Files {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate = "/files/stream/empty".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/files/stream/empty"
         let pathParams = [
             "": ""
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         let queryParams: [QueryParameter] = [
         ]
@@ -252,8 +235,8 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 

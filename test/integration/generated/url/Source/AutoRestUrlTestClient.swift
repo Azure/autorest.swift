@@ -16,6 +16,10 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
+extension CharacterSet {
+    static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?#[]"))
+}
+
 public final class AutoRestUrlTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
@@ -61,6 +65,51 @@ public final class AutoRestUrlTestClient: PipelineClient {
             logger: options.logger,
             options: options
         )
+    }
+
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        //  var template = templateIn
+        //   if template.hasPrefix("/") { template = String(template.dropFirst()) }
+        var urlString = baseUrl.absoluteString + templateIn
+        //   if template.starts(with: urlString) {
+        //        urlString = template
+        //    } else {
+        //        urlString += template
+        //    }
+        if let urlKwargs = kwargs {
+            for (key, value) in urlKwargs {
+                urlString = urlString.replacingOccurrences(of: "{\(key)}", with: value)
+            }
+        }
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+
+        guard !(addedParams?.isEmpty ?? false) else { return url }
+
+        return appendingQueryParameters(url: url, addedParams ?? [])
+    }
+
+    private func appendingQueryParameters(url: URL, _ addedParams: [QueryParameter]) -> URL? {
+        guard !addedParams.isEmpty else { return url }
+        guard var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+        let addedQueryItems = addedParams.map { name, value in URLQueryItem(
+            name: name,
+            value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed4)
+        ) }
+        // if var percentEncodedQueryItems = urlComps.percentEncodedQueryItems, !percentEncodedQueryItems.isEmpty {
+        //     percentEncodedQueryItems.append(contentsOf: addedQueryItems)
+        //     urlComps.percentEncodedQueryItems = percentEncodedQueryItems
+        // } else {
+        urlComps.percentEncodedQueryItems = addedQueryItems
+        // }
+
+        return urlComps.url
     }
 
     // /// A string value 'globalItemStringPath' that appears in the path

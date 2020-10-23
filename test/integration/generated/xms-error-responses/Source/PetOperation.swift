@@ -30,8 +30,12 @@ public final class PetOperation {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs)
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -54,17 +58,10 @@ public final class PetOperation {
         completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
         // Construct URL
-        guard let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
             "petId": petId
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         let queryParams: [QueryParameter] = [
         ]
@@ -73,8 +70,8 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -189,17 +186,10 @@ public final class PetOperation {
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
         // Construct URL
-        guard let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
             "whatAction": whatAction
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         let queryParams: [QueryParameter] = [
         ]
@@ -208,8 +198,8 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 

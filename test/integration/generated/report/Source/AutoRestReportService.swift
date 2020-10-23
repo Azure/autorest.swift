@@ -30,8 +30,12 @@ public final class AutoRestReportService {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs)
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -53,17 +57,10 @@ public final class AutoRestReportService {
         completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
         // Construct URL
-        guard let urlTemplate = "/report".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/report"
         let pathParams = [
             "": ""
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -78,8 +75,8 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -154,17 +151,10 @@ public final class AutoRestReportService {
         completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
         // Construct URL
-        guard let urlTemplate = "/report/optional".removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
+        let urlTemplate = "/report/optional"
         let pathParams = [
             "": ""
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -179,8 +169,8 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 

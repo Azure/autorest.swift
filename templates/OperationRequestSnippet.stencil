@@ -1,6 +1,6 @@
 // Construct request
-guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-    self.options.logger.error("Failed to append query parameters to url")
+guard let requestUrl = self.url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+    self.options.logger.error("Failed to construct url")
     return
 }
 

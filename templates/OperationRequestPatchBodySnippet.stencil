@@ -10,8 +10,8 @@ guard let patchBody = try? JSONEncoder().encode(patch) else {
     return
 }
 
-guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-    self.options.logger.error("Failed to append query parameters to URL")
+guard let requestUrl = self.url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+    self.options.logger.error("Failed to construct url")
     return
 }
 

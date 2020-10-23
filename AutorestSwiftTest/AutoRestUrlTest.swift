@@ -31,6 +31,11 @@ import XCTest
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
+
+// extension CharacterSet {
+//    static let allowedCharacters = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?#[]"))
+// }
+
 class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
@@ -604,6 +609,60 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.floatNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringCsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvValid succeed")
+
+        let options = Queries.ArrayStringCsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringCsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_stringUrlEncoded200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringUrlEncoded succeed")
+
+        client.queries.stringUrlEncoded { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.stringUrlEncoded failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_floatScientificPositive200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.floatScientificPositive succeed")
+
+        client.queries.floatScientificPositive { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatScientificPositive failed")
             }
         }
 

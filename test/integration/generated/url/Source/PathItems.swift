@@ -30,8 +30,12 @@ public final class PathItems {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs)
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -56,21 +60,13 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate =
+        let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery"
-                .removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "globalStringPath": client.globalStringPath
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -91,8 +87,8 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -165,21 +161,13 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate =
+        let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery"
-                .removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "globalStringPath": client.globalStringPath
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -200,8 +188,8 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -274,21 +262,13 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate =
+        let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null"
-                .removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "globalStringPath": client.globalStringPath
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -309,8 +289,8 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 
@@ -383,21 +363,13 @@ public final class PathItems {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        guard let urlTemplate =
+        let urlTemplate =
             "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null"
-                .removingPercentEncoding else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "globalStringPath": client.globalStringPath
         ]
-        guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-            self.options.logger.error("Failed to construct url")
-            return
-        }
         // Construct query
         var queryParams: [QueryParameter] = [
         ]
@@ -418,8 +390,8 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-            self.options.logger.error("Failed to append query parameters to url")
+        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+            self.options.logger.error("Failed to construct url")
             return
         }
 

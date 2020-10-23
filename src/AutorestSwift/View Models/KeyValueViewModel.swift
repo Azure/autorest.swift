@@ -156,8 +156,6 @@ struct KeyValueViewModel: Comparable {
      */
     private static func formatValueForType(type: AllSchemaTypes, value: String) -> String {
         switch type {
-        case .string:
-            return "\(value)"
         case .integer,
              .number,
              .boolean:
