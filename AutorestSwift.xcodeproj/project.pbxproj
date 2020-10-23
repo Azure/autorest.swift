@@ -172,7 +172,8 @@
 		F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */; };
 		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
 		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
-		F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutorestHeadTest.swift */; };
+		F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B1F6125414556007DA581 /* Dictionary+Extension.swift */; };
+		F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113047424F78283007FF3A3 /* AutoRestHeadTest.swift */; };
 		F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */; };
 		F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */; };
 		F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */; };
@@ -194,7 +195,7 @@
 		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
-		F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18718F0250C592300318867 /* AutoRestReportTest.swift */; };
+		F18718F1250C592300318867 /* ZZZAutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18718F0250C592300318867 /* ZZZAutoRestReportTest.swift */; };
 		F198F81C251BC456009CB4E5 /* OperationResponseStatusCodeDeclareSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */; };
 		F198F81D251BC456009CB4E5 /* OperationResponseUnixTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */; };
 		F198F975251C570B009CB4E5 /* NamedOperationGroupFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */; };
@@ -348,7 +349,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F170D49A253F8DEC00A569A0 /* OperationOptionalQueryParamSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
 				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,
@@ -503,7 +503,8 @@
 		F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestBodySnippet.stencil; sourceTree = "<group>"; };
 		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
 		F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationUrlSnippet.stencil; sourceTree = "<group>"; };
-		F113047424F78283007FF3A3 /* AutorestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorestHeadTest.swift; sourceTree = "<group>"; };
+		F10B1F6125414556007DA581 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		F113047424F78283007FF3A3 /* AutoRestHeadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestHeadTest.swift; sourceTree = "<group>"; };
 		F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBatFile.xcodeproj; path = "test/integration/generated/body-file/AutoRestSwaggerBatFile.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatFileTest.swift; sourceTree = "<group>"; };
 		F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -531,7 +532,7 @@
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestReport.xcodeproj; path = "test/integration/generated/body-file/../report/AutoRestReport.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		F18718F0250C592300318867 /* AutoRestReportTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestReportTest.swift; sourceTree = "<group>"; };
+		F18718F0250C592300318867 /* ZZZAutoRestReportTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZZZAutoRestReportTest.swift; sourceTree = "<group>"; };
 		F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; name = OperationResponseDataSnippet.stencil; path = templates/OperationResponseDataSnippet.stencil; sourceTree = SOURCE_ROOT; };
 		F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionResponseViewModel.swift; sourceTree = "<group>"; };
 		F19B01D62507EA1300121831 /* OperationResponseStatusCodeSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeSnippet.stencil; sourceTree = "<group>"; };
@@ -879,17 +880,18 @@
 				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
 				F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */,
 				F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */,
-				F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */,
 				F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */,
 				F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */,
 				0A7476E82527CDAC00819FC9 /* AutoRestResourceFlatteningTest.xcodeproj */,
+				F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */,
 				0A747B22252E897200819FC9 /* AutoRestUrlTest.swift */,
-				F113047424F78283007FF3A3 /* AutorestHeadTest.swift */,
-				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
-				F18718F0250C592300318867 /* AutoRestReportTest.swift */,
-				0A7477002527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift */,
-				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
+				F113047424F78283007FF3A3 /* AutoRestHeadTest.swift */,
 				F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */,
+				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
+				0A7477002527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift */,
+				F10B1F6125414556007DA581 /* Dictionary+Extension.swift */,
+				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
+				F18718F0250C592300318867 /* ZZZAutoRestReportTest.swift */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				F170D321253F786800A569A0 /* Util.swift */,
 			);
@@ -1358,10 +1360,12 @@
 				F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */,
+				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
+				F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
 				0A7477012527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift in Sources */,
-				F18718F1250C592300318867 /* AutoRestReportTest.swift in Sources */,
+				F18718F1250C592300318867 /* ZZZAutoRestReportTest.swift in Sources */,
 				0A747B24252E897300819FC9 /* AutoRestUrlTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

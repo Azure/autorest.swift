@@ -86,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		"AutoRestUrlTest::AutoRestUrlTest::Product" /* AutoRestUrlTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoRestUrlTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10B1F6025414545007DA581 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+Extension.swift"; path = "../../../../AutorestSwiftTest/Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		OBJ_100 /* XMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTree.swift; sourceTree = "<group>"; };
 		OBJ_101 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -385,9 +386,10 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				F10B1F6025414545007DA581 /* Dictionary+Extension.swift */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_86 /* Tests */,
@@ -395,7 +397,6 @@
 				OBJ_148 /* Products */,
 				OBJ_151 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -535,7 +536,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_148 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
