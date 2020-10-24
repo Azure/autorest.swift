@@ -17,8 +17,8 @@ import Foundation
 // swiftlint:disable type_body_length
 
 extension CharacterSet {
-    static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "*'();:@&=+$,/?"))
-    static let urlPathAllowed4 = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/"))
+    static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let urlPathAllowed4 = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
 }
 
 public final class AutoRestUrlTestClient: PipelineClient {

@@ -304,6 +304,24 @@ class AutoRestUrlTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Paths_arrayStringCsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.arrayStringCsvValid succeed")
+
+        client.paths
+            .arrayCsvInPath(arrayPath: ["ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", ""]) { result, httpResponse in
+                switch result {
+                case .success:
+                    expectation.fulfill()
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    print("test failed. error=\(details)")
+                    XCTFail("Call paths.arrayStringCsvValid failed")
+                }
+            }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_byteNull200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull succeed")
 
@@ -642,6 +660,69 @@ class AutoRestUrlTest: XCTestCase {
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call queries.arrayStringCsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringPipesValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringPipesValid succeed")
+
+        let options = Queries.ArrayStringPipesValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringPipesValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringPipesValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringSsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringSsvValid succeed")
+
+        let options = Queries.ArrayStringSsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringSsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringSsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringTsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringTsvValid succeed")
+
+        let options = Queries.ArrayStringTsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringTsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringTsvValid failed")
             }
         }
 

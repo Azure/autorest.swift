@@ -31,4 +31,5 @@ enum QueryEncodingStyle: String, Codable {
     case form
     case pipeDelimited
     case spaceDelimited
+    case tabDelimited
 }

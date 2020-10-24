@@ -2847,7 +2847,7 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: " "))
         }
         // Header options
         // Construct request
@@ -2936,7 +2936,7 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "\t"))
         }
         // Header options
         // Construct request
@@ -3025,7 +3025,7 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
+            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "|"))
         }
         // Header options
         // Construct request
