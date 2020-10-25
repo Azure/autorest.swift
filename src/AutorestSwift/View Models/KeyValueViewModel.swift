@@ -28,6 +28,7 @@ import Foundation
 
 enum KeyValueDecodeStrategy: String {
     case byteArray
+    case base64ByteArray
     case date
     case dateTime
     case `default`
@@ -128,7 +129,12 @@ struct KeyValueViewModel: Comparable {
         case .dateTime:
             keyValueType = .dateTime
         case .byteArray:
-            keyValueType = .byteArray
+            if let byteArraySchema = signatureParameter.schema as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                keyValueType = .base64ByteArray
+            } else {
+                keyValueType = .byteArray
+            }
         default:
             keyValueType = .default
         }

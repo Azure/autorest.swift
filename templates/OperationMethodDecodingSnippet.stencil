@@ -10,6 +10,8 @@
         self.options.logger.error("Failed to construct String for {{ method.key }}")
         return
     }
+    {% elif method.strategy == "base64ByteArray" %}
+    let {{ method.key }}String = {{ method.key }}.base64URLEncodedString()
     {% else %}
     {# Do nothing #}
     {% endif %}

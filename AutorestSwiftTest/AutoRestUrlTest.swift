@@ -32,10 +32,6 @@ import XCTest
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 
-// extension CharacterSet {
-//    static let allowedCharacters = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?#[]"))
-// }
-
 class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
@@ -318,6 +314,23 @@ class AutoRestUrlTest: XCTestCase {
                     XCTFail("Call paths.arrayStringCsvValid failed")
                 }
             }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_base64Url200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.base64Url succeed")
+
+        client.paths.base64Url(base64UrlPath: Data("lorem".utf8)) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call paths.base64Url failed")
+            }
+        }
 
         wait(for: [expectation], timeout: 5.0)
     }

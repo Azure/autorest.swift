@@ -4,6 +4,8 @@ let {{ param.key }}String = DateFormatter().string(from: {{ param.key }})
 let {{ param.key }}String = Date.Format.iso8601.formatter.string(from: {{ param.key }})
 {% elif param.strategy == "byteArray" %}
 let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8)
+{% elif param.strategy == "base64ByteArray" %}
+let {{ param.key }}String = {{ param.key }}.base64URLEncodedString()
 {% else %}
 {# No need to decode the parameter to String. Leave this blank #}
 {% endif %}

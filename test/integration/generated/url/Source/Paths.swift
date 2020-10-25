@@ -2072,10 +2072,7 @@ public final class Paths {
         withOptions options: Base64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let base64UrlPathString = String(bytes: base64UrlPath, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for base64UrlPath")
-            return
-        }
+        let base64UrlPathString = base64UrlPath.base64URLEncodedString()
 
         // Construct URL
         let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
