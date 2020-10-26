@@ -757,7 +757,7 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_arrayStringNoCollectionFormatEmpty200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringNoCollectionFormatEmpty succeed")
 
@@ -778,6 +778,49 @@ class AutoRestUrlTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_Queries_arrayStringCsvEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvEmpty succeed")
+
+        let options = Queries.ArrayStringCsvEmptyOptions(
+            arrayQuery: []
+        )
+
+        client.queries.arrayStringCsvEmpty(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvEmpty failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringCsvNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvNull succeed")
+
+        let options = Queries.ArrayStringCsvNullOptions(
+            arrayQuery: nil
+        )
+
+        client.queries.arrayStringCsvNull(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_stringUrlEncoded200() throws {
         let expectation = XCTestExpectation(description: "Call queries.stringUrlEncoded succeed")
 
