@@ -17,8 +17,8 @@ import Foundation
 // swiftlint:disable type_body_length
 
 extension CharacterSet {
-    static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
-    static let urlPathAllowed4 = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+    static let urlQueryValueAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let urlPathItemAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
 }
 
 public final class AutoRestReportClient: PipelineClient {
@@ -80,19 +80,13 @@ public final class AutoRestReportClient: PipelineClient {
 
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
-                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed4) {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathItemAllowed) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
                 }
             }
         }
 
-        var urlString = baseUrl.absoluteString
-
-        // if template.starts(with: urlString) {
-        //    urlString = template
-        // } else {
-        urlString += template
-        // }
+        var urlString = baseUrl.absoluteString + template
         guard let url = URL(string: urlString) else {
             return nil
         }
@@ -108,15 +102,9 @@ public final class AutoRestReportClient: PipelineClient {
 
         let addedQueryItems = addedParams.map { name, value in URLQueryItem(
             name: name,
-            value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed4)
+            value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed)
         ) }
-        // if var percentEncodedQueryItems = urlComps.percentEncodedQueryItems, !percentEncodedQueryItems.isEmpty {
-        //     percentEncodedQueryItems.append(contentsOf: addedQueryItems)
-        //     urlComps.percentEncodedQueryItems = percentEncodedQueryItems
-        // } else {
         urlComps.percentEncodedQueryItems = addedQueryItems
-        // }
-
         return urlComps.url
     }
 
