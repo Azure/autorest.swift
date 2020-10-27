@@ -76,7 +76,6 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -176,7 +175,6 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",

@@ -72,7 +72,6 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "http://{accountName}{host}",

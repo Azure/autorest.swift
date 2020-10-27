@@ -69,7 +69,6 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -152,7 +151,6 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -235,7 +233,6 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",

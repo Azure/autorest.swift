@@ -76,7 +76,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -165,7 +164,6 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -265,7 +263,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -354,7 +351,6 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -454,7 +450,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -543,7 +538,6 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -643,7 +637,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -732,7 +725,6 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -832,7 +824,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -944,7 +935,6 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -1041,7 +1031,6 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",

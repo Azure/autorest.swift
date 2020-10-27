@@ -72,7 +72,6 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
@@ -207,7 +206,6 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "{$host}",
