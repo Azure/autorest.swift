@@ -118,7 +118,7 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValueForType(signatureParameter: signatureParameter, value: name)
+        self.value = KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
@@ -160,7 +160,7 @@ struct KeyValueViewModel: Comparable {
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueForType(signatureParameter: ParameterType, value: String) -> String {
+    private static func formatValue(forSignatureParameter signatureParameter: ParameterType, value: String) -> String {
         let type = signatureParameter.schema.type
         switch type {
         case .integer,
