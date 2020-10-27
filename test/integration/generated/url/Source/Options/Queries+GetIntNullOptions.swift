@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.GetIntNull` operation.
-    public struct GetIntNullOptions: AzureOptions {
+    public struct GetIntNullOptions: RequestOptions {
         /// null integer value
         public let intQuery: Int32?
 

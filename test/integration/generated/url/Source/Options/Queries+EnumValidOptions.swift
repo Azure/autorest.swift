@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.EnumValid` operation.
-    public struct EnumValidOptions: AzureOptions {
+    public struct EnumValidOptions: RequestOptions {
         /// 'green color' enum value
         public let enumQuery: UriColor?
 

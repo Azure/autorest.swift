@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestReportService {
     /// User-configurable options for the `AutoRestReportService.GetReport` operation.
-    public struct GetReportOptions: AzureOptions {
+    public struct GetReportOptions: RequestOptions {
         /// If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
         public let qualifier: String?
 

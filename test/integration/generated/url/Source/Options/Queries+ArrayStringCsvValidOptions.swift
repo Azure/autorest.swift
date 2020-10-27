@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ArrayStringCsvValid` operation.
-    public struct ArrayStringCsvValidOptions: AzureOptions {
+    public struct ArrayStringCsvValidOptions: RequestOptions {
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
         public let arrayQuery: [String]?
 

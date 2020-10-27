@@ -1,6 +1,6 @@
 {% if op.needHttpResponseData %}
 guard let data = httpResponse?.data else {
-    let noDataError = AzureError.sdk("Response data expected but not found.")
+    let noDataError = AzureError.client("Response data expected but not found.")
     dispatchQueue.async {
          completionHandler(.failure(noDataError), httpResponse)
     }

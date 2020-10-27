@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ArrayStringPipesValid` operation.
-    public struct ArrayStringPipesValidOptions: AzureOptions {
+    public struct ArrayStringPipesValidOptions: RequestOptions {
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
         public let arrayQuery: [String]?
 

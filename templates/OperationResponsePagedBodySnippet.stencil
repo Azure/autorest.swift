@@ -19,7 +19,7 @@
         }
     } catch {
         dispatchQueue.async {
-            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
         }
     }
 }

@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.DoubleDecimalPositive` operation.
-    public struct DoubleDecimalPositiveOptions: AzureOptions {
+    public struct DoubleDecimalPositiveOptions: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.StringNull` operation.
-    public struct StringNullOptions: AzureOptions {
+    public struct StringNullOptions: RequestOptions {
         /// null string value
         public let stringQuery: String?
 

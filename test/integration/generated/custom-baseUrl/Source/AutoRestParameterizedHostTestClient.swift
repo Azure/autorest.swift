@@ -17,8 +17,13 @@ import Foundation
 // swiftlint:disable type_body_length
 
 extension CharacterSet {
+<<<<<<< HEAD
     static let urlQueryValueAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
     static let urlPathItemAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+=======
+    static let azureUrlQueryAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let azureUrlPathAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+>>>>>>> sacheu/array
 }
 
 public final class AutoRestParameterizedHostTestClient: PipelineClient {
@@ -73,16 +78,23 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
 
     public func url(
         forTemplate templateIn: String,
+<<<<<<< HEAD
         withHost hostIn: String? = nil,
+=======
+>>>>>>> sacheu/array
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
         var template = templateIn
+<<<<<<< HEAD
         var hostString = hostIn
+=======
+>>>>>>> sacheu/array
         if template.hasPrefix("/") { template = String(template.dropFirst()) }
 
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
+<<<<<<< HEAD
                 if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathItemAllowed) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
                 }
@@ -97,6 +109,15 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
             hostString = hostUnwrapped + "/"
         }
         let urlString = (hostString ?? baseUrl.absoluteString) + template
+=======
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .azureUrlPathAllowed) {
+                    template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
+            }
+        }
+
+        var urlString = baseUrl.absoluteString + template
+>>>>>>> sacheu/array
         guard let url = URL(string: urlString) else {
             return nil
         }
@@ -112,7 +133,11 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
 
         let addedQueryItems = addedParams.map { name, value in URLQueryItem(
             name: name,
+<<<<<<< HEAD
             value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed)
+=======
+            value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
+>>>>>>> sacheu/array
         ) }
         urlComps.percentEncodedQueryItems = addedQueryItems
         return urlComps.url
