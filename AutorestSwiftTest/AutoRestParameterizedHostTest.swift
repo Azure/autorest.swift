@@ -66,7 +66,7 @@ class AutoRestParameterizedHostTest: XCTestCase {
             switch result {
             case .success:
                 XCTFail("Call paths.getEmptyFailed should failed")
-            case let .failure(error):
+            case let .failure:
                 expectation.fulfill()
             }
         }

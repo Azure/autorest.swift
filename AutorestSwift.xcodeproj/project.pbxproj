@@ -185,6 +185,7 @@
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
 		F15D2C5C2547536400265366 /* AutoRestParameterizedHostTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */; };
+		F15D2D962547E03E00265366 /* OperationRequestUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15D2D942547E00100265366 /* OperationRequestUrlSnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -364,6 +365,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F15D2D962547E03E00265366 /* OperationRequestUrlSnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
 				F1731F342522E531006CDED8 /* OperationMethodDecodingSnippet.stencil in CopyFiles */,
@@ -535,6 +537,7 @@
 		F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedOperationGroupFile.stencil; sourceTree = "<group>"; };
 		F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestParameterizedHostTest.xcodeproj; path = "test/integration/generated/custom-baseUrl/AutoRestParameterizedHostTest.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestParameterizedHostTest.swift; sourceTree = "<group>"; };
+		F15D2D942547E00100265366 /* OperationRequestUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestUrlSnippet.stencil; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
@@ -743,6 +746,7 @@
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
+				F15D2D942547E00100265366 /* OperationRequestUrlSnippet.stencil */,
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */,
