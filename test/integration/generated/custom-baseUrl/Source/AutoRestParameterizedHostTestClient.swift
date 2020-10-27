@@ -74,15 +74,15 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
     public func url(
         host hostIn: String? = nil,
         template templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
         var template = templateIn
         var hostString = hostIn
         if template.hasPrefix("/") { template = String(template.dropFirst()) }
 
-        if let urlKwargs = kwargs {
-            for (key, value) in urlKwargs {
+        if let pathParams = pathParamsIn {
+            for (key, value) in pathParams {
                 if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .azureUrlPathAllowed) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
                 }
@@ -101,20 +101,20 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
             return nil
         }
 
-        guard !(addedParams?.isEmpty ?? false) else { return url }
+        guard !(queryParamsIn?.isEmpty ?? false) else { return url }
 
-        return appendingQueryParameters(url: url, addedParams ?? [])
+        return appendingQueryParameters(url: url, queryParamsIn ?? [])
     }
 
-    private func appendingQueryParameters(url: URL, _ addedParams: [QueryParameter]) -> URL? {
-        guard !addedParams.isEmpty else { return url }
+    private func appendingQueryParameters(url: URL, _ queryParams: [QueryParameter]) -> URL? {
+        guard !queryParams.isEmpty else { return url }
         guard var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
 
-        let addedQueryItems = addedParams.map { name, value in URLQueryItem(
+        let queryItems = queryParams.map { name, value in URLQueryItem(
             name: name,
             value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
         ) }
-        urlComps.percentEncodedQueryItems = addedQueryItems
+        urlComps.percentEncodedQueryItems = queryItems
         return urlComps.url
     }
 

@@ -33,10 +33,10 @@ public final class Files {
     public func url(
         host hostIn: String? = nil,
         template templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(host: hostIn, template: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
 
     public func request(
@@ -70,8 +70,12 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(host: "{$host}", template: urlTemplate, withKwargs: pathParams, and: queryParams)
-        else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -154,8 +158,12 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(host: "{$host}", template: urlTemplate, withKwargs: pathParams, and: queryParams)
-        else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -238,8 +246,12 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(host: "{$host}", template: urlTemplate, withKwargs: pathParams, and: queryParams)
-        else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
