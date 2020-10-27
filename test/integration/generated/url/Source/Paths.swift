@@ -60,6 +60,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/true/{boolPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "boolPath": String(true)
         ]
         // Construct query
@@ -70,7 +71,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -143,6 +150,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/false/{boolPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "boolPath": String(false)
         ]
         // Construct query
@@ -153,7 +161,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -226,6 +240,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/1000000/{intPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "intPath": String(1_000_000)
         ]
         // Construct query
@@ -236,7 +251,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -309,6 +330,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/-1000000/{intPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "intPath": String(-1_000_000)
         ]
         // Construct query
@@ -319,7 +341,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -392,6 +420,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/long/10000000000/{longPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "longPath": String(10_000_000_000)
         ]
         // Construct query
@@ -402,7 +431,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -475,6 +510,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/long/-10000000000/{longPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "longPath": String(-10_000_000_000)
         ]
         // Construct query
@@ -485,7 +521,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -558,6 +600,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "floatPath": String(Double(103_400_000_000_000_000_000))
         ]
         // Construct query
@@ -568,7 +611,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -641,6 +690,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "floatPath": String(Double(-1.034e-20))
         ]
         // Construct query
@@ -651,7 +701,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -724,6 +780,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "doublePath": String(Double(9_999_999.999))
         ]
         // Construct query
@@ -734,7 +791,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -807,6 +870,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "doublePath": String(Double(-9_999_999.999))
         ]
         // Construct query
@@ -817,7 +881,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -890,6 +960,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/unicode/{stringPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "stringPath": "啊齄丂狛狜隣郎隣兀﨩"
         ]
         // Construct query
@@ -900,7 +971,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -973,6 +1050,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "stringPath": "begin!*'();:@ &=+$,/?#[]end"
         ]
         // Construct query
@@ -983,7 +1061,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1056,6 +1140,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
         ]
         // Construct query
@@ -1066,7 +1151,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1139,6 +1230,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "stringPath": ""
         ]
         // Construct query
@@ -1149,7 +1241,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1223,7 +1321,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/null/{stringPath}"
         let pathParams = [
-            "stringPath": stringPath
+            "stringPath": stringPath,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1233,7 +1332,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1307,7 +1412,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/enum/green%20color/{enumPath}"
         let pathParams = [
-            "enumPath": enumPath.rawValue
+            "enumPath": enumPath.rawValue,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1317,7 +1423,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1391,7 +1503,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/null/{enumPath}"
         let pathParams = [
-            "enumPath": enumPath.rawValue
+            "enumPath": enumPath.rawValue,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1401,7 +1514,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1480,7 +1599,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/multibyte/{bytePath}"
         let pathParams = [
-            "bytePath": bytePathString
+            "bytePath": bytePathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1490,7 +1610,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1563,6 +1689,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/empty/{bytePath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "bytePath": ""
         ]
         // Construct query
@@ -1573,7 +1700,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1652,7 +1785,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/null/{bytePath}"
         let pathParams = [
-            "bytePath": bytePathString
+            "bytePath": bytePathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1662,7 +1796,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1735,6 +1875,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/date/2012-01-01/{datePath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "datePath": "2012-01-01"
         ]
         // Construct query
@@ -1745,7 +1886,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1823,7 +1970,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/date/null/{datePath}"
         let pathParams = [
-            "datePath": datePathString
+            "datePath": datePathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1833,7 +1981,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1906,6 +2060,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "dateTimePath": "2012-01-01T01:01:01Z"
         ]
         // Construct query
@@ -1916,7 +2071,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1992,7 +2153,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/datetime/null/{dateTimePath}"
         let pathParams = [
-            "dateTimePath": dateTimePathString
+            "dateTimePath": dateTimePathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2002,7 +2164,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -2078,7 +2246,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
         let pathParams = [
-            "base64UrlPath": base64UrlPathString
+            "base64UrlPath": base64UrlPathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2088,7 +2257,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -2163,7 +2338,8 @@ public final class Paths {
         let urlTemplate =
             "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
         let pathParams = [
-            "arrayPath": arrayPath.map { String($0) }.joined(separator: ",")
+            "arrayPath": arrayPath.map { String($0) }.joined(separator: ","),
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2173,7 +2349,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -2251,7 +2433,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
         let pathParams = [
-            "unixTimeUrlPath": unixTimeUrlPathString
+            "unixTimeUrlPath": unixTimeUrlPathString,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2261,7 +2444,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

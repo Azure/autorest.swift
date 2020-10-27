@@ -121,6 +121,10 @@ enum ParameterType: Codable {
         return common.inHeader
     }
 
+    var inUri: Bool {
+        return common.inUri
+    }
+
     /// Return the common base class Parameter properties
     private var common: Parameter {
         switch self {

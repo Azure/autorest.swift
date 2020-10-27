@@ -61,7 +61,8 @@ public final class PetOperation {
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
-            "petId": petId
+            "petId": petId,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -71,7 +72,13 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -189,7 +196,8 @@ public final class PetOperation {
         // Construct URL
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
-            "whatAction": whatAction
+            "whatAction": whatAction,
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -199,7 +207,13 @@ public final class PetOperation {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

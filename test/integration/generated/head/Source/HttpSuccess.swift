@@ -60,7 +60,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/200"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -69,7 +69,13 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -137,7 +143,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/204"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -146,7 +152,13 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -214,7 +226,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/404"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -223,7 +235,13 @@ public final class HttpSuccess {
         // Construct headers
         let headers = HTTPHeaders()
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

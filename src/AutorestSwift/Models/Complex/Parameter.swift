@@ -71,8 +71,8 @@ class Parameter: Value, CustomDebugStringConvertible {
     }
 
     var inPath: Bool {
-        if let x_in = extensions?["x-in"]?.value as? String,
-            x_in == ParameterLocation.path.rawValue {
+        if let xInValue = extensions?["x-in"]?.value as? String,
+            xInValue == ParameterLocation.path.rawValue {
             return true
         }
 
@@ -81,8 +81,8 @@ class Parameter: Value, CustomDebugStringConvertible {
     }
 
     var inQuery: Bool {
-        if let x_in = extensions?["x-in"]?.value as? String,
-            x_in == ParameterLocation.query.rawValue {
+        if let xInValue = extensions?["x-in"]?.value as? String,
+            xInValue == ParameterLocation.query.rawValue {
             return true
         }
 
@@ -91,13 +91,23 @@ class Parameter: Value, CustomDebugStringConvertible {
     }
 
     var inHeader: Bool {
-        if let x_in = extensions?["x-in"]?.value as? String,
-            x_in == ParameterLocation.header.rawValue {
+        if let xInValue = extensions?["x-in"]?.value as? String,
+            xInValue == ParameterLocation.header.rawValue {
             return true
         }
 
         guard let location = paramLocation else { return false }
         return location == ParameterLocation.header
+    }
+
+    var inUri: Bool {
+        if let xInValue = extensions?["x-in"]?.value as? String,
+            xInValue == ParameterLocation.uri.rawValue {
+            return true
+        }
+
+        guard let location = paramLocation else { return false }
+        return location == ParameterLocation.uri
     }
 
     // MARK: Codable

@@ -66,6 +66,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -88,7 +89,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -167,6 +174,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -189,7 +197,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -268,6 +282,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -290,7 +305,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -369,6 +390,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -391,7 +413,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

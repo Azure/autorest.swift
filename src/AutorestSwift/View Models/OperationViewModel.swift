@@ -53,6 +53,8 @@ struct OperationParameters {
                     .append(viewModel)
             } else if param.inPath {
                 path.append(viewModel)
+            } else if param.inUri {
+                path.append(viewModel)
             } else {
                 continue
             }

@@ -60,7 +60,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/nonempty"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -70,7 +70,13 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -143,7 +149,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/verylarge"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -153,7 +159,13 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -226,7 +238,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/empty"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -236,7 +248,13 @@ public final class Files {
         var headers = HTTPHeaders()
         headers["Accept"] = "image/png, application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

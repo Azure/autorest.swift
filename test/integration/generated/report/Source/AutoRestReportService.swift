@@ -60,7 +60,7 @@ public final class AutoRestReportService {
         // Construct URL
         let urlTemplate = "/report"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -76,7 +76,13 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -154,7 +160,7 @@ public final class AutoRestReportService {
         // Construct URL
         let urlTemplate = "/report/optional"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -170,7 +176,13 @@ public final class AutoRestReportService {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "{$host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }

@@ -72,7 +72,7 @@ struct KeyValueViewModel: Comparable {
         } else if param.implementation == .client {
             self.init(
                 key: name,
-                value: name,
+                value: (name == "$host") ? "baseUrl.absoluteString" : name,
                 optional: !param.required,
                 path: "client."
             )
