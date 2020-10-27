@@ -9,6 +9,8 @@ clean = False
 createProject = False
 code_generated = False
 
+swagger_directory = r'./node_modules/@microsoft.azure/autorest.testserver/swagger/'
+
 working_files = [
     "head",
     "body-file",
@@ -20,66 +22,14 @@ working_files = [
     "custom-baseUrl"
 ]
 
-all_files = [
-    "additionalProperties",
-    "azure-parameter-grouping",
-    "azure-report",
-    "azure-resource-x",
-    "azure-resource",
-    "azure-special-properties",
-    "body-array",
-    "body-boolean",
-    "body-boolean.quirks",
-    "body-byte",
-    "body-complex",
-    "body-date",
-    "body-datetime-rfc1123",
-    "body-datetime",
-    "body-dictionary",
-    "body-duration",
-    "body-file",
-    "body-formdata-urlencoded",
-    "body-formdata",
-    "body-integer",
-    "body-number",
-    "body-number.quirks",
-    "body-string",
-    "body-string.quirks",
-    "body-time",
-    "complex-model",
-    "constants",
-    "custom-baseUrl-more-options",
-    "custom-baseUrl-paging",
-    "custom-baseUrl",
-    "extensible-enums-swagger",
-    "head-exceptions",
-    "head",
-    "header",
-    "httpInfrastructure",
-    "httpInfrastructure.quirks",
-    "lro",
-    "media_types",
-    "model-flattening",
-    "multiapi-v1-custom-base-url",
-    "multiapi-v1",
-    "multiapi-v2-custom-base-url",
-    "multiapi-v2",
-    "multiapi-v3",
-    "multiple-inheritance",
-    "non-string-enum",
-    "object-type",
-    "paging",
-    "parameter-flattening",
-    "report",
-    "required-optional",
-    "storage",
-    "subscriptionId-apiVersion",
-    "url-multi-collectionFormat",
-    "url",
-    "validation",
-    "xml-service",
-    "xms-error-responses"
-]
+def get_all_files():
+    all_files = []
+    for filename in os.listdir(swagger_directory):
+        if filename.endswith(".json"):
+            all_files.append(os.path.splitext(filename)[0])
+        else:
+            continue
+    return all_files
 
 def generate_and_build_code( fileList):
     """Generate code and build code"""
@@ -88,16 +38,17 @@ def generate_and_build_code( fileList):
     global debug
     global keepChange
     global createProject
+    generated_directory = r'./test/integration/generated/'
 
     for file in fileList:
         os.system('echo "== Generate code for test server swagger {file}.json =="'.format(file=file))
-        
+
         if clean:
             os.system('echo "Remove Package.resolved and .build directory."')
-            os.system('rm ./test/integration/generated/{file}/Package.resolved'.format(file=file))
-            os.system('rm -Rf ./test/integration/generated/{file}/.build'.format(file=file))
+            os.system('rm {generated_directory}{file}/Package.resolved'.format(file=file, generated_directory=generated_directory))
+            os.system('rm -Rf {generated_directory}{file}/.build'.format(file=file, generated_directory=generated_directory))
 
-        autorest_command = "autorest --input-file=./node_modules/@microsoft.azure/autorest.testserver/swagger/{file}.json --output-folder=./test/integration/generated/{file} --namespace={file} --use=.".format(file=file)
+        autorest_command = "autorest --input-file={swagger_directory}{file}.json --output-folder={generated_directory}{file} --namespace={file} --use=.".format(file=file, swagger_directory=swagger_directory, generated_directory=generated_directory)
 
         os.system('echo "Autorest: %s"' % autorest_command)
         if debug:
@@ -112,14 +63,14 @@ def generate_and_build_code( fileList):
             code_generated = False
             if keepChange == 0:
                 os.system('echo "autorest code generation failed. Revert the generated code."')
-                return_value = os.system('git restore ./test/integration/generated/{file}'.format(file=file))
+                return_value = os.system('git restore {generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
                 if return_value == 1:
                     os.system('echo "Revert the generated code failed. Remove the directory"')
-                    os.system('rm -Rf  ./test/integration/generated/{file}'.format(file=file))
+                    os.system('rm -Rf  {generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
 
         if code_generated:
             # Build generated code
-            os.chdir('./test/integration/generated/{file}'.format(file=file))
+            os.chdir('{generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
             build_command = "swift build"
 
             if debug:
@@ -133,7 +84,7 @@ def generate_and_build_code( fileList):
             else:
                 os.system('echo "swift build failed. Revert the generated code."')
                 os.chdir('../../../..')
-                os.system('git restore ./test/integration/generated/{file}'.format(file=file))
+                os.system('git restore {generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
 
             # Create xcode project
             if return_value == 0 and createProject:
@@ -170,7 +121,7 @@ def main(argv):
             createProject = True
 
     if allFiles:
-        generate_and_build_code(all_files)
+        generate_and_build_code(get_all_files())
     else:
         generate_and_build_code(working_files)
 
