@@ -72,8 +72,13 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withHost: "http://{accountName}{host}", withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            forTemplate: urlTemplate,
+            withHost: "http://{accountName}{host}",
+            withKwargs: pathParams,
+            and: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 

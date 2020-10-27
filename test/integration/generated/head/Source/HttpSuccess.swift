@@ -73,6 +73,7 @@ public final class HttpSuccess {
             self.options.logger.error("Failed to construct request url")
             return
         }
+
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
@@ -149,6 +150,7 @@ public final class HttpSuccess {
             self.options.logger.error("Failed to construct request url")
             return
         }
+
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
@@ -225,6 +227,7 @@ public final class HttpSuccess {
             self.options.logger.error("Failed to construct request url")
             return
         }
+
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return

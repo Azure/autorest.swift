@@ -91,15 +91,11 @@ public final class AutoRestSwaggerBatFileClient: PipelineClient {
             }
         }
 
-<<<<<<< HEAD
         if let hostUnwrapped = hostString,
             !hostUnwrapped.hasSuffix("/") {
             hostString = hostUnwrapped + "/"
         }
         let urlString = (hostString ?? baseUrl.absoluteString) + template
-=======
-        var urlString = baseUrl.absoluteString + template
->>>>>>> sacheu/array
         guard let url = URL(string: urlString) else {
             return nil
         }
