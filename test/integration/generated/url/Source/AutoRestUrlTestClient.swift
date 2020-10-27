@@ -73,8 +73,8 @@ public final class AutoRestUrlTestClient: PipelineClient {
     }
 
     public func url(
-        forTemplate templateIn: String,
-        withHost hostIn: String? = nil,
+        host hostIn: String? = nil,
+        template templateIn: String,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {

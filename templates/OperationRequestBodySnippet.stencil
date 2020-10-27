@@ -22,7 +22,7 @@ guard let requestBody = try? JSONEncoder().encode(body) else {
     return
 }
 {% endif %}
-guard let requestUrl = self.url(forTemplate: urlTemplate, withHost: "{{ op.request.uri }}", withKwargs: pathParams, and: queryParams) else {
+guard let requestUrl = self.url(host: "{{ op.request.uri }}", template: urlTemplate, withKwargs: pathParams, and: queryParams) else {
     self.options.logger.error("Failed to construct request url")
     return
 }
