@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.DateNull` operation.
-    public struct DateNullOptions: AzureOptions {
+    public struct DateNullOptions: RequestOptions {
         /// null as date (no query parameters in uri)
         public let dateQuery: Date?
 

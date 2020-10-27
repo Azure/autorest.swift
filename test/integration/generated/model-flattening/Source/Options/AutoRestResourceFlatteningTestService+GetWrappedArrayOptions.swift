@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.GetWrappedArray` operation.
-    public struct GetWrappedArrayOptions: AzureOptions {
+    public struct GetWrappedArrayOptions: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

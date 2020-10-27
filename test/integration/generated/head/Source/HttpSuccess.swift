@@ -19,7 +19,7 @@ import Foundation
 public final class HttpSuccess {
     public let client: AutoRestHeadTestClient
 
-    public let commonOptions: AzureClientOptions
+    public let commonOptions: ClientOptions
 
     /// Options provided to configure this `AutoRestHeadTestClient`.
     public let options: AutoRestHeadTestClientOptions
@@ -89,7 +89,7 @@ public final class HttpSuccess {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -166,7 +166,7 @@ public final class HttpSuccess {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -243,7 +243,7 @@ public final class HttpSuccess {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }

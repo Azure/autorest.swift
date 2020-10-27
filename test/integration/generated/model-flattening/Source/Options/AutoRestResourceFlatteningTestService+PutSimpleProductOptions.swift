@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutSimpleProduct` operation.
-    public struct PutSimpleProductOptions: AzureOptions {
+    public struct PutSimpleProductOptions: RequestOptions {
         /// Simple body product to put
         public let simpleBodyProduct: SimpleProduct?
 

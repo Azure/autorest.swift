@@ -17,7 +17,7 @@ import Foundation
 
 extension PetOperation {
     /// User-configurable options for the `XMSErrorResponseExtensions.GetPetById` operation.
-    public struct GetPetByIdOptions: AzureOptions {
+    public struct GetPetByIdOptions: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

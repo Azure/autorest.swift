@@ -6,7 +6,7 @@
 // swiftlint:disable line_length
 
 /// User-configurable options for the `{{ model.name }}`.
-public struct {{ model.name }}Options: AzureClientOptions {
+public struct {{ model.name }}Options: ClientOptions {
     /// The API version of the {{ model.description }} to invoke.
     public let apiVersion: String
     /// The `ClientLogger` to be used by this `{{ model.name }}`.

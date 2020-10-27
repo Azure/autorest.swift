@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.FloatNull` operation.
-    public struct FloatNullOptions: AzureOptions {
+    public struct FloatNullOptions: RequestOptions {
         /// null numeric value
         public let floatQuery: Float?
 

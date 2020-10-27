@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `AutoRestSwaggerBatFileClient`.
-public struct AutoRestSwaggerBatFileClientOptions: AzureClientOptions {
+public struct AutoRestSwaggerBatFileClientOptions: ClientOptions {
     /// The API version of the  to invoke.
     public let apiVersion: String
     /// The `ClientLogger` to be used by this `AutoRestSwaggerBatFileClient`.

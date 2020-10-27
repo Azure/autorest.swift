@@ -12,7 +12,7 @@ public final class {{ group.name }} {
 
     public let client: {{ model.name }}
     
-    public let commonOptions: AzureClientOptions
+    public let commonOptions: ClientOptions
 
     /// Options provided to configure this `{{ model.name }}`.
     public let options: {{ model.name }}Options

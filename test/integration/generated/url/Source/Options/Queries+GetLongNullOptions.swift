@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.GetLongNull` operation.
-    public struct GetLongNullOptions: AzureOptions {
+    public struct GetLongNullOptions: RequestOptions {
         /// null 64 bit integer value
         public let longQuery: Int64?
 
