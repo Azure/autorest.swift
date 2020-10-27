@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ByteMultiByte` operation.
-    public struct ByteMultiByteOptions: AzureOptions {
+    public struct ByteMultiByteOptions: RequestOptions {
         /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         public let byteQuery: Data?
 

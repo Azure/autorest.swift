@@ -6,6 +6,6 @@ if let decodedstr = String(data: data, encoding: .utf8),
     }
 } else {
     dispatchQueue.async {
-        completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+        completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
     }
 }

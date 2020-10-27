@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.EnumNull` operation.
-    public struct EnumNullOptions: AzureOptions {
+    public struct EnumNullOptions: RequestOptions {
         /// null string value
         public let enumQuery: UriColor?
 

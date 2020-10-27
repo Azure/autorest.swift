@@ -17,7 +17,7 @@ import Foundation
 
 extension IntType {
     /// User-configurable options for the `AutoRestIntegerTestService.GetOverflowInt32` operation.
-    public struct GetOverflowInt32Options: AzureOptions {
+    public struct GetOverflowInt32Options: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

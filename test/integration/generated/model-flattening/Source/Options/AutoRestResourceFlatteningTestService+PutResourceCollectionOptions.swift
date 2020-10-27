@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutResourceCollection` operation.
-    public struct PutResourceCollectionOptions: AzureOptions {
+    public struct PutResourceCollectionOptions: RequestOptions {
         /// External Resource as a ResourceCollection to put
         public let resourceComplexObject: ResourceCollection?
 

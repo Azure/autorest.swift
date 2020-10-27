@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ArrayStringCsvEmpty` operation.
-    public struct ArrayStringCsvEmptyOptions: AzureOptions {
+    public struct ArrayStringCsvEmptyOptions: RequestOptions {
         /// an empty array [] of string using the csv-array format
         public let arrayQuery: [String]?
 

@@ -17,7 +17,7 @@ import Foundation
 
 extension IntType {
     /// User-configurable options for the `AutoRestIntegerTestService.GetUnderflowInt64` operation.
-    public struct GetUnderflowInt64Options: AzureOptions {
+    public struct GetUnderflowInt64Options: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

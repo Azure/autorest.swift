@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.DoubleNull` operation.
-    public struct DoubleNullOptions: AzureOptions {
+    public struct DoubleNullOptions: RequestOptions {
         /// null numeric value
         public let doubleQuery: Double?
 
