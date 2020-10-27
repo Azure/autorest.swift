@@ -43,19 +43,21 @@ struct OperationParameters {
         var methodDecoding = [KeyValueViewModel]()
 
         for param in parameters {
+            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
             let viewModel = KeyValueViewModel(from: param, with: operation)
 
-            if param.inQuery {
+            switch httpParam.in {
+            case .query:
                 viewModel.optional ? query.optional.append(viewModel) : query.required
                     .append(viewModel)
-            } else if param.inHeader {
+            case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
-            } else if param.inPath {
+            case .path:
                 path.append(viewModel)
-            } else if param.inUri {
+            case .uri:
                 path.append(viewModel)
-            } else {
+            default:
                 continue
             }
         }
