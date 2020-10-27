@@ -1,5 +1,5 @@
 /// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
-public struct {{ model.name }}: AzureOptions {
+public struct {{ model.name }}: RequestOptions {
 
 {% for property in model.properties %}
     {{ property.comment }}
