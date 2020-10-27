@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ByteNull` operation.
-    public struct ByteNullOptions: AzureOptions {
+    public struct ByteNullOptions: RequestOptions {
         /// null as byte array (no query parameters in uri)
         public let byteQuery: Data?
 

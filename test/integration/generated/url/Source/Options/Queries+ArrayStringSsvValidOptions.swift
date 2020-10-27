@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ArrayStringSsvValid` operation.
-    public struct ArrayStringSsvValidOptions: AzureOptions {
+    public struct ArrayStringSsvValidOptions: RequestOptions {
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
         public let arrayQuery: [String]?
 

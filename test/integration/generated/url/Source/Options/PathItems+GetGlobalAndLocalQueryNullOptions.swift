@@ -17,7 +17,7 @@ import Foundation
 
 extension PathItems {
     /// User-configurable options for the `AutoRestUrlTestService.GetGlobalAndLocalQueryNull` operation.
-    public struct GetGlobalAndLocalQueryNullOptions: AzureOptions {
+    public struct GetGlobalAndLocalQueryNullOptions: RequestOptions {
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         public let pathItemStringQuery: String?
         /// should contain null value
