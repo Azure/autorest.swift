@@ -3,7 +3,7 @@ guard let requestUrl = self.url(forTemplate: urlTemplate, withHost: "{{ op.reque
     self.options.logger.error("Failed to construct request url")
     return
 }
-npm
+
 guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else {
     self.options.logger.error("Failed to construct Http request")
     return
