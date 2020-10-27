@@ -48,9 +48,6 @@ struct RequestViewModel {
         // load HttpRequest properties
         let httpRequest = request.protocol.http as? HttpRequest
         self.uri = httpRequest?.uri ?? nil
-        // if the uri equals to '$host', the request url is retrieved from the PipelineClient baseUrl property.
-        // Do not need to save that in the RequestViewModel
-        // self.uri = (uri != "{$host}") ? uri : nil
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 
