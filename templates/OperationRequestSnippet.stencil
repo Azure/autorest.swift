@@ -1,8 +1,5 @@
 // Construct request
-guard let requestUrl = self.url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-    self.options.logger.error("Failed to construct url")
-    return
-}
+{% include "OperationRequestUrlSnippet.stencil" %}
 
 guard let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: headers) else {
     self.options.logger.error("Failed to construct Http request")

@@ -37,6 +37,7 @@ enum RequestBodyType: String {
 
 /// View Model for the method request creation.
 struct RequestViewModel {
+    let uri: String?
     let path: String
     let method: String
     let bodyParam: BodyParamViewModel?
@@ -46,6 +47,7 @@ struct RequestViewModel {
     init(from request: Request, with operation: Operation) {
         // load HttpRequest properties
         let httpRequest = request.protocol.http as? HttpRequest
+        self.uri = httpRequest?.uri ?? nil
         self.path = httpRequest?.path ?? ""
         self.method = httpRequest?.method.rawValue ?? ""
 

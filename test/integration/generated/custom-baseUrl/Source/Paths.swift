@@ -32,10 +32,11 @@ public final class Paths {
 
     public func url(
         forTemplate templateIn: String,
+        withHost hostIn: String? = nil,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(forTemplate: templateIn, withHost: hostIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -53,14 +54,15 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getEmpty(
-        accountName _: String,
+        accountName: String,
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
         let urlTemplate = "/customuri"
         let pathParams = [
-            "": ""
+            "accountName": accountName,
+            "host": client.host
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -70,7 +72,7 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(forTemplate: urlTemplate, withHost: "http://{accountName}{host}", withKwargs: pathParams, and: queryParams) else {
             self.options.logger.error("Failed to construct url")
             return
         }

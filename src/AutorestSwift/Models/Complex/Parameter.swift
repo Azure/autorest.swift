@@ -70,6 +70,36 @@ class Parameter: Value, CustomDebugStringConvertible {
         }
     }
 
+    var inPath: Bool {
+        if let x_in = extensions?["x-in"]?.value as? String,
+            x_in == ParameterLocation.path.rawValue {
+            return true
+        }
+
+        guard let location = paramLocation else { return false }
+        return location == ParameterLocation.path
+    }
+
+    var inQuery: Bool {
+        if let x_in = extensions?["x-in"]?.value as? String,
+            x_in == ParameterLocation.query.rawValue {
+            return true
+        }
+
+        guard let location = paramLocation else { return false }
+        return location == ParameterLocation.query
+    }
+
+    var inHeader: Bool {
+        if let x_in = extensions?["x-in"]?.value as? String,
+            x_in == ParameterLocation.header.rawValue {
+            return true
+        }
+
+        guard let location = paramLocation else { return false }
+        return location == ParameterLocation.header
+    }
+
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {

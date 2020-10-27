@@ -73,27 +73,32 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
 
     public func url(
         forTemplate templateIn: String,
+        withHost hostIn: String? = nil,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
         var template = templateIn
+        var hostString = hostIn
         if template.hasPrefix("/") { template = String(template.dropFirst()) }
 
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
                 if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed4) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+
+                }
+                if let host = hostString {
+                    hostString = host.replacingOccurrences(of: "{\(key)}", with: value)
                 }
             }
         }
 
-        var urlString = baseUrl.absoluteString
-
-        // if template.starts(with: urlString) {
-        //    urlString = template
-        // } else {
-        urlString += template
-        // }
+        if let hostUnwrapped = hostString,
+           !hostUnwrapped.hasSuffix("/")  {
+                hostString = hostUnwrapped + "/"
+        }
+        
+        let urlString = (hostString ?? self.baseUrl.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }

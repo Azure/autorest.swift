@@ -23,8 +23,8 @@ public final class {{ group.name }} {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil, and addedParams: [QueryParameter]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+    public func url(forTemplate templateIn: String, withHost hostIn: String? = nil, withKwargs kwargs: [String: String]? = nil, and addedParams: [QueryParameter]? = nil) -> URL? {
+        return client.url(forTemplate: templateIn, withHost: hostIn, withKwargs: kwargs, and: addedParams)
     }
     
     public func request(_ request: HTTPRequest, context: PipelineContext?, completionHandler: @escaping HTTPResultHandler<Data?>) {

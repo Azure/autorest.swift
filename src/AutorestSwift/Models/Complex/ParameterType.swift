@@ -109,6 +109,18 @@ enum ParameterType: Codable {
         return common.groupedBy
     }
 
+    var inPath: Bool {
+        return common.inPath
+    }
+
+    var inQuery: Bool {
+        return common.inQuery
+    }
+
+    var inHeader: Bool {
+        return common.inHeader
+    }
+
     /// Return the common base class Parameter properties
     private var common: Parameter {
         switch self {
