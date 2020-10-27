@@ -17,8 +17,8 @@ import Foundation
 // swiftlint:disable type_body_length
 
 extension CharacterSet {
-    static let urlQueryValueAllowed4 = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
-    static let urlPathAllowed4 = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+    static let urlQueryValueAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let urlPathItemAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
 }
 
 public final class AutoRestUrlTestClient: PipelineClient {
@@ -74,27 +74,30 @@ public final class AutoRestUrlTestClient: PipelineClient {
 
     public func url(
         forTemplate templateIn: String,
+        withHost hostIn: String? = nil,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
         var template = templateIn
+        var hostString = hostIn
         if template.hasPrefix("/") { template = String(template.dropFirst()) }
 
         if let urlKwargs = kwargs {
             for (key, value) in urlKwargs {
-                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed4) {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .urlPathItemAllowed) {
                     template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
+                if let host = hostString {
+                    hostString = host.replacingOccurrences(of: "{\(key)}", with: value)
                 }
             }
         }
 
-        var urlString = baseUrl.absoluteString
-
-        // if template.starts(with: urlString) {
-        //    urlString = template
-        // } else {
-        urlString += template
-        // }
+        if let hostUnwrapped = hostString,
+            !hostUnwrapped.hasSuffix("/") {
+            hostString = hostUnwrapped + "/"
+        }
+        let urlString = (hostString ?? baseUrl.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }
@@ -110,15 +113,9 @@ public final class AutoRestUrlTestClient: PipelineClient {
 
         let addedQueryItems = addedParams.map { name, value in URLQueryItem(
             name: name,
-            value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed4)
+            value: value?.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed)
         ) }
-        // if var percentEncodedQueryItems = urlComps.percentEncodedQueryItems, !percentEncodedQueryItems.isEmpty {
-        //     percentEncodedQueryItems.append(contentsOf: addedQueryItems)
-        //     urlComps.percentEncodedQueryItems = percentEncodedQueryItems
-        // } else {
         urlComps.percentEncodedQueryItems = addedQueryItems
-        // }
-
         return urlComps.url
     }
 

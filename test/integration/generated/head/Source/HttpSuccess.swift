@@ -32,10 +32,11 @@ public final class HttpSuccess {
 
     public func url(
         forTemplate templateIn: String,
+        withHost hostIn: String? = nil,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(forTemplate: templateIn, withHost: hostIn, withKwargs: kwargs, and: addedParams)
     }
 
     public func request(
@@ -69,10 +70,9 @@ public final class HttpSuccess {
         let headers = HTTPHeaders()
         // Construct request
         guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+            self.options.logger.error("Failed to construct request url")
             return
         }
-
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
@@ -146,10 +146,9 @@ public final class HttpSuccess {
         let headers = HTTPHeaders()
         // Construct request
         guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+            self.options.logger.error("Failed to construct request url")
             return
         }
-
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return
@@ -223,10 +222,9 @@ public final class HttpSuccess {
         let headers = HTTPHeaders()
         // Construct request
         guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+            self.options.logger.error("Failed to construct request url")
             return
         }
-
         guard let request = try? HTTPRequest(method: .head, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
             return

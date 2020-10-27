@@ -1,5 +1,5 @@
 {% if op.request.uri != nil %}
-guard let requestUrl = self.url(forTemplate: urlTemplate, withHost: {{ op.request.uri }} withKwargs: pathParams, and: queryParams) else {
+guard let requestUrl = self.url(forTemplate: urlTemplate, withHost: {{ op.request.uri }}, withKwargs: pathParams, and: queryParams) else {
 {% else %}
 guard let requestUrl = self.url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
 {% endif %}
