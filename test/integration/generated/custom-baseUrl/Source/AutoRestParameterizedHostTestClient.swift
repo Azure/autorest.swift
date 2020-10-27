@@ -16,6 +16,11 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
+extension CharacterSet {
+    static let azureUrlQueryAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let azureUrlPathAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+}
+
 public final class AutoRestParameterizedHostTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
@@ -64,6 +69,44 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
             logger: options.logger,
             options: options
         )
+    }
+
+    public func url(
+        forTemplate templateIn: String,
+        withKwargs kwargs: [String: String]? = nil,
+        and addedParams: [QueryParameter]? = nil
+    ) -> URL? {
+        var template = templateIn
+        if template.hasPrefix("/") { template = String(template.dropFirst()) }
+
+        if let urlKwargs = kwargs {
+            for (key, value) in urlKwargs {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .azureUrlPathAllowed) {
+                    template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
+            }
+        }
+
+        var urlString = baseUrl.absoluteString + template
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+
+        guard !(addedParams?.isEmpty ?? false) else { return url }
+
+        return appendingQueryParameters(url: url, addedParams ?? [])
+    }
+
+    private func appendingQueryParameters(url: URL, _ addedParams: [QueryParameter]) -> URL? {
+        guard !addedParams.isEmpty else { return url }
+        guard var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+        let addedQueryItems = addedParams.map { name, value in URLQueryItem(
+            name: name,
+            value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
+        ) }
+        urlComps.percentEncodedQueryItems = addedQueryItems
+        return urlComps.url
     }
 
     // /// A string value that is used as a global part of the parameterized host
