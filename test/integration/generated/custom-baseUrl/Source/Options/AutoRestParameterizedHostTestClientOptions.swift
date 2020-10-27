@@ -15,11 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `AutoRestParameterizedHostTestClient`.
-<<<<<<< HEAD
-public struct AutoRestParameterizedHostTestClientOptions: AzureClientOptions {
-=======
 public struct AutoRestParameterizedHostTestClientOptions: ClientOptions {
->>>>>>> sacheu/array
     /// The API version of the  to invoke.
     public let apiVersion: String
     /// The `ClientLogger` to be used by this `AutoRestParameterizedHostTestClient`.

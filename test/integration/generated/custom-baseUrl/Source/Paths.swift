@@ -19,11 +19,7 @@ import Foundation
 public final class Paths {
     public let client: AutoRestParameterizedHostTestClient
 
-<<<<<<< HEAD
-    public let commonOptions: AzureClientOptions
-=======
     public let commonOptions: ClientOptions
->>>>>>> sacheu/array
 
     /// Options provided to configure this `AutoRestParameterizedHostTestClient`.
     public let options: AutoRestParameterizedHostTestClientOptions
@@ -36,18 +32,11 @@ public final class Paths {
 
     public func url(
         forTemplate templateIn: String,
-<<<<<<< HEAD
         withHost hostIn: String? = nil,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
     ) -> URL? {
         return client.url(forTemplate: templateIn, withHost: hostIn, withKwargs: kwargs, and: addedParams)
-=======
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
-    ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
->>>>>>> sacheu/array
     }
 
     public func request(
@@ -65,23 +54,15 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getEmpty(
-<<<<<<< HEAD
         accountName: String,
-=======
-        accountName _: String,
->>>>>>> sacheu/array
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
         let urlTemplate = "/customuri"
         let pathParams = [
-<<<<<<< HEAD
             "accountName": accountName,
             "host": client.host
-=======
-            "": ""
->>>>>>> sacheu/array
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -91,7 +72,6 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-<<<<<<< HEAD
         guard let requestUrl = url(
             forTemplate: urlTemplate,
             withHost: "http://{accountName}{host}",
@@ -99,10 +79,6 @@ public final class Paths {
             and: queryParams
         ) else {
             self.options.logger.error("Failed to construct request url")
-=======
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
->>>>>>> sacheu/array
             return
         }
 
@@ -119,11 +95,7 @@ public final class Paths {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-<<<<<<< HEAD
-                let noDataError = AzureError.sdk("Response data expected but not found.")
-=======
                 let noDataError = AzureError.client("Response data expected but not found.")
->>>>>>> sacheu/array
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -133,11 +105,7 @@ public final class Paths {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-<<<<<<< HEAD
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
-=======
                     let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
->>>>>>> sacheu/array
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -162,11 +130,7 @@ public final class Paths {
                     }
                 } catch {
                     dispatchQueue.async {
-<<<<<<< HEAD
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
-=======
                         completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
->>>>>>> sacheu/array
                     }
                 }
             }
