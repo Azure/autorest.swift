@@ -184,6 +184,7 @@
 		F151510B25128E2D00DF0B9F /* OperationExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */; };
 		F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */; };
 		F15151272512AA5B00DF0B9F /* OperationResponseExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */; };
+		F15D2C5C2547536400265366 /* AutoRestParameterizedHostTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -258,6 +259,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = "AutoRestSwaggerBatFile::AutoRestSwaggerBatFile";
 			remoteInfo = AutoRestSwaggerBatFile;
+		};
+		F15D2C4F2547523B00265366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestParameterizedHostTest::AutoRestParameterizedHostTest::Product";
+			remoteInfo = AutoRestParameterizedHostTest;
+		};
+		F15D2C5F254753BE00265366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestParameterizedHostTest::AutoRestParameterizedHostTest";
+			remoteInfo = AutoRestParameterizedHostTest;
 		};
 		F186E8E8250FE46100723FA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -518,6 +533,8 @@
 		F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseExceptionSnippet.stencil; sourceTree = "<group>"; };
 		F1587DA8251A965900A89B98 /* NamedOperationGroupFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedOperationGroupFile.stencil; sourceTree = "<group>"; };
+		F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestParameterizedHostTest.xcodeproj; path = "test/integration/generated/custom-baseUrl/AutoRestParameterizedHostTest.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestParameterizedHostTest.swift; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
@@ -850,6 +867,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F15D2C482547523B00265366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F15D2C502547523B00265366 /* AutoRestParameterizedHostTest.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F186E8FD250FEAEC00723FA3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,12 +908,14 @@
 				F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */,
 				F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */,
 				0A7476E82527CDAC00819FC9 /* AutoRestResourceFlatteningTest.xcodeproj */,
+				F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */,
 				F186E8F2250FE9A100723FA3 /* XmsErrorResponseExtensions.xcodeproj */,
 				0A747B22252E897200819FC9 /* AutoRestUrlTest.swift */,
 				F113047424F78283007FF3A3 /* AutoRestHeadTest.swift */,
 				F186EB1425116AC500723FA3 /* AutoRestBodyIntegerTest.swift */,
 				F11304A624F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift */,
 				0A7477002527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift */,
+				F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */,
 				F10B1F6125414556007DA581 /* Dictionary+Extension.swift */,
 				F186E914250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift */,
 				F18718F0250C592300318867 /* ZZZAutoRestReportTest.swift */,
@@ -1134,6 +1161,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F15D2C60254753BE00265366 /* PBXTargetDependency */,
 				0A7477382527D17800819FC9 /* PBXTargetDependency */,
 				0A7476FF2527CE2100819FC9 /* PBXTargetDependency */,
 				F186EB2E25116BE200723FA3 /* PBXTargetDependency */,
@@ -1185,6 +1213,10 @@
 					ProjectRef = F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */;
 				},
 				{
+					ProductGroup = F15D2C482547523B00265366 /* Products */;
+					ProjectRef = F15D2C472547523B00265366 /* AutoRestParameterizedHostTest.xcodeproj */;
+				},
+				{
 					ProductGroup = F18718E1250C58B900318867 /* Products */;
 					ProjectRef = F18718E0250C58B900318867 /* AutoRestReport.xcodeproj */;
 				},
@@ -1197,12 +1229,12 @@
 					ProjectRef = F113049624F8BA0C007FF3A3 /* AutoRestSwaggerBatFile.xcodeproj */;
 				},
 				{
-					ProductGroup = 0A74777D252CD3D500819FC9 /* Products */;
-					ProjectRef = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
-				},
-				{
 					ProductGroup = 0A7477232527D15F00819FC9 /* Products */;
 					ProjectRef = 0A7477222527D15F00819FC9 /* AutoRestUrlTest.xcodeproj */;
+				},
+				{
+					ProductGroup = 0A74777D252CD3D500819FC9 /* Products */;
+					ProjectRef = F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */;
 				},
 				{
 					ProductGroup = F186E8FD250FEAEC00723FA3 /* Products */;
@@ -1244,6 +1276,13 @@
 			fileType = wrapper.framework;
 			path = AutoRestSwaggerBatFile.framework;
 			remoteRef = F11304A024F8BA0C007FF3A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F15D2C502547523B00265366 /* AutoRestParameterizedHostTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestParameterizedHostTest.framework;
+			remoteRef = F15D2C4F2547523B00265366 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F186E906250FEAEC00723FA3 /* XmsErrorResponseExtensions.framework */ = {
@@ -1357,13 +1396,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15D2C5C2547536400265366 /* AutoRestParameterizedHostTest.swift in Sources */,
 				F186E916250FF08D00723FA3 /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				F11304A724F8BA85007FF3A3 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F186EB1525116AC500723FA3 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
-				F113047524F78283007FF3A3 /* AutorestHeadTest.swift in Sources */,
+				F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */,
 				0A7477012527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F18718F1250C592300318867 /* ZZZAutoRestReportTest.swift in Sources */,
 				0A747B24252E897300819FC9 /* AutoRestUrlTest.swift in Sources */,
@@ -1527,6 +1567,11 @@
 			isa = PBXTargetDependency;
 			name = AutoRestSwaggerBatFile;
 			targetProxy = F11304A424F8BA30007FF3A3 /* PBXContainerItemProxy */;
+		};
+		F15D2C60254753BE00265366 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestParameterizedHostTest;
+			targetProxy = F15D2C5F254753BE00265366 /* PBXContainerItemProxy */;
 		};
 		F186E8E9250FE46100723FA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

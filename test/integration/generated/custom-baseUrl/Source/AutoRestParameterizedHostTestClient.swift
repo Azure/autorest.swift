@@ -72,6 +72,7 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
     }
 
     public func url(
+<<<<<<< HEAD
         forTemplate templateIn: String,
         withKwargs kwargs: [String: String]? = nil,
         and addedParams: [QueryParameter]? = nil
@@ -88,10 +89,38 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
         }
 
         var urlString = baseUrl.absoluteString + template
+=======
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        var template = templateIn
+        var hostString = hostIn
+        if template.hasPrefix("/") { template = String(template.dropFirst()) }
+
+        if let pathParams = pathParamsIn {
+            for (key, value) in pathParams {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .azureUrlPathAllowed) {
+                    template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
+                if let host = hostString {
+                    hostString = host.replacingOccurrences(of: "{\(key)}", with: value)
+                }
+            }
+        }
+
+        if let hostUnwrapped = hostString,
+            !hostUnwrapped.hasSuffix("/") {
+            hostString = hostUnwrapped + "/"
+        }
+        let urlString = (hostString ?? baseUrl.absoluteString) + template
+>>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
         guard let url = URL(string: urlString) else {
             return nil
         }
 
+<<<<<<< HEAD
         guard !(addedParams?.isEmpty ?? false) else { return url }
 
         return appendingQueryParameters(url: url, addedParams ?? [])
@@ -106,6 +135,22 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
             value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
         ) }
         urlComps.percentEncodedQueryItems = addedQueryItems
+=======
+        guard !(queryParamsIn?.isEmpty ?? false) else { return url }
+
+        return appendingQueryParameters(url: url, queryParamsIn ?? [])
+    }
+
+    private func appendingQueryParameters(url: URL, _ queryParams: [QueryParameter]) -> URL? {
+        guard !queryParams.isEmpty else { return url }
+        guard var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+        let queryItems = queryParams.map { name, value in URLQueryItem(
+            name: name,
+            value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
+        ) }
+        urlComps.percentEncodedQueryItems = queryItems
+>>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
         return urlComps.url
     }
 

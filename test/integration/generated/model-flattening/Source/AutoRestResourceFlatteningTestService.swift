@@ -31,11 +31,12 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     public func url(
-        forTemplate templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
 
     public func request(
@@ -60,7 +61,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -75,7 +76,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -148,7 +154,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -158,8 +164,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -237,7 +248,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -252,7 +263,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -325,7 +341,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -335,8 +351,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -414,7 +435,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -429,7 +450,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -502,7 +528,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -512,8 +538,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -591,7 +622,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -606,7 +637,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -679,7 +715,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -689,8 +725,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -768,7 +809,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -783,7 +824,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -870,7 +916,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -889,7 +935,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -968,6 +1019,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "name": flattenParameterGroup.name
         ]
         // Construct query
@@ -979,8 +1031,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 

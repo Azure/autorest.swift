@@ -31,11 +31,12 @@ public final class PathItems {
     }
 
     public func url(
-        forTemplate templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
 
     public func request(
@@ -65,6 +66,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -87,8 +89,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -166,6 +173,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -188,8 +196,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -267,6 +280,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -289,8 +303,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -368,6 +387,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
+            "$host": client.baseUrl.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -390,8 +410,13 @@ public final class PathItems {
         }
         // Header options
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
