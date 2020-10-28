@@ -31,20 +31,12 @@ public final class Paths {
     }
 
     public func url(
-<<<<<<< HEAD
-        forTemplate templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
-    ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
-=======
         host hostIn: String? = nil,
         template templateIn: String,
         pathParams pathParamsIn: [String: String]? = nil,
         queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
         return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
->>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
     }
 
     public func request(
@@ -62,23 +54,15 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func getEmpty(
-<<<<<<< HEAD
-        accountName _: String,
-=======
         accountName: String,
->>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
         let urlTemplate = "/customuri"
         let pathParams = [
-<<<<<<< HEAD
-            "": ""
-=======
             "accountName": accountName,
             "host": client.host
->>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -88,10 +72,6 @@ public final class Paths {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-<<<<<<< HEAD
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
-=======
         guard let requestUrl = url(
             host: "http://{accountName}{host}",
             template: urlTemplate,
@@ -99,7 +79,6 @@ public final class Paths {
             queryParams: queryParams
         ) else {
             self.options.logger.error("Failed to construct request url")
->>>>>>> adceceb0b228fe31c6eb23acf89a76df244ae0a3
             return
         }
 
