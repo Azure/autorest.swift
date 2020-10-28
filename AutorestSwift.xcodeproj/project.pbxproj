@@ -346,6 +346,20 @@
 			remoteGlobalIDString = "AzureSDK::AzureCore";
 			remoteInfo = AzureCore;
 		};
+		F1BBE2C3254A112000BF6D9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1BBE2BB254A111F00BF6D9E /* AutoRestSwaggerBat.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "AutoRestSwaggerBat::AutoRestSwaggerBat::Product";
+			remoteInfo = AutoRestSwaggerBat;
+		};
+		F1BBE2D3254A114500BF6D9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1BBE2BB254A111F00BF6D9E /* AutoRestSwaggerBat.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "AutoRestSwaggerBat::AutoRestSwaggerBat";
+			remoteInfo = AutoRestSwaggerBat;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -565,6 +579,7 @@
 		F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutorestSwiftTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A6719624F5CCCC00C2712C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestHeadTest.xcodeproj; path = test/integration/generated/head/AutoRestHeadTest.xcodeproj; sourceTree = SOURCE_ROOT; };
+		F1BBE2BB254A111F00BF6D9E /* AutoRestSwaggerBat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestSwaggerBat.xcodeproj; path = "test/integration/generated/body-string/AutoRestSwaggerBat.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeDeclareSnippet.stencil; sourceTree = "<group>"; };
 		F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseUnixTimeBodySnippet.stencil; sourceTree = "<group>"; };
 		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -906,6 +921,7 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				F1BBE2BB254A111F00BF6D9E /* AutoRestSwaggerBat.xcodeproj */,
 				F1A671A924F5E54000C2712C /* AutoRestHeadTest.xcodeproj */,
 				F13C48092527EB86004E7CCF /* AutoRestUrlTest.xcodeproj */,
 				F186EB2225116ADF00723FA3 /* AutoRestIntegerTest.xcodeproj */,
@@ -936,6 +952,14 @@
 			children = (
 				F1A671B224F5E54100C2712C /* AutoRestHeadTest.framework */,
 				F1A671B424F5E54100C2712C /* AzureCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1BBE2BC254A111F00BF6D9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1BBE2C4254A112000BF6D9E /* AutoRestSwaggerBat.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1168,6 +1192,7 @@
 			);
 			dependencies = (
 				F15D2C60254753BE00265366 /* PBXTargetDependency */,
+				F1BBE2D4254A114500BF6D9E /* PBXTargetDependency */,
 				0A7477382527D17800819FC9 /* PBXTargetDependency */,
 				0A7476FF2527CE2100819FC9 /* PBXTargetDependency */,
 				F186EB2E25116BE200723FA3 /* PBXTargetDependency */,
@@ -1229,6 +1254,10 @@
 				{
 					ProductGroup = 0A7476E92527CDAC00819FC9 /* Products */;
 					ProjectRef = 0A7476E82527CDAC00819FC9 /* AutoRestResourceFlatteningTest.xcodeproj */;
+				},
+				{
+					ProductGroup = F1BBE2BC254A111F00BF6D9E /* Products */;
+					ProjectRef = F1BBE2BB254A111F00BF6D9E /* AutoRestSwaggerBat.xcodeproj */;
 				},
 				{
 					ProductGroup = F113049724F8BA0C007FF3A3 /* Products */;
@@ -1324,6 +1353,13 @@
 			fileType = wrapper.framework;
 			path = AzureCore.framework;
 			remoteRef = F1A671B324F5E54100C2712C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1BBE2C4254A112000BF6D9E /* AutoRestSwaggerBat.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AutoRestSwaggerBat.framework;
+			remoteRef = F1BBE2C3254A112000BF6D9E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1605,6 +1641,11 @@
 			isa = PBXTargetDependency;
 			name = AzureCore;
 			targetProxy = F1A671B724F5E5FF00C2712C /* PBXContainerItemProxy */;
+		};
+		F1BBE2D4254A114500BF6D9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AutoRestSwaggerBat;
+			targetProxy = F1BBE2D3254A114500BF6D9E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
