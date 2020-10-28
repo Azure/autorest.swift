@@ -45,6 +45,31 @@ class Parameter: Value, CustomDebugStringConvertible {
         return nil
     }
 
+    var style: SerializationStyle? {
+        if let httpParam = self.protocol.http as? HttpParameter {
+            return httpParam.style
+        }
+        return nil
+    }
+
+    var delimiter: String {
+        guard let delimiterStyle = style else {
+            return ","
+        }
+        switch delimiterStyle {
+        case .pipeDelimited:
+            return "|"
+        case .spaceDelimited:
+            return " "
+        case .tabDelimited:
+            return "\\t"
+        case .form:
+            return ","
+        default:
+            return ","
+        }
+    }
+
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {

@@ -31,6 +31,7 @@ import XCTest
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
+
 class AutoRestUrlTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
@@ -276,6 +277,74 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call paths.floatScientificNegative failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_stringUrlEncoded200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.stringUrlEncoded succeed")
+
+        client.paths.stringUrlEncoded { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call paths.stringUrlEncoded failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_arrayStringCsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.arrayStringCsvValid succeed")
+
+        client.paths
+            .arrayCsvInPath(arrayPath: ["ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", ""]) { result, httpResponse in
+                switch result {
+                case .success:
+                    expectation.fulfill()
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    print("test failed. error=\(details)")
+                    XCTFail("Call paths.arrayStringCsvValid failed")
+                }
+            }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_base64Url200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.base64Url succeed")
+
+        client.paths.base64Url(base64UrlPath: Data("lorem".utf8)) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call paths.base64Url failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_stringUrlNonEncoded200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.stringUrlNonEncoded succeed")
+
+        client.paths.stringUrlNonEncoded { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call paths.stringUrlNonEncoded failed")
             }
         }
 
@@ -599,6 +668,203 @@ class AutoRestUrlTest: XCTestCase {
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call queries.floatNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringCsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvValid succeed")
+
+        let options = Queries.ArrayStringCsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringCsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringPipesValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringPipesValid succeed")
+
+        let options = Queries.ArrayStringPipesValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringPipesValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringPipesValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringSsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringSsvValid succeed")
+
+        let options = Queries.ArrayStringSsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringSsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringSsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringTsvValid200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringTsvValid succeed")
+
+        let options = Queries.ArrayStringTsvValidOptions(
+            arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
+        )
+
+        client.queries.arrayStringTsvValid(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringTsvValid failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringNoCollectionFormatEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringNoCollectionFormatEmpty succeed")
+
+        let options = Queries.ArrayStringNoCollectionFormatEmptyOptions(
+            arrayQuery: ["hello", "nihao", "bonjour"]
+        )
+
+        client.queries.arrayStringNoCollectionFormatEmpty(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringNoCollectionFormatEmpty failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringCsvEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvEmpty succeed")
+
+        let options = Queries.ArrayStringCsvEmptyOptions(
+            arrayQuery: []
+        )
+
+        client.queries.arrayStringCsvEmpty(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvEmpty failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_arrayStringCsvNull200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvNull succeed")
+
+        let options = Queries.ArrayStringCsvNullOptions(
+            arrayQuery: nil
+        )
+
+        client.queries.arrayStringCsvNull(withOptions: options) { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.arrayStringCsvNull failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_stringUrlEncoded200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringUrlEncoded succeed")
+
+        client.queries.stringUrlEncoded { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.stringUrlEncoded failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_stringUnicoded200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringUnicode succeed")
+
+        client.queries.stringUnicode { result, httpResponse in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call queries.stringUnicode failed")
+            }
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_floatScientificPositive200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.floatScientificPositive succeed")
+
+        client.queries.floatScientificPositive { result, _ in
+            switch result {
+            case .success:
+                expectation.fulfill()
+            case let .failure(error):
+                print("test failed. error=\(error.message)")
+                XCTFail("Call queries.floatScientificPositive failed")
             }
         }
 

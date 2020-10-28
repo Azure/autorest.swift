@@ -89,6 +89,14 @@ enum ParameterType: Codable {
         return common.paramLocation
     }
 
+    var style: SerializationStyle? {
+        return common.style
+    }
+
+    var delimiter: String {
+        return common.delimiter
+    }
+
     var clientDefaultValue: String? {
         return common.clientDefaultValue
     }

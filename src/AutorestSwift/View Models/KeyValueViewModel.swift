@@ -28,6 +28,7 @@ import Foundation
 
 enum KeyValueDecodeStrategy: String {
     case byteArray
+    case base64ByteArray
     case date
     case dateTime
     case `default`
@@ -71,7 +72,8 @@ struct KeyValueViewModel: Comparable {
         } else if param.implementation == .client {
             self.init(
                 key: name,
-                value: name,
+                // if the parameter is $host, retrieve the value from client's 'baseUrl' property
+                value: (name == "$host") ? "baseUrl.absoluteString" : name,
                 optional: !param.required,
                 path: "client."
             )
@@ -117,7 +119,7 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValueForType(type: type, value: name)
+        self.value = KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
@@ -128,7 +130,12 @@ struct KeyValueViewModel: Comparable {
         case .dateTime:
             keyValueType = .dateTime
         case .byteArray:
-            keyValueType = .byteArray
+            if let byteArraySchema = signatureParameter.schema as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                keyValueType = .base64ByteArray
+            } else {
+                keyValueType = .byteArray
+            }
         default:
             keyValueType = .default
         }
@@ -154,10 +161,9 @@ struct KeyValueViewModel: Comparable {
     /**
      Convert the type into String format in Swift
      */
-    private static func formatValueForType(type: AllSchemaTypes, value: String) -> String {
+    private static func formatValue(forSignatureParameter signatureParameter: ParameterType, value: String) -> String {
+        let type = signatureParameter.schema.type
         switch type {
-        case .string:
-            return "\(value)"
         case .integer,
              .number,
              .boolean:
@@ -172,7 +178,7 @@ struct KeyValueViewModel: Comparable {
              .sealedChoice:
             return "\(value).rawValue"
         case .array:
-            return "\(value).map { String($0) }.joined(separator: \",\") "
+            return "\(value).map { String($0) }.joined(separator: \"\(signatureParameter.delimiter)\") "
         default:
             return "\(value)"
         }

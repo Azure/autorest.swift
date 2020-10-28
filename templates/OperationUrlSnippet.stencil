@@ -1,14 +1,7 @@
 // Construct URL
-guard let urlTemplate = "{{ op.request.path }}".removingPercentEncoding else {
-    self.options.logger.error("Failed to construct url")
-    return
-}
+let urlTemplate = "{{ op.request.path }}"
 let pathParams = [
     {% for param in op.params.path %}
         "{{ param.key }}" : {{ param.path}}{{ param.value }},
     {% endfor %}
 ]
-guard let url = self.url(forTemplate: urlTemplate, withKwargs: pathParams) else {
-    self.options.logger.error("Failed to construct url")
-    return
-}

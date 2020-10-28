@@ -55,6 +55,8 @@ struct OperationParameters {
                     .append(viewModel)
             case .path:
                 path.append(viewModel)
+            case .uri:
+                path.append(viewModel)
             default:
                 continue
             }

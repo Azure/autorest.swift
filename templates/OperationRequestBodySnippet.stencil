@@ -22,8 +22,8 @@ guard let requestBody = try? JSONEncoder().encode(body) else {
     return
 }
 {% endif %}
-guard let requestUrl = url.appendingQueryParameters(queryParams) else {
-    self.options.logger.error("Failed to append query parameters to URL")
+guard let requestUrl = self.url(host: "{{ op.request.uri }}", template: urlTemplate, pathParams: pathParams, queryParams: queryParams) else {
+    self.options.logger.error("Failed to construct request url")
     return
 }
 
