@@ -76,7 +76,7 @@ class ZZZAutoRestReportTest: XCTestCase {
             let mobileCoverage: Float = Float(mobilePassedCount) / Float(mobileTestCount) * 100
 
             /* Uncomment this to print the list of passed/failed tests */
-            /*
+
              let mobileFailedTest = mobileTest.filter { $0.value == 0 }
 
              if mobilePassedTest.count > 0 {
@@ -90,7 +90,7 @@ class ZZZAutoRestReportTest: XCTestCase {
                  print("-------------------")
                  for test in mobileFailedTest { print(test.key) }
              }
-             */
+
 
             print(
                 "Mobile Passed Test=\(mobilePassedCount), Mobile Total Test=\(mobileTestCount), Coverage=\(String(format: "%.2f", mobileCoverage))%"
@@ -99,14 +99,14 @@ class ZZZAutoRestReportTest: XCTestCase {
 
         // List all passed tests which are not part of the mobile tests
         /* Uncomment this to print the list of passed/failed tests */
-        /*
+
          let otherPassedTest = passedTest.difference(from: mobilePassedTest)
          if otherPassedTest.count > 0 {
              print("\nOther passed tests")
              print("-------------------")
              for test in otherPassedTest { print(test.key) }
          }
-         */
+
         print("Pass Test=\(passedCount), Total Test=\(totalTestCount), Coverage=\(String(format: "%.2f", coverage))%")
     }
 
