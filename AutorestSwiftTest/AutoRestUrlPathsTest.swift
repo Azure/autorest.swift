@@ -32,7 +32,7 @@ import XCTest
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 
-class AutoRestUrlTest: XCTestCase {
+class AutoRestUrlPathsTest: XCTestCase {
     var client: AutoRestUrlTestClient!
 
     override func setUpWithError() throws {
@@ -44,37 +44,39 @@ class AutoRestUrlTest: XCTestCase {
     }
 
     func test_Paths_byteNull200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.byteNull succeed")
+        let expectation = XCTestExpectation(description: "Call paths.byteNull")
 
         client.paths.byteNull(bytePath: Data()) { result, _ in
             switch result {
             case .success:
                 XCTFail("Call paths.byteNull failed")
             case .failure:
-                expectation.fulfill()
+                break
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_byteEmpty200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.byteEmpty succeed")
+        let expectation = XCTestExpectation(description: "Call paths.byteEmpty")
 
         client.paths.byteEmpty { result, _ in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case .failure:
                 XCTFail("Call paths.byteEmpty failed")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_byteMultiByte200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.byteMultiByte succeed")
+        let expectation = XCTestExpectation(description: "Call paths.byteMultiByte")
 
         guard let bytePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
             return
@@ -82,74 +84,79 @@ class AutoRestUrlTest: XCTestCase {
         client.paths.byteMultiByte(bytePath: bytePath) { result, _ in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case .failure:
                 XCTFail("Call paths.byteMultiByte failed")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_getBooleanTrue200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getBooleanTrue succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getBooleanTrue")
 
-        client.paths.getBooleanTrue { result, _ in
+        client.paths.getBooleanTrue { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getBooleanTrue failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getBooleanTrue failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_getBooleanFalse200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getBooleanFalse succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getBooleanFalse")
 
-        client.paths.getBooleanFalse { result, _ in
+        client.paths.getBooleanFalse { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getBooleanFalse failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getBooleanFalse failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_enumValid200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.enumValid succeed")
+        let expectation = XCTestExpectation(description: "Call paths.enumValid")
 
-        client.paths.enumValid(enumPath: .greenColor) { result, _ in
+        client.paths.enumValid(enumPath: .greenColor) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.enumValid failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.enumValid failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_dateValid200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.dateValid succeed")
+        let expectation = XCTestExpectation(description: "Call paths.dateValid")
 
-        client.paths.dateValid { result, _ in
+        client.paths.dateValid { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.dateValid failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.dateValid failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
@@ -158,14 +165,15 @@ class AutoRestUrlTest: XCTestCase {
     func test_Paths_dateTimeValid200() throws {
         let expectation = XCTestExpectation(description: "Call paths.dateTimeValid succeed")
 
-        client.paths.dateTimeValid { result, _ in
+        client.paths.dateTimeValid { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.dateTimeValid failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.dateTimeValid failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
@@ -174,178 +182,186 @@ class AutoRestUrlTest: XCTestCase {
     func test_Paths_getIntOneMillion200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getIntOneMillion succeed")
 
-        client.paths.getIntOneMillion { result, _ in
+        client.paths.getIntOneMillion { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getIntOneMillion failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getIntOneMillion failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_getIntNegativeOneMillion200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getIntNegativeOneMillion succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getIntNegativeOneMillion")
 
-        client.paths.getIntNegativeOneMillion { result, _ in
+        client.paths.getIntNegativeOneMillion { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getIntOneMillion failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getIntNegativeOneMillion failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_getTenBillion200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getTenBillion succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getTenBillion")
 
-        client.paths.getTenBillion { result, _ in
+        client.paths.getTenBillion { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getTenBillion failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getTenBillion failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_getNegativeTenBillion200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getNegativeTenBillion succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getNegativeTenBillion")
 
-        client.paths.getNegativeTenBillion { result, _ in
+        client.paths.getNegativeTenBillion { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.getTenBillion failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getNegativeTenBillion failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_doubleDecimalPositive200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalPositive succeed")
+        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalPositive")
 
-        client.paths.doubleDecimalPositive { result, _ in
+        client.paths.doubleDecimalPositive { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.doubleDecimalPositive failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.doubleDecimalPositive failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_doubleDecimalNegative200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalNegative succeed")
+        let expectation = XCTestExpectation(description: "Call paths.doubleDecimalNegative")
 
-        client.paths.doubleDecimalNegative { result, _ in
+        client.paths.doubleDecimalNegative { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.doubleDecimalNegative failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.doubleDecimalNegative failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_floatScientificNegative200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.floatScientificNegative succeed")
+        let expectation = XCTestExpectation(description: "Call paths.floatScientificNegative")
 
-        client.paths.floatScientificNegative { result, _ in
+        client.paths.floatScientificNegative { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.floatScientificNegative failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.floatScientificNegative failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_stringUrlEncoded200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.stringUrlEncoded succeed")
+        let expectation = XCTestExpectation(description: "Call paths.stringUrlEncoded")
 
         client.paths.stringUrlEncoded { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call paths.stringUrlEncoded failed")
+                XCTFail("Call paths.stringUrlEncoded failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_arrayStringCsvValid200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.arrayStringCsvValid succeed")
+        let expectation = XCTestExpectation(description: "Call paths.arrayStringCsvValid")
 
         client.paths
             .arrayCsvInPath(arrayPath: ["ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", ""]) { result, httpResponse in
                 switch result {
                 case .success:
-                    expectation.fulfill()
+                    break
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    print("test failed. error=\(details)")
-                    XCTFail("Call paths.arrayStringCsvValid failed")
+                    XCTFail("Call paths.arrayStringCsvValid failed. error=\(details)")
                 }
+                expectation.fulfill()
             }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_base64Url200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.base64Url succeed")
+        let expectation = XCTestExpectation(description: "Call paths.base64Url")
 
         client.paths.base64Url(base64UrlPath: Data("lorem".utf8)) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call paths.base64Url failed")
+                XCTFail("Call paths.base64Url failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Paths_stringUrlNonEncoded200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.stringUrlNonEncoded succeed")
+        let expectation = XCTestExpectation(description: "Call paths.stringUrlNonEncoded")
 
-        client.paths.stringUrlNonEncoded { result, _ in
+        client.paths.stringUrlNonEncoded { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call paths.stringUrlNonEncoded failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.getTenBillion failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)

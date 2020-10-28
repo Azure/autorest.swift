@@ -44,7 +44,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
     }
 
     func test_Pathitems_getGlobalQueryNull200() throws {
-        let expectation = XCTestExpectation(description: "Call pathitems_getGlobalQueryNull succeed")
+        let expectation = XCTestExpectation(description: "Call pathitems_getGlobalQueryNull")
 
         let options = PathItems.GetGlobalQueryNullOptions(
             pathItemStringQuery: "pathItemStringQuery",
@@ -57,19 +57,19 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call pathitems_getGlobalQueryNull failed")
+                XCTFail("Call pathitems_getGlobalQueryNull failed error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Pathitems_getGlobalAndLocalQueryNull200() throws {
-        let expectation = XCTestExpectation(description: "Call pathitems.getGlobalAndLocalQueryNull succeed")
+        let expectation = XCTestExpectation(description: "Call pathitems.getGlobalAndLocalQueryNull")
 
         let options = PathItems.GetGlobalAndLocalQueryNullOptions(pathItemStringQuery: "pathItemStringQuery")
         client.pathitems.getGlobalAndLocalQueryNull(
@@ -79,19 +79,19 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call pathitems.getGlobalAndLocalQueryNull failed")
+                XCTFail("Call pathitems.getGlobalAndLocalQueryNull failed error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Pathitems_getLocalPathItemQueryNull200() throws {
-        let expectation = XCTestExpectation(description: "Call pathitems_getLocalPathItemQueryNull succeed")
+        let expectation = XCTestExpectation(description: "Call pathitems_getLocalPathItemQueryNull")
         client.globalStringQuery = "globalStringQuery"
         client.pathitems.getLocalPathItemQueryNull(
             pathItemStringPath: "pathItemStringPath",
@@ -99,19 +99,19 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call pathitems_getLocalPathItemQueryNull failed")
+                XCTFail("Call pathitems_getLocalPathItemQueryNull failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Pathitems_listAllWithValues200() throws {
-        let expectation = XCTestExpectation(description: "Call pathitems_listAllWithValues succeed")
+        let expectation = XCTestExpectation(description: "Call pathitems_listAllWithValues")
         client.globalStringQuery = "globalStringQuery"
         let options = PathItems.GetAllWithValuesOptions(
             pathItemStringQuery: "pathItemStringQuery",
@@ -124,12 +124,12 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                print("test failed. error=\(details)")
-                XCTFail("Call pathitems_listAllWithValues failed")
+                XCTFail("Call pathitems_listAllWithValues failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
