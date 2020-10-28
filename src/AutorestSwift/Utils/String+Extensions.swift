@@ -93,7 +93,8 @@ extension String {
             "Int",
             "String",
             "Bool",
-            "Enum"
+            "Enum",
+            "Array"
         ]
         return reserved.contains(self)
     }

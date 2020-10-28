@@ -98,7 +98,7 @@ class Schema: Codable, LanguageShortcut {
                     swiftType = "[\(arraySchema.elementType.name)]"
                 }
             } else {
-                swiftType = "[\(name)]"
+                swiftType = "[\(swiftName)]"
             }
         case AllSchemaTypes.dateTime,
              AllSchemaTypes.date,
@@ -112,12 +112,12 @@ class Schema: Codable, LanguageShortcut {
              AllSchemaTypes.object,
              AllSchemaTypes.sealedChoice,
              AllSchemaTypes.group:
-            swiftType = name.isReserved ? name + "Type" : name
+            swiftType = swiftName
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
                 swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
             } else {
-                swiftType = "[String:\(name)]"
+                swiftType = "[String:\(swiftName)]"
             }
         case AllSchemaTypes.constant:
             guard let constant = self as? ConstantSchema else {
@@ -129,6 +129,10 @@ class Schema: Codable, LanguageShortcut {
         }
 
         return optional ? "\(swiftType)?" : swiftType
+    }
+
+    var swiftName: String {
+        return name.isReserved ? name + "Type" : name
     }
 
     static func decode<Key>(

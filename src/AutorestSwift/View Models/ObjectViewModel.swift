@@ -42,11 +42,7 @@ struct ObjectViewModel {
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
-        var name = schema.name
-        if name.isReserved {
-            name += "Type"
-        }
-        self.name = name
+        self.name = schema.swiftName
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs
@@ -85,11 +81,7 @@ struct ObjectViewModel {
     }
 
     init(from schema: GroupSchema) {
-        var name = schema.name
-        if name.isReserved {
-            name += "Type"
-        }
-        self.name = name
+        self.name = schema.swiftName
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs
