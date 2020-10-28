@@ -11,7 +11,6 @@
 		OBJ_112 /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ClientLogger.swift */; };
 		OBJ_113 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* CancellationToken.swift */; };
 		OBJ_114 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Collections.swift */; };
-		OBJ_115 /* MatchCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MatchCondition.swift */; };
 		OBJ_116 /* XMLMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* XMLMap.swift */; };
 		OBJ_117 /* XMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* XMLModel.swift */; };
 		OBJ_118 /* XMLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* XMLTree.swift */; };
@@ -273,7 +272,7 @@
 			path = Policies;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -283,7 +282,6 @@
 				OBJ_80 /* Products */,
 				OBJ_83 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Transport */ = {
@@ -413,7 +411,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_80 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -433,7 +431,6 @@
 				OBJ_112 /* ClientLogger.swift in Sources */,
 				OBJ_113 /* CancellationToken.swift in Sources */,
 				OBJ_114 /* Collections.swift in Sources */,
-				OBJ_115 /* MatchCondition.swift in Sources */,
 				OBJ_116 /* XMLMap.swift in Sources */,
 				OBJ_117 /* XMLModel.swift in Sources */,
 				OBJ_118 /* XMLTree.swift in Sources */,
