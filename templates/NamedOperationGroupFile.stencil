@@ -12,7 +12,7 @@ public final class {{ group.name }} {
 
     public let client: {{ model.name }}
     
-    public let commonOptions: AzureClientOptions
+    public let commonOptions: ClientOptions
 
     /// Options provided to configure this `{{ model.name }}`.
     public let options: {{ model.name }}Options
@@ -23,8 +23,13 @@ public final class {{ group.name }} {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(forTemplate templateIn: String, withKwargs kwargs: [String: String]? = nil, and addedParams: [QueryParameter]? = nil) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+    public func url(
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
     
     public func request(_ request: HTTPRequest, context: PipelineContext?, completionHandler: @escaping HTTPResultHandler<Data?>) {

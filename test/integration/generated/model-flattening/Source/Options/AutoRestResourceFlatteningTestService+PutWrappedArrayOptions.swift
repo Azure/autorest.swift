@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutWrappedArray` operation.
-    public struct PutWrappedArrayOptions: AzureOptions {
+    public struct PutWrappedArrayOptions: RequestOptions {
         /// External Resource as an Array to put
         public let resourceArray: [WrappedProduct]?
 

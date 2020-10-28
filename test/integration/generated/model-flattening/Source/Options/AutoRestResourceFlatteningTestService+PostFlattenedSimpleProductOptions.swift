@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PostFlattenedSimpleProduct` operation.
-    public struct PostFlattenedSimpleProductOptions: AzureOptions {
+    public struct PostFlattenedSimpleProductOptions: RequestOptions {
         /// Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
         public let productId: String
         /// Description of product.

@@ -17,7 +17,7 @@ import Foundation
 
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutDictionary` operation.
-    public struct PutDictionaryOptions: AzureOptions {
+    public struct PutDictionaryOptions: RequestOptions {
         /// External Resource as a Dictionary to put
         public let resourceDictionary: [String: FlattenedProduct]?
 

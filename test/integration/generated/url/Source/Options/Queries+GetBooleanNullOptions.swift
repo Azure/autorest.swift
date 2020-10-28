@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.GetBooleanNull` operation.
-    public struct GetBooleanNullOptions: AzureOptions {
+    public struct GetBooleanNullOptions: RequestOptions {
         /// null boolean value
         public let boolQuery: Bool?
 

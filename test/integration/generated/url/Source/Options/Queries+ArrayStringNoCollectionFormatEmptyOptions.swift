@@ -17,7 +17,7 @@ import Foundation
 
 extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.ArrayStringNoCollectionFormatEmpty` operation.
-    public struct ArrayStringNoCollectionFormatEmptyOptions: AzureOptions {
+    public struct ArrayStringNoCollectionFormatEmptyOptions: RequestOptions {
         /// Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
         public let arrayQuery: [String]?
 

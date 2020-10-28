@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `XmsErrorResponseExtensionsClient`.
-public struct XmsErrorResponseExtensionsClientOptions: AzureClientOptions {
+public struct XmsErrorResponseExtensionsClientOptions: ClientOptions {
     /// The API version of the  to invoke.
     public let apiVersion: String
     /// The `ClientLogger` to be used by this `XmsErrorResponseExtensionsClient`.

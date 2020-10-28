@@ -19,7 +19,7 @@ import Foundation
 public final class AutoRestResourceFlatteningTestService {
     public let client: AutoRestResourceFlatteningTestClient
 
-    public let commonOptions: AzureClientOptions
+    public let commonOptions: ClientOptions
 
     /// Options provided to configure this `AutoRestResourceFlatteningTestClient`.
     public let options: AutoRestResourceFlatteningTestClientOptions
@@ -31,11 +31,12 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     public func url(
-        forTemplate templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
 
     public func request(
@@ -60,7 +61,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -75,7 +76,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -93,7 +99,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -103,7 +109,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -128,7 +134,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -148,7 +154,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -158,8 +164,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -176,7 +187,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -186,7 +197,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -203,7 +214,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -216,7 +227,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -237,7 +248,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -252,7 +263,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -270,7 +286,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -280,7 +296,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -305,7 +321,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -325,7 +341,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -335,8 +351,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -353,7 +374,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -363,7 +384,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -380,7 +401,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -393,7 +414,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -414,7 +435,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -429,7 +450,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -447,7 +473,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -457,7 +483,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -482,7 +508,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -502,7 +528,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -512,8 +538,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -530,7 +561,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -540,7 +571,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -557,7 +588,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -570,7 +601,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -591,7 +622,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -606,7 +637,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -624,7 +660,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -634,7 +670,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -659,7 +695,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -679,7 +715,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -689,8 +725,13 @@ public final class AutoRestResourceFlatteningTestService {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -707,7 +748,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -717,7 +758,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -734,7 +775,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -747,7 +788,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -768,7 +809,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -783,7 +824,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -801,7 +847,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -811,7 +857,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -828,7 +874,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -841,7 +887,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -870,7 +916,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -889,7 +935,12 @@ public final class AutoRestResourceFlatteningTestService {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -907,7 +958,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -917,7 +968,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -934,7 +985,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -947,7 +998,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -968,6 +1019,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
         let pathParams = [
+            "$host": client.baseUrl.absoluteString,
             "name": flattenParameterGroup.name
         ]
         // Construct query
@@ -979,8 +1031,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -997,7 +1054,7 @@ public final class AutoRestResourceFlatteningTestService {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -1007,7 +1064,7 @@ public final class AutoRestResourceFlatteningTestService {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -1024,7 +1081,7 @@ public final class AutoRestResourceFlatteningTestService {
                         }
                     } catch {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                         }
                     }
                 }
@@ -1037,7 +1094,7 @@ public final class AutoRestResourceFlatteningTestService {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }

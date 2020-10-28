@@ -17,7 +17,7 @@ import Foundation
 
 extension Files {
     /// User-configurable options for the `AutoRestSwaggerBATFileService.GetFile` operation.
-    public struct GetFileOptions: AzureOptions {
+    public struct GetFileOptions: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

@@ -17,7 +17,7 @@ import Foundation
 
 extension HttpSuccess {
     /// User-configurable options for the `AutoRestHeadTestService.Head204` operation.
-    public struct Head204Options: AzureOptions {
+    public struct Head204Options: RequestOptions {
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?

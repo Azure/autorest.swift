@@ -19,7 +19,7 @@ import Foundation
 public final class IntType {
     public let client: AutoRestIntegerTestClient
 
-    public let commonOptions: AzureClientOptions
+    public let commonOptions: ClientOptions
 
     /// Options provided to configure this `AutoRestIntegerTestClient`.
     public let options: AutoRestIntegerTestClientOptions
@@ -31,11 +31,12 @@ public final class IntType {
     }
 
     public func url(
-        forTemplate templateIn: String,
-        withKwargs kwargs: [String: String]? = nil,
-        and addedParams: [QueryParameter]? = nil
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
     ) -> URL? {
-        return client.url(forTemplate: templateIn, withKwargs: kwargs, and: addedParams)
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
     }
 
     public func request(
@@ -59,7 +60,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/null"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -69,8 +70,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -87,7 +93,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -97,7 +103,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -120,7 +126,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -133,7 +139,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -153,7 +159,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/invalid"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -163,8 +169,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -181,7 +192,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -191,7 +202,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -207,7 +218,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -220,7 +231,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -240,7 +251,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/overflowint32"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -250,8 +261,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -268,7 +284,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -278,7 +294,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -294,7 +310,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -307,7 +323,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -327,7 +343,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/underflowint32"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -337,8 +353,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -355,7 +376,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -365,7 +386,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -381,7 +402,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -394,7 +415,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -414,7 +435,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/overflowint64"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -424,8 +445,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -442,7 +468,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -452,7 +478,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -468,7 +494,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -481,7 +507,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -501,7 +527,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/underflowint64"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -511,8 +537,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -529,7 +560,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -539,7 +570,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -555,7 +586,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -568,7 +599,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -589,7 +620,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/max/32"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -604,7 +635,12 @@ public final class IntType {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -622,7 +658,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -632,7 +668,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -657,7 +693,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -678,7 +714,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/max/64"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -693,7 +729,12 @@ public final class IntType {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -711,7 +752,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -721,7 +762,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -746,7 +787,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -767,7 +808,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/min/32"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -782,7 +823,12 @@ public final class IntType {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -800,7 +846,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -810,7 +856,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -835,7 +881,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -856,7 +902,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/min/64"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -871,7 +917,12 @@ public final class IntType {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -889,7 +940,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -899,7 +950,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -924,7 +975,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -944,7 +995,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/unixtime"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -954,8 +1005,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -972,7 +1028,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -982,7 +1038,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -999,7 +1055,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1012,7 +1068,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -1033,7 +1089,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/unixtime"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1050,7 +1106,12 @@ public final class IntType {
             self.options.logger.error("Failed to encode request body in unixTime.")
             return
         }
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
             self.options.logger.error("Failed to construct request url")
             return
         }
@@ -1068,7 +1129,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -1078,7 +1139,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -1103,7 +1164,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -1123,7 +1184,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/invalidunixtime"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1133,8 +1194,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -1151,7 +1217,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -1161,7 +1227,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -1178,7 +1244,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1191,7 +1257,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
@@ -1211,7 +1277,7 @@ public final class IntType {
         // Construct URL
         let urlTemplate = "/int/nullunixtime"
         let pathParams = [
-            "": ""
+            "$host": client.baseUrl.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1221,8 +1287,13 @@ public final class IntType {
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(forTemplate: urlTemplate, withKwargs: pathParams, and: queryParams) else {
-            self.options.logger.error("Failed to construct url")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
 
@@ -1239,7 +1310,7 @@ public final class IntType {
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
-                let noDataError = AzureError.sdk("Response data expected but not found.")
+                let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
                     completionHandler(.failure(noDataError), httpResponse)
                 }
@@ -1249,7 +1320,7 @@ public final class IntType {
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.sdk("Expected a status code in response but didn't find one.")
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
                     dispatchQueue.async {
                         completionHandler(.failure(noStatusCodeError), httpResponse)
                     }
@@ -1273,7 +1344,7 @@ public final class IntType {
                         }
                     } else {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.sdk("Decoding error.", nil)), httpResponse)
+                            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                         }
                     }
                 }
@@ -1286,7 +1357,7 @@ public final class IntType {
                     }
                 } catch {
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.sdk("Decoding error.", error)), httpResponse)
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
                     }
                 }
             }
