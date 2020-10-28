@@ -42,13 +42,16 @@ struct OperationGroupViewModel {
         if model.object(for: groupName) != nil {
             // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
             groupName += "Operation"
+        } else if groupName.isReserved {
+            groupName += "Type"
         }
+
         self.name = groupName
 
         self.comment = ViewModelComment(from: group.description)
         var items = [OperationViewModel]()
         for operation in group.operations {
-            items.append(OperationViewModel(from: operation, with: model, groupName: name))
+            items.append(OperationViewModel(from: operation, with: model, groupName: groupName))
         }
         self.operations = items
     }

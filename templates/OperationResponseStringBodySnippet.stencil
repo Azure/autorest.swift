@@ -1,5 +1,11 @@
 {% include "OperationResponseNullableBodySnippet.stencil" %}
-let decoded = String(data: data, encoding: .utf8)
-dispatchQueue.async {
-    completionHandler(.success(decoded), httpResponse)
+if let decoded = String(data: data, encoding: .utf8) {
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
+    }
+} else {
+    let decodedError = AzureError.client("Expected a string in response body.")
+    dispatchQueue.async {
+        completionHandler(.failure(decodedError), httpResponse)
+    }
 }
