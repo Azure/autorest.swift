@@ -89,6 +89,7 @@ extension String {
 
     var isReserved: Bool {
         let reserved = [
+            "Error",
             "Int",
             "String",
             "Bool",

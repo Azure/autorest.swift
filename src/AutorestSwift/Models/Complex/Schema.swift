@@ -112,7 +112,7 @@ class Schema: Codable, LanguageShortcut {
              AllSchemaTypes.object,
              AllSchemaTypes.sealedChoice,
              AllSchemaTypes.group:
-            swiftType = name
+            swiftType = name.isReserved ? name + "Type" : name
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
                 swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
