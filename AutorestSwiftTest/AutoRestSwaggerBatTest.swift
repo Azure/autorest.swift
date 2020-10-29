@@ -39,4 +39,22 @@ class AutoRestSwaggerBatTest: XCTestCase {
             withOptions: AutoRestSwaggerBatClientOptions()
         )
     }
+
+    func test_string_getNull__200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getNull")
+
+        client.stringOperation.getNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertNil(data)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

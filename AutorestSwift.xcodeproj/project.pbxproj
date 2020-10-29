@@ -200,6 +200,8 @@
 		F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */; };
 		F15A92AA254B0A0F00E2D9C2 /* AutoRestHeadTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */; };
 		F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */; };
+		F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */; };
+		F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -433,6 +435,8 @@
 		F15A9298254B095500E2D9C2 /* report */ = {isa = PBXFileReference; lastKnownFileType = text; name = report; path = test/integration/generated/report; sourceTree = SOURCE_ROOT; };
 		F15A929A254B096900E2D9C2 /* model-flattening */ = {isa = PBXFileReference; lastKnownFileType = text; name = "model-flattening"; path = "test/integration/generated/model-flattening"; sourceTree = SOURCE_ROOT; };
 		F15A92A7254B0A0900E2D9C2 /* head */ = {isa = PBXFileReference; lastKnownFileType = text; name = head; path = test/integration/generated/head; sourceTree = SOURCE_ROOT; };
+		F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoRestSwaggerBatTest.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift-3/AutorestSwiftTest/AutoRestSwaggerBatTest.swift"; sourceTree = "<absolute>"; };
+		F15A92D6254B293400E2D9C2 /* body-string */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-string"; path = "test/integration/generated/body-string"; sourceTree = SOURCE_ROOT; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
@@ -567,6 +571,7 @@
 				F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */,
 				F1BBE513254A82F800BF6D9E /* AzureCore in Frameworks */,
 				F15A92A3254B09C700E2D9C2 /* AutoRestResourceFlatteningTest in Frameworks */,
+				F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */,
 				F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */,
 				F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */,
 				F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */,
@@ -764,6 +769,7 @@
 				F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */,
 				F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */,
 				F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */,
+				F15A92D6254B293400E2D9C2 /* body-string */,
 				F15A92A7254B0A0900E2D9C2 /* head */,
 				F15A929A254B096900E2D9C2 /* model-flattening */,
 				F15A9298254B095500E2D9C2 /* report */,
@@ -773,6 +779,7 @@
 				F15A927B254B083600E2D9C2 /* body-file */,
 				F1BBE4C2254A780D00BF6D9E /* url */,
 				0A747B22252E897200819FC9 /* AutoRestUrlTest.swift */,
+				F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */,
 				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
 				F15A9283254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift */,
 				F15A9289254B092C00E2D9C2 /* AutoRestParameterizedHostTest.swift */,
@@ -1039,6 +1046,7 @@
 				F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */,
 				F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */,
 				F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */,
+				F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1181,6 +1189,7 @@
 				F15A928A254B092C00E2D9C2 /* AutoRestParameterizedHostTest.swift in Sources */,
 				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
+				F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
 				F113047524F78283007FF3A3 /* AutoRestHeadTest.swift in Sources */,
 				0A7477012527CE4500819FC9 /* AutoRestResourceFlatteningTest.swift in Sources */,
@@ -1336,13 +1345,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F1BBE51B254A84F500BF6D9E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = F1BBE51A254A84F500BF6D9E /* AzureCore */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F1A6719724F5CCCC00C2712C /* Debug */ = {
@@ -1667,16 +1669,15 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = XmsErrorResponseExtensions;
 		};
+		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestSwaggerBat;
+		};
 		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestUrlTest;
 		};
 		F1BBE512254A82F800BF6D9E /* AzureCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F1BBE4BE254A77FD00BF6D9E /* XCRemoteSwiftPackageReference "azure-sdk-for-ios" */;
-			productName = AzureCore;
-		};
-		F1BBE51A254A84F500BF6D9E /* AzureCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F1BBE4BE254A77FD00BF6D9E /* XCRemoteSwiftPackageReference "azure-sdk-for-ios" */;
 			productName = AzureCore;
