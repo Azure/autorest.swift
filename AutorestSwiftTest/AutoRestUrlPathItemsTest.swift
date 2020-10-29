@@ -50,7 +50,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
             pathItemStringQuery: "pathItemStringQuery",
             localStringQuery: "localStringQuery"
         )
-        client.pathitems.getGlobalQueryNull(
+        client.pathItems.getGlobalQueryNull(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
@@ -72,7 +72,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Call pathitems.getGlobalAndLocalQueryNull")
 
         let options = PathItems.GetGlobalAndLocalQueryNullOptions(pathItemStringQuery: "pathItemStringQuery")
-        client.pathitems.getGlobalAndLocalQueryNull(
+        client.pathItems.getGlobalAndLocalQueryNull(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
@@ -93,7 +93,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
     func test_Pathitems_getLocalPathItemQueryNull_200() throws {
         let expectation = XCTestExpectation(description: "Call pathitems_getLocalPathItemQueryNull")
         client.globalStringQuery = "globalStringQuery"
-        client.pathitems.getLocalPathItemQueryNull(
+        client.pathItems.getLocalPathItemQueryNull(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath"
         ) { result, httpResponse in
@@ -117,7 +117,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
             pathItemStringQuery: "pathItemStringQuery",
             localStringQuery: "localStringQuery"
         )
-        client.pathitems.listAllWithValues(
+        client.pathItems.listAllWithValues(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options
