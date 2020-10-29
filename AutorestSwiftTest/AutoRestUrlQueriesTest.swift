@@ -43,16 +43,16 @@ class AutoRestUrlQuriesTest: XCTestCase {
         )
     }
 
-    func test_Queries_byteNull200() throws {
+    func test_Queries_byteNull_400() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull")
 
         let options = Queries.ByteNullOptions(byteQuery: Data())
-        client.queries.byteNull(withOptions: options) { result, _ in
+        client.queries.byteNull(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call queries.byteNull failed")
             case .failure:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 400)
             }
             expectation.fulfill()
         }
@@ -60,13 +60,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_byteEmpty200() throws {
+    func test_Queries_byteEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteEmpty")
 
-        client.queries.byteEmpty { result, _ in
+        client.queries.byteEmpty { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case .failure:
                 XCTFail("Call queries.byteEmpty failed")
             }
@@ -76,17 +76,17 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_byteMultiByte200() throws {
+    func test_Queries_byteMultiByte_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteMultiByte")
 
         guard let byteQuery = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
             return
         }
         let options = Queries.ByteMultiByteOptions(byteQuery: byteQuery)
-        client.queries.byteMultiByte(withOptions: options) { result, _ in
+        client.queries.byteMultiByte(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case .failure:
                 XCTFail("Call queries.byteMultiByte failed")
             }
@@ -96,13 +96,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getBooleanTrue200() throws {
+    func test_Queries_getBooleanTrue_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getBooleanTrue")
 
         client.queries.getBooleanTrue { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.getBooleanTrue failed. error=\(details)")
@@ -113,13 +113,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getBooleanFalse200() throws {
+    func test_Queries_getBooleanFalse_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getBooleanFalse")
 
         client.queries.getBooleanFalse { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.getBooleanFalse failed. error=\(details)")
@@ -130,14 +130,14 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_enumValid200() throws {
+    func test_Queries_enumValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.enumValid")
 
         let options = Queries.EnumValidOptions(enumQuery: .greenColor)
         client.queries.enumValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.enumValid failed. error=\(details)")
@@ -148,13 +148,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_dateValid200() throws {
+    func test_Queries_dateValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateValid")
 
         client.queries.dateValid { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.dateValid failed. error=\(details)")
@@ -165,13 +165,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_dateTimeValid200() throws {
+    func test_Queries_dateTimeValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateTimeValid")
 
         client.queries.dateTimeValid { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.dateTimeValid failed. error=\(details)")
@@ -182,13 +182,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getIntOneMillion200() throws {
+    func test_Queries_getIntOneMillion_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getIntOneMillion")
 
         client.queries.getIntOneMillion { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.getIntOneMillion failed. error=\(details)")
@@ -199,13 +199,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getIntNegativeOneMillion200() throws {
+    func test_Queries_getIntNegativeOneMillion_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getIntNegativeOneMillion")
 
         client.queries.getIntNegativeOneMillion { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call paths.getTenBillion failed. error=\(details)")
@@ -216,13 +216,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getTenBillion200() throws {
+    func test_Queries_getTenBillion_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getTenBillion")
 
         client.queries.getTenBillion { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.getTenBillion failed. error=\(details)")
@@ -233,13 +233,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getNegativeTenBillion200() throws {
+    func test_Queries_getNegativeTenBillion_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getNegativeTenBillion")
 
         client.queries.getNegativeTenBillion { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.getNegativeTenBillion failed. error=\(details)")
@@ -250,13 +250,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_doubleDecimalPositive200() throws {
+    func test_Queries_doubleDecimalPositive_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.doubleDecimalPositive")
 
         client.queries.doubleDecimalPositive { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.doubleDecimalPositive failed. error=\(details)")
@@ -267,13 +267,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_doubleDecimalNegative200() throws {
+    func test_Queries_doubleDecimalNegative_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.doubleDecimalNegative")
 
         client.queries.doubleDecimalNegative { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.doubleDecimalNegative failed. error=\(details)")
@@ -284,13 +284,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_floatScientificNegative200() throws {
+    func test_Queries_floatScientificNegative_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.floatScientificNegative")
 
         client.queries.floatScientificNegative { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.floatScientificNegative failed. error=\(details)")
@@ -301,13 +301,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_enumNull200() throws {
+    func test_Queries_enumNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.enumNull")
 
         client.queries.enumNull { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.enumNull failed. error=\(details)")
@@ -318,13 +318,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_dateNull200() throws {
+    func test_Queries_dateNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateNull")
 
         client.queries.dateNull { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.dateNull failed. error=\(details)")
@@ -335,13 +335,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_dateTimeNull200() throws {
+    func test_Queries_dateTimeNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.dateTimeNull")
 
         client.queries.dateTimeNull { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.dateTimeNull failed. error=\(details)")
@@ -352,13 +352,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_floatNull200() throws {
+    func test_Queries_floatNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.floatNull")
 
         client.queries.floatNull { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.floatNull failed. error=\(details)")
@@ -369,13 +369,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_doubleNull200() throws {
+    func test_Queries_doubleNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.doubleNull")
 
         client.queries.doubleNull { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call  queries.doubleNull failed. error=\(details)")
@@ -386,7 +386,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringCsvValid200() throws {
+    func test_Queries_arrayStringCsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvValid")
 
         let options = Queries.ArrayStringCsvValidOptions(
@@ -396,7 +396,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringCsvValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringCsvValid failed. error=\(details)")
@@ -407,7 +407,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringPipesValid200() throws {
+    func test_Queries_arrayStringPipesValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringPipesValid")
 
         let options = Queries.ArrayStringPipesValidOptions(
@@ -417,7 +417,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringPipesValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringPipesValid failed. error=\(details)")
@@ -428,7 +428,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringSsvValid200() throws {
+    func test_Queries_arrayStringSsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringSsvValid")
 
         let options = Queries.ArrayStringSsvValidOptions(
@@ -438,7 +438,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringSsvValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringSsvValid failed. error=\(details)")
@@ -449,7 +449,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringTsvValid200() throws {
+    func test_Queries_arrayStringTsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringTsvValid")
 
         let options = Queries.ArrayStringTsvValidOptions(
@@ -459,7 +459,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringTsvValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringTsvValid failed. error=\(details)")
@@ -470,7 +470,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringNoCollectionFormatEmpty200() throws {
+    func test_Queries_arrayStringNoCollectionFormatEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringNoCollectionFormatEmpty")
 
         let options = Queries.ArrayStringNoCollectionFormatEmptyOptions(
@@ -480,7 +480,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringNoCollectionFormatEmpty(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringNoCollectionFormatEmpty failed. error=\(details)")
@@ -491,7 +491,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringCsvEmpty200() throws {
+    func test_Queries_arrayStringCsvEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvEmpty")
 
         let options = Queries.ArrayStringCsvEmptyOptions(
@@ -501,7 +501,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringCsvEmpty(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringCsvEmpty failed. error=\(details)")
@@ -512,7 +512,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_arrayStringCsvNull200() throws {
+    func test_Queries_arrayStringCsvNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvNull")
 
         let options = Queries.ArrayStringCsvNullOptions(
@@ -522,7 +522,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         client.queries.arrayStringCsvNull(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.arrayStringCsvNull failed. error=\(details)")
@@ -533,13 +533,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_stringUrlEncoded200() throws {
+    func test_Queries_stringUrlEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.stringUrlEncoded")
 
         client.queries.stringUrlEncoded { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.stringUrlEncoded failed. error=\(details)")
@@ -550,13 +550,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_stringUnicoded200() throws {
+    func test_Queries_stringUnicoded_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.stringUnicode")
 
         client.queries.stringUnicode { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.stringUnicode failed. error=\(details)")
@@ -567,13 +567,13 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_floatScientificPositive200() throws {
+    func test_Queries_floatScientificPositive_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.floatScientificPositive")
 
         client.queries.floatScientificPositive { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.floatScientificPositive failed. error=\(details)")

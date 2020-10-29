@@ -43,7 +43,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         )
     }
 
-    func test_Pathitems_getGlobalQueryNull200() throws {
+    func test_Pathitems_getGlobalQueryNull_200() throws {
         let expectation = XCTestExpectation(description: "Call pathitems_getGlobalQueryNull")
 
         let options = PathItems.GetGlobalQueryNullOptions(
@@ -57,7 +57,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call pathitems_getGlobalQueryNull failed error=\(details)")
@@ -68,7 +68,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Pathitems_getGlobalAndLocalQueryNull200() throws {
+    func test_Pathitems_getGlobalAndLocalQueryNull_200() throws {
         let expectation = XCTestExpectation(description: "Call pathitems.getGlobalAndLocalQueryNull")
 
         let options = PathItems.GetGlobalAndLocalQueryNullOptions(pathItemStringQuery: "pathItemStringQuery")
@@ -79,7 +79,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call pathitems.getGlobalAndLocalQueryNull failed error=\(details)")
@@ -90,7 +90,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Pathitems_getLocalPathItemQueryNull200() throws {
+    func test_Pathitems_getLocalPathItemQueryNull_200() throws {
         let expectation = XCTestExpectation(description: "Call pathitems_getLocalPathItemQueryNull")
         client.globalStringQuery = "globalStringQuery"
         client.pathitems.getLocalPathItemQueryNull(
@@ -99,7 +99,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call pathitems_getLocalPathItemQueryNull failed. error=\(details)")
@@ -110,7 +110,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Pathitems_listAllWithValues200() throws {
+    func test_Pathitems_listAllWithValues_200() throws {
         let expectation = XCTestExpectation(description: "Call pathitems_listAllWithValues")
         client.globalStringQuery = "globalStringQuery"
         let options = PathItems.GetAllWithValuesOptions(
@@ -124,7 +124,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
         ) { result, httpResponse in
             switch result {
             case .success:
-                break
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call pathitems_listAllWithValues failed. error=\(details)")
