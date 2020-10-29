@@ -38,7 +38,7 @@ class OperationGroup: Metadata {
     }
 
     var swiftName: String {
-        return name.isReserved ? name + "Type" : name
+        return name.isReserved ? name + "Operation" : name
     }
 
     public required init(from decoder: Decoder) throws {
