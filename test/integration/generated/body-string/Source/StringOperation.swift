@@ -338,11 +338,12 @@ public final class StringOperation {
 
     /// Set string value empty ''
     /// - Parameters:
-
+    ///    - empty :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func putEmpty(
+    public func put(
+        empty: String,
         withOptions options: PutEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -360,6 +361,10 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(empty) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -370,8 +375,8 @@ public final class StringOperation {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -519,11 +524,12 @@ public final class StringOperation {
 
     /// Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
     /// - Parameters:
-
+    ///    - mbcs :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func putMbcs(
+    public func put(
+        mbcs: String,
         withOptions options: PutMbcsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -541,6 +547,10 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(mbcs) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -551,8 +561,8 @@ public final class StringOperation {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -700,11 +710,12 @@ public final class StringOperation {
 
     /// Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
     /// - Parameters:
-
+    ///    - whitespace :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func putWhitespace(
+    public func put(
+        whitespace: String,
         withOptions options: PutWhitespaceOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -722,6 +733,10 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(whitespace) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -732,8 +747,8 @@ public final class StringOperation {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 

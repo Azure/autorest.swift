@@ -74,4 +74,57 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_string_getEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getEmpty")
+
+        client.stringOperation.getEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, "\"\"")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putEmpty")
+
+        client.stringOperation.put(empty: "") { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.putEmpty failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_listMbcs_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.listMbcs")
+
+        client.stringOperation.listMbcs { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data.count, 70)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.listMbcs failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

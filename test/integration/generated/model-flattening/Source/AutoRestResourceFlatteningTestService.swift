@@ -1031,6 +1031,15 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        let body = SimpleProduct(
+            maxProductDisplayName: flattenParameterGroup.maxProductDisplayName,
+            genericValue: flattenParameterGroup.genericValue, odataValue: flattenParameterGroup.odataValue,
+            productId: flattenParameterGroup.productId, description: flattenParameterGroup.description
+        )
+        guard let requestBody = try? JSONEncoder().encode(body) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1041,8 +1050,8 @@ public final class AutoRestResourceFlatteningTestService {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 

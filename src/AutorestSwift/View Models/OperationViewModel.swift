@@ -168,7 +168,11 @@ struct VirtualParam {
 
     init(from param: VirtualParameter) {
         self.name = param.name
-        self.path = param.targetProperty.name
+        var path = param.targetProperty.name
+        if let groupBy = param.groupedBy?.name {
+            path = "\(groupBy).\(path)"
+        }
+        self.path = path
         self.type = param.schema!.swiftType(optional: !param.required)
         self.defaultValue = param.required ? "" : " = nil"
     }
