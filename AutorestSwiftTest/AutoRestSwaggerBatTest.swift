@@ -39,6 +39,4 @@ class AutoRestSwaggerBatTest: XCTestCase {
             withOptions: AutoRestSwaggerBatClientOptions()
         )
     }
-
-    func test_BodyFile_getFile() throws {}
 }
