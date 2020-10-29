@@ -86,4 +86,16 @@ extension String {
     }
 
     var lowercasedFirst: String { return prefix(1).lowercased() + dropFirst() }
+
+    var isReserved: Bool {
+        let reserved = [
+            "Error",
+            "Int",
+            "String",
+            "Bool",
+            "Enum",
+            "Array"
+        ]
+        return reserved.contains(self)
+    }
 }

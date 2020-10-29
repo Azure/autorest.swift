@@ -41,7 +41,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getNull200() throws {
         let expectation = XCTestExpectation(description: "Call getNull succeed")
 
-        client.inttype.getNull { result, httpResponse in
+        client.intOperation.getNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, nil)
@@ -59,7 +59,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getInvalid200() throws {
         let expectation = XCTestExpectation(description: "Call getInvalid succeed")
 
-        client.inttype.getInvalid { result, httpResponse in
+        client.intOperation.getInvalid { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getInvalid failed")
@@ -82,7 +82,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getOverflowInt32_200() throws {
         let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
 
-        client.inttype.getOverflowInt32 { result, httpResponse in
+        client.intOperation.getOverflowInt32 { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getOverflowInt32 failed")
@@ -105,7 +105,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getUnderflowInt32_200() throws {
         let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
 
-        client.inttype.getUnderflowInt32 { result, httpResponse in
+        client.intOperation.getUnderflowInt32 { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getOverflowInt32 failed")
@@ -128,7 +128,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getOverflowInt64_200() throws {
         let expectation = XCTestExpectation(description: "Call getOverflowInt64 succeed")
 
-        client.inttype.getOverflowInt64 { result, httpResponse in
+        client.intOperation.getOverflowInt64 { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getOverflowInt64 failed")
@@ -151,7 +151,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getUnderflowInt64_200() throws {
         let expectation = XCTestExpectation(description: "Call getOverflowInt32 succeed")
 
-        client.inttype.getUnderflowInt64 { result, httpResponse in
+        client.intOperation.getUnderflowInt64 { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getOverflowInt32 failed")
@@ -173,7 +173,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getUnixTime_200() throws {
         let expectation = XCTestExpectation(description: "Call getUnixTime succeed")
 
-        client.inttype.getUnixTime { result, httpResponse in
+        client.intOperation.getUnixTime { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -191,7 +191,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getInvalidUnixTime_200() throws {
         let expectation = XCTestExpectation(description: "Call getInvalidUnixTime succeed")
 
-        client.inttype.getInvalidUnixTime { result, httpResponse in
+        client.intOperation.getInvalidUnixTime { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getInvalidUnixTime failed")
@@ -213,7 +213,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_getNullUnixTime_200() throws {
         let expectation = XCTestExpectation(description: "Call getNullUnixTime succeed")
 
-        client.inttype.getNullUnixTime { result, httpResponse in
+        client.intOperation.getNullUnixTime { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, nil)
@@ -230,7 +230,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_putMax32_200() throws {
         let expectation = XCTestExpectation(description: "Call putMax32 succeed")
 
-        client.inttype.put(max32: Int32.max) { result, httpResponse in
+        client.intOperation.put(max32: Int32.max) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -246,7 +246,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_putMax64_200() throws {
         let expectation = XCTestExpectation(description: "Call putMax64 succeed")
 
-        client.inttype.put(max64: Int64.max) { result, httpResponse in
+        client.intOperation.put(max64: Int64.max) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -262,7 +262,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_putMin32_200() throws {
         let expectation = XCTestExpectation(description: "Call putMin32 succeed")
 
-        client.inttype.put(min32: Int32.min) { result, httpResponse in
+        client.intOperation.put(min32: Int32.min) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -278,7 +278,7 @@ class AutoRestIntegerTest: XCTestCase {
     func test_BodyInteger_putMin64_200() throws {
         let expectation = XCTestExpectation(description: "Call putMin64 succeed")
 
-        client.inttype.put(min64: Int64.min) { result, httpResponse in
+        client.intOperation.put(min64: Int64.min) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -296,7 +296,7 @@ class AutoRestIntegerTest: XCTestCase {
 
         let decoded = Date(timeIntervalSince1970: Double(1_460_505_600))
 
-        client.inttype.put(unixTimeDate: decoded) { result, httpResponse in
+        client.intOperation.put(unixTimeDate: decoded) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)

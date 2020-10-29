@@ -42,7 +42,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
     func test_resourceFlattening_getArray() throws {
         let expectation = XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getArray succeed")
 
-        client.autorestresourceflatteningtestservice.getArray { result, httpResponse in
+        client.autoRestResourceFlatteningTestService.getArray { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -64,7 +64,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
             Resource(tags: ["tag1": "value1", "tag2": "value3"], location: "West US"),
             Resource(location: "Building 44")
         ]
-        client.autorestresourceflatteningtestservice.put(array: array) { result, httpResponse in
+        client.autoRestResourceFlatteningTestService.put(array: array) { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -80,7 +80,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
     func test_resourceFlattening_getDictionary() throws {
         let expectation =
             XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getDictionary succeed")
-        client.autorestresourceflatteningtestservice.getDictionary { result, httpResponse in
+        client.autoRestResourceFlatteningTestService.getDictionary { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -112,7 +112,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            )
 //        ]
 //        // FIXME: Flattened parameters should be sent on the wire under "properties" object
-//        client.autorestresourceflatteningtestservice.put(dictionary: dictionary) { result, httpResponse in
+//        client.autoRestResourceFlatteningTestService.put(dictionary: dictionary) { result, httpResponse in
 //            switch result {
 //            case .success:
 //                expectation.fulfill()
@@ -128,7 +128,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
     func test_resourceFlattening_getResourceCollection() throws {
         let expectation =
             XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getResourceCollection succeed")
-        client.autorestresourceflatteningtestservice.getResourceCollection { result, httpResponse in
+        client.autoRestResourceFlatteningTestService.getResourceCollection { result, httpResponse in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -175,7 +175,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            ]
 //        )
 //        // FIXME: Flattened parameters should be sent on the wire under "properties" object
-//        client.autorestresourceflatteningtestservice.put(resourceCollection: collection) { result, httpResponse in
+//        client.autoRestResourceFlatteningTestService.put(resourceCollection: collection) { result, httpResponse in
 //            switch result {
 //            case .success:
 //                expectation.fulfill()
@@ -192,7 +192,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        let expectation =
 //            XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getWrappedArray succeed")
 //        // FIXME: Request path must container array, dictionary or resourcecollection
-//        client.autorestresourceflatteningtestservice.getWrappedArray { result, httpResponse in
+//        client.autoRestResourceFlatteningTestService.getWrappedArray { result, httpResponse in
 //            switch result {
 //            case .success:
 //                expectation.fulfill()
@@ -214,7 +214,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            WrappedProduct(value: "test")
 //        ]
 //        // FIXME: Timeout fails
-//        client.autorestresourceflatteningtestservice.put(wrappedArray: wrapped) { result, httpResponse in
+//        client.autoRestResourceFlatteningTestService.put(wrappedArray: wrapped) { result, httpResponse in
 //            switch result {
 //            case .success:
 //                expectation.fulfill()
@@ -239,7 +239,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            description: "product description"
 //        )
 //        // FIXME: Serialization of flattened object to the wire needs fixing
-//        client.autorestresourceflatteningtestservice.put(simpleProduct: product) { result, httpResponse in
+//        client.autoRestResourceFlatteningTestService.put(simpleProduct: product) { result, httpResponse in
 //            switch result {
 //            case .success:
 //                expectation.fulfill()
@@ -265,7 +265,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            odataValue: "http://foo"
 //        )
 //        // FIXME: Received body is {} (empty)
-//        client.autorestresourceflatteningtestservice
+//        client.autoRestResourceFlatteningTestService
 //            .putSimpleProductWithGrouping(flattenParameterGroup: group) { result, httpResponse in
 //                switch result {
 //                case .success:
@@ -287,7 +287,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //                description: "Call autorestresourceflatteningtestservice.postFlattenedSimpleProduct succeed"
 //            )
 //        // FIXME: Serialization of flattened object to the wire needs fixing
-//        client.autorestresourceflatteningtestservice.postFlattenedSimpleProduct(
+//        client.autoRestResourceFlatteningTestService.postFlattenedSimpleProduct(
 //            productId: "123",
 //            description: "product description",
 //            maxProductDisplayName: "max name",

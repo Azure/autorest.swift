@@ -66,7 +66,7 @@ struct ServiceClientFileViewModel {
         (self.globalParameters, self.host) = resolveGlobalParameters(from: model)
 
         for key in namedOperationGroups.keys {
-            namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercased()))
+            namedOperationGroupShortcuts.append(KeyValueViewModel(key: key, value: key.lowercasedFirst))
         }
         self.namedOperationGroupShortcuts = namedOperationGroupShortcuts.sorted()
     }

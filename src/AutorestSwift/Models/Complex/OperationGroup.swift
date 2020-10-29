@@ -37,6 +37,10 @@ class OperationGroup: Metadata {
         case key = "$key"
     }
 
+    var swiftName: String {
+        return name.isReserved ? name + "Operation" : name
+    }
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         key = try container.decode(String.self, forKey: .key)

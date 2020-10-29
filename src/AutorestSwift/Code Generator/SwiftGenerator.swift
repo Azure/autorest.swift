@@ -51,7 +51,8 @@ class SwiftGenerator: CodeGenerator {
 
         // Create model files
         for object in model.schemas.objects ?? [] {
-            let name = object.name
+            let name = object.swiftName
+
             guard modelsWritten[name] == nil else {
                 SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
                 modelsWritten[name]! += 1

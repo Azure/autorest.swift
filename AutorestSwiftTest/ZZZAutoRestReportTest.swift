@@ -77,20 +77,20 @@ class ZZZAutoRestReportTest: XCTestCase {
 
             /* Uncomment this to print the list of passed/failed tests */
             /*
-            let mobileFailedTest = mobileTest.filter { $0.value == 0 }
+             let mobileFailedTest = mobileTest.filter { $0.value == 0 }
 
-            if mobilePassedTest.count > 0 {
-                print("Passed mobile tests")
-                print("-------------------")
-                for test in mobilePassedTest { print(test.key) }
-            }
+             if mobilePassedTest.count > 0 {
+                 print("Passed mobile tests")
+                 print("-------------------")
+                 for test in mobilePassedTest { print(test.key) }
+             }
 
-            if mobileFailedTest.count > 0 {
-                print("Failed mobile tests")
-                print("-------------------")
-                for test in mobileFailedTest { print(test.key) }
-            }
-            */
+             if mobileFailedTest.count > 0 {
+                 print("Failed mobile tests")
+                 print("-------------------")
+                 for test in mobileFailedTest { print(test.key) }
+             }
+             */
             print(
                 "Mobile Passed Test=\(mobilePassedCount), Mobile Total Test=\(mobileTestCount), Coverage=\(String(format: "%.2f", mobileCoverage))%"
             )
@@ -99,13 +99,13 @@ class ZZZAutoRestReportTest: XCTestCase {
         // List all passed tests which are not part of the mobile tests
         /* Uncomment this to print the list of passed/failed tests */
         /*
-        let otherPassedTest = passedTest.difference(from: mobilePassedTest)
-        if otherPassedTest.count > 0 {
-            print("\nOther passed tests")
-            print("-------------------")
-            for test in otherPassedTest { print(test.key) }
-        }
-        */
+         let otherPassedTest = passedTest.difference(from: mobilePassedTest)
+         if otherPassedTest.count > 0 {
+             print("\nOther passed tests")
+             print("-------------------")
+             for test in otherPassedTest { print(test.key) }
+         }
+         */
         print("Pass Test=\(passedCount), Total Test=\(totalTestCount), Coverage=\(String(format: "%.2f", coverage))%")
     }
 
@@ -124,7 +124,7 @@ class ZZZAutoRestReportTest: XCTestCase {
     func test_ReportFile_getReport() throws {
         let expectation = XCTestExpectation(description: "Call getReport succeed")
 
-        client.autorestreportservice.getReport { result, _ in
+        client.autoRestReportService.getReport { result, _ in
             switch result {
             case let .success(report):
                 XCTAssert(report.count > 0)
@@ -143,7 +143,7 @@ class ZZZAutoRestReportTest: XCTestCase {
     func test_ReportFile_getOptionalReport() throws {
         let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
 
-        client.autorestreportservice.getOptionalReport { result, _ in
+        client.autoRestReportService.getOptionalReport { result, _ in
             switch result {
             case let .success(optionalReport):
                 XCTAssert(optionalReport.count > 0)

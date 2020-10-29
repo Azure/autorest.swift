@@ -120,7 +120,7 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
         return urlComps.url
     }
 
-    public lazy var autorestresourceflatteningtestservice: AutoRestResourceFlatteningTestService =
+    public lazy var autoRestResourceFlatteningTestService: AutoRestResourceFlatteningTestService =
         AutoRestResourceFlatteningTestService(client: self)
 
     // MARK: Public Client Methods

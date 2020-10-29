@@ -117,7 +117,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
         return urlComps.url
     }
 
-    public lazy var httpsuccess: HttpSuccess = HttpSuccess(client: self)
+    public lazy var httpSuccess: HttpSuccess = HttpSuccess(client: self)
 
     // MARK: Public Client Methods
 }
