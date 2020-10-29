@@ -109,6 +109,10 @@ enum ParameterType: Codable {
         return common.groupedBy
     }
 
+    var nullable: Bool {
+        return common.nullable ?? false
+    }
+
     /// Return the common base class Parameter properties
     private var common: Parameter {
         switch self {

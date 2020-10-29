@@ -171,9 +171,13 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(null) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if null != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(null) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",

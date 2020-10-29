@@ -40,7 +40,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
         )
     }
 
-    func test_string_getNull__200() throws {
+    func test_string_getNull_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.getNull")
 
         client.stringOperation.getNull { result, httpResponse in
@@ -48,6 +48,23 @@ class AutoRestSwaggerBatTest: XCTestCase {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 XCTAssertNil(data)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putNull_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putNull")
+
+        client.stringOperation.put(null: nil) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call stringOperation.getNull failed error=\(details)")

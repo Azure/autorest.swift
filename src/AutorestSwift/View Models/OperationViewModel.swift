@@ -127,6 +127,7 @@ enum BodyParamStrategy: String {
     case plain
     case flattened
     case unixTime
+    case plainNullable
 }
 
 struct BodyParams {
@@ -153,7 +154,7 @@ struct BodyParams {
         }
 
         let strategy: BodyParamStrategy = param.flattened ? .flattened : param.schema.type == AllSchemaTypes
-            .unixTime ? .unixTime : .plain
+            .unixTime ? .unixTime : param.nullable ? .plainNullable : .plain
         self.strategy = strategy.rawValue
         self.children = virtParams
     }
