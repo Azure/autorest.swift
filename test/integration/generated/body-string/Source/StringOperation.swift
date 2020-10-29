@@ -153,7 +153,7 @@ public final class StringOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        null: String? = nil,
+        null: String?,
         withOptions options: PutNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

@@ -54,7 +54,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        array: [Resource]? = nil,
+        array: [Resource]?,
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -241,7 +241,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        wrappedArray: [WrappedProduct]? = nil,
+        wrappedArray: [WrappedProduct]?,
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -428,7 +428,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionary: [String: FlattenedProduct]? = nil,
+        dictionary: [String: FlattenedProduct]?,
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -615,7 +615,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        resourceCollection: ResourceCollection? = nil,
+        resourceCollection: ResourceCollection?,
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -802,7 +802,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        simpleProduct: SimpleProduct? = nil,
+        simpleProduct: SimpleProduct?,
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
