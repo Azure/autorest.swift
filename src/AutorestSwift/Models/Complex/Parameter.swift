@@ -114,12 +114,13 @@ class Parameter: Value, CustomDebugStringConvertible {
     }
 
     internal func belongsInOptions() -> Bool {
-        let inMethod = implementation == .method
+        let inMethodImplementation = implementation == .method
         let notConstant = schema!.type != .constant
         let notFlattened = flattened != true
         let notGrouped = groupedBy == nil
         let notRequired = required == false
-        return notRequired && inMethod && notConstant && notFlattened && notGrouped
+        let inBodyLocation = paramLocation == .body
+        return notRequired && inMethodImplementation && notConstant && notFlattened && notGrouped && !inBodyLocation
     }
 }
 

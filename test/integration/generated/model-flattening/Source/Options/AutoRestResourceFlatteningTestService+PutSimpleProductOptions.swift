@@ -18,9 +18,6 @@ import Foundation
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutSimpleProduct` operation.
     public struct PutSimpleProductOptions: RequestOptions {
-        /// Simple body product to put
-        public let simpleBodyProduct: SimpleProduct?
-
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?
@@ -33,17 +30,14 @@ extension AutoRestResourceFlatteningTestService {
 
         /// Initialize a `PutSimpleProductOptions` structure.
         /// - Parameters:
-        ///   - simpleBodyProduct: Simple body product to put
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         public init(
-            simpleBodyProduct: SimpleProduct? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil
         ) {
-            self.simpleBodyProduct = simpleBodyProduct
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue

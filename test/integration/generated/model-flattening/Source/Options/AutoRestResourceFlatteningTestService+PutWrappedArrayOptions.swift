@@ -18,9 +18,6 @@ import Foundation
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutWrappedArray` operation.
     public struct PutWrappedArrayOptions: RequestOptions {
-        /// External Resource as an Array to put
-        public let resourceArray: [WrappedProduct]?
-
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?
@@ -33,17 +30,14 @@ extension AutoRestResourceFlatteningTestService {
 
         /// Initialize a `PutWrappedArrayOptions` structure.
         /// - Parameters:
-        ///   - resourceArray: External Resource as an Array to put
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         public init(
-            resourceArray: [WrappedProduct]? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil
         ) {
-            self.resourceArray = resourceArray
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue
