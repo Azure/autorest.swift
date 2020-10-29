@@ -62,8 +62,20 @@ class Request: Metadata {
 extension Request {
     /// Retrieves a single body-encoded parameter, if there is one. Fails if there is more than one.
     var bodyParam: ParameterType? {
+        // Look for body parameters from signature parameters first. If none is found, look up in parameters.
+        var bodyParams = findBodyParams(parameters: signatureParameters)
+        if bodyParams.count == 0 {
+            bodyParams = findBodyParams(parameters: parameters)
+        }
+
+        // current logic only supports a single request per operation
+        assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(name)")
+        return bodyParams.first
+    }
+
+    func findBodyParams(parameters: [ParameterType]?) -> [ParameterType] {
         var bodyParams = [ParameterType]()
-        for param in signatureParameters ?? [] {
+        for param in parameters ?? [] {
             if case let ParameterType.virtual(virtParam) = param {
                 let originalParam = ParameterType.regular(virtParam.originalParameter)
                 if !bodyParams.contains(originalParam) {
@@ -75,9 +87,7 @@ extension Request {
                 bodyParams.append(param)
             }
         }
-        // current logic only supports a single request per operation
-        assert(bodyParams.count <= 1, "Unexpectedly found more than 1 body parameters in request... \(name)")
-        return bodyParams.first
+        return bodyParams
     }
 
     /// Return a unique list of all `ParameterType` objects.
