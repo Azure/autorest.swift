@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys, getopt
 import os
+import subprocess
 import os.path
 
 keepChange = False
@@ -42,10 +43,13 @@ def revert_generated_code(file):
     global end_color
     global generated_directory
     print(warning_color + "Revert the generated code." + end_color)
-    return_value = os.system('git restore {generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
-    if return_value == 1:
+    git_restore_call = subprocess.run(["git", "restore", '{generated_directory}{file}'.format(file=file, generated_directory=generated_directory)], stderr=subprocess.PIPE, text=True)
+
+    if "error" in git_restore_call.stderr:
         print(warning_color + "Revert the generated code failed. Remove the directory" + end_color)
         os.system('rm -Rf  {generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
+    else:
+        print(git_restore_call.stdout)
 
 def execute_command(command):
     global debug
@@ -54,6 +58,13 @@ def execute_command(command):
     else:
         return_value = os.system('%s > /dev/null 2>&1' % command)
     return return_value
+
+def check_xcode_project_exists():
+    for fname in os.listdir('.'):
+        if fname.endswith('.xcodeproj'):
+            return True
+
+    return False
 
 def generate_and_build_code(fileList):
     """Generate code and build code"""
@@ -96,21 +107,20 @@ def generate_and_build_code(fileList):
 
             if return_value == 0:
                 print("swift build succeed.")
+
+                # Create xcode project
+                if return_value == 0 and createProject:
+                    if check_xcode_project_exists() == False:
+                        print("create XCode project.")
+                        xcode_gen_proj_command = "swift package generate-xcodeproj"
+                        return_value = execute_command(xcode_gen_proj_command)
+
                 os.chdir('../../../..')
             else:
                 print(warning_color + "swift build failed." +  end_color)
                 os.chdir('../../../..')
                 if keepChange == 0:
                     revert_generated_code(file)
-
-            # Create xcode project
-            if return_value == 0 and createProject:
-                if os.path.isfile('filename.txt'):
-                    print("XCode project already exists. Skip creating XCode project")
-                else:
-                    print("create XCode project.")
-                    xcode_gen_proj_command = "swift package generate-xcodeproj"
-                    return_value = execute_command(xcode_gen_proj_command)
 
 
 def main(argv):

@@ -18,7 +18,7 @@ RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
 build: copyRunResources
 	swift build --target AutorestSwift
 	./scripts/build_azure_core.sh
-	./scripts/swiftlint.sh
+	./scripts/swiftlint.sh > /dev/null
 
 copyRunResources:
 	mkdir -p ${RUN_RESOURCES_DIRECTORY}
@@ -51,7 +51,7 @@ clean:
 	rm Package.resolved
 
 cleanAll:
-	find . -name \.build -type d -exec rm -rf {} \;
-	find . -name \Package.resolved -type f -delete
+	find . -name ".build" -type d -exec rm -rf {} \;
+	find . -name "Package.resolved" -exec rm -rf {} \;
 
 .PHONY: run build test copyRunResources copyTestResources clean
