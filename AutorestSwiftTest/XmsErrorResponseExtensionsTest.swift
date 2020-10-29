@@ -46,7 +46,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById200() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with tommy succeed")
 
-        client.petoperation.getPetById(petId: "tommy") { result, httpResponse in
+        client.petOperation.getPetById(petId: "tommy") { result, httpResponse in
             switch result {
             case let .success(data):
                 if let pet = data {
@@ -68,7 +68,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById202() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with django succeed")
 
-        client.petoperation.getPetById(petId: "django") { result, httpResponse in
+        client.petOperation.getPetById(petId: "django") { result, httpResponse in
             switch result {
             case let .success(data):
                 if (data as? Pet) != nil {
@@ -89,7 +89,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById404_1() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with coyoteUgly succeed")
 
-        client.petoperation.getPetById(petId: "coyoteUgly") { result, httpResponse in
+        client.petOperation.getPetById(petId: "coyoteUgly") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getPetById with coyoteUgly failed")
@@ -113,7 +113,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById404_2() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with weirdAlYankovic succeed")
 
-        client.petoperation.getPetById(petId: "weirdAlYankovic") { result, httpResponse in
+        client.petOperation.getPetById(petId: "weirdAlYankovic") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getPetById with weirdAlYankovic failed")
@@ -137,7 +137,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById501() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with alien123 succeed")
 
-        client.petoperation.getPetById(petId: "alien123") { result, httpResponse in
+        client.petOperation.getPetById(petId: "alien123") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getPetById with alien123 failed")
@@ -160,7 +160,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_getPetById400() throws {
         let expectation = XCTestExpectation(description: "Call getPetById with ringo succeed")
 
-        client.petoperation.getPetById(petId: "ringo") { result, httpResponse in
+        client.petOperation.getPetById(petId: "ringo") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call getPetById with ringo failed")
@@ -183,7 +183,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_doSomething200() throws {
         let expectation = XCTestExpectation(description: "Call doSomething with stay succeed")
 
-        client.petoperation.doSomething(whatAction: "stay") { result, httpResponse in
+        client.petOperation.doSomething(whatAction: "stay") { result, httpResponse in
             switch result {
             case let .success(petAction):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -201,7 +201,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_doSomething500() throws {
         let expectation = XCTestExpectation(description: "Call doSomething with jump succeed")
 
-        client.petoperation.doSomething(whatAction: "jump") { result, httpResponse in
+        client.petOperation.doSomething(whatAction: "jump") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call doSomething with jump failed")
@@ -225,7 +225,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
     func test_XmsErrorResponseExtensions_doSomething404() throws {
         let expectation = XCTestExpectation(description: "Call doSomething with fetch succeed")
 
-        client.petoperation.doSomething(whatAction: "fetch") { result, httpResponse in
+        client.petOperation.doSomething(whatAction: "fetch") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call doSomething with fetch failed")

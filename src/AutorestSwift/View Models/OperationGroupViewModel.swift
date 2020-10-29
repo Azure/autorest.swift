@@ -36,11 +36,12 @@ struct OperationGroupViewModel {
     let comment: ViewModelComment
 
     init(from group: OperationGroup, with model: CodeModel) {
-        let name = group.name.isEmpty ? model.name : group.swiftName
+        let name = group.name.isEmpty ? model.name : group.name
 
         var groupName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if model.object(for: groupName) != nil {
-            // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
+        // if the operation group name has a collision with a model object, append 'Operation' to the operation group name
+        // or group name is a reserved keyword
+        if model.object(for: groupName) != nil || groupName.isReserved {
             groupName += "Operation"
         }
 

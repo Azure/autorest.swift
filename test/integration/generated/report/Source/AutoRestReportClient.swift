@@ -117,7 +117,7 @@ public final class AutoRestReportClient: PipelineClient {
         return urlComps.url
     }
 
-    public lazy var autorestreportservice: AutoRestReportService = AutoRestReportService(client: self)
+    public lazy var autoRestReportService: AutoRestReportService = AutoRestReportService(client: self)
 
     // MARK: Public Client Methods
 }

@@ -24,9 +24,7 @@ working_files = [
     "url",
     "model-flattening",
     "custom-baseUrl",
-    "body-string",
-    "body-boolean",
-    "body-array"
+    "body-string"
 ]
 
 def get_all_files():

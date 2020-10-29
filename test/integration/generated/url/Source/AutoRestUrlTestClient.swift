@@ -124,7 +124,7 @@ public final class AutoRestUrlTestClient: PipelineClient {
     // /// should contain value null
     public var globalStringQuery: String?
 
-    public lazy var pathitems: PathItems = PathItems(client: self)
+    public lazy var pathItems: PathItems = PathItems(client: self)
     public lazy var paths: Paths = Paths(client: self)
     public lazy var queries: Queries = Queries(client: self)
 

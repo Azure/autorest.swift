@@ -41,7 +41,7 @@ class AutoRestHeadTest: XCTestCase {
     func test_Head_success200() throws {
         let expectation = XCTestExpectation(description: "Call head200 succeed")
 
-        client.httpsuccess.head200 { result, _ in
+        client.httpSuccess.head200 { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -57,7 +57,7 @@ class AutoRestHeadTest: XCTestCase {
     func test_Head_success204() throws {
         let expectation = XCTestExpectation(description: "Call head204 succeed")
 
-        client.httpsuccess.head204 { result, _ in
+        client.httpSuccess.head204 { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()
@@ -73,7 +73,7 @@ class AutoRestHeadTest: XCTestCase {
     func test_Head_success404() throws {
         let expectation = XCTestExpectation(description: "Call head404 succeed")
 
-        client.httpsuccess.head404 { result, _ in
+        client.httpSuccess.head404 { result, _ in
             switch result {
             case .success:
                 expectation.fulfill()

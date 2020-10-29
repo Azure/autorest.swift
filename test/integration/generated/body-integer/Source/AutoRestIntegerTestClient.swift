@@ -117,7 +117,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
         return urlComps.url
     }
 
-    public lazy var inttype: IntType = IntType(client: self)
+    public lazy var intOperation: IntOperation = IntOperation(client: self)
 
     // MARK: Public Client Methods
 }

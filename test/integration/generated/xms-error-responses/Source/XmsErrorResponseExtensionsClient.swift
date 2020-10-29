@@ -117,7 +117,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         return urlComps.url
     }
 
-    public lazy var petoperation: PetOperation = PetOperation(client: self)
+    public lazy var petOperation: PetOperation = PetOperation(client: self)
 
     // MARK: Public Client Methods
 }

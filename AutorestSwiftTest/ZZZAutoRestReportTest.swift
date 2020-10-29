@@ -124,7 +124,7 @@ class ZZZAutoRestReportTest: XCTestCase {
     func test_ReportFile_getReport() throws {
         let expectation = XCTestExpectation(description: "Call getReport succeed")
 
-        client.autorestreportservice.getReport { result, _ in
+        client.autoRestReportService.getReport { result, _ in
             switch result {
             case let .success(report):
                 XCTAssert(report.count > 0)
@@ -143,7 +143,7 @@ class ZZZAutoRestReportTest: XCTestCase {
     func test_ReportFile_getOptionalReport() throws {
         let expectation = XCTestExpectation(description: "Call getOptionalReport succeed")
 
-        client.autorestreportservice.getOptionalReport { result, _ in
+        client.autoRestReportService.getOptionalReport { result, _ in
             switch result {
             case let .success(optionalReport):
                 XCTAssert(optionalReport.count > 0)
