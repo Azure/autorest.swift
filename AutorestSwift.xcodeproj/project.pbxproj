@@ -148,8 +148,8 @@
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
-		0A7477012527CE4500819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		0A747B24252E897300819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0A7477012527CE4500819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0A747B24252E897300819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
@@ -164,6 +164,7 @@
 		0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */; };
 		0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
+		0AFA1AE8254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
@@ -189,15 +190,14 @@
 		F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A928F254B093D00E2D9C2 /* AutoRestSwaggerBatFileTest.swift */; };
 		F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9292254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift */; };
 		F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */; };
-		F15A929D254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A929F254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92A1254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92A3254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92A5254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92AA254B0A0F00E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92AD254B0A6200E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */; };
-		F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */; };
-		F15A92F9254B2FFA00E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */; };
+		F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */; };
+		F15A92A1254B09C700E2D9C2 /* AutoRestReport in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A0254B09C700E2D9C2 /* AutoRestReport */; };
+		F15A92A3254B09C700E2D9C2 /* AutoRestResourceFlatteningTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */; };
+		F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */; };
+		F15A92AA254B0A0F00E2D9C2 /* AutoRestHeadTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */; };
+		F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */; };
+		F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */; };
 		F15D2C5C2547536400265366 /* AutoRestParameterizedHostTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */; };
 		F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */; };
 		F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */; };
@@ -222,7 +222,7 @@
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
 		F1A5FD8124DCFEE600A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */; };
 		F1A5FD8224DCFEE600A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */; };
-		F1BBE510254A7DAE00BF6D9E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */; };
+		F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */ = {isa = PBXBuildFile; productRef = F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,9 +389,10 @@
 		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
 		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
 		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
+		0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatTest.swift; sourceTree = "<group>"; };
 		4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AutorestSwift::AutorestSwift::Product /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
+		"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F106826B24CF5B71007EB4D5 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = SOURCE_ROOT; };
 		F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
@@ -426,7 +427,6 @@
 		F15A9298254B095500E2D9C2 /* report */ = {isa = PBXFileReference; lastKnownFileType = text; name = report; path = test/integration/generated/report; sourceTree = SOURCE_ROOT; };
 		F15A929A254B096900E2D9C2 /* model-flattening */ = {isa = PBXFileReference; lastKnownFileType = text; name = "model-flattening"; path = "test/integration/generated/model-flattening"; sourceTree = SOURCE_ROOT; };
 		F15A92A7254B0A0900E2D9C2 /* head */ = {isa = PBXFileReference; lastKnownFileType = text; name = head; path = test/integration/generated/head; sourceTree = SOURCE_ROOT; };
-		F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AutoRestSwaggerBatTest.swift; path = "/Users/sacheu/Documents/GitHub/autorest.swift-3/AutorestSwiftTest/AutoRestSwaggerBatTest.swift"; sourceTree = "<absolute>"; };
 		F15A92D6254B293400E2D9C2 /* body-string */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-string"; path = "test/integration/generated/body-string"; sourceTree = SOURCE_ROOT; };
 		F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestParameterizedHostTest.swift; sourceTree = "<group>"; };
 		F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestUrlPathItemsTest.swift; sourceTree = "<group>"; };
@@ -559,15 +559,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F15A92AD254B0A6200E2D9C2 /* BuildFile in Frameworks */,
-				F15A92A1254B09C700E2D9C2 /* BuildFile in Frameworks */,
-				F15A92AA254B0A0F00E2D9C2 /* BuildFile in Frameworks */,
-				F1BBE510254A7DAE00BF6D9E /* BuildFile in Frameworks */,
-				F15A92A3254B09C700E2D9C2 /* BuildFile in Frameworks */,
-				F15A92F9254B2FFA00E2D9C2 /* BuildFile in Frameworks */,
-				F15A929D254B09C700E2D9C2 /* BuildFile in Frameworks */,
-				F15A92A5254B09C700E2D9C2 /* BuildFile in Frameworks */,
-				F15A929F254B09C700E2D9C2 /* BuildFile in Frameworks */,
+				F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */,
+				F15A92A1254B09C700E2D9C2 /* AutoRestReport in Frameworks */,
+				F15A92AA254B0A0F00E2D9C2 /* AutoRestHeadTest in Frameworks */,
+				F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */,
+				F15A92A3254B09C700E2D9C2 /* AutoRestResourceFlatteningTest in Frameworks */,
+				F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */,
+				F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */,
+				F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */,
+				F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +710,6 @@
 				4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */,
 				BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -743,6 +742,7 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */,
 				F15A92D6254B293400E2D9C2 /* body-string */,
 				F15A92A7254B0A0900E2D9C2 /* head */,
 				F15A929A254B096900E2D9C2 /* model-flattening */,
@@ -752,7 +752,6 @@
 				F15A927D254B084F00E2D9C2 /* custom-baseUrl */,
 				F15A927B254B083600E2D9C2 /* body-file */,
 				F1BBE4C2254A780D00BF6D9E /* url */,
-				F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */,
 				F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */,
 				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
 				F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */,
@@ -774,7 +773,7 @@
 		OBJ_114 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AutorestSwift::AutorestSwift::Product /* AutorestSwift */,
+				"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */,
 				F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */,
 			);
 			name = Products;
@@ -964,7 +963,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AutorestSwift::AutorestSwift /* AutorestSwift */ = {
+		"AutorestSwift::AutorestSwift" /* AutorestSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */;
 			buildPhases = (
@@ -982,7 +981,7 @@
 			);
 			name = AutorestSwift;
 			productName = AutorestSwift;
-			productReference = AutorestSwift::AutorestSwift::Product /* AutorestSwift */;
+			productReference = "AutorestSwift::AutorestSwift::Product" /* AutorestSwift */;
 			productType = "com.apple.product-type.tool";
 		};
 		F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */ = {
@@ -1000,15 +999,15 @@
 			);
 			name = AutorestSwiftTest;
 			packageProductDependencies = (
-				F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */,
-				F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */,
-				F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */,
-				F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */,
+				F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */,
+				F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */,
+				F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */,
+				F15A92A0254B09C700E2D9C2 /* AutoRestReport */,
+				F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */,
+				F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */,
+				F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */,
+				F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */,
+				F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1049,7 +1048,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				AutorestSwift::AutorestSwift /* AutorestSwift */,
+				"AutorestSwift::AutorestSwift" /* AutorestSwift */,
 				F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */,
 			);
 		};
@@ -1144,14 +1143,14 @@
 				F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */,
 				F15A928A254B092C00E2D9C2 /* AutoRestParameterizedHostTest.swift in Sources */,
 				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
+				0AFA1AE8254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
-				F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
-				0A7477012527CE4500819FC9 /* BuildFile in Sources */,
+				0A7477012527CE4500819FC9 /* (null) in Sources */,
 				F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */,
 				F15A9287254B08A400E2D9C2 /* AutoRestHeadTest.swift in Sources */,
 				F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */,
-				0A747B24252E897300819FC9 /* BuildFile in Sources */,
+				0A747B24252E897300819FC9 /* (null) in Sources */,
 				F15A9284254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F15A928D254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */,
@@ -1584,39 +1583,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestIntegerTest;
 		};
-		F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestParameterizedHostTest;
 		};
-		F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A0254B09C700E2D9C2 /* AutoRestReport */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestReport;
 		};
-		F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestResourceFlatteningTest;
 		};
-		F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBatFile;
 		};
-		F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestHeadTest;
 		};
-		F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XmsErrorResponseExtensions;
 		};
-		F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBat;
 		};
-		F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */ = {
+		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestUrlTest;
 		};
