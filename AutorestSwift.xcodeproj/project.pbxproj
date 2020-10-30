@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */; };
 		0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */; };
 		0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
 		0A22B0DE24D3671D00EC018E /* EnumerationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */; };
@@ -149,8 +148,8 @@
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
-		0A7477012527CE4500819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		0A747B24252E897300819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0A7477012527CE4500819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0A747B24252E897300819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
@@ -165,6 +164,7 @@
 		0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */; };
 		0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
+		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -189,15 +189,15 @@
 		F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A928F254B093D00E2D9C2 /* AutoRestSwaggerBatFileTest.swift */; };
 		F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9292254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift */; };
 		F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */; };
-		F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */; };
-		F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */; };
-		F15A92A1254B09C700E2D9C2 /* AutoRestReport in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A0254B09C700E2D9C2 /* AutoRestReport */; };
-		F15A92A3254B09C700E2D9C2 /* AutoRestResourceFlatteningTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */; };
-		F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */; };
-		F15A92AA254B0A0F00E2D9C2 /* AutoRestHeadTest in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */; };
-		F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */; };
+		F15A929D254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A929F254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A92A1254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A92A3254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A92A5254B09C700E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A92AA254B0A0F00E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */; };
+		F15A92AD254B0A6200E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */; };
 		F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A92CD254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift */; };
-		F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */; };
+		F15A92F9254B2FFA00E2D9C2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */; };
 		F15D2C5C2547536400265366 /* AutoRestParameterizedHostTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */; };
 		F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */; };
 		F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */; };
@@ -222,8 +222,7 @@
 		F1A5FD8024DCFEE600A5CC6C /* ModelDecoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* ModelDecoderProperty.stencil */; };
 		F1A5FD8124DCFEE600A5CC6C /* ModelEncoderDateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* ModelEncoderDateProperty.stencil */; };
 		F1A5FD8224DCFEE600A5CC6C /* ModelEncoderProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* ModelEncoderProperty.stencil */; };
-		F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */ = {isa = PBXBuildFile; productRef = F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */; };
-		F1BBE513254A82F800BF6D9E /* AzureCore in Frameworks */ = {isa = PBXBuildFile; productRef = F1BBE512254A82F800BF6D9E /* AzureCore */; };
+		F1BBE510254A7DAE00BF6D9E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,7 +325,6 @@
 
 /* Begin PBXFileReference section */
 		0A22B02C24C88EB000EC018E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		0A22B02D24C88EB000EC018E /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		0A22B03424C8964000EC018E /* LanguageShortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageShortcut.swift; sourceTree = "<group>"; };
 		0A22B03524C8964000EC018E /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
 		0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationFileViewModel.swift; sourceTree = "<group>"; };
@@ -391,12 +389,10 @@
 		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
 		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
 		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
-		50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
-		C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwiftTests/Pods-AutorestSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
-		DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
+		4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutorestSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AutorestSwift::AutorestSwift::Product /* AutorestSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = AutorestSwift; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F106826B24CF5B71007EB4D5 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = SOURCE_ROOT; };
 		F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
@@ -458,7 +454,6 @@
 		F1BBE4C2254A780D00BF6D9E /* url */ = {isa = PBXFileReference; lastKnownFileType = text; name = url; path = test/integration/generated/url; sourceTree = SOURCE_ROOT; };
 		F1DE649E251304ED00B2C864 /* OperationResponseStatusCodeDeclareSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStatusCodeDeclareSnippet.stencil; sourceTree = "<group>"; };
 		F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseUnixTimeBodySnippet.stencil; sourceTree = "<group>"; };
-		F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		OBJ_10 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		OBJ_101 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
@@ -564,16 +559,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */,
-				F15A92A1254B09C700E2D9C2 /* AutoRestReport in Frameworks */,
-				F15A92AA254B0A0F00E2D9C2 /* AutoRestHeadTest in Frameworks */,
-				F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */,
-				F1BBE513254A82F800BF6D9E /* AzureCore in Frameworks */,
-				F15A92A3254B09C700E2D9C2 /* AutoRestResourceFlatteningTest in Frameworks */,
-				F15A92F9254B2FFA00E2D9C2 /* AutoRestSwaggerBat in Frameworks */,
-				F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */,
-				F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */,
-				F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */,
+				F15A92AD254B0A6200E2D9C2 /* BuildFile in Frameworks */,
+				F15A92A1254B09C700E2D9C2 /* BuildFile in Frameworks */,
+				F15A92AA254B0A0F00E2D9C2 /* BuildFile in Frameworks */,
+				F1BBE510254A7DAE00BF6D9E /* BuildFile in Frameworks */,
+				F15A92A3254B09C700E2D9C2 /* BuildFile in Frameworks */,
+				F15A92F9254B2FFA00E2D9C2 /* BuildFile in Frameworks */,
+				F15A929D254B09C700E2D9C2 /* BuildFile in Frameworks */,
+				F15A92A5254B09C700E2D9C2 /* BuildFile in Frameworks */,
+				F15A929F254B09C700E2D9C2 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +575,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				07E19426CF77C39BAE500ACF /* libPods-AutorestSwift.a in Frameworks */,
+				61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,24 +704,22 @@
 			path = JsonRpc;
 			sourceTree = "<group>";
 		};
-		D140A829FDBE9A58B03FF430 /* Frameworks */ = {
+		41CEA9DBCC8825C2C1346AE7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				83D1551AC5FB9279DDE6D239 /* libPods-AutorestSwift.a */,
-				6111AB27AE90FF2215A75C1F /* libPods-AutorestSwiftTests.a */,
+				4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */,
+				BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		E09E9823B4CA64CA4E9DEB27 /* Pods */ = {
+		439002EA86479895A35561C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */,
-				DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */,
-				50684F746D1F4406B5919571 /* Pods-AutorestSwiftTests.debug.xcconfig */,
-				C104206EDB67890639071382 /* Pods-AutorestSwiftTests.release.xcconfig */,
+				A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F106826A24CF5AB9007EB4D5 /* configs */ = {
@@ -782,7 +774,7 @@
 		OBJ_114 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */,
+				AutorestSwift::AutorestSwift::Product /* AutorestSwift */,
 				F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */,
 			);
 			name = Products;
@@ -866,7 +858,6 @@
 				0AA2B98824E5FD6500CEA1D6 /* package.json */,
 				0A22B09524D09C2900EC018E /* Makefile */,
 				OBJ_6 /* Package.swift */,
-				0A22B02D24C88EB000EC018E /* Package.resolved */,
 				OBJ_7 /* Sources */,
 				F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */,
 				OBJ_114 /* Products */,
@@ -878,8 +869,8 @@
 				OBJ_124 /* README.md */,
 				OBJ_125 /* CONTRIBUTING.md */,
 				0A22B02C24C88EB000EC018E /* Podfile */,
-				E09E9823B4CA64CA4E9DEB27 /* Pods */,
-				D140A829FDBE9A58B03FF430 /* Frameworks */,
+				41CEA9DBCC8825C2C1346AE7 /* Pods */,
+				439002EA86479895A35561C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -973,11 +964,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		"AutorestSwift::AutorestSwift" /* AutorestSwift */ = {
+		AutorestSwift::AutorestSwift /* AutorestSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */;
 			buildPhases = (
-				148BDF5E35394EA176B0C219 /* [CP] Check Pods Manifest.lock */,
+				266E1B13E1770F8C7851F8CB /* [CP] Check Pods Manifest.lock */,
 				OBJ_130 /* Sources */,
 				OBJ_227 /* Frameworks */,
 				F175405F24C7DDC4004A1139 /* Embed Frameworks */,
@@ -990,10 +981,8 @@
 			dependencies = (
 			);
 			name = AutorestSwift;
-			packageProductDependencies = (
-			);
 			productName = AutorestSwift;
-			productReference = "AutorestSwift::AutorestSwift::Product" /* AutorestSwift */;
+			productReference = AutorestSwift::AutorestSwift::Product /* AutorestSwift */;
 			productType = "com.apple.product-type.tool";
 		};
 		F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */ = {
@@ -1011,16 +1000,15 @@
 			);
 			name = AutorestSwiftTest;
 			packageProductDependencies = (
-				F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */,
-				F1BBE512254A82F800BF6D9E /* AzureCore */,
-				F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */,
-				F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */,
-				F15A92A0254B09C700E2D9C2 /* AutoRestReport */,
-				F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */,
-				F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */,
-				F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */,
-				F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */,
-				F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */,
+				F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */,
+				F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */,
+				F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */,
+				F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1051,9 +1039,6 @@
 				en,
 			);
 			mainGroup = OBJ_5;
-			packageReferences = (
-				F1BBE4BE254A77FD00BF6D9E /* XCRemoteSwiftPackageReference "azure-sdk-for-ios" */,
-			);
 			productRefGroup = OBJ_114 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -1064,7 +1049,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				"AutorestSwift::AutorestSwift" /* AutorestSwift */,
+				AutorestSwift::AutorestSwift /* AutorestSwift */,
 				F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */,
 			);
 		};
@@ -1091,7 +1076,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		148BDF5E35394EA176B0C219 /* [CP] Check Pods Manifest.lock */ = {
+		266E1B13E1770F8C7851F8CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1162,11 +1147,11 @@
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F15A92CE254B288C00E2D9C2 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
-				0A7477012527CE4500819FC9 /* (null) in Sources */,
+				0A7477012527CE4500819FC9 /* BuildFile in Sources */,
 				F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */,
 				F15A9287254B08A400E2D9C2 /* AutoRestHeadTest.swift in Sources */,
 				F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */,
-				0A747B24252E897300819FC9 /* (null) in Sources */,
+				0A747B24252E897300819FC9 /* BuildFile in Sources */,
 				F15A9284254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F15A928D254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */,
@@ -1450,7 +1435,7 @@
 		};
 		OBJ_128 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4042B9C29C4EEFB3DCB9CE1 /* Pods-AutorestSwift.debug.xcconfig */;
+			baseConfigurationReference = 4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_TESTABILITY = YES;
@@ -1483,7 +1468,7 @@
 		};
 		OBJ_129 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA88D6FB5D3F4D6C165D0111 /* Pods-AutorestSwift.release.xcconfig */;
+			baseConfigurationReference = BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_TESTABILITY = YES;
@@ -1598,58 +1583,42 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		F1BBE4BE254A77FD00BF6D9E /* XCRemoteSwiftPackageReference "azure-sdk-for-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Azure/azure-sdk-for-ios.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */ = {
+		F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestIntegerTest;
 		};
-		F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */ = {
+		F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestParameterizedHostTest;
 		};
-		F15A92A0254B09C700E2D9C2 /* AutoRestReport */ = {
+		F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestReport;
 		};
-		F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */ = {
+		F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestResourceFlatteningTest;
 		};
-		F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */ = {
+		F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBatFile;
 		};
-		F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */ = {
+		F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestHeadTest;
 		};
-		F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */ = {
+		F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XmsErrorResponseExtensions;
 		};
-		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
+		F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBat;
 		};
-		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
+		F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestUrlTest;
-		};
-		F1BBE512254A82F800BF6D9E /* AzureCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F1BBE4BE254A77FD00BF6D9E /* XCRemoteSwiftPackageReference "azure-sdk-for-ios" */;
-			productName = AzureCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
