@@ -40,7 +40,7 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
     /// Create a AutoRestHeadTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestHeadTestClient.
+    ///   - endpoint: Base URL for the AutoRestHeadTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

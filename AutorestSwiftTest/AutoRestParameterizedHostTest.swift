@@ -32,12 +32,12 @@ class AutoRestParameterizedHostTest: XCTestCase {
     var client: AutoRestParameterizedHostTestClient!
 
     override func setUpWithError() throws {
-        guard let baseUrl = URL(string: "http://wronghost") else {
+        guard let endpoint = URL(string: "http://wronghost") else {
             fatalError("Can't creat a base URL")
         }
         client = try AutoRestParameterizedHostTestClient(
             host: "host:3000",
-            baseUrl: baseUrl,
+            endpoint: endpoint,
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestParameterizedHostTestClientOptions()
         )

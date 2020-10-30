@@ -66,7 +66,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
-            "$host": client.baseUrl.absoluteString,
+            "$host": client.endpoint.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -174,7 +174,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
-            "$host": client.baseUrl.absoluteString,
+            "$host": client.endpoint.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -282,7 +282,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
-            "$host": client.baseUrl.absoluteString,
+            "$host": client.endpoint.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query
@@ -390,7 +390,7 @@ public final class PathItems {
         let pathParams = [
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
-            "$host": client.baseUrl.absoluteString,
+            "$host": client.endpoint.absoluteString,
             "globalStringPath": client.globalStringPath
         ]
         // Construct query

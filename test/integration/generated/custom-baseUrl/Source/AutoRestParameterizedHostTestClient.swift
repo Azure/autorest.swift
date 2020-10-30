@@ -40,7 +40,7 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
 
     /// Create a AutoRestParameterizedHostTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestParameterizedHostTestClient.
+    ///   - endpoint: Base URL for the AutoRestParameterizedHostTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

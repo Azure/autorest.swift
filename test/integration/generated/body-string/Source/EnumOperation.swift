@@ -60,7 +60,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/notExpandable"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -155,7 +155,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/notExpandable"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -249,7 +249,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/Referenced"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -344,7 +344,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/Referenced"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -438,7 +438,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/ReferencedConstant"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -533,7 +533,7 @@ public final class EnumOperation {
         // Construct URL
         let urlTemplate = "/string/enum/ReferencedConstant"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

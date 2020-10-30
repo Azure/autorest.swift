@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBatClient: PipelineClient {
 
     /// Create a AutoRestSwaggerBatClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestSwaggerBatClient.
+    ///   - endpoint: Base URL for the AutoRestSwaggerBatClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

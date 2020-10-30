@@ -60,7 +60,7 @@ public final class AutoRestReportService {
         // Construct URL
         let urlTemplate = "/report"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -160,7 +160,7 @@ public final class AutoRestReportService {
         // Construct URL
         let urlTemplate = "/report/optional"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
