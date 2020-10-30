@@ -148,8 +148,8 @@
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
-		0A7477012527CE4500819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		0A747B24252E897300819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0A7477012527CE4500819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0A747B24252E897300819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
@@ -742,30 +742,30 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
-				0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */,
+				F15A927B254B083600E2D9C2 /* body-file */,
+				F15A9281254B086800E2D9C2 /* body-integer */,
 				F15A92D6254B293400E2D9C2 /* body-string */,
+				F15A927D254B084F00E2D9C2 /* custom-baseUrl */,
 				F15A92A7254B0A0900E2D9C2 /* head */,
 				F15A929A254B096900E2D9C2 /* model-flattening */,
 				F15A9298254B095500E2D9C2 /* report */,
-				F15A9281254B086800E2D9C2 /* body-integer */,
-				F15A927F254B085600E2D9C2 /* xms-error-responses */,
-				F15A927D254B084F00E2D9C2 /* custom-baseUrl */,
-				F15A927B254B083600E2D9C2 /* body-file */,
 				F1BBE4C2254A780D00BF6D9E /* url */,
-				F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */,
-				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
-				F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */,
-				F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */,
-				F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */,
+				F15A927F254B085600E2D9C2 /* xms-error-responses */,
+				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				F15A9283254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift */,
-				F15A9289254B092C00E2D9C2 /* AutoRestParameterizedHostTest.swift */,
+				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
+				F15D2C5B2547536400265366 /* AutoRestParameterizedHostTest.swift */,
 				F15A928C254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift */,
 				F15A928F254B093D00E2D9C2 /* AutoRestSwaggerBatFileTest.swift */,
-				F15A9292254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift */,
+				0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */,
+				F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */,
+				F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */,
+				F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */,
 				F10B1F6125414556007DA581 /* Dictionary+Extension.swift */,
-				F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */,
-				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				F170D321253F786800A569A0 /* Util.swift */,
+				F15A9292254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift */,
+				F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */,
+				F15A9289254B092C00E2D9C2 /* AutoRestParameterizedHostTest.swift */,
 			);
 			path = AutorestSwiftTest;
 			sourceTree = "<group>";
@@ -773,7 +773,7 @@
 		OBJ_114 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AutorestSwift::AutorestSwift::Product /* AutorestSwift */,
+				"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */,
 				F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */,
 			);
 			name = Products;
@@ -963,7 +963,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AutorestSwift::AutorestSwift /* AutorestSwift */ = {
+		"AutorestSwift::AutorestSwift" /* AutorestSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */;
 			buildPhases = (
@@ -981,7 +981,7 @@
 			);
 			name = AutorestSwift;
 			productName = AutorestSwift;
-			productReference = AutorestSwift::AutorestSwift::Product /* AutorestSwift */;
+			productReference = "AutorestSwift::AutorestSwift::Product" /* AutorestSwift */;
 			productType = "com.apple.product-type.tool";
 		};
 		F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */ = {
@@ -1048,7 +1048,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				AutorestSwift::AutorestSwift /* AutorestSwift */,
+				"AutorestSwift::AutorestSwift" /* AutorestSwift */,
 				F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */,
 			);
 		};
@@ -1146,11 +1146,11 @@
 				0AFA1AE8254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
-				0A7477012527CE4500819FC9 /* BuildFile in Sources */,
+				0A7477012527CE4500819FC9 /* (null) in Sources */,
 				F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */,
 				F15A9287254B08A400E2D9C2 /* AutoRestHeadTest.swift in Sources */,
 				F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */,
-				0A747B24252E897300819FC9 /* BuildFile in Sources */,
+				0A747B24252E897300819FC9 /* (null) in Sources */,
 				F15A9284254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F15A928D254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */,
@@ -1583,39 +1583,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestIntegerTest;
 		};
-		F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestParameterizedHostTest;
 		};
-		F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A0254B09C700E2D9C2 /* AutoRestReport */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestReport;
 		};
-		F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestResourceFlatteningTest;
 		};
-		F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBatFile;
 		};
-		F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestHeadTest;
 		};
-		F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XmsErrorResponseExtensions;
 		};
-		F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */ = {
+		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBat;
 		};
-		F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */ = {
+		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestUrlTest;
 		};
