@@ -50,14 +50,14 @@ public final class {{ model.name }}: {{ model.protocols }} {
         {% if model.host != "" %}
         url: URL? = nil,
         {% else %}
-        baseUrl: URL,
+        endpoint: URL,
         {% endif %}
         authPolicy: Authenticating,
         withOptions options: {{ model.name }}Options
     ) throws {
         {% if model.host != "" %}
         let defaultHost = URL(string: {{ model.host }})
-        guard let baseUrl = url ?? defaultHost else {
+        guard let endpoint = url ?? defaultHost else {
             fatalError("Unable to determine base URL. ")
         }
         {% endif %}
@@ -68,8 +68,8 @@ public final class {{ model.name }}: {{ model.protocols }} {
         {% endfor %}
         self.options = options
         super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
             policies: [
                 UserAgentPolicy(for: {{ model.name }}.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
@@ -104,7 +104,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
            !hostUnwrapped.hasSuffix("/")  {
                 hostString = hostUnwrapped + "/"
         }
-        let urlString = (hostString ?? self.baseUrl.absoluteString) + template
+        let urlString = (hostString ?? self.endpoint.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }

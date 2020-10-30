@@ -49,13 +49,13 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
         withOptions options: XmsErrorResponseExtensionsClientOptions
     ) throws {
         let defaultHost = URL(string: "http://localhost")
-        guard let baseUrl = url ?? defaultHost else {
+        guard let endpoint = url ?? defaultHost else {
             fatalError("Unable to determine base URL. ")
         }
         self.options = options
         super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
             policies: [
                 UserAgentPolicy(for: XmsErrorResponseExtensionsClient.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
@@ -95,7 +95,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
             !hostUnwrapped.hasSuffix("/") {
             hostString = hostUnwrapped + "/"
         }
-        let urlString = (hostString ?? baseUrl.absoluteString) + template
+        let urlString = (hostString ?? endpoint.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }
