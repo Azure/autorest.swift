@@ -39,48 +39,51 @@ class AutoRestHeadTest: XCTestCase {
     }
 
     func test_Head_success200() throws {
-        let expectation = XCTestExpectation(description: "Call head200 succeed")
+        let expectation = XCTestExpectation(description: "Call head200")
 
-        client.httpSuccess.head200 { result, _ in
+        client.httpSuccess.head200 { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call head200 failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call head200 failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Head_success204() throws {
-        let expectation = XCTestExpectation(description: "Call head204 succeed")
+        let expectation = XCTestExpectation(description: "Call head204")
 
-        client.httpSuccess.head204 { result, _ in
+        client.httpSuccess.head204 { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 204)
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call head204 failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call head204 failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_Head_success404() throws {
-        let expectation = XCTestExpectation(description: "Call head404 succeed")
+        let expectation = XCTestExpectation(description: "Call head404")
 
-        client.httpSuccess.head404 { result, _ in
+        client.httpSuccess.head404 { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 404)
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call head404 failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call head404 failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
