@@ -153,8 +153,18 @@ struct BodyParams {
             }
         }
 
-        let strategy: BodyParamStrategy = param.flattened ? .flattened : param.schema.type == AllSchemaTypes
-            .unixTime ? .unixTime : param.nullable ? .plainNullable : .plain
+        var strategy: BodyParamStrategy = .plain
+
+        if param.flattened {
+            strategy = .flattened
+        } else if param.nullable {
+            strategy = .plainNullable
+        } else if param.schema.type == .unixTime {
+            strategy = .unixTime
+        } else {
+            strategy = .plain
+        }
+
         self.strategy = strategy.rawValue
         self.children = virtParams
     }

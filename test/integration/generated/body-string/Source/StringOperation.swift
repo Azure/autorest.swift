@@ -959,16 +959,8 @@ public final class StringOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Data.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                        }
+                    dispatchQueue.async {
+                        completionHandler(.success(data), httpResponse)
                     }
                 }
             case .failure:
@@ -1052,16 +1044,8 @@ public final class StringOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Data.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                        }
+                    dispatchQueue.async {
+                        completionHandler(.success(data), httpResponse)
                     }
                 }
             case .failure:
@@ -1246,16 +1230,8 @@ public final class StringOperation {
                         return
                     }
 
-                    do {
-                        let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Data.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
-                        }
-                    } catch {
-                        dispatchQueue.async {
-                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                        }
+                    dispatchQueue.async {
+                        completionHandler(.success(data), httpResponse)
                     }
                 }
             case .failure:
