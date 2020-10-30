@@ -148,8 +148,8 @@
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
 		0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* JazzyFile.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
-		0A7477012527CE4500819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		0A747B24252E897300819FC9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0A7477012527CE4500819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		0A747B24252E897300819FC9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
@@ -773,7 +773,7 @@
 		OBJ_114 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"AutorestSwift::AutorestSwift::Product" /* AutorestSwift */,
+				AutorestSwift::AutorestSwift::Product /* AutorestSwift */,
 				F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */,
 			);
 			name = Products;
@@ -963,7 +963,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		"AutorestSwift::AutorestSwift" /* AutorestSwift */ = {
+		AutorestSwift::AutorestSwift /* AutorestSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "AutorestSwift" */;
 			buildPhases = (
@@ -981,7 +981,7 @@
 			);
 			name = AutorestSwift;
 			productName = AutorestSwift;
-			productReference = "AutorestSwift::AutorestSwift::Product" /* AutorestSwift */;
+			productReference = AutorestSwift::AutorestSwift::Product /* AutorestSwift */;
 			productType = "com.apple.product-type.tool";
 		};
 		F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */ = {
@@ -1048,7 +1048,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				"AutorestSwift::AutorestSwift" /* AutorestSwift */,
+				AutorestSwift::AutorestSwift /* AutorestSwift */,
 				F1A6719124F5CCCC00C2712C /* AutorestSwiftTest */,
 			);
 		};
@@ -1146,11 +1146,11 @@
 				0AFA1AE8254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
-				0A7477012527CE4500819FC9 /* (null) in Sources */,
+				0A7477012527CE4500819FC9 /* BuildFile in Sources */,
 				F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */,
 				F15A9287254B08A400E2D9C2 /* AutoRestHeadTest.swift in Sources */,
 				F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */,
-				0A747B24252E897300819FC9 /* (null) in Sources */,
+				0A747B24252E897300819FC9 /* BuildFile in Sources */,
 				F15A9284254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift in Sources */,
 				F15A928D254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */,
@@ -1583,39 +1583,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */ = {
+		F15A929C254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestIntegerTest;
 		};
-		F15A929E254B09C700E2D9C2 /* AutoRestParameterizedHostTest */ = {
+		F15A929E254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestParameterizedHostTest;
 		};
-		F15A92A0254B09C700E2D9C2 /* AutoRestReport */ = {
+		F15A92A0254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestReport;
 		};
-		F15A92A2254B09C700E2D9C2 /* AutoRestResourceFlatteningTest */ = {
+		F15A92A2254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestResourceFlatteningTest;
 		};
-		F15A92A4254B09C700E2D9C2 /* AutoRestSwaggerBatFile */ = {
+		F15A92A4254B09C700E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBatFile;
 		};
-		F15A92A9254B0A0F00E2D9C2 /* AutoRestHeadTest */ = {
+		F15A92A9254B0A0F00E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestHeadTest;
 		};
-		F15A92AC254B0A6200E2D9C2 /* XmsErrorResponseExtensions */ = {
+		F15A92AC254B0A6200E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XmsErrorResponseExtensions;
 		};
-		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
+		F15A92F8254B2FFA00E2D9C2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBat;
 		};
-		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
+		F1BBE50F254A7DAE00BF6D9E /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestUrlTest;
 		};
