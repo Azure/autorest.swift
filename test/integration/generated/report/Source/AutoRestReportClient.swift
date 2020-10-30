@@ -40,7 +40,7 @@ public final class AutoRestReportClient: PipelineClient {
 
     /// Create a AutoRestReportClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestReportClient.
+    ///   - endpoint: Base URL for the AutoRestReportClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

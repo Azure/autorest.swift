@@ -40,7 +40,7 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
 
     /// Create a AutoRestResourceFlatteningTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestResourceFlatteningTestClient.
+    ///   - endpoint: Base URL for the AutoRestResourceFlatteningTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

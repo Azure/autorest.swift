@@ -73,7 +73,7 @@ struct KeyValueViewModel: Comparable {
             self.init(
                 key: name,
                 // if the parameter is $host, retrieve the value from client's 'baseUrl' property
-                value: (name == "$host") ? "baseUrl.absoluteString" : name,
+                value: (name == "$host") ? "endpoint.absoluteString" : name,
                 optional: !param.required,
                 path: "client."
             )

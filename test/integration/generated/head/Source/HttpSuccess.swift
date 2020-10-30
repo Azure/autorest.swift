@@ -60,7 +60,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/200"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -143,7 +143,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/204"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -226,7 +226,7 @@ public final class HttpSuccess {
         // Construct URL
         let urlTemplate = "/http/success/404"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

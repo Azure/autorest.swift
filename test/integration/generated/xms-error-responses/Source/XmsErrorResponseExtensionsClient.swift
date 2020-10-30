@@ -40,7 +40,7 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
 
     /// Create a XmsErrorResponseExtensionsClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the XmsErrorResponseExtensionsClient.
+    ///   - endpoint: Base URL for the XmsErrorResponseExtensionsClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

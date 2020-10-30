@@ -38,7 +38,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
     // MARK: Initializers
     /// Create a {{ model.name }} client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the {{ model.name }}.
+    ///   - endpoint: Base URL for the {{ model.name }}.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

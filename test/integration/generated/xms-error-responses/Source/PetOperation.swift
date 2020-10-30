@@ -62,7 +62,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
             "petId": petId,
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -197,7 +197,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
             "whatAction": whatAction,
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

@@ -60,7 +60,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/null"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -161,7 +161,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/null"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -255,7 +255,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/empty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -348,7 +348,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/empty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -438,7 +438,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/mbcs"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -531,7 +531,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/mbcs"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -621,7 +621,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/whitespace"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -714,7 +714,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/whitespace"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -804,7 +804,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/notProvided"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -897,7 +897,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64Encoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -991,7 +991,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1086,7 +1086,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1180,7 +1180,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/nullBase64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

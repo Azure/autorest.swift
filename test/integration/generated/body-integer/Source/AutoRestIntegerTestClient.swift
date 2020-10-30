@@ -40,7 +40,7 @@ public final class AutoRestIntegerTestClient: PipelineClient {
 
     /// Create a AutoRestIntegerTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestIntegerTestClient.
+    ///   - endpoint: Base URL for the AutoRestIntegerTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(

@@ -60,7 +60,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/nonempty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -149,7 +149,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/verylarge"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -238,7 +238,7 @@ public final class Files {
         // Construct URL
         let urlTemplate = "/files/stream/empty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
