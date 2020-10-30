@@ -61,7 +61,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -96,6 +96,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -154,7 +155,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/array"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -184,6 +185,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -248,7 +250,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -283,6 +285,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -341,7 +344,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -371,6 +374,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -435,7 +439,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -470,6 +474,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -528,7 +533,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -558,6 +563,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -622,7 +628,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -657,6 +663,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -715,7 +722,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -745,6 +752,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -809,7 +817,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -844,6 +852,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -916,7 +925,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -955,6 +964,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1019,7 +1029,7 @@ public final class AutoRestResourceFlatteningTestService {
         // Construct URL
         let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString,
+            "$host": client.endpoint.absoluteString,
             "name": flattenParameterGroup.name
         ]
         // Construct query
@@ -1060,6 +1070,7 @@ public final class AutoRestResourceFlatteningTestService {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {

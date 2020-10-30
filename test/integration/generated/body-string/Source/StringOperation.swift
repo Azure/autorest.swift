@@ -60,7 +60,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/null"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -90,6 +90,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -160,7 +161,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/null"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -199,6 +200,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -257,7 +259,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/empty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -287,6 +289,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -350,7 +353,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/empty"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -385,6 +388,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -443,7 +447,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/mbcs"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -473,6 +477,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -536,7 +541,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/mbcs"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -571,6 +576,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -629,7 +635,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/whitespace"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -659,6 +665,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -722,7 +729,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/whitespace"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -757,6 +764,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -815,7 +823,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/notProvided"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -845,6 +853,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -907,7 +916,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64Encoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -937,6 +946,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -992,7 +1002,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1022,6 +1032,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1078,7 +1089,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1113,6 +1124,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1171,7 +1183,7 @@ public final class StringOperation {
         // Construct URL
         let urlTemplate = "/string/nullBase64UrlEncoding"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1201,6 +1213,7 @@ public final class StringOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {

@@ -62,7 +62,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let pathParams = [
             "petId": petId,
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -92,6 +92,7 @@ public final class PetOperation {
             ContextKey.allowedStatusCodes.rawValue: [200, 202, 400, 404, 501] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -196,7 +197,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let pathParams = [
             "whatAction": whatAction,
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -226,6 +227,7 @@ public final class PetOperation {
             ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
