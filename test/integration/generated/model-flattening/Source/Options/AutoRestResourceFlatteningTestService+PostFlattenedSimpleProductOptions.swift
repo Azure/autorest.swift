@@ -39,6 +39,9 @@ extension AutoRestResourceFlatteningTestService {
         /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         public var dispatchQueue: DispatchQueue?
 
+        /// A `PipelineContext` object to associate with the request.
+        public var context: PipelineContext?
+
         /// Initialize a `PostFlattenedSimpleProductOptions` structure.
         /// - Parameters:
         ///   - productId: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
@@ -49,6 +52,7 @@ extension AutoRestResourceFlatteningTestService {
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+        ///   - context: A `PipelineContext` object to associate with the request.
         public init(
             productId: String,
             description: String? = nil,
@@ -57,7 +61,8 @@ extension AutoRestResourceFlatteningTestService {
             odataValue: String? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
-            dispatchQueue: DispatchQueue? = nil
+            dispatchQueue: DispatchQueue? = nil,
+            context: PipelineContext? = nil
         ) {
             self.productId = productId
             self.description = description
@@ -67,6 +72,7 @@ extension AutoRestResourceFlatteningTestService {
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue
+            self.context = context
         }
     }
 }

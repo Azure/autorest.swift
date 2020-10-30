@@ -31,22 +31,28 @@ extension AutoRestResourceFlatteningTestService {
         /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         public var dispatchQueue: DispatchQueue?
 
+        /// A `PipelineContext` object to associate with the request.
+        public var context: PipelineContext?
+
         /// Initialize a `PutWrappedArrayOptions` structure.
         /// - Parameters:
         ///   - resourceArray: External Resource as an Array to put
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+        ///   - context: A `PipelineContext` object to associate with the request.
         public init(
             resourceArray: [WrappedProduct]? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
-            dispatchQueue: DispatchQueue? = nil
+            dispatchQueue: DispatchQueue? = nil,
+            context: PipelineContext? = nil
         ) {
             self.resourceArray = resourceArray
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue
+            self.context = context
         }
     }
 }

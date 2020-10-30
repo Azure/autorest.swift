@@ -89,6 +89,7 @@ public final class HttpSuccess {
             ContextKey.allowedStatusCodes.rawValue: [200, 404] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -171,6 +172,7 @@ public final class HttpSuccess {
             ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -253,6 +255,7 @@ public final class HttpSuccess {
             ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
 

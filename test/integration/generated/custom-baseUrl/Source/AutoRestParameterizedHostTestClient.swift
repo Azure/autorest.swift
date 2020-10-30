@@ -45,15 +45,15 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
     ///   - options: Options used to configure the client.
     public init(
         host: String,
-        baseUrl: URL,
+        endpoint: URL,
         authPolicy: Authenticating,
         withOptions options: AutoRestParameterizedHostTestClientOptions
     ) throws {
         self.host = host
         self.options = options
         super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
             policies: [
                 UserAgentPolicy(
                     for: AutoRestParameterizedHostTestClient.self,
@@ -96,7 +96,7 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
             !hostUnwrapped.hasSuffix("/") {
             hostString = hostUnwrapped + "/"
         }
-        let urlString = (hostString ?? baseUrl.absoluteString) + template
+        let urlString = (hostString ?? endpoint.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }

@@ -17,7 +17,7 @@ public struct {{ model.name }}: RequestOptions {
     public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    var context: PipelineContext? { get set }
+    public var context: PipelineContext?
 
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
