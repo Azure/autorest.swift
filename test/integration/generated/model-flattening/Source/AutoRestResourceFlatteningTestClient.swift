@@ -40,7 +40,7 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
 
     /// Create a AutoRestResourceFlatteningTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestResourceFlatteningTestClient.
+    ///   - endpoint: Base URL for the AutoRestResourceFlatteningTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
@@ -49,13 +49,13 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
         withOptions options: AutoRestResourceFlatteningTestClientOptions
     ) throws {
         let defaultHost = URL(string: "http://localhost:3000")
-        guard let baseUrl = url ?? defaultHost else {
+        guard let endpoint = url ?? defaultHost else {
             fatalError("Unable to determine base URL. ")
         }
         self.options = options
         super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
             policies: [
                 UserAgentPolicy(
                     for: AutoRestResourceFlatteningTestClient.self,
@@ -98,7 +98,7 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
             !hostUnwrapped.hasSuffix("/") {
             hostString = hostUnwrapped + "/"
         }
-        let urlString = (hostString ?? baseUrl.absoluteString) + template
+        let urlString = (hostString ?? endpoint.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }

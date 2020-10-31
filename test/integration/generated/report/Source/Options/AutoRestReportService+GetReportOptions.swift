@@ -31,22 +31,28 @@ extension AutoRestReportService {
         /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         public var dispatchQueue: DispatchQueue?
 
+        /// A `PipelineContext` object to associate with the request.
+        public var context: PipelineContext?
+
         /// Initialize a `GetReportOptions` structure.
         /// - Parameters:
         ///   - qualifier: If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+        ///   - context: A `PipelineContext` object to associate with the request.
         public init(
             qualifier: String? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
-            dispatchQueue: DispatchQueue? = nil
+            dispatchQueue: DispatchQueue? = nil,
+            context: PipelineContext? = nil
         ) {
             self.qualifier = qualifier
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue
+            self.context = context
         }
     }
 }

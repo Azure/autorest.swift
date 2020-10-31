@@ -60,7 +60,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/null"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -90,6 +90,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -159,7 +160,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/invalid"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -189,6 +190,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -251,7 +253,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/overflowint32"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -281,6 +283,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -343,7 +346,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/underflowint32"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -373,6 +376,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -435,7 +439,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/overflowint64"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -465,6 +469,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -527,7 +532,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/underflowint64"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -557,6 +562,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -620,7 +626,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/max/32"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -655,6 +661,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -714,7 +721,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/max/64"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -749,6 +756,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -808,7 +816,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/min/32"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -843,6 +851,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -902,7 +911,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/min/64"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -937,6 +946,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -995,7 +1005,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/unixtime"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1025,6 +1035,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1089,7 +1100,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/unixtime"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1126,6 +1137,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1184,7 +1196,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/invalidunixtime"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1214,6 +1226,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
@@ -1277,7 +1290,7 @@ public final class IntOperation {
         // Construct URL
         let urlTemplate = "/int/nullunixtime"
         let pathParams = [
-            "$host": client.baseUrl.absoluteString
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1307,6 +1320,7 @@ public final class IntOperation {
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
         self.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {

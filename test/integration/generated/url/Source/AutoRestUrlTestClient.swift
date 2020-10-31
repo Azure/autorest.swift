@@ -40,7 +40,7 @@ public final class AutoRestUrlTestClient: PipelineClient {
 
     /// Create a AutoRestUrlTestClient client.
     /// - Parameters:
-    ///   - baseUrl: Base URL for the AutoRestUrlTestClient.
+    ///   - endpoint: Base URL for the AutoRestUrlTestClient.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
@@ -50,14 +50,14 @@ public final class AutoRestUrlTestClient: PipelineClient {
         withOptions options: AutoRestUrlTestClientOptions
     ) throws {
         let defaultHost = URL(string: "http://localhost:3000")
-        guard let baseUrl = url ?? defaultHost else {
+        guard let endpoint = url ?? defaultHost else {
             fatalError("Unable to determine base URL. ")
         }
         self.globalStringPath = globalStringPath
         self.options = options
         super.init(
-            baseUrl: baseUrl,
-            transport: URLSessionTransport(),
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
             policies: [
                 UserAgentPolicy(for: AutoRestUrlTestClient.self, telemetryOptions: options.telemetryOptions),
                 RequestIdPolicy(),
@@ -97,7 +97,7 @@ public final class AutoRestUrlTestClient: PipelineClient {
             !hostUnwrapped.hasSuffix("/") {
             hostString = hostUnwrapped + "/"
         }
-        let urlString = (hostString ?? baseUrl.absoluteString) + template
+        let urlString = (hostString ?? endpoint.absoluteString) + template
         guard let url = URL(string: urlString) else {
             return nil
         }
