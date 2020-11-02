@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetHungryOrThirstyError: Codable, Swift.Error {
+public struct PetHungryOrThirstyError: Codable {
     // MARK: Properties
 
     /// is the pet hungry or thirsty or both
@@ -26,6 +26,8 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
     public let errorType: String
     /// the error message
     public let errorMessage: String?
+    /// action feedback
+    public let actionResponse: String?
 
     // MARK: Initializers
 
@@ -35,13 +37,16 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
     ///   - reason: why is the pet sad
     ///   - errorType:
     ///   - errorMessage: the error message
+    ///   - actionResponse: action feedback
     public init(
-        hungryOrThirsty: String? = nil, reason: String? = nil, errorType: String, errorMessage: String? = nil
+        hungryOrThirsty: String? = nil, reason: String? = nil, errorType: String, errorMessage: String? = nil,
+        actionResponse: String? = nil
     ) {
         self.hungryOrThirsty = hungryOrThirsty
         self.reason = reason
         self.errorType = errorType
         self.errorMessage = errorMessage
+        self.actionResponse = actionResponse
     }
 
     // MARK: Codable
@@ -51,6 +56,7 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
         case reason
         case errorType
         case errorMessage
+        case actionResponse
     }
 
     /// Initialize a `PetHungryOrThirstyError` structure from decoder
@@ -60,6 +66,7 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
         self.reason = try? container.decode(String.self, forKey: .reason)
         self.errorType = try container.decode(String.self, forKey: .errorType)
         self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
+        self.actionResponse = try? container.decode(String.self, forKey: .actionResponse)
     }
 
     /// Encode a `PetHungryOrThirstyError` structure
@@ -69,5 +76,6 @@ public struct PetHungryOrThirstyError: Codable, Swift.Error {
         if reason != nil { try? container.encode(reason, forKey: .reason) }
         try container.encode(errorType, forKey: .errorType)
         if errorMessage != nil { try? container.encode(errorMessage, forKey: .errorMessage) }
+        if actionResponse != nil { try? container.encode(actionResponse, forKey: .actionResponse) }
     }
 }

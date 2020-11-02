@@ -153,8 +153,6 @@ class AutoRestSwaggerBatTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-
-                print(data)
                 XCTAssertEqual(
                     data,
                     "\"    Now is the time for all good men to come to the aid of their country    \""

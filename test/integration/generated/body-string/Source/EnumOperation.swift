@@ -143,7 +143,7 @@ public final class EnumOperation {
 
     /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
     /// - Parameters:
-    ///    - notExpandable :
+    ///    - notExpandable : string body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -332,7 +332,7 @@ public final class EnumOperation {
 
     /// Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
     /// - Parameters:
-    ///    - referenced :
+    ///    - referenced : enum string body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -521,7 +521,7 @@ public final class EnumOperation {
 
     /// Sends value 'green-color' from a constant
     /// - Parameters:
-    ///    - referencedConstant :
+    ///    - referencedConstant : enum string body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
