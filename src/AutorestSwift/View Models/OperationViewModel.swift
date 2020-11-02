@@ -127,6 +127,7 @@ enum BodyParamStrategy: String {
     case plain
     case flattened
     case unixTime
+    case plainNullable
 }
 
 struct BodyParams {
@@ -152,8 +153,18 @@ struct BodyParams {
             }
         }
 
-        let strategy: BodyParamStrategy = param.flattened ? .flattened : param.schema.type == AllSchemaTypes
-            .unixTime ? .unixTime : .plain
+        var strategy: BodyParamStrategy = .plain
+
+        if param.flattened {
+            strategy = .flattened
+        } else if param.nullable {
+            strategy = .plainNullable
+        } else if param.schema.type == .unixTime {
+            strategy = .unixTime
+        } else {
+            strategy = .plain
+        }
+
         self.strategy = strategy.rawValue
         self.children = virtParams
     }
@@ -167,7 +178,11 @@ struct VirtualParam {
 
     init(from param: VirtualParameter) {
         self.name = param.name
-        self.path = param.targetProperty.name
+        var path = param.targetProperty.name
+        if let groupBy = param.groupedBy?.name {
+            path = "\(groupBy).\(path)"
+        }
+        self.path = path
         self.type = param.schema!.swiftType(optional: !param.required)
         self.defaultValue = param.required ? "" : " = nil"
     }

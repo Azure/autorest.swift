@@ -4,6 +4,16 @@ guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name 
     self.options.logger.error("Failed to encode request body as json.")
     return
 }
+{% elif op.params.body.strategy == "plainNullable" %}
+var requestBody: Data? = nil
+if ({{ op.params.body.param.name }} != nil)
+{
+    guard let encodedRequestBody = try? JSONEncoder().encode( {{ op.params.body.param.name }} ) else {
+        self.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+    requestBody = encodedRequestBody
+}
 {% elif op.params.body.strategy == "unixTime" %}
 let encoder = JSONEncoder()
 encoder.dateEncodingStrategy = .secondsSince1970

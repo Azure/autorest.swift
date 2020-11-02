@@ -18,8 +18,6 @@ import Foundation
 extension StringOperation {
     /// User-configurable options for the `AutoRestSwaggerBATService.PutNull` operation.
     public struct PutNullOptions: RequestOptions {
-        public let stringBody: String?
-
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?
@@ -35,19 +33,16 @@ extension StringOperation {
 
         /// Initialize a `PutNullOptions` structure.
         /// - Parameters:
-        ///   - stringBody:
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         ///   - context: A `PipelineContext` object to associate with the request.
         public init(
-            stringBody: String? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil,
             context: PipelineContext? = nil
         ) {
-            self.stringBody = stringBody
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue

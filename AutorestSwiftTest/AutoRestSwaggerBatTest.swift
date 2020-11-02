@@ -40,7 +40,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
         )
     }
 
-    func test_string_getNull__200() throws {
+    func test_string_getNull_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.getNull")
 
         client.stringOperation.getNull { result, httpResponse in
@@ -51,6 +51,191 @@ class AutoRestSwaggerBatTest: XCTestCase {
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putNull_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putNull")
+
+        client.stringOperation.put(null: nil) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_getEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getEmpty")
+
+        client.stringOperation.getEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, "\"\"")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getNull failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putEmpty")
+
+        client.stringOperation.put(empty: "") { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.putEmpty failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_listMbcs_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.listMbcs")
+
+        client.stringOperation.listMbcs { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data.count, 70)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.listMbcs failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putMbcs_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putMbcs")
+
+        client.stringOperation
+            .put(mbcs: "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€") { result, httpResponse in
+                switch result {
+                case .success:
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call stringOperation.putMbcs failed error=\(details)")
+                }
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_getWhitespace_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getWhitespace")
+
+        client.stringOperation.getWhitespace { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(
+                    data,
+                    "\"    Now is the time for all good men to come to the aid of their country    \""
+                )
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.getWhitespace failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_putWhitespace_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putWhitespace")
+
+        client.stringOperation
+            .put(whitespace: "    Now is the time for all good men to come to the aid of their country    ") { result, httpResponse in
+                switch result {
+                case .success:
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call stringOperation.putWhitespace failed error=\(details)")
+                }
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_getNotProvided_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getNotProvided")
+
+        client.stringOperation.getNotProvided { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, "")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getNotProvided.putWhitespace failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_getBase64Encoded_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getBase64Encoded")
+
+        client.stringOperation.getBase64Encoded { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(
+                    String(decoding: data, as: UTF8.self),
+                    "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjQ=\""
+                )
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getNotProvided.getBase64Encoded failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_string_getBase64UrlEncoded_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getBase64UrlEncoded")
+
+        client.stringOperation.getBase64UrlEncoded { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let str = String(decoding: data, as: UTF8.self)
+                XCTAssertEqual(str, "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getNotProvided.getBase64UrlEncoded failed error=\(details)")
             }
             expectation.fulfill()
         }

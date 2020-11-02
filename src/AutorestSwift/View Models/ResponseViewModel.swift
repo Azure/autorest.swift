@@ -39,6 +39,8 @@ enum ResponseBodyType: String {
     case jsonBody
     /// Service returns a unixTime body
     case unixTimeBody
+    /// Service returns a byteArray body
+    case byteArrayBody
 
     static func strategy(for input: String, and type: AllSchemaTypes) -> ResponseBodyType {
         if input == "String" {
@@ -47,6 +49,8 @@ enum ResponseBodyType: String {
             return .intBody
         } else if input == "Date", type == .unixTime {
             return .unixTimeBody
+        } else if input == "Data", type == .byteArray {
+            return .byteArrayBody
         } else {
             return .jsonBody
         }

@@ -54,7 +54,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        array: [Resource]? = nil,
+        array: [Resource]?,
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -243,7 +243,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        wrappedArray: [WrappedProduct]? = nil,
+        wrappedArray: [WrappedProduct]?,
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -432,7 +432,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionary: [String: FlattenedProduct]? = nil,
+        dictionary: [String: FlattenedProduct]?,
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -621,7 +621,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        resourceCollection: ResourceCollection? = nil,
+        resourceCollection: ResourceCollection?,
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -810,7 +810,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        simpleProduct: SimpleProduct? = nil,
+        simpleProduct: SimpleProduct?,
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
@@ -1041,6 +1041,15 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        let body = SimpleProduct(
+            maxProductDisplayName: flattenParameterGroup.maxProductDisplayName,
+            genericValue: flattenParameterGroup.genericValue, odataValue: flattenParameterGroup.odataValue,
+            productId: flattenParameterGroup.productId, description: flattenParameterGroup.description
+        )
+        guard let requestBody = try? JSONEncoder().encode(body) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1051,8 +1060,8 @@ public final class AutoRestResourceFlatteningTestService {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 

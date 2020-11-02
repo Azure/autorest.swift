@@ -18,9 +18,6 @@ import Foundation
 extension AutoRestResourceFlatteningTestService {
     /// User-configurable options for the `AutoRestResourceFlatteningTestService.PutResourceCollection` operation.
     public struct PutResourceCollectionOptions: RequestOptions {
-        /// External Resource as a ResourceCollection to put
-        public let resourceComplexObject: ResourceCollection?
-
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
         public let clientRequestId: String?
@@ -36,19 +33,16 @@ extension AutoRestResourceFlatteningTestService {
 
         /// Initialize a `PutResourceCollectionOptions` structure.
         /// - Parameters:
-        ///   - resourceComplexObject: External Resource as a ResourceCollection to put
         ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         ///   - context: A `PipelineContext` object to associate with the request.
         public init(
-            resourceComplexObject: ResourceCollection? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil,
             context: PipelineContext? = nil
         ) {
-            self.resourceComplexObject = resourceComplexObject
             self.clientRequestId = clientRequestId
             self.cancellationToken = cancellationToken
             self.dispatchQueue = dispatchQueue
