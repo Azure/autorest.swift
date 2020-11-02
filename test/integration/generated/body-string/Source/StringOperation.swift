@@ -149,7 +149,7 @@ public final class StringOperation {
 
     /// Set string value null
     /// - Parameters:
-    ///    - null : string body
+    ///    - null :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -341,7 +341,7 @@ public final class StringOperation {
 
     /// Set string value empty ''
     /// - Parameters:
-    ///    - empty : string body
+    ///    - empty :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -529,7 +529,7 @@ public final class StringOperation {
 
     /// Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
     /// - Parameters:
-    ///    - mbcs : string body
+    ///    - mbcs :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -717,7 +717,7 @@ public final class StringOperation {
 
     /// Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
     /// - Parameters:
-    ///    - whitespace : string body
+    ///    - whitespace :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -1077,7 +1077,7 @@ public final class StringOperation {
 
     /// Put value that is base64url encoded
     /// - Parameters:
-    ///    - base64UrlEncoded : string body
+    ///    - base64UrlEncoded :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.

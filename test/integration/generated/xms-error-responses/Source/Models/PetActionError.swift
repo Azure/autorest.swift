@@ -21,8 +21,6 @@ public struct PetActionError: Codable, Swift.Error {
     public let errorType: String
     /// the error message
     public let errorMessage: String?
-    /// action feedback
-    public let actionResponse: String?
 
     // MARK: Initializers
 
@@ -30,13 +28,11 @@ public struct PetActionError: Codable, Swift.Error {
     /// - Parameters:
     ///   - errorType:
     ///   - errorMessage: the error message
-    ///   - actionResponse: action feedback
     public init(
-        errorType: String, errorMessage: String? = nil, actionResponse: String? = nil
+        errorType: String, errorMessage: String? = nil
     ) {
         self.errorType = errorType
         self.errorMessage = errorMessage
-        self.actionResponse = actionResponse
     }
 
     // MARK: Codable
@@ -44,7 +40,6 @@ public struct PetActionError: Codable, Swift.Error {
     enum CodingKeys: String, CodingKey {
         case errorType
         case errorMessage
-        case actionResponse
     }
 
     /// Initialize a `PetActionError` structure from decoder
@@ -52,7 +47,6 @@ public struct PetActionError: Codable, Swift.Error {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.errorType = try container.decode(String.self, forKey: .errorType)
         self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
-        self.actionResponse = try? container.decode(String.self, forKey: .actionResponse)
     }
 
     /// Encode a `PetActionError` structure
@@ -60,6 +54,5 @@ public struct PetActionError: Codable, Swift.Error {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(errorType, forKey: .errorType)
         if errorMessage != nil { try? container.encode(errorMessage, forKey: .errorMessage) }
-        if actionResponse != nil { try? container.encode(actionResponse, forKey: .actionResponse) }
     }
 }
