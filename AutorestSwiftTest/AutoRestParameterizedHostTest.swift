@@ -44,31 +44,33 @@ class AutoRestParameterizedHostTest: XCTestCase {
     }
 
     func test_get_empty200() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getEmpty succeed")
+        let expectation = XCTestExpectation(description: "Call paths.getEmpty")
 
-        client.paths.getEmpty(accountName: "local") { result, _ in
+        client.paths.getEmpty(accountName: "local") { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 print("test failed. error=\(error.message)")
                 XCTFail("Call paths.getEmpty failed")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_get_emptyFailed() throws {
-        let expectation = XCTestExpectation(description: "Call paths.getEmpty failed")
+        let expectation = XCTestExpectation(description: "Call paths.getEmpty")
 
-        client.paths.getEmpty(accountName: "bad") { result, _ in
+        client.paths.getEmpty(accountName: "bad") { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("Call paths.getEmptyFailed should failed")
-            case let .failure:
-                expectation.fulfill()
+            case .failure:
+                XCTAssertNil(httpResponse?.statusCode)
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 5.0)

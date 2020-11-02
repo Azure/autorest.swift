@@ -45,12 +45,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         client.autoRestResourceFlatteningTestService.getArray { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getArray failed")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
@@ -67,12 +68,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         client.autoRestResourceFlatteningTestService.put(array: array) { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.putArray failed")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
@@ -83,12 +85,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         client.autoRestResourceFlatteningTestService.getDictionary { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getDictionary failed")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
@@ -115,12 +118,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        client.autoRestResourceFlatteningTestService.put(dictionary: dictionary) { result, httpResponse in
 //            switch result {
 //            case .success:
-//                expectation.fulfill()
+//               XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.putDictionary failed")
 //            }
+//            expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -131,12 +135,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         client.autoRestResourceFlatteningTestService.getResourceCollection { result, httpResponse in
             switch result {
             case .success:
-                expectation.fulfill()
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 print("test failed. error=\(details)")
                 XCTFail("Call autorestresourceflatteningtestservice.getResourceCollection failed")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
@@ -178,12 +183,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        client.autoRestResourceFlatteningTestService.put(resourceCollection: collection) { result, httpResponse in
 //            switch result {
 //            case .success:
-//                expectation.fulfill()
+//                XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.putResourceCollection failed")
 //            }
+//              expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -195,12 +201,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        client.autoRestResourceFlatteningTestService.getWrappedArray { result, httpResponse in
 //            switch result {
 //            case .success:
-//                expectation.fulfill()
+//               XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.getWrappedArray failed")
 //            }
+//    expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -217,12 +224,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        client.autoRestResourceFlatteningTestService.put(wrappedArray: wrapped) { result, httpResponse in
 //            switch result {
 //            case .success:
-//                expectation.fulfill()
+//                XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.putWrappedArray failed")
 //            }
+//          expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -242,12 +250,13 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        client.autoRestResourceFlatteningTestService.put(simpleProduct: product) { result, httpResponse in
 //            switch result {
 //            case .success:
-//                expectation.fulfill()
+//                XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.putSimpleProduct failed")
 //            }
+//          expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -269,7 +278,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //            .putSimpleProductWithGrouping(flattenParameterGroup: group) { result, httpResponse in
 //                switch result {
 //                case .success:
-//                    expectation.fulfill()
+//                    XCTAssertEqual(httpResponse?.statusCode, 200)
 //                case let .failure(error):
 //                    let details = self.errorDetails(for: error, withResponse: httpResponse)
 //                    print("test failed. error=\(details)")
@@ -277,6 +286,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //                        "Call autorestresourceflatteningtestservice.putSimpleProductWithGroupingFlattenParameterGroup failed"
 //                    )
 //                }
+//              expectation.fulfill()
 //            }
 //        wait(for: [expectation], timeout: 5.0)
 //    }
@@ -301,6 +311,7 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //                print("test failed. error=\(details)")
 //                XCTFail("Call autorestresourceflatteningtestservice.postFlattenedSimpleProduct failed")
 //            }
+//          expectation.fulfill()
 //        }
 //        wait(for: [expectation], timeout: 5.0)
 //    }

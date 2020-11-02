@@ -40,7 +40,7 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
     }
 
     func test_BodyFile_getFile() throws {
-        let expectation = XCTestExpectation(description: "Call getFile succeed")
+        let expectation = XCTestExpectation(description: "Call getFile")
 
         client.files.getFile { result, httpResponse in
             switch result {
@@ -50,18 +50,18 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
                     return
                 }
                 XCTAssertEqual(data.count, 8725)
-                expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call getFile failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getFile failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 10.0)
     }
 
     func test_BodyFile_getEmptyFile() throws {
-        let expectation = XCTestExpectation(description: "Call getEmptyFile succeed")
+        let expectation = XCTestExpectation(description: "Call getEmptyFile")
 
         client.files.getEmptyFile { result, httpResponse in
             switch result {
@@ -71,18 +71,18 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
                     return
                 }
                 XCTAssertTrue(data.isEmpty)
-                expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call getEmptyFile failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getEmptyFile failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 10.0)
     }
 
     func test_BodyFile_getFileLarge() throws {
-        let expectation = XCTestExpectation(description: "Call getFileLarge succeed")
+        let expectation = XCTestExpectation(description: "Call getFileLarge")
 
         client.files.getFileLarge { result, httpResponse in
             switch result {
@@ -92,11 +92,11 @@ class AutoRestSwaggerBatFileTest: XCTestCase {
                     return
                 }
                 XCTAssertEqual(data.count, 3000 * 1024 * 1024)
-                expectation.fulfill()
             case let .failure(error):
-                print("test failed. error=\(error.message)")
-                XCTFail("Call getFileLarge failed")
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getFileLarge failed. error=\(details)")
             }
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 30.0)

@@ -614,7 +614,7 @@ public final class IntOperation {
 
     /// Put max int32 value
     /// - Parameters:
-    ///    - max32 : int body
+    ///    - max32 :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -709,7 +709,7 @@ public final class IntOperation {
 
     /// Put max int64 value
     /// - Parameters:
-    ///    - max64 : int body
+    ///    - max64 :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -804,7 +804,7 @@ public final class IntOperation {
 
     /// Put min int32 value
     /// - Parameters:
-    ///    - min32 : int body
+    ///    - min32 :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -899,7 +899,7 @@ public final class IntOperation {
 
     /// Put min int64 value
     /// - Parameters:
-    ///    - min64 : int body
+    ///    - min64 :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
@@ -1088,7 +1088,7 @@ public final class IntOperation {
 
     /// Put datetime encoded as Unix time
     /// - Parameters:
-    ///    - unixTimeDate : int body
+    ///    - unixTimeDate :
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
