@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetSadError: Codable, Swift.Error {
+public struct PetSadError: Codable {
     // MARK: Properties
 
     /// why is the pet sad
@@ -24,6 +24,8 @@ public struct PetSadError: Codable, Swift.Error {
     public let errorType: String
     /// the error message
     public let errorMessage: String?
+    /// action feedback
+    public let actionResponse: String?
 
     // MARK: Initializers
 
@@ -32,12 +34,14 @@ public struct PetSadError: Codable, Swift.Error {
     ///   - reason: why is the pet sad
     ///   - errorType:
     ///   - errorMessage: the error message
+    ///   - actionResponse: action feedback
     public init(
-        reason: String? = nil, errorType: String, errorMessage: String? = nil
+        reason: String? = nil, errorType: String, errorMessage: String? = nil, actionResponse: String? = nil
     ) {
         self.reason = reason
         self.errorType = errorType
         self.errorMessage = errorMessage
+        self.actionResponse = actionResponse
     }
 
     // MARK: Codable
@@ -46,6 +50,7 @@ public struct PetSadError: Codable, Swift.Error {
         case reason
         case errorType
         case errorMessage
+        case actionResponse
     }
 
     /// Initialize a `PetSadError` structure from decoder
@@ -54,6 +59,7 @@ public struct PetSadError: Codable, Swift.Error {
         self.reason = try? container.decode(String.self, forKey: .reason)
         self.errorType = try container.decode(String.self, forKey: .errorType)
         self.errorMessage = try? container.decode(String.self, forKey: .errorMessage)
+        self.actionResponse = try? container.decode(String.self, forKey: .actionResponse)
     }
 
     /// Encode a `PetSadError` structure
@@ -62,5 +68,6 @@ public struct PetSadError: Codable, Swift.Error {
         if reason != nil { try? container.encode(reason, forKey: .reason) }
         try container.encode(errorType, forKey: .errorType)
         if errorMessage != nil { try? container.encode(errorMessage, forKey: .errorMessage) }
+        if actionResponse != nil { try? container.encode(actionResponse, forKey: .actionResponse) }
     }
 }
