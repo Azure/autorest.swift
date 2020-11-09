@@ -41,14 +41,12 @@ struct PropertyViewModel {
     let isDate: Bool
     let optional: Bool
     let className: String
-    let serializedName: String?
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
         let name = schema.serializedName ?? schema.name
         assert(!name.isEmpty)
         self.name = name
-        self.serializedName = schema.serializedName
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema!.swiftType()
         self.optional = !schema.required
