@@ -36,12 +36,14 @@ struct ConstantViewModel {
     // default value of the proeprty
     let defaultValue: ViewModelDefault
     let required: Bool
+    let serializedName: String
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: ConstantSchema, required: Bool) {
         let name = (schema.serializedName ?? schema.name).lowercasedFirst
         assert(!name.isEmpty)
         self.name = name
+        self.serializedName = (schema.serializedName ?? schema.name)
         self.comment = ViewModelComment(from: schema.description)
         self.defaultValue = ViewModelDefault(from: schema.value.value, isString: true, isOptional: false)
         self.required = required

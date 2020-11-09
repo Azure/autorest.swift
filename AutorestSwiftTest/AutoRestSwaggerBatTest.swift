@@ -242,4 +242,110 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_enum_getNotExpandable_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.getNotExpandable")
+
+        client.enumOperation.getNotExpandable { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Colors.redColor)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call enumOperation.getNotExpandable failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_enum_putNotExpandable_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.putNotExpandable")
+
+        client.enumOperation.put(notExpandable: Colors.redColor) { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call enumOperation.putNotExpandable failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_enum_getReferenced_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.getReferenced")
+
+        client.enumOperation.getReferenced { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Colors.redColor)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call enumOperation.getReferenced failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_enum_putReferenced_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.putReferenced")
+
+        client.enumOperation.put(referenced: Colors.redColor) { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call enumOperation.putReferenced failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_enum_getReferencedConstant_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.getReferencedConstant")
+
+        client.enumOperation.getReferencedConstant { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data.field1, "Sample String")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call enumOperation.getReferencedConstant failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_enum_putReferencedConstant_200() throws {
+        let expectation = XCTestExpectation(description: "Call enumOperation.putReferencedConstant")
+
+        client.enumOperation
+            .put(referencedConstant: RefColorConstant()) { result, httpResponse in
+                switch result {
+                case let .success(data):
+                    XCTAssertEqual(httpResponse?.statusCode, 200)
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call enumOperation.putReferencedConstant failed error=\(details)")
+                }
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
