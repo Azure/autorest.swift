@@ -49,9 +49,8 @@ struct ObjectViewModel {
         var props = [PropertyViewModel]()
         var consts = [ConstantViewModel]()
         for property in schema.flattenedProperties ?? [] {
-            if let constSchema = property.schema as? ConstantSchema,
-                property.required != true {
-                consts.append(ConstantViewModel(from: constSchema))
+            if let constSchema = property.schema as? ConstantSchema {
+                consts.append(ConstantViewModel(from: constSchema, required: property.required))
             } else {
                 props.append(PropertyViewModel(from: property))
             }
@@ -100,7 +99,7 @@ struct ObjectViewModel {
                 continue
             }
             if let constSchema = property.schema as? ConstantSchema {
-                consts.append(ConstantViewModel(from: constSchema))
+                consts.append(ConstantViewModel(from: constSchema, required: property.required))
             } else {
                 props.append(PropertyViewModel(from: property))
             }

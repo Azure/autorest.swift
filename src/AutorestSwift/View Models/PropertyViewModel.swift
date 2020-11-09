@@ -44,7 +44,7 @@ struct PropertyViewModel {
     let serializedName: String?
 
     /// Initialize from Value type (such as Property or Parameter)
-    init(from schema: Property) {
+    init(from schema: Value) {
         let name = schema.serializedName ?? schema.name
         assert(!name.isEmpty)
         self.name = name
