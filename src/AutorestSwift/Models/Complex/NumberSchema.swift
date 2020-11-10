@@ -90,7 +90,7 @@ class NumberSchema: PrimitiveSchema {
         case 64:
             return (type == .integer) ? "Int64" : "Double"
         default:
-            return (type == .integer) ? "Int" : "Float"
+            return (type == .integer) ? "Int" : "Double"
         }
     }
 }
