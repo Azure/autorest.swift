@@ -243,6 +243,23 @@ class AutoRestSwaggerBatTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_string_putBase64UrlEncoded_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.putBase64UrlEncoded")
+
+        let data = "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"".data(using: .utf8) ?? Data()
+        client.stringOperation.put(base64UrlEncoded: data) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getNotProvided.getBase64UrlEncoded failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_enum_getNotExpandable_200() throws {
         let expectation = XCTestExpectation(description: "Call enumOperation.getNotExpandable")
 

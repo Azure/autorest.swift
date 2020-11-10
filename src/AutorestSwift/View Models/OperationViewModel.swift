@@ -27,13 +27,13 @@
 import Foundation
 
 struct OperationParameters {
-    var header: Params
-    var query: Params
-    var path: [KeyValueViewModel]
-    var body: BodyParams?
-    var signature: [ParameterViewModel]
-    var hasOptionalParams: Bool
-    var methodDecoding: [KeyValueViewModel]
+    let header: Params
+    let query: Params
+    let path: [KeyValueViewModel]
+    let body: BodyParams?
+    let signature: [ParameterViewModel]
+    let hasOptionalParams: Bool
+    let methodDecoding: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
     init(parameters: [ParameterType], operation: Operation) {
@@ -128,12 +128,13 @@ enum BodyParamStrategy: String {
     case flattened
     case unixTime
     case plainNullable
+    case byteArray
 }
 
 struct BodyParams {
-    var param: ParameterViewModel
-    var strategy: String
-    var children: [VirtualParam]
+    let param: ParameterViewModel
+    let strategy: String
+    let children: [VirtualParam]
 
     var flattened: Bool {
         return !children.isEmpty
@@ -161,6 +162,8 @@ struct BodyParams {
             strategy = .plainNullable
         } else if param.schema.type == .unixTime {
             strategy = .unixTime
+        } else if param.schema.type == .byteArray {
+            strategy = .byteArray
         } else {
             strategy = .plain
         }
