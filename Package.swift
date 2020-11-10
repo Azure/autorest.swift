@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/tjprescott/Yams.git", .branch("CircularReferences")),
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
-        .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", .branch("master")),
+        .package(name: "AzureSDK", url: "https://github.com/Azure/azure-sdk-for-ios.git", from: "1.0.0-beta.2"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
         .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
@@ -41,7 +41,8 @@ let package = Package(
         ),
         .testTarget(
             name: "AutorestSwiftTest",
-            dependencies: [.product(name: "AzureCore", package: "AzureSDK"),
+            dependencies: [
+                .product(name: "AzureCore", package: "AzureSDK"),
             "AutoRestHeadTest",
             "AutoRestSwaggerBatFile",
             "XmsErrorResponseExtensions",
