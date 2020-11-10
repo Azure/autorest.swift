@@ -5,7 +5,9 @@
 ///    - completionHandler: A completion handler that receives a status code on
 ///     success.
 public func {{ op.name }}(
+    {% if op.params.body != nil %}
     {% include "BodyParamSnippet.stencil" op %}
+    {% endif %}
     {% for param in op.params.signature %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
     {% endfor %}
