@@ -41,6 +41,7 @@ public struct RefColorConstant: Codable {
 
     enum CodingKeys: String, CodingKey {
         case field1
+        case colorConstant = "ColorConstant"
     }
 
     /// Initialize a `RefColorConstant` structure from decoder
@@ -53,5 +54,6 @@ public struct RefColorConstant: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if field1 != nil { try? container.encode(field1, forKey: .field1) }
+        try container.encode(colorConstant, forKey: .colorConstant)
     }
 }

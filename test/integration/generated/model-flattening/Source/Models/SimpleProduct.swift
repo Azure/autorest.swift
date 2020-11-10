@@ -63,6 +63,7 @@ public struct SimpleProduct: Codable {
         case odataValue
         case productId
         case description
+        case capacity = "Capacity"
     }
 
     /// Initialize a `SimpleProduct` structure from decoder
@@ -83,5 +84,6 @@ public struct SimpleProduct: Codable {
         if odataValue != nil { try? container.encode(odataValue, forKey: .odataValue) }
         try container.encode(productId, forKey: .productId)
         if description != nil { try? container.encode(description, forKey: .description) }
+        try container.encode(capacity, forKey: .capacity)
     }
 }
