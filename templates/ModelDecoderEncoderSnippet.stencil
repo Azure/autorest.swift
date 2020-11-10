@@ -3,9 +3,7 @@ enum CodingKeys: String, CodingKey {
        case {{ property.name }}
 {% endfor %}
 {% for constant in model.constants %}
-{% if constant.required == true %}
-        case {{ constant.name }} = "{{ constant.serializedName }}"
-{% endif %}
+    case {{ constant.name }} = "{{ constant.serializedName }}"
 {% endfor %}
 }
 
@@ -24,8 +22,6 @@ public func encode(to encoder: Encoder) throws {
     {% include "ModelEncoderProperty.stencil" %}
     {% endfor %}
     {% for constant in model.constants %}
-    {% if constant.required == true %}
     try container.encode({{ constant.name }}, forKey: .{{ constant.name }})
-    {% endif %}
     {% endfor %}
 }
