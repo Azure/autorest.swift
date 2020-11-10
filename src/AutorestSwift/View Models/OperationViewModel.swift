@@ -128,6 +128,7 @@ enum BodyParamStrategy: String {
     case flattened
     case unixTime
     case plainNullable
+    case byteArray
 }
 
 struct BodyParams {
@@ -161,6 +162,8 @@ struct BodyParams {
             strategy = .plainNullable
         } else if param.schema.type == .unixTime {
             strategy = .unixTime
+        } else if param.schema.type == .byteArray {
+            strategy = .byteArray
         } else {
             strategy = .plain
         }

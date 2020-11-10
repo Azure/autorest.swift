@@ -14,6 +14,8 @@ if ({{ op.params.body.param.name }} != nil)
     }
     requestBody = encodedRequestBody
 }
+{% elif op.params.body.strategy == "byteArray" %}
+let requestBody = {{ op.params.body.param.name }}
 {% elif op.params.body.strategy == "unixTime" %}
 let encoder = JSONEncoder()
 encoder.dateEncodingStrategy = .secondsSince1970

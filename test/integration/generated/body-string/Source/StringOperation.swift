@@ -1100,10 +1100,7 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(base64UrlEncoded) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
-        }
+        let requestBody = base64UrlEncoded
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
