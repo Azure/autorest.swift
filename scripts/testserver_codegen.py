@@ -8,7 +8,6 @@ import os.path
 keepChange = False
 debug = False
 clean = False
-createProject = False
 code_generated = False
 
 generated_directory = r'./test/integration/generated/'
@@ -72,7 +71,6 @@ def generate_and_build_code(fileList):
  
     global clean
     global keepChange
-    global createProject
     global warning_color
     global end_color
     global generated_directory
@@ -108,14 +106,6 @@ def generate_and_build_code(fileList):
 
             if return_value == 0:
                 print("swift build succeed.")
-
-                # Create xcode project
-                if return_value == 0 and createProject:
-                    if check_xcode_project_exists() == False:
-                        print("create XCode project.")
-                        xcode_gen_proj_command = "swift package generate-xcodeproj"
-                        return_value = execute_command(xcode_gen_proj_command)
-
                 os.chdir('../../../..')
             else:
                 print(warning_color + "swift build failed." +  end_color)
@@ -129,10 +119,9 @@ def main(argv):
     global clean
     global debug
     global keepChange
-    global createProject
 
     try:
-        opts, args = getopt.getopt(argv,"acdkp", ["all-files", "clean", "debug", "keep-change", "create-project"])
+        opts, args = getopt.getopt(argv,"acdk", ["all-files", "clean", "debug", "keep-change"])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
@@ -144,8 +133,6 @@ def main(argv):
             debug = True
         elif opt in ("-k", "--keep-change"):
             keepChange = True
-        elif opt in ("-p", "--create-project"):
-            createProject = True
 
     if allFiles:
         generate_and_build_code(get_all_files())
