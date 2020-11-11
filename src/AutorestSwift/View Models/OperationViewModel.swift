@@ -40,6 +40,7 @@ struct OperationParameters {
         var header = Params()
         var query = Params()
         var path = [KeyValueViewModel]()
+        var body = [KeyValueViewModel]()
         var methodDecoding = [KeyValueViewModel]()
 
         for param in parameters {
@@ -53,10 +54,11 @@ struct OperationParameters {
             case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
-            case .path:
+            case .path,
+                 .uri:
                 path.append(viewModel)
-            case .uri:
-                path.append(viewModel)
+            case .body:
+                body.append(viewModel)
             default:
                 continue
             }

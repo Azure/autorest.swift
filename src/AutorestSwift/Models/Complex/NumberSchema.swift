@@ -89,6 +89,8 @@ class NumberSchema: PrimitiveSchema {
             return (type == .integer) ? "Int32" : "Float"
         case 64:
             return (type == .integer) ? "Int64" : "Double"
+        case 128:
+            return (type == .integer) ? "Int" : "Decimal"
         default:
             return (type == .integer) ? "Int" : "Double"
         }

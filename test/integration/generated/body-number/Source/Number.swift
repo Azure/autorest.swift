@@ -344,7 +344,7 @@ public final class Number {
     ///     success.
     public func getInvalidDecimal(
         withOptions options: GetInvalidDecimalOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Double>
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
         let urlTemplate = "/number/invaliddecimal"
@@ -404,7 +404,7 @@ public final class Number {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Double.self, from: data)
+                        let decoded = try decoder.decode(Decimal.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1193,7 +1193,7 @@ public final class Number {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        bigDecimal: Double,
+        bigDecimal: Decimal,
         withOptions options: PutBigDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1289,7 +1289,7 @@ public final class Number {
     ///     success.
     public func getBigDecimal(
         withOptions options: GetBigDecimalOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Double>
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
         let urlTemplate = "/number/big/decimal/2.5976931e+101"
@@ -1349,7 +1349,7 @@ public final class Number {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Double.self, from: data)
+                        let decoded = try decoder.decode(Decimal.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1382,7 +1382,7 @@ public final class Number {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        bigDecimalPositiveDecimal: Double,
+        bigDecimalPositiveDecimal: Decimal,
         withOptions options: PutBigDecimalPositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1478,7 +1478,7 @@ public final class Number {
     ///     success.
     public func getBigDecimalPositiveDecimal(
         withOptions options: GetBigDecimalPositiveDecimalOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Double>
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
         let urlTemplate = "/number/big/decimal/99999999.99"
@@ -1538,7 +1538,7 @@ public final class Number {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Double.self, from: data)
+                        let decoded = try decoder.decode(Decimal.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1571,7 +1571,7 @@ public final class Number {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        bigDecimalNegativeDecimal: Double,
+        bigDecimalNegativeDecimal: Decimal,
         withOptions options: PutBigDecimalNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1667,7 +1667,7 @@ public final class Number {
     ///     success.
     public func getBigDecimalNegativeDecimal(
         withOptions options: GetBigDecimalNegativeDecimalOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Double>
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
         let urlTemplate = "/number/big/decimal/-99999999.99"
@@ -1727,7 +1727,7 @@ public final class Number {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Double.self, from: data)
+                        let decoded = try decoder.decode(Decimal.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2138,7 +2138,7 @@ public final class Number {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        smallDecimal: Double,
+        smallDecimal: Decimal,
         withOptions options: PutSmallDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2234,7 +2234,7 @@ public final class Number {
     ///     success.
     public func getSmallDecimal(
         withOptions options: GetSmallDecimalOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Double>
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
         let urlTemplate = "/number/small/decimal/2.5976931e-101"
@@ -2294,7 +2294,7 @@ public final class Number {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Double.self, from: data)
+                        let decoded = try decoder.decode(Decimal.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

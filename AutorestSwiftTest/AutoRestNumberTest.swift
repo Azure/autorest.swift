@@ -112,7 +112,7 @@ class AutoRestNumberTest: XCTestCase {
     func test_putBigDecimal200() throws {
         let expectation = XCTestExpectation(description: "Call number.putBigDecimal")
 
-        client.number.put(bigDecimal: Double(2.5976931e+101)) { result, httpResponse in
+        client.number.put(bigDecimal: Decimal(2.5976931e+101)) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -132,7 +132,7 @@ class AutoRestNumberTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                XCTAssertEqual(data, Double(2.5976931e+101))
+                XCTAssertEqual(data, Decimal(2.5976931e+101))
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call putBigDecimal failed. error=\(details)")
@@ -145,7 +145,7 @@ class AutoRestNumberTest: XCTestCase {
     func test_putBigDecimalPositiveDecimal200() throws {
         let expectation = XCTestExpectation(description: "Call number.putBigDecimalPositiveDecimal")
 
-        client.number.put(bigDecimalPositiveDecimal: Double(99_999_999.99)) { result, httpResponse in
+        client.number.put(bigDecimalPositiveDecimal: Decimal(99_999_999.99)) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -165,7 +165,7 @@ class AutoRestNumberTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                XCTAssertEqual(data, Double(99_999_999.99))
+                XCTAssertEqual(data, Decimal(99_999_999.99))
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call putBigDecimal failed. error=\(details)")
@@ -178,7 +178,7 @@ class AutoRestNumberTest: XCTestCase {
     func test_putBigDecimalNegativeDecimal200() throws {
         let expectation = XCTestExpectation(description: "Call number.putBigDecimalNegativeDecimal")
 
-        client.number.put(bigDecimalNegativeDecimal: Double(-99_999_999.99)) { result, httpResponse in
+        client.number.put(bigDecimalNegativeDecimal: Decimal(-99_999_999.99)) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -198,7 +198,7 @@ class AutoRestNumberTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                XCTAssertEqual(data, Double(-99_999_999.99))
+                XCTAssertEqual(data, Decimal(-99_999_999.99))
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call putBigDecimal failed. error=\(details)")
@@ -277,7 +277,7 @@ class AutoRestNumberTest: XCTestCase {
     func test_putSmallDecimal200() throws {
         let expectation = XCTestExpectation(description: "Call number.putSmallDecimal")
 
-        client.number.put(smallDecimal: Double(2.5976931e-101)) { result, httpResponse in
+        client.number.put(smallDecimal: Decimal(2.5976931e-101)) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -297,7 +297,7 @@ class AutoRestNumberTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                XCTAssertEqual(data, Double(2.5976931e-101))
+                XCTAssertEqual(data, Decimal(2.5976931e-101))
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call putBigDecimal failed. error=\(details)")
