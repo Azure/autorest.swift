@@ -46,16 +46,19 @@ class Language: Codable {
 
     struct PagingNames: Codable {
         /// name for the item property
-        var itemName: String
+        var itemName: String? = "value"
 
         /// name of the next link property
         var nextLinkName: String
 
+        /// name of the operation for retrieving the next page
+        var operationName: String?
+
         init?(from dict: [String: String]) {
-            guard let itemName = dict["itemName"],
-                let nextLinkName = dict["nextLinkName"] else { return nil }
-            self.itemName = itemName
+            guard let nextLinkName = dict["nextLinkName"] else { return nil }
             self.nextLinkName = nextLinkName
+            self.itemName = dict["itemName"]
+            self.operationName = dict["operationName"]
         }
     }
 
