@@ -105,6 +105,10 @@ extension Request {
     /// Gets the Swift name for the body-encoded parameter, if there is one. Fails if there is more than one.
     func bodyParamName(for operation: Operation) -> String? {
         guard bodyParam != nil else { return nil }
+        if bodyParam!.isConstantSchema {
+            return nil
+        }
+
         let operationNameComps = operation.name.splitAndJoinAcronyms
         var bodyParamNameComps = Array(operationNameComps[1 ..< operationNameComps.count])
         for (index, comp) in bodyParamNameComps.enumerated() where index != 0 {

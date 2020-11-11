@@ -810,12 +810,11 @@ public final class Number {
 
     /// Put big double value 99999999.99
     /// - Parameters:
-    ///    - bigDoublePositiveDecimal :
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        bigDoublePositiveDecimal: Double,
+    public func putBigDoublePositiveDecimal(
         withOptions options: PutBigDoublePositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -833,7 +832,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(bigDoublePositiveDecimal) else {
+        guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -999,12 +998,11 @@ public final class Number {
 
     /// Put big double value -99999999.99
     /// - Parameters:
-    ///    - bigDoubleNegativeDecimal :
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        bigDoubleNegativeDecimal: Double,
+    public func putBigDoubleNegativeDecimal(
         withOptions options: PutBigDoubleNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1022,7 +1020,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(bigDoubleNegativeDecimal) else {
+        guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1377,12 +1375,11 @@ public final class Number {
 
     /// Put big decimal value 99999999.99
     /// - Parameters:
-    ///    - bigDecimalPositiveDecimal :
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        bigDecimalPositiveDecimal: Decimal,
+    public func putBigDecimalPositiveDecimal(
         withOptions options: PutBigDecimalPositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1400,7 +1397,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(bigDecimalPositiveDecimal) else {
+        guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1566,12 +1563,11 @@ public final class Number {
 
     /// Put big decimal value -99999999.99
     /// - Parameters:
-    ///    - bigDecimalNegativeDecimal :
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        bigDecimalNegativeDecimal: Decimal,
+    public func putBigDecimalNegativeDecimal(
         withOptions options: PutBigDecimalNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1589,7 +1585,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(bigDecimalNegativeDecimal) else {
+        guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }

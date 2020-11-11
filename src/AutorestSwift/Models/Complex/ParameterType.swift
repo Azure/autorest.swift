@@ -113,6 +113,10 @@ enum ParameterType: Codable {
         return common.nullable ?? false
     }
 
+    var isConstantSchema: Bool {
+        return common.schema as? ConstantSchema != nil
+    }
+
     /// Return the common base class Parameter properties
     private var common: Parameter {
         switch self {

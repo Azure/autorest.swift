@@ -58,7 +58,9 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                body.append(viewModel)
+                if param.isConstantSchema {
+                    body.append(viewModel)
+                }
             default:
                 continue
             }
@@ -82,8 +84,12 @@ struct OperationParameters {
 
         // Set the body param, if applicable
         if let bodyParam = operation.request?.bodyParam {
-            let bodyParamName = operation.request?.bodyParamName(for: operation)
-
+            var bodyParamName: String?
+            if body.count > 0 {
+                bodyParamName = body.first?.value
+            } else {
+                bodyParamName = operation.request?.bodyParamName(for: operation)
+            }
             self.body = BodyParams(
                 from: bodyParam,
                 withName: bodyParamName!,
@@ -131,6 +137,7 @@ enum BodyParamStrategy: String {
     case unixTime
     case plainNullable
     case byteArray
+    case constant
 }
 
 struct BodyParams {
@@ -166,6 +173,8 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
+        } else if param.isConstantSchema {
+            strategy = .constant
         } else {
             strategy = .plain
         }
@@ -277,7 +286,8 @@ struct OperationViewModel {
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
-            if !bodyParam.flattened {
+            if !bodyParam.flattened,
+                bodyParam.strategy != BodyParamStrategy.constant.rawValue {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }
