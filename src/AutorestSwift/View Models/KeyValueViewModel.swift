@@ -103,7 +103,13 @@ struct KeyValueViewModel: Comparable {
                  .string:
                 self.value = "\"\(constantValue)\""
             case .number:
-                self.value = "String(Double(\(constantValue)))"
+                let numberSchema = constantSchema.valueType
+                let swiftType = numberSchema.swiftType()
+                if swiftType == "Decimal" {
+                    self.value = "\(swiftType)(\(constantValue))"
+                } else {
+                    self.value = "String(\(swiftType)(\(constantValue)))"
+                }
             default:
                 self.value = "String(\(constantValue))"
             }

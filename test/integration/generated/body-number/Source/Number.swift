@@ -1397,7 +1397,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
+        guard let requestBody = try? JSONEncoder().encode(Decimal(99_999_999.99)) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1585,7 +1585,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
+        guard let requestBody = try? JSONEncoder().encode(Decimal(-99_999_999.99)) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }

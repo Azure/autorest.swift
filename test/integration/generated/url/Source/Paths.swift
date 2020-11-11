@@ -601,7 +601,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "floatPath": String(Double(103_400_000_000_000_000_000))
+            "floatPath": String(Float(103_400_000_000_000_000_000))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -691,7 +691,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "floatPath": String(Double(-1.034e-20))
+            "floatPath": String(Float(-1.034e-20))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

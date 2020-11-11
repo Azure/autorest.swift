@@ -889,7 +889,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Double(103_400_000_000_000_000_000)))
+            ("floatQuery", String(Float(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
@@ -979,7 +979,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Double(-1.034e-20)))
+            ("floatQuery", String(Float(-1.034e-20)))
         ]
 
         // Construct headers
