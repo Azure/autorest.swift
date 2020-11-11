@@ -38,6 +38,11 @@ enum KeyValueDecodeStrategy: String {
     case unixTime
 }
 
+enum KeyValueKeyStrategy {
+    case name
+    case serializedName
+}
+
 /// View Model for a key-value pair, as used in Dictionaries.
 /// Example:
 ///     "key" = value
