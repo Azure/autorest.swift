@@ -281,7 +281,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         client.enumOperation.put(notExpandable: Colors.redColor) { result, httpResponse in
             switch result {
-            case let .success(data):
+            case let .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -316,7 +316,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         client.enumOperation.put(referenced: Colors.redColor) { result, httpResponse in
             switch result {
-            case let .success(data):
+            case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -352,7 +352,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
         client.enumOperation
             .put(referencedConstant: RefColorConstant()) { result, httpResponse in
                 switch result {
-                case let .success(data):
+                case .success:
                     XCTAssertEqual(httpResponse?.statusCode, 200)
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
