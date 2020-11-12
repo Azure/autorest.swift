@@ -62,7 +62,7 @@ public final class Paths {
         let urlTemplate = "/customuri"
         let pathParams = [
             "accountName": accountName,
-            "Host": client.Host
+            "host": client.host
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

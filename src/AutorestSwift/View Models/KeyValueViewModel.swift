@@ -71,9 +71,9 @@ struct KeyValueViewModel: Comparable {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
             self.init(
-                key: name,
+                key: param.serializedName ?? param.name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : name,
+                value: (name == "$host") ? "endpoint.absoluteString" : param.serializedName ?? param.name,
                 optional: !param.required,
                 path: "client."
             )

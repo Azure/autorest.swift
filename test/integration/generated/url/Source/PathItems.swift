@@ -67,7 +67,7 @@ public final class PathItems {
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "$host": client.endpoint.absoluteString,
-            "GlobalStringPath": client.GlobalStringPath
+            "globalStringPath": client.globalStringPath
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -84,8 +84,8 @@ public final class PathItems {
         if let localStringQuery = options?.localStringQuery {
             queryParams.append("localStringQuery", localStringQuery)
         }
-        if let GlobalStringQuery = client.GlobalStringQuery {
-            queryParams.append("GlobalStringQuery", GlobalStringQuery)
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
         }
         // Header options
         // Construct request
@@ -175,7 +175,7 @@ public final class PathItems {
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "$host": client.endpoint.absoluteString,
-            "GlobalStringPath": client.GlobalStringPath
+            "globalStringPath": client.globalStringPath
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -192,8 +192,8 @@ public final class PathItems {
         if let localStringQuery = options?.localStringQuery {
             queryParams.append("localStringQuery", localStringQuery)
         }
-        if let GlobalStringQuery = client.GlobalStringQuery {
-            queryParams.append("GlobalStringQuery", GlobalStringQuery)
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
         }
         // Header options
         // Construct request
@@ -283,7 +283,7 @@ public final class PathItems {
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "$host": client.endpoint.absoluteString,
-            "GlobalStringPath": client.GlobalStringPath
+            "globalStringPath": client.globalStringPath
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -300,8 +300,8 @@ public final class PathItems {
         if let localStringQuery = options?.localStringQuery {
             queryParams.append("localStringQuery", localStringQuery)
         }
-        if let GlobalStringQuery = client.GlobalStringQuery {
-            queryParams.append("GlobalStringQuery", GlobalStringQuery)
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
         }
         // Header options
         // Construct request
@@ -391,7 +391,7 @@ public final class PathItems {
             "pathItemStringPath": pathItemStringPath,
             "localStringPath": localStringPath,
             "$host": client.endpoint.absoluteString,
-            "GlobalStringPath": client.GlobalStringPath
+            "globalStringPath": client.globalStringPath
         ]
         // Construct query
         var queryParams: [QueryParameter] = [
@@ -408,8 +408,8 @@ public final class PathItems {
         if let localStringQuery = options?.localStringQuery {
             queryParams.append("localStringQuery", localStringQuery)
         }
-        if let GlobalStringQuery = client.GlobalStringQuery {
-            queryParams.append("GlobalStringQuery", GlobalStringQuery)
+        if let globalStringQuery = client.globalStringQuery {
+            queryParams.append("globalStringQuery", globalStringQuery)
         }
         // Header options
         // Construct request
