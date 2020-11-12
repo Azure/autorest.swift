@@ -188,6 +188,8 @@ struct KeyValueViewModel: Comparable {
             return "\(value).rawValue"
         case .array:
             return "\(value).map { String($0) }.joined(separator: \"\(signatureParameter.delimiter)\") "
+        case .duration:
+            return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
         default:
             return "\(value)"
         }

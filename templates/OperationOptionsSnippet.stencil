@@ -7,8 +7,9 @@ if let {{ param.key }} = {{ param.path }}{{ param.key }} {
 }
 {% endfor %}
 // Header options
-{% for header in op.params.header.optional %}
-if let {{ header.key }} = {{ param.path }}{{ header.key }} {
-    headers["{{ header.key }}"] = {{ header.value}}
+{% for param in op.params.header.optional %}
+if let {{ param.key }} = {{ param.path }}{{ param.key }} {
+    {% include "OperationOptionsDecodingSnippet.stencil" %}
+    headers["{{ param.key }}"] = {{ param.value}}
 }
 {% endfor %}

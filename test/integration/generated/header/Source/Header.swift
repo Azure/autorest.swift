@@ -1359,7 +1359,7 @@ public final class Header {
         // Process endpoint options
         // Query options
         // Header options
-        if let value = value {
+        if let value = options?.value {
             headers["value"] = value
         }
         // Construct request
@@ -1529,10 +1529,14 @@ public final class Header {
     ///     success.
     public func paramDate(
         scenario: String,
-        value _: Date,
+        value: Date,
         withOptions options: ParamDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let valueString = dateFormatter.string(from: value)
+
         // Construct URL
         let urlTemplate = "/header/param/prim/date"
         let pathParams = [
@@ -1714,10 +1718,12 @@ public final class Header {
     ///     success.
     public func paramDatetime(
         scenario: String,
-        value _: Date,
+        value: Date,
         withOptions options: ParamDatetimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let valueString = Date.Format.iso8601.formatter.string(from: value)
+
         // Construct URL
         let urlTemplate = "/header/param/prim/datetime"
         let pathParams = [
@@ -1917,7 +1923,9 @@ public final class Header {
         // Process endpoint options
         // Query options
         // Header options
-        if let value = value {
+        if let value = options?.value {
+            let valueString = Date.Format.iso8601.formatter.string(from: value)
+
             headers["value"] = valueString
         }
         // Construct request
@@ -2103,7 +2111,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["value"] = value
+        headers["value"] = DateComponentsFormatter().string(from: value) ?? ""
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
@@ -2272,10 +2280,15 @@ public final class Header {
     ///     success.
     public func paramByte(
         scenario: String,
-        value _: Data,
+        value: Data,
         withOptions options: ParamByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        guard let valueString = String(bytes: value, encoding: .utf8) else {
+            self.options.logger.error("Failed to construct String for value")
+            return
+        }
+
         // Construct URL
         let urlTemplate = "/header/param/prim/byte"
         let pathParams = [
@@ -2475,7 +2488,7 @@ public final class Header {
         // Process endpoint options
         // Query options
         // Header options
-        if let value = value {
+        if let value = options?.value {
             headers["value"] = value.rawValue
         }
         // Construct request
