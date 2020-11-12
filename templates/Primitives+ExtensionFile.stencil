@@ -25,3 +25,32 @@ extension Data {
         return base64UrlString
     }
 }
+
+extension String {
+    func decimal(_ codingPath: [CodingKey], key: CodingKey) throws -> Decimal {
+        guard let decimal = Decimal(string: self) else {
+            throw DecodingError.dataCorrupted(.init(codingPath: codingPath, debugDescription: "The key \(key) could not be converted to decimal: \(self)"))
+        }
+        return decimal
+    }
+
+}
+
+extension KeyedEncodingContainer {
+    mutating func encode(_ value: Decimal, forKey key: K) throws {
+        try encode(String(describing: value), forKey: key)
+    }
+    mutating func encodeIfPresent(_ value: Decimal?, forKey key: K) throws {
+        guard let value = value else { return }
+        try encode(value, forKey: key)
+    }
+}
+
+extension KeyedDecodingContainer {
+    func decode(_ type: Decimal.Type, forKey key: K) throws -> Decimal {
+        try decode(String.self, forKey: key).decimal(codingPath, key: key)
+    }
+    func decodeIfPresent(_ type: Decimal.Type, forKey key: K) throws -> Decimal? {
+        try decodeIfPresent(String.self, forKey: key)?.decimal(codingPath, key: key)
+    }
+}
