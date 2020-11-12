@@ -61,20 +61,19 @@ struct KeyValueViewModel: Comparable {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: ParameterType, with operation: Operation) {
-        // let name = param.name
         let name = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
             self.init(param: param, constantSchema: constantSchema, name: name)
-        } else if let signatureParameter = operation.signatureParameter(for: param.serializedName ?? param.name) {
-            self.init(signatureParameter: signatureParameter, name: name)
+        } else if let signatureParameter = operation.signatureParameter(for: name) {
+            self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
             self.init(
-                key: param.serializedName ?? param.name,
+                key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : param.serializedName ?? param.name,
+                value: (name == "$host") ? "endpoint.absoluteString" : name,
                 optional: !param.required,
                 path: "client."
             )
@@ -83,11 +82,11 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(param: ParameterType, constantSchema: ConstantSchema, name _: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = param.serializedName ?? param.name // name
+        self.key = name
         let constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type
@@ -117,7 +116,7 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(signatureParameter: ParameterType, name _: String) {
+    private init(signatureParameter: ParameterType) {
         self.key = signatureParameter.serializedName ?? signatureParameter.name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
