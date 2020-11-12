@@ -24,8 +24,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/Azure/azure-sdk-for-ios.git",
-            .branch("master")
-        )
+            from: "1.0.0-beta.2")
     ],
     targets: [
         // Build targets
