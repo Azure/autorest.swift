@@ -70,7 +70,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["User-Agent"] = userAgent
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -159,7 +159,7 @@ public final class Header {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -250,7 +250,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["Content-Type"] = contentType
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -339,7 +339,7 @@ public final class Header {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -433,7 +433,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = String(value)
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -524,7 +524,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -618,7 +618,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = String(value)
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -709,7 +709,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -803,7 +803,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = String(value)
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -894,7 +894,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -988,7 +988,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = String(value)
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1079,7 +1079,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1173,7 +1173,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = String(value)
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1264,7 +1264,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1355,7 +1355,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         // Header options
@@ -1452,7 +1452,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1546,7 +1546,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = valueString
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1637,7 +1637,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1731,7 +1731,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = valueString
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1822,7 +1822,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1913,7 +1913,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         // Header options
@@ -2010,7 +2010,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2104,7 +2104,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = value
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2195,7 +2195,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2289,7 +2289,7 @@ public final class Header {
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
         headers["value"] = valueString
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2380,7 +2380,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2471,7 +2471,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         // Header options
@@ -2568,7 +2568,7 @@ public final class Header {
         // Construct headers
         var headers = HTTPHeaders()
         headers["scenario"] = scenario
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2657,7 +2657,7 @@ public final class Header {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

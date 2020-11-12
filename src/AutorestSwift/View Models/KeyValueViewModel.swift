@@ -61,7 +61,8 @@ struct KeyValueViewModel: Comparable {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: ParameterType, with operation: Operation) {
-        let name = param.name
+        // let name = param.name
+        let name = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
             self.init(param: param, constantSchema: constantSchema, name: name)
@@ -86,7 +87,7 @@ struct KeyValueViewModel: Comparable {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = param.serializedName ?? param.name
+        self.key = param.serializedName ?? param.name // name
         let constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type
@@ -116,7 +117,7 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(signatureParameter: ParameterType, name: String) {
+    private init(signatureParameter: ParameterType, name _: String) {
         self.key = signatureParameter.serializedName ?? signatureParameter.name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
@@ -125,7 +126,10 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
+        self.value = KeyValueViewModel.formatValue(
+            forSignatureParameter: signatureParameter,
+            value: signatureParameter.name
+        )
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
