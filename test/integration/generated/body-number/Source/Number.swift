@@ -68,7 +68,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -169,7 +169,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -263,7 +263,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -357,7 +357,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -452,8 +452,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigFloat) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -546,7 +546,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -641,8 +641,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigDouble) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -735,7 +735,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -829,8 +829,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -923,7 +923,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1017,8 +1017,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1111,7 +1111,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1206,8 +1206,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigDecimal) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1300,7 +1300,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1394,8 +1394,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(Decimal(99_999_999.99)) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1488,7 +1488,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1582,8 +1582,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(Decimal(-99_999_999.99)) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1676,7 +1676,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1771,8 +1771,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallFloat) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1865,7 +1865,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1960,8 +1960,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallDouble) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -2054,7 +2054,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2149,8 +2149,8 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallDecimal) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -2243,7 +2243,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

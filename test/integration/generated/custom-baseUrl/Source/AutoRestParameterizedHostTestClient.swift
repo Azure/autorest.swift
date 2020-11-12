@@ -44,12 +44,12 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        host: String,
+        Host: String,
         endpoint: URL,
         authPolicy: Authenticating,
         withOptions options: AutoRestParameterizedHostTestClientOptions
     ) throws {
-        self.host = host
+        self.Host = Host
         self.options = options
         super.init(
             endpoint: endpoint,
@@ -119,7 +119,7 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
     }
 
     // /// A string value that is used as a global part of the parameterized host
-    public var host: String = "host"
+    public var Host: String = "host"
 
     public lazy var paths: Paths = Paths(client: self)
 

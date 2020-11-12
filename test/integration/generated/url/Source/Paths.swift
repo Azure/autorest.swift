@@ -69,7 +69,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -159,7 +159,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -249,7 +249,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -339,7 +339,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -429,7 +429,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -519,7 +519,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -609,7 +609,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -699,7 +699,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -789,7 +789,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -879,7 +879,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -969,7 +969,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1059,7 +1059,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1149,7 +1149,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1239,7 +1239,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1330,7 +1330,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1421,7 +1421,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1512,7 +1512,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1608,7 +1608,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1698,7 +1698,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1794,7 +1794,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1884,7 +1884,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1979,7 +1979,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2069,7 +2069,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2162,7 +2162,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2255,7 +2255,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2347,7 +2347,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2442,7 +2442,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

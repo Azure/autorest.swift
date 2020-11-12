@@ -44,7 +44,7 @@ public final class AutoRestUrlTestClient: PipelineClient {
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
     public init(
-        globalStringPath: String,
+        GlobalStringPath: String,
         url: URL? = nil,
         authPolicy: Authenticating,
         withOptions options: AutoRestUrlTestClientOptions
@@ -53,7 +53,7 @@ public final class AutoRestUrlTestClient: PipelineClient {
         guard let endpoint = url ?? defaultHost else {
             fatalError("Unable to determine base URL. ")
         }
-        self.globalStringPath = globalStringPath
+        self.GlobalStringPath = GlobalStringPath
         self.options = options
         super.init(
             endpoint: endpoint,
@@ -120,9 +120,9 @@ public final class AutoRestUrlTestClient: PipelineClient {
     }
 
     // /// A string value 'globalItemStringPath' that appears in the path
-    public var globalStringPath: String
+    public var GlobalStringPath: String
     // /// should contain value null
-    public var globalStringQuery: String?
+    public var GlobalStringQuery: String?
 
     public lazy var pathItems: PathItems = PathItems(client: self)
     public lazy var paths: Paths = Paths(client: self)

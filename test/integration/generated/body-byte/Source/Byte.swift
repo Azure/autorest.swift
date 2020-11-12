@@ -68,7 +68,7 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -154,7 +154,7 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -240,7 +240,7 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -327,8 +327,8 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         let requestBody = nonAscii
         guard let requestUrl = url(
@@ -418,7 +418,7 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

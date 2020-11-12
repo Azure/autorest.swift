@@ -62,7 +62,7 @@ public final class Paths {
         let urlTemplate = "/customuri"
         let pathParams = [
             "accountName": accountName,
-            "host": client.host
+            "Host": client.Host
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -70,7 +70,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "http://{accountName}{host}",

@@ -68,7 +68,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -163,8 +163,8 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(notExpandable) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -257,7 +257,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -352,8 +352,8 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(referenced) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -446,7 +446,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -541,8 +541,8 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["contentType"] = "application/json"
+        headers["accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(referencedConstant) else {
             self.options.logger.error("Failed to encode request body as json.")
