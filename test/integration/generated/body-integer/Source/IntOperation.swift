@@ -68,7 +68,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -168,7 +168,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -261,7 +261,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -354,7 +354,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -447,7 +447,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -540,7 +540,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -634,8 +634,8 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(max32) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -729,8 +729,8 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(max64) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -824,8 +824,8 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(min32) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -919,8 +919,8 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(min64) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -1013,7 +1013,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1108,8 +1108,8 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
@@ -1204,7 +1204,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1298,7 +1298,7 @@ public final class IntOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

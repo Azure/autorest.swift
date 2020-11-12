@@ -70,7 +70,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "http://{accountName}{host}",

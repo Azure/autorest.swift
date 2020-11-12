@@ -68,7 +68,7 @@ public final class AutoRestReportService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let qualifier = options?.qualifier {
@@ -168,7 +168,7 @@ public final class AutoRestReportService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let qualifier = options?.qualifier {

@@ -64,12 +64,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(true))
+            ("Constant1", String(true))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -154,12 +154,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(false))
+            ("Constant3", String(false))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -248,7 +248,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let boolQuery = options?.boolQuery {
@@ -339,12 +339,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(1_000_000))
+            ("Constant4", String(1_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -429,12 +429,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(-1_000_000))
+            ("Constant5", String(-1_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -523,7 +523,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let intQuery = options?.intQuery {
@@ -614,12 +614,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(10_000_000_000))
+            ("Constant6", String(10_000_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -704,12 +704,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(-10_000_000_000))
+            ("Constant7", String(-10_000_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -798,7 +798,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let longQuery = options?.longQuery {
@@ -889,12 +889,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Float(103_400_000_000_000_000_000)))
+            ("Constant8", String(Float(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -979,12 +979,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Float(-1.034e-20)))
+            ("Constant9", String(Float(-1.034e-20)))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1073,7 +1073,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let floatQuery = options?.floatQuery {
@@ -1164,12 +1164,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(Double(9_999_999.999)))
+            ("Constant10", String(Double(9_999_999.999)))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1254,12 +1254,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(Double(-9_999_999.999)))
+            ("Constant11", String(Double(-9_999_999.999)))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1348,7 +1348,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let doubleQuery = options?.doubleQuery {
@@ -1439,12 +1439,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "啊齄丂狛狜隣郎隣兀﨩")
+            ("Constant12", "啊齄丂狛狜隣郎隣兀﨩")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1529,12 +1529,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "begin!*'();:@ &=+$,/?#[]end")
+            ("Constant13", "begin!*'();:@ &=+$,/?#[]end")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1619,12 +1619,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "")
+            ("Constant15", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1713,7 +1713,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let stringQuery = options?.stringQuery {
@@ -1808,7 +1808,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let enumQuery = options?.enumQuery {
@@ -1903,7 +1903,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let enumQuery = options?.enumQuery {
@@ -1998,7 +1998,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
@@ -2091,12 +2091,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("byteQuery", "")
+            ("Constant16", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2185,7 +2185,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
@@ -2278,12 +2278,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateQuery", "2012-01-01")
+            ("Constant17", "2012-01-01")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2372,7 +2372,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let dateQuery = options?.dateQuery {
@@ -2465,12 +2465,12 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateTimeQuery", "2012-01-01T01:01:01Z")
+            ("Constant18", "2012-01-01T01:01:01Z")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2559,7 +2559,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let dateTimeQuery = options?.dateTimeQuery {
@@ -2656,7 +2656,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -2751,7 +2751,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -2846,7 +2846,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -2941,7 +2941,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -3036,7 +3036,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -3131,7 +3131,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {
@@ -3226,7 +3226,7 @@ public final class Queries {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let arrayQuery = options?.arrayQuery {

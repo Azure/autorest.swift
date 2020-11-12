@@ -69,8 +69,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(array) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -163,7 +163,7 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -258,8 +258,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(wrappedArray) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -352,7 +352,7 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -447,8 +447,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(dictionary) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -541,7 +541,7 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -636,8 +636,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(resourceCollection) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -730,7 +730,7 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -825,8 +825,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(simpleProduct) else {
             self.options.logger.error("Failed to encode request body as json.")
@@ -933,8 +933,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let body = SimpleProduct(
             maxProductDisplayName: maxProductDisplayName, genericValue: genericValue, odataValue: odataValue,
@@ -1038,8 +1038,8 @@ public final class AutoRestResourceFlatteningTestService {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["contentType"] = "application/json"
-        headers["accept"] = "application/json"
+        headers["ApplicationJson"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let body = SimpleProduct(
             maxProductDisplayName: flattenParameterGroup.maxProductDisplayName,

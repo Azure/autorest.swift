@@ -82,11 +82,11 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema, name _: String) {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = name
+        self.key = constantSchema.serializedName ?? constantSchema.name
         let constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type

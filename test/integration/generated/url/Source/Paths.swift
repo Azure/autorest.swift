@@ -61,7 +61,7 @@ public final class Paths {
         let urlTemplate = "/paths/bool/true/{boolPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "boolPath": String(true)
+            "Constant1": String(true)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -69,7 +69,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -151,7 +151,7 @@ public final class Paths {
         let urlTemplate = "/paths/bool/false/{boolPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "boolPath": String(false)
+            "Constant3": String(false)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -159,7 +159,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -241,7 +241,7 @@ public final class Paths {
         let urlTemplate = "/paths/int/1000000/{intPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "intPath": String(1_000_000)
+            "Constant4": String(1_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -249,7 +249,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -331,7 +331,7 @@ public final class Paths {
         let urlTemplate = "/paths/int/-1000000/{intPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "intPath": String(-1_000_000)
+            "Constant5": String(-1_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -339,7 +339,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -421,7 +421,7 @@ public final class Paths {
         let urlTemplate = "/paths/long/10000000000/{longPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "longPath": String(10_000_000_000)
+            "Constant6": String(10_000_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -429,7 +429,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -511,7 +511,7 @@ public final class Paths {
         let urlTemplate = "/paths/long/-10000000000/{longPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "longPath": String(-10_000_000_000)
+            "Constant7": String(-10_000_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -519,7 +519,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -601,7 +601,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "floatPath": String(Float(103_400_000_000_000_000_000))
+            "Constant8": String(Float(103_400_000_000_000_000_000))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -609,7 +609,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -691,7 +691,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "floatPath": String(Float(-1.034e-20))
+            "Constant9": String(Float(-1.034e-20))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -699,7 +699,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -781,7 +781,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "doublePath": String(Double(9_999_999.999))
+            "Constant10": String(Double(9_999_999.999))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -789,7 +789,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -871,7 +871,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "doublePath": String(Double(-9_999_999.999))
+            "Constant11": String(Double(-9_999_999.999))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -879,7 +879,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -961,7 +961,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/unicode/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "stringPath": "啊齄丂狛狜隣郎隣兀﨩"
+            "Constant12": "啊齄丂狛狜隣郎隣兀﨩"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -969,7 +969,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1051,7 +1051,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "stringPath": "begin!*'();:@ &=+$,/?#[]end"
+            "Constant13": "begin!*'();:@ &=+$,/?#[]end"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1059,7 +1059,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1141,7 +1141,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
+            "Constant14": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1149,7 +1149,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1231,7 +1231,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "stringPath": ""
+            "Constant15": ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1239,7 +1239,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1330,7 +1330,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1421,7 +1421,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1512,7 +1512,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1608,7 +1608,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1690,7 +1690,7 @@ public final class Paths {
         let urlTemplate = "/paths/byte/empty/{bytePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "bytePath": ""
+            "Constant16": ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1698,7 +1698,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1794,7 +1794,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1876,7 +1876,7 @@ public final class Paths {
         let urlTemplate = "/paths/date/2012-01-01/{datePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "datePath": "2012-01-01"
+            "Constant17": "2012-01-01"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1884,7 +1884,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -1979,7 +1979,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2061,7 +2061,7 @@ public final class Paths {
         let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "dateTimePath": "2012-01-01T01:01:01Z"
+            "Constant18": "2012-01-01T01:01:01Z"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2069,7 +2069,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2162,7 +2162,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2255,7 +2255,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2347,7 +2347,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2442,7 +2442,7 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",

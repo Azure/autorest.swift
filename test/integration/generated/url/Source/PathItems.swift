@@ -75,7 +75,7 @@ public final class PathItems {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let pathItemStringQuery = options?.pathItemStringQuery {
@@ -183,7 +183,7 @@ public final class PathItems {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let pathItemStringQuery = options?.pathItemStringQuery {
@@ -291,7 +291,7 @@ public final class PathItems {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let pathItemStringQuery = options?.pathItemStringQuery {
@@ -399,7 +399,7 @@ public final class PathItems {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "application/json"
+        headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
         if let pathItemStringQuery = options?.pathItemStringQuery {

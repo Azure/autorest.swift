@@ -68,7 +68,7 @@ public final class Files {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "image/png, application/json"
+        headers["Accept"] = "image/png, application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -157,7 +157,7 @@ public final class Files {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "image/png, application/json"
+        headers["Accept"] = "image/png, application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -246,7 +246,7 @@ public final class Files {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["accept"] = "image/png, application/json"
+        headers["Accept"] = "image/png, application/json"
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
