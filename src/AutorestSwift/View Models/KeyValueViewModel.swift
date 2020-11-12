@@ -78,7 +78,7 @@ struct KeyValueViewModel: Comparable {
                 path: "client."
             )
         } else {
-            self.init(key: name, value: "?????")
+            self.init(key: name, value: "")
         }
     }
 
