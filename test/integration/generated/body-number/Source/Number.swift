@@ -452,7 +452,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigFloat) else {
@@ -641,7 +641,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigDouble) else {
@@ -829,7 +829,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
@@ -1017,7 +1017,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
@@ -1206,7 +1206,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(bigDecimal) else {
@@ -1394,7 +1394,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(Decimal(99_999_999.99)) else {
@@ -1582,7 +1582,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(Decimal(-99_999_999.99)) else {
@@ -1771,7 +1771,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallFloat) else {
@@ -1960,7 +1960,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallDouble) else {
@@ -2149,7 +2149,7 @@ public final class Number {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(smallDecimal) else {

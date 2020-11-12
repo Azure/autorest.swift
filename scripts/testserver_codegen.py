@@ -26,7 +26,8 @@ working_files = [
     "custom-baseUrl",
     "body-string",
     "body-byte",
-    "body-number"
+    "body-number",
+    "header"
 ]
 
 def get_all_files():

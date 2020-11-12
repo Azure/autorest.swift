@@ -86,7 +86,7 @@ struct KeyValueViewModel: Comparable {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = constantSchema.serializedName ?? constantSchema.name
+        self.key = param.serializedName ?? param.name
         let constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type

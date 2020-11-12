@@ -163,7 +163,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(notExpandable) else {
@@ -352,7 +352,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(referenced) else {
@@ -541,7 +541,7 @@ public final class EnumOperation {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(referencedConstant) else {

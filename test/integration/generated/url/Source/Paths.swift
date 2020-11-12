@@ -61,7 +61,7 @@ public final class Paths {
         let urlTemplate = "/paths/bool/true/{boolPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant1": String(true)
+            "boolPath": String(true)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -151,7 +151,7 @@ public final class Paths {
         let urlTemplate = "/paths/bool/false/{boolPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant3": String(false)
+            "boolPath": String(false)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -241,7 +241,7 @@ public final class Paths {
         let urlTemplate = "/paths/int/1000000/{intPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant4": String(1_000_000)
+            "intPath": String(1_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -331,7 +331,7 @@ public final class Paths {
         let urlTemplate = "/paths/int/-1000000/{intPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant5": String(-1_000_000)
+            "intPath": String(-1_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -421,7 +421,7 @@ public final class Paths {
         let urlTemplate = "/paths/long/10000000000/{longPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant6": String(10_000_000_000)
+            "longPath": String(10_000_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -511,7 +511,7 @@ public final class Paths {
         let urlTemplate = "/paths/long/-10000000000/{longPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant7": String(-10_000_000_000)
+            "longPath": String(-10_000_000_000)
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -601,7 +601,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant8": String(Float(103_400_000_000_000_000_000))
+            "floatPath": String(Float(103_400_000_000_000_000_000))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -691,7 +691,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant9": String(Float(-1.034e-20))
+            "floatPath": String(Float(-1.034e-20))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -781,7 +781,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant10": String(Double(9_999_999.999))
+            "doublePath": String(Double(9_999_999.999))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -871,7 +871,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant11": String(Double(-9_999_999.999))
+            "doublePath": String(Double(-9_999_999.999))
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -961,7 +961,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/unicode/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant12": "啊齄丂狛狜隣郎隣兀﨩"
+            "stringPath": "啊齄丂狛狜隣郎隣兀﨩"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1051,7 +1051,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant13": "begin!*'();:@ &=+$,/?#[]end"
+            "stringPath": "begin!*'();:@ &=+$,/?#[]end"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1141,7 +1141,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant14": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
+            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1231,7 +1231,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant15": ""
+            "stringPath": ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1690,7 +1690,7 @@ public final class Paths {
         let urlTemplate = "/paths/byte/empty/{bytePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant16": ""
+            "bytePath": ""
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1876,7 +1876,7 @@ public final class Paths {
         let urlTemplate = "/paths/date/2012-01-01/{datePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant17": "2012-01-01"
+            "datePath": "2012-01-01"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2061,7 +2061,7 @@ public final class Paths {
         let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
         let pathParams = [
             "$host": client.endpoint.absoluteString,
-            "Constant18": "2012-01-01T01:01:01Z"
+            "dateTimePath": "2012-01-01T01:01:01Z"
         ]
         // Construct query
         let queryParams: [QueryParameter] = [

@@ -327,7 +327,7 @@ public final class Byte {
 
         // Construct headers
         var headers = HTTPHeaders()
-        headers["ApplicationJson"] = "application/json"
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
         let requestBody = nonAscii

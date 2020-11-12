@@ -64,7 +64,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant1", String(true))
+            ("boolQuery", String(true))
         ]
 
         // Construct headers
@@ -154,7 +154,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant3", String(false))
+            ("boolQuery", String(false))
         ]
 
         // Construct headers
@@ -339,7 +339,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant4", String(1_000_000))
+            ("intQuery", String(1_000_000))
         ]
 
         // Construct headers
@@ -429,7 +429,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant5", String(-1_000_000))
+            ("intQuery", String(-1_000_000))
         ]
 
         // Construct headers
@@ -614,7 +614,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant6", String(10_000_000_000))
+            ("longQuery", String(10_000_000_000))
         ]
 
         // Construct headers
@@ -704,7 +704,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant7", String(-10_000_000_000))
+            ("longQuery", String(-10_000_000_000))
         ]
 
         // Construct headers
@@ -889,7 +889,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant8", String(Float(103_400_000_000_000_000_000)))
+            ("floatQuery", String(Float(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
@@ -979,7 +979,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant9", String(Float(-1.034e-20)))
+            ("floatQuery", String(Float(-1.034e-20)))
         ]
 
         // Construct headers
@@ -1164,7 +1164,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant10", String(Double(9_999_999.999)))
+            ("doubleQuery", String(Double(9_999_999.999)))
         ]
 
         // Construct headers
@@ -1254,7 +1254,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant11", String(Double(-9_999_999.999)))
+            ("doubleQuery", String(Double(-9_999_999.999)))
         ]
 
         // Construct headers
@@ -1439,7 +1439,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant12", "啊齄丂狛狜隣郎隣兀﨩")
+            ("stringQuery", "啊齄丂狛狜隣郎隣兀﨩")
         ]
 
         // Construct headers
@@ -1529,7 +1529,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant13", "begin!*'();:@ &=+$,/?#[]end")
+            ("stringQuery", "begin!*'();:@ &=+$,/?#[]end")
         ]
 
         // Construct headers
@@ -1619,7 +1619,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant15", "")
+            ("stringQuery", "")
         ]
 
         // Construct headers
@@ -2091,7 +2091,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant16", "")
+            ("byteQuery", "")
         ]
 
         // Construct headers
@@ -2278,7 +2278,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant17", "2012-01-01")
+            ("dateQuery", "2012-01-01")
         ]
 
         // Construct headers
@@ -2465,7 +2465,7 @@ public final class Queries {
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("Constant18", "2012-01-01T01:01:01Z")
+            ("dateTimeQuery", "2012-01-01T01:01:01Z")
         ]
 
         // Construct headers
