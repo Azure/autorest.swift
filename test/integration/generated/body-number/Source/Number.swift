@@ -445,7 +445,7 @@ public final class Number {
         numberFormatter.numberStyle = .scientific
         numberFormatter.maximumSignificantDigits = 8
         var bigFloatString = numberFormatter.string(from: bigFloat as NSNumber)
-        bigFloatString = bigFloatString?.replacingOccurrences(of: "e[0-9]", with: "e+$1", options: .regularExpression)
+        bigFloatString = bigFloatString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
 
         // Construct URL
         let urlTemplate = "/number/big/float/3.402823e+20"
@@ -640,7 +640,11 @@ public final class Number {
         numberFormatter.numberStyle = .scientific
         numberFormatter.maximumSignificantDigits = 8
         var bigDoubleString = numberFormatter.string(from: bigDouble as NSNumber)
-        bigDoubleString = bigDoubleString?.replacingOccurrences(of: "e[0-9]", with: "e+$1", options: .regularExpression)
+        bigDoubleString = bigDoubleString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
 
         // Construct URL
         let urlTemplate = "/number/big/double/2.5976931e+101"
@@ -1212,7 +1216,7 @@ public final class Number {
         numberFormatter.maximumSignificantDigits = 8
         var bigDecimalString = numberFormatter.string(from: bigDecimal as NSDecimalNumber)
         bigDecimalString = bigDecimalString?.replacingOccurrences(
-            of: "e[0-9]",
+            of: "e([0-9])",
             with: "e+$1",
             options: .regularExpression
         )
@@ -1787,7 +1791,7 @@ public final class Number {
         numberFormatter.maximumSignificantDigits = 8
         var smallFloatString = numberFormatter.string(from: smallFloat as NSNumber)
         smallFloatString = smallFloatString?.replacingOccurrences(
-            of: "e[0-9]",
+            of: "e([0-9])",
             with: "e+$1",
             options: .regularExpression
         )
@@ -1986,7 +1990,7 @@ public final class Number {
         numberFormatter.maximumSignificantDigits = 8
         var smallDoubleString = numberFormatter.string(from: smallDouble as NSNumber)
         smallDoubleString = smallDoubleString?.replacingOccurrences(
-            of: "e[0-9]",
+            of: "e([0-9])",
             with: "e+$1",
             options: .regularExpression
         )
@@ -2185,7 +2189,7 @@ public final class Number {
         numberFormatter.maximumSignificantDigits = 8
         var smallDecimalString = numberFormatter.string(from: smallDecimal as NSDecimalNumber)
         smallDecimalString = smallDecimalString?.replacingOccurrences(
-            of: "e[0-9]",
+            of: "e([0-9])",
             with: "e+$1",
             options: .regularExpression
         )
