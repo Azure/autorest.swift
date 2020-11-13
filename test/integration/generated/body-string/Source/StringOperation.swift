@@ -1085,6 +1085,8 @@ public final class StringOperation {
         withOptions options: PutBase64UrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let base64UrlEncodedString = base64UrlEncoded.base64URLEncodedString()
+
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
         let pathParams = [
