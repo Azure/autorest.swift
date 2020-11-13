@@ -61,19 +61,20 @@ struct KeyValueViewModel: Comparable {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: ParameterType, with operation: Operation) {
-        let name = param.serializedName ?? param.name
+        //let name = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
-            self.init(param: param, constantSchema: constantSchema, name: name)
+            self.init(param: param, constantSchema: constantSchema)
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
-            self.init(key: name, value: "\(groupedBy).\(name)")
+            self.init(key: param.name, value: "\(groupedBy).\(param.name)")
         } else if param.implementation == .client {
+            let name = param.serializedName ?? param.name
             self.init(
-                key: param.serializedName ?? param.name,
+                key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : param.serializedName ?? param.name,
+                value: (name == "$host") ? "endpoint.absoluteString" : name,
                 optional: !param.required,
                 path: "client."
             )
@@ -82,7 +83,7 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(param: ParameterType, constantSchema: ConstantSchema, name _: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema) {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
