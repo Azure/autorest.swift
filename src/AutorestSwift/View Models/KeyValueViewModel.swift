@@ -61,7 +61,7 @@ struct KeyValueViewModel: Comparable {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: ParameterType, with operation: Operation) {
-        //let name = param.serializedName ?? param.name
+        // let name = param.serializedName ?? param.name
 
         if let constantSchema = param.schema as? ConstantSchema {
             self.init(param: param, constantSchema: constantSchema)
