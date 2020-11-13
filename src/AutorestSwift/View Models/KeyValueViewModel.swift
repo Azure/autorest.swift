@@ -117,7 +117,7 @@ struct KeyValueViewModel: Comparable {
     }
 
     private init(signatureParameter: ParameterType) {
-        self.key = signatureParameter.serializedName ?? signatureParameter.name
+        self.key = signatureParameter.serializedName ?? ""
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
         self.needDecodingInMethod = signatureParameter.required
