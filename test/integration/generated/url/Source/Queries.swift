@@ -1077,7 +1077,7 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let floatQuery = options?.floatQuery {
-            queryParams.append("floatQuery", floatQueryString)
+            queryParams.append("floatQuery", String(floatQuery))
         }
         // Header options
         // Construct request
@@ -1352,7 +1352,7 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let doubleQuery = options?.doubleQuery {
-            queryParams.append("doubleQuery", doubleQueryString)
+            queryParams.append("doubleQuery", String(doubleQuery))
         }
         // Header options
         // Construct request
