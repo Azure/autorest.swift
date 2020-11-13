@@ -85,6 +85,7 @@ struct OperationParameters {
         // Set the body param, if applicable
         if let bodyParam = operation.request?.bodyParam {
             var bodyParamName: String?
+            assert(body.count <= 1, "Expected, at most, one body parameter.")
             if body.count > 0 {
                 bodyParamName = body.first?.value
             } else {
@@ -176,7 +177,7 @@ struct BodyParams {
             strategy = .byteArray
         } else if param.schema.type == .number {
             strategy = .number
-        } else if param.isConstantSchema {
+        } else if param.schema is ConstantSchema {
             strategy = .constant
         } else {
             strategy = .plain
