@@ -12,6 +12,12 @@
     }
     {% elif method.strategy == "base64ByteArray" %}
     let {{ method.key }}String = {{ method.key }}.base64URLEncodedString()
+    {% elif method.strategy == "decimal" or method.strategy == "number" %}
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .scientific
+    numberFormatter.maximumSignificantDigits = 8
+    var {{ method.key }}String = numberFormatter.string(from: {{ method.key }} as {% if  method.strategy == "decimal" %} NSDecimalNumber {% else %} NSNumber {% endif %})
+    {{ method.key }}String = {{ method.key }}String?.replacingOccurrences(of: "e", with: "e+")
     {% else %}
     {# Do nothing #}
     {% endif %}

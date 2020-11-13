@@ -58,7 +58,7 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                if param.isConstantSchema {
+                if param.isConstantSchema || param.required {
                     body.append(viewModel)
                 }
             default:
@@ -66,7 +66,7 @@ struct OperationParameters {
             }
         }
 
-        let allParams = query.required + path
+        let allParams = query.required + path + body
         for param in allParams where param.needDecodingInMethod {
             methodDecoding.append(param)
         }
@@ -138,6 +138,7 @@ enum BodyParamStrategy: String {
     case plainNullable
     case byteArray
     case constant
+    case number
 }
 
 struct BodyParams {
@@ -173,6 +174,8 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
+        } else if param.schema.type == .number {
+            strategy = .number
         } else if param.isConstantSchema {
             strategy = .constant
         } else {

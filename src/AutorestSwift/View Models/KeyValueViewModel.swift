@@ -32,6 +32,8 @@ enum KeyValueDecodeStrategy: String {
     case date
     case dateTime
     case `default`
+    case decimal
+    case number
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -77,6 +79,9 @@ struct KeyValueViewModel: Comparable {
                 optional: !param.required,
                 path: "client."
             )
+        } else if param.paramLocation == .body {
+            let bodyParamName = operation.request?.bodyParamName(for: operation)
+            self.init(signatureParameter: param, name: bodyParamName ?? name, value: bodyParamName)
         } else {
             self.init(key: name, value: "")
         }
@@ -116,7 +121,7 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(signatureParameter: ParameterType, name: String) {
+    private init(signatureParameter: ParameterType, name: String, value: String? = nil) {
         self.key = name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
@@ -125,7 +130,7 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
+        self.value = value ?? KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
@@ -141,6 +146,12 @@ struct KeyValueViewModel: Comparable {
                 keyValueType = .base64ByteArray
             } else {
                 keyValueType = .byteArray
+            }
+        case .number:
+            if let numberSchema = signatureParameter.schema as? NumberSchema {
+                keyValueType = numberSchema.swiftType() == "Decimal" ? .decimal : .number
+            } else {
+                keyValueType = .number
             }
         default:
             keyValueType = .default
@@ -171,14 +182,14 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
         switch type {
         case .integer,
-             .number,
              .boolean:
             return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
              .unixTime,
              .dateTime,
-             .byteArray:
+             .byteArray,
+             .number:
             return "\(value)String"
         case .choice,
              .sealedChoice:
