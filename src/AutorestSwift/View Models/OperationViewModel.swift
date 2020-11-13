@@ -58,7 +58,7 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                if param.isConstantSchema || param.required {
+                if param.required {
                     body.append(viewModel)
                 }
             default:
