@@ -71,22 +71,22 @@ struct KeyValueViewModel: Comparable {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
             self.init(
-                key: name,
+                key: param.serializedName ?? param.name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : name,
+                value: (name == "$host") ? "endpoint.absoluteString" : param.serializedName ?? param.name,
                 optional: !param.required,
                 path: "client."
             )
         } else {
-            self.init(key: name, value: "?????")
+            self.init(key: param.name, value: "?????")
         }
     }
 
-    private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema, name _: String) {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = name
+        self.key = param.serializedName ?? param.name
         let constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         let type = constantSchema.valueType.type

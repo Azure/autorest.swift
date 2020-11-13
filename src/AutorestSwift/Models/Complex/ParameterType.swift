@@ -176,7 +176,7 @@ extension ParameterType: Equatable {
 extension Array where Element == ParameterType {
     func first(named: String) -> Element? {
         for param in self {
-            let name = param.serializedName ?? param.name
+            let name = param.name
             if named == name {
                 return param
             }
