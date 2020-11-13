@@ -5,7 +5,7 @@ guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name 
     return
 }
 {% elif op.params.body.strategy == "number" %}
-guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name }}String ) else {
+guard let requestBody = {{ op.params.body.param.name }}String?.data(using: .utf8) else {
     self.options.logger.error("Failed to encode request body as json.")
     return
 }

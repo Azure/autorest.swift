@@ -17,7 +17,7 @@
     numberFormatter.numberStyle = .scientific
     numberFormatter.maximumSignificantDigits = 8
     var {{ method.key }}String = numberFormatter.string(from: {{ method.key }} as {% if  method.strategy == "decimal" %} NSDecimalNumber {% else %} NSNumber {% endif %})
-    {{ method.key }}String = {{ method.key }}String?.replacingOccurrences(of: "e", with: "e+")
+    {{ method.key }}String = {{ method.key }}String?.replacingOccurrences(of: "e[0-9]", with: "e+$1", options:  .regularExpression)
     {% else %}
     {# Do nothing #}
     {% endif %}
