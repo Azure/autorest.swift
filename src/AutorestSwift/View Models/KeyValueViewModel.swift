@@ -71,10 +71,14 @@ struct KeyValueViewModel: Comparable {
             self.init(key: param.name, value: "\(groupedBy).\(param.name)")
         } else if param.implementation == .client {
             let name = param.swiftVariableName
+            let value = KeyValueViewModel.formatValue(
+                forSignatureParameter: param,
+                value: name
+            )
             self.init(
                 key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : name,
+                value: (name == "$host") ? "endpoint.absoluteString" : value,
                 optional: !param.required,
                 path: "client."
             )
