@@ -790,6 +790,12 @@ public final class Header {
         withOptions options: ParamFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var valueString = numberFormatter.string(from: value as NSNumber)
+        valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
+
         // Construct URL
         let urlTemplate = "/header/param/prim/float"
         let pathParams = [
@@ -975,6 +981,12 @@ public final class Header {
         withOptions options: ParamDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var valueString = numberFormatter.string(from: value as NSNumber)
+        valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
+
         // Construct URL
         let urlTemplate = "/header/param/prim/double"
         let pathParams = [
