@@ -98,28 +98,6 @@ struct KeyValueViewModel: Comparable {
             forSignatureParameter: signatureParameter,
             value: signatureParameter.name
         )
-        /*
-                var keyValueType = KeyValueDecodeStrategy.default
-                let type = signatureParameter.schema.type
-                // if parameter is from method signature (not from option) and type is date or byteArray,
-                // add decoding logic to string in the method and specify the right decoding strategy
-                switch type {
-                case .date,
-                     .unixTime:
-                    keyValueType = .date
-                case .dateTime:
-                    keyValueType = .dateTime
-                case .byteArray:
-                    if let byteArraySchema = signatureParameter.schema as? ByteArraySchema,
-                        byteArraySchema.format == .base64url {
-                        keyValueType = .base64ByteArray
-                    } else {
-                        keyValueType = .byteArray
-                    }
-                default:
-                    keyValueType = .default
-                }
-         */
         self.strategy = KeyValueViewModel.getKeyValueDecodeStrategy(for: signatureParameter).rawValue
     }
 
@@ -128,37 +106,9 @@ struct KeyValueViewModel: Comparable {
         self.needDecodingInMethod = false
         self.path = ""
         self.key = name
-        // constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
 
         self.value = KeyValueViewModel.getValue(for: constantSchema, isSkipUrlEncoding: param.value.isSkipUrlEncoding)
-        /*
-             let type = constantSchema.valueType.type
-
-             if type == .string,
-                 param.value.isSkipUrlEncoding {
-                 self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
-             } else {
-                 switch type {
-                 case .date,
-                      .unixTime,
-                      .dateTime,
-                      .byteArray,
-                      .string:
-                     self.value = "\"\(constantValue)\""
-                 case .number:
-                     let numberSchema = constantSchema.valueType
-                     let swiftType = numberSchema.swiftType()
-                     if swiftType == "Decimal" {
-                         self.value = "\(swiftType)(\(constantValue))"
-                     } else {
-                         self.value = "String(\(swiftType)(\(constantValue)))"
-                     }
-                 default:
-                     self.value = "String(\(constantValue))"
-                 }
-             }
-         */
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
@@ -166,7 +116,6 @@ struct KeyValueViewModel: Comparable {
         self.path = bodySignatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !bodySignatureParameter.required
         var needDecodingInMethod = bodySignatureParameter.required
-        // var keyValueType = KeyValueDecodeStrategy.default
         let type = bodySignatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
@@ -176,38 +125,9 @@ struct KeyValueViewModel: Comparable {
         )
         self.key = key
         if type == .date || type == .byteArray || type == .unixTime {
-            // case .date,  .byteArray, .unixTime:
             needDecodingInMethod = bodySignatureParameter.paramLocation == .body ? false : needDecodingInMethod
-            // default:
         }
-        /*
-         // if parameter is from method signature (not from option) and type is date or byteArray,
-         // add decoding logic to string in the method and specify the right decoding strategy
-         switch type {
-         case .date,
-              .unixTime:
-             keyValueType = .date
-             needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
-         case .dateTime:
-             keyValueType = .dateTime
-         case .byteArray:
-             if let byteArraySchema = signatureParameter.schema as? ByteArraySchema,
-                 byteArraySchema.format == .base64url {
-                 keyValueType = .base64ByteArray
-             } else {
-                 keyValueType = .byteArray
-             }
-             needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
-         case .number:
-             if let numberSchema = signatureParameter.schema as? NumberSchema {
-                 keyValueType = numberSchema.swiftType() == "Decimal" ? .decimal : .number
-             } else {
-                 keyValueType = .number
-             }
-         default:
-             keyValueType = .default
-         }
-         */
+
         self.needDecodingInMethod = needDecodingInMethod
         self.strategy = KeyValueViewModel.getKeyValueDecodeStrategy(for: bodySignatureParameter).rawValue
     }
@@ -286,7 +206,6 @@ struct KeyValueViewModel: Comparable {
     }
 
     private static func getKeyValueDecodeStrategy(for parameter: ParameterType) -> KeyValueDecodeStrategy {
-        // var keyValueType = KeyValueDecodeStrategy.default
         let type = parameter.schema.type
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
