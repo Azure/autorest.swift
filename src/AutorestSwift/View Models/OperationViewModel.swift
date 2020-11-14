@@ -58,7 +58,7 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                if param.isConstantSchema {
+                if param.required {
                     body.append(viewModel)
                 }
             default:
@@ -66,7 +66,7 @@ struct OperationParameters {
             }
         }
 
-        let allParams = query.required + path + header.required
+        let allParams = query.required + path + body + header.required
         for param in allParams where param.needDecodingInMethod {
             methodDecoding.append(param)
         }
@@ -83,13 +83,15 @@ struct OperationParameters {
         header.declaration = header.isEmpty ? "let" : "var"
 
         // Set the body param, if applicable
-        if let bodyParam = operation.request?.bodyParam {
-            var bodyParamName: String?
-            if body.count > 0 {
-                bodyParamName = body.first?.value
-            } else {
-                bodyParamName = operation.request?.bodyParamName(for: operation)
-            }
+        var bodyParamName: String?
+        assert(body.count <= 1, "Expected, at most, one body parameter.")
+        if body.count > 0 {
+            bodyParamName = body.first?.value
+        } else {
+            bodyParamName = operation.request?.bodyParamName(for: operation)
+        }
+        if let bodyParam = operation.request?.bodyParam,
+            bodyParamName != nil {
             self.body = BodyParams(
                 from: bodyParam,
                 withName: bodyParamName!,
@@ -138,6 +140,7 @@ enum BodyParamStrategy: String {
     case plainNullable
     case byteArray
     case constant
+    case number
 }
 
 struct BodyParams {
@@ -173,7 +176,9 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
-        } else if param.isConstantSchema {
+        } else if param.schema.type == .number {
+            strategy = .number
+        } else if param.schema is ConstantSchema {
             strategy = .constant
         } else {
             strategy = .plain
