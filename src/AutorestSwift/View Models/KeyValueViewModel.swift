@@ -92,8 +92,6 @@ struct KeyValueViewModel: Comparable {
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
         self.needDecodingInMethod = signatureParameter.required
-        var keyValueType = KeyValueDecodeStrategy.default
-        let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
         self.value = KeyValueViewModel.formatValue(
@@ -101,6 +99,8 @@ struct KeyValueViewModel: Comparable {
             value: signatureParameter.name
         )
 
+        var keyValueType = KeyValueDecodeStrategy.default
+        let type = signatureParameter.schema.type
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
         switch type {
@@ -220,7 +220,8 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
         switch type {
         case .integer,
-             .boolean:
+             .boolean,
+             .number:
             return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
@@ -228,8 +229,6 @@ struct KeyValueViewModel: Comparable {
              .dateTime,
              .byteArray:
             return "\(value)String"
-        case .number:
-            return signatureParameter.required ? "\(value)String" : "String(\(value))"
         case .choice,
              .sealedChoice:
             return "\(value).rawValue"
