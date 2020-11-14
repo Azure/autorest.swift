@@ -58,11 +58,7 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                let type = param.schema.type
-                if param.required,
-                    type != .byteArray,
-                    type != .date,
-                    type != .unixTime {
+                if param.required {
                     body.append(viewModel)
                 }
             default:
@@ -95,11 +91,15 @@ struct OperationParameters {
             } else {
                 bodyParamName = operation.request?.bodyParamName(for: operation)
             }
-            self.body = BodyParams(
-                from: bodyParam,
-                withName: bodyParamName!,
-                parameters: parameters
-            )
+            if bodyParamName != nil {
+                self.body = BodyParams(
+                    from: bodyParam,
+                    withName: bodyParamName!,
+                    parameters: parameters
+                )
+            } else {
+                self.body = nil
+            }
         } else {
             self.body = nil
         }

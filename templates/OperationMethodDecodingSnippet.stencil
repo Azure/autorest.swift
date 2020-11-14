@@ -13,6 +13,7 @@
     {% elif method.strategy == "base64ByteArray" %}
     let {{ method.key }}String = {{ method.key }}.base64URLEncodedString()
     {% elif method.strategy == "decimal" or method.strategy == "number" %}
+    {# Test server expect the 'positive exponent' to have a + sign. i.e. instead of 2.566e10, it expects 2.566e+10} #}
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .scientific
     numberFormatter.maximumSignificantDigits = 8

@@ -125,7 +125,7 @@ struct KeyValueViewModel: Comparable {
         self.key = name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
-        self.needDecodingInMethod = signatureParameter.required
+        var needDecodingInMethod = signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
 
@@ -138,6 +138,7 @@ struct KeyValueViewModel: Comparable {
         case .date,
              .unixTime:
             keyValueType = .date
+            needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
         case .dateTime:
             keyValueType = .dateTime
         case .byteArray:
@@ -147,6 +148,7 @@ struct KeyValueViewModel: Comparable {
             } else {
                 keyValueType = .byteArray
             }
+            needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
         case .number:
             if let numberSchema = signatureParameter.schema as? NumberSchema {
                 keyValueType = numberSchema.swiftType() == "Decimal" ? .decimal : .number
@@ -156,6 +158,7 @@ struct KeyValueViewModel: Comparable {
         default:
             keyValueType = .default
         }
+        self.needDecodingInMethod = needDecodingInMethod
         self.strategy = keyValueType.rawValue
     }
 
