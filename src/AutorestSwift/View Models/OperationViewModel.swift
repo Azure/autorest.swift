@@ -83,23 +83,20 @@ struct OperationParameters {
         header.declaration = header.isEmpty ? "let" : "var"
 
         // Set the body param, if applicable
-        if let bodyParam = operation.request?.bodyParam {
-            var bodyParamName: String?
-            assert(body.count <= 1, "Expected, at most, one body parameter.")
-            if body.count > 0 {
-                bodyParamName = body.first?.value
-            } else {
-                bodyParamName = operation.request?.bodyParamName(for: operation)
-            }
-            if bodyParamName != nil {
-                self.body = BodyParams(
-                    from: bodyParam,
-                    withName: bodyParamName!,
-                    parameters: parameters
-                )
-            } else {
-                self.body = nil
-            }
+        var bodyParamName: String?
+        assert(body.count <= 1, "Expected, at most, one body parameter.")
+        if body.count > 0 {
+            bodyParamName = body.first?.value
+        } else {
+            bodyParamName = operation.request?.bodyParamName(for: operation)
+        }
+        if let bodyParam = operation.request?.bodyParam,
+            bodyParamName != nil {
+            self.body = BodyParams(
+                from: bodyParam,
+                withName: bodyParamName!,
+                parameters: parameters
+            )
         } else {
             self.body = nil
         }
