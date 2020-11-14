@@ -41,7 +41,7 @@ struct ParameterViewModel {
         if let name = specificName, !name.isEmpty {
             self.name = name
         } else {
-            self.name = param.name.lowercasedFirst
+            self.name = param.swiftVariableName
         }
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)

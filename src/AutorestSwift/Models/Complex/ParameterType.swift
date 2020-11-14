@@ -57,6 +57,10 @@ enum ParameterType: Codable {
         return common.name
     }
 
+    var swiftVariableName: String {
+        return common.swiftVariableName
+    }
+
     var schema: Schema {
         return common.schema!
     }

@@ -39,7 +39,7 @@ struct ConstantViewModel {
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: ConstantSchema) {
-        let name = schema.name.lowercasedFirst
+        let name = schema.swiftVariableName
         assert(!name.isEmpty)
         self.name = name
         self.serializedName = schema.serializedName ?? schema.name

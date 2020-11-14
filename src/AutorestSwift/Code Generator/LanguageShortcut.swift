@@ -50,6 +50,10 @@ extension LanguageShortcut {
         }
     }
 
+    var swiftVariableName: String {
+        return name.lowercasedFirst
+    }
+
     var description: String {
         get {
             return language.swift.description.trimmingCharacters(in: .whitespacesAndNewlines)
