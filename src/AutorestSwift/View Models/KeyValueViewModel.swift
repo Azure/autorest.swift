@@ -68,7 +68,7 @@ struct KeyValueViewModel: Comparable {
         if let constantSchema = param.schema as? ConstantSchema {
             self.init(param: param, constantSchema: constantSchema, name: name)
         } else if let signatureParameter = operation.signatureParameter(for: name) {
-            self.init(signatureParameter: signatureParameter, name: name)
+            self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
@@ -85,6 +85,41 @@ struct KeyValueViewModel: Comparable {
         } else {
             self.init(key: name, value: "")
         }
+    }
+
+    private init(signatureParameter: ParameterType) {
+        self.key = signatureParameter.serializedName ?? signatureParameter.name
+        self.path = signatureParameter.belongsInOptions() ? "options?." : ""
+        self.optional = !signatureParameter.required
+        self.needDecodingInMethod = signatureParameter.required
+        var keyValueType = KeyValueDecodeStrategy.default
+        let type = signatureParameter.schema.type
+
+        // value is referring a signature parameter, no need to wrap as String
+        self.value = KeyValueViewModel.formatValue(
+            forSignatureParameter: signatureParameter,
+            value: signatureParameter.name
+        )
+
+        // if parameter is from method signature (not from option) and type is date or byteArray,
+        // add decoding logic to string in the method and specify the right decoding strategy
+        switch type {
+        case .date,
+             .unixTime:
+            keyValueType = .date
+        case .dateTime:
+            keyValueType = .dateTime
+        case .byteArray:
+            if let byteArraySchema = signatureParameter.schema as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                keyValueType = .base64ByteArray
+            } else {
+                keyValueType = .byteArray
+            }
+        default:
+            keyValueType = .default
+        }
+        self.strategy = keyValueType.rawValue
     }
 
     private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
