@@ -58,7 +58,11 @@ struct OperationParameters {
                  .uri:
                 path.append(viewModel)
             case .body:
-                if param.required {
+                let type = param.schema.type
+                if param.required,
+                    type != .byteArray,
+                    type != .date,
+                    type != .unixTime {
                     body.append(viewModel)
                 }
             default:

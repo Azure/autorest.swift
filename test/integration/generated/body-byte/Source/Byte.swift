@@ -316,11 +316,6 @@ public final class Byte {
         withOptions options: PutNonAsciiOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let nonAsciiString = String(bytes: nonAscii, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for nonAscii")
-            return
-        }
-
         // Construct URL
         let urlTemplate = "/byte/nonAscii"
         let pathParams = [

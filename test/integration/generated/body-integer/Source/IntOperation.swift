@@ -1097,10 +1097,6 @@ public final class IntOperation {
         withOptions options: PutUnixTimeDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let unixTimeDateString = dateFormatter.string(from: unixTimeDate)
-
         // Construct URL
         let urlTemplate = "/int/unixtime"
         let pathParams = [
