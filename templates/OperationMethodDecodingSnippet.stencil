@@ -12,6 +12,13 @@
     }
     {% elif method.strategy == "base64ByteArray" %}
     let {{ method.key }}String = {{ method.key }}.base64URLEncodedString()
+    {% elif method.strategy == "decimal" or method.strategy == "number" %}
+    {# Test server expect the 'positive exponent' to have a + sign. i.e. instead of 2.566e10, it expects 2.566e+10} #}
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .scientific
+    numberFormatter.maximumSignificantDigits = 8
+    var {{ method.key }}String = numberFormatter.string(from: {{ method.key }} as {% if  method.strategy == "decimal" %} NSDecimalNumber {% else %} NSNumber {% endif %})
+    {{ method.key }}String = {{ method.key }}String?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options:  .regularExpression)
     {% else %}
     {# Do nothing #}
     {% endif %}

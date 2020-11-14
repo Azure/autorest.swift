@@ -32,6 +32,8 @@ enum KeyValueDecodeStrategy: String {
     case date
     case dateTime
     case `default`
+    case decimal
+    case number
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
@@ -77,8 +79,11 @@ struct KeyValueViewModel: Comparable {
                 optional: !param.required,
                 path: "client."
             )
+        } else if param.paramLocation == .body {
+            let bodyParamName = operation.request?.bodyParamName(for: operation)
+            self.init(signatureParameter: param, name: bodyParamName ?? name, value: bodyParamName)
         } else {
-            self.init(key: name, value: "?????")
+            self.init(key: name, value: "")
         }
     }
 
@@ -116,19 +121,16 @@ struct KeyValueViewModel: Comparable {
         }
     }
 
-    private init(signatureParameter: ParameterType) {
-        self.key = signatureParameter.serializedName ?? signatureParameter.name
+    private init(signatureParameter: ParameterType, name: String, value: String? = nil) {
+        self.key = name
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
-        self.needDecodingInMethod = signatureParameter.required
+        var needDecodingInMethod = signatureParameter.required
         var keyValueType = KeyValueDecodeStrategy.default
         let type = signatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = KeyValueViewModel.formatValue(
-            forSignatureParameter: signatureParameter,
-            value: signatureParameter.name
-        )
+        self.value = value ?? KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
 
         // if parameter is from method signature (not from option) and type is date or byteArray,
         // add decoding logic to string in the method and specify the right decoding strategy
@@ -136,6 +138,7 @@ struct KeyValueViewModel: Comparable {
         case .date,
              .unixTime:
             keyValueType = .date
+            needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
         case .dateTime:
             keyValueType = .dateTime
         case .byteArray:
@@ -145,9 +148,17 @@ struct KeyValueViewModel: Comparable {
             } else {
                 keyValueType = .byteArray
             }
+            needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
+        case .number:
+            if let numberSchema = signatureParameter.schema as? NumberSchema {
+                keyValueType = numberSchema.swiftType() == "Decimal" ? .decimal : .number
+            } else {
+                keyValueType = .number
+            }
         default:
             keyValueType = .default
         }
+        self.needDecodingInMethod = needDecodingInMethod
         self.strategy = keyValueType.rawValue
     }
 
@@ -174,7 +185,6 @@ struct KeyValueViewModel: Comparable {
         let type = signatureParameter.schema.type
         switch type {
         case .integer,
-             .number,
              .boolean:
             return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
@@ -183,6 +193,8 @@ struct KeyValueViewModel: Comparable {
              .dateTime,
              .byteArray:
             return "\(value)String"
+        case .number:
+            return signatureParameter.required ? "\(value)String" : "String(\(value))"
         case .choice,
              .sealedChoice:
             return "\(value).rawValue"
