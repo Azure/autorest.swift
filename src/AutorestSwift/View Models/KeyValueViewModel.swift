@@ -82,11 +82,13 @@ struct KeyValueViewModel: Comparable {
             let bodyParamName = operation.request?.bodyParamName(for: operation)
             self.init(bodySignatureParameter: param, bodyParamName: bodyParamName)
         } else {
+            assertionFailure("Not expected to have the scenario in KeyValue ViewModel")
             self.init(key: param.name, value: "")
         }
     }
 
     private init(signatureParameter: ParameterType) {
+        assert(!(signatureParameter.serializedName?.isEmpty ?? true))
         self.key = signatureParameter.serializedName ?? ""
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
@@ -104,7 +106,12 @@ struct KeyValueViewModel: Comparable {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = (param.paramLocation == .header) ? (param.serializedName ?? "") : param.name
+        if param.paramLocation == .header {
+            assert(!(param.serializedName?.isEmpty ?? true))
+            self.key = param.serializedName ?? ""
+        } else {
+            self.key = param.name
+        }
         self.strategy = KeyValueDecodeStrategy.default.rawValue
 
         self.value = KeyValueViewModel.getValue(for: constantSchema, isSkipUrlEncoding: param.value.isSkipUrlEncoding)
