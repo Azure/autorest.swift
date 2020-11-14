@@ -81,7 +81,7 @@ struct KeyValueViewModel: Comparable {
             )
         } else if param.paramLocation == .body {
             let bodyParamName = operation.request?.bodyParamName(for: operation)
-            self.init(signatureParameter: param, name: bodyParamName ?? name, value: bodyParamName)
+            self.init(bodySignatureParameter: param, bodyParamName: bodyParamName)
         } else {
             self.init(key: name, value: "")
         }
@@ -128,49 +128,56 @@ struct KeyValueViewModel: Comparable {
         self.needDecodingInMethod = false
         self.path = ""
         self.key = name
-        let constantValue: String = constantSchema.value.value
+        // constantValue: String = constantSchema.value.value
         self.strategy = KeyValueDecodeStrategy.default.rawValue
-        let type = constantSchema.valueType.type
 
-        if type == .string,
-            param.value.isSkipUrlEncoding {
-            self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
-        } else {
-            switch type {
-            case .date,
-                 .unixTime,
-                 .dateTime,
-                 .byteArray,
-                 .string:
-                self.value = "\"\(constantValue)\""
-            case .number:
-                let numberSchema = constantSchema.valueType
-                let swiftType = numberSchema.swiftType()
-                if swiftType == "Decimal" {
-                    self.value = "\(swiftType)(\(constantValue))"
-                } else {
-                    self.value = "String(\(swiftType)(\(constantValue)))"
-                }
-            default:
-                self.value = "String(\(constantValue))"
-            }
-        }
+        self.value = KeyValueViewModel.getValue(for: constantSchema, isSkipUrlEncoding: param.value.isSkipUrlEncoding)
+        /*
+             let type = constantSchema.valueType.type
+
+             if type == .string,
+                 param.value.isSkipUrlEncoding {
+                 self.value = "\"\(constantValue)\".removingPercentEncoding ?? \"\""
+             } else {
+                 switch type {
+                 case .date,
+                      .unixTime,
+                      .dateTime,
+                      .byteArray,
+                      .string:
+                     self.value = "\"\(constantValue)\""
+                 case .number:
+                     let numberSchema = constantSchema.valueType
+                     let swiftType = numberSchema.swiftType()
+                     if swiftType == "Decimal" {
+                         self.value = "\(swiftType)(\(constantValue))"
+                     } else {
+                         self.value = "String(\(swiftType)(\(constantValue)))"
+                     }
+                 default:
+                     self.value = "String(\(constantValue))"
+                 }
+             }
+         */
     }
 
-    private init(signatureParameter: ParameterType, name: String, value: String? = nil) {
-        self.key = name
-        self.path = signatureParameter.belongsInOptions() ? "options?." : ""
-        self.optional = !signatureParameter.required
-        var needDecodingInMethod = signatureParameter.required
+    private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
+        let key = bodyParamName ?? bodySignatureParameter.name
+        self.path = bodySignatureParameter.belongsInOptions() ? "options?." : ""
+        self.optional = !bodySignatureParameter.required
+        var needDecodingInMethod = bodySignatureParameter.required
         // var keyValueType = KeyValueDecodeStrategy.default
-        let type = signatureParameter.schema.type
+        let type = bodySignatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = value ?? KeyValueViewModel.formatValue(forSignatureParameter: signatureParameter, value: name)
-
+        self.value = bodyParamName ?? KeyValueViewModel.formatValue(
+            forSignatureParameter: bodySignatureParameter,
+            value: key
+        )
+        self.key = key
         if type == .date || type == .byteArray || type == .unixTime {
             // case .date,  .byteArray, .unixTime:
-            needDecodingInMethod = signatureParameter.paramLocation == .body ? false : needDecodingInMethod
+            needDecodingInMethod = bodySignatureParameter.paramLocation == .body ? false : needDecodingInMethod
             // default:
         }
         /*
@@ -202,7 +209,7 @@ struct KeyValueViewModel: Comparable {
          }
          */
         self.needDecodingInMethod = needDecodingInMethod
-        self.strategy = KeyValueViewModel.getKeyValueDecodeStrategy(for: signatureParameter).rawValue
+        self.strategy = KeyValueViewModel.getKeyValueDecodeStrategy(for: bodySignatureParameter).rawValue
     }
 
     /**
