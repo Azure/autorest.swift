@@ -142,6 +142,7 @@ class AutoRestNumberTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    // Need to add support to encode Decimal constant into String before we can enable this test case
     /*
      func test_putBigDecimalPositiveDecimal200() throws {
          let expectation = XCTestExpectation(description: "Call number.putBigDecimalPositiveDecimal")
@@ -177,6 +178,7 @@ class AutoRestNumberTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    // Need to add support to encode Decimal constant into String before we can enable this test case
     /*
      func test_putBigDecimalNegativeDecimal200() throws {
          let expectation = XCTestExpectation(description: "Call number.putBigDecimalNegativeDecimal")
