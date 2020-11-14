@@ -27,7 +27,8 @@ working_files = [
     "body-string",
     "body-byte",
     "body-number",
-    "header"
+    "header",
+    "required-optional"
 ]
 
 def get_all_files():
@@ -121,6 +122,7 @@ def main(argv):
     global clean
     global debug
     global keepChange
+    inputFile = ""
 
     try:
         opts, args = getopt.getopt(argv,"acdk", ["all-files", "clean", "debug", "keep-change"])

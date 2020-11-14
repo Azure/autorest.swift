@@ -83,16 +83,18 @@ class NumberSchema: PrimitiveSchema {
         try super.encode(to: encoder)
     }
 
-    override func swiftType(optional _: Bool = false) -> String {
+    override func swiftType(optional: Bool = false) -> String {
+        var swiftType: String
         switch precision {
         case 32:
-            return (type == .integer) ? "Int32" : "Float"
+            swiftType = (type == .integer) ? "Int32" : "Float"
         case 64:
-            return (type == .integer) ? "Int64" : "Double"
+            swiftType = (type == .integer) ? "Int64" : "Double"
         case 128:
-            return (type == .integer) ? "Int" : "Decimal"
+            swiftType = (type == .integer) ? "Int" : "Decimal"
         default:
-            return (type == .integer) ? "Int" : "Double"
+            swiftType = (type == .integer) ? "Int" : "Double"
         }
+        return optional ? "\(swiftType)?" : swiftType
     }
 }
