@@ -117,7 +117,7 @@ class Schema: Codable, LanguageShortcut {
              .group:
             swiftType = swiftName
         case .duration:
-            swiftType = "DateComponents"
+            swiftType = "TimeInterval"
         case .dictionary:
             guard let dictionarySchema = self as? DictionarySchema else {
                 fatalError("Type mismatch. Expected dictionary type but got \(self)")
