@@ -68,7 +68,7 @@ struct KeyValueViewModel: Comparable {
         if let constantSchema = param.schema as? ConstantSchema {
             self.init(param: param, constantSchema: constantSchema, name: name)
         } else if let signatureParameter = operation.signatureParameter(for: name) {
-            self.init(signatureParameter: signatureParameter)
+            self.init(signatureParameter: signatureParameter, name: name)
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: name, value: "\(groupedBy).\(name)")
         } else if param.implementation == .client {
