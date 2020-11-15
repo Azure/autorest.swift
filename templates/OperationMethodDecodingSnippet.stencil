@@ -3,8 +3,10 @@
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     let {{ method.key }}String = dateFormatter.string(from: {{ method.key }})
-    {% elif method.strategy == "dateTime" %}
+    {% elif method.strategy == "dateTimeIso8601" %}
     let {{ method.key }}String = Date.Format.iso8601.formatter.string(from: {{ method.key }})
+    {% elif method.strategy == "dateTimeRfc1123" %}
+    let {{ method.key }}String = Date.Format.rfc1123.formatter.string(from: {{ method.key }})
     {% elif method.strategy == "byteArray" %}
     guard let {{ method.key }}String = String(bytes: {{ method.key }}, encoding: .utf8) else {
         self.options.logger.error("Failed to construct String for {{ method.key }}")

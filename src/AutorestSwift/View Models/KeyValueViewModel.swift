@@ -30,7 +30,8 @@ enum KeyValueDecodeStrategy: String {
     case byteArray
     case base64ByteArray
     case date
-    case dateTime
+    case dateTimeIso8601
+    case dateTimeRfc1123
     case `default`
     case decimal
     case number
@@ -224,7 +225,11 @@ struct KeyValueViewModel: Comparable {
              .unixTime:
             return .date
         case .dateTime:
-            return .dateTime
+            if let dateTimeSchema = parameter.schema as? DateTimeSchema,
+                dateTimeSchema.format == .dateTimeRfc1123 {
+                return .dateTimeRfc1123
+            }
+            return .dateTimeIso8601
         case .byteArray:
             if let byteArraySchema = parameter.schema as? ByteArraySchema,
                 byteArraySchema.format == .base64url {
