@@ -2003,7 +2003,6 @@ public final class Queries {
         // Query options
         if let byteQuery = options?.byteQuery {
             let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
-
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2190,7 +2189,6 @@ public final class Queries {
         // Query options
         if let byteQuery = options?.byteQuery {
             let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
-
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2377,7 +2375,6 @@ public final class Queries {
         // Query options
         if let dateQuery = options?.dateQuery {
             let dateQueryString = DateFormatter().string(from: dateQuery)
-
             queryParams.append("dateQuery", dateQueryString)
         }
         // Header options
@@ -2564,7 +2561,6 @@ public final class Queries {
         // Query options
         if let dateTimeQuery = options?.dateTimeQuery {
             let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
-
             queryParams.append("dateTimeQuery", dateTimeQueryString)
         }
         // Header options

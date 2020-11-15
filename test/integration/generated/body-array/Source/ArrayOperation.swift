@@ -4298,7 +4298,7 @@ public final class ArrayOperation {
     ///     success.
     public func getDurationValid(
         withOptions options: GetDurationValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[DateComponents]>
+        completionHandler: @escaping HTTPResultHandler<[TimeInterval]>
     ) {
         // Construct URL
         let urlTemplate = "/array/prim/duration/valid"
@@ -4358,7 +4358,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([DateComponents].self, from: data)
+                        let decoded = try decoder.decode([TimeInterval].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4391,7 +4391,7 @@ public final class ArrayOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        durationValid: [DateComponents],
+        durationValid: [TimeInterval],
         withOptions options: PutDurationValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

@@ -30,7 +30,8 @@ let package = Package(
         .package(name: "AutoRestParameterizedHostTest", path: "./test/integration/generated/custom-baseUrl/"),
         .package(name: "AutoRestSwaggerBat", path: "./test/integration/generated/body-string/"),
         .package(name: "AutoRestSwaggerBatByte", path: "./test/integration/generated/body-byte/"),
-        .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/")
+        .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
+        .package(name: "AutoRestSwaggerBatHeader", path: "./test/integration/generated/header/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -58,7 +59,8 @@ let package = Package(
             "AutoRestParameterizedHostTest",
             "AutoRestSwaggerBat",
             "AutoRestSwaggerBatByte",
-            "AutoRestNumberTest"],
+            "AutoRestNumberTest",
+            "AutoRestSwaggerBatHeader"],
             path: "AutorestSwiftTest"
         )
     ],

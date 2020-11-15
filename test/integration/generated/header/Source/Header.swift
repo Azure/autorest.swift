@@ -1936,8 +1936,7 @@ public final class Header {
         // Query options
         // Header options
         if let value = options?.value {
-            let valueString = Date.Format.iso8601.formatter.string(from: value)
-
+            let valueString = Date.Format.rfc1123.formatter.string(from: value)
             headers["value"] = valueString
         }
         // Construct request
@@ -2107,7 +2106,7 @@ public final class Header {
     ///     success.
     public func paramDuration(
         scenario: String,
-        value: DateComponents,
+        value: TimeInterval,
         withOptions options: ParamDurationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
