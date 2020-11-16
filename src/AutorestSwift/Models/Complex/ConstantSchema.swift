@@ -112,4 +112,36 @@ class ConstantSchema: Schema {
 
         try super.encode(to: encoder)
     }
+
+    /**
+     Convert the Constant into String format in Swift
+     */
+    public func formatValue(isSkipUrlEncoding: Bool) -> String {
+        let constantValue: String = value.value
+        let type = valueType.type
+
+        if type == .string,
+            isSkipUrlEncoding {
+            return "\"\(constantValue)\".removingPercentEncoding ?? \"\""
+        } else {
+            switch type {
+            case .date,
+                 .unixTime,
+                 .dateTime,
+                 .byteArray,
+                 .string:
+                return "\"\(constantValue)\""
+            case .number:
+                let numberSchema = valueType
+                let swiftType = numberSchema.swiftType()
+                if swiftType == "Decimal" {
+                    return "\(swiftType)(\(constantValue))"
+                } else {
+                    return "String(\(swiftType)(\(constantValue)))"
+                }
+            default:
+                return "String(\(constantValue))"
+            }
+        }
+    }
 }
