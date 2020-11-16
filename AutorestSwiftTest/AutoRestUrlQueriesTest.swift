@@ -96,6 +96,23 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_Queries_getBooleanNull_400() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getBooleanNull")
+
+        let options = Queries.ByteNullOptions(byteQuery: Data())
+        client.queries.getBooleanNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call queries.getBooleanNull failed")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 400)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_Queries_getBooleanTrue_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getBooleanTrue")
 
@@ -345,6 +362,74 @@ class AutoRestUrlQuriesTest: XCTestCase {
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call queries.dateTimeNull failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_getIntNull_200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getIntNull")
+
+        client.queries.getIntNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call queries.getIntNull failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_getLongNull_200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.getLongNull")
+
+        client.queries.getLongNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call queries.getLongNull failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_Queries_stringEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringEmpty")
+
+        client.queries.stringEmpty { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call queries.stringEmpty failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Queries_stringNull_200() throws {
+        let expectation = XCTestExpectation(description: "Call queries.stringNull")
+
+        client.queries.stringNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call queries.stringNull failed. error=\(details)")
             }
             expectation.fulfill()
         }
