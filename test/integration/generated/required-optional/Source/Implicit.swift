@@ -628,7 +628,7 @@ public final class Implicit {
         // Process endpoint options
         // Query options
         if let optionalGlobalQuery = client.optionalGlobalQuery {
-            queryParams.append("optionalGlobalQuery", String(optionalGlobalQuery))
+            queryParams.append("optionalGlobalQuery", optionalGlobalQuery)
         }
         // Header options
         // Construct request
