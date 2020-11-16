@@ -348,7 +348,7 @@ class AutoRestUrlPathsTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Paths_stringUnicode_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.stringUnicode")
 
@@ -417,7 +417,7 @@ class AutoRestUrlPathsTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Paths_unixTimeUrl_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.unixTimeUrl")
 
@@ -428,7 +428,7 @@ class AutoRestUrlPathsTest: XCTestCase {
             XCTFail("Input is not a date")
             return
         }
-        
+
         client.paths.unixTimeUrl(unixTimeUrlPath: date) { result, httpResponse in
             switch result {
             case .success:

@@ -43,16 +43,15 @@ class AutoRestUrlQuriesTest: XCTestCase {
         )
     }
 
-    func test_Queries_byteNull_400() throws {
+    func test_Queries_byteNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull")
 
-        let options = Queries.ByteNullOptions(byteQuery: Data())
-        client.queries.byteNull(withOptions: options) { result, httpResponse in
+        client.queries.byteNull() { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call queries.byteNull failed")
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case .failure:
-                XCTAssertEqual(httpResponse?.statusCode, 400)
+                XCTFail("Call queries.byteNull failed")
             }
             expectation.fulfill()
         }
@@ -96,16 +95,15 @@ class AutoRestUrlQuriesTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Queries_getBooleanNull_400() throws {
+    func test_Queries_getBooleanNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getBooleanNull")
 
-        let options = Queries.ByteNullOptions(byteQuery: Data())
         client.queries.getBooleanNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call queries.getBooleanNull failed")
+                XCTAssertEqual(httpResponse?.statusCode, 200)
             case .failure:
-                XCTAssertEqual(httpResponse?.statusCode, 400)
+                XCTFail("Call queries.byteMultiByte failed")
             }
             expectation.fulfill()
         }
@@ -385,7 +383,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_getLongNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.getLongNull")
 
@@ -402,7 +400,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_Queries_stringEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.stringEmpty")
 
