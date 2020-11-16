@@ -46,7 +46,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_byteNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.byteNull")
 
-        client.queries.byteNull() { result, httpResponse in
+        client.queries.byteNull { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)

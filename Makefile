@@ -40,8 +40,7 @@ copyTools:
 
 install: build copyTools
 
-run: build
-	${EXECUTABLE_DIRECTORY}/AutorestSwift
+run: 	${EXECUTABLE_DIRECTORY}/AutorestSwift
 
 test: copyTestResources
 	swift test
