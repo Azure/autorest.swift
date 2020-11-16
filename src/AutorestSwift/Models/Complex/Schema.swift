@@ -84,7 +84,8 @@ class Schema: Codable, LanguageShortcut {
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
-        case .string:
+        case .string,
+             .uuid:
             swiftType = "String"
         case .boolean:
             swiftType = "Bool"
