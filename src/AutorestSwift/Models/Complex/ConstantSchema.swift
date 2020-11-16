@@ -113,15 +113,15 @@ class ConstantSchema: Schema {
         try super.encode(to: encoder)
     }
 
-    /**
-     Convert the Constant into String format in Swift
-     */
-    public func formatValue(isSkipUrlEncoding: Bool) -> String {
+    /// Convert the Constant into String format in Swift
+    /// - Parameter skipUrlEncoding: a flag to indicate if the string should skip url encoding
+    /// - Returns: A swift string in generated code
+    public func formatValue(skipUrlEncoding: Bool) -> String {
         let constantValue: String = value.value
         let type = valueType.type
 
         if type == .string,
-            isSkipUrlEncoding {
+            skipUrlEncoding {
             return "\"\(constantValue)\".removingPercentEncoding ?? \"\""
         } else {
             switch type {
