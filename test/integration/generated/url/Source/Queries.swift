@@ -1077,6 +1077,15 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let floatQuery = options?.floatQuery {
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .scientific
+            numberFormatter.maximumSignificantDigits = 8
+            var floatQueryString = numberFormatter.string(from: floatQuery as NSNumber)
+            floatQueryString = floatQueryString?.replacingOccurrences(
+                of: "e([0-9])",
+                with: "e+$1",
+                options: .regularExpression
+            )
             queryParams.append("floatQuery", String(floatQuery))
         }
         // Header options
@@ -1352,6 +1361,15 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let doubleQuery = options?.doubleQuery {
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .scientific
+            numberFormatter.maximumSignificantDigits = 8
+            var doubleQueryString = numberFormatter.string(from: doubleQuery as NSNumber)
+            doubleQueryString = doubleQueryString?.replacingOccurrences(
+                of: "e([0-9])",
+                with: "e+$1",
+                options: .regularExpression
+            )
             queryParams.append("doubleQuery", String(doubleQuery))
         }
         // Header options
@@ -2002,7 +2020,10 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
-            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
+                self.options.logger.error("Failed to construct String for byteQuery")
+                return
+            }
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2188,7 +2209,10 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
-            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
+            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
+                self.options.logger.error("Failed to construct String for byteQuery")
+                return
+            }
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2374,7 +2398,9 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let dateQuery = options?.dateQuery {
-            let dateQueryString = DateFormatter().string(from: dateQuery)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateQueryString = dateFormatter.string(from: dateQuery)
             queryParams.append("dateQuery", dateQueryString)
         }
         // Header options

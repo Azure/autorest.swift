@@ -795,7 +795,6 @@ public final class Header {
         numberFormatter.maximumSignificantDigits = 8
         var valueString = numberFormatter.string(from: value as NSNumber)
         valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
-
         // Construct URL
         let urlTemplate = "/header/param/prim/float"
         let pathParams = [
@@ -986,7 +985,6 @@ public final class Header {
         numberFormatter.maximumSignificantDigits = 8
         var valueString = numberFormatter.string(from: value as NSNumber)
         valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
-
         // Construct URL
         let urlTemplate = "/header/param/prim/double"
         let pathParams = [
@@ -1545,10 +1543,7 @@ public final class Header {
         withOptions options: ParamDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let valueString = dateFormatter.string(from: value)
-
+        let valueString = DateFormatter().string(from: value)
         // Construct URL
         let urlTemplate = "/header/param/prim/date"
         let pathParams = [
@@ -1735,7 +1730,6 @@ public final class Header {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let valueString = Date.Format.iso8601.formatter.string(from: value)
-
         // Construct URL
         let urlTemplate = "/header/param/prim/datetime"
         let pathParams = [
@@ -2295,11 +2289,7 @@ public final class Header {
         withOptions options: ParamByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        guard let valueString = String(bytes: value, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for value")
-            return
-        }
-
+        let valueString = String(bytes: value, encoding: .utf8)
         // Construct URL
         let urlTemplate = "/header/param/prim/byte"
         let pathParams = [
