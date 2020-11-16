@@ -155,6 +155,62 @@ enum ParameterType: Codable {
     internal func belongsInOptions() -> Bool {
         return common.belongsInOptions()
     }
+
+    /**
+     Convert the type into String format in Swift
+     */
+    public func formatValue(value: String) -> String {
+        let type = schema.type
+        switch type {
+        case .integer,
+             .boolean,
+             .number:
+            return "String(\(value))"
+        // For these types, a variable will be created in the method using the naming convention `{key|value}String`
+        case .date,
+             .unixTime,
+             .dateTime,
+             .byteArray:
+            return "\(value)String"
+        case .choice,
+             .sealedChoice:
+            return "\(value).rawValue"
+        case .array:
+            return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+        case .duration:
+            return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
+        default:
+            return "\(value)"
+        }
+    }
+
+    var keyValueDecodeStrategy: KeyValueDecodeStrategy {
+        let type = schema.type
+        // if parameter is from method signature (not from option) and type is date or byteArray,
+        // add decoding logic to string in the method and specify the right decoding strategy
+        switch type {
+        case .date,
+             .unixTime:
+            return .date
+        case .dateTime:
+            return .dateTime
+        case .byteArray:
+            if let byteArraySchema = schema as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                return .base64ByteArray
+            } else {
+                return .byteArray
+            }
+        case .number:
+            if let numberSchema = schema as? NumberSchema {
+                return (numberSchema.swiftType() == "Decimal") ? .decimal : .number
+            } else {
+                return .number
+            }
+        default:
+            return .default
+        }
+    }
 }
 
 extension ParameterType: Equatable {
