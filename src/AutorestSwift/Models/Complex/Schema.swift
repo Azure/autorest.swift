@@ -125,7 +125,7 @@ class Schema: Codable, LanguageShortcut {
             }
             swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.duration:
-            swiftType = "TimeInterval"
+            swiftType = "DateInterval"
         default:
             fatalError("Type \(type) not implemented")
         }
