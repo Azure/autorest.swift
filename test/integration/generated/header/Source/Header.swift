@@ -2107,7 +2107,7 @@ public final class Header {
     ///     success.
     public func paramDuration(
         scenario: String,
-        value: DateInterval,
+        value: DateComponents,
         withOptions options: ParamDurationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
