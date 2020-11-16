@@ -94,9 +94,7 @@ struct KeyValueViewModel: Comparable {
         self.needDecodingInMethod = signatureParameter.required
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = signatureParameter.formatValue(
-            value: signatureParameter.name
-        )
+        self.value = signatureParameter.formatValue()
         self.strategy = signatureParameter.keyValueDecodeStrategy.rawValue
     }
 
@@ -107,19 +105,18 @@ struct KeyValueViewModel: Comparable {
         self.key = name
         self.strategy = KeyValueDecodeStrategy.default.rawValue
 
-        self.value = constantSchema.formatValue(isSkipUrlEncoding: param.value.isSkipUrlEncoding)
+        self.value = constantSchema.formatValue(skipUrlEncoding: param.value.isSkipUrlEncoding)
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
-        let key = bodyParamName ?? bodySignatureParameter.name
         self.path = bodySignatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !bodySignatureParameter.required
         var needDecodingInMethod = bodySignatureParameter.required
         let type = bodySignatureParameter.schema.type
 
         // value is referring a signature parameter, no need to wrap as String
-        self.value = bodyParamName ?? bodySignatureParameter.formatValue(value: key)
-        self.key = key
+        self.value = bodyParamName ?? bodySignatureParameter.formatValue(bodyParamName)
+        self.key = bodyParamName ?? bodySignatureParameter.name
         if type == .date || type == .byteArray || type == .unixTime {
             needDecodingInMethod = bodySignatureParameter.paramLocation == .body ? false : needDecodingInMethod
         }

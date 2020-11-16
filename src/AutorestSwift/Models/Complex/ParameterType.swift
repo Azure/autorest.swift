@@ -152,12 +152,12 @@ enum ParameterType: Codable {
         return common.belongsInOptions()
     }
 
-    /**
-     Convert the type into String format in Swift
-     */
-    public func formatValue(value: String) -> String {
-        let type = schema.type
-        switch type {
+    /// Convert the type into String format in Swift
+    /// - Parameter value: Value of the swift string
+    /// - Returns: A swift string in generated code
+    public func formatValue(_ valueIn: String? = nil) -> String {
+        let value = valueIn ?? name
+        switch schema.type {
         case .integer,
              .boolean,
              .number:
@@ -181,10 +181,7 @@ enum ParameterType: Codable {
     }
 
     var keyValueDecodeStrategy: KeyValueDecodeStrategy {
-        let type = schema.type
-        // if parameter is from method signature (not from option) and type is date or byteArray,
-        // add decoding logic to string in the method and specify the right decoding strategy
-        switch type {
+        switch schema.type {
         case .date,
              .unixTime:
             return .date
