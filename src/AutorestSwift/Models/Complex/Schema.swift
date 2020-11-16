@@ -124,6 +124,8 @@ class Schema: Codable, LanguageShortcut {
                 fatalError("Type mismatch. Expected constant type but got \(self)")
             }
             swiftType = constant.valueType.swiftType()
+        case AllSchemaTypes.duration:
+            swiftType = "DateComponents"
         default:
             fatalError("Type \(type) not implemented")
         }

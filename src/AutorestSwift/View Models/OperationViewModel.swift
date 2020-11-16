@@ -66,7 +66,7 @@ struct OperationParameters {
             }
         }
 
-        let allParams = query.required + path + body
+        let allParams = query.required + path + body + header.required
         for param in allParams where param.needDecodingInMethod {
             methodDecoding.append(param)
         }

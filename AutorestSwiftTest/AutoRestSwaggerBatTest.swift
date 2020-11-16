@@ -281,7 +281,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         client.enumOperation.put(notExpandable: Colors.redColor) { result, httpResponse in
             switch result {
-            case let .success:
+            case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
