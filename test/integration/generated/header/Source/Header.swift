@@ -1543,7 +1543,9 @@ public final class Header {
         withOptions options: ParamDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let valueString = DateFormatter().string(from: value)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let valueString = dateFormatter.string(from: value)
         // Construct URL
         let urlTemplate = "/header/param/prim/date"
         let pathParams = [
@@ -2289,7 +2291,10 @@ public final class Header {
         withOptions options: ParamByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let valueString = String(bytes: value, encoding: .utf8)
+        guard let valueString = String(bytes: value, encoding: .utf8) else {
+            self.options.logger.error("Failed to construct String for value")
+            return
+        }
         // Construct URL
         let urlTemplate = "/header/param/prim/byte"
         let pathParams = [
