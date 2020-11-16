@@ -50,7 +50,11 @@ extension LanguageShortcut {
         }
     }
 
+<<<<<<< HEAD
     var swiftVariableName: String {
+=======
+    var variableName: String {
+>>>>>>> master
         return name.lowercasedFirst
     }
 

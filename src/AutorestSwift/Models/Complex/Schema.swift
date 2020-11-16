@@ -98,7 +98,7 @@ class Schema: Codable, LanguageShortcut {
                     swiftType = "[\(arraySchema.elementType.name)]"
                 }
             } else {
-                swiftType = "[\(swiftName)]"
+                swiftType = "[\(modelName)]"
             }
         case AllSchemaTypes.dateTime,
              AllSchemaTypes.date,
@@ -112,12 +112,12 @@ class Schema: Codable, LanguageShortcut {
              AllSchemaTypes.object,
              AllSchemaTypes.sealedChoice,
              AllSchemaTypes.group:
-            swiftType = swiftName
+            swiftType = modelName
         case AllSchemaTypes.dictionary:
             if let dictionarySchema = self as? DictionarySchema {
                 swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
             } else {
-                swiftType = "[String:\(swiftName)]"
+                swiftType = "[String:\(modelName)]"
             }
         case AllSchemaTypes.constant:
             guard let constant = self as? ConstantSchema else {
@@ -125,7 +125,7 @@ class Schema: Codable, LanguageShortcut {
             }
             swiftType = constant.valueType.swiftType()
         case AllSchemaTypes.duration:
-            swiftType = "TimeInterval"
+            swiftType = "DateComponents"
         default:
             fatalError("Type \(type) not implemented")
         }
@@ -133,7 +133,7 @@ class Schema: Codable, LanguageShortcut {
         return optional ? "\(swiftType)?" : swiftType
     }
 
-    var swiftName: String {
+    var modelName: String {
         return name.isReserved ? name + "Type" : name
     }
 

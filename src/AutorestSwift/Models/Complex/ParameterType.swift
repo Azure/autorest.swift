@@ -57,8 +57,8 @@ enum ParameterType: Codable {
         return common.name
     }
 
-    var swiftVariableName: String {
-        return common.swiftVariableName
+    var variableName: String {
+        return common.variableName
     }
 
     var schema: Schema {
@@ -154,6 +154,59 @@ enum ParameterType: Codable {
 
     internal func belongsInOptions() -> Bool {
         return common.belongsInOptions()
+    }
+
+    /// Convert the type into String format in Swift
+    /// - Parameter value: Value of the swift string
+    /// - Returns: A swift string in generated code
+    public func formatValue(_ valueIn: String? = nil) -> String {
+        let value = valueIn ?? name
+        switch schema.type {
+        case .integer,
+             .boolean,
+             .number:
+            return "String(\(value))"
+        // For these types, a variable will be created in the method using the naming convention `{key|value}String`
+        case .date,
+             .unixTime,
+             .dateTime,
+             .byteArray:
+            return "\(value)String"
+        case .choice,
+             .sealedChoice:
+            return "\(value).rawValue"
+        case .array:
+            return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+        case .duration:
+            return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
+        default:
+            return "\(value)"
+        }
+    }
+
+    var keyValueDecodeStrategy: KeyValueDecodeStrategy {
+        switch schema.type {
+        case .date,
+             .unixTime:
+            return .date
+        case .dateTime:
+            return .dateTime
+        case .byteArray:
+            if let byteArraySchema = schema as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                return .base64ByteArray
+            } else {
+                return .byteArray
+            }
+        case .number:
+            if let numberSchema = schema as? NumberSchema {
+                return (numberSchema.swiftType() == "Decimal") ? .decimal : .number
+            } else {
+                return .number
+            }
+        default:
+            return .default
+        }
     }
 }
 
