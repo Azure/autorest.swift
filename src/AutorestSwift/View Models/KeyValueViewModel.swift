@@ -70,7 +70,7 @@ struct KeyValueViewModel: Comparable {
         } else if let groupedBy = param.groupedBy?.name {
             self.init(key: param.name, value: "\(groupedBy).\(param.name)")
         } else if param.implementation == .client {
-            let name = param.swiftVariableName
+            let name = param.variableName
             self.init(
                 key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
