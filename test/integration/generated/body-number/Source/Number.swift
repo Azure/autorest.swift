@@ -16,15 +16,15 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class Paths {
-    public let client: AutoRestUrlTestClient
+public final class Number {
+    public let client: AutoRestNumberTestClient
 
     public let commonOptions: ClientOptions
 
-    /// Options provided to configure this `AutoRestUrlTestClient`.
-    public let options: AutoRestUrlTestClientOptions
+    /// Options provided to configure this `AutoRestNumberTestClient`.
+    public let options: AutoRestNumberTestClientOptions
 
-    init(client: AutoRestUrlTestClient) {
+    init(client: AutoRestNumberTestClient) {
         self.client = client
         self.options = client.options
         self.commonOptions = client.commonOptions
@@ -47,1372 +47,19 @@ public final class Paths {
         return client.request(request, context: context, completionHandler: completionHandler)
     }
 
-    /// Get true Boolean value on path
+    /// Get null Number value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanTrue(
-        withOptions options: GetBooleanTrueOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getNull(
+        withOptions options: GetNullOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Float?>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/bool/true/{boolPath}"
+        let urlTemplate = "/number/null"
         let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "boolPath": String(true)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get false Boolean value on path
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getBooleanFalse(
-        withOptions options: GetBooleanFalseOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/bool/false/{boolPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "boolPath": String(false)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '1000000' integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getIntOneMillion(
-        withOptions options: GetIntOneMillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/int/1000000/{intPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "intPath": String(1_000_000)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '-1000000' integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getIntNegativeOneMillion(
-        withOptions options: GetIntNegativeOneMillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/int/-1000000/{intPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "intPath": String(-1_000_000)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '10000000000' 64 bit integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getTenBillion(
-        withOptions options: GetTenBillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/long/10000000000/{longPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "longPath": String(10_000_000_000)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '-10000000000' 64 bit integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getNegativeTenBillion(
-        withOptions options: GetNegativeTenBillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/long/-10000000000/{longPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "longPath": String(-10_000_000_000)
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '1.034E+20' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func floatScientificPositive(
-        withOptions options: FloatScientificPositiveOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "floatPath": String(Float(103_400_000_000_000_000_000))
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '-1.034E-20' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func floatScientificNegative(
-        withOptions options: FloatScientificNegativeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "floatPath": String(Float(-1.034e-20))
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '9999999.999' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func doubleDecimalPositive(
-        withOptions options: DoubleDecimalPositiveOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/double/9999999.999/{doublePath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "doublePath": String(Double(9_999_999.999))
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '-9999999.999' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func doubleDecimalNegative(
-        withOptions options: DoubleDecimalNegativeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "doublePath": String(Double(-9_999_999.999))
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringUnicode(
-        withOptions options: StringUnicodeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/unicode/{stringPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "stringPath": "啊齄丂狛狜隣郎隣兀﨩"
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get 'begin!*'();:@ &=+$,/?#[]end
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringUrlEncoded(
-        withOptions options: StringUrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "stringPath": "begin!*'();:@ &=+$,/?#[]end"
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringUrlNonEncoded(
-        withOptions options: StringUrlNonEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "stringPath": "begin!*'();:@&=+$,end".removingPercentEncoding ?? ""
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get ''
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringEmpty(
-        withOptions options: StringEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/empty/{stringPath}"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "stringPath": ""
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get null (should throw)
-    /// - Parameters:
-    ///    - stringPath : null string value
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringNull(
-        stringPath: String,
-        withOptions options: StringNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/null/{stringPath}"
-        let pathParams = [
-            "stringPath": stringPath,
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    400
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get using uri with 'green color' in path parameter
-    /// - Parameters:
-    ///    - enumPath : send the value green
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func enumValid(
-        enumPath: UriColor,
-        withOptions options: EnumValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/paths/enum/green%20color/{enumPath}"
-        let pathParams = [
-            "enumPath": enumPath.rawValue,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -1466,11 +113,23 @@ public final class Paths {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Float.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1489,21 +148,19 @@ public final class Paths {
         }
     }
 
-    /// Get null (should throw on the client before the request is sent on wire)
+    /// Get invalid float Number value
     /// - Parameters:
-    ///    - enumPath : send null should throw
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func enumNull(
-        enumPath: UriColor,
-        withOptions options: EnumNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getInvalidFloat(
+        withOptions options: GetInvalidFloatOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Float>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/string/null/{enumPath}"
+        let urlTemplate = "/number/invalidfloat"
         let pathParams = [
-            "enumPath": enumPath.rawValue,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -1531,7 +188,7 @@ public final class Paths {
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
@@ -1555,13 +212,18 @@ public final class Paths {
                     return
                 }
                 if [
-                    400
+                    200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Float.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1580,26 +242,19 @@ public final class Paths {
         }
     }
 
-    /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+    /// Get invalid double Number value
     /// - Parameters:
-    ///    - bytePath : '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func byteMultiByte(
-        bytePath: Data,
-        withOptions options: ByteMultiByteOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getInvalidDouble(
+        withOptions options: GetInvalidDoubleOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for bytePath")
-            return
-        }
-
         // Construct URL
-        let urlTemplate = "/paths/byte/multibyte/{bytePath}"
+        let urlTemplate = "/number/invaliddouble"
         let pathParams = [
-            "bytePath": bytePathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -1622,6 +277,206 @@ public final class Paths {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get invalid decimal Number value
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func getInvalidDecimal(
+        withOptions options: GetInvalidDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Decimal>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/invaliddecimal"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Decimal.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put big float value 3.402823e+20
+    /// - Parameters:
+    ///    - bigFloat : number body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        bigFloat: Float,
+        withOptions options: PutBigFloatOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var bigFloatString = numberFormatter.string(from: bigFloat as NSNumber)
+        bigFloatString = bigFloatString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
+
+        // Construct URL
+        let urlTemplate = "/number/big/float/3.402823e+20"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = bigFloatString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1676,21 +531,20 @@ public final class Paths {
         }
     }
 
-    /// Get '' as byte array
+    /// Get big float value 3.402823e+20
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func byteEmpty(
-        withOptions options: ByteEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigFloat(
+        withOptions options: GetBigFloatOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Float>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/byte/empty/{bytePath}"
+        let urlTemplate = "/number/big/float/3.402823e+20"
         let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "bytePath": ""
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1712,6 +566,116 @@ public final class Paths {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Float.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put big double value 2.5976931e+101
+    /// - Parameters:
+    ///    - bigDouble : number body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        bigDouble: Double,
+        withOptions options: PutBigDoubleOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var bigDoubleString = numberFormatter.string(from: bigDouble as NSNumber)
+        bigDoubleString = bigDoubleString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
+
+        // Construct URL
+        let urlTemplate = "/number/big/double/2.5976931e+101"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = bigDoubleString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1766,26 +730,19 @@ public final class Paths {
         }
     }
 
-    /// Get null as byte array (should throw)
+    /// Get big double value 2.5976931e+101
     /// - Parameters:
-    ///    - bytePath : null as byte array (should throw)
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func byteNull(
-        bytePath: Data,
-        withOptions options: ByteNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigDouble(
+        withOptions options: GetBigDoubleOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        guard let bytePathString = String(bytes: bytePath, encoding: .utf8) else {
-            self.options.logger.error("Failed to construct String for bytePath")
-            return
-        }
-
         // Construct URL
-        let urlTemplate = "/paths/byte/null/{bytePath}"
+        let urlTemplate = "/number/big/double/2.5976931e+101"
         let pathParams = [
-            "bytePath": bytePathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -1813,7 +770,7 @@ public final class Paths {
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
@@ -1837,13 +794,18 @@ public final class Paths {
                     return
                 }
                 if [
-                    400
+                    200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1862,21 +824,20 @@ public final class Paths {
         }
     }
 
-    /// Get '2012-01-01' as date
+    /// Put big double value 99999999.99
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateValid(
-        withOptions options: DateValidOptions? = nil,
+    public func putBigDoublePositiveDecimal(
+        withOptions options: PutBigDoublePositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/date/2012-01-01/{datePath}"
+        let urlTemplate = "/number/big/double/99999999.99"
         let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "datePath": "2012-01-01"
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -1884,8 +845,13 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(String(Double(99_999_999.99))) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1896,8 +862,8 @@ public final class Paths {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1952,25 +918,19 @@ public final class Paths {
         }
     }
 
-    /// Get null as date - this should throw or be unusable on the client side, depending on date representation
+    /// Get big double value 99999999.99
     /// - Parameters:
-    ///    - datePath : null as date (should throw)
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateNull(
-        datePath: Date,
-        withOptions options: DateNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigDoublePositiveDecimal(
+        withOptions options: GetBigDoublePositiveDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let datePathString = dateFormatter.string(from: datePath)
-
         // Construct URL
-        let urlTemplate = "/paths/date/null/{datePath}"
+        let urlTemplate = "/number/big/double/99999999.99"
         let pathParams = [
-            "datePath": datePathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -1998,7 +958,7 @@ public final class Paths {
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
@@ -2022,13 +982,18 @@ public final class Paths {
                     return
                 }
                 if [
-                    400
+                    200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -2047,21 +1012,20 @@ public final class Paths {
         }
     }
 
-    /// Get '2012-01-01T01:01:01Z' as date-time
+    /// Put big double value -99999999.99
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateTimeValid(
-        withOptions options: DateTimeValidOptions? = nil,
+    public func putBigDoubleNegativeDecimal(
+        withOptions options: PutBigDoubleNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
+        let urlTemplate = "/number/big/double/-99999999.99"
         let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "dateTimePath": "2012-01-01T01:01:01Z"
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -2069,8 +1033,13 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(String(Double(-99_999_999.99))) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -2081,8 +1050,8 @@ public final class Paths {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2137,23 +1106,19 @@ public final class Paths {
         }
     }
 
-    /// Get null as date-time, should be disallowed or throw depending on representation of date-time
+    /// Get big double value -99999999.99
     /// - Parameters:
-    ///    - dateTimePath : null as date-time
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateTimeNull(
-        dateTimePath: Date,
-        withOptions options: DateTimeNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigDoubleNegativeDecimal(
+        withOptions options: GetBigDoubleNegativeDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
-
         // Construct URL
-        let urlTemplate = "/paths/datetime/null/{dateTimePath}"
+        let urlTemplate = "/number/big/double/-99999999.99"
         let pathParams = [
-            "dateTimePath": dateTimePathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -2181,7 +1146,7 @@ public final class Paths {
 
         // Send request
         let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
         context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
@@ -2205,13 +1170,18 @@ public final class Paths {
                     return
                 }
                 if [
-                    400
+                    200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -2230,23 +1200,30 @@ public final class Paths {
         }
     }
 
-    /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+    /// Put big decimal value 2.5976931e+101
     /// - Parameters:
-    ///    - base64UrlPath : base64url encoded value
+    ///    - bigDecimal : number body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func base64Url(
-        base64UrlPath: Data,
-        withOptions options: Base64UrlOptions? = nil,
+    public func put(
+        bigDecimal: Decimal,
+        withOptions options: PutBigDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let base64UrlPathString = base64UrlPath.base64URLEncodedString()
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var bigDecimalString = numberFormatter.string(from: bigDecimal as NSDecimalNumber)
+        bigDecimalString = bigDecimalString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
 
         // Construct URL
-        let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
+        let urlTemplate = "/number/big/decimal/2.5976931e+101"
         let pathParams = [
-            "base64UrlPath": base64UrlPathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -2255,8 +1232,13 @@ public final class Paths {
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = bigDecimalString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -2267,8 +1249,8 @@ public final class Paths {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2323,22 +1305,19 @@ public final class Paths {
         }
     }
 
-    /// Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
+    /// Get big decimal value 2.5976931e+101
     /// - Parameters:
-    ///    - arrayPath : an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func arrayCsvInPath(
-        arrayPath: [String],
-        withOptions options: ArrayCsvInPathOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigDecimal(
+        withOptions options: GetBigDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
         // Construct URL
-        let urlTemplate =
-            "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
+        let urlTemplate = "/number/big/decimal/2.5976931e+101"
         let pathParams = [
-            "arrayPath": arrayPath.map { String($0) }.joined(separator: ","),
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -2361,6 +1340,105 @@ public final class Paths {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Decimal.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put big decimal value 99999999.99
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func putBigDecimalPositiveDecimal(
+        withOptions options: PutBigDecimalPositiveDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/big/decimal/99999999.99"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = try? JSONEncoder().encode(Decimal(99_999_999.99)) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2415,25 +1493,19 @@ public final class Paths {
         }
     }
 
-    /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+    /// Get big decimal value 99999999.99
     /// - Parameters:
-    ///    - unixTimeUrlPath : Unix time encoded value
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func unixTimeUrl(
-        unixTimeUrlPath: Date,
-        withOptions options: UnixTimeUrlOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getBigDecimalPositiveDecimal(
+        withOptions options: GetBigDecimalPositiveDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let unixTimeUrlPathString = dateFormatter.string(from: unixTimeUrlPath)
-
         // Construct URL
-        let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
+        let urlTemplate = "/number/big/decimal/99999999.99"
         let pathParams = [
-            "unixTimeUrlPath": unixTimeUrlPathString,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -2487,11 +1559,801 @@ public final class Paths {
                 if [
                     200
                 ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Decimal.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put big decimal value -99999999.99
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func putBigDecimalNegativeDecimal(
+        withOptions options: PutBigDecimalNegativeDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/big/decimal/-99999999.99"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = try? JSONEncoder().encode(Decimal(-99_999_999.99)) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
                     dispatchQueue.async {
                         completionHandler(
                             .success(()),
                             httpResponse
                         )
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get big decimal value -99999999.99
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func getBigDecimalNegativeDecimal(
+        withOptions options: GetBigDecimalNegativeDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Decimal>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/big/decimal/-99999999.99"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Decimal.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put small float value 3.402823e-20
+    /// - Parameters:
+    ///    - smallFloat : number body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        smallFloat: Float,
+        withOptions options: PutSmallFloatOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var smallFloatString = numberFormatter.string(from: smallFloat as NSNumber)
+        smallFloatString = smallFloatString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
+
+        // Construct URL
+        let urlTemplate = "/number/small/float/3.402823e-20"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = smallFloatString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get big double value 3.402823e-20
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func getSmallFloat(
+        withOptions options: GetSmallFloatOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/small/float/3.402823e-20"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put small double value 2.5976931e-101
+    /// - Parameters:
+    ///    - smallDouble : number body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        smallDouble: Double,
+        withOptions options: PutSmallDoubleOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var smallDoubleString = numberFormatter.string(from: smallDouble as NSNumber)
+        smallDoubleString = smallDoubleString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
+
+        // Construct URL
+        let urlTemplate = "/number/small/double/2.5976931e-101"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = smallDoubleString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get big double value 2.5976931e-101
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func getSmallDouble(
+        withOptions options: GetSmallDoubleOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Double>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/small/double/2.5976931e-101"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Double.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put small decimal value 2.5976931e-101
+    /// - Parameters:
+    ///    - smallDecimal : number body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        smallDecimal: Decimal,
+        withOptions options: PutSmallDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .scientific
+        numberFormatter.maximumSignificantDigits = 8
+        var smallDecimalString = numberFormatter.string(from: smallDecimal as NSDecimalNumber)
+        smallDecimalString = smallDecimalString?.replacingOccurrences(
+            of: "e([0-9])",
+            with: "e+$1",
+            options: .regularExpression
+        )
+
+        // Construct URL
+        let urlTemplate = "/number/small/decimal/2.5976931e-101"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = smallDecimalString?.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    dispatchQueue.async {
+                        completionHandler(
+                            .success(()),
+                            httpResponse
+                        )
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get small decimal value 2.5976931e-101
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func getSmallDecimal(
+        withOptions options: GetSmallDecimalOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Decimal>
+    ) {
+        // Construct URL
+        let urlTemplate = "/number/small/decimal/2.5976931e-101"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Decimal.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:

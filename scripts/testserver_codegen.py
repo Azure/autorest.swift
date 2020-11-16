@@ -25,7 +25,8 @@ working_files = [
     "model-flattening",
     "custom-baseUrl",
     "body-string",
-    "body-byte"
+    "body-byte",
+    "body-number"
 ]
 
 def get_all_files():

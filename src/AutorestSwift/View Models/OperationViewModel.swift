@@ -40,29 +40,33 @@ struct OperationParameters {
         var header = Params()
         var query = Params()
         var path = [KeyValueViewModel]()
+        var body = [KeyValueViewModel]()
         var methodDecoding = [KeyValueViewModel]()
 
         for param in parameters {
-            guard let httpParam = param.protocol.http as? HttpParameter else { continue }
+            guard let paramLocation = param.paramLocation else { continue }
             let viewModel = KeyValueViewModel(from: param, with: operation)
 
-            switch httpParam.in {
+            switch paramLocation {
             case .query:
                 viewModel.optional ? query.optional.append(viewModel) : query.required
                     .append(viewModel)
             case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
-            case .path:
+            case .path,
+                 .uri:
                 path.append(viewModel)
-            case .uri:
-                path.append(viewModel)
+            case .body:
+                if param.required {
+                    body.append(viewModel)
+                }
             default:
                 continue
             }
         }
 
-        let allParams = query.required + path
+        let allParams = query.required + path + body
         for param in allParams where param.needDecodingInMethod {
             methodDecoding.append(param)
         }
@@ -79,9 +83,15 @@ struct OperationParameters {
         header.declaration = header.isEmpty ? "let" : "var"
 
         // Set the body param, if applicable
-        if let bodyParam = operation.request?.bodyParam {
-            let bodyParamName = operation.request?.bodyParamName(for: operation)
-
+        var bodyParamName: String?
+        assert(body.count <= 1, "Expected, at most, one body parameter.")
+        if body.count > 0 {
+            bodyParamName = body.first?.value
+        } else {
+            bodyParamName = operation.request?.bodyParamName(for: operation)
+        }
+        if let bodyParam = operation.request?.bodyParam,
+            bodyParamName != nil {
             self.body = BodyParams(
                 from: bodyParam,
                 withName: bodyParamName!,
@@ -129,6 +139,8 @@ enum BodyParamStrategy: String {
     case unixTime
     case plainNullable
     case byteArray
+    case constant
+    case number
 }
 
 struct BodyParams {
@@ -164,6 +176,10 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
+        } else if param.schema.type == .number {
+            strategy = .number
+        } else if param.schema is ConstantSchema {
+            strategy = .constant
         } else {
             strategy = .plain
         }
@@ -275,7 +291,8 @@ struct OperationViewModel {
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
-            if !bodyParam.flattened {
+            if !bodyParam.flattened,
+                bodyParam.strategy != BodyParamStrategy.constant.rawValue {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }

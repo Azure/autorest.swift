@@ -29,7 +29,8 @@ let package = Package(
         .package(name: "AutoRestResourceFlatteningTest", path: "./test/integration/generated/model-flattening/"),
         .package(name: "AutoRestParameterizedHostTest", path: "./test/integration/generated/custom-baseUrl/"),
         .package(name: "AutoRestSwaggerBat", path: "./test/integration/generated/body-string/"),
-        .package(name: "AutoRestSwaggerBatByte", path: "./test/integration/generated/body-byte/")
+        .package(name: "AutoRestSwaggerBatByte", path: "./test/integration/generated/body-byte/"),
+        .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -56,7 +57,8 @@ let package = Package(
             "AutoRestResourceFlatteningTest",
             "AutoRestParameterizedHostTest",
             "AutoRestSwaggerBat",
-            "AutoRestSwaggerBatByte"],
+            "AutoRestSwaggerBatByte",
+            "AutoRestNumberTest"],
             path: "AutorestSwiftTest"
         )
     ],

@@ -96,7 +96,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
     func test_string_putEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putEmpty")
 
-        client.stringOperation.put(empty: "") { result, httpResponse in
+        client.stringOperation.putEmpty { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -131,17 +131,16 @@ class AutoRestSwaggerBatTest: XCTestCase {
     func test_string_putMbcs_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putMbcs")
 
-        client.stringOperation
-            .put(mbcs: "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€") { result, httpResponse in
-                switch result {
-                case .success:
-                    XCTAssertEqual(httpResponse?.statusCode, 200)
-                case let .failure(error):
-                    let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call stringOperation.putMbcs failed error=\(details)")
-                }
-                expectation.fulfill()
+        client.stringOperation.putMbcs { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.putMbcs failed error=\(details)")
             }
+            expectation.fulfill()
+        }
 
         wait(for: [expectation], timeout: 5.0)
     }
@@ -170,17 +169,16 @@ class AutoRestSwaggerBatTest: XCTestCase {
     func test_string_putWhitespace_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putWhitespace")
 
-        client.stringOperation
-            .put(whitespace: "    Now is the time for all good men to come to the aid of their country    ") { result, httpResponse in
-                switch result {
-                case .success:
-                    XCTAssertEqual(httpResponse?.statusCode, 200)
-                case let .failure(error):
-                    let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call stringOperation.putWhitespace failed error=\(details)")
-                }
-                expectation.fulfill()
+        client.stringOperation.putWhitespace { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call stringOperation.putWhitespace failed error=\(details)")
             }
+            expectation.fulfill()
+        }
 
         wait(for: [expectation], timeout: 5.0)
     }
@@ -283,7 +281,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         client.enumOperation.put(notExpandable: Colors.redColor) { result, httpResponse in
             switch result {
-            case let .success(data):
+            case let .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -318,7 +316,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
         client.enumOperation.put(referenced: Colors.redColor) { result, httpResponse in
             switch result {
-            case let .success(data):
+            case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -354,7 +352,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
         client.enumOperation
             .put(referencedConstant: RefColorConstant()) { result, httpResponse in
                 switch result {
-                case let .success(data):
+                case .success:
                     XCTAssertEqual(httpResponse?.statusCode, 200)
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)

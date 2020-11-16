@@ -70,7 +70,7 @@ class XmsErrorResponseExtensionsTest: XCTestCase {
         client.petOperation.getPetById(petId: "django") { result, httpResponse in
             switch result {
             case let .success(data):
-                if (data as? Pet) != nil {
+                if data != nil {
                     XCTFail("Call getPetById with django failed")
                 } else {
                     XCTAssertEqual(httpResponse?.statusCode, 202)

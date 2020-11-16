@@ -341,12 +341,11 @@ public final class StringOperation {
 
     /// Set string value empty ''
     /// - Parameters:
-    ///    - empty : string body
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        empty: String,
+    public func putEmpty(
         withOptions options: PutEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -364,7 +363,7 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(empty) else {
+        guard let requestBody = try? JSONEncoder().encode("") else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -529,12 +528,11 @@ public final class StringOperation {
 
     /// Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
     /// - Parameters:
-    ///    - mbcs : string body
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        mbcs: String,
+    public func putMbcs(
         withOptions options: PutMbcsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -552,7 +550,8 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(mbcs) else {
+        guard let requestBody = try? JSONEncoder()
+            .encode("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€") else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -717,12 +716,11 @@ public final class StringOperation {
 
     /// Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
     /// - Parameters:
-    ///    - whitespace : string body
+
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func put(
-        whitespace: String,
+    public func putWhitespace(
         withOptions options: PutWhitespaceOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -740,7 +738,8 @@ public final class StringOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(whitespace) else {
+        guard let requestBody = try? JSONEncoder()
+            .encode("    Now is the time for all good men to come to the aid of their country    ") else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
