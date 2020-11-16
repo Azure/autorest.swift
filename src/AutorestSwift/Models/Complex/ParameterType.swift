@@ -57,6 +57,10 @@ enum ParameterType: Codable {
         return common.name
     }
 
+    var variableName: String {
+        return common.variableName
+    }
+
     var schema: Schema {
         return common.schema!
     }
@@ -224,14 +228,7 @@ extension ParameterType: Equatable {
 
 extension Array where Element == ParameterType {
     func first(named: String) -> Element? {
-        for param in self {
-            let name = param.serializedName ?? param.name
-            if named == name {
-                return param
-            }
-        }
-        // no match found
-        return nil
+        return first { $0.name == named }
     }
 
     /// Returns the subset of `ParameterType` that are `VirtualParameter` types.

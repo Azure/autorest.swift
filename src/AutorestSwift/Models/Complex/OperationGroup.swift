@@ -37,7 +37,7 @@ class OperationGroup: Metadata {
         case key = "$key"
     }
 
-    var swiftName: String {
+    var modelName: String {
         return name.isReserved ? name + "Operation" : name
     }
 

@@ -63,15 +63,14 @@ struct KeyValueViewModel: Comparable {
         - Parameter operation: the operation which this paramter exists.
      */
     init(from param: ParameterType, with operation: Operation) {
-        let name = param.serializedName ?? param.name
-
         if let constantSchema = param.schema as? ConstantSchema {
-            self.init(param: param, constantSchema: constantSchema, name: name)
-        } else if let signatureParameter = operation.signatureParameter(for: name) {
+            self.init(param: param, constantSchema: constantSchema)
+        } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
-            self.init(key: name, value: "\(groupedBy).\(name)")
+            self.init(key: param.name, value: "\(groupedBy).\(param.name)")
         } else if param.implementation == .client {
+            let name = param.variableName
             self.init(
                 key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
@@ -83,12 +82,14 @@ struct KeyValueViewModel: Comparable {
             let bodyParamName = operation.request?.bodyParamName(for: operation)
             self.init(bodySignatureParameter: param, bodyParamName: bodyParamName)
         } else {
-            self.init(key: name, value: "")
+            assertionFailure("Not expected to have the scenario in KeyValue ViewModel")
+            self.init(key: param.name, value: "")
         }
     }
 
     private init(signatureParameter: ParameterType) {
-        self.key = signatureParameter.serializedName ?? signatureParameter.name
+        assert(!(signatureParameter.serializedName?.isEmpty ?? true))
+        self.key = signatureParameter.serializedName ?? ""
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
         self.needDecodingInMethod = signatureParameter.required
@@ -98,11 +99,16 @@ struct KeyValueViewModel: Comparable {
         self.strategy = signatureParameter.keyValueDecodeStrategy.rawValue
     }
 
-    private init(param: ParameterType, constantSchema: ConstantSchema, name: String) {
+    private init(param: ParameterType, constantSchema: ConstantSchema) {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.key = name
+        if param.paramLocation == .header {
+            assert(!(param.serializedName?.isEmpty ?? true))
+            self.key = param.serializedName ?? ""
+        } else {
+            self.key = param.name
+        }
         self.strategy = KeyValueDecodeStrategy.default.rawValue
 
         self.value = constantSchema.formatValue(skipUrlEncoding: param.value.isSkipUrlEncoding)

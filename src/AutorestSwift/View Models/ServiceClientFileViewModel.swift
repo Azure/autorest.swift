@@ -80,7 +80,7 @@ func resolveGlobalParameters(from model: CodeModel) -> ([ParameterViewModel], St
         if globalParameter.name == "$host" {
             host = globalParameter.value.clientDefaultValue
             // `endpoint` and `api-version` have different logic in generated code. Do not add them to the list of global parameters
-        } else if !["endpoint", "api-version"].contains(globalParameter.serializedName) {
+        } else if !["endpoint", "api-version"].contains(globalParameter.name) {
             globalParameters.append(ParameterViewModel(from: globalParameter))
         }
     }
