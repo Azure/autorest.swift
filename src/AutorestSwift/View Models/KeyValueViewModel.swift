@@ -164,6 +164,8 @@ struct KeyValueViewModel: Comparable {
              .dateTime,
              .byteArray:
             return "\(value)String"
+        case .number:
+            return signatureParameter.required ? "\(value)String" : "String(\(value))"
         case .choice,
              .sealedChoice:
             return "\(value).rawValue"
