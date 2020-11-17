@@ -1077,7 +1077,8 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let floatQuery = options?.floatQuery {
-            queryParams.append("floatQuery", String(floatQuery))
+            let floatQueryString = String(describing: floatQuery)
+            queryParams.append("floatQuery", floatQueryString)
         }
         // Header options
         // Construct request
@@ -1352,7 +1353,8 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let doubleQuery = options?.doubleQuery {
-            queryParams.append("doubleQuery", String(doubleQuery))
+            let doubleQueryString = String(describing: doubleQuery)
+            queryParams.append("doubleQuery", doubleQueryString)
         }
         // Header options
         // Construct request
@@ -2002,8 +2004,10 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
-            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
-
+            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
+                self.options.logger.error("Failed to construct String for byteQuery")
+                return
+            }
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2189,8 +2193,10 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let byteQuery = options?.byteQuery {
-            let byteQueryString = String(bytes: byteQuery, encoding: .utf8)
-
+            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
+                self.options.logger.error("Failed to construct String for byteQuery")
+                return
+            }
             queryParams.append("byteQuery", byteQueryString)
         }
         // Header options
@@ -2376,8 +2382,9 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let dateQuery = options?.dateQuery {
-            let dateQueryString = DateFormatter().string(from: dateQuery)
-
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateQueryString = dateFormatter.string(from: dateQuery)
             queryParams.append("dateQuery", dateQueryString)
         }
         // Header options
@@ -2564,7 +2571,6 @@ public final class Queries {
         // Query options
         if let dateTimeQuery = options?.dateTimeQuery {
             let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
-
             queryParams.append("dateTimeQuery", dateTimeQueryString)
         }
         // Header options

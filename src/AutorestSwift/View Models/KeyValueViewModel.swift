@@ -30,10 +30,12 @@ enum KeyValueDecodeStrategy: String {
     case byteArray
     case base64ByteArray
     case date
-    case dateTime
+    case dateTimeIso8601
+    case dateTimeRfc1123
     case `default`
     case decimal
     case number
+    case unixTime
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.

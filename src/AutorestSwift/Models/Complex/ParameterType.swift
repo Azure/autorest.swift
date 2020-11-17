@@ -163,14 +163,14 @@ enum ParameterType: Codable {
         let value = valueIn ?? name
         switch schema.type {
         case .integer,
-             .boolean,
-             .number:
+             .boolean:
             return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
              .unixTime,
              .dateTime,
-             .byteArray:
+             .byteArray,
+             .number:
             return "\(value)String"
         case .choice,
              .sealedChoice:
@@ -186,11 +186,16 @@ enum ParameterType: Codable {
 
     var keyValueDecodeStrategy: KeyValueDecodeStrategy {
         switch schema.type {
-        case .date,
-             .unixTime:
+        case .date:
             return .date
+        case .unixTime:
+            return .unixTime
         case .dateTime:
-            return .dateTime
+            if let dateTimeSchema = schema as? DateTimeSchema,
+                dateTimeSchema.format == .dateTimeRfc1123 {
+                return .dateTimeRfc1123
+            }
+            return .dateTimeIso8601
         case .byteArray:
             if let byteArraySchema = schema as? ByteArraySchema,
                 byteArraySchema.format == .base64url {

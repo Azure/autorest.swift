@@ -1595,7 +1595,6 @@ public final class Paths {
             self.options.logger.error("Failed to construct String for bytePath")
             return
         }
-
         // Construct URL
         let urlTemplate = "/paths/byte/multibyte/{bytePath}"
         let pathParams = [
@@ -1781,7 +1780,6 @@ public final class Paths {
             self.options.logger.error("Failed to construct String for bytePath")
             return
         }
-
         // Construct URL
         let urlTemplate = "/paths/byte/null/{bytePath}"
         let pathParams = [
@@ -1966,7 +1964,6 @@ public final class Paths {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let datePathString = dateFormatter.string(from: datePath)
-
         // Construct URL
         let urlTemplate = "/paths/date/null/{datePath}"
         let pathParams = [
@@ -2149,7 +2146,6 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
-
         // Construct URL
         let urlTemplate = "/paths/datetime/null/{dateTimePath}"
         let pathParams = [
@@ -2242,7 +2238,6 @@ public final class Paths {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let base64UrlPathString = base64UrlPath.base64URLEncodedString()
-
         // Construct URL
         let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
         let pathParams = [
@@ -2426,10 +2421,7 @@ public final class Paths {
         withOptions options: UnixTimeUrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let unixTimeUrlPathString = dateFormatter.string(from: unixTimeUrlPath)
-
+        let unixTimeUrlPathString = String(Int(unixTimeUrlPath.timeIntervalSince1970))
         // Construct URL
         let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
         let pathParams = [

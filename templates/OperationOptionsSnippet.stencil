@@ -2,14 +2,14 @@
 // Query options
 {% for param in op.params.query.optional %}
 if let {{ param.key }} = {{ param.path }}{{ param.key }} {
-    {% include "OperationOptionsDecodingSnippet.stencil" %}
+    {% include "OperationDecodingSnippet.stencil" %}
     queryParams.append("{{ param.key }}", {{ param.value }})
 }
 {% endfor %}
 // Header options
 {% for param in op.params.header.optional %}
 if let {{ param.key }} = {{ param.path }}{{ param.key }} {
-    {% include "OperationOptionsDecodingSnippet.stencil" %}
+    {% include "OperationDecodingSnippet.stencil" %}
     headers["{{ param.key }}"] = {{ param.value}}
 }
 {% endfor %}

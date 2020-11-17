@@ -59,7 +59,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_byteEmpty__200() throws {
+    func test_Paths_byteEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.byteEmpty")
 
         client.paths.byteEmpty { result, httpResponse in
@@ -75,7 +75,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_byteMultiByte__200() throws {
+    func test_Paths_byteMultiByte_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.byteMultiByte")
 
         guard let bytePath = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
@@ -94,7 +94,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getBooleanTrue__200() throws {
+    func test_Paths_getBooleanTrue_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getBooleanTrue")
 
         client.paths.getBooleanTrue { result, httpResponse in
@@ -111,7 +111,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getBooleanFalse__200() throws {
+    func test_Paths_getBooleanFalse_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getBooleanFalse")
 
         client.paths.getBooleanFalse { result, httpResponse in
@@ -128,7 +128,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_enumValid__200() throws {
+    func test_Paths_enumValid_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.enumValid")
 
         client.paths.enumValid(enumPath: .greenColor) { result, httpResponse in
@@ -145,7 +145,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_dateValid__200() throws {
+    func test_Paths_dateValid_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.dateValid")
 
         client.paths.dateValid { result, httpResponse in
@@ -162,7 +162,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_dateTimeValid__200() throws {
+    func test_Paths_dateTimeValid_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.dateTimeValid succeed")
 
         client.paths.dateTimeValid { result, httpResponse in
@@ -179,7 +179,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getIntOneMillion__200() throws {
+    func test_Paths_getIntOneMillion_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getIntOneMillion succeed")
 
         client.paths.getIntOneMillion { result, httpResponse in
@@ -196,7 +196,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getIntNegativeOneMillion__200() throws {
+    func test_Paths_getIntNegativeOneMillion_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getIntNegativeOneMillion")
 
         client.paths.getIntNegativeOneMillion { result, httpResponse in
@@ -213,7 +213,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getTenBillion__200() throws {
+    func test_Paths_getTenBillion_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getTenBillion")
 
         client.paths.getTenBillion { result, httpResponse in
@@ -230,7 +230,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_getNegativeTenBillion__200() throws {
+    func test_Paths_getNegativeTenBillion_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getNegativeTenBillion")
 
         client.paths.getNegativeTenBillion { result, httpResponse in
@@ -247,7 +247,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_doubleDecimalPositive__200() throws {
+    func test_Paths_doubleDecimalPositive_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.doubleDecimalPositive")
 
         client.paths.doubleDecimalPositive { result, httpResponse in
@@ -264,7 +264,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_doubleDecimalNegative__200() throws {
+    func test_Paths_doubleDecimalNegative_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.doubleDecimalNegative")
 
         client.paths.doubleDecimalNegative { result, httpResponse in
@@ -281,7 +281,24 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_floatScientificNegative__200() throws {
+    func test_Paths_floatScientificPositive_200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.floatScientificPositive")
+
+        client.paths.floatScientificPositive { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.floatScientificPositive failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_floatScientificNegative_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.floatScientificNegative")
 
         client.paths.floatScientificNegative { result, httpResponse in
@@ -298,7 +315,24 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_stringUrlEncoded__200() throws {
+    func test_Paths_stringEmpty_200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.stringEmpty")
+
+        client.paths.stringEmpty { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.stringEmpty failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_stringUrlEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.stringUrlEncoded")
 
         client.paths.stringUrlEncoded { result, httpResponse in
@@ -315,7 +349,24 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_arrayStringCsvValid__200() throws {
+    func test_Paths_stringUnicode_200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.stringUnicode")
+
+        client.paths.stringUnicode { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.stringUnicode failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_arrayStringCsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.arrayStringCsvValid")
 
         client.paths
@@ -333,7 +384,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_base64Url__200() throws {
+    func test_Paths_base64Url_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.base64Url")
 
         client.paths.base64Url(base64UrlPath: Data("lorem".utf8)) { result, httpResponse in
@@ -350,7 +401,7 @@ class AutoRestUrlPathsTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_Paths_stringUrlNonEncoded__200() throws {
+    func test_Paths_stringUrlNonEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.stringUrlNonEncoded")
 
         client.paths.stringUrlNonEncoded { result, httpResponse in
@@ -360,6 +411,28 @@ class AutoRestUrlPathsTest: XCTestCase {
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call paths.getTenBillion failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_Paths_unixTimeUrl_200() throws {
+        let expectation = XCTestExpectation(description: "Call paths.unixTimeUrl")
+
+        guard let date = ISO8601DateFormatter().date(from: "2016-04-13T00:00:00Z") else {
+            XCTFail("Input is not a date")
+            return
+        }
+
+        client.paths.unixTimeUrl(unixTimeUrlPath: date) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call paths.unixTimeUrl failed. error=\(details)")
             }
             expectation.fulfill()
         }
