@@ -27,7 +27,9 @@ working_files = [
     "body-string",
     "body-byte",
     "body-number",
-    "header"
+    "header",
+    "required-optional",
+    "body-array"
 ]
 
 def get_all_files():
@@ -121,9 +123,10 @@ def main(argv):
     global clean
     global debug
     global keepChange
+    inputFile = ''
 
     try:
-        opts, args = getopt.getopt(argv,"acdk", ["all-files", "clean", "debug", "keep-change"])
+        opts, args = getopt.getopt(argv,"acdki:", ["all-files", "clean", "debug", "keep-change", "input-file"])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
@@ -135,8 +138,12 @@ def main(argv):
             debug = True
         elif opt in ("-k", "--keep-change"):
             keepChange = True
+        elif opt in ("-i", "--input-file"):
+            inputFile = argv[1]
 
-    if allFiles:
+    if inputFile != '':
+        generate_and_build_code([inputFile])
+    elif allFiles:
         generate_and_build_code(get_all_files())
     else:
         generate_and_build_code(working_files)

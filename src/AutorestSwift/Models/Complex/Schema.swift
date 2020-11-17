@@ -84,47 +84,45 @@ class Schema: Codable, LanguageShortcut {
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
-        case AllSchemaTypes.string:
+        case .string,
+             .uuid:
             swiftType = "String"
-        case AllSchemaTypes.boolean:
+        case .boolean:
             swiftType = "Bool"
-        case AllSchemaTypes.array:
-            if let arraySchema = self as? ArraySchema {
-                // If array element is String type, return an array of String instead of an array of Element Name and
-                // then create a typealias for the ElementName and String
-                if arraySchema.elementType as? StringSchema != nil {
-                    swiftType = "[String]"
-                } else {
-                    swiftType = "[\(arraySchema.elementType.name)]"
-                }
-            } else {
-                swiftType = "[\(modelName)]"
+        case .array:
+            guard let arraySchema = self as? ArraySchema else {
+                fatalError("Type mismatch. Expected array type but got \(self)")
             }
-        case AllSchemaTypes.dateTime,
-             AllSchemaTypes.date,
-             AllSchemaTypes.unixTime:
+            swiftType = "[\(arraySchema.elementType.swiftType())]"
+        case .number:
+            guard let numberSchema = self as? NumberSchema else {
+                fatalError("Type mismatch. Expected number type but got \(self)")
+            }
+            swiftType = numberSchema.swiftType()
+        case .dateTime,
+             .date,
+             .unixTime:
             swiftType = "Date"
-        case AllSchemaTypes.byteArray:
+        case .byteArray:
             swiftType = "Data"
-        case AllSchemaTypes.integer:
+        case .integer:
             swiftType = "Int"
-        case AllSchemaTypes.choice,
-             AllSchemaTypes.object,
-             AllSchemaTypes.sealedChoice,
-             AllSchemaTypes.group:
+        case .choice,
+             .object,
+             .sealedChoice,
+             .group:
             swiftType = modelName
-        case AllSchemaTypes.dictionary:
-            if let dictionarySchema = self as? DictionarySchema {
-                swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
-            } else {
-                swiftType = "[String:\(modelName)]"
+        case .dictionary:
+            guard let dictionarySchema = self as? DictionarySchema else {
+                fatalError("Type mismatch. Expected dictionary type but got \(self)")
             }
-        case AllSchemaTypes.constant:
+            swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
+        case .constant:
             guard let constant = self as? ConstantSchema else {
                 fatalError("Type mismatch. Expected constant type but got \(self)")
             }
             swiftType = constant.valueType.swiftType()
-        case AllSchemaTypes.duration:
+        case .duration:
             swiftType = "DateComponents"
         default:
             fatalError("Type \(type) not implemented")
