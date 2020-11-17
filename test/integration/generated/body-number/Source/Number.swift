@@ -441,11 +441,7 @@ public final class Number {
         withOptions options: PutBigFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .scientific
-        numberFormatter.maximumSignificantDigits = 8
-        var bigFloatString = numberFormatter.string(from: bigFloat as NSNumber)
-        bigFloatString = bigFloatString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
+        let bigFloatString = String(describing: bigFloat)
         // Construct URL
         let urlTemplate = "/number/big/float/3.402823e+20"
         let pathParams = [
@@ -460,7 +456,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = bigFloatString?.data(using: .utf8) else {
+        guard let requestBody = bigFloatString.data(using: .utf8) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -635,15 +631,7 @@ public final class Number {
         withOptions options: PutBigDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .scientific
-        numberFormatter.maximumSignificantDigits = 8
-        var bigDoubleString = numberFormatter.string(from: bigDouble as NSNumber)
-        bigDoubleString = bigDoubleString?.replacingOccurrences(
-            of: "e([0-9])",
-            with: "e+$1",
-            options: .regularExpression
-        )
+        let bigDoubleString = String(describing: bigDouble)
         // Construct URL
         let urlTemplate = "/number/big/double/2.5976931e+101"
         let pathParams = [
@@ -658,7 +646,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = bigDoubleString?.data(using: .utf8) else {
+        guard let requestBody = bigDoubleString.data(using: .utf8) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1783,15 +1771,7 @@ public final class Number {
         withOptions options: PutSmallFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .scientific
-        numberFormatter.maximumSignificantDigits = 8
-        var smallFloatString = numberFormatter.string(from: smallFloat as NSNumber)
-        smallFloatString = smallFloatString?.replacingOccurrences(
-            of: "e([0-9])",
-            with: "e+$1",
-            options: .regularExpression
-        )
+        let smallFloatString = String(describing: smallFloat)
         // Construct URL
         let urlTemplate = "/number/small/float/3.402823e-20"
         let pathParams = [
@@ -1806,7 +1786,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = smallFloatString?.data(using: .utf8) else {
+        guard let requestBody = smallFloatString.data(using: .utf8) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1981,15 +1961,7 @@ public final class Number {
         withOptions options: PutSmallDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .scientific
-        numberFormatter.maximumSignificantDigits = 8
-        var smallDoubleString = numberFormatter.string(from: smallDouble as NSNumber)
-        smallDoubleString = smallDoubleString?.replacingOccurrences(
-            of: "e([0-9])",
-            with: "e+$1",
-            options: .regularExpression
-        )
+        let smallDoubleString = String(describing: smallDouble)
         // Construct URL
         let urlTemplate = "/number/small/double/2.5976931e-101"
         let pathParams = [
@@ -2004,7 +1976,7 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = smallDoubleString?.data(using: .utf8) else {
+        guard let requestBody = smallDoubleString.data(using: .utf8) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }

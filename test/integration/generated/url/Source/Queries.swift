@@ -1077,16 +1077,8 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let floatQuery = options?.floatQuery {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .scientific
-            numberFormatter.maximumSignificantDigits = 8
-            var floatQueryString = numberFormatter.string(from: floatQuery as NSNumber)
-            floatQueryString = floatQueryString?.replacingOccurrences(
-                of: "e([0-9])",
-                with: "e+$1",
-                options: .regularExpression
-            )
-            queryParams.append("floatQuery", String(floatQuery))
+            let floatQueryString = String(describing: floatQuery)
+            queryParams.append("floatQuery", floatQueryString)
         }
         // Header options
         // Construct request
@@ -1361,16 +1353,8 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let doubleQuery = options?.doubleQuery {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .scientific
-            numberFormatter.maximumSignificantDigits = 8
-            var doubleQueryString = numberFormatter.string(from: doubleQuery as NSNumber)
-            doubleQueryString = doubleQueryString?.replacingOccurrences(
-                of: "e([0-9])",
-                with: "e+$1",
-                options: .regularExpression
-            )
-            queryParams.append("doubleQuery", String(doubleQuery))
+            let doubleQueryString = String(describing: doubleQuery)
+            queryParams.append("doubleQuery", doubleQueryString)
         }
         // Header options
         // Construct request

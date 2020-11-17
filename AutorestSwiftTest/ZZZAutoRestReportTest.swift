@@ -77,20 +77,20 @@ class ZZZAutoRestReportTest: XCTestCase {
 
             /* Uncomment this to print the list of passed/failed tests */
             /*
-            let mobileFailedTest = mobileTest.filter { $0.value == 0 }
+             let mobileFailedTest = mobileTest.filter { $0.value == 0 }
 
-            if mobilePassedTest.count > 0 {
-                print("Passed mobile tests")
-                print("-------------------")
-                for test in mobilePassedTest { print(test.key) }
-            }
+             if mobilePassedTest.count > 0 {
+                 print("Passed mobile tests")
+                 print("-------------------")
+                 for test in mobilePassedTest { print(test.key) }
+             }
 
-            if mobileFailedTest.count > 0 {
-                print("Failed mobile tests")
-                print("-------------------")
-                for test in mobileFailedTest { print(test.key) }
-            }
-            */
+             if mobileFailedTest.count > 0 {
+                 print("Failed mobile tests")
+                 print("-------------------")
+                 for test in mobileFailedTest { print(test.key) }
+             }
+             */
             print(
                 "Mobile Passed Test=\(mobilePassedCount), Mobile Total Test=\(mobileTestCount), Coverage=\(String(format: "%.2f", mobileCoverage))%"
             )

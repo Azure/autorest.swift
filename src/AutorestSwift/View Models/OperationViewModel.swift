@@ -141,6 +141,7 @@ enum BodyParamStrategy: String {
     case byteArray
     case constant
     case number
+    case decimal
 }
 
 struct BodyParams {
@@ -177,7 +178,7 @@ struct BodyParams {
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
         } else if param.schema.type == .number {
-            strategy = .number
+            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .number
         } else if param.schema is ConstantSchema {
             strategy = .constant
         } else {

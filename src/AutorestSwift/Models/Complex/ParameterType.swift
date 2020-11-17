@@ -163,14 +163,14 @@ enum ParameterType: Codable {
         let value = valueIn ?? name
         switch schema.type {
         case .integer,
-             .boolean,
-             .number:
+             .boolean:
             return "String(\(value))"
         // For these types, a variable will be created in the method using the naming convention `{key|value}String`
         case .date,
              .unixTime,
              .dateTime,
-             .byteArray:
+             .byteArray,
+             .number:
             return "\(value)String"
         case .choice,
              .sealedChoice:
