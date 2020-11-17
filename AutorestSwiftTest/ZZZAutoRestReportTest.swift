@@ -114,6 +114,7 @@ class ZZZAutoRestReportTest: XCTestCase {
         return report.filter {
             for prefix in mobileTestsPrefix {
                 if $0.key.hasPrefix(prefix),
+                   // test name 'expectedEnum' is from non-string-enum.json, not part of the mobile test
                     $0.key != "expectedEnum" {
                     return true
                 }
