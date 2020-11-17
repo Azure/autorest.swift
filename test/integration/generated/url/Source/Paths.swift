@@ -2421,9 +2421,7 @@ public final class Paths {
         withOptions options: UnixTimeUrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let unixTimeUrlPathString = dateFormatter.string(from: unixTimeUrlPath)
+        let unixTimeUrlPathString = String(Int(unixTimeUrlPath.timeIntervalSince1970))
         // Construct URL
         let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
         let pathParams = [

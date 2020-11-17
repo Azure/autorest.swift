@@ -186,11 +186,16 @@ enum ParameterType: Codable {
 
     var keyValueDecodeStrategy: KeyValueDecodeStrategy {
         switch schema.type {
-        case .date,
-             .unixTime:
+        case .date:
             return .date
+        case .unixTime:
+            return .unixTime
         case .dateTime:
-            return .dateTime
+            if let dateTimeSchema = schema as? DateTimeSchema,
+                dateTimeSchema.format == .dateTimeRfc1123 {
+                return .dateTimeRfc1123
+            }
+            return .dateTimeIso8601
         case .byteArray:
             if let byteArraySchema = schema as? ByteArraySchema,
                 byteArraySchema.format == .base64url {

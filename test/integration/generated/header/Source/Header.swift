@@ -795,10 +795,6 @@ public final class Header {
         numberFormatter.maximumSignificantDigits = 8
         var valueString = numberFormatter.string(from: value as NSNumber)
         valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/header/param/prim/float"
         let pathParams = [
@@ -989,10 +985,6 @@ public final class Header {
         numberFormatter.maximumSignificantDigits = 8
         var valueString = numberFormatter.string(from: value as NSNumber)
         valueString = valueString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/header/param/prim/double"
         let pathParams = [
@@ -1554,10 +1546,6 @@ public final class Header {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let valueString = dateFormatter.string(from: value)
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/header/param/prim/date"
         let pathParams = [
@@ -1744,10 +1732,6 @@ public final class Header {
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         let valueString = Date.Format.iso8601.formatter.string(from: value)
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/header/param/prim/datetime"
         let pathParams = [
@@ -1948,12 +1932,7 @@ public final class Header {
         // Query options
         // Header options
         if let value = options?.value {
-<<<<<<< HEAD
             let valueString = Date.Format.rfc1123.formatter.string(from: value)
-=======
-            let valueString = Date.Format.iso8601.formatter.string(from: value)
-
->>>>>>> master
             headers["value"] = valueString
         }
         // Construct request
@@ -2123,11 +2102,7 @@ public final class Header {
     ///     success.
     public func paramDuration(
         scenario: String,
-<<<<<<< HEAD
-        value: TimeInterval,
-=======
         value: DateComponents,
->>>>>>> master
         withOptions options: ParamDurationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2320,10 +2295,6 @@ public final class Header {
             self.options.logger.error("Failed to construct String for value")
             return
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/header/param/prim/byte"
         let pathParams = [

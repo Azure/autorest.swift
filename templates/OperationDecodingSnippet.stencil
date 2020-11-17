@@ -6,6 +6,8 @@ let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
 let {{ param.key }}String = Date.Format.iso8601.formatter.string(from: {{ param.key }})
 {% elif param.strategy == "dateTimeRfc1123" %}
 let {{ param.key }}String = Date.Format.rfc1123.formatter.string(from: {{ param.key }})
+{% elif param.strategy == "unixTime" %}
+let {{ param.key }}String =  String(Int({{ param.key }}.timeIntervalSince1970 ))
 {% elif param.strategy == "byteArray" %}
 guard let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8) else {
     self.options.logger.error("Failed to construct String for {{ param.key }}")

@@ -446,10 +446,6 @@ public final class Number {
         numberFormatter.maximumSignificantDigits = 8
         var bigFloatString = numberFormatter.string(from: bigFloat as NSNumber)
         bigFloatString = bigFloatString?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options: .regularExpression)
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/big/float/3.402823e+20"
         let pathParams = [
@@ -648,10 +644,6 @@ public final class Number {
             with: "e+$1",
             options: .regularExpression
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/big/double/2.5976931e+101"
         let pathParams = [
@@ -1226,10 +1218,6 @@ public final class Number {
             with: "e+$1",
             options: .regularExpression
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/big/decimal/2.5976931e+101"
         let pathParams = [
@@ -1804,10 +1792,6 @@ public final class Number {
             with: "e+$1",
             options: .regularExpression
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/small/float/3.402823e-20"
         let pathParams = [
@@ -2006,10 +1990,6 @@ public final class Number {
             with: "e+$1",
             options: .regularExpression
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/small/double/2.5976931e-101"
         let pathParams = [
@@ -2208,10 +2188,6 @@ public final class Number {
             with: "e+$1",
             options: .regularExpression
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // Construct URL
         let urlTemplate = "/number/small/decimal/2.5976931e-101"
         let pathParams = [

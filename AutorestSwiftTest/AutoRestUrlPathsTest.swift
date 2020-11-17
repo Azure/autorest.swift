@@ -421,10 +421,7 @@ class AutoRestUrlPathsTest: XCTestCase {
     func test_Paths_unixTimeUrl_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.unixTimeUrl")
 
-        let dateString = "2016-04-13"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        guard let date = dateFormatter.date(from: dateString) else {
+        guard let date = ISO8601DateFormatter().date(from: "2016-04-13T00:00:00Z") else {
             XCTFail("Input is not a date")
             return
         }

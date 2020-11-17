@@ -35,6 +35,7 @@ enum KeyValueDecodeStrategy: String {
     case `default`
     case decimal
     case number
+    case unixTime
 }
 
 /// View Model for a key-value pair, as used in Dictionaries.
