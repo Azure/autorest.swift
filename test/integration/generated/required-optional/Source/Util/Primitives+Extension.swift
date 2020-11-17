@@ -25,6 +25,7 @@ extension Data {
         return base64UrlString
     }
 }
+<<<<<<< HEAD
 
 extension String {
     func decimal(_ codingPath: [CodingKey], key: CodingKey) throws -> Decimal {
@@ -59,3 +60,5 @@ extension KeyedDecodingContainer {
         try decodeIfPresent(String.self, forKey: key)?.decimal(codingPath, key: key)
     }
 }
+=======
+>>>>>>> master

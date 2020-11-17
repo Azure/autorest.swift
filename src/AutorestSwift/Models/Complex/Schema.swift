@@ -98,11 +98,7 @@ class Schema: Codable, LanguageShortcut {
             guard let numberSchema = self as? NumberSchema else {
                 fatalError("Type mismatch. Expected number type but got \(self)")
             }
-            if numberSchema.precision == 32 {
-                swiftType = "[Int32]"
-            } else {
-                swiftType = "[Int64]"
-            }
+            swiftType = numberSchema.swiftType()
         case .dateTime,
              .date,
              .unixTime:
@@ -115,9 +111,7 @@ class Schema: Codable, LanguageShortcut {
              .object,
              .sealedChoice,
              .group:
-            swiftType = swiftName
-        case .duration:
-            swiftType = "TimeInterval"
+            swiftType = modelName
         case .dictionary:
             guard let dictionarySchema = self as? DictionarySchema else {
                 fatalError("Type mismatch. Expected dictionary type but got \(self)")
@@ -128,6 +122,8 @@ class Schema: Codable, LanguageShortcut {
                 fatalError("Type mismatch. Expected constant type but got \(self)")
             }
             swiftType = constant.valueType.swiftType()
+        case .duration:
+            swiftType = "DateComponents"
         default:
             fatalError("Type \(type) not implemented")
         }
@@ -135,7 +131,7 @@ class Schema: Codable, LanguageShortcut {
         return optional ? "\(swiftType)?" : swiftType
     }
 
-    var swiftName: String {
+    var modelName: String {
         return name.isReserved ? name + "Type" : name
     }
 
