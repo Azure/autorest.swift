@@ -29,7 +29,8 @@ working_files = [
     "body-number",
     "header",
     "required-optional",
-    "body-array"
+    "body-array",
+    "url-multi-collectionFormat"
 ]
 
 def get_all_files():
