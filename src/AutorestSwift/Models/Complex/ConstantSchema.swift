@@ -139,6 +139,8 @@ class ConstantSchema: Schema {
                 } else {
                     return "String(\(swiftType)(\(constantValue)))"
                 }
+            case .boolean:
+                return "\(constantValue)"
             default:
                 return "String(\(constantValue))"
             }
