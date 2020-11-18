@@ -94,7 +94,8 @@ extension String {
             "String",
             "Bool",
             "Enum",
-            "Array"
+            "Array",
+            "Date"
         ]
         return reserved.contains(self)
     }
