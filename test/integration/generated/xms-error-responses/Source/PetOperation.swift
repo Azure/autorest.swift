@@ -320,6 +320,7 @@ public final class PetOperation {
         if let models = options?.models {
             queryParams.append("models", models)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
