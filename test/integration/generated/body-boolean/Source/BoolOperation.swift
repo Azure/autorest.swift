@@ -163,7 +163,7 @@ public final class BoolOperation {
         // Construct headers
         var headers = HTTPHeaders()
         headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
+        headers["Accept"] = "application/jsgit on"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(true) else {
             self.options.logger.error("Failed to encode request body as json.")
