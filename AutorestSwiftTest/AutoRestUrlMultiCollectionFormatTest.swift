@@ -56,14 +56,14 @@ class AutoRestUrlMutliCollectionFormatTest: XCTestCase {
 
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_queries_arrayStringMultiEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringMultiEmpty")
 
-        let options = Queries.ArrayStringMultiEmptyOptions (
+        let options = Queries.ArrayStringMultiEmptyOptions(
             arrayQuery: []
         )
-        
+
         client.queries.arrayStringMultiEmpty(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
