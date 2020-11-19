@@ -30,7 +30,8 @@ working_files = [
     "header",
     "required-optional",
     "body-array",
-    "body-boolean"
+    "body-boolean",
+    "custom-baseUrl-more-options"
 ]
 
 def get_all_files():
@@ -133,13 +134,13 @@ def main(argv):
     for opt, arg in opts:
         if opt in ("-a", "--all-files"):
             allFiles = True
-        elif opt in ("-c", "--clean"):
+        if opt in ("-c", "--clean"):
             clean = True
-        elif opt in ("-d", "--debug"):
+        if opt in ("-d", "--debug"):
             debug = True
-        elif opt in ("-k", "--keep-change"):
+        if opt in ("-k", "--keep-change"):
             keepChange = True
-        elif opt in ("-i", "--input-file"):
+        if opt in ("-i", "--input-file"):
             inputFile = argv[1]
 
     if inputFile != '':

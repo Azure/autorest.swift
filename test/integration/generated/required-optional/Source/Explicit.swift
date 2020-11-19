@@ -542,6 +542,7 @@ public final class Explicit {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let headerParameter = options?.headerParameter {
             headers["headerParameter"] = String(headerParameter)
@@ -1108,6 +1109,7 @@ public final class Explicit {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let bodyParameter = options?.bodyParameter {
             headers["bodyParameter"] = bodyParameter
@@ -2054,6 +2056,7 @@ public final class Explicit {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let headerParameter = options?.headerParameter {
             headers["headerParameter"] = headerParameter.map { String($0) }.joined(separator: ",")

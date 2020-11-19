@@ -29,6 +29,7 @@ import Foundation
 struct OperationParameters {
     let header: Params
     let query: Params
+    let explodeQuery: Params
     let path: [KeyValueViewModel]
     let body: BodyParams?
     let signature: [ParameterViewModel]
@@ -39,6 +40,7 @@ struct OperationParameters {
     init(parameters: [ParameterType], operation: Operation) {
         var header = Params()
         var query = Params()
+        var explodeQuery = Params()
         var path = [KeyValueViewModel]()
         var body = [KeyValueViewModel]()
         var methodDecoding = [KeyValueViewModel]()
@@ -49,8 +51,13 @@ struct OperationParameters {
 
             switch paramLocation {
             case .query:
-                viewModel.optional ? query.optional.append(viewModel) : query.required
-                    .append(viewModel)
+                if param.explode {
+                    viewModel.optional ? explodeQuery.optional.append(viewModel) : explodeQuery.required
+                        .append(viewModel)
+                } else {
+                    viewModel.optional ? query.optional.append(viewModel) : query.required
+                        .append(viewModel)
+                }
             case .header:
                 viewModel.optional ? header.optional.append(viewModel) : header.required
                     .append(viewModel)
@@ -79,7 +86,7 @@ struct OperationParameters {
         // If there is no optional query params, change query param declaration to 'let'
         // For header, the declaration is 'let' when both required and optional headers are empty, since the required
         // header parameters will be initialized out of header initializer
-        query.declaration = query.optional.isEmpty ? "let" : "var"
+        query.declaration = query.optional.isEmpty && explodeQuery.optional.isEmpty ? "let" : "var"
         header.declaration = header.isEmpty ? "let" : "var"
 
         // Set the body param, if applicable
@@ -110,8 +117,9 @@ struct OperationParameters {
         self.methodDecoding = methodDecoding
         self.header = header
         self.query = query
+        self.explodeQuery = explodeQuery
         self.path = path
-        self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty)
+        self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty && explodeQuery.optional.isEmpty)
     }
 }
 
