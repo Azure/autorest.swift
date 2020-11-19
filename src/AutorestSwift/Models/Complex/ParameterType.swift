@@ -127,6 +127,14 @@ enum ParameterType: Codable {
         }
     }
 
+    internal var explode: Bool {
+        if let httpParam = self.protocol.http as? HttpParameter {
+            return httpParam.explode ?? false
+        } else {
+            return false
+        }
+    }
+
     // MARK: Methods
 
     /// Returns whether the given parameter is located in the specified location.
@@ -176,7 +184,11 @@ enum ParameterType: Codable {
              .sealedChoice:
             return "\(value).rawValue"
         case .array:
-            return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+            if explode {
+                return "\(value)"
+            } else {
+                return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+            }
         case .duration:
             return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
         default:

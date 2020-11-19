@@ -1360,6 +1360,7 @@ public final class Header {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let value = options?.value {
             headers["value"] = value
@@ -1922,6 +1923,7 @@ public final class Header {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let value = options?.value {
             let valueString = Date.Format.rfc1123.formatter.string(from: value)
@@ -2485,6 +2487,7 @@ public final class Header {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let value = options?.value {
             headers["value"] = value.rawValue
