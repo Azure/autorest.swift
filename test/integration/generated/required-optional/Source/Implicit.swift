@@ -165,6 +165,7 @@ public final class Implicit {
         if let queryParameter = options?.queryParameter {
             queryParams.append("queryParameter", queryParameter)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -257,6 +258,7 @@ public final class Implicit {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+
         // Header options
         if let queryParameter = options?.queryParameter {
             headers["queryParameter"] = queryParameter
@@ -630,6 +632,7 @@ public final class Implicit {
         if let optionalGlobalQuery = client.optionalGlobalQuery {
             queryParams.append("optionalGlobalQuery", String(optionalGlobalQuery))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
