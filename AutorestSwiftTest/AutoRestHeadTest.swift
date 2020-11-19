@@ -31,7 +31,7 @@ import XCTest
 class AutoRestHeadTest: XCTestCase {
     var client: AutoRestHeadTestClient!
 
-    override func setUpWithError() throws {
+    overriode func setUpWithError() throws {
         client = try AutoRestHeadTestClient(
             authPolicy: AnonymousAccessPolicy(),
             withOptions: AutoRestHeadTestClientOptions()
