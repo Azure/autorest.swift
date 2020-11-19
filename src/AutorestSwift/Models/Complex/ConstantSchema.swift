@@ -115,8 +115,9 @@ class ConstantSchema: Schema {
 
     /// Convert the Constant into String format in Swift
     /// - Parameter skipUrlEncoding: a flag to indicate if the string should skip url encoding
+    /// - Parameter ParameterLocation: location of the parameter with the Constant Schema as value
     /// - Returns: A swift string in generated code
-    public func formatValue(skipUrlEncoding: Bool) -> String {
+    public func formatValue(skipUrlEncoding: Bool, paramLocation: ParameterLocation?) -> String {
         let constantValue: String = value.value
         let type = valueType.type
 
@@ -139,6 +140,8 @@ class ConstantSchema: Schema {
                 } else {
                     return "String(\(swiftType)(\(constantValue)))"
                 }
+            case .boolean:
+                return (paramLocation == .body) ? "\(constantValue)" : "String(\(constantValue))"
             default:
                 return "String(\(constantValue))"
             }

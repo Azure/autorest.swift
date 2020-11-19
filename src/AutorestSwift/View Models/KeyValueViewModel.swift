@@ -113,7 +113,10 @@ struct KeyValueViewModel: Comparable {
         }
         self.strategy = KeyValueDecodeStrategy.default.rawValue
 
-        self.value = constantSchema.formatValue(skipUrlEncoding: param.value.isSkipUrlEncoding)
+        self.value = constantSchema.formatValue(
+            skipUrlEncoding: param.value.isSkipUrlEncoding,
+            paramLocation: param.paramLocation
+        )
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {

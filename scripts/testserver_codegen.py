@@ -30,7 +30,7 @@ working_files = [
     "header",
     "required-optional",
     "body-array",
-    "url-multi-collectionFormat"
+    "body-boolean"
 ]
 
 def get_all_files():
