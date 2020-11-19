@@ -29,7 +29,8 @@ working_files = [
     "body-number",
     "header",
     "required-optional",
-    "body-array"
+    "body-array",
+    "body-boolean"
 ]
 
 def get_all_files():

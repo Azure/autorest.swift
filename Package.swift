@@ -32,7 +32,8 @@ let package = Package(
         .package(name: "AutoRestSwaggerBatByte", path: "./test/integration/generated/body-byte/"),
         .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
         .package(name: "AutoRestSwaggerBatHeader", path: "./test/integration/generated/header/"),
-        .package(name: "AutoRestSwaggerBatArray", path: "./test/integration/generated/body-array/")
+        .package(name: "AutoRestSwaggerBatArray", path: "./test/integration/generated/body-array/"),
+        .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -62,7 +63,8 @@ let package = Package(
             "AutoRestSwaggerBatByte",
             "AutoRestNumberTest",
             "AutoRestSwaggerBatHeader",
-            "AutoRestSwaggerBatArray"],
+            "AutoRestSwaggerBatArray",
+            "AutoRestBoolTest"],
             path: "AutorestSwiftTest"
         )
     ],
