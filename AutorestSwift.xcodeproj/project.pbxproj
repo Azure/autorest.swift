@@ -177,6 +177,8 @@
 		F11CA101256392F3009DFACF /* AutoRestSwaggerBatArray in Frameworks */ = {isa = PBXBuildFile; productRef = F11CA100256392F3009DFACF /* AutoRestSwaggerBatArray */; };
 		F11CA17F25647D8D009DFACF /* AutoRestSwaggerBatBoolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CA17E25647D8C009DFACF /* AutoRestSwaggerBatBoolTest.swift */; };
 		F11CA18425647E37009DFACF /* AutoRestBoolTest in Frameworks */ = {isa = PBXBuildFile; productRef = F11CA18325647E37009DFACF /* AutoRestBoolTest */; };
+		F13E68E1256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13E68E0256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift */; };
+		F13E68E725672348006C0F93 /* AutoRestParameterizedCustomHostTest in Frameworks */ = {isa = PBXBuildFile; productRef = F13E68E625672348006C0F93 /* AutoRestParameterizedCustomHostTest */; };
 		F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */; };
 		F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */; };
 		F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */; };
@@ -417,6 +419,8 @@
 		F11CA0FE256392DD009DFACF /* body-array */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-array"; path = "test/integration/generated/body-array"; sourceTree = SOURCE_ROOT; };
 		F11CA17C25647D51009DFACF /* body-boolean */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-boolean"; path = "test/integration/generated/body-boolean"; sourceTree = SOURCE_ROOT; };
 		F11CA17E25647D8C009DFACF /* AutoRestSwaggerBatBoolTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatBoolTest.swift; sourceTree = "<group>"; };
+		F13E68E0256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerCustomerBaseUrlOptionTest.swift; sourceTree = "<group>"; };
+		F13E68E42567232D006C0F93 /* custom-baseUrl-more-options */ = {isa = PBXFileReference; lastKnownFileType = text; name = "custom-baseUrl-more-options"; path = "test/integration/generated/custom-baseUrl-more-options"; sourceTree = SOURCE_ROOT; };
 		F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseIntBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStringBodySnippet.stencil; sourceTree = "<group>"; };
@@ -579,6 +583,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F13E68E725672348006C0F93 /* AutoRestParameterizedCustomHostTest in Frameworks */,
 				F1D306132565B137003EAABB /* AutoRestUrlMutliCollectionFormatTest in Frameworks */,
 				F15A92AD254B0A6200E2D9C2 /* XmsErrorResponseExtensions in Frameworks */,
 				F15A92A1254B09C700E2D9C2 /* AutoRestReport in Frameworks */,
@@ -768,6 +773,7 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				F13E68E42567232D006C0F93 /* custom-baseUrl-more-options */,
 				F1D305E42565A55F003EAABB /* url-multi-collectionFormat */,
 				F11CA17C25647D51009DFACF /* body-boolean */,
 				F11CA0FE256392DD009DFACF /* body-array */,
@@ -799,6 +805,7 @@
 				F11CA0BA25638E21009DFACF /* AutoRestSwaggerBatHeaderTest.swift */,
 				F11CA0EB25639186009DFACF /* AutoRestSwaggerBatArrayTest.swift */,
 				F1DCAF16255A10A500A6E425 /* AutoRestParameterizedHostTest.swift */,
+				F13E68E0256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift */,
 				F1D305F02565A86F003EAABB /* AutoRestUrlMultiCollectionFormatTest.swift */,
 				F170D321253F786800A569A0 /* Util.swift */,
 				F10B1F6125414556007DA581 /* Dictionary+Extension.swift */,
@@ -1051,6 +1058,7 @@
 				F11CA100256392F3009DFACF /* AutoRestSwaggerBatArray */,
 				F1D306122565B137003EAABB /* AutoRestUrlMutliCollectionFormatTest */,
 				F11CA18325647E37009DFACF /* AutoRestBoolTest */,
+				F13E68E625672348006C0F93 /* AutoRestParameterizedCustomHostTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1182,6 +1190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11CA17F25647D8D009DFACF /* AutoRestSwaggerBatBoolTest.swift in Sources */,
+				F13E68E1256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift in Sources */,
 				F1DCAF17255A10A500A6E425 /* AutoRestParameterizedHostTest.swift in Sources */,
 				F15D30F12548F38700265366 /* AutoRestUrlPathsTest.swift in Sources */,
 				F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */,
@@ -1636,6 +1645,10 @@
 		F11CA18325647E37009DFACF /* AutoRestBoolTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestBoolTest;
+		};
+		F13E68E625672348006C0F93 /* AutoRestParameterizedCustomHostTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestParameterizedCustomHostTest;
 		};
 		F15A929C254B09C700E2D9C2 /* AutoRestIntegerTest */ = {
 			isa = XCSwiftPackageProductDependency;
