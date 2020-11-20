@@ -42,13 +42,30 @@ enum ResponseBodyType: String {
     /// Service returns a byteArray body
     case byteArrayBody
 
-    static func strategy(for input: String, and type: AllSchemaTypes) -> ResponseBodyType {
+    case dateBody
+    case dateTimeBody
+    case datetimeRfc1123Body
+
+    static func strategy(for input: String, and type: AllSchemaTypes, schema: Schema) -> ResponseBodyType {
         if input == "String" {
             return .stringBody
         } else if input.starts(with: "Int") {
             return .intBody
-        } else if input == "Date", type == .unixTime {
-            return .unixTimeBody
+        } else if input == "Date" {
+            switch type {
+            case .unixTime:
+                return .unixTimeBody
+            case .date:
+                return .dateBody
+            case .dateTime:
+                if let dateTimeSchema = schema as? DateTimeSchema,
+                    dateTimeSchema.format == .dateTimeRfc1123 {
+                    return .datetimeRfc1123Body
+                }
+                return .dateTimeBody
+            default:
+                return .dateBody
+            }
         } else if input == "Data", type == .byteArray {
             return .byteArrayBody
         } else {
@@ -96,8 +113,9 @@ struct ResponseViewModel {
             self.pagingNames = nil
             self.pagedElementClassName = nil
             if let objectType = schemaResponse?.schema.swiftType(optional: false),
-                let type = schemaResponse?.schema.type {
-                self.strategy = ResponseBodyType.strategy(for: objectType, and: type).rawValue
+                let type = schemaResponse?.schema.type,
+                let schema = schemaResponse?.schema {
+                self.strategy = ResponseBodyType.strategy(for: objectType, and: type, schema: schema).rawValue
                 self.objectType = objectType
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue

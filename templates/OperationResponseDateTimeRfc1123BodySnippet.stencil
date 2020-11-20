@@ -1,0 +1,9 @@
+{% include "OperationResponseNullableBodySnippet.stencil" %}
+do {
+    let dateFormatter = Date.Format.rfc1123.formatter
+    {% include "OperationResponseDateDispatchSnippet.stencil" %}
+} catch {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+    }
+}

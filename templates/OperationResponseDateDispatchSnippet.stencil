@@ -1,0 +1,10 @@
+let decodedStr = try JSONDecoder().decode(String.self, from: data)
+if let decoded = dateFormatter.date(from: decodedStr) {
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
+    }
+} else {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+    }
+}

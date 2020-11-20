@@ -10,7 +10,13 @@
     {% include "OperationResponseUnixTImeBodySnippet.stencil" response %}
     {% elif response.strategy == "byteArrayBody" %}
     {% include "OperationResponseByteArrayBodySnippet.stencil" response %}
+    {% elif response.strategy == "dateTimeBody" %}
+    {% include "OperationResponseDateTimeBodySnippet.stencil" response %}
+    {% elif response.strategy == "datetimeRfc1123Body" %}
+    {% include "OperationResponseDateTimeRfc1123BodySnippet.stencil" response %}
+    {% elif response.strategy == "dateBody" %}
+    {% include "OperationResponseDateBodySnippet.stencil" response %}
     {% else %}
-    // TODO: Couldn't find template for {{ exception.strategy }}
+    // TODO: Couldn't find template for {{ response.strategy }}
     {% endif %}
 }
