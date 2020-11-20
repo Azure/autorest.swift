@@ -141,7 +141,8 @@ enum BodyParamStrategy: String {
     case byteArray
     case constant
     case decimal
-    case number
+    case data
+    case string
 }
 
 struct BodyParams {
@@ -177,8 +178,10 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
+        } else if param.schema.type == .date || param.schema.type == .dateTime {
+            strategy = .string
         } else if param.schema.type == .number {
-            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .number
+            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .data
         } else if param.schema is ConstantSchema {
             strategy = .constant
         } else {

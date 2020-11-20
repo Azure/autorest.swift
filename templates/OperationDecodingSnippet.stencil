@@ -3,7 +3,9 @@ let dateFormatter = DateFormatter()
 dateFormatter.dateFormat = "yyyy-MM-dd"
 let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
 {% elif param.strategy == "dateTimeIso8601" %}
-let {{ param.key }}String = Date.Format.iso8601.formatter.string(from: {{ param.key }})
+let dateFormatter = ISO8601DateFormatter()
+dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
 {% elif param.strategy == "dateTimeRfc1123" %}
 let {{ param.key }}String = Date.Format.rfc1123.formatter.string(from: {{ param.key }})
 {% elif param.strategy == "unixTime" %}
