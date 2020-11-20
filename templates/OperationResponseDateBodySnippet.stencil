@@ -1,10 +1,4 @@
-{% include "OperationResponseNullableBodySnippet.stencil" %}
-do {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    {% include "OperationResponseDateDispatchSnippet.stencil" %}
-} catch {
-    dispatchQueue.async {
-        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-    }
-}
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "yyyy-MM-dd"
+{% include "OperationResponseDateDispatchSnippet.stencil" %}
+

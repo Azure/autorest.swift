@@ -1,18 +1,11 @@
-{% include "OperationResponseNullableBodySnippet.stencil" %}
-do {
-    let dateFormatter = ISO8601DateFormatter()
-    dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-    if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-        dispatchQueue.async {
-            completionHandler(.success(decoded), httpResponse)
-        }
-    } else {
-        dateFormatter.formatOptions = [.withInternetDateTime]
-        {% include "OperationResponseDateDispatchSnippet.stencil" %}
-    }
-} catch {
+let dateFormatter = ISO8601DateFormatter()
+dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+if let decoded = dateFormatter.date(from: decodedStrWithSec) {
     dispatchQueue.async {
-        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+        completionHandler(.success(decoded), httpResponse)
     }
+} else {
+    dateFormatter.formatOptions = [.withInternetDateTime]
+    {% include "OperationResponseDateDispatchSnippet.stencil" %}
 }
