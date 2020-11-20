@@ -111,7 +111,8 @@ struct KeyValueViewModel: Comparable {
             paramLocation: param.paramLocation
         )
 
-        if param.paramLocation == .header {
+        // For header and query parameters, serialized name should be used as to send over the wire
+        if param.paramLocation == .header || param.paramLocation == .query {
             assert(!(param.serializedName?.isEmpty ?? true))
             self.key = param.serializedName ?? ""
         } else if param.paramLocation == .body {
