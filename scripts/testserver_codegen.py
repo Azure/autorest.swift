@@ -29,7 +29,10 @@ working_files = [
     "body-number",
     "header",
     "required-optional",
-    "body-array"
+    "body-array",
+    "body-date",
+    "body-datetime",
+    "body-datetime-rfc1123"
 ]
 
 def get_all_files():

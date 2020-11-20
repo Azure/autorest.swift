@@ -33,7 +33,9 @@ let package = Package(
         .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
         .package(name: "AutoRestSwaggerBatHeader", path: "./test/integration/generated/header/"),
         .package(name: "AutoRestSwaggerBatArray", path: "./test/integration/generated/body-array/"),
-        .package(name: "AutoRestDateTest", path: "./test/integration/generated/body-date/")
+        .package(name: "AutoRestDateTest", path: "./test/integration/generated/body-date/"),
+        .package(name: "AutoRestRfC1123DateTimeTest", path: "./test/integration/generated/body-datetime-rfc1123/"),
+        .package(name: "AutoRestDateTimeTest", path: "./test/integration/generated/body-datetime/")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -64,7 +66,9 @@ let package = Package(
             "AutoRestNumberTest",
             "AutoRestSwaggerBatHeader",
             "AutoRestSwaggerBatArray",
-            "AutoRestDateTest"],
+            "AutoRestDateTest",
+            "AutoRestRfC1123DateTimeTest",
+            "AutoRestDateTimeTest"],
             path: "AutorestSwiftTest"
         )
     ],

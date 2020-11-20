@@ -24,31 +24,31 @@
 //
 // --------------------------------------------------------------------------
 
-import AutoRestDateTest
+import AutoRestRfC1123DateTimeTest
 import AzureCore
 import XCTest
 
-class AutoRestDateTest: XCTestCase {
-    var client: AutoRestDateTestClient!
+class AutoRestRfC1123DateTimeTest: XCTestCase {
+    var client: AutoRestRfC1123DateTimeTestClient!
 
     override func setUpWithError() throws {
-        client = try AutoRestDateTestClient(
+        client = try AutoRestRfC1123DateTimeTestClient(
             authPolicy: AnonymousAccessPolicy(),
-            withOptions: AutoRestDateTestClientOptions()
+            withOptions: AutoRestRfC1123DateTimeTestClientOptions()
         )
     }
 
     func test_getNull200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getNull")
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getNull")
 
-        client.dateOperation.getNull { result, httpResponse in
+        client.datetimerfc1123.getNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertNil(data)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call date.getNull failed. error=\(details)")
+                XCTFail("Call datetimerfc1123.getNull failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -56,9 +56,9 @@ class AutoRestDateTest: XCTestCase {
     }
 
     func test_getInvalidDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getInvalidDate")
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getInvalid")
 
-        client.dateOperation.getInvalidDate { result, httpResponse in
+        client.datetimerfc1123.getInvalid { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("date.getInvalid expected failed")
@@ -70,25 +70,26 @@ class AutoRestDateTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getOverflowDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getOverflowDate")
+    func test_getOverflow200() throws {
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getOverflow")
 
-        client.dateOperation.getOverflowDate { result, httpResponse in
+        client.datetimerfc1123.getOverflow { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("date.getOverflowDate expected failed")
-            case .failure:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call datetimerfc1123.getOverflow failed. error=\(details)")
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getUnderflowDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getUnderflowDate")
+    func test_getUnderflow200() throws {
+        let expectation = XCTestExpectation(description: "Call date.getUnderflow")
 
-        client.dateOperation.getUnderflowDate { result, httpResponse in
+        client.datetimerfc1123.getUnderflow { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("date.getUnderflowDate expected failed")
@@ -101,16 +102,14 @@ class AutoRestDateTest: XCTestCase {
     }
 
     func test_putMaxDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.putMaxDate")
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.putMaxDate")
 
-        let dateString = "9999-12-31"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
+        guard let date = Date.Format.rfc1123.formatter.date(from: "Fri, 31 Dec 9999 23:59:59 GMT") else {
+            XCTFail("Input is not a datetime")
             return
         }
-        client.dateOperation.put(maxDate: date) { result, httpResponse in
+
+        client.datetimerfc1123.put(utcMaxDateTime: date) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -123,71 +122,66 @@ class AutoRestDateTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getMaxDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getMaxDate")
+    func test_getUtcUppercaseMaxDateTime200() throws {
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcUppercaseMaxDateTime")
 
-        let dateString = "9999-12-31"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let expectedDate = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
+        let iso8601DateFormatter = ISO8601DateFormatter()
+        iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "Fri, 31 Dec 9999 23:59:59 GMT") else {
+            XCTFail("Input is not a datetime")
             return
         }
-        client.dateOperation.getMaxDate { result, httpResponse in
+
+        client.datetimerfc1123.getUtcUppercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call date.getMaxDate failed. error=\(details)")
+                XCTFail("Call datetimerfc1123.getUtcUppercaseMaxDateTime failed. error=\(details)")
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_putMinDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.putMinDate")
+    func test_putUtcMinDate200() throws {
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.putUtcMinDate")
 
-        let dateString = "0001-01-01"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let expectedDate = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
+        guard let date = Date.Format.rfc1123.formatter.date(from: "Mon, 01 Jan 0001 00:00:00 GMT") else {
+            XCTFail("Input is not a datetime")
             return
         }
-        client.dateOperation.put(minDate: expectedDate) { result, httpResponse in
+        client.datetimerfc1123.put(utcMinDateTime: date) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call date.putMinDate failed. error=\(details)")
+                XCTFail("Call datetimerfc1123.putUtcMinDate failed. error=\(details)")
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getMinDate200() throws {
-        let expectation = XCTestExpectation(description: "Call date.getMinDate")
+    func test_getUtcMinDateTime200() throws {
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcMinDateTime")
 
-        let dateString = "0001-01-01"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
+        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "Mon, 01 Jan 0001 00:00:00 GMT") else {
+            XCTFail("Input is not a datetime")
             return
         }
-        client.dateOperation.getMinDate { result, httpResponse in
+
+        client.datetimerfc1123.getUtcMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, date)
+                XCTAssertEqual(data, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call date.getMinDate failed. error=\(details)")
+                XCTFail("Call datetimerfc1123.getUtcMinDateTime failed. error=\(details)")
             }
             expectation.fulfill()
         }
