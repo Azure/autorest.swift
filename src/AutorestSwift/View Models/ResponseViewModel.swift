@@ -107,7 +107,8 @@ struct ResponseViewModel {
             }
 
             // FIXME: This assumption no longer holds for storage and should be revisited
-            guard arrayElements.count == 1 else { fatalError("Did not find exactly one array type for paged collection.") }
+            guard arrayElements.count == 1
+            else { fatalError("Did not find exactly one array type for paged collection.") }
             self.strategy = ResponseBodyType.pagedBody.rawValue
             self.pagingNames = pagingNames
             self.pagedElementClassName = arrayElements.first!.elementType.name
