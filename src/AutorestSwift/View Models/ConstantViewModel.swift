@@ -35,7 +35,7 @@ struct ConstantViewModel {
     let comment: ViewModelComment
     // default value of the proeprty
     let defaultValue: ViewModelDefault
-    let serializedName: String?
+    let serializedName: String
 
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: ConstantSchema) {

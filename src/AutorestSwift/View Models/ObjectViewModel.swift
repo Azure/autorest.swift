@@ -95,8 +95,8 @@ struct ObjectViewModel {
         for property in groupedProperties {
             // the source of flattened parameters should not be included in the view model
 
-            // FIXME: This assumption no longer holds
-            // assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
+            // FIXME: This assumption no longer holds for storage and should be revisited
+            assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
             if property.originalParameter.first?.flattened ?? false {
                 continue
             }

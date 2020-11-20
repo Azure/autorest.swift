@@ -45,8 +45,10 @@ class Language: Codable {
     // MARK: AdditionalProperties
 
     struct PagingNames: Codable {
+        static let defaultItemName = "value"
+
         /// name for the item property
-        var itemName: String? = "value"
+        var itemName: String? = PagingNames.defaultItemName
 
         /// name of the next link property
         var nextLinkName: String
@@ -57,7 +59,7 @@ class Language: Codable {
         init?(from dict: [String: String]) {
             guard let nextLinkName = dict["nextLinkName"] else { return nil }
             self.nextLinkName = nextLinkName
-            self.itemName = dict["itemName"]
+            self.itemName = dict["itemName"] ?? PagingNames.defaultItemName
             self.operationName = dict["operationName"]
         }
     }
