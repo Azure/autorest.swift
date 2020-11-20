@@ -6,6 +6,14 @@ if let {{ param.key }} = {{ param.path }}{{ param.key }} {
     queryParams.append("{{ param.key }}", {{ param.value }})
 }
 {% endfor %}
+{% for param in op.params.explodeQuery.optional %}
+if let {{ param.key }} = {{ param.path }}{{ param.key }} {
+    {{ param.value}}.forEach {
+        queryParams.append("{{ param.key }}", $0)
+    }
+}
+{% endfor %}
+
 // Header options
 {% for param in op.params.header.optional %}
 if let {{ param.key }} = {{ param.path }}{{ param.key }} {

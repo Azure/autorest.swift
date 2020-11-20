@@ -5,4 +5,8 @@
     {% endfor %}
 ]
 
-
+{% for param in op.params.explodeQuery.required %}
+{{ param.value}}.forEach {
+    queryParams.append("{{ param.key }}", $0)
+}
+{% endfor %}
