@@ -67,8 +67,8 @@ let package = Package(
             "AutoRestSwaggerBatHeader",
             "AutoRestSwaggerBatArray",
             "AutoRestBoolTest",
-            "AutoRestUrlMutliCollectionFormatTest",
-            "AutoRestParameterizedCustomHostTest"],
+            "AutoRestParameterizedCustomHostTest",
+            "AutoRestUrlMutliCollectionFormatTest"],
             path: "AutorestSwiftTest"
         )
     ],

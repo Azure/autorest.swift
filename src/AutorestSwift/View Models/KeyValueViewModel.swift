@@ -106,7 +106,10 @@ struct KeyValueViewModel: Comparable {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        self.value = constantSchema.formatValue(skipUrlEncoding: param.value.isSkipUrlEncoding)
+        self.value = constantSchema.formatValue(
+            skipUrlEncoding: param.value.isSkipUrlEncoding,
+            paramLocation: param.paramLocation
+        )
 
         if param.paramLocation == .header {
             assert(!(param.serializedName?.isEmpty ?? true))
@@ -117,11 +120,6 @@ struct KeyValueViewModel: Comparable {
             self.key = param.name
         }
         self.strategy = KeyValueDecodeStrategy.default.rawValue
-
-        self.value = constantSchema.formatValue(
-            skipUrlEncoding: param.value.isSkipUrlEncoding,
-            paramLocation: param.paramLocation
-        )
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
