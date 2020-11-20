@@ -16,15 +16,15 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class Implicit {
-    public let client: AutoRestRequiredOptionalTestClient
+public final class BoolOperation {
+    public let client: AutoRestBoolTestClient
 
     public let commonOptions: ClientOptions
 
-    /// Options provided to configure this `AutoRestRequiredOptionalTestClient`.
-    public let options: AutoRestRequiredOptionalTestClientOptions
+    /// Options provided to configure this `AutoRestBoolTestClient`.
+    public let options: AutoRestBoolTestClientOptions
 
-    init(client: AutoRestRequiredOptionalTestClient) {
+    init(client: AutoRestBoolTestClient) {
         self.client = client
         self.options = client.options
         self.commonOptions = client.commonOptions
@@ -47,21 +47,19 @@ public final class Implicit {
         return client.request(request, context: context, completionHandler: completionHandler)
     }
 
-    /// Test implicitly required path parameter
+    /// Get true Boolean value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getRequiredPath(
-        pathParameter: String,
-        withOptions options: GetRequiredPathOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getTrue(
+        withOptions options: GetTrueOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Bool>
     ) {
         // Construct URL
-        let urlTemplate = "/reqopt/implicit/required/path/{pathParameter}"
+        let urlTemplate = "/bool/true"
         let pathParams = [
-            "pathParameter": pathParameter,
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
@@ -115,11 +113,16 @@ public final class Implicit {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Bool.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -138,211 +141,18 @@ public final class Implicit {
         }
     }
 
-    /// Test implicitly optional query parameter
+    /// Set Boolean value true
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func putOptionalQuery(
-        withOptions options: PutOptionalQueryOptions? = nil,
+    public func putTrue(
+        withOptions options: PutTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/query"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let queryParameter = options?.queryParameter {
-            queryParams.append("queryParameter", queryParameter)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Test implicitly optional header parameter
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func putOptionalHeader(
-        withOptions options: PutOptionalHeaderOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/header"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-
-        // Header options
-        if let queryParameter = options?.queryParameter {
-            headers["queryParameter"] = queryParameter
-        }
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Test implicitly optional body parameter
-    /// - Parameters:
-    ///    - optionalBody :
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func put(
-        optionalBody: String?,
-        withOptions options: PutOptionalBodyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/body"
+        let urlTemplate = "/bool/true"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
@@ -355,7 +165,7 @@ public final class Implicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalBody) else {
+        guard let requestBody = try? JSONEncoder().encode(true) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -425,21 +235,20 @@ public final class Implicit {
         }
     }
 
-    /// Test implicitly required path parameter
+    /// Get false Boolean value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getRequiredGlobalPath(
-        withOptions options: GetRequiredGlobalPathOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getFalse(
+        withOptions options: GetFalseOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Bool>
     ) {
         // Construct URL
-        let urlTemplate = "/reqopt/global/required/path/{required-global-path}"
+        let urlTemplate = "/bool/false"
         let pathParams = [
-            "$host": client.endpoint.absoluteString,
-            "requiredGlobalPath": client.requiredGlobalPath
+            "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
@@ -461,6 +270,105 @@ public final class Implicit {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Bool.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Set Boolean value false
+    /// - Parameters:
+
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func putFalse(
+        withOptions options: PutFalseOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        // Construct URL
+        let urlTemplate = "/bool/false"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = try? JSONEncoder().encode(false) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -515,24 +423,23 @@ public final class Implicit {
         }
     }
 
-    /// Test implicitly required query parameter
+    /// Get null Boolean value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getRequiredGlobalQuery(
-        withOptions options: GetRequiredGlobalQueryOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getNull(
+        withOptions options: GetNullOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Bool?>
     ) {
         // Construct URL
-        let urlTemplate = "/reqopt/global/required/query"
+        let urlTemplate = "/bool/null"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("requiredGlobalQuery", client.requiredGlobalQuery)
         ]
 
         // Construct headers
@@ -582,11 +489,23 @@ public final class Implicit {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Bool.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -605,35 +524,28 @@ public final class Implicit {
         }
     }
 
-    /// Test implicitly optional query parameter
+    /// Get invalid Boolean value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getOptionalGlobalQuery(
-        withOptions options: GetOptionalGlobalQueryOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getInvalid(
+        withOptions options: GetInvalidOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Bool>
     ) {
         // Construct URL
-        let urlTemplate = "/reqopt/global/optional/query"
+        let urlTemplate = "/bool/invalid"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let optionalGlobalQuery = client.optionalGlobalQuery {
-            queryParams.append("optionalGlobalQuery", String(optionalGlobalQuery))
-        }
-
-        // Header options
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -678,11 +590,16 @@ public final class Implicit {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let decoder = JSONDecoder()
+                        let decoded = try decoder.decode(Bool.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
