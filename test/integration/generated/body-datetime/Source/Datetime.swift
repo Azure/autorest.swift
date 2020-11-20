@@ -16,15 +16,15 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
-public final class Queries {
-    public let client: AutoRestUrlTestClient
+public final class Datetime {
+    public let client: AutoRestDateTimeTestClient
 
     public let commonOptions: ClientOptions
 
-    /// Options provided to configure this `AutoRestUrlTestClient`.
-    public let options: AutoRestUrlTestClientOptions
+    /// Options provided to configure this `AutoRestDateTimeTestClient`.
+    public let options: AutoRestDateTimeTestClientOptions
 
-    init(client: AutoRestUrlTestClient) {
+    init(client: AutoRestDateTimeTestClient) {
         self.client = client
         self.options = client.options
         self.commonOptions = client.commonOptions
@@ -47,24 +47,23 @@ public final class Queries {
         return client.request(request, context: context, completionHandler: completionHandler)
     }
 
-    /// Get true Boolean value on path
+    /// Get null datetime value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanTrue(
-        withOptions options: GetBooleanTrueOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getNull(
+        withOptions options: GetNullOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date?>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/bool/true"
+        let urlTemplate = "/datetime/null"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(true))
         ]
 
         // Construct headers
@@ -114,11 +113,38 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -137,24 +163,23 @@ public final class Queries {
         }
     }
 
-    /// Get false Boolean value on path
+    /// Get invalid datetime value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanFalse(
-        withOptions options: GetBooleanFalseOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getInvalid(
+        withOptions options: GetInvalidOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/bool/false"
+        let urlTemplate = "/datetime/invalid"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("boolQuery", String(false))
         ]
 
         // Construct headers
@@ -204,11 +229,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -227,120 +272,23 @@ public final class Queries {
         }
     }
 
-    /// Get null Boolean value on query (query string should be absent)
+    /// Get overflow datetime value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanNull(
-        withOptions options: GetBooleanNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getOverflow(
+        withOptions options: GetOverflowOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/bool/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let boolQuery = options?.boolQuery {
-            queryParams.append("boolQuery", String(boolQuery))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '1000000' integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getIntOneMillion(
-        withOptions options: GetIntOneMillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/int/1000000"
+        let urlTemplate = "/datetime/overflow"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(1_000_000))
         ]
 
         // Construct headers
@@ -390,11 +338,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -413,24 +381,23 @@ public final class Queries {
         }
     }
 
-    /// Get '-1000000' integer value
+    /// Get underflow datetime value
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getIntNegativeOneMillion(
-        withOptions options: GetIntNegativeOneMillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getUnderflow(
+        withOptions options: GetUnderflowOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/int/-1000000"
+        let urlTemplate = "/datetime/underflow"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("intQuery", String(-1_000_000))
         ]
 
         // Construct headers
@@ -480,11 +447,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -503,126 +490,38 @@ public final class Queries {
         }
     }
 
-    /// Get null integer value (no query parameter)
+    /// Put max datetime value 9999-12-31T23:59:59.999Z
     /// - Parameters:
-
+    ///    - utcMaxDateTime : datetime body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getIntNull(
-        withOptions options: GetIntNullOptions? = nil,
+    public func put(
+        utcMaxDateTime: Date,
+        withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMaxDateTimeString = dateFormatter.string(from: utcMaxDateTime)
         // Construct URL
-        let urlTemplate = "/queries/int/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let intQuery = options?.intQuery {
-            queryParams.append("intQuery", String(intQuery))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '10000000000' 64 bit integer value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func getTenBillion(
-        withOptions options: GetTenBillionOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/long/10000000000"
+        let urlTemplate = "/datetime/max/utc"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(10_000_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -633,8 +532,8 @@ public final class Queries {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -689,30 +588,38 @@ public final class Queries {
         }
     }
 
-    /// Get '-10000000000' 64 bit integer value
+    /// This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario
     /// - Parameters:
-
+    ///    - utcMaxDateTime7Digits : datetime body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getNegativeTenBillion(
-        withOptions options: GetNegativeTenBillionOptions? = nil,
+    public func put(
+        utcMaxDateTime7Digits: Date,
+        withOptions options: PutUtcMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMaxDateTime7DigitsString = dateFormatter.string(from: utcMaxDateTime7Digits)
         // Construct URL
-        let urlTemplate = "/queries/long/-10000000000"
+        let urlTemplate = "/datetime/max/utc7ms"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("longQuery", String(-10_000_000_000))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime7DigitsString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -723,8 +630,8 @@ public final class Queries {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -779,120 +686,23 @@ public final class Queries {
         }
     }
 
-    /// Get 'null 64 bit integer value (no query param in uri)
+    /// Get max datetime value 9999-12-31t23:59:59.999z
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getLongNull(
-        withOptions options: GetLongNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getUtcLowercaseMaxDateTime(
+        withOptions options: GetUtcLowercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/long/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let longQuery = options?.longQuery {
-            queryParams.append("longQuery", String(longQuery))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '1.034E+20' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func floatScientificPositive(
-        withOptions options: FloatScientificPositiveOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/float/1.034E+20"
+        let urlTemplate = "/datetime/max/utc/lowercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Float(103_400_000_000_000_000_000)))
         ]
 
         // Construct headers
@@ -942,11 +752,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -965,24 +795,23 @@ public final class Queries {
         }
     }
 
-    /// Get '-1.034E-20' numeric value
+    /// Get max datetime value 9999-12-31T23:59:59.999Z
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func floatScientificNegative(
-        withOptions options: FloatScientificNegativeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getUtcUppercaseMaxDateTime(
+        withOptions options: GetUtcUppercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/float/-1.034E-20"
+        let urlTemplate = "/datetime/max/utc/uppercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("floatQuery", String(Float(-1.034e-20)))
         ]
 
         // Construct headers
@@ -1032,11 +861,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1055,121 +904,23 @@ public final class Queries {
         }
     }
 
-    /// Get null numeric value (no query parameter)
+    /// This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func floatNull(
-        withOptions options: FloatNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func listUtcUppercaseMaxDateTime7Digits(
+        withOptions options: GetUtcUppercaseMaxDateTime7DigitsOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/float/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let floatQuery = options?.floatQuery {
-            let floatQueryString = String(describing: floatQuery)
-            queryParams.append("floatQuery", floatQueryString)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '9999999.999' numeric value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func doubleDecimalPositive(
-        withOptions options: DoubleDecimalPositiveOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/double/9999999.999"
+        let urlTemplate = "/datetime/max/utc7ms/uppercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(Double(9_999_999.999)))
         ]
 
         // Construct headers
@@ -1219,11 +970,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1242,30 +1013,38 @@ public final class Queries {
         }
     }
 
-    /// Get '-9999999.999' numeric value
+    /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00
     /// - Parameters:
-
+    ///    - localPositiveOffsetMaxDateTime : datetime body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func doubleDecimalNegative(
-        withOptions options: DoubleDecimalNegativeOptions? = nil,
+    public func put(
+        localPositiveOffsetMaxDateTime: Date,
+        withOptions options: PutLocalPositiveOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localPositiveOffsetMaxDateTimeString = dateFormatter.string(from: localPositiveOffsetMaxDateTime)
         // Construct URL
-        let urlTemplate = "/queries/double/-9999999.999"
+        let urlTemplate = "/datetime/max/localpositiveoffset"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("doubleQuery", String(Double(-9_999_999.999)))
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1276,8 +1055,8 @@ public final class Queries {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1332,121 +1111,23 @@ public final class Queries {
         }
     }
 
-    /// Get null numeric value (no query parameter)
+    /// Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func doubleNull(
-        withOptions options: DoubleNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalPositiveOffsetLowercaseMaxDateTime(
+        withOptions options: GetLocalPositiveOffsetLowercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/double/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let doubleQuery = options?.doubleQuery {
-            let doubleQueryString = String(describing: doubleQuery)
-            queryParams.append("doubleQuery", doubleQueryString)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func stringUnicode(
-        withOptions options: StringUnicodeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/string/unicode/"
+        let urlTemplate = "/datetime/max/localpositiveoffset/lowercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "啊齄丂狛狜隣郎隣兀﨩")
         ]
 
         // Construct headers
@@ -1496,11 +1177,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1519,24 +1220,23 @@ public final class Queries {
         }
     }
 
-    /// Get 'begin!*'();:@ &=+$,/?#[]end
+    /// Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func stringUrlEncoded(
-        withOptions options: StringUrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalPositiveOffsetUppercaseMaxDateTime(
+        withOptions options: GetLocalPositiveOffsetUppercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend"
+        let urlTemplate = "/datetime/max/localpositiveoffset/uppercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "begin!*'();:@ &=+$,/?#[]end")
         ]
 
         // Construct headers
@@ -1586,11 +1286,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -1609,30 +1329,38 @@ public final class Queries {
         }
     }
 
-    /// Get ''
+    /// Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00
     /// - Parameters:
-
+    ///    - localNegativeOffsetMaxDateTime : datetime body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func stringEmpty(
-        withOptions options: StringEmptyOptions? = nil,
+    public func put(
+        localNegativeOffsetMaxDateTime: Date,
+        withOptions options: PutLocalNegativeOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localNegativeOffsetMaxDateTimeString = dateFormatter.string(from: localNegativeOffsetMaxDateTime)
         // Construct URL
-        let urlTemplate = "/queries/string/empty"
+        let urlTemplate = "/datetime/max/localnegativeoffset"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("stringQuery", "")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1643,8 +1371,8 @@ public final class Queries {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -1699,412 +1427,23 @@ public final class Queries {
         }
     }
 
-    /// Get null (no query parameter in url)
+    /// Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func stringNull(
-        withOptions options: StringNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalNegativeOffsetUppercaseMaxDateTime(
+        withOptions options: GetLocalNegativeOffsetUppercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/string/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let stringQuery = options?.stringQuery {
-            queryParams.append("stringQuery", stringQuery)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get using uri with query parameter 'green color'
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func enumValid(
-        withOptions options: EnumValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/enum/green%20color"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let enumQuery = options?.enumQuery {
-            queryParams.append("enumQuery", enumQuery.rawValue)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get null (no query parameter in url)
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func enumNull(
-        withOptions options: EnumNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/enum/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let enumQuery = options?.enumQuery {
-            queryParams.append("enumQuery", enumQuery.rawValue)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func byteMultiByte(
-        withOptions options: ByteMultiByteOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/byte/multibyte"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let byteQuery = options?.byteQuery {
-            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
-                self.options.logger.error("Failed to construct String for byteQuery")
-                return
-            }
-            queryParams.append("byteQuery", byteQueryString)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '' as byte array
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func byteEmpty(
-        withOptions options: ByteEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/byte/empty"
+        let urlTemplate = "/datetime/max/localnegativeoffset/uppercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("byteQuery", "")
         ]
 
         // Construct headers
@@ -2154,11 +1493,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -2177,124 +1536,23 @@ public final class Queries {
         }
     }
 
-    /// Get null as byte array (no query parameters in uri)
+    /// Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func byteNull(
-        withOptions options: ByteNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalNegativeOffsetLowercaseMaxDateTime(
+        withOptions options: GetLocalNegativeOffsetLowercaseMaxDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/byte/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let byteQuery = options?.byteQuery {
-            guard let byteQueryString = String(bytes: byteQuery, encoding: .utf8) else {
-                self.options.logger.error("Failed to construct String for byteQuery")
-                return
-            }
-            queryParams.append("byteQuery", byteQueryString)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '2012-01-01' as date
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func dateValid(
-        withOptions options: DateValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/date/2012-01-01"
+        let urlTemplate = "/datetime/max/localnegativeoffset/lowercase"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateQuery", "2012-01-01")
         ]
 
         // Construct headers
@@ -2344,11 +1602,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -2367,129 +1645,38 @@ public final class Queries {
         }
     }
 
-    /// Get null as date - this should result in no query parameters in uri
+    /// Put min datetime value 0001-01-01T00:00:00Z
     /// - Parameters:
-
+    ///    - utcMinDateTime : datetime body
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateNull(
-        withOptions options: DateNullOptions? = nil,
+    public func put(
+        utcMinDateTime: Date,
+        withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMinDateTimeString = dateFormatter.string(from: utcMinDateTime)
         // Construct URL
-        let urlTemplate = "/queries/date/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let dateQuery = options?.dateQuery {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateQueryString = dateFormatter.string(from: dateQuery)
-            queryParams.append("dateQuery", dateQueryString)
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get '2012-01-01T01:01:01Z' as date-time
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func dateTimeValid(
-        withOptions options: DateTimeValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z"
+        let urlTemplate = "/datetime/min/utc"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
         let queryParams: [QueryParameter] = [
-            ("dateTimeQuery", "2012-01-01T01:01:01Z")
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -2500,8 +1687,8 @@ public final class Queries {
             return
         }
 
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2556,38 +1743,28 @@ public final class Queries {
         }
     }
 
-    /// Get null as date-time, should result in no query parameters in uri
+    /// Get min datetime value 0001-01-01T00:00:00Z
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func dateTimeNull(
-        withOptions options: DateTimeNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getUtcMinDateTime(
+        withOptions options: GetUtcMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/datetime/null"
+        let urlTemplate = "/datetime/min/utc"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let dateTimeQuery = options?.dateTimeQuery {
-            let dateFormatter = ISO8601DateFormatter()
-            dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            let dateTimeQueryString = dateFormatter.string(from: dateTimeQuery)
-            queryParams.append("dateTimeQuery", dateTimeQueryString)
-        }
-
-        // Header options
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2601,6 +1778,124 @@ public final class Queries {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put min datetime value 0001-01-01T00:00:00+14:00
+    /// - Parameters:
+    ///    - localPositiveOffsetMinDateTime : datetime body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        localPositiveOffsetMinDateTime: Date,
+        withOptions options: PutLocalPositiveOffsetMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localPositiveOffsetMinDateTimeString = dateFormatter.string(from: localPositiveOffsetMinDateTime)
+        // Construct URL
+        let urlTemplate = "/datetime/min/localpositiveoffset"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2655,35 +1950,28 @@ public final class Queries {
         }
     }
 
-    /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
+    /// Get min datetime value 0001-01-01T00:00:00+14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func arrayStringCsvValid(
-        withOptions options: ArrayStringCsvValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalPositiveOffsetMinDateTime(
+        withOptions options: GetLocalPositiveOffsetMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/valid"
+        let urlTemplate = "/datetime/min/localpositiveoffset"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-        }
-
-        // Header options
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2697,6 +1985,124 @@ public final class Queries {
 
         guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
             self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
+        // Send request
+        let context = PipelineContext.of(keyValues: [
+            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
+        ])
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.merge(with: options?.context)
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+            guard let data = httpResponse?.data else {
+                let noDataError = AzureError.client("Response data expected but not found.")
+                dispatchQueue.async {
+                    completionHandler(.failure(noDataError), httpResponse)
+                }
+                return
+            }
+
+            switch result {
+            case .success:
+                guard let statusCode = httpResponse?.statusCode else {
+                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+                    dispatchQueue.async {
+                        completionHandler(.failure(noStatusCodeError), httpResponse)
+                    }
+                    return
+                }
+                if [
+                    200
+                ].contains(statusCode) {
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
+                }
+            case .failure:
+                do {
+                    let decoder = JSONDecoder()
+                    let decoded = try decoder.decode(ErrorType.self, from: data)
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                    }
+                } catch {
+                    dispatchQueue.async {
+                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Put min datetime value 0001-01-01T00:00:00-14:00
+    /// - Parameters:
+    ///    - localNegativeOffsetMinDateTime : datetime body
+    ///    - options: A list of options for the operation
+    ///    - completionHandler: A completion handler that receives a status code on
+    ///     success.
+    public func put(
+        localNegativeOffsetMinDateTime: Date,
+        withOptions options: PutLocalNegativeOffsetMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localNegativeOffsetMinDateTimeString = dateFormatter.string(from: localNegativeOffsetMinDateTime)
+        // Construct URL
+        let urlTemplate = "/datetime/min/localnegativeoffset"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
+            return
+        }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
             return
         }
 
@@ -2751,35 +2157,28 @@ public final class Queries {
         }
     }
 
-    /// Get a null array of string using the csv-array format
+    /// Get min datetime value 0001-01-01T00:00:00-14:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func arrayStringCsvNull(
-        withOptions options: ArrayStringCsvNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalNegativeOffsetMinDateTime(
+        withOptions options: GetLocalNegativeOffsetMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/null"
+        let urlTemplate = "/datetime/min/localnegativeoffset"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-        }
-
-        // Header options
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2824,11 +2223,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -2847,35 +2266,28 @@ public final class Queries {
         }
     }
 
-    /// Get an empty array [] of string using the csv-array format
+    /// Get min datetime value 0001-01-01T00:00:00
     /// - Parameters:
 
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func arrayStringCsvEmpty(
-        withOptions options: ArrayStringCsvEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
+    public func getLocalNoOffsetMinDateTime(
+        withOptions options: GetLocalNoOffsetMinDateTimeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
         // Construct URL
-        let urlTemplate = "/queries/array/csv/string/empty"
+        let urlTemplate = "/datetime/min/localnooffset"
         let pathParams = [
             "$host": client.endpoint.absoluteString
         ]
         // Construct query
-        var queryParams: [QueryParameter] = [
+        let queryParams: [QueryParameter] = [
         ]
 
         // Construct headers
         var headers = HTTPHeaders()
         headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-        }
-
-        // Header options
         // Construct request
         guard let requestUrl = url(
             host: "{$host}",
@@ -2920,395 +2332,31 @@ public final class Queries {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func arrayStringNoCollectionFormatEmpty(
-        withOptions options: ArrayStringNoCollectionFormatEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/none/string/empty"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func arrayStringSsvValid(
-        withOptions options: ArrayStringSsvValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/ssv/string/valid"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: " "))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func arrayStringTsvValid(
-        withOptions options: ArrayStringTsvValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/tsv/string/valid"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "\t"))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
-                    }
-                }
-            case .failure:
-                do {
-                    let decoder = JSONDecoder()
-                    let decoded = try decoder.decode(ErrorType.self, from: data)
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
-                    }
-                } catch {
-                    dispatchQueue.async {
-                        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
-    /// - Parameters:
-
-    ///    - options: A list of options for the operation
-    ///    - completionHandler: A completion handler that receives a status code on
-    ///     success.
-    public func arrayStringPipesValid(
-        withOptions options: ArrayStringPipesValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Void>
-    ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/pipes/string/valid"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
-
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let arrayQuery = options?.arrayQuery {
-            queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "|"))
-        }
-
-        // Header options
-        // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
-            return
-        }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
-        // Send request
-        let context = PipelineContext.of(keyValues: [
-            ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
-        ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
-        context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
-            guard let data = httpResponse?.data else {
-                let noDataError = AzureError.client("Response data expected but not found.")
-                dispatchQueue.async {
-                    completionHandler(.failure(noDataError), httpResponse)
-                }
-                return
-            }
-
-            switch result {
-            case .success:
-                guard let statusCode = httpResponse?.statusCode else {
-                    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-                    dispatchQueue.async {
-                        completionHandler(.failure(noStatusCodeError), httpResponse)
-                    }
-                    return
-                }
-                if [
-                    200
-                ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(
-                            .success(()),
-                            httpResponse
-                        )
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
                     }
                 }
             case .failure:

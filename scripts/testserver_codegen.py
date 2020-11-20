@@ -30,6 +30,9 @@ working_files = [
     "header",
     "required-optional",
     "body-array",
+    "body-date",
+    "body-datetime",
+    "body-datetime-rfc1123",
     "body-boolean",
     "custom-baseUrl-more-options"
 ]

@@ -1724,7 +1724,9 @@ public final class Header {
         withOptions options: ParamDatetimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let valueString = Date.Format.iso8601.formatter.string(from: value)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let valueString = dateFormatter.string(from: value)
         // Construct URL
         let urlTemplate = "/header/param/prim/datetime"
         let pathParams = [

@@ -206,6 +206,21 @@
 		F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */; };
 		F15D30F12548F38700265366 /* AutoRestUrlPathsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */; };
 		F1660B51254CA88A00868BF2 /* OperationResponseByteArrayBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1660B4F254CA85C00868BF2 /* OperationResponseByteArrayBodySnippet.stencil */; };
+		F16CDA182568765800FD0817 /* AutoRestDateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CDA152568765700FD0817 /* AutoRestDateTest.swift */; };
+		F16CDA192568765800FD0817 /* AutoRestDateTimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CDA162568765700FD0817 /* AutoRestDateTimeTest.swift */; };
+		F16CDA1A2568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */; };
+		F16CDA242568769600FD0817 /* AutoRestDateTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA232568769600FD0817 /* AutoRestDateTest */; };
+		F16CDA262568769F00FD0817 /* AutoRestDateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA252568769F00FD0817 /* AutoRestDateTimeTest */; };
+		F16CDA28256876A700FD0817 /* AutoRestRfC1123DateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA27256876A700FD0817 /* AutoRestRfC1123DateTimeTest */; };
+		F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
+		F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
+		F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
+		F16CDA322568770B00FD0817 /* OperationResponseDataSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */; };
+		F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
+		F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
+		F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
+		F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
+		F16CDA392568772500FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -264,6 +279,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
+				F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */,
+				F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */,
+				F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */,
+				F16CDA392568772500FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in CopyFiles */,
 				F1660B51254CA88A00868BF2 /* OperationResponseByteArrayBodySnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
@@ -285,7 +305,6 @@
 				F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */,
 				F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */,
 				F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */,
-				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
 				0A22B46424E1E66F00EC018E /* JazzyFile.stencil in CopyFiles */,
 				F1A5FD7E24DCFEE600A5CC6C /* ModelDecoderDateProperty.stencil in CopyFiles */,
 				F1A5FD7F24DCFEE600A5CC6C /* ModelDecoderEncoderSnippet.stencil in CopyFiles */,
@@ -449,6 +468,17 @@
 		F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestUrlQueriesTest.swift; sourceTree = "<group>"; };
 		F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestUrlPathsTest.swift; sourceTree = "<group>"; };
 		F1660B4F254CA85C00868BF2 /* OperationResponseByteArrayBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseByteArrayBodySnippet.stencil; sourceTree = "<group>"; };
+		F16CDA152568765700FD0817 /* AutoRestDateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestDateTest.swift; sourceTree = "<group>"; };
+		F16CDA162568765700FD0817 /* AutoRestDateTimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestDateTimeTest.swift; sourceTree = "<group>"; };
+		F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestDateTimeRfc1123Test.swift; sourceTree = "<group>"; };
+		F16CDA1D2568767500FD0817 /* body-date */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-date"; path = "test/integration/generated/body-date"; sourceTree = SOURCE_ROOT; };
+		F16CDA1F2568767B00FD0817 /* body-datetime */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-datetime"; path = "test/integration/generated/body-datetime"; sourceTree = SOURCE_ROOT; };
+		F16CDA212568767F00FD0817 /* body-datetime-rfc1123 */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-datetime-rfc1123"; path = "test/integration/generated/body-datetime-rfc1123"; sourceTree = SOURCE_ROOT; };
+		F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeBodySnippet.stencil; sourceTree = "<group>"; };
+		F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateBodySnippet.stencil; sourceTree = "<group>"; };
+		F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeRfc1123BodySnippet.stencil; sourceTree = "<group>"; };
+		F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDataSnippet.stencil; sourceTree = "<group>"; };
+		F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateDispatchSnippet.stencil; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
@@ -595,10 +625,13 @@
 				F1DCAF8F255A496C00A6E425 /* AutoRestNumberTest in Frameworks */,
 				F1E1A1AC2560C0C1009A73BC /* AutoRestSwaggerBatHeader in Frameworks */,
 				F15A929D254B09C700E2D9C2 /* AutoRestIntegerTest in Frameworks */,
+				F16CDA262568769F00FD0817 /* AutoRestDateTimeTest in Frameworks */,
+				F16CDA242568769600FD0817 /* AutoRestDateTest in Frameworks */,
 				F15A92A5254B09C700E2D9C2 /* AutoRestSwaggerBatFile in Frameworks */,
 				F11CA18425647E37009DFACF /* AutoRestBoolTest in Frameworks */,
 				F1DCAF21255A125C00A6E425 /* AutoRestSwaggerBatByte in Frameworks */,
 				F15A929F254B09C700E2D9C2 /* AutoRestParameterizedHostTest in Frameworks */,
+				F16CDA28256876A700FD0817 /* AutoRestRfC1123DateTimeTest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +709,11 @@
 				0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */,
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */,
+				F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */,
+				F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */,
+				F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */,
+				F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */,
+				F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */,
 				F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */,
 				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
 				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
@@ -773,6 +811,9 @@
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				F16CDA212568767F00FD0817 /* body-datetime-rfc1123 */,
+				F16CDA1F2568767B00FD0817 /* body-datetime */,
+				F16CDA1D2568767500FD0817 /* body-date */,
 				F13E68E42567232D006C0F93 /* custom-baseUrl-more-options */,
 				F1D305E42565A55F003EAABB /* url-multi-collectionFormat */,
 				F11CA17C25647D51009DFACF /* body-boolean */,
@@ -791,6 +832,9 @@
 				F15A927F254B085600E2D9C2 /* xms-error-responses */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				F15A9283254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift */,
+				F16CDA152568765700FD0817 /* AutoRestDateTest.swift */,
+				F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */,
+				F16CDA162568765700FD0817 /* AutoRestDateTimeTest.swift */,
 				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
 				F15A928C254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift */,
 				F15A928F254B093D00E2D9C2 /* AutoRestSwaggerBatFileTest.swift */,
@@ -1059,6 +1103,9 @@
 				F1D306122565B137003EAABB /* AutoRestUrlMutliCollectionFormatTest */,
 				F11CA18325647E37009DFACF /* AutoRestBoolTest */,
 				F13E68E625672348006C0F93 /* AutoRestParameterizedCustomHostTest */,
+				F16CDA232568769600FD0817 /* AutoRestDateTest */,
+				F16CDA252568769F00FD0817 /* AutoRestDateTimeTest */,
+				F16CDA27256876A700FD0817 /* AutoRestRfC1123DateTimeTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1120,6 +1167,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */,
+				F16CDA322568770B00FD0817 /* OperationResponseDataSnippet.stencil in Resources */,
+				F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */,
+				F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */,
+				F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,15 +1249,18 @@
 				F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */,
 				F11CA0BB25638E21009DFACF /* AutoRestSwaggerBatHeaderTest.swift in Sources */,
 				F1DCAF1B255A10EA00A6E425 /* AutoRestSwaggerBatByteTest.swift in Sources */,
+				F16CDA182568765800FD0817 /* AutoRestDateTest.swift in Sources */,
 				F1DCAF91255A4B2200A6E425 /* AutoRestNumberTest.swift in Sources */,
 				0AFA1AE8254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift in Sources */,
 				F11CA0EC25639186009DFACF /* AutoRestSwaggerBatArrayTest.swift in Sources */,
 				F15A9290254B093E00E2D9C2 /* AutoRestSwaggerBatFileTest.swift in Sources */,
 				F170D322253F786800A569A0 /* Util.swift in Sources */,
 				F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */,
+				F16CDA192568765800FD0817 /* AutoRestDateTimeTest.swift in Sources */,
 				F15A9287254B08A400E2D9C2 /* AutoRestHeadTest.swift in Sources */,
 				F15A9293254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				F15A9284254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift in Sources */,
+				F16CDA1A2568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift in Sources */,
 				F15A928D254B093800E2D9C2 /* AutoRestResourceFlatteningTest.swift in Sources */,
 				F15A9296254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift in Sources */,
 				F1D305F12565A86F003EAABB /* AutoRestUrlMultiCollectionFormatTest.swift in Sources */,
@@ -1681,6 +1736,18 @@
 		F15A92F8254B2FFA00E2D9C2 /* AutoRestSwaggerBat */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestSwaggerBat;
+		};
+		F16CDA232568769600FD0817 /* AutoRestDateTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestDateTest;
+		};
+		F16CDA252568769F00FD0817 /* AutoRestDateTimeTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestDateTimeTest;
+		};
+		F16CDA27256876A700FD0817 /* AutoRestRfC1123DateTimeTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestRfC1123DateTimeTest;
 		};
 		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
