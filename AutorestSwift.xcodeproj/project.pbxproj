@@ -222,6 +222,9 @@
 		F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
 		F16CDA392568772500FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
 		F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */; };
+		F16CDAD525688F2C00FD0817 /* OperationResponseJsonDecoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADF71DE25688CBC0079F127 /* OperationResponseJsonDecoderSnippet.stencil */; };
+		F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */; };
+		F16CDAD725688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -280,10 +283,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F1731F352522E531006CDED8 /* OperationDecodingSnippet.stencil in CopyFiles */,
-				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
-				F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
+				F16CDAD525688F2C00FD0817 /* OperationResponseJsonDecoderSnippet.stencil in CopyFiles */,
 				F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */,
+				F1731F352522E531006CDED8 /* OperationDecodingSnippet.stencil in CopyFiles */,
+				F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
+				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
+				F16CDAD725688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
+				F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
 				F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */,
 				F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */,
 				F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */,
@@ -486,6 +492,7 @@
 		F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseReturnTypeStatusCodeSnippet.stencil; sourceTree = "<group>"; };
 		F16CDAD025688E5600FD0817 /* OperationDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDecodingSnippet.stencil; sourceTree = "<group>"; };
+		F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
@@ -704,7 +711,7 @@
 				F16CDAD025688E5600FD0817 /* OperationDecodingSnippet.stencil */,
 				F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */,
 				F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */,
-				F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */,
+				F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */,
 				F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */,
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
@@ -818,6 +825,14 @@
 				F106830124CF9220007EB4D5 /* swiftlint */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		F16CDAD225688ED200FD0817 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				F151510325128E0B00DF0B9F /* OperationExceptionJsonBodySnippet.stencil */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
@@ -970,6 +985,7 @@
 				0A22B02C24C88EB000EC018E /* Podfile */,
 				41CEA9DBCC8825C2C1346AE7 /* Pods */,
 				439002EA86479895A35561C7 /* Frameworks */,
+				F16CDAD225688ED200FD0817 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
