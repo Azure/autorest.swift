@@ -33,7 +33,7 @@ let package = Package(
         .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
         .package(name: "AutoRestSwaggerBatHeader", path: "./test/integration/generated/header/"),
         .package(name: "AutoRestSwaggerBatArray", path: "./test/integration/generated/body-array/"),
-        .package(name: "AutoRestDateTest", path: "./test/integration/generated/body-date/")
+        //.package(name: "AutoRestDateTest", path: "./test/integration/generated/body-date/")
         .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/"),
         .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
         .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options")
@@ -67,7 +67,7 @@ let package = Package(
             "AutoRestNumberTest",
             "AutoRestSwaggerBatHeader",
             "AutoRestSwaggerBatArray",
-            "AutoRestDateTest",
+//            "AutoRestDateTest",
             "AutoRestBoolTest",
             "AutoRestUrlMutliCollectionFormatTest",
             "AutoRestParameterizedCustomHostTest"],
