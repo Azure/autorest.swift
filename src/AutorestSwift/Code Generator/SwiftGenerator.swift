@@ -154,7 +154,7 @@ class SwiftGenerator: CodeGenerator {
         let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
             template: "ServiceClientFile",
-            toSubfolder: .source,
+            toSubfolder: .generated,
             withFilename: clientViewModel.name,
             andParams: [
                 "model": clientViewModel
@@ -170,7 +170,7 @@ class SwiftGenerator: CodeGenerator {
         for (groupName, operationGroup) in clientViewModel.namedOperationGroups {
             try render(
                 template: "NamedOperationGroupFile",
-                toSubfolder: .source,
+                toSubfolder: .generated,
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
