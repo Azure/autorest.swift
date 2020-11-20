@@ -33,15 +33,12 @@ let package = Package(
         .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
         .package(name: "AutoRestSwaggerBatHeader", path: "./test/integration/generated/header/"),
         .package(name: "AutoRestSwaggerBatArray", path: "./test/integration/generated/body-array/"),
-<<<<<<< HEAD
         .package(name: "AutoRestDateTest", path: "./test/integration/generated/body-date/"),
         .package(name: "AutoRestRfC1123DateTimeTest", path: "./test/integration/generated/body-datetime-rfc1123/"),
-        .package(name: "AutoRestDateTimeTest", path: "./test/integration/generated/body-datetime/")
-=======
+        .package(name: "AutoRestDateTimeTest", path: "./test/integration/generated/body-datetime/"),
         .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/"),
         .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
         .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options")
->>>>>>> sacheu/body-date
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -74,7 +71,7 @@ let package = Package(
             "AutoRestSwaggerBatArray",
             "AutoRestDateTest",
             "AutoRestRfC1123DateTimeTest",
-            "AutoRestDateTimeTest"],
+            "AutoRestDateTimeTest",
             "AutoRestBoolTest",
             "AutoRestUrlMutliCollectionFormatTest",
             "AutoRestParameterizedCustomHostTest"],

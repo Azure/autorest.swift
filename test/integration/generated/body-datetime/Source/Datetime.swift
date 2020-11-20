@@ -141,7 +141,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -251,7 +250,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -361,7 +359,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -471,7 +468,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -777,7 +773,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -887,7 +882,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -997,7 +991,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -1205,7 +1198,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -1315,7 +1307,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -1523,7 +1514,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -1633,7 +1623,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -1841,7 +1830,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -2049,7 +2037,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -2257,7 +2244,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -2367,7 +2353,6 @@ public final class Datetime {
                                 }
                             }
                         }
-
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
