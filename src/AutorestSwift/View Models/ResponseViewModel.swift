@@ -80,9 +80,17 @@ struct ResponseViewModel {
         self.isNullable = schemaResponse?.nullable ?? false
         if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
             let pagingNames = Language.PagingNames(from: pagingMetadata) {
-            let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
-            guard arrayElements.count == 1
-            else { fatalError("Did not find exactly one array type for paged collection.") }
+            var arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
+            if arrayElements.isEmpty {
+                let objectElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ObjectSchema }
+                for object in objectElements {
+                    let objectArrays = (object.properties ?? []).compactMap { $0.schema as? ArraySchema }
+                    arrayElements += objectArrays
+                }
+            }
+
+            // FIXME: This assumption no longer holds for storage and should be revisited
+            guard arrayElements.count == 1 else { fatalError("Did not find exactly one array type for paged collection.") }
             self.strategy = ResponseBodyType.pagedBody.rawValue
             self.pagingNames = pagingNames
             self.pagedElementClassName = arrayElements.first!.elementType.name

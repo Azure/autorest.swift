@@ -124,6 +124,10 @@ class Schema: Codable, LanguageShortcut {
             swiftType = constant.valueType.swiftType()
         case .duration:
             swiftType = "DateComponents"
+        case .binary:
+            swiftType = "Data"
+        case .uri:
+            swiftType = "URL"
         default:
             fatalError("Type \(type) not implemented")
         }
