@@ -93,7 +93,7 @@ struct OperationParameters {
         var bodyParamName: String?
         assert(body.count <= 1, "Expected, at most, one body parameter.")
         if body.count > 0 {
-            bodyParamName = body.first?.value
+            bodyParamName = body.first?.key
         } else {
             bodyParamName = operation.request?.bodyParamName(for: operation)
         }
@@ -148,8 +148,9 @@ enum BodyParamStrategy: String {
     case plainNullable
     case byteArray
     case constant
-    case number
     case decimal
+    case data
+    case string
 }
 
 struct BodyParams {
@@ -185,8 +186,10 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
+        } else if param.schema.type == .date || param.schema.type == .dateTime {
+            strategy = .string
         } else if param.schema.type == .number {
-            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .number
+            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .data
         } else if param.schema is ConstantSchema {
             strategy = .constant
         } else {

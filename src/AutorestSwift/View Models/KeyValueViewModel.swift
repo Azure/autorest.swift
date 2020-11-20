@@ -94,7 +94,8 @@ struct KeyValueViewModel: Comparable {
         self.key = signatureParameter.serializedName ?? ""
         self.path = signatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !signatureParameter.required
-        self.needDecodingInMethod = signatureParameter.required
+        self.needDecodingInMethod = signatureParameter
+            .keyValueDecodeStrategy != .default
 
         // value is referring a signature parameter, no need to wrap as String
         self.value = signatureParameter.formatValue()
@@ -105,35 +106,47 @@ struct KeyValueViewModel: Comparable {
         self.optional = false
         self.needDecodingInMethod = false
         self.path = ""
-        if param.paramLocation == .header {
-            assert(!(param.serializedName?.isEmpty ?? true))
-            self.key = param.serializedName ?? ""
-        } else {
-            self.key = param.name
-        }
-        self.strategy = KeyValueDecodeStrategy.default.rawValue
-
         self.value = constantSchema.formatValue(
             skipUrlEncoding: param.value.isSkipUrlEncoding,
             paramLocation: param.paramLocation
         )
+
+        if param.paramLocation == .header {
+            assert(!(param.serializedName?.isEmpty ?? true))
+            self.key = param.serializedName ?? ""
+        } else if param.paramLocation == .body {
+            self.key = value
+        } else {
+            self.key = param.name
+        }
+        self.strategy = KeyValueDecodeStrategy.default.rawValue
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
         self.path = bodySignatureParameter.belongsInOptions() ? "options?." : ""
         self.optional = !bodySignatureParameter.required
-        var needDecodingInMethod = bodySignatureParameter.required
+
+        self.strategy = bodySignatureParameter.keyValueDecodeStrategy.rawValue
+
+        var needDecodingInMethod = bodySignatureParameter
+            .keyValueDecodeStrategy != .default
         let type = bodySignatureParameter.schema.type
 
-        // value is referring a signature parameter, no need to wrap as String
-        self.value = bodyParamName ?? bodySignatureParameter.formatValue(bodyParamName)
         self.key = bodyParamName ?? bodySignatureParameter.name
-        if type == .date || type == .byteArray || type == .unixTime {
-            needDecodingInMethod = bodySignatureParameter.paramLocation == .body ? false : needDecodingInMethod
+
+        if type == .byteArray || type == .unixTime,
+            bodySignatureParameter.paramLocation == .body {
+            needDecodingInMethod = false
+        }
+
+        // value is referring a signature parameter, no need to wrap as String
+        if let bodyParamName1 = bodyParamName {
+            self.value = needDecodingInMethod ? "\(bodyParamName1)String" : bodyParamName1
+        } else {
+            self.value = bodySignatureParameter.formatValue(bodyParamName)
         }
 
         self.needDecodingInMethod = needDecodingInMethod
-        self.strategy = bodySignatureParameter.keyValueDecodeStrategy.rawValue
     }
 
     /**
