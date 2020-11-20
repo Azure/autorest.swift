@@ -113,7 +113,32 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -197,7 +222,25 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -281,7 +324,25 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -365,7 +426,25 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -411,6 +490,10 @@ public final class DateOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(maxDateString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -543,7 +626,25 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -589,6 +690,10 @@ public final class DateOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(minDateString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -721,7 +826,25 @@ public final class DateOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {

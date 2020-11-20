@@ -254,6 +254,7 @@ public final class Queries {
         if let boolQuery = options?.boolQuery {
             queryParams.append("boolQuery", String(boolQuery))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -529,6 +530,7 @@ public final class Queries {
         if let intQuery = options?.intQuery {
             queryParams.append("intQuery", String(intQuery))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -804,6 +806,7 @@ public final class Queries {
         if let longQuery = options?.longQuery {
             queryParams.append("longQuery", String(longQuery))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -1080,6 +1083,7 @@ public final class Queries {
             let floatQueryString = String(describing: floatQuery)
             queryParams.append("floatQuery", floatQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -1356,6 +1360,7 @@ public final class Queries {
             let doubleQueryString = String(describing: doubleQuery)
             queryParams.append("doubleQuery", doubleQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -1721,6 +1726,7 @@ public final class Queries {
         if let stringQuery = options?.stringQuery {
             queryParams.append("stringQuery", stringQuery)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -1816,6 +1822,7 @@ public final class Queries {
         if let enumQuery = options?.enumQuery {
             queryParams.append("enumQuery", enumQuery.rawValue)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -1911,6 +1918,7 @@ public final class Queries {
         if let enumQuery = options?.enumQuery {
             queryParams.append("enumQuery", enumQuery.rawValue)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2010,6 +2018,7 @@ public final class Queries {
             }
             queryParams.append("byteQuery", byteQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2199,6 +2208,7 @@ public final class Queries {
             }
             queryParams.append("byteQuery", byteQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2387,6 +2397,7 @@ public final class Queries {
             let dateQueryString = dateFormatter.string(from: dateQuery)
             queryParams.append("dateQuery", dateQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2570,9 +2581,12 @@ public final class Queries {
         // Process endpoint options
         // Query options
         if let dateTimeQuery = options?.dateTimeQuery {
-            let dateTimeQueryString = Date.Format.iso8601.formatter.string(from: dateTimeQuery)
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            let dateTimeQueryString = dateFormatter.string(from: dateTimeQuery)
             queryParams.append("dateTimeQuery", dateTimeQueryString)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2668,6 +2682,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2763,6 +2778,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2858,6 +2874,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -2953,6 +2970,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: ","))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -3048,6 +3066,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: " "))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -3143,6 +3162,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "\t"))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -3238,6 +3258,7 @@ public final class Queries {
         if let arrayQuery = options?.arrayQuery {
             queryParams.append("arrayQuery", arrayQuery.map { String($0) }.joined(separator: "|"))
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(

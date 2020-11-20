@@ -83,6 +83,7 @@ public final class Paths {
         if let keyVersion = options?.keyVersion {
             queryParams.append("keyVersion", keyVersion)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(

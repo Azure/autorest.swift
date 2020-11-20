@@ -71,6 +71,12 @@ public final class Queries {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+        if let arrayQuery = options?.arrayQuery {
+            arrayQuery.forEach {
+                queryParams.append("arrayQuery", $0)
+            }
+        }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -163,6 +169,12 @@ public final class Queries {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+        if let arrayQuery = options?.arrayQuery {
+            arrayQuery.forEach {
+                queryParams.append("arrayQuery", $0)
+            }
+        }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -255,6 +267,12 @@ public final class Queries {
         headers["Accept"] = "application/json"
         // Process endpoint options
         // Query options
+        if let arrayQuery = options?.arrayQuery {
+            arrayQuery.forEach {
+                queryParams.append("arrayQuery", $0)
+            }
+        }
+
         // Header options
         // Construct request
         guard let requestUrl = url(

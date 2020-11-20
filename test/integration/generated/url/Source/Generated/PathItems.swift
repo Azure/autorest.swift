@@ -87,6 +87,7 @@ public final class PathItems {
         if let globalStringQuery = client.globalStringQuery {
             queryParams.append("globalStringQuery", globalStringQuery)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -195,6 +196,7 @@ public final class PathItems {
         if let globalStringQuery = client.globalStringQuery {
             queryParams.append("globalStringQuery", globalStringQuery)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -303,6 +305,7 @@ public final class PathItems {
         if let globalStringQuery = client.globalStringQuery {
             queryParams.append("globalStringQuery", globalStringQuery)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(
@@ -411,6 +414,7 @@ public final class PathItems {
         if let globalStringQuery = client.globalStringQuery {
             queryParams.append("globalStringQuery", globalStringQuery)
         }
+
         // Header options
         // Construct request
         guard let requestUrl = url(

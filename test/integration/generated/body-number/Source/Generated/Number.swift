@@ -456,6 +456,10 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = bigFloatString.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -642,6 +646,10 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = bigDoubleString.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1778,6 +1786,10 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = smallFloatString.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1964,6 +1976,10 @@ public final class Number {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = smallDoubleString.data(using: .utf8) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,

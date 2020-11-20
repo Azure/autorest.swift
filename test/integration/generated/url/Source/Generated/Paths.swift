@@ -2145,7 +2145,9 @@ public final class Paths {
         withOptions options: DateTimeNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateTimePathString = Date.Format.iso8601.formatter.string(from: dateTimePath)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let dateTimePathString = dateFormatter.string(from: dateTimePath)
         // Construct URL
         let urlTemplate = "/paths/datetime/null/{dateTimePath}"
         let pathParams = [

@@ -113,7 +113,39 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -197,7 +229,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -281,7 +338,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -365,7 +447,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -394,7 +501,9 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let utcMaxDateTimeString = Date.Format.iso8601.formatter.string(from: utcMaxDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMaxDateTimeString = dateFormatter.string(from: utcMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/utc"
         let pathParams = [
@@ -409,6 +518,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -486,7 +599,9 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let utcMaxDateTime7DigitsString = Date.Format.iso8601.formatter.string(from: utcMaxDateTime7Digits)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMaxDateTime7DigitsString = dateFormatter.string(from: utcMaxDateTime7Digits)
         // Construct URL
         let urlTemplate = "/datetime/max/utc7ms"
         let pathParams = [
@@ -501,6 +616,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime7DigitsString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -633,7 +752,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -717,7 +861,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -801,7 +970,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -830,8 +1024,9 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let localPositiveOffsetMaxDateTimeString = Date.Format.iso8601.formatter
-            .string(from: localPositiveOffsetMaxDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localPositiveOffsetMaxDateTimeString = dateFormatter.string(from: localPositiveOffsetMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/localpositiveoffset"
         let pathParams = [
@@ -846,6 +1041,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -978,7 +1177,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1062,7 +1286,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1091,8 +1340,9 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let localNegativeOffsetMaxDateTimeString = Date.Format.iso8601.formatter
-            .string(from: localNegativeOffsetMaxDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localNegativeOffsetMaxDateTimeString = dateFormatter.string(from: localNegativeOffsetMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/localnegativeoffset"
         let pathParams = [
@@ -1107,6 +1357,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMaxDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1239,7 +1493,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1323,7 +1602,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1352,7 +1656,9 @@ public final class Datetime {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let utcMinDateTimeString = Date.Format.iso8601.formatter.string(from: utcMinDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let utcMinDateTimeString = dateFormatter.string(from: utcMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/utc"
         let pathParams = [
@@ -1367,6 +1673,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(utcMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1499,7 +1809,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1528,8 +1863,9 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let localPositiveOffsetMinDateTimeString = Date.Format.iso8601.formatter
-            .string(from: localPositiveOffsetMinDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localPositiveOffsetMinDateTimeString = dateFormatter.string(from: localPositiveOffsetMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/localpositiveoffset"
         let pathParams = [
@@ -1544,6 +1880,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1676,7 +2016,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1705,8 +2070,9 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let localNegativeOffsetMinDateTimeString = Date.Format.iso8601.formatter
-            .string(from: localNegativeOffsetMinDateTime)
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let localNegativeOffsetMinDateTimeString = dateFormatter.string(from: localNegativeOffsetMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/localnegativeoffset"
         let pathParams = [
@@ -1721,6 +2087,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMinDateTimeString) else {
+            self.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         guard let requestUrl = url(
             host: "{$host}",
             template: urlTemplate,
@@ -1853,7 +2223,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -1937,7 +2332,32 @@ public final class Datetime {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for
+                    do {
+                        let dateFormatter = ISO8601DateFormatter()
+                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dateFormatter.formatOptions = [.withInternetDateTime]
+                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                            if let decoded = dateFormatter.date(from: decodedStr) {
+                                dispatchQueue.async {
+                                    completionHandler(.success(decoded), httpResponse)
+                                }
+                            } else {
+                                dispatchQueue.async {
+                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                                }
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
