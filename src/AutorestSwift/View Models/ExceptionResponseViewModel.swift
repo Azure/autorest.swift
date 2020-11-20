@@ -47,9 +47,8 @@ struct ExceptionResponseViewModel {
         self.description = schemaResponse?.description
 
         if let objectType = schemaResponse?.schema.swiftType(optional: false),
-            let type = schemaResponse?.schema.type,
             let schema = schemaResponse?.schema {
-            self.strategy = ResponseBodyType.strategy(for: objectType, and: type, schema: schema).rawValue
+            self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
             self.objectType = objectType
         } else {
             self.strategy = ResponseBodyType.noBody.rawValue

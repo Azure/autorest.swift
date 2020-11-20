@@ -42,6 +42,7 @@ install: build copyTools
 run: 	${EXECUTABLE_DIRECTORY}/AutorestSwift
 
 test: copyTestResources
+	swift build --target AutorestSwiftTest
 	swift test
 
 clean:

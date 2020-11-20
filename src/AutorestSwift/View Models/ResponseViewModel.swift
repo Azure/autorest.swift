@@ -46,7 +46,8 @@ enum ResponseBodyType: String {
     case dateTimeBody
     case datetimeRfc1123Body
 
-    static func strategy(for input: String, and type: AllSchemaTypes, schema: Schema) -> ResponseBodyType {
+    static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
+        let type = schema.type
         if input == "String" {
             return .stringBody
         } else if input.starts(with: "Int") {
@@ -122,9 +123,8 @@ struct ResponseViewModel {
             self.pagingNames = nil
             self.pagedElementClassName = nil
             if let objectType = schemaResponse?.schema.swiftType(optional: false),
-                let type = schemaResponse?.schema.type,
                 let schema = schemaResponse?.schema {
-                self.strategy = ResponseBodyType.strategy(for: objectType, and: type, schema: schema).rawValue
+                self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
                 self.objectType = objectType
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue
