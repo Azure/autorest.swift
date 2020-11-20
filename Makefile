@@ -17,7 +17,6 @@ RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
 
 build: copyRunResources
 	swift build --target AutorestSwift
-	./scripts/build_azure_core.sh
 	./scripts/swiftlint.sh > /dev/null
 
 copyRunResources:
@@ -43,6 +42,7 @@ install: build copyTools
 run: 	${EXECUTABLE_DIRECTORY}/AutorestSwift
 
 test: copyTestResources
+	swift build --target AutorestSwiftTest
 	swift test
 
 clean:

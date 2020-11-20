@@ -57,6 +57,8 @@ class CodeModel: Codable, LanguageShortcut {
     func getApiVersion() -> String {
         if let constantSchema = globalParameter(for: "api-version")?.schema as? ConstantSchema {
             return constantSchema.value.value
+        } else if let constantSchema = globalParameter(for: "x-ms-version")?.schema as? ConstantSchema {
+            return constantSchema.value.value
         } else {
             return ""
         }

@@ -46,7 +46,8 @@ enum ResponseBodyType: String {
     case dateTimeBody
     case datetimeRfc1123Body
 
-    static func strategy(for input: String, and type: AllSchemaTypes, schema: Schema) -> ResponseBodyType {
+    static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
+        let type = schema.type
         if input == "String" {
             return .stringBody
         } else if input.starts(with: "Int") {
@@ -97,7 +98,16 @@ struct ResponseViewModel {
         self.isNullable = schemaResponse?.nullable ?? false
         if let pagingMetadata = operation.extensions?["x-ms-pageable"]?.value as? [String: String],
             let pagingNames = Language.PagingNames(from: pagingMetadata) {
-            let arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
+            var arrayElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ArraySchema }
+            if arrayElements.isEmpty {
+                let objectElements = (schemaResponse?.schema.properties ?? []).compactMap { $0.schema as? ObjectSchema }
+                for object in objectElements {
+                    let objectArrays = (object.properties ?? []).compactMap { $0.schema as? ArraySchema }
+                    arrayElements += objectArrays
+                }
+            }
+
+            // FIXME: This assumption no longer holds for storage and should be revisited
             guard arrayElements.count == 1
             else { fatalError("Did not find exactly one array type for paged collection.") }
             self.strategy = ResponseBodyType.pagedBody.rawValue
@@ -113,9 +123,8 @@ struct ResponseViewModel {
             self.pagingNames = nil
             self.pagedElementClassName = nil
             if let objectType = schemaResponse?.schema.swiftType(optional: false),
-                let type = schemaResponse?.schema.type,
                 let schema = schemaResponse?.schema {
-                self.strategy = ResponseBodyType.strategy(for: objectType, and: type, schema: schema).rawValue
+                self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
                 self.objectType = objectType
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue

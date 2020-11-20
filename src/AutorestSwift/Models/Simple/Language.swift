@@ -45,17 +45,22 @@ class Language: Codable {
     // MARK: AdditionalProperties
 
     struct PagingNames: Codable {
+        static let defaultItemName = "value"
+
         /// name for the item property
-        var itemName: String
+        var itemName: String? = PagingNames.defaultItemName
 
         /// name of the next link property
         var nextLinkName: String
 
+        /// name of the operation for retrieving the next page
+        var operationName: String?
+
         init?(from dict: [String: String]) {
-            guard let itemName = dict["itemName"],
-                let nextLinkName = dict["nextLinkName"] else { return nil }
-            self.itemName = itemName
+            guard let nextLinkName = dict["nextLinkName"] else { return nil }
             self.nextLinkName = nextLinkName
+            self.itemName = dict["itemName"] ?? PagingNames.defaultItemName
+            self.operationName = dict["operationName"]
         }
     }
 
