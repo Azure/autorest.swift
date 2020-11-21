@@ -1,11 +1,2 @@
-let dateFormatter = ISO8601DateFormatter()
-dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-    dispatchQueue.async {
-        completionHandler(.success(decoded), httpResponse)
-    }
-} else {
-    dateFormatter.formatOptions = [.withInternetDateTime]
-    {% include "OperationResponseDateDispatchSnippet.stencil" %}
-}
+let dateFormatter = Date.AzureISO8601DateFormatter()
+{% include "OperationResponseDateDispatchSnippet.stencil" %}
