@@ -1,2 +1,2 @@
-let dateFormatter = Date.Format.rfc1123.formatter
+let dateFormatter = Date.AzureRfc1123DateFormatter()
 {% include "OperationResponseDateDispatchSnippet.stencil" %}
