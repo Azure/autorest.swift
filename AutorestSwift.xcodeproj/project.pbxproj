@@ -215,7 +215,6 @@
 		F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
 		F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
 		F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
-		F16CDA322568770B00FD0817 /* OperationResponseDataSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */; };
 		F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
 		F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
 		F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
@@ -224,7 +223,6 @@
 		F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */; };
 		F16CDAD525688F2C00FD0817 /* OperationResponseJsonDecoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADF71DE25688CBC0079F127 /* OperationResponseJsonDecoderSnippet.stencil */; };
 		F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */; };
-		F16CDAD725688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
@@ -286,7 +284,6 @@
 				F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */,
 				F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
 				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
-				F16CDAD725688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
 				F151510925128E2D00DF0B9F /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
 				F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */,
 				F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */,
@@ -484,9 +481,7 @@
 		F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeBodySnippet.stencil; sourceTree = "<group>"; };
 		F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateBodySnippet.stencil; sourceTree = "<group>"; };
 		F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeRfc1123BodySnippet.stencil; sourceTree = "<group>"; };
-		F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDataSnippet.stencil; sourceTree = "<group>"; };
 		F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateDispatchSnippet.stencil; sourceTree = "<group>"; };
-		F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseReturnTypeStatusCodeSnippet.stencil; sourceTree = "<group>"; };
 		F16CDAD025688E5600FD0817 /* OperationDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
@@ -745,8 +740,6 @@
 				F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
 				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
-				F16CDA2D2568770B00FD0817 /* OperationResponseDataSnippet.stencil */,
-				F16CDACC25688DB700FD0817 /* OperationExceptionJsonBodySnippet.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -1190,7 +1183,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */,
-				F16CDA322568770B00FD0817 /* OperationResponseDataSnippet.stencil in Resources */,
 				F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */,
 				F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */,
 				F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */,
