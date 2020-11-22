@@ -25,3 +25,30 @@ extension Data {
         return base64UrlString
     }
 }
+
+extension Date {
+    struct AzureISO8601DateFormatter {
+        static let allFormatOptions: [ISO8601DateFormatter.Options] = [
+            [.withInternetDateTime, .withFractionalSeconds],
+            [.withInternetDateTime]
+        ]
+
+        public func date(from stringIn: String) -> Date? {
+            let string = stringIn.hasSuffix("Z") ? stringIn : stringIn + "Z"
+            let dateFormatter = ISO8601DateFormatter()
+            for aformatOption in AzureISO8601DateFormatter.allFormatOptions {
+                dateFormatter.formatOptions = aformatOption
+                if let date = dateFormatter.date(from: string.capitalized) {
+                    return date
+                }
+            }
+            return nil
+        }
+    }
+
+    struct AzureRfc1123DateFormatter {
+        public func date(from string: String) -> Date? {
+            return Date.Format.rfc1123.formatter.date(from: string.capitalized)
+        }
+    }
+}

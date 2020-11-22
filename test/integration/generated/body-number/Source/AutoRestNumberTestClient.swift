@@ -24,12 +24,12 @@ extension CharacterSet {
 public final class AutoRestNumberTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
-        /// API version ""
-        case v = ""
+        /// API version "1.0.0"
+        case v100 = "1.0.0"
 
         /// The most recent API version of the
         public static var latest: ApiVersion {
-            return .v
+            return .v100
         }
     }
 

@@ -121,7 +121,7 @@ public final class Datetimerfc1123 {
                     }
 
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -221,7 +221,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -321,7 +321,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -421,7 +421,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -617,7 +617,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -717,7 +717,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
@@ -913,7 +913,7 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
                         let decodedStr = try JSONDecoder().decode(String.self, from: data)
                         if let decoded = dateFormatter.date(from: decodedStr) {
                             dispatchQueue.async {
