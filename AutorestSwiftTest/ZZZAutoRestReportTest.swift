@@ -74,34 +74,54 @@ class ZZZAutoRestReportTest: XCTestCase {
 
     // Calculate the nobile test coverage & total test coverage
     // List the mobile tests which passed and failed
-    private func printCoverage(for allTests: [String: Int32], listFailed: Bool = false) {
-        let passedTest = allTests.filter { $0.value > 0 }
-        let totalCount = allTests.count
+    private func printReport(report: [String: Int32]) {
+        let mobileTest = getMobileTests(with: report)
+        let passedTest = report.filter { $0.value > 0 }
+        let mobilePassedTest = mobileTest.filter { $0.value > 0 }
+
+        let totalTestCount = report.count
         let passedCount = passedTest.count
 
-        guard totalCount > 0 else {
-            return
+        let mobileTestCount = mobileTest.count
+        let mobilePassedCount = mobilePassedTest.count
+
+        let coverage: Float = Float(passedCount) / Float(totalTestCount) * 100
+
+        if mobileTestCount > 0 {
+            let mobileCoverage: Float = Float(mobilePassedCount) / Float(mobileTestCount) * 100
+
+            /* Uncomment this to print the list of passed/failed tests */
+            /*
+             let mobileFailedTest = mobileTest.filter { $0.value == 0 }
+
+             if mobilePassedTest.count > 0 {
+                 print("Passed mobile tests")
+                 print("-------------------")
+                 for test in mobilePassedTest { print(test.key) }
+             }
+
+             if mobileFailedTest.count > 0 {
+                 print("Failed mobile tests")
+                 print("-------------------")
+                 for test in mobileFailedTest { print(test.key) }
+             }
+             */
+            print(
+                "Mobile Passed Test=\(mobilePassedCount), Mobile Total Test=\(mobileTestCount), Coverage=\(String(format: "%.2f", mobileCoverage))%"
+            )
         }
 
-        let coverage: Float = Float(passedCount) / Float(totalCount) * 100
-
-        print("Passed Test=\(passedCount), Total Test=\(totalCount), Coverage=\(String(format: "%.2f", coverage))%")
-
-        if listFailed {
-            let failedTest = allTests.filter { $0.value == 0 }
-
-            if failedTest.count > 0 {
-                print("Failed tests")
-                print("-------------------")
-                for test in failedTest { print(test.key) }
-            }
-        }
-    }
-
-    private func printReport(allTests: [String: Int32]) {
-        let mobileTests = getMobileTests(with: allTests)
-        printCoverage(for: mobileTests)
-        printCoverage(for: allTests)
+        // List all passed tests which are not part of the mobile tests
+        /* Uncomment this to print the list of passed/failed tests */
+        /*
+         let otherPassedTest = passedTest.difference(from: mobilePassedTest)
+         if otherPassedTest.count > 0 {
+             print("\nOther passed tests")
+             print("-------------------")
+             for test in otherPassedTest { print(test.key) }
+         }
+         */
+        print("Pass Test=\(passedCount), Total Test=\(totalTestCount), Coverage=\(String(format: "%.2f", coverage))%")
     }
 
     // Return the list of mobile tests
@@ -134,21 +154,10 @@ class ZZZAutoRestReportTest: XCTestCase {
 
         client.autoRestReportService.getReport { result, _ in
             switch result {
-            case let .success(allTests):
-                XCTAssert(allTests.count > 0)
-
-                let mobileTests = self.getMobileTests(with: allTests)
-                print("Mobile Coverage:")
-                self.printCoverage(for: mobileTests)
-
-                print("Total Coverage:")
-                self.printCoverage(for: allTests)
-
-                let workingTests = self.getWorkingTests(with: allTests)
-                print("\n\nWorking Coverage:")
-                // set listFailed to True to print out the name of non passesd tests
-                self.printCoverage(for: workingTests, listFailed: false)
-
+            case let .success(report):
+                XCTAssert(report.count > 0)
+                print("\nCoverage:")
+                self.printReport(report: report)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
@@ -166,8 +175,8 @@ class ZZZAutoRestReportTest: XCTestCase {
             switch result {
             case let .success(optionalReport):
                 XCTAssert(optionalReport.count > 0)
-                print("\n\nOptional Coverage:")
-                self.printCoverage(for: optionalReport)
+                print("Optional Coverage:")
+                self.printReport(report: optionalReport)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
