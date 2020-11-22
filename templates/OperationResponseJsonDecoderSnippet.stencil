@@ -1,21 +1,13 @@
 {% include "OperationResponseNullableBodySnippet.stencil" %}
 do {
     {% if response.strategy == "dateTimeBody" %}
-    let dateFormatter = Date.AzureISO8601DateFormatter()
-    {% include "OperationResponseDateDispatchSnippet.stencil" %}
+    {% include "OperationResponseDateTimeBodySnippet.stencil" response %}
     {% elif response.strategy == "datetimeRfc1123Body" %}
-    let dateFormatter = Date.AzureRfc1123DateFormatter()
-    {% include "OperationResponseDateDispatchSnippet.stencil" %}
+    {% include "OperationResponseDateTimeRfc1123BodySnippet.stencil" response %}
     {% elif response.strategy == "dateBody" %}
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    {% include "OperationResponseDateDispatchSnippet.stencil" %}
+    {% include "OperationResponseDateBodySnippet.stencil" response %}
     {% elif response.strategy == "jsonBody" %}
-    let decoder = JSONDecoder()
-    let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
-    dispatchQueue.async {
-        completionHandler(.success(decoded), httpResponse)
-    }
+    {% include "OperationResponseJsonBodySnippet.stencil" response %}
     {% else %}
     // TODO: Couldn't find template for {{ response.strategy }}
     {% endif %}
