@@ -135,7 +135,7 @@ class ConstantSchema: Schema {
             case .number:
                 let numberSchema = valueType
                 let swiftType = numberSchema.swiftType()
-                if swiftType == "Decimal" {
+                if paramLocation == .body {
                     return "\(swiftType)(\(constantValue))"
                 } else {
                     return "String(\(swiftType)(\(constantValue)))"
