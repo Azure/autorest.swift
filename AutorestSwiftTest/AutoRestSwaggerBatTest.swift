@@ -241,6 +241,24 @@ class AutoRestSwaggerBatTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_string_getNullBase64UrlEncoded_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getNullBase64UrlEncoded")
+
+        client.stringOperation.getNullBase64UrlEncoded { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertNil(data)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getNotProvided.getNullBase64UrlEncoded failed error=\(details)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_string_putBase64UrlEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putBase64UrlEncoded")
 

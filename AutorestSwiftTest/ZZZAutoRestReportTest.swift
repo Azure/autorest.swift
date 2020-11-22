@@ -39,15 +39,30 @@ class ZZZAutoRestReportTest: XCTestCase {
     // 4. url.json
     // The following strings are the prefix of the mobile tests from AutoRest TestServer
     let mobileTestsPrefix = [
-        // custom-baseUrl.json
+        // custom-baseUrl.json, custom-baseUrl-more-options.json
         "CustomBase",
         // xms-error-response.json
         "expected", "animalNotFoundError", "linkNotFoundError", "stringError", "intError",
         // body-integer.json
         "putInteger", "putLong", "putUnixTime", "getInteger", "getLong", "getUnixTime", "getInvalidUnixTime",
         "getNullUnixTime",
-        // url.json
+        // url.json , url-multi-collectionFormat.json
         "UrlPathItem", "UrlQueries", "UrlPaths"
+    ]
+
+    let workingTestsPrefix = [
+        // body-date.json
+        "getDate", "putDate",
+        // body-date-time.json
+        "getDateTime", "putDateTime",
+        // body-date-time-rfc1123.json
+        "putDateTimeRfc1123", "getDateTimeRfc1123",
+        // body-string.json
+        "putString", "getString",
+        // body-byte.json
+        "putByte", "getByte",
+        // body-array.json
+        "putArray", "getArray"
     ]
 
     override func setUpWithError() throws {
@@ -59,7 +74,7 @@ class ZZZAutoRestReportTest: XCTestCase {
 
     // Calculate the nobile test coverage & total test coverage
     // List the mobile tests which passed and failed
-    private func printCoverage(for allTests: [String: Int32]) {
+    private func printCoverage(for allTests: [String: Int32], listFailed: Bool = false) {
         let passedTest = allTests.filter { $0.value > 0 }
         let totalCount = allTests.count
         let passedCount = passedTest.count
@@ -72,22 +87,22 @@ class ZZZAutoRestReportTest: XCTestCase {
 
         print("Passed Test=\(passedCount), Total Test=\(totalCount), Coverage=\(String(format: "%.2f", coverage))%")
 
-        /* Uncomment this to print the list of passed/failed tests */
-        /*
-        let failedTest = allTests.filter { $0.value == 0 }
+        if listFailed {
+            let failedTest = allTests.filter { $0.value == 0 }
 
-        if failedTest.count > 0 {
-            print("Failed tests")
-            print("-------------------")
-            for test in failedTest { print(test.key) }
+            if failedTest.count > 0 {
+                print("Failed tests")
+                print("-------------------")
+                for test in failedTest { print(test.key) }
+            }
         }
-        */
+    }
 
-     private func printReport(allTests: [String: Int32]) {
+    private func printReport(allTests: [String: Int32]) {
         let mobileTests = getMobileTests(with: allTests)
         printCoverage(for: mobileTests)
         printCoverage(for: allTests)
-     }
+    }
 
     // Return the list of mobile tests
     private func getMobileTests(with report: [String: Int32]) -> [String: Int32] {
@@ -96,6 +111,17 @@ class ZZZAutoRestReportTest: XCTestCase {
                 if $0.key.hasPrefix(prefix),
                     // test name 'expectedEnum' is from non-string-enum.json, not part of the mobile test
                     $0.key != "expectedEnum" {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
+    private func getWorkingTests(with report: [String: Int32]) -> [String: Int32] {
+        return report.filter {
+            for prefix in workingTestsPrefix {
+                if $0.key.hasPrefix(prefix) {
                     return true
                 }
             }
@@ -114,8 +140,15 @@ class ZZZAutoRestReportTest: XCTestCase {
                 let mobileTests = self.getMobileTests(with: allTests)
                 print("Mobile Coverage:")
                 self.printCoverage(for: mobileTests)
+
                 print("Total Coverage:")
                 self.printCoverage(for: allTests)
+
+                let workingTests = self.getWorkingTests(with: allTests)
+                print("\n\nWorking Coverage:")
+                // set listFailed to True to print out the name of non passesd tests
+                self.printCoverage(for: workingTests, listFailed: false)
+
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")
