@@ -134,6 +134,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"acdki:", ["all-files", "clean", "debug", "keep-change", "input-file"])
     except getopt.GetoptError:
+        print("Wrong option")
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-a", "--all-files"):
@@ -147,6 +148,8 @@ def main(argv):
         if opt in ("-i", "--input-file"):
             inputFile = argv[1]
 
+    print("== make install ==")
+    execute_command("make install")
     if inputFile != '':
         generate_and_build_code([inputFile])
     elif allFiles:
