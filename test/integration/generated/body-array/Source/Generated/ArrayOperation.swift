@@ -3415,6 +3415,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3604,6 +3607,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3698,6 +3704,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3792,6 +3801,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3981,6 +3992,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -4075,6 +4088,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -4169,6 +4184,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)

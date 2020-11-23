@@ -27,13 +27,13 @@ extension Data {
 }
 
 extension Date {
-    struct AzureISO8601DateFormatter {
+    class AzureISO8601DateFormatter: DateFormatter {
         static let allFormatOptions: [ISO8601DateFormatter.Options] = [
             [.withInternetDateTime, .withFractionalSeconds],
             [.withInternetDateTime]
         ]
 
-        public func date(from stringIn: String) -> Date? {
+        override public func date(from stringIn: String) -> Date? {
             let string = stringIn.hasSuffix("Z") ? stringIn : stringIn + "Z"
             let dateFormatter = ISO8601DateFormatter()
             for aformatOption in AzureISO8601DateFormatter.allFormatOptions {
@@ -46,8 +46,8 @@ extension Date {
         }
     }
 
-    struct AzureRfc1123DateFormatter {
-        public func date(from string: String) -> Date? {
+    class AzureRfc1123DateFormatter: DateFormatter {
+        override public func date(from string: String) -> Date? {
             return Date.Format.rfc1123.formatter.date(from: string.capitalized)
         }
     }

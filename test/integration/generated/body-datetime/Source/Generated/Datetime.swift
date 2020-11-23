@@ -121,16 +121,12 @@ public final class Datetime {
                     }
 
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -221,16 +217,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -321,16 +313,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -421,16 +409,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -717,16 +701,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -817,16 +797,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -917,16 +893,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1115,16 +1087,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1215,16 +1183,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1413,16 +1377,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1513,16 +1473,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1711,16 +1667,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1909,16 +1861,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -2107,16 +2055,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -2207,16 +2151,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
+                        let decoder = JSONDecoder()
                         let dateFormatter = Date.AzureISO8601DateFormatter()
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
