@@ -49,7 +49,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call getNull expected to failed.")
+                XCTFail("\(expectation.description) expected to failed.")
             case .failure:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             }
@@ -64,7 +64,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getInvalid { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call getInvalid expected to failed.")
+                XCTFail("\(expectation.description) expected to failed.")
             case .failure:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             }
@@ -83,7 +83,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getEmpty failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -99,7 +99,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putEmpty failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -116,7 +116,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getBooleanTfft failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -132,7 +132,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putBooleanTfft failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -145,7 +145,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getBooleanInvalidNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call getBooleanInvalidNull expected to failed.")
+                XCTFail("\(expectation.description) expected to failed.")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -162,7 +162,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getBooleanInvalidString { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("Call getBooleanInvalidString expected to failed.")
+                XCTFail("\(expectation.description) expected to failed.")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -183,7 +183,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getIntegerValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -199,7 +199,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putIntegerValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -212,7 +212,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getIntInvalidNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getLongInvalidNull expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -229,7 +229,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getIntInvalidString { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getFloatWithString expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -250,7 +250,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getLongValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -266,7 +266,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putLongValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -279,7 +279,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getLongInvalidNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getLongInvalidNull expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -296,7 +296,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getLongInvalidString { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getLongInvalidString expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -317,23 +317,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getFloatValid failed. error=\(details)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 5.0)
-    }
-
-    func test_putFloatValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.putFloatValid")
-
-        client.arrayOperation.put(floatValid: [0, -0.01, 1.2e20]) { result, httpResponse in
-            switch result {
-            case .success:
-                XCTAssertEqual(httpResponse?.statusCode, 200)
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putFloatValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -346,7 +330,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getFloatInvalidNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getFloatInvalidNull expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -363,7 +347,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getFloatInvalidString { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getFloatWithString expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -384,7 +368,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getDoubleValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -400,7 +384,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putDoubleValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -413,7 +397,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getDoubleInvalidNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getDoubleInvalidNull expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -430,7 +414,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getDoubleInvalidString { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getDoubleInvalidString expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -451,7 +435,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getStringValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -467,7 +451,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putStringValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -480,7 +464,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         client.arrayOperation.getStringWithNull { result, httpResponse in
             switch result {
             case .success:
-                XCTFail("array.getStringWithNull expected to fail")
+                XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -501,7 +485,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getEnumValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -517,7 +501,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putEnumValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -534,7 +518,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getStringEnumValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -550,7 +534,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putStringEnumValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -574,7 +558,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getUuidValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -594,7 +578,41 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call putUuidValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func getDateInvalidNull() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDateInvalidNull")
+
+        client.arrayOperation.getDateInvalidNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail")
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssertTrue(details.contains("\"foo\", null, \"foo2\""))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_listDateInvalidChars200() throws {
+        let expectation = XCTestExpectation(description: "Call array.listDateInvalidChars")
+
+        client.arrayOperation.listDateInvalidChars { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail")
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssertTrue(details.contains("[\"2011-03-22\", \"date\"]"))
             }
             expectation.fulfill()
         }
@@ -618,7 +636,41 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call getDateValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDateTimeInvalidNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDateTimeInvalidNull")
+
+        client.arrayOperation.getDateTimeInvalidNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail")
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssertTrue(details.contains("\"2000-12-01t00:00:01z\", null"))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_listDateTimeInvalidChars200() throws {
+        let expectation = XCTestExpectation(description: "Call array.listDateTimeInvalidChars")
+
+        client.arrayOperation.listDateTimeInvalidChars { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail")
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssertTrue(details.contains("date-time"))
             }
             expectation.fulfill()
         }
@@ -641,7 +693,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call array.getDateTimeValid failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -664,7 +716,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(expectation.description) failed. error=\(details)")
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
