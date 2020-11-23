@@ -8,8 +8,8 @@
     {% include "OperationResponseUnixTImeBodySnippet.stencil" response %}
     {% elif response.strategy == "byteArrayBody" %}
     {% include "OperationResponseByteArrayBodySnippet.stencil" response %}
-    {% elif response.strategy == "dateTimeBody" or response.strategy == "datetimeRfc1123Body" or response.strategy == "dateBody" or response.strategy == "jsonBody" or response.strategy == "jsonBody" or response.strategy == "arrayDateTimeBody" or response.strategy == "arrayDatetimeRfc1123Body" or response.strategy == "arrayDateBody" %}
-    {% include "OperationResponseJsonDecoderSnippet.stencil" response %}
+    {% elif response.strategy == "dateTimeBody" or response.strategy == "dateTimeRfc1123Body" or response.strategy == "dateBody" or response.strategy == "jsonBody" %}
+    {% include "OperationResponseJsonBodySnippet.stencil" response %}
     {% else %}
     // TODO: Couldn't find template for {{ response.strategy }}
     {% endif %}
