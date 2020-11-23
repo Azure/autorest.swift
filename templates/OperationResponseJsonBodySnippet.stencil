@@ -1,15 +1,23 @@
-let decoder = JSONDecoder()
-{% if response.strategy == "arrayDateTimeBody" %}
-{% include "OperationResponseDateTimeBodySnippet.stencil" response %}
-decoder.dateDecodingStrategy = .formatted(dateFormatter)
-{% elif response.strategy == "arrayDatetimeRfc1123Body" %}
-{% include "OperationResponseDateTimeRfc1123BodySnippet.stencil" response %}
-decoder.dateDecodingStrategy = .formatted(dateFormatter)
-{% elif response.strategy == "arrayDateBody" %}
-{% include "OperationResponseDateBodySnippet.stencil" response %}
-decoder.dateDecodingStrategy = .formatted(dateFormatter)
-{% endif %}
-let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
-dispatchQueue.async {
-    completionHandler(.success(decoded), httpResponse)
+{% include "OperationResponseNullableBodySnippet.stencil" %}
+do {
+    let decoder = JSONDecoder()
+    {% if response.strategy == "dateTimeBody" %}
+    let dateFormatter = Date.AzureISO8601DateFormatter()
+    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    {% elif response.strategy == "dateTimeRfc1123Body" %}
+    let dateFormatter = Date.AzureRfc1123DateFormatter()
+    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    {% elif response.strategy == "dateBody" %}
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    {% endif %}
+    let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
+    dispatchQueue.async {
+        completionHandler(.success(decoded), httpResponse)
+    }
+} catch {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+    }
 }

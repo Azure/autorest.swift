@@ -44,11 +44,7 @@ enum ResponseBodyType: String {
 
     case dateBody
     case dateTimeBody
-    case datetimeRfc1123Body
-
-    case arrayDateBody
-    case arrayDateTimeBody
-    case arrayDatetimeRfc1123Body
+    case dateTimeRfc1123Body
 
     static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
         let type = schema.type
@@ -65,7 +61,7 @@ enum ResponseBodyType: String {
             case .dateTime:
                 if let dateTimeSchema = schema as? DateTimeSchema,
                     dateTimeSchema.format == .dateTimeRfc1123 {
-                    return .datetimeRfc1123Body
+                    return .dateTimeRfc1123Body
                 }
                 return .dateTimeBody
             default:
@@ -76,9 +72,9 @@ enum ResponseBodyType: String {
         } else if input == "[Date]" {
             if let arraySchema = schema as? ArraySchema,
                 let dateTimeSchema = arraySchema.elementType as? DateTimeSchema {
-                return (dateTimeSchema.format == .dateTimeRfc1123) ? .arrayDatetimeRfc1123Body : .arrayDateTimeBody
+                return (dateTimeSchema.format == .dateTimeRfc1123) ? .dateTimeRfc1123Body : .dateTimeBody
             } else {
-                return .arrayDateBody
+                return .dateBody
             }
         } else {
             return .jsonBody
