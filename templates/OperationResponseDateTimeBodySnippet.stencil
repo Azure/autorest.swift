@@ -1,1 +1,0 @@
-let dateFormatter = Date.AzureISO8601DateFormatter()
