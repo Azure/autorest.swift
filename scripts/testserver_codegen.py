@@ -34,7 +34,8 @@ working_files = [
     "body-datetime",
     "body-datetime-rfc1123",
     "body-boolean",
-    "custom-baseUrl-more-options"
+    "custom-baseUrl-more-options",
+    "url-multi-collectionFormat"
 ]
 
 def get_all_files():

@@ -154,7 +154,7 @@ class SwiftGenerator: CodeGenerator {
         let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
             template: "ServiceClientFile",
-            toSubfolder: .source,
+            toSubfolder: .generated,
             withFilename: clientViewModel.name,
             andParams: [
                 "model": clientViewModel
@@ -170,7 +170,7 @@ class SwiftGenerator: CodeGenerator {
         for (groupName, operationGroup) in clientViewModel.namedOperationGroups {
             try render(
                 template: "NamedOperationGroupFile",
-                toSubfolder: .source,
+                toSubfolder: .generated,
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
@@ -185,31 +185,41 @@ class SwiftGenerator: CodeGenerator {
             andParams: ["model": clientViewModel]
         )
 
-        // Create README.md file
-        let readmeViewModel = ReadmeFileViewModel(from: model)
-        try render(
-            template: "README",
-            toSubfolder: .root,
-            withFilename: "README.md",
-            andParams: ["model": readmeViewModel]
-        )
+        if !exists(filename: "README.md", inSubfolder: .root) {
+            // Create README.md file
+            let readmeViewModel = ReadmeFileViewModel(from: model)
+            try render(
+                template: "README",
+                toSubfolder: .root,
+                withFilename: "README.md",
+                andParams: ["model": readmeViewModel]
+            )
+        }
 
         // Create Package.swift file
-        let packageViewModel = PackageFileViewModel(from: model)
-        try render(
-            template: "Package",
-            toSubfolder: .root,
-            withFilename: "Package.swift",
-            andParams: ["model": packageViewModel]
-        )
+        if !exists(filename: "Package.swift", inSubfolder: .root) {
+            let packageViewModel = PackageFileViewModel(from: model)
+            try render(
+                template: "Package",
+                toSubfolder: .root,
+                withFilename: "Package.swift",
+                andParams: ["model": packageViewModel]
+            )
 
-        // Create Jazzy config file
-        try render(
-            template: "JazzyFile",
-            toSubfolder: .jazzy,
-            withFilename: "\(model.packageName).yml",
-            andParams: ["model": packageViewModel]
-        )
+            // Create Jazzy config file
+            try render(
+                template: "JazzyFile",
+                toSubfolder: .jazzy,
+                withFilename: "\(model.packageName).yml",
+                andParams: ["model": packageViewModel]
+            )
+        }
+    }
+
+    private func exists(filename: String, inSubfolder subfolder: FileDestination) -> Bool {
+        let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
+        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
+        return FileManager.default.fileExists(atPath: fileUrl.path)
     }
 
     private func render(
