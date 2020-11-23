@@ -133,6 +133,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -234,6 +235,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -335,6 +337,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -436,6 +439,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -635,6 +639,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -834,6 +839,7 @@ public final class DateOperation {
                                 completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
                             }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
