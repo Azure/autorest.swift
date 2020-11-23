@@ -24,12 +24,12 @@ extension CharacterSet {
 public final class XmsErrorResponseExtensionsClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
-        /// API version "0.0.0"
-        case v000 = "0.0.0"
+        /// API version ""
+        case v = ""
 
         /// The most recent API version of the
         public static var latest: ApiVersion {
-            return .v000
+            return .v
         }
     }
 

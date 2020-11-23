@@ -121,14 +121,19 @@ public final class DateOperation {
                     }
 
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -218,14 +223,19 @@ public final class DateOperation {
                     200
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -315,14 +325,19 @@ public final class DateOperation {
                     200
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -412,14 +427,19 @@ public final class DateOperation {
                     200
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -607,14 +627,19 @@ public final class DateOperation {
                     200
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
@@ -802,14 +827,19 @@ public final class DateOperation {
                     200
                 ].contains(statusCode) {
                     do {
-                        let decoder = JSONDecoder()
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
-                        dispatchQueue.async {
-                            completionHandler(.success(decoded), httpResponse)
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
                         }
+
                     } catch {
                         dispatchQueue.async {
                             completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)

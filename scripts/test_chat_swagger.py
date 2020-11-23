@@ -29,10 +29,12 @@ def cleanup(swagger_name):
 def code_gen(swagger_name, swagger_spec_directory):
     print('Generate code for {swagger_name}.json'.format(swagger_name=swagger_name))
     os.chdir('test/integration/azure-rest-api-specs')
+    if path.exists('../../{swagger_name}'.format(swagger_name=swagger_name)):
+        os.rmdir('../../{swagger_name}'.format(swagger_name=swagger_name))
     os.chdir('{swagger_spec_directory}'.format(swagger_spec_directory=swagger_spec_directory))
     return_value = execute_command('autorest --input-file={swagger_name}.json --output-folder=../../../../../../../{swagger_name} --namespace={swagger_name} --use=../../../../../../../../../'.format(swagger_name=swagger_name))
     if return_value == 0:
-        print("Code generation for {swagger_name}.json is sucessfull")
+        print("Code generation for {swagger_name}.json is sucessfull".format(swagger_name=swagger_name))
     else:
         print(warning_color + "Fail to code gen {swagger_name}.json" + end_color)
         exit(1)
@@ -71,6 +73,18 @@ def compile_ios_sdk():
 
 def compile_ios_sdk_with_generated_code(swagger_name):
     os.chdir('test/integration/azure-sdk-for-ios')
+    # Work aroud before the restructed generated code of chat sdk is push
+    remove_directories = ["Options" , "Util", "Models"]
+    for directory in remove_directories:
+        if path.exists('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=directory)):
+            os.system('rm -Rf sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=directory))
+
+    remove_files = ['AzureCommunicationChatClient.swift', 'AzureCommunicationChatService.swift']
+    for file in remove_files:
+        if path.exists('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=file)):
+            os.remove('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=file))
+
+
     print("==Copy new generated code to azure-sdk-for-ios==")
     execute_command('cp -r ../{swagger_name}/* sdk/communication/AzureCommunicationChat'.format(swagger_name=swagger_name))
     print("==Compile azure-sdk-for-ios repo with generated code==")

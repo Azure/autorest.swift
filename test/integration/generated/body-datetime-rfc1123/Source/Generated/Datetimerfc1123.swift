@@ -113,7 +113,30 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    if data.count == 0 {
+                        dispatchQueue.async {
+                            completionHandler(.success(nil), httpResponse)
+                        }
+                        return
+                    }
+
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -197,7 +220,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -281,7 +320,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -365,7 +420,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -545,7 +616,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -629,7 +716,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
@@ -809,7 +912,23 @@ public final class Datetimerfc1123 {
                 if [
                     200
                 ].contains(statusCode) {
-                    // TODO: Couldn't find template for datetimeRfc1123Body
+                    do {
+                        let dateFormatter = Date.Format.rfc1123.formatter
+                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
+                        if let decoded = dateFormatter.date(from: decodedStr) {
+                            dispatchQueue.async {
+                                completionHandler(.success(decoded), httpResponse)
+                            }
+                        } else {
+                            dispatchQueue.async {
+                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+                            }
+                        }
+                    } catch {
+                        dispatchQueue.async {
+                            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+                        }
+                    }
                 }
             case .failure:
                 do {
