@@ -45,10 +45,10 @@ class ObjectSchema: ComplexSchema, UsageSchema {
 
     // MARK: allOf: Schema Usage
 
-    let usage: [SchemaContext]
+    let usage: [SchemaContext]?
 
     /// Known media types in which this schema can be serialized
-    let serializationFormats: [KnownMediaType]
+    let serializationFormats: [KnownMediaType]?
 
     /// Returns the properties of the model and any parent models.
     var flattenedProperties: [PropertyType]? {
@@ -73,6 +73,8 @@ class ObjectSchema: ComplexSchema, UsageSchema {
     }
 
     public required init(from decoder: Decoder) throws {
+        //  do
+        //  {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         discriminator = try? container.decode(Discriminator.self, forKey: .discriminator)
@@ -81,8 +83,14 @@ class ObjectSchema: ComplexSchema, UsageSchema {
         parents = try? container.decode(Relations.self, forKey: .parents)
         children = try? container.decode(Relations.self, forKey: .children)
         discriminatorValue = try? container.decode(String.self, forKey: .discriminatorValue)
-        usage = try container.decode([SchemaContext].self, forKey: .usage)
-        serializationFormats = try container.decode([KnownMediaType].self, forKey: .serializationFormats)
+        usage = try? container.decode([SchemaContext].self, forKey: .usage)
+        serializationFormats = try? container.decode([KnownMediaType].self, forKey: .serializationFormats)
+
+        //  } catch {
+        //      discriminatorValue = nil
+        //      print("\(error)")
+
+        //   }
 
         try super.init(from: decoder)
     }

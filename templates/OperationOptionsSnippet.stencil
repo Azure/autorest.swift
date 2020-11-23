@@ -16,7 +16,7 @@ if let {{ param.key }} = {{ param.path }}{{ param.key }} {
 
 // Header options
 {% for param in op.params.header.optional %}
-if let {{ param.key }} = {{ param.path }}{{ param.key }} {
+if let {{ param.value }} = {{ param.path }}{{ param.value }} {
     {% include "OperationDecodingSnippet.stencil" %}
     headers["{{ param.key }}"] = {{ param.value}}
 }

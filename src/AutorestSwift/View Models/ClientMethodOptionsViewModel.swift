@@ -53,8 +53,8 @@ struct ClientMethodOptionsViewModel {
         }
         var properties = [PropertyViewModel]()
 
-        parameters.forEach {
-            properties.append(PropertyViewModel(from: $0.value))
+        for parameter in parameters where parameter.value.name != "clientRequestId" {
+            properties.append(PropertyViewModel(from: parameter.value))
         }
 
         self.properties = properties
