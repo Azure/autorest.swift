@@ -30,6 +30,7 @@ enum FileDestination {
     case root
     case tests
     case source
+    case generated
     case models
     case operations
     case options
@@ -44,14 +45,20 @@ enum FileDestination {
             return baseUrl.appendingPathComponent("Tests")
         case .source:
             return baseUrl.appendingPathComponent("Source")
+        case .generated:
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
         case .models:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Models")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
+                .appendingPathComponent("Models")
         case .operations:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Operations")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
+                .appendingPathComponent("Operations")
         case .options:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Options")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
+                .appendingPathComponent("Options")
         case .util:
-            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Util")
+            return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
+                .appendingPathComponent("Util")
         case .jazzy:
             return baseUrl.appendingPathComponent(".jazzy")
         }
