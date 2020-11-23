@@ -1,4 +1,14 @@
 let decoder = JSONDecoder()
+{% if response.strategy == "arrayDateTimeBody" %}
+{% include "OperationResponseDateTimeBodySnippet.stencil" response %}
+decoder.dateDecodingStrategy = .formatted(dateFormatter)
+{% elif response.strategy == "arrayDatetimeRfc1123Body" %}
+{% include "OperationResponseDateTimeRfc1123BodySnippet.stencil" response %}
+decoder.dateDecodingStrategy = .formatted(dateFormatter)
+{% elif response.strategy == "arrayDateBody" %}
+{% include "OperationResponseDateBodySnippet.stencil" response %}
+decoder.dateDecodingStrategy = .formatted(dateFormatter)
+{% endif %}
 let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
 dispatchQueue.async {
     completionHandler(.success(decoded), httpResponse)
