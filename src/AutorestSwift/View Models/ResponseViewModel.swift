@@ -46,6 +46,10 @@ enum ResponseBodyType: String {
     case dateTimeBody
     case datetimeRfc1123Body
 
+    case arrayDateBody
+    case arrayDateTimeBody
+    case arrayDatetimeRfc1123Body
+
     static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
         let type = schema.type
         if input == "String" {
@@ -67,8 +71,15 @@ enum ResponseBodyType: String {
             default:
                 return .dateBody
             }
-        } else if input == "Data", type == .byteArray {
+        } else if type == .byteArray {
             return .byteArrayBody
+        } else if input == "[Date]" {
+            if let arraySchema = schema as? ArraySchema,
+                let dateTimeSchema = arraySchema.elementType as? DateTimeSchema {
+                return (dateTimeSchema.format == .dateTimeRfc1123) ? .arrayDatetimeRfc1123Body : .arrayDateTimeBody
+            } else {
+                return .arrayDateBody
+            }
         } else {
             return .jsonBody
         }
