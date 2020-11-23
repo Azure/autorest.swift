@@ -76,7 +76,7 @@ struct KeyValueViewModel: Comparable {
             self.init(
                 key: name,
                 // if the parameter is $host, retrieve the value from client's 'endpoint' property
-                value: (name == "$host") ? "endpoint.absoluteString" : param.formatValue(name),
+                value: (name == "$host" || name == "endpoint") ? "endpoint.absoluteString" : param.formatValue(name),
                 optional: !param.required,
                 path: "client."
             )
@@ -111,7 +111,8 @@ struct KeyValueViewModel: Comparable {
             paramLocation: param.paramLocation
         )
 
-        if param.paramLocation == .header {
+        // For header and query parameters, serialized name should be used as to send over the wire
+        if param.paramLocation == .header || param.paramLocation == .query {
             assert(!(param.serializedName?.isEmpty ?? true))
             self.key = param.serializedName ?? ""
         } else if param.paramLocation == .body {

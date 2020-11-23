@@ -55,13 +55,14 @@ class CodeModel: Codable, LanguageShortcut {
     }
 
     func getApiVersion() -> String {
-        if let constantSchema = globalParameter(for: "api-version")?.schema as? ConstantSchema {
-            return constantSchema.value.value
-        } else if let constantSchema = globalParameter(for: "x-ms-version")?.schema as? ConstantSchema {
-            return constantSchema.value.value
-        } else {
-            return ""
+        let apiNames = ["apiVersion", "x-ms-version"]
+
+        for apiName in apiNames {
+            if let constantSchema = globalParameter(for: apiName)?.schema as? ConstantSchema {
+                return constantSchema.value.value
+            }
         }
+        return ""
     }
 
     var pagingNames: Language.PagingNames? {

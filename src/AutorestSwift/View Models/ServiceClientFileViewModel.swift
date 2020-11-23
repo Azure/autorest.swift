@@ -59,7 +59,9 @@ struct ServiceClientFileViewModel {
         self.operationGroups = operationGroups
         self.namedOperationGroups = namedOperationGroups
         self.apiVersion = model.getApiVersion()
-        self.apiVersionName = "v\(apiVersion.replacingOccurrences(of: "-", with: ""))"
+        self
+            .apiVersionName =
+            "v\(apiVersion.replacingOccurrences(of: "-", with: "_").replacingOccurrences(of: ".", with: "_"))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
 
@@ -79,8 +81,8 @@ func resolveGlobalParameters(from model: CodeModel) -> ([ParameterViewModel], St
     for globalParameter in model.globalParameters ?? [] {
         if globalParameter.name == "$host" {
             host = globalParameter.value.clientDefaultValue
-            // `endpoint` and `api-version` have different logic in generated code. Do not add them to the list of global parameters
-        } else if !["endpoint", "api-version"].contains(globalParameter.name) {
+            // `endpoint` and `apiVersion` have different logic in generated code. Do not add them to the list of global parameters
+        } else if !["endpoint", "apiVersion"].contains(globalParameter.variableName) {
             globalParameters.append(ParameterViewModel(from: globalParameter))
         }
     }
