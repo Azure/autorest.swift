@@ -55,21 +55,14 @@ class CodeModel: Codable, LanguageShortcut {
     }
 
     func getApiVersion() -> String {
-        if let constantSchema = globalParameter(for: "api-version")?.schema as? ConstantSchema {
-            return constantSchema.value.value
-        } else if let constantSchema = globalParameter(for: "x-ms-version")?.schema as? ConstantSchema {
-            return constantSchema.value.value
-        } else {
-            // If there is not `api-version` global parameter is defined, look for apiVersions in Operation for api version
-            for operationGroup in operationGroups {
-                for operation in operationGroup.operations {
-                    if let apiVersions = operation.apiVersions {
-                        return apiVersions[0].version
-                    }
-                }
+        let apiNames = ["apiVersion", "x-ms-version"]
+
+        for apiName in apiNames {
+            if let constantSchema = globalParameter(for: apiName)?.schema as? ConstantSchema {
+                return constantSchema.value.value
             }
-            return ""
         }
+        return ""
     }
 
     var pagingNames: Language.PagingNames? {
