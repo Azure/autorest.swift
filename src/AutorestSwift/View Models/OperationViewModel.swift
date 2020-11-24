@@ -151,6 +151,9 @@ enum BodyParamStrategy: String {
     case decimal
     case data
     case string
+    case date
+    case dateTime
+    case dateTimeRfc1123
 }
 
 struct BodyParams {
@@ -186,8 +189,22 @@ struct BodyParams {
             strategy = .unixTime
         } else if param.schema.type == .byteArray {
             strategy = .byteArray
-        } else if param.schema.type == .date || param.schema.type == .dateTime {
-            strategy = .string
+        } else if param.schema.type == .date {
+            strategy = .date
+        } else if param.schema.type == .dateTime {
+            if let dateTimeSchema = param.schema as? DateTimeSchema,
+                dateTimeSchema.format == .dateTimeRfc1123 {
+                strategy = .dateTimeRfc1123
+            } else {
+                strategy = .dateTime
+            }
+        } else if param.schema.type == .array {
+            if let arraySchema = param.schema as? ArraySchema,
+                let dateTimeSchema = arraySchema.elementType as? DateTimeSchema {
+                strategy = (dateTimeSchema.format == .dateTimeRfc1123) ? .dateTimeRfc1123 : .dateTime
+            } else {
+                strategy = .plain
+            }
         } else if param.schema.type == .number {
             strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .data
         } else if param.schema is ConstantSchema {
