@@ -60,7 +60,7 @@ struct RequestViewModel {
 
         // Determine which kind of request body snippet to render
         if method == "patch" {
-            if let contentTypeParameter = request.parameter(for: "Content-Type"),
+            if let contentTypeParameter = request.parameter(for: "contentType"),
                 let constantSchema = contentTypeParameter.schema as? ConstantSchema,
                 constantSchema.value.value == "application/json" {
                 self.strategy = RequestBodyType.body.rawValue
