@@ -1114,7 +1114,7 @@ public final class IntOperation {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
         guard let requestBody = try? encoder.encode(unixTimeDate) else {
-            self.options.logger.error("Failed to encode request body in unixTime.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
         guard let requestUrl = url(

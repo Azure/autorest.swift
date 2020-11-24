@@ -33,6 +33,12 @@ extension Date {
             [.withInternetDateTime]
         ]
 
+        override public func string(from date: Date) -> String {
+            let dateFormatter = ISO8601DateFormatter()
+            dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            return dateFormatter.string(from: date)
+        }
+
         override public func date(from stringIn: String) -> Date? {
             let string = stringIn.hasSuffix("Z") ? stringIn : stringIn + "Z"
             let dateFormatter = ISO8601DateFormatter()
@@ -49,6 +55,10 @@ extension Date {
     class AzureRfc1123DateFormatter: DateFormatter {
         override public func date(from string: String) -> Date? {
             return Date.Format.rfc1123.formatter.date(from: string.capitalized)
+        }
+
+        override public func string(from date: Date) -> String {
+            return Date.Format.rfc1123.formatter.string(from: date)
         }
     }
 }
