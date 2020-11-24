@@ -178,39 +178,14 @@ struct BodyParams {
                 virtParams.append(VirtualParam(from: virtParam))
             }
         }
-
         var strategy: BodyParamStrategy = .plain
 
         if param.flattened {
             strategy = .flattened
         } else if param.nullable {
             strategy = .plainNullable
-        } else if param.schema.type == .unixTime {
-            strategy = .unixTime
-        } else if param.schema.type == .byteArray {
-            strategy = .byteArray
-        } else if param.schema.type == .date {
-            strategy = .date
-        } else if param.schema.type == .dateTime {
-            if let dateTimeSchema = param.schema as? DateTimeSchema,
-                dateTimeSchema.format == .dateTimeRfc1123 {
-                strategy = .dateTimeRfc1123
-            } else {
-                strategy = .dateTime
-            }
-        } else if param.schema.type == .array {
-            if let arraySchema = param.schema as? ArraySchema,
-                let dateTimeSchema = arraySchema.elementType as? DateTimeSchema {
-                strategy = (dateTimeSchema.format == .dateTimeRfc1123) ? .dateTimeRfc1123 : .dateTime
-            } else {
-                strategy = .plain
-            }
-        } else if param.schema.type == .number {
-            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .data
-        } else if param.schema is ConstantSchema {
-            strategy = .constant
         } else {
-            strategy = .plain
+            strategy = param.schema.bodyParamStrategy
         }
 
         self.strategy = strategy.rawValue
