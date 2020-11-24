@@ -722,4 +722,28 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_putDateValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.putDateValid")
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let expectedDates = [
+            dateFormatter.date(from: "2000-12-01") ?? Date(),
+            dateFormatter.date(from: "1980-01-02") ?? Date(),
+            dateFormatter.date(from: "1492-10-12") ?? Date()
+        ]
+
+        client.arrayOperation.put(dateValid: expectedDates) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
