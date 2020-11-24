@@ -54,6 +54,8 @@ struct KeyValueViewModel: Comparable {
     let strategy: String
     // The full path to the value property
     let path: String
+    // The parameter variable name specified in swagger
+    let variableName: String
 
     /**
         Create a ViewModel with a Key and Value pair
@@ -100,6 +102,7 @@ struct KeyValueViewModel: Comparable {
         // value is referring a signature parameter, no need to wrap as String
         self.value = signatureParameter.formatValue()
         self.strategy = signatureParameter.keyValueDecodeStrategy.rawValue
+        self.variableName = signatureParameter.variableName
     }
 
     private init(param: ParameterType, constantSchema: ConstantSchema) {
@@ -121,6 +124,7 @@ struct KeyValueViewModel: Comparable {
             self.key = param.name
         }
         self.strategy = KeyValueDecodeStrategy.default.rawValue
+        self.variableName = param.variableName
     }
 
     private init(bodySignatureParameter: ParameterType, bodyParamName: String?) {
@@ -148,6 +152,7 @@ struct KeyValueViewModel: Comparable {
         }
 
         self.needDecodingInMethod = needDecodingInMethod
+        self.variableName = bodySignatureParameter.variableName
     }
 
     /**
@@ -164,6 +169,7 @@ struct KeyValueViewModel: Comparable {
         self.path = path
         self.strategy = KeyValueDecodeStrategy.default.rawValue
         self.needDecodingInMethod = false
+        self.variableName = key
     }
 
     static func < (lhs: KeyValueViewModel, rhs: KeyValueViewModel) -> Bool {
