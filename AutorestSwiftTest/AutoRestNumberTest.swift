@@ -312,4 +312,136 @@ class AutoRestNumberTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_putBigDouble200() throws {
+        let expectation = XCTestExpectation(description: "Call number.putBigDouble")
+
+        client.number.put(bigDouble: Double(2.5976931e+101)) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call putBigDouble failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getBigDouble200() throws {
+        let expectation = XCTestExpectation(description: "Call number.getBigDouble")
+
+        client.number.getBigDouble { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Double(2.5976931e+101))
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getBigDouble failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_putBigDoublePositiveDecimal200() throws {
+        let expectation = XCTestExpectation(description: "Call number.BigDoublePositiveDecimal")
+
+        client.number.putBigDoublePositiveDecimal { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call putBigDouble failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getBigDoublePositiveDecimal200() throws {
+        let expectation = XCTestExpectation(description: "Call number.getBigDoublePositiveDecimal")
+
+        client.number.getBigDoublePositiveDecimal { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Double(99_999_999.99))
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getBigDouble failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_putDoubleBigNegativeDecimal200() throws {
+        let expectation = XCTestExpectation(description: "Call number.putBigDoubleNegativeDecimal")
+
+        client.number.putBigDoubleNegativeDecimal { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call putBigDoubleNegativeDecimal failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDoubleBigNegativeDecimal200() throws {
+        let expectation = XCTestExpectation(description: "Call number.getBigDoubleNegativeDecimal")
+
+        client.number.getBigDoubleNegativeDecimal { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Double(-99_999_999.99))
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getBigDoubleNegativeDecimal failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_bigFloat200() throws {
+        let expectation = XCTestExpectation(description: "Call number.bigFloat")
+
+        client.number.put(bigFloat: Float(3.402823e+20)) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getBigFloat200() throws {
+        let expectation = XCTestExpectation(description: "Call number.getBigFloat")
+
+        client.number.getBigFloat { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, Float(3.402823e+20))
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call getBigFloat failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

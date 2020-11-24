@@ -1,15 +1,15 @@
 {% include "OperationResponseStatusCodeSnippet.stencil" %}
 {
     {% if response.strategy == "intBody" %}
-    {% include "OperationResponseIntBodySnippet.stencil" response %}
+        {% include "OperationResponseIntBodySnippet.stencil" response %}
     {% elif response.strategy == "stringBody" %}
-    {% include "OperationResponseStringBodySnippet.stencil" response %}
+        {% include "OperationResponseStringBodySnippet.stencil" response %}
     {% elif response.strategy == "unixTimeBody" %}
-    {% include "OperationResponseUnixTImeBodySnippet.stencil" response %}
+        {% include "OperationResponseUnixTImeBodySnippet.stencil" response %}
     {% elif response.strategy == "byteArrayBody" %}
-    {% include "OperationResponseByteArrayBodySnippet.stencil" response %}
-    {% elif response.strategy == "dateTimeBody" or response.strategy == "datetimeRfc1123Body" or response.strategy == "dateBody" or response.strategy == "jsonBody" %}
-    {% include "OperationResponseJsonDecoderSnippet.stencil" response %}
+        {% include "OperationResponseByteArrayBodySnippet.stencil" response %}
+    {% elif response.strategy == "dateTimeBody" or response.strategy == "dateTimeRfc1123Body" or response.strategy == "dateBody" or response.strategy == "jsonBody" %}
+        {% include "OperationResponseJsonBodySnippet.stencil" response %}
     {% else %}
     // TODO: Couldn't find template for {{ response.strategy }}
     {% endif %}

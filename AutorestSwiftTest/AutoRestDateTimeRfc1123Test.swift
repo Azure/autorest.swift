@@ -187,4 +187,27 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_getUtcLowercaseMaxDateTime200() throws {
+        let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcLowercaseMaxDateTime")
+
+        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "fri, 31 dec 9999 23:59:59 gmt".capitalized)
+        else {
+            XCTFail("Input is not a datetime")
+            return
+        }
+
+        client.datetimerfc1123.getUtcLowercaseMaxDateTime { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call datetimerfc1123.getUtcLowercaseMaxDateTime failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

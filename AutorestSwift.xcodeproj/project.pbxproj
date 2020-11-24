@@ -211,16 +211,7 @@
 		F16CDA242568769600FD0817 /* AutoRestDateTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA232568769600FD0817 /* AutoRestDateTest */; };
 		F16CDA262568769F00FD0817 /* AutoRestDateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA252568769F00FD0817 /* AutoRestDateTimeTest */; };
 		F16CDA28256876A700FD0817 /* AutoRestRfC1123DateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = F16CDA27256876A700FD0817 /* AutoRestRfC1123DateTimeTest */; };
-		F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
-		F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
-		F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
-		F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
-		F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */; };
-		F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */; };
-		F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */; };
-		F16CDA392568772500FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */; };
 		F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */; };
-		F16CDAD525688F2C00FD0817 /* OperationResponseJsonDecoderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADF71DE25688CBC0079F127 /* OperationResponseJsonDecoderSnippet.stencil */; };
 		F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
@@ -279,14 +270,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F16CDAD525688F2C00FD0817 /* OperationResponseJsonDecoderSnippet.stencil in CopyFiles */,
 				F16CDACE25688DE900FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil in CopyFiles */,
 				F16CDAD625688F2C00FD0817 /* OperationExceptionJsonBodySnippet.stencil in CopyFiles */,
 				F19B01E52507F3D300121831 /* OperationResponseDataSnippet.stencil in CopyFiles */,
-				F16CDA362568772500FD0817 /* OperationResponseDateBodySnippet.stencil in CopyFiles */,
-				F16CDA372568772500FD0817 /* OperationResponseDateDispatchSnippet.stencil in CopyFiles */,
-				F16CDA382568772500FD0817 /* OperationResponseDateTimeBodySnippet.stencil in CopyFiles */,
-				F16CDA392568772500FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in CopyFiles */,
 				F1660B51254CA88A00868BF2 /* OperationResponseByteArrayBodySnippet.stencil in CopyFiles */,
 				F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */,
 				F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */,
@@ -476,10 +462,6 @@
 		F16CDA1D2568767500FD0817 /* body-date */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-date"; path = "test/integration/generated/body-date"; sourceTree = SOURCE_ROOT; };
 		F16CDA1F2568767B00FD0817 /* body-datetime */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-datetime"; path = "test/integration/generated/body-datetime"; sourceTree = SOURCE_ROOT; };
 		F16CDA212568767F00FD0817 /* body-datetime-rfc1123 */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-datetime-rfc1123"; path = "test/integration/generated/body-datetime-rfc1123"; sourceTree = SOURCE_ROOT; };
-		F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeBodySnippet.stencil; sourceTree = "<group>"; };
-		F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateBodySnippet.stencil; sourceTree = "<group>"; };
-		F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateTimeRfc1123BodySnippet.stencil; sourceTree = "<group>"; };
-		F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseDateDispatchSnippet.stencil; sourceTree = "<group>"; };
 		F16CDACD25688DD800FD0817 /* OperationResponseReturnTypeStatusCodeSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseReturnTypeStatusCodeSnippet.stencil; sourceTree = "<group>"; };
 		F16CDAD025688E5600FD0817 /* OperationDecodingSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDecodingSnippet.stencil; sourceTree = "<group>"; };
 		F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionJsonBodySnippet.stencil; sourceTree = "<group>"; };
@@ -711,10 +693,6 @@
 				0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */,
 				F1660B4F254CA85C00868BF2 /* OperationResponseByteArrayBodySnippet.stencil */,
 				F19B01C725073E7F00121831 /* OperationResponseDataSnippet.stencil */,
-				F16CDA2B2568770B00FD0817 /* OperationResponseDateBodySnippet.stencil */,
-				F16CDA2E2568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil */,
-				F16CDA2A2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil */,
-				F16CDA2C2568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil */,
 				F15151262512AA2D00DF0B9F /* OperationResponseExceptionSnippet.stencil */,
 				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
 				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
@@ -1180,10 +1158,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F16CDA2F2568770B00FD0817 /* OperationResponseDateTimeBodySnippet.stencil in Resources */,
-				F16CDA332568770B00FD0817 /* OperationResponseDateDispatchSnippet.stencil in Resources */,
-				F16CDA302568770B00FD0817 /* OperationResponseDateBodySnippet.stencil in Resources */,
-				F16CDA312568770B00FD0817 /* OperationResponseDateTimeRfc1123BodySnippet.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

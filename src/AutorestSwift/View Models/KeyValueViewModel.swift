@@ -139,14 +139,14 @@ struct KeyValueViewModel: Comparable {
 
         self.key = bodyParamName ?? bodySignatureParameter.name
 
-        if type == .byteArray || type == .unixTime,
+        if type == .byteArray || type == .unixTime || type == .date || type == .dateTime,
             bodySignatureParameter.paramLocation == .body {
             needDecodingInMethod = false
         }
 
         // value is referring a signature parameter, no need to wrap as String
-        if let bodyParamName1 = bodyParamName {
-            self.value = needDecodingInMethod ? "\(bodyParamName1)String" : bodyParamName1
+        if let bodyParamName = bodyParamName {
+            self.value = needDecodingInMethod ? "\(bodyParamName)String" : bodyParamName
         } else {
             self.value = bodySignatureParameter.formatValue(bodyParamName)
         }

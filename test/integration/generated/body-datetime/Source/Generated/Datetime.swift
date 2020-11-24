@@ -121,25 +121,12 @@ public final class Datetime {
                     }
 
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -230,25 +217,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -339,25 +313,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -448,25 +409,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -501,9 +449,6 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let utcMaxDateTimeString = dateFormatter.string(from: utcMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/utc"
         let pathParams = [
@@ -518,7 +463,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(utcMaxDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -599,9 +547,6 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let utcMaxDateTime7DigitsString = dateFormatter.string(from: utcMaxDateTime7Digits)
         // Construct URL
         let urlTemplate = "/datetime/max/utc7ms"
         let pathParams = [
@@ -616,7 +561,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime7DigitsString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(utcMaxDateTime7Digits) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -753,25 +701,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -862,25 +797,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -971,25 +893,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1024,9 +933,6 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let localPositiveOffsetMaxDateTimeString = dateFormatter.string(from: localPositiveOffsetMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/localpositiveoffset"
         let pathParams = [
@@ -1041,7 +947,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMaxDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(localPositiveOffsetMaxDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1178,25 +1087,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1287,25 +1183,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1340,9 +1223,6 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let localNegativeOffsetMaxDateTimeString = dateFormatter.string(from: localNegativeOffsetMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetime/max/localnegativeoffset"
         let pathParams = [
@@ -1357,7 +1237,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMaxDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(localNegativeOffsetMaxDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1494,25 +1377,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1603,25 +1473,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1656,9 +1513,6 @@ public final class Datetime {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let utcMinDateTimeString = dateFormatter.string(from: utcMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/utc"
         let pathParams = [
@@ -1673,7 +1527,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(utcMinDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(utcMinDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1810,25 +1667,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -1863,9 +1707,6 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let localPositiveOffsetMinDateTimeString = dateFormatter.string(from: localPositiveOffsetMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/localpositiveoffset"
         let pathParams = [
@@ -1880,7 +1721,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMinDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(localPositiveOffsetMinDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -2017,25 +1861,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -2070,9 +1901,6 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let localNegativeOffsetMinDateTimeString = dateFormatter.string(from: localNegativeOffsetMinDateTime)
         // Construct URL
         let urlTemplate = "/datetime/min/localnegativeoffset"
         let pathParams = [
@@ -2087,7 +1915,10 @@ public final class Datetime {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMinDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(localNegativeOffsetMinDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -2224,25 +2055,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -2333,25 +2151,12 @@ public final class Datetime {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = ISO8601DateFormatter()
-                        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                        let decodedStrWithSec = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStrWithSec) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dateFormatter.formatOptions = [.withInternetDateTime]
-                            let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                            if let decoded = dateFormatter.date(from: decodedStr) {
-                                dispatchQueue.async {
-                                    completionHandler(.success(decoded), httpResponse)
-                                }
-                            } else {
-                                dispatchQueue.async {
-                                    completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                                }
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
