@@ -139,6 +139,39 @@ class Schema: Codable, LanguageShortcut {
         return name.isReserved ? name + "Type" : name
     }
 
+    var bodyParamStrategy: BodyParamStrategy {
+        if self is ConstantSchema {
+            return .constant
+        }
+
+        switch type {
+        case .unixTime:
+            return .unixTime
+        case .byteArray:
+            return .byteArray
+        case .date:
+            return .date
+        case .dateTime:
+            if let dateTimeSchema = self as? DateTimeSchema,
+                dateTimeSchema.format == .dateTimeRfc1123 {
+                return .dateTimeRfc1123
+            } else {
+                return .dateTime
+            }
+        case .array:
+            if let arraySchema = self as? ArraySchema,
+                arraySchema.elementType.type == .date || arraySchema.elementType.type == .dateTime {
+                return arraySchema.elementType.bodyParamStrategy
+            } else {
+                return .plain
+            }
+        case .number:
+            return (swiftType() == "Decimal") ? .decimal : .data
+        default:
+            return .plain
+        }
+    }
+
     static func decode<Key>(
         withContainer container: KeyedDecodingContainer<Key>,
         useKey keyName: String = "schema"
