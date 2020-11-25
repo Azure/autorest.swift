@@ -72,7 +72,17 @@ struct KeyValueViewModel: Comparable {
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
-            self.init(key: param.name, value: "\(groupedBy).\(param.name)")
+            let operationName = operation.name
+            if groupedBy.lowercased().hasSuffix("\(operationName)Options".lowercased()) {
+                if param.paramLocation == .path {
+                    // should be in signature
+                    self.init(key: param.name, value: param.formatValue(), optional: false, path: "")
+                } else {
+                    self.init(key: param.name, value: param.formatValue(), optional: true, path: "options?.")
+                }
+            } else {
+                self.init(key: param.name, value: param.name, path: "\(groupedBy).")
+            }
         } else if param.implementation == .client {
             let name = param.variableName
             self.init(

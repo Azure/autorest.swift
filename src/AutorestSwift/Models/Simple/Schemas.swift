@@ -219,6 +219,8 @@ class Schemas: Codable {
             return strings?.first { $0.name == name }
         case .integer:
             return numbers?.first { $0.name == name }
+        case .group:
+            return groups?.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }
         default:
             fatalError("Unhandled schema type: \(type)")
         }

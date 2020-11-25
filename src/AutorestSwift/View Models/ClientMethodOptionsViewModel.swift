@@ -57,6 +57,15 @@ struct ClientMethodOptionsViewModel {
             properties.append(PropertyViewModel(from: parameter.value))
         }
 
+        if let group = model.schemas.schema(for: groupName + name, withType: .group),
+            group.name.hasSuffix("Options") {
+            for property in group.properties ?? [] {
+                // if let groupProperty = property  {
+                //    groupProperty.
+                properties.append(PropertyViewModel(from: property.value))
+            }
+        }
+
         self.properties = properties
     }
 }
