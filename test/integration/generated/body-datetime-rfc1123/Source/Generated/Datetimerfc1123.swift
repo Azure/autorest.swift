@@ -121,16 +121,12 @@ public final class Datetimerfc1123 {
                     }
 
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -221,16 +217,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -321,16 +313,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -421,16 +409,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -465,7 +449,6 @@ public final class Datetimerfc1123 {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let utcMaxDateTimeString = Date.Format.rfc1123.formatter.string(from: utcMaxDateTime)
         // Construct URL
         let urlTemplate = "/datetimerfc1123/max"
         let pathParams = [
@@ -480,7 +463,10 @@ public final class Datetimerfc1123 {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureRfc1123DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(utcMaxDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -617,16 +603,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -717,16 +699,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -761,7 +739,6 @@ public final class Datetimerfc1123 {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        let utcMinDateTimeString = Date.Format.rfc1123.formatter.string(from: utcMinDateTime)
         // Construct URL
         let urlTemplate = "/datetimerfc1123/min"
         let pathParams = [
@@ -776,7 +753,10 @@ public final class Datetimerfc1123 {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(utcMinDateTimeString) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureRfc1123DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(utcMinDateTime) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -913,16 +893,12 @@ public final class Datetimerfc1123 {
                     200
                 ].contains(statusCode) {
                     do {
-                        let dateFormatter = Date.Format.rfc1123.formatter
-                        let decodedStr = try JSONDecoder().decode(String.self, from: data)
-                        if let decoded = dateFormatter.date(from: decodedStr) {
-                            dispatchQueue.async {
-                                completionHandler(.success(decoded), httpResponse)
-                            }
-                        } else {
-                            dispatchQueue.async {
-                                completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
-                            }
+                        let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {

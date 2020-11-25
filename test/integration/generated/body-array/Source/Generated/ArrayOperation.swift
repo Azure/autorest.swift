@@ -3415,6 +3415,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3466,7 +3469,11 @@ public final class ArrayOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(dateValid) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(dateValid) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -3604,6 +3611,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3698,6 +3708,9 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3792,6 +3805,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -3843,7 +3858,10 @@ public final class ArrayOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(dateTimeValid) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureISO8601DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(dateTimeValid) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -3981,6 +3999,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -4075,6 +4095,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -4169,6 +4191,8 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
+                        let dateFormatter = Date.AzureRfc1123DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode([Date].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -4220,7 +4244,10 @@ public final class ArrayOperation {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(dateTimeRfc1123Valid) else {
+        let encoder = JSONEncoder()
+        let dateFormatter = Date.AzureRfc1123DateFormatter()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        guard let requestBody = try? encoder.encode(dateTimeRfc1123Valid) else {
             self.options.logger.error("Failed to encode request body as json.")
             return
         }

@@ -151,6 +151,9 @@ enum BodyParamStrategy: String {
     case decimal
     case data
     case string
+    case date
+    case dateTime
+    case dateTimeRfc1123
 }
 
 struct BodyParams {
@@ -175,25 +178,14 @@ struct BodyParams {
                 virtParams.append(VirtualParam(from: virtParam))
             }
         }
-
         var strategy: BodyParamStrategy = .plain
 
         if param.flattened {
             strategy = .flattened
         } else if param.nullable {
             strategy = .plainNullable
-        } else if param.schema.type == .unixTime {
-            strategy = .unixTime
-        } else if param.schema.type == .byteArray {
-            strategy = .byteArray
-        } else if param.schema.type == .date || param.schema.type == .dateTime {
-            strategy = .string
-        } else if param.schema.type == .number {
-            strategy = (param.schema.swiftType() == "Decimal") ? .decimal : .data
-        } else if param.schema is ConstantSchema {
-            strategy = .constant
         } else {
-            strategy = .plain
+            strategy = param.schema.bodyParamStrategy
         }
 
         self.strategy = strategy.rawValue
