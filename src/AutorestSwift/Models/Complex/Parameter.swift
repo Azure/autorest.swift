@@ -100,14 +100,10 @@ class Parameter: Value, CustomDebugStringConvertible {
         return debugString() ?? description
     }
 
-    internal func belongsInSignature(model _: CodeModel? = nil) -> Bool {
+    internal func belongsInSignature(model: CodeModel? = nil) -> Bool {
         // We track body params in a special way, so always omit them generally from the signature.
         // If they belong in the signature, they will be added in a way to ensure they come first.
         guard paramLocation != .body else { return false }
-
-        if paramLocation == .path {
-            return true
-        }
 
         // Default logic
         let inMethod = implementation == .method
@@ -116,10 +112,11 @@ class Parameter: Value, CustomDebugStringConvertible {
         let isRequired = required
 
         var isInGroupSchemaOptions = false
-        /* if let group = model?.schemas.schema(for: name, withType: .group),
-             group.name.hasSuffix("Options") {
-             isInGroupSchemaOptions = true
-         } */
+        if let group = model?.schemas.schema(for: name, withType: .group),
+            group.name.hasSuffix("Options"),
+            paramLocation != .path {
+            isInGroupSchemaOptions = true
+        }
 
         return isRequired && inMethod && notConstant && notGrouped && !isInGroupSchemaOptions
     }

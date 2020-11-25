@@ -73,8 +73,6 @@ class ObjectSchema: ComplexSchema, UsageSchema {
     }
 
     public required init(from decoder: Decoder) throws {
-        //  do
-        //  {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         discriminator = try? container.decode(Discriminator.self, forKey: .discriminator)
@@ -85,12 +83,6 @@ class ObjectSchema: ComplexSchema, UsageSchema {
         discriminatorValue = try? container.decode(String.self, forKey: .discriminatorValue)
         usage = try? container.decode([SchemaContext].self, forKey: .usage)
         serializationFormats = try? container.decode([KnownMediaType].self, forKey: .serializationFormats)
-
-        //  } catch {
-        //      discriminatorValue = nil
-        //      print("\(error)")
-
-        //   }
 
         try super.init(from: decoder)
     }

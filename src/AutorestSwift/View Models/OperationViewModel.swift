@@ -109,44 +109,23 @@ struct OperationParameters {
         }
 
         var signatureParameterViewModel = [ParameterViewModel]()
-        for param in parameters.inSignature(model: model) {
-            var isInGroupSchemaOptions = false
+        for param in parameters {
+            // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
+            // look for  all the properties from that group schema which is in 'path' as the signature of the method
             if let group = model.schemas.schema(for: param.name, withType: .group) as? GroupSchema,
                 group.name.hasSuffix("Options") {
-                isInGroupSchemaOptions = true
-                /*
-                 for prop in group.properties ?? [] {
-                     // let groupProperty = prop as GroupProperty
-                     switch prop {
-                     case let .grouped(groupProperty):
-                         for param in groupProperty.originalParameter {
-                             if param.belongsInSignature() {
-                                 signatureParameterViewModel
-                                     .append(ParameterViewModel(from: param))
-                             }
-                         }
-                     default:
-                         continue
-                     }
-                 }
-                 */
-                // check if any of the property in teh group should be in signatuer
-                /* switch param {
-                 case let .virtual(groupProperty):
-                     isInGroupSchemaOptions = true
-                     // if let originalParameter = groupProperty.originalParameter {
-                     //  for param in groupProperty.originalParameter {
-                     if groupProperty.originalParameter.belongsInSignature() {
-                         signatureParameterViewModel
-                             .append(ParameterViewModel(from: ParameterType.regular(groupProperty.originalParameter)))
-                     }
-                    // }
-
-                 default:
-                     isInGroupSchemaOptions = true
-                 }*/
-
-            } else {
+                for property in group.properties ?? [] {
+                    switch property {
+                    case let .grouped(groupProperty):
+                        for param in groupProperty.originalParameter where param.paramLocation == .path {
+                            signatureParameterViewModel
+                                .append(ParameterViewModel(from: param))
+                        }
+                    default:
+                        continue
+                    }
+                }
+            } else if param.belongsInSignature() {
                 signatureParameterViewModel.append(ParameterViewModel(from: param))
             }
         }
@@ -329,7 +308,8 @@ struct OperationViewModel {
 
         // create help struct to manage required and optional params in
         // headers/query/path, etc.
-        self.params = OperationParameters(parameters: params, operation: operation, model: model)
+        let operationParameters = OperationParameters(parameters: params, operation: operation, model: model)
+        self.params = operationParameters
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
@@ -338,8 +318,8 @@ struct OperationViewModel {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }
-        for param in params.inSignature(model: model) where param.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.description)")
+        for param in operationParameters.signature where param.comment.description != "" {
+            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
 
