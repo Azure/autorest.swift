@@ -120,7 +120,6 @@ struct ObjectViewModel {
             usage.count > 0 {
             isErrorType = usage.first == SchemaContext.exception
         }
-        //  (schema.usage?.count > 0) ? (schema.usage?.first == SchemaContext.exception) : false
         self.isErrorType = isErrorType
         let parents = isErrorType ? ["Codable", "Swift.Error"] : ["Codable"]
         inheritance = parents.joined(separator: ", ")
