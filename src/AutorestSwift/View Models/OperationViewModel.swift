@@ -186,6 +186,9 @@ struct BodyParams {
             strategy = .plainNullable
         } else {
             strategy = param.schema.bodyParamStrategy
+            if strategy == .plain, !param.required {
+                strategy = .plainNullable
+            }
         }
 
         self.strategy = strategy.rawValue

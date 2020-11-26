@@ -24,29 +24,34 @@
 //
 // --------------------------------------------------------------------------
 
-import Foundation
+import AutoRestRequiredOptionalTest
+import AzureCore
+import XCTest
 
-/// View Model for a method signature parameter.
-/// Example:
-///     name: String? = nil
-struct ParameterViewModel {
-    let name: String
-    let type: String
-    let typeName: String
-    let optional: Bool
-    let defaultValue: ViewModelDefault
-    let comment: ViewModelComment
+class AutoRestRequiredOptionalTest: XCTestCase {
+    var client: AutoRestRequiredOptionalTestClient!
 
-    init(from param: ParameterType, withName specificName: String? = nil) {
-        if let name = specificName, !name.isEmpty {
-            self.name = name
-        } else {
-            self.name = param.variableName
-        }
-        self.optional = !param.required
-        self.type = param.schema.swiftType(optional: optional)
-        self.typeName = param.schema.swiftType()
-        self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional)
-        self.comment = ViewModelComment(from: param.description)
+    override func setUpWithError() throws {
+        client = try AutoRestRequiredOptionalTestClient(
+            authPolicy: AnonymousAccessPolicy(),
+            withOptions: AutoRestRequiredOptionalTestClientOptions()
+        )
+    }
+
+    func test_getTrue200() throws {
+        let expectation = XCTestExpectation(description: "Call bool.getTrue")
+        /*
+         client.boolOperation.getTrue { result, httpResponse in
+             switch result {
+             case let .success(data):
+                 XCTAssertEqual(data, true)
+                 XCTAssertEqual(httpResponse?.statusCode, 200)
+             case let .failure(error):
+                 let details = errorDetails(for: error, withResponse: httpResponse)
+                 XCTFail("Call bool.getTrue failed. error=\(details)")
+             }
+             expectation.fulfill()
+         }*/
+        wait(for: [expectation], timeout: 5.0)
     }
 }

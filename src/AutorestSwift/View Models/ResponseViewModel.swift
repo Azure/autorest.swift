@@ -124,12 +124,12 @@ struct ResponseViewModel {
             if let elementType = pagedElementClassName, self.pagingNames != nil {
                 self.objectType = "PagedCollection<\(elementType)>"
             } else {
-                self.objectType = schemaResponse?.schema.swiftType(optional: false) ?? "Void"
+                self.objectType = schemaResponse?.schema.swiftType() ?? "Void"
             }
         } else {
             self.pagingNames = nil
             self.pagedElementClassName = nil
-            if let objectType = schemaResponse?.schema.swiftType(optional: false),
+            if let objectType = schemaResponse?.schema.swiftType(),
                 let schema = schemaResponse?.schema {
                 self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
                 self.objectType = objectType

@@ -93,7 +93,8 @@ class Schema: Codable, LanguageShortcut {
             guard let arraySchema = self as? ArraySchema else {
                 fatalError("Type mismatch. Expected array type but got \(self)")
             }
-            swiftType = "[\(arraySchema.elementType.swiftType())]"
+            let elementSwiftType = arraySchema.elementType.swiftType()
+            swiftType = (arraySchema.nullableItems ?? false) ? "[\(elementSwiftType)?]" : "[\(elementSwiftType)]"
         case .number:
             guard let numberSchema = self as? NumberSchema else {
                 fatalError("Type mismatch. Expected number type but got \(self)")
