@@ -154,6 +154,7 @@ enum BodyParamStrategy: String {
     case date
     case dateTime
     case dateTimeRfc1123
+    case time
 }
 
 struct BodyParams {

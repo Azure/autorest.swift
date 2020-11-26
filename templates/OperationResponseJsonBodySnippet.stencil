@@ -11,6 +11,10 @@ do {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    {% elif response.strategy == "timeBody" %}
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
     {% endif %}
     let decoded = try decoder.decode({{ response.objectType }}.self, from: data)
     dispatchQueue.async {

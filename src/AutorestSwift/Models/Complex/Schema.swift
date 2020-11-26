@@ -102,6 +102,7 @@ class Schema: Codable, LanguageShortcut {
             swiftType = numberSchema.swiftType()
         case .dateTime,
              .date,
+             .time,
              .unixTime:
             swiftType = "Date"
         case .byteArray:
@@ -152,6 +153,8 @@ class Schema: Codable, LanguageShortcut {
             return .byteArray
         case .date:
             return .date
+        case .time:
+            return .time
         case .dateTime:
             if let dateTimeSchema = self as? DateTimeSchema,
                 dateTimeSchema.format == .dateTimeRfc1123 {

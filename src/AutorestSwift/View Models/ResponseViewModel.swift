@@ -41,10 +41,10 @@ enum ResponseBodyType: String {
     case unixTimeBody
     /// Service returns a byteArray body
     case byteArrayBody
-
     case dateBody
     case dateTimeBody
     case dateTimeRfc1123Body
+    case timeBody
 
     static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
         let type = schema.type
@@ -56,6 +56,8 @@ enum ResponseBodyType: String {
             switch type {
             case .unixTime:
                 return .unixTimeBody
+            case .time:
+                return .timeBody
             case .date:
                 return .dateBody
             case .dateTime:
