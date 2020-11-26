@@ -355,9 +355,13 @@ public final class Implicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalBody) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalBody != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalBody) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
