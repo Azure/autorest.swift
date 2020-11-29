@@ -41,13 +41,33 @@ struct PropertyViewModel {
     let isDate: Bool
     let optional: Bool
     let className: String
+    let serializedName: String
 
     /// Initialize from Value type (such as Property or Parameter)
-    init(from schema: Value) {
+    init(from property: Property) {
+        // The `name` field is preferred.
+        let name = property.name
+        assert(!name.isEmpty)
+        self.name = name
+        let serializedName = property.serializedName
+        assert(!serializedName.isEmpty)
+        self.serializedName = serializedName
+        self.comment = ViewModelComment(from: property.description)
+        self.className = property.schema!.swiftType()
+        self.optional = !property.required
+        self.type = optional ? "\(className)?" : className
+        self.defaultValue = ViewModelDefault(from: property.clientDefaultValue, isString: true, isOptional: optional)
+        self.initDefaultValue = optional ? "= nil" : ""
+        self.isDate = type.contains("Date")
+    }
+
+    init(from parameterType: ParameterType) {
+        let schema = parameterType.value
         // The `name` field is preferred.
         let name = schema.name
         assert(!name.isEmpty)
         self.name = name
+        self.serializedName = schema.serializedName ?? schema.name
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema!.swiftType()
         self.optional = !schema.required
@@ -57,8 +77,8 @@ struct PropertyViewModel {
         self.isDate = type.contains("Date")
     }
 
-    init(from schema: PropertyType) {
-        switch schema {
+    init(from property: PropertyType) {
+        switch property {
         case let .regular(reg):
             self.init(from: reg)
         case let .grouped(group):

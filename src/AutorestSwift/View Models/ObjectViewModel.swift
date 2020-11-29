@@ -36,10 +36,11 @@ struct ObjectViewModel {
     let properties: [PropertyViewModel]
     let constants: [ConstantViewModel]
     let hasConstants: Bool
-
+    var flattenProperties: [String: [PropertyViewModel]]
     var inheritance = "NSObject"
     var objectType = "struct"
     var isErrorType = false
+    let hasProperty: Bool
 
     init(from schema: ObjectSchema) {
         self.name = schema.modelName
@@ -48,17 +49,29 @@ struct ObjectViewModel {
         // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
         var consts = [ConstantViewModel]()
+        var flattenProperties: [String: [PropertyViewModel]] = [:]
+
         for property in schema.flattenedProperties ?? [] {
-            if let constSchema = property.schema as? ConstantSchema {
+            if property.flattenedNames?.count != 0,
+                let name = property.flattenedNames?[0] {
+                if flattenProperties.keys.contains(name) {
+                    flattenProperties[name]?.append(PropertyViewModel(from: property))
+                } else {
+                    flattenProperties[name] = []
+                    flattenProperties[name]?.append(PropertyViewModel(from: property))
+                }
+            } else if let constSchema = property.schema as? ConstantSchema {
                 consts.append(ConstantViewModel(from: constSchema))
             } else {
                 props.append(PropertyViewModel(from: property))
             }
         }
+        self.flattenProperties = flattenProperties
         self.properties = props
         self.constants = consts
         self.hasConstants = !consts.isEmpty
-
+        self.flattenProperties = flattenProperties
+        self.hasProperty = properties.count > 0
         checkForErrorType(with: schema)
         checkForCircularReferences()
     }
@@ -92,9 +105,9 @@ struct ObjectViewModel {
             groupedProperties.count == (schema.properties?.count ?? 0),
             "Expected all properties to be group properties."
         )
+
         for property in groupedProperties {
             // the source of flattened parameters should not be included in the view model
-
             // FIXME: This assumption no longer holds for storage and should be revisited
             assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
             if property.originalParameter.first?.flattened ?? false {
@@ -106,9 +119,11 @@ struct ObjectViewModel {
                 props.append(PropertyViewModel(from: property))
             }
         }
+        self.flattenProperties = [:]
         self.properties = props
         self.constants = consts
         self.hasConstants = !consts.isEmpty
+        self.hasProperty = properties.count > 0
 
         checkForErrorType(with: schema)
         checkForCircularReferences()

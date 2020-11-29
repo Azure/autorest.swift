@@ -6,12 +6,37 @@
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
+{% for flattenName, properties  in model.flattenProperties %}
+struct {{ flattenName|capitalize }} : Codable {
+    {% for property in properties %}
+        public let {{ property.name }}: {{ property.type }}
+    {% endfor %}
+    
+    enum CodingKeys: String, CodingKey {
+        {% for property in properties %}
+        case {{ property.name }}= "{{ property.serializedName }}"
+        {% endfor %}
+    }
+}
+{% endfor %}
+
 {{ model.comment }}
 public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
     // MARK: Properties
     {% for property in model.properties %}
     {{ property.comment }}
     public let {{ property.name }}: {{ property.type }}
+    {% endfor %}
+
+    {% for flattenName, properties  in model.flattenProperties %}
+    internal let {{ flattenName }}: {{ flattenName|capitalize }}?
+    {% for property in properties %}
+    public var {{ property.name }}: {{ property.type }} {
+        get {
+            return {{ flattenName }}?.{{ property.name }}
+        }
+    }
+    {% endfor %}
     {% endfor %}
 
     {% if model.hasConstants %}
@@ -30,12 +55,24 @@ public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
     ///   - {{ property.name }}: {{ property.comment.withoutPrefix }}
     {% endfor %}
     public init(
+    {% for flattenName, properties  in model.flattenProperties %}
+        {% for property in properties %}
+        {{ property.name }}: {{ property.type }}{{ property.initDefaultValue }}{% if not forloop.last or model.hasProperty %},{% endif%}
+        {% endfor %}
+    {% endfor %}
     {% for property in model.properties %}
         {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
     {% endfor %}
     ) {
     {% for property in model.properties %}
         self.{{ property.name }} = {{ property.name }}
+    {% endfor %}
+    {% for flattenName, properties  in model.flattenProperties %}
+        self.{{ flattenName }} = {{ flattenName|capitalize }}(
+        {% for property in properties %}
+        {{ property.name }}: {{ property.name }}{% if not forloop.last %},{% endif%}
+        {% endfor %}
+        )
     {% endfor %}
     }
 

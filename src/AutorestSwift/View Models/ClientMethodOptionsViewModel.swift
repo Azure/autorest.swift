@@ -54,7 +54,7 @@ struct ClientMethodOptionsViewModel {
         var properties = [PropertyViewModel]()
 
         parameters.forEach {
-            properties.append(PropertyViewModel(from: $0.value))
+            properties.append(PropertyViewModel(from: $0))
         }
 
         self.properties = properties
