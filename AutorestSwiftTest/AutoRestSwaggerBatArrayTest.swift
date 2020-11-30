@@ -913,6 +913,23 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_getArraygetArrayItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayItemNull")
+
+        client.arrayOperation.getArrayItemNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [["1", "2", "3"], nil, ["7", "8", "9"]])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_getComplexValid() throws {
         let expectation = XCTestExpectation(description: "Call array.getComplexValid")
 
@@ -1043,6 +1060,29 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             ["7": "seven", "8": "eight", "9": "nine"]
         ]
         client.arrayOperation.getDictionaryItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryItemNull")
+
+        let expectedData: [[String: String]?] = [
+            ["1": "one", "2": "two", "3": "three"],
+            nil,
+            ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+
+        client.arrayOperation.getDictionaryItemNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
