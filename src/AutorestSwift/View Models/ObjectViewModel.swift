@@ -26,6 +26,50 @@
 
 import Foundation
 
+class FlattenedNode {
+    let name: String
+    let serializedName: String
+    let swiftName: String
+    var children: [FlattenedNode] = []
+    var properties: [PropertyViewModel] = []
+    var hasChild: Bool
+    // let initArgument: String
+
+    init(name: String, serializedName: String) {
+        self.name = name
+        self.serializedName = serializedName
+        self.swiftName = name.uppercasedFirst
+        self.hasChild = false
+    }
+
+    func add(property: PropertyViewModel) {
+        properties.append(property)
+    }
+
+    func add(child: FlattenedNode) {
+        children.append(child)
+        hasChild = true
+    }
+
+    func findChild(with name: String) -> FlattenedNode? {
+        return children.first(where: { $0.name == name })
+    }
+
+    /* func getInitArgument() -> String {
+         var initArgument: String = ""
+
+         for swiftStruct1 in model.swiftStructs {
+             for property in swiftStruct1.properties {
+                 {{ property.name }}: {{ property.name }}{% ifnot forloop.last %},{% endif%}
+             }
+         }
+     }*/
+}
+
+private func findName(with name: String, from nodes: [FlattenedNode]) -> FlattenedNode? {
+    return nodes.first(where: { $0.name == name })
+}
+
 /// View Model for a class or struct defintion.
 /// Example:
 ///   // a simple model object
@@ -36,7 +80,8 @@ struct ObjectViewModel {
     let properties: [PropertyViewModel]
     let constants: [ConstantViewModel]
     let hasConstants: Bool
-    var flattenProperties: [String: [PropertyViewModel]]
+    var swiftStructs: [FlattenedNode]
+    let rootFlattenedNode: FlattenedNode
     var inheritance = "NSObject"
     var objectType = "struct"
     var isErrorType = false
@@ -49,31 +94,52 @@ struct ObjectViewModel {
         // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
         var consts = [ConstantViewModel]()
-        var flattenProperties: [String: [PropertyViewModel]] = [:]
 
-        for property in schema.flattenedProperties ?? [] {
-            if property.flattenedNames?.count != 0,
-                let name = property.flattenedNames?[0] {
-                if flattenProperties.keys.contains(name) {
-                    flattenProperties[name]?.append(PropertyViewModel(from: property))
-                } else {
-                    flattenProperties[name] = []
-                    flattenProperties[name]?.append(PropertyViewModel(from: property))
+        let rootNode: FlattenedNode = FlattenedNode(name: "root", serializedName: "root")
+        var currentNode = rootNode
+        for propertyType in schema.flattenedProperties ?? [] {
+            if let flattenedNames = propertyType.flattenedNames {
+                for i in 0 ..< flattenedNames.count {
+                    let name = flattenedNames[i]
+                    if let node = currentNode.findChild(with: name) {
+                        currentNode = node
+                    } else if i == (flattenedNames.count - 1) {
+                        currentNode.add(property: PropertyViewModel(from: propertyType))
+                    } else if case let .regular(property) = propertyType {
+                        let serializedName = property.serializedName
+                        let node = FlattenedNode(name: name, serializedName: serializedName)
+                        currentNode.add(child: node)
+                        currentNode = node
+                    }
                 }
-            } else if let constSchema = property.schema as? ConstantSchema {
+                currentNode = rootNode
+
+            } else if let constSchema = propertyType.schema as? ConstantSchema {
                 consts.append(ConstantViewModel(from: constSchema))
             } else {
-                props.append(PropertyViewModel(from: property))
+                props.append(PropertyViewModel(from: propertyType))
             }
         }
-        self.flattenProperties = flattenProperties
+
+        self.rootFlattenedNode = rootNode
+        self.swiftStructs = []
+
         self.properties = props
         self.constants = consts
         self.hasConstants = !consts.isEmpty
-        self.flattenProperties = flattenProperties
         self.hasProperty = properties.count > 0
+
+        self.swiftStructs = []
+        buildSwiftStructs(node: rootNode)
         checkForErrorType(with: schema)
         checkForCircularReferences()
+    }
+
+    private mutating func buildSwiftStructs(node: FlattenedNode) {
+        swiftStructs.append(contentsOf: node.children)
+        for child in node.children {
+            buildSwiftStructs(node: child)
+        }
     }
 
     private mutating func checkForCircularReferences() {
@@ -119,7 +185,9 @@ struct ObjectViewModel {
                 props.append(PropertyViewModel(from: property))
             }
         }
-        self.flattenProperties = [:]
+
+        self.rootFlattenedNode = FlattenedNode(name: "", serializedName: "")
+        self.swiftStructs = []
         self.properties = props
         self.constants = consts
         self.hasConstants = !consts.isEmpty
