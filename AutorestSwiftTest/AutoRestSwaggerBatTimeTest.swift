@@ -76,7 +76,7 @@ class AutoRestSwaggerBatTimeTest: XCTestCase {
 
         client.time.put(timeBody: timeInput) { result, httpResponse in
             switch result {
-            case let .success(data):
+            case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
