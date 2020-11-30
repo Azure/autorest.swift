@@ -107,7 +107,7 @@ struct ObjectViewModel {
                         currentNode.add(property: PropertyViewModel(from: propertyType))
                     } else if case let .regular(property) = propertyType {
                         let serializedName = property.serializedName
-                        let node = FlattenedNode(name: name, serializedName: serializedName)
+                        let node = FlattenedNode(name: name, serializedName: name)
                         currentNode.add(child: node)
                         currentNode = node
                     }
