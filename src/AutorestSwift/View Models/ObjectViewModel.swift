@@ -26,6 +26,7 @@
 
 import Foundation
 
+// A Tree struct to keep track of mulitiple level flattened names
 class FlattenedNode {
     let name: String
     let serializedName: String
@@ -69,8 +70,16 @@ struct ObjectViewModel {
     let properties: [PropertyViewModel]
     let constants: [ConstantViewModel]
     let hasConstants: Bool
-    var swiftStructs: [FlattenedNode]
+    // A Tree structure to handle multiple level flattened Names
+    // e.g. in model-flattening.json
+    // flattenedNames:
+    // - details
+    // - max_product_image
+    // - generic_value
+    // AutoRest should create a Struct 'details' which has another Struct 'max_product_image' which has property 'generic_value'
     let rootFlattenedNode: FlattenedNode
+    // Flattend the tree struct `rootFlattenedNode` for stencil engine to generate all the necessary structs
+    var swiftStructs: [FlattenedNode]
     var inheritance = "NSObject"
     var objectType = "struct"
     var isErrorType = false
