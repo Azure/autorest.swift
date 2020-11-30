@@ -37,6 +37,10 @@ class GroupSchema: Schema, UsageSchema {
         case usage, serializationFormats
     }
 
+    func name(equals string: String) -> Bool {
+        return name.caseInsensitiveCompare(string) == .orderedSame
+    }
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         usage = try? container.decode([SchemaContext].self, forKey: .usage)

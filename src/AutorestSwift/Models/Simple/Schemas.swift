@@ -220,7 +220,7 @@ class Schemas: Codable {
         case .integer:
             return numbers?.first { $0.name == name }
         case .group:
-            return groups?.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+            return groups?.first { $0.name(equals: name) }
         default:
             fatalError("Unhandled schema type: \(type)")
         }
