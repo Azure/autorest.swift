@@ -282,31 +282,33 @@ class AutoRestResourceFlatteningTest: XCTestCase {
 //        wait(for: [expectation], timeout: 5.0)
 //    }
 
-//    func test_resourceFlattening_putSimpleProduct() throws {
-//        let expectation =
-//            XCTestExpectation(
-//                description: "Call autorestresourceflatteningtestservice.putSimpleProduct succeed"
-//            )
-//        let product = SimpleProduct(
-//            maxProductDisplayName: "max name",
-//            odataValue: "http://foo",
-//            productId: "123",
-//            description: "product description"
-//        )
-//        // FIXME: Serialization of flattened object to the wire needs fixing
-//        client.autoRestResourceFlatteningTestService.put(simpleProduct: product) { result, httpResponse in
-//            switch result {
-//            case .success:
-//                XCTAssertEqual(httpResponse?.statusCode, 200)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                print("test failed. error=\(details)")
-//                XCTFail("Call autorestresourceflatteningtestservice.putSimpleProduct failed")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: 5.0)
-//    }
+    func test_resourceFlattening_putSimpleProduct() throws {
+        let expectation =
+            XCTestExpectation(
+                description: "Call autorestresourceflatteningtestservice.putSimpleProduct succeed"
+            )
+        let product = SimpleProduct(
+            maxProductDisplayName: "max name",
+            capacity: "Large",
+            genericValue: "https://generic",
+            odataValue: "http://foo",
+            productId: "123",
+            description: "product description"
+        )
+        // FIXME: Serialization of flattened object to the wire needs fixing
+        client.autoRestResourceFlatteningTestService.put(simpleProduct: product) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.putSimpleProduct failed")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 
 //    func test_resourceFlattening_putSimpleProductWithGroupingFlattenParameterGroup() throws {
 //        let expectation =
