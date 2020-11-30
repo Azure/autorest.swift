@@ -34,7 +34,7 @@ public struct BaseError: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case someBaseProp
+        case someBaseProp = "someBaseProp"
     }
 
     /// Initialize a `BaseError` structure from decoder

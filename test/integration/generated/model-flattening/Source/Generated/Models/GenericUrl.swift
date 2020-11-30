@@ -36,7 +36,7 @@ public struct GenericUrl: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case genericValue
+        case genericValue = "generic_value"
     }
 
     /// Initialize a `GenericUrl` structure from decoder

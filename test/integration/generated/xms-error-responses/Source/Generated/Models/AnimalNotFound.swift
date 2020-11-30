@@ -46,10 +46,10 @@ public struct AnimalNotFound: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case name
-        case reason
-        case whatNotFound
-        case someBaseProp
+        case name = "name"
+        case reason = "reason"
+        case whatNotFound = "whatNotFound"
+        case someBaseProp = "someBaseProp"
     }
 
     /// Initialize a `AnimalNotFound` structure from decoder

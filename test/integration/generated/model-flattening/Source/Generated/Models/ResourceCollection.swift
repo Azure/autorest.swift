@@ -44,9 +44,9 @@ public struct ResourceCollection: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case productresource
-        case arrayofresources
-        case dictionaryofresources
+        case productresource = "productresource"
+        case arrayofresources = "arrayofresources"
+        case dictionaryofresources = "dictionaryofresources"
     }
 
     /// Initialize a `ResourceCollection` structure from decoder

@@ -40,8 +40,8 @@ public struct ProductUrl: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case odataValue
-        case genericValue
+        case odataValue = "@odata.value"
+        case genericValue = "generic_value"
     }
 
     /// Initialize a `ProductUrl` structure from decoder

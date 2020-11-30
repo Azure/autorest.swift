@@ -47,10 +47,10 @@ public struct PetSadError: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case reason
-        case errorType
-        case errorMessage
-        case actionResponse
+        case reason = "reason"
+        case errorType = "errorType"
+        case errorMessage = "errorMessage"
+        case actionResponse = "actionResponse"
     }
 
     /// Initialize a `PetSadError` structure from decoder
