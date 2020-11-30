@@ -1,18 +1,18 @@
 {% if op.request.strategy == "body" %}
-{% include "OperationRequestBodySnippet.stencil" op %}
+    {% include "OperationRequestBodySnippet.stencil" op %}
 {% elif op.request.strategy == "noBody" %}
-{% include "OperationRequestSnippet.stencil" op %}
+    {% include "OperationRequestSnippet.stencil" op %}
 {% elif op.request.strategy == "patchBody" %}
-{% include "OperationRequestPatchBodySnippet.stencil" op %}
+    {% include "OperationRequestPatchBodySnippet.stencil" op %}
 {% else %}
-// TODO: Couldn't find template for {{ op.request.strategy }}
+    // TODO: Couldn't find template for {{ op.request.strategy }}
 {% endif %}
 
 // Send request
 let context = PipelineContext.of(keyValues: [
-   {% for param in op.pipelineContext %}
+{% for param in op.pipelineContext %}
    {{ param.key }} : {{ param.value}} as AnyObject
-   {% endfor %}
+{% endfor %}
 ])
 context.add(cancellationToken: options?.cancellationToken, applying: self.options)
 context.merge(with: options?.context)

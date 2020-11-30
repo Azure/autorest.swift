@@ -3,11 +3,11 @@
 {% include "ImportSnippet.stencil" %}
 
 {% for enum in models.enums %}
-{{ enum.comment }}
-public enum {{ enum.name }}: {{ enum.type }}, Codable {
-{% for choice in enum.choices %}
-    {{ choice.comment }}
-    case {{ choice.name }} = "{{choice.value}}"
-{% endfor %}
-}
+    {{ enum.comment }}
+    public enum {{ enum.name }}: {{ enum.type }}, Codable {
+        {% for choice in enum.choices %}
+            {{ choice.comment }}
+            case {{ choice.name }} = "{{choice.value}}"
+        {% endfor %}
+    }
 {% endfor %}

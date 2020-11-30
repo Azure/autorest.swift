@@ -5,23 +5,23 @@
 ///    - completionHandler: A completion handler that receives a status code on
 ///     success.
 public func {{ op.name }}(
-    {% if op.params.body != nil %}
+{% if op.params.body != nil %}
     {% include "BodyParamSnippet.stencil" op %}
-    {% endif %}
-    {% for param in op.params.signature %}
+{% endif %}
+{% for param in op.params.signature %}
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
-    {% endfor %}
+{% endfor %}
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
 ) {
-    {% for param in op.params.methodDecoding %}
-        {% include "OperationDecodingSnippet.stencil" param %}
-    {% endfor %}
+{% for param in op.params.methodDecoding %}
+    {% include "OperationDecodingSnippet.stencil" param %}
+{% endfor %}
     {% include "OperationUrlSnippet.stencil" %}
     {% include "OperationQueryParamSnippet.stencil" %}
     {% include "OperationHeaderSnippet.stencil" %}
-    {% if op.params.hasOptionalParams %}
+{% if op.params.hasOptionalParams %}
     {% include "OperationOptionsSnippet.stencil" op %}
-    {% endif %}
+{% endif %}
     {% include "OperationSendRequestSnippet.stencil" op %}
 }

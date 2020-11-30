@@ -23,19 +23,6 @@ public final class {{ group.name }} {
         self.commonOptions = client.commonOptions
     }
 
-    public func url(
-        host hostIn: String? = nil,
-        template templateIn: String,
-        pathParams pathParamsIn: [String: String]? = nil,
-        queryParams queryParamsIn: [QueryParameter]? = nil
-    ) -> URL? {
-        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
-    }
-    
-    public func request(_ request: HTTPRequest, context: PipelineContext?, completionHandler: @escaping HTTPResultHandler<Data?>) {
-        return client.request(request, context: context, completionHandler: completionHandler)
-    }
-
     {% for op in group.operations %}
         {% include "OperationSnippet.stencil" op %}
     {% endfor %}

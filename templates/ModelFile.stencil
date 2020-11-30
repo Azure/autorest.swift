@@ -9,34 +9,34 @@
 {{ model.comment }}
 public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
     // MARK: Properties
-    {% for property in model.properties %}
+{% for property in model.properties %}
     {{ property.comment }}
     public let {{ property.name }}: {{ property.type }}
-    {% endfor %}
+{% endfor %}
 
-    {% if model.hasConstants %}
+{% if model.hasConstants %}
     // MARK: Constants
     {% for constant in model.constants %}
-    {{ constant.comment }}
-    public let {{ constant.name }}{{constant.defaultValue}}
+        {{ constant.comment }}
+        public let {{ constant.name }}{{constant.defaultValue}}
     {% endfor %}
-    {% endif %}
+{% endif %}
 
     // MARK: Initializers
 
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
-    {% for property in model.properties %}
+{% for property in model.properties %}
     ///   - {{ property.name }}: {{ property.comment.withoutPrefix }}
-    {% endfor %}
+{% endfor %}
     public init(
-    {% for property in model.properties %}
-        {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
-    {% endfor %}
+{% for property in model.properties %}
+    {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }}{% ifnot forloop.last %},{% endif%}
+{% endfor %}
     ) {
-    {% for property in model.properties %}
-        self.{{ property.name }} = {{ property.name }}
-    {% endfor %}
+{% for property in model.properties %}
+    self.{{ property.name }} = {{ property.name }}
+{% endfor %}
     }
 
     // MARK: Codable

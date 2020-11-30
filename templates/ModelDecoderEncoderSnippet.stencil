@@ -10,18 +10,18 @@ enum CodingKeys: String, CodingKey {
 /// Initialize a `{{ model.name }}` structure from decoder
 public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    {% for property in model.properties %}
+{% for property in model.properties %}
     {% include "ModelDecoderProperty.stencil" %}
-    {% endfor %}
+{% endfor %}
 }
 
 /// Encode a `{{ model.name }}` structure
 public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    {% for property in model.properties %}
+{% for property in model.properties %}
     {% include "ModelEncoderProperty.stencil" %}
-    {% endfor %}
-    {% for constant in model.constants %}
+{% endfor %}
+{% for constant in model.constants %}
     try container.encode({{ constant.name }}, forKey: .{{ constant.name }})
-    {% endfor %}
+{% endfor %}
 }

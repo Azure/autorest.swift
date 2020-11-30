@@ -1,9 +1,9 @@
 {% if property.isDate %}
-{% include "ModelEncoderDateProperty.stencil" %}
+    {% include "ModelEncoderDateProperty.stencil" %}
 {% else %}
-{% if property.optional %}
-if {{ property.name }} != nil { try? container.encode({{ property.name }} , forKey: .{{ property.name }}) }
-{% else %}
-try container.encode({{ property.name }}, forKey: .{{ property.name }})
-{% endif %}
+    {% if property.optional %}
+        if {{ property.name }} != nil { try? container.encode({{ property.name }} , forKey: .{{ property.name }}) }
+    {% else %}
+        try container.encode({{ property.name }}, forKey: .{{ property.name }})
+    {% endif %}
 {% endif %}

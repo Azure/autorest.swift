@@ -1,31 +1,31 @@
 {% if param.strategy == "date" %}
-let dateFormatter = DateFormatter()
-dateFormatter.dateFormat = "yyyy-MM-dd"
-let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
 {% elif param.strategy == "dateTimeIso8601" %}
-let dateFormatter = ISO8601DateFormatter()
-dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
+    let dateFormatter = ISO8601DateFormatter()
+    dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    let {{ param.key }}String = dateFormatter.string(from: {{ param.key }})
 {% elif param.strategy == "dateTimeRfc1123" %}
-let {{ param.key }}String = Date.Format.rfc1123.formatter.string(from: {{ param.key }})
+    let {{ param.key }}String = Date.Format.rfc1123.formatter.string(from: {{ param.key }})
 {% elif param.strategy == "unixTime" %}
-let {{ param.key }}String =  String(Int({{ param.key }}.timeIntervalSince1970 ))
+    let {{ param.key }}String =  String(Int({{ param.key }}.timeIntervalSince1970 ))
 {% elif param.strategy == "byteArray" %}
-guard let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8) else {
-    self.options.logger.error("Failed to construct String for {{ param.key }}")
-    return
-}
+    guard let {{ param.key }}String = String(bytes: {{ param.key }}, encoding: .utf8) else {
+        self.options.logger.error("Failed to construct String for {{ param.key }}")
+        return
+    }
 {% elif param.strategy == "base64ByteArray" %}
-let {{ param.key }}String = {{ param.key }}.base64URLEncodedString()
+    let {{ param.key }}String = {{ param.key }}.base64URLEncodedString()
 {% elif param.strategy == "number" %}
-let {{ param.key }}String = String(describing: {{ param.key }})
+    let {{ param.key }}String = String(describing: {{ param.key }})
 {% elif param.strategy == "decimal" %}
-{# Test server expect the 'positive exponent' to have a + sign. i.e. instead of 2.566e10, it expects 2.566e+10} #}
-let numberFormatter = NumberFormatter()
-numberFormatter.numberStyle = .scientific
-numberFormatter.maximumSignificantDigits = 8
-var {{ param.key }}String = numberFormatter.string(from: {{ param.key }} as NSDecimalNumber)
-{{ param.key }}String = {{ param.key }}String?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options:  .regularExpression)
+    {# Test server expect the 'positive exponent' to have a + sign. i.e. instead of 2.566e10, it expects 2.566e+10} #}
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .scientific
+    numberFormatter.maximumSignificantDigits = 8
+    var {{ param.key }}String = numberFormatter.string(from: {{ param.key }} as NSDecimalNumber)
+    {{ param.key }}String = {{ param.key }}String?.replacingOccurrences(of: "e([0-9])", with: "e+$1", options:  .regularExpression)
 {% else %}
-{# No need to decode the parameter to String. Leave this blank #}
+    {# No need to decode the parameter to String. Leave this blank #}
 {% endif %}

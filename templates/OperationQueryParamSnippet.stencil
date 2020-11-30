@@ -1,8 +1,8 @@
 // Construct query
 {{ op.params.query.declaration }} queryParams: [QueryParameter] = [
-    {% for param in op.params.query.required %}
+{% for param in op.params.query.required %}
     ("{{ param.key }}" , {{ param.path}}{{ param.value}})
-    {% endfor %}
+{% endfor %}
 ]
 
 {% for param in op.params.explodeQuery.required %}

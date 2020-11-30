@@ -1,18 +1,18 @@
 {% for exception in op.exceptions %}
     if [
-    {% for statusCode in exception.statusCodes %}
-      {{ statusCode }},
-    {% endfor  %}
+{% for statusCode in exception.statusCodes %}
+    {{ statusCode }},
+{% endfor  %}
     ].contains(statusCode)
     {
-        {% if exception.strategy == "intBody" %}
+    {% if exception.strategy == "intBody" %}
         {% include "OperationExceptionIntBodySnippet.stencil" exception %}
-        {% elif exception.strategy == "stringBody" %}
+    {% elif exception.strategy == "stringBody" %}
         {% include "OperationExceptionStringBodySnippet.stencil" exception %}
-        {% elif exception.strategy == "jsonBody" %}
+    {% elif exception.strategy == "jsonBody" %}
         {% include "OperationExceptionJsonBodySnippet.stencil" exception %}
-        {% else %}
+    {% else %}
         // TODO: Couldn't find template for {{ exception.strategy }}
-        {% endif %}
+    {% endif %}
     }
 {% endfor %}

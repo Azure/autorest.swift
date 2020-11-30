@@ -216,7 +216,6 @@
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
 		F1731F322522E531006CDED8 /* MethodOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */; };
 		F1731F332522E531006CDED8 /* NamedMethodOptionsFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */; };
-		F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */; };
 		F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */; };
 		F18717D2250B186200318867 /* OperationResponseFailureNoBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */; };
 		F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */; };
@@ -287,7 +286,6 @@
 				F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */,
 				F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */,
 				F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */,
-				F186E97E25103AD400723FA3 /* Primitives+ExtensionFile.stencil in CopyFiles */,
 				F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */,
 				F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */,
 				F18717D1250B186200318867 /* OperationResponseFailureBodySnippet.stencil in CopyFiles */,
@@ -466,7 +464,6 @@
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		F1731F2E2522E4D8006CDED8 /* MethodOptionsSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodOptionsSnippet.stencil; sourceTree = "<group>"; };
 		F1731F2F2522E4F0006CDED8 /* NamedMethodOptionsFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethodOptionsFile.stencil; sourceTree = "<group>"; };
-		F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Primitives+ExtensionFile.stencil"; sourceTree = "<group>"; };
 		F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureBodySnippet.stencil; sourceTree = "<group>"; };
 		F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseFailureNoBodySnippet.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* OperationDefaultExceptionSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationDefaultExceptionSnippet.stencil; sourceTree = "<group>"; };
@@ -709,7 +706,6 @@
 				F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package.stencil */,
 				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
-				F186E97D25103ABB00723FA3 /* Primitives+ExtensionFile.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
 				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
 			);
