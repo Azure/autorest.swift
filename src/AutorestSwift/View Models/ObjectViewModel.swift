@@ -33,7 +33,6 @@ class FlattenedNode {
     var children: [FlattenedNode] = []
     var properties: [PropertyViewModel] = []
     var hasChild: Bool
-    // let initArgument: String
 
     init(name: String, serializedName: String) {
         self.name = name
@@ -54,16 +53,6 @@ class FlattenedNode {
     func findChild(with name: String) -> FlattenedNode? {
         return children.first(where: { $0.name == name })
     }
-
-    /* func getInitArgument() -> String {
-         var initArgument: String = ""
-
-         for swiftStruct1 in model.swiftStructs {
-             for property in swiftStruct1.properties {
-                 {{ property.name }}: {{ property.name }}{% ifnot forloop.last %},{% endif%}
-             }
-         }
-     }*/
 }
 
 private func findName(with name: String, from nodes: [FlattenedNode]) -> FlattenedNode? {
@@ -105,9 +94,8 @@ struct ObjectViewModel {
                         currentNode = node
                     } else if i == (flattenedNames.count - 1) {
                         currentNode.add(property: PropertyViewModel(from: propertyType))
-                    } else if case let .regular(property) = propertyType {
-                        let serializedName = property.serializedName
-                        let node = FlattenedNode(name: name, serializedName: serializedName)
+                    } else {
+                        let node = FlattenedNode(name: name, serializedName: name)
                         currentNode.add(child: node)
                         currentNode = node
                     }
