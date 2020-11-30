@@ -54,6 +54,7 @@ struct ClientMethodOptionsViewModel {
         var properties = [PropertyViewModel]()
 
         // In generated code stencil, there is already a 'clientRequestId', so do not duplicate by adding anyone with same name
+        // TODO: Revisit how to handle local swagger overrides predefined properties in Autorest swift generated code
         for parameter in parameters where parameter.value.name != "clientRequestId" {
             properties.append(PropertyViewModel(from: parameter.value))
         }

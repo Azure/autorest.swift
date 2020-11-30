@@ -112,7 +112,7 @@ class AutoRestPagingTest: XCTestCase {
                 var noOfPages = 1
                 pagedCollection.forEachPage { _ in
                     noOfPages += 1
-                    
+
                     if pagedCollection.isExhausted {
                         XCTAssertEqual(noOfPages, 1)
                         return false
@@ -144,7 +144,7 @@ class AutoRestPagingTest: XCTestCase {
                 var noOfPages = 1
                 pagedCollection.forEachPage { _ in
                     noOfPages += 1
-                    
+
                     if pagedCollection.isExhausted {
                         XCTAssertEqual(noOfPages, 10)
                         return false
@@ -160,7 +160,7 @@ class AutoRestPagingTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_listWithQueryParams200() throws {
         let expectation = XCTestExpectation(description: "Call paging.listWithQueryParams")
 
@@ -172,7 +172,7 @@ class AutoRestPagingTest: XCTestCase {
                 var noOfPages = 1
                 pagedCollection.forEachPage { _ in
                     noOfPages += 1
-                    
+
                     if pagedCollection.isExhausted {
                         XCTAssertEqual(noOfPages, 2)
                         return false
@@ -188,7 +188,7 @@ class AutoRestPagingTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_getMultiplePagesWithOffset200() throws {
         let expectation = XCTestExpectation(description: "Call paging.getMultiplePagesWithOffset")
 
@@ -201,7 +201,7 @@ class AutoRestPagingTest: XCTestCase {
                 var allProducts: [Product] = []
                 pagedCollection.forEachPage { products in
                     noOfPages += 1
-                    
+
                     allProducts.append(contentsOf: products)
 
                     if pagedCollection.isExhausted {
@@ -221,7 +221,7 @@ class AutoRestPagingTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_listOdataMultiplePages200() throws {
         let expectation = XCTestExpectation(description: "Call paging.listOdataMultiplePages")
 
@@ -233,7 +233,7 @@ class AutoRestPagingTest: XCTestCase {
                 var noOfPages = 1
                 pagedCollection.forEachPage { _ in
                     noOfPages += 1
-                    
+
                     if pagedCollection.isExhausted {
                         XCTAssertEqual(noOfPages, 10)
                         return false
