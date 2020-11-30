@@ -178,6 +178,16 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call header.paramFloat failed. error=\(details)")
             }
+        }
+
+        client.header.paramFloat(scenario: "negative", value: -3.0) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call header.paramFloat failed. error=\(details)")
+            }
             expectation.fulfill()
         }
 

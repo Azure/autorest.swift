@@ -754,6 +754,64 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_getByteValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.getByteValid")
+
+        let expectedData = [
+            Data([255, 255, 255, 250]),
+            Data([1, 2, 3]),
+            Data([37, 41, 67])
+        ]
+        client.arrayOperation.getByteValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_getByteInvalidNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getByteInvalidNull")
+
+        client.arrayOperation.getByteInvalidNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail.")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_puttByteValid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.puttByteValid")
+
+        let data = [
+            Data([255, 255, 255, 250]),
+            Data([1, 2, 3]),
+            Data([37, 41, 67])
+        ]
+        client.arrayOperation.put(byteValid: data) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_getArrayValid() throws {
         let expectation = XCTestExpectation(description: "Call array.getArrayValid")
 
