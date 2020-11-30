@@ -35,7 +35,8 @@ working_files = [
     "body-datetime-rfc1123",
     "body-boolean",
     "custom-baseUrl-more-options",
-    "url-multi-collectionFormat"
+    "url-multi-collectionFormat",
+    "paging"
 ]
 
 def get_all_files():
