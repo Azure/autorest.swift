@@ -458,6 +458,23 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
+    func test_getStringWithInvalid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getStringWithInvalid")
+
+        client.arrayOperation.getStringWithInvalid { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail")
+            case let .failure(error):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssertTrue(details.contains("\"foo\", 123, \"foo2\""))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func test_getStringWithNull200() throws {
         let expectation = XCTestExpectation(description: "Call array.getStringWithNull")
 
@@ -775,7 +792,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_getByteInvalidNull200() throws {
         let expectation = XCTestExpectation(description: "Call array.getByteInvalidNull")
 
@@ -790,7 +807,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     func test_puttByteValid200() throws {
         let expectation = XCTestExpectation(description: "Call array.puttByteValid")
 
