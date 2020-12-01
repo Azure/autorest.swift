@@ -27,73 +27,57 @@
 import Foundation
 
 struct OperationParameters {
-    let header: Params
-    let query: Params
-    let explodeQuery: Params
-    let path: [KeyValueViewModel]
-    let body: BodyParams?
+    let params: [ParameterViewModel]
     let signature: [ParameterViewModel]
-    let hasOptionalParams: Bool
-    let methodDecoding: [KeyValueViewModel]
+    let methodDecoding: [ParameterViewModel]
+    let body: BodyParams?
 
-    /// Build a list of required and optional query params and headers from a list of parameters
+    /// Initialize with a list of `ParameterType`.
     init(parameters: [ParameterType], operation: Operation) {
-        var header = Params()
-        var query = Params()
-        var explodeQuery = Params()
-        var path = [KeyValueViewModel]()
-        var body = [KeyValueViewModel]()
-        var methodDecoding = [KeyValueViewModel]()
+        var params = [ParameterViewModel]()
+        var methodDecoding = [ParameterViewModel]()
 
         for param in parameters {
             guard let paramLocation = param.paramLocation else { continue }
-            let viewModel = KeyValueViewModel(from: param, with: operation)
+            let viewModel = ParameterViewModel(from: param, with: operation)
+            let kvModel = KeyValueViewModel(from: param, with: operation)
 
             switch paramLocation {
             case .query:
                 if param.explode {
-                    viewModel.optional ? explodeQuery.optional.append(viewModel) : explodeQuery.required
-                        .append(viewModel)
+//                    {% for param in op.params.explodeQuery.required %}
+//                    //    {{ param.value}}.forEach {
+//                    //        queryParams.append("{{ param.key }}", $0)
+//                    //    }
+//                    {% endfor %}
+//                    viewModel.optional ? explodeQuery.optional.append(viewModel) : explodeQuery.required
+//                        .append(viewModel)
+                    assertionFailure("Re-enable explode query.")
                 } else {
-                    viewModel.optional ? query.optional.append(viewModel) : query.required
-                        .append(viewModel)
+                    params.append(viewModel)
                 }
-            case .header:
-                viewModel.optional ? header.optional.append(viewModel) : header.required
-                    .append(viewModel)
-            case .path,
-                 .uri:
-                path.append(viewModel)
+            case .header, .path, .uri:
+                params.append(viewModel)
             case .body:
                 if param.required {
-                    body.append(viewModel)
+                    params.append(viewModel)
                 }
             default:
                 continue
             }
         }
 
-        let allParams = query.required + path + body + header.required
-        for param in allParams where param.needDecodingInMethod {
-            methodDecoding.append(param)
-        }
-
-        // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
-        if path.isEmpty {
-            path.append(KeyValueViewModel(key: "", value: "\"\""))
-        }
-
-        // If there is no optional query params, change query param declaration to 'let'
-        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
-        // header parameters will be initialized out of header initializer
-        query.declaration = query.optional.isEmpty && explodeQuery.optional.isEmpty ? "let" : "var"
-        header.declaration = header.isEmpty ? "let" : "var"
+        // TODO: re-evaluate and restore
+//        for param in params where param.needDecodingInMethod {
+//            methodDecoding.append(param)
+//        }
 
         // Set the body param, if applicable
         var bodyParamName: String?
-        assert(body.count <= 1, "Expected, at most, one body parameter.")
-        if body.count > 0 {
-            bodyParamName = body.first?.key
+        let bodyParams = params.filter { $0.location == "body" }
+        assert(bodyParams.count <= 1, "Expected, at most, one body parameter.")
+        if bodyParams.count > 0 {
+            bodyParamName = bodyParams.first?.name
         } else {
             bodyParamName = operation.request?.bodyParamName(for: operation)
         }
@@ -108,36 +92,13 @@ struct OperationParameters {
             self.body = nil
         }
 
-        var signatureParameterViewModel = [ParameterViewModel]()
+        var signatureViewModel = [ParameterViewModel]()
         for param in parameters.inSignature {
-            signatureParameterViewModel.append(ParameterViewModel(from: param))
+            signatureViewModel.append(ParameterViewModel(from: param))
         }
-        self.signature = signatureParameterViewModel
-
+        self.params = params
+        self.signature = signatureViewModel
         self.methodDecoding = methodDecoding
-        self.header = header
-        self.query = query
-        self.explodeQuery = explodeQuery
-        self.path = path
-        self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty && explodeQuery.optional.isEmpty)
-    }
-}
-
-struct Params {
-    // Query Params/Header in initializer
-    var required: [KeyValueViewModel]
-    // Query Params/Header need to add Nil check
-    var optional: [KeyValueViewModel]
-    // Whether to 'var' or 'let' in generated code for the param declaration
-    var declaration: String = "var"
-
-    init() {
-        self.required = [KeyValueViewModel]()
-        self.optional = [KeyValueViewModel]()
-    }
-
-    var isEmpty: Bool {
-        return required.isEmpty && optional.isEmpty
     }
 }
 

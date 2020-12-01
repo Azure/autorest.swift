@@ -89,9 +89,10 @@ def generate_and_build_code(fileList):
         print('== Generate code for test server swagger {file}.json =='.format(file=file))
 
         if clean:
-            print("Remove Package.resolved and .build directory.")
+            print("Remove `Package.resolved` and `.build` and `Generated` directories.")
             os.system('rm {generated_directory}{file}/Package.resolved'.format(file=file, generated_directory=generated_directory))
             os.system('rm -Rf {generated_directory}{file}/.build'.format(file=file, generated_directory=generated_directory))
+            os.system('rm -Rf {generated_directory}{file}/Source/Generated'.format(file=file, generated_directory=generated_directory))
 
         autorest_command = "autorest --input-file={swagger_directory}{file}.json --output-folder={generated_directory}{file} --namespace={file} --use=.".format(file=file, swagger_directory=swagger_directory, generated_directory=generated_directory)
 

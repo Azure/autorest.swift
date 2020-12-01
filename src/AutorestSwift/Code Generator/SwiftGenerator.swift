@@ -189,6 +189,17 @@ class SwiftGenerator: CodeGenerator {
             )
         }
 
+        if !exists(filename: "Custom.swift", inSubfolder: .source) {
+            // Create Custom.swift file, which allows us to wipe and
+            // re-generate the Generated folder.
+            try render(
+                template: "Custom",
+                toSubfolder: .source,
+                withFilename: "Custom.swift",
+                andParams: ["": ""]
+            )
+        }
+
         // Create Package.swift file
         if !exists(filename: "Package.swift", inSubfolder: .root) {
             let packageViewModel = PackageFileViewModel(from: model)

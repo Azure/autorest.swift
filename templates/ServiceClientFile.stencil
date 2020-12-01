@@ -90,6 +90,9 @@ public final class {{ model.name }}: {{ model.protocols }} {
 
     // MARK: Public Client Methods
 {% for group in model.operationGroups %}
-    {% include "OperationGroupSnippet.stencil" group %}
+    // MARK: {{ group.name }}
+    {% for op in group.operations %}
+        {% include "OperationSnippet.stencil" op %}
+    {% endfor %}
 {% endfor %}
 }

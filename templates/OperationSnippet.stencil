@@ -21,22 +21,8 @@ public func {{ op.name }}(
     // Construct URL
     let urlTemplate = "{{ op.request.path }}"
     let params = RequestParameters(
-    {% for param in op.params.path %}
-        {# calculate .encode and handle , at end #}
-        (.path, "{{ param.key }}", {{ param.path}}{{ param.value }}, .encode),
-    {% endfor %}
-    {% for param in op.params.query %}
-        {# calculate .encode and handle , at end #}
-        (.query, "{{ param.key }}", {{ param.path}}{{ param.value }}, .encode),
-    {% endfor %}
-    {% for param in op.params.header %}
-        {# calculate .encode and handle , at end #}
-        (.header, "{{ param.key }}", {{ param.path}}{{ param.value }}, .encode),
-    {% endfor %}
-    {% for param in op.params.explodeQuery.required %}
-        {{ param.value}}.forEach {
-            queryParams.append("{{ param.key }}", $0)
-        }
+    {% for param in op.params.values %}
+        (.{{ param.location }}, "{{ param.name }}", {{ param.pathOrValue }}, .{{ param.encode }}),
     {% endfor %}
     )
 
@@ -60,12 +46,6 @@ public func {{ op.name }}(
     ])
     context.add(cancellationToken: options?.cancellationToken, applying: client.options)
     context.merge(with: options?.context)
-    guard let requestUrl = client.url(template: urlTemplate, params: params),
-        let request = try? HTTPRequest(method: {{ op.request.method }}, url: requestUrl, headers: param.headers) else {
-        client.options.logger.error("Failed to construct HTTP request.")
-        return
-    }
-
     client.request(request, context: context) { result, httpResponse in
         let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
         {% include "OperationResponseSnippet.stencil" op %}

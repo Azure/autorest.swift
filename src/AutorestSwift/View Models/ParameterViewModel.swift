@@ -30,14 +30,34 @@ import Foundation
 /// Example:
 ///     name: String? = nil
 struct ParameterViewModel {
+    /// Name of the parameter
     let name: String
+
+    /// The value or variable path to the value of the parameter
+    let pathOrValue: String
+
+    /// Swift type annotation, including optionality, if applicable
     let type: String
+
+    /// Swift type annotation, disregarding optionality
     let typeName: String
+
+    /// Whether the parameter is required or not
     let optional: Bool
+
+    /// Default value for the parameter
     let defaultValue: ViewModelDefault
+
+    /// Comment value for the parameter
     let comment: ViewModelComment
 
-    init(from param: ParameterType, withName specificName: String? = nil) {
+    /// Where the parameter goes in terms of the request
+    let location: String
+
+    /// Whether to URL encode the parameter or not
+    let encode: String
+
+    init(from param: ParameterType, with operation: Operation? = nil, withName specificName: String? = nil) {
         if let name = specificName, !name.isEmpty {
             self.name = name
         } else {
@@ -48,5 +68,12 @@ struct ParameterViewModel {
         self.typeName = param.schema.swiftType(optional: false)
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional)
         self.comment = ViewModelComment(from: param.description)
+        self.encode = param.value.isSkipUrlEncoding ? "skipEncoding" : "encode"
+        self.location = param.paramLocation?.rawValue ?? "???"
+        if let op = operation {
+            self.pathOrValue = "TODO"
+        } else {
+            self.pathOrValue = "???"
+        }
     }
 }

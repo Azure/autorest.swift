@@ -130,7 +130,6 @@
 		0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* HeaderSnippet.stencil */; };
 		0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
 		0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
-		0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
 		0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */; };
 		0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */; };
 		0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */; };
@@ -303,7 +302,6 @@
 				0A22B15724D36F8300EC018E /* HeaderSnippet.stencil in CopyFiles */,
 				0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */,
 				0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */,
-				0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
 				0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */,
 				0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */,
 				0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */,
@@ -352,7 +350,6 @@
 		0A22B08824CB783F00EC018E /* ServiceClientFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientFileViewModel.swift; sourceTree = "<group>"; };
 		0A22B08A24CB9E0F00EC018E /* ReadmeFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeFileViewModel.swift; sourceTree = "<group>"; };
 		0A22B09524D09C2900EC018E /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationGroupSnippet.stencil; sourceTree = "<group>"; };
 		0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationSnippet.stencil; sourceTree = "<group>"; };
 		0A22B09D24D2183500EC018E /* ParameterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterViewModel.swift; sourceTree = "<group>"; };
 		0A22B09F24D2185500EC018E /* ReturnTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnTypeViewModel.swift; sourceTree = "<group>"; };
@@ -392,6 +389,7 @@
 		0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLengthHeader.swift; sourceTree = "<group>"; };
 		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
 		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
+		0AB808CB2576E896008506CD /* Custom.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Custom.stencil; sourceTree = "<group>"; };
 		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
 		0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatTest.swift; sourceTree = "<group>"; };
 		4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -666,7 +664,6 @@
 				F16CDAD425688F1D00FD0817 /* OperationExceptionJsonBodySnippet.stencil */,
 				F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */,
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
-				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
@@ -692,6 +689,7 @@
 				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
 				0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */,
+				0AB808CB2576E896008506CD /* Custom.stencil */,
 			);
 			path = templates;
 			sourceTree = "<group>";
