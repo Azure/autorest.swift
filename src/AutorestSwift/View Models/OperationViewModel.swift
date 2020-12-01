@@ -27,7 +27,7 @@
 import Foundation
 
 struct OperationParameters {
-    let params: [ParameterViewModel]
+    let all: [ParameterViewModel]
     let signature: [ParameterViewModel]
     let methodDecoding: [ParameterViewModel]
     let body: BodyParams?
@@ -85,7 +85,6 @@ struct OperationParameters {
             bodyParamName != nil {
             self.body = BodyParams(
                 from: bodyParam,
-                withName: bodyParamName!,
                 parameters: parameters
             )
         } else {
@@ -96,7 +95,7 @@ struct OperationParameters {
         for param in parameters.inSignature {
             signatureViewModel.append(ParameterViewModel(from: param))
         }
-        self.params = params
+        self.all = params
         self.signature = signatureViewModel
         self.methodDecoding = methodDecoding
     }
@@ -126,8 +125,8 @@ struct BodyParams {
         return !children.isEmpty
     }
 
-    init(from param: ParameterType, withName name: String, parameters: [ParameterType]) {
-        self.param = ParameterViewModel(from: param, withName: name)
+    init(from param: ParameterType, parameters: [ParameterType]) {
+        self.param = ParameterViewModel(from: param)
         var properties = param.schema.properties
         if let objectSchema = param.schema as? ObjectSchema {
             properties = objectSchema.flattenedProperties

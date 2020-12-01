@@ -51,7 +51,6 @@ clean:
 
 cleanAll:
 	find . -name ".build" -type d -exec rm -rf {} \;
-	find . -name "Generated" -type d -exec rm -rf {} \;
 	find . -name "Package.resolved" -exec rm -rf {} \;
 
 .PHONY: run build test copyRunResources copyTestResources clean

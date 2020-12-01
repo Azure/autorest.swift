@@ -166,11 +166,11 @@ class Manager {
 
     private func formatCode(atBaseUrl baseUrl: URL) {
         runTool(with: "swiftformat", configFilename: ".swiftformat", arguments: ["--quiet", baseUrl.path])
-//        runTool(
-//            with: "swiftlint",
-//            configFilename: ".swiftlint.yml",
-//            arguments: ["autocorrect", "--quiet", baseUrl.path]
-//        )
+        runTool(
+            with: "swiftlint",
+            configFilename: ".swiftlint.yml",
+            arguments: ["autocorrect", "--quiet", baseUrl.path]
+        )
     }
 
     private func runTool(with tool: String, configFilename: String, arguments: [String]) {

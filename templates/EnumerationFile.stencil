@@ -4,10 +4,14 @@
 
 {% for enum in models.enums %}
     {{ enum.comment }}
-    public enum {{ enum.name }}: {{ enum.type }}, Codable {
+    public enum {{ enum.name }}: {{ enum.type }}, Codable, RequestStringConvertible {
         {% for choice in enum.choices %}
             {{ choice.comment }}
             case {{ choice.name }} = "{{choice.value}}"
         {% endfor %}
+
+        public var requestString: String {
+            return rawValue
+        }
     }
 {% endfor %}

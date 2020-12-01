@@ -21,8 +21,8 @@ public func {{ op.name }}(
     // Construct URL
     let urlTemplate = "{{ op.request.path }}"
     let params = RequestParameters(
-    {% for param in op.params.values %}
-        (.{{ param.location }}, "{{ param.name }}", {{ param.pathOrValue }}, .{{ param.encode }}),
+    {% for param in op.params.all %}
+        (.{{ param.location }}, "{{ param.name }}", {{ param.pathOrValue }}, .{{ param.encode }}){% if not forloop.last %},{% endif %}
     {% endfor %}
     )
 

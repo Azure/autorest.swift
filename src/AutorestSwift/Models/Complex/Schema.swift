@@ -81,6 +81,7 @@ class Schema: Codable, LanguageShortcut {
         case extensions
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
@@ -102,7 +103,18 @@ class Schema: Codable, LanguageShortcut {
         case .dateTime,
              .date,
              .unixTime:
-            swiftType = "Date"
+            if let dateSchema = self as? DateTimeSchema {
+                switch dateSchema.format {
+                case .dateTime:
+                    swiftType = "Iso8601Date"
+                case .dateTimeRfc1123:
+                    swiftType = "Rfc1123Date"
+                }
+            } else {
+                // TODO: `Date` is not `RequestStringConvertible` so this
+                // will need additional work.
+                swiftType = "Date"
+            }
         case .byteArray:
             swiftType = "Data"
         case .integer:

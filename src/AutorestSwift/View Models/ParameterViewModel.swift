@@ -26,54 +26,122 @@
 
 import Foundation
 
-/// View Model for a method signature parameter.
-/// Example:
-///     name: String? = nil
+/// View Model for an operation parameter.
+/// /// Operation description.
+/// /// - Parameters:
+/// ///  {name}: {comment}
+/// public func method(
+///   {name}: {type}{defaultValue},
+/// ) {
+///    // Construct URL
+///    let urlTemplate = ""
+///    let params = RequestParameters(
+///        (.{location}, {serializedName}, {pathOrValue}, .{encode})
+///    )
 struct ParameterViewModel {
     /// Name of the parameter
-    let name: String
+    var name: String
+
+    /// The name or key that should be sent over the wire
+    var serializedName: String
 
     /// The value or variable path to the value of the parameter
-    let pathOrValue: String
+    var pathOrValue: String
 
     /// Swift type annotation, including optionality, if applicable
-    let type: String
-
-    /// Swift type annotation, disregarding optionality
-    let typeName: String
-
-    /// Whether the parameter is required or not
-    let optional: Bool
+    var type: String
 
     /// Default value for the parameter
-    let defaultValue: ViewModelDefault
+    var defaultValue: ViewModelDefault
 
     /// Comment value for the parameter
-    let comment: ViewModelComment
+    var comment: ViewModelComment
 
     /// Where the parameter goes in terms of the request
-    let location: String
+    var location: String
 
     /// Whether to URL encode the parameter or not
     let encode: String
 
-    init(from param: ParameterType, with operation: Operation? = nil, withName specificName: String? = nil) {
-        if let name = specificName, !name.isEmpty {
-            self.name = name
-        } else {
-            self.name = param.variableName
+    // MARK: Initializers
+
+    init(
+        name: String,
+        serializedName: String,
+        pathOrValue: String,
+        type: String,
+        defaultValue: ViewModelDefault,
+        comment: ViewModelComment,
+        location: String,
+        encode: String
+    ) {
+        self.name = name
+        self.serializedName = serializedName
+        self.pathOrValue = pathOrValue
+        self.type = type
+        self.defaultValue = defaultValue
+        self.comment = comment
+        self.location = location
+        self.encode = encode
+    }
+
+    init(from param: ParameterType, with operation: Operation? = nil) {
+        let optional = !param.required
+        self.init(
+            name: param.variableName,
+            serializedName: param.serializedName ?? param.name,
+            pathOrValue: "",
+            type: param.schema.swiftType(optional: optional),
+            defaultValue: ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional),
+            comment: ViewModelComment(from: param.description),
+            location: param.paramLocation?.rawValue ?? "???",
+            encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode"
+        )
+
+        // TODO: Need to add `.uri` to AzureCore
+        if location == "uri" {
+            self.location = "path"
         }
-        self.optional = !param.required
-        self.type = param.schema.swiftType(optional: optional)
-        self.typeName = param.schema.swiftType(optional: false)
-        self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional)
-        self.comment = ViewModelComment(from: param.description)
-        self.encode = param.value.isSkipUrlEncoding ? "skipEncoding" : "encode"
-        self.location = param.paramLocation?.rawValue ?? "???"
-        if let op = operation {
-            self.pathOrValue = "TODO"
+
+        if let constantSchema = param.schema as? ConstantSchema {
+            update(withParam: param, andConstantSchema: constantSchema)
+        } else if let signatureParameter = operation?.signatureParameter(for: param.name) {
+            update(withSignatureParameter: signatureParameter)
+        } else if let groupedBy = param.groupedBy?.name {
+            self.pathOrValue = "\(groupedBy).\(param.name)"
+        } else if param.implementation == .client {
+            if ["$host", "endpoint"].contains(name) {
+                self.pathOrValue = "client.endpoint.absoluteString"
+            } else {
+                self.pathOrValue = "client.\(name)"
+            }
+        } else if let op = operation, param.paramLocation == .body {
+            let bodyParamName = op.request?.bodyParamName(for: op)
+            update(withBodySignatureParameter: param, andBodyParamName: bodyParamName)
         } else {
+            // assertionFailure("Unexpected scenario in ParameterViewModel")
             self.pathOrValue = "???"
         }
+    }
+
+    private mutating func update(withSignatureParameter param: ParameterType) {
+        assert(!(param.serializedName?.isEmpty ?? true))
+        pathOrValue = param.belongsInOptions() ? "options?.\(name)" : "\(name)"
+    }
+
+    private mutating func update(withParam param: ParameterType, andConstantSchema constant: ConstantSchema) {
+        pathOrValue = constant.formatValue(
+            skipUrlEncoding: param.value.isSkipUrlEncoding,
+            paramLocation: param.paramLocation
+        )
+    }
+
+    private mutating func update(withBodySignatureParameter param: ParameterType, andBodyParamName name: String?) {
+        let key = name ?? param.name
+        pathOrValue = param.belongsInOptions() ? "options?.\(key)" : "\(key)"
+    }
+
+    static func < (lhs: ParameterViewModel, rhs: ParameterViewModel) -> Bool {
+        return lhs.name.caseInsensitiveCompare(rhs.name) == .orderedAscending
     }
 }

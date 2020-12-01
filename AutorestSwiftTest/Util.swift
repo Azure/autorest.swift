@@ -43,17 +43,18 @@ func errorDetails(for error: AzureError, withResponse response: HTTPResponse?) -
 }
 
 func iso8601date(from stringIn: String) -> Date? {
-    let string = stringIn.hasSuffix("Z") ? stringIn : stringIn + "Z"
-    let dateFormatter = ISO8601DateFormatter()
-    for aformatOption in allFormatOptions {
-        dateFormatter.formatOptions = aformatOption
-        if let date = dateFormatter.date(from: string.capitalized) {
-            return date
-        }
-    }
-    return nil
+    return Iso8601Date(string: stringIn)?.value
+//    let string = stringIn.hasSuffix("Z") ? stringIn : stringIn + "Z"
+//    let dateFormatter = ISO8601DateFormatter()
+//    for aformatOption in allFormatOptions {
+//        dateFormatter.formatOptions = aformatOption
+//        if let date = dateFormatter.date(from: string.capitalized) {
+//            return date
+//        }
+//    }
+//    return nil
 }
 
 func rfc1123date(from string: String) -> Date? {
-    return Date.Format.rfc1123.formatter.date(from: string.capitalized)
+    return Rfc1123Date(string: string)?.value
 }
