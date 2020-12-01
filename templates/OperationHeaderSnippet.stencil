@@ -1,5 +1,0 @@
-// Construct headers
-{{ op.params.header.declaration }} headers = HTTPHeaders()
-{% for header in op.params.header.required %}
-    headers["{{ header.key }}"] = {{ header.value }}
-{% endfor %}

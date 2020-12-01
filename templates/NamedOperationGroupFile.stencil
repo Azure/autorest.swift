@@ -11,16 +11,9 @@
 public final class {{ group.name }} {
 
     public let client: {{ model.name }}
-    
-    public let commonOptions: ClientOptions
-
-    /// Options provided to configure this `{{ model.name }}`.
-    public let options: {{ model.name }}Options
 
     init(client: {{ model.name }}) {
         self.client = client
-        self.options = client.options
-        self.commonOptions = client.commonOptions
     }
 
     {% for op in group.operations %}

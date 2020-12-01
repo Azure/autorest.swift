@@ -131,7 +131,6 @@
 		0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* ImportSnippet.stencil */; };
 		0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* ModelFile.stencil */; };
 		0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */; };
-		0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */; };
 		0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */; };
 		0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C524D3342300EC018E /* OperationResponseBodySnippet.stencil */; };
 		0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */; };
@@ -141,8 +140,6 @@
 		0A22B16324D36F8400EC018E /* Package.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package.stencil */; };
 		0A22B16424D36F8400EC018E /* README.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README.stencil */; };
 		0A22B16524D36F8400EC018E /* ServiceClientFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* ServiceClientFile.stencil */; };
-		0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */; };
-		0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */; };
 		0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */; };
 		0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */; };
 		0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */; };
@@ -170,7 +167,6 @@
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */; };
 		F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */; };
-		F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */; };
 		F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B1F6125414556007DA581 /* Dictionary+Extension.swift */; };
 		F11CA0BB25638E21009DFACF /* AutoRestSwaggerBatHeaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CA0BA25638E21009DFACF /* AutoRestSwaggerBatHeaderTest.swift */; };
 		F11CA0EC25639186009DFACF /* AutoRestSwaggerBatArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CA0EB25639186009DFACF /* AutoRestSwaggerBatArrayTest.swift */; };
@@ -299,11 +295,8 @@
 				0A22B46224DCE52000EC018E /* BodyParamSnippet.stencil in CopyFiles */,
 				0A22B45D24DB6FE900EC018E /* PatchUtilFile.stencil in CopyFiles */,
 				0A22B45B24DB605700EC018E /* OperationRequestPatchBodySnippet.stencil in CopyFiles */,
-				F1068F4124D4BD4F0082793F /* OperationUrlSnippet.stencil in CopyFiles */,
 				F1068F3E24D484D70082793F /* OperationSendRequestSnippet.stencil in CopyFiles */,
 				F1068F3F24D484D70082793F /* OperationRequestBodySnippet.stencil in CopyFiles */,
-				0A22B16824D36FD500EC018E /* OperationHeaderSnippet.stencil in CopyFiles */,
-				0A22B16924D36FD500EC018E /* OperationQueryParamSnippet.stencil in CopyFiles */,
 				0A22B15324D36F8300EC018E /* ClientMethodOptionsFile.stencil in CopyFiles */,
 				0A22B15524D36F8300EC018E /* ClientOptionsFile.stencil in CopyFiles */,
 				0A22B15624D36F8300EC018E /* EnumerationFile.stencil in CopyFiles */,
@@ -311,7 +304,6 @@
 				0A22B15824D36F8300EC018E /* ImportSnippet.stencil in CopyFiles */,
 				0A22B15924D36F8400EC018E /* ModelFile.stencil in CopyFiles */,
 				0A22B15B24D36F8400EC018E /* OperationGroupSnippet.stencil in CopyFiles */,
-				0A22B15C24D36F8400EC018E /* OperationOptionsSnippet.stencil in CopyFiles */,
 				0A22B15D24D36F8400EC018E /* OperationRequestSnippet.stencil in CopyFiles */,
 				0A22B15E24D36F8400EC018E /* OperationResponseBodySnippet.stencil in CopyFiles */,
 				0A22B15F24D36F8400EC018E /* OperationResponsePagedBodySnippet.stencil in CopyFiles */,
@@ -373,7 +365,6 @@
 		0A22B0AE24D219A600EC018E /* EnumerationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumerationViewModel.swift; sourceTree = "<group>"; };
 		0A22B0B124D21D2700EC018E /* ObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewModel.swift; sourceTree = "<group>"; };
 		0A22B0B324D224F400EC018E /* ClientOptionsFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientOptionsFile.stencil; sourceTree = "<group>"; };
-		0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationOptionsSnippet.stencil; sourceTree = "<group>"; };
 		0A22B0C024D32F2E00EC018E /* ClientMethodOptionsFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ClientMethodOptionsFile.stencil; sourceTree = "<group>"; };
 		0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientMethodOptionsViewModel.swift; sourceTree = "<group>"; };
 		0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponsePagedBodySnippet.stencil; sourceTree = "<group>"; };
@@ -381,8 +372,6 @@
 		0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseNoBodySnippet.stencil; sourceTree = "<group>"; };
 		0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestSnippet.stencil; sourceTree = "<group>"; };
 		0A22B0C824D33F1000EC018E /* OperationResponseSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationResponseSnippet.stencil; sourceTree = "<group>"; };
-		0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationHeaderSnippet.stencil; sourceTree = "<group>"; };
-		0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationQueryParamSnippet.stencil; sourceTree = "<group>"; };
 		0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = OperationRequestPatchBodySnippet.stencil; sourceTree = "<group>"; };
 		0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtilFile.stencil; sourceTree = "<group>"; };
 		0A22B46124DCE50400EC018E /* BodyParamSnippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BodyParamSnippet.stencil; sourceTree = "<group>"; };
@@ -416,7 +405,6 @@
 		F106830624CF9E0A007EB4D5 /* PackageFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageFileViewModel.swift; sourceTree = "<group>"; };
 		F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationRequestBodySnippet.stencil; sourceTree = "<group>"; };
 		F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationSendRequestSnippet.stencil; sourceTree = "<group>"; };
-		F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationUrlSnippet.stencil; sourceTree = "<group>"; };
 		F10B1F6125414556007DA581 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		F11CA0BA25638E21009DFACF /* AutoRestSwaggerBatHeaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatHeaderTest.swift; sourceTree = "<group>"; };
 		F11CA0EB25639186009DFACF /* AutoRestSwaggerBatArrayTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatArrayTest.swift; sourceTree = "<group>"; };
@@ -679,9 +667,6 @@
 				F151510725128E0B00DF0B9F /* OperationExceptionSnippet.stencil */,
 				F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */,
 				0A22B09724D209E700EC018E /* OperationGroupSnippet.stencil */,
-				0A22B16624D36FB800EC018E /* OperationHeaderSnippet.stencil */,
-				0A22B0BF24D32E7D00EC018E /* OperationOptionsSnippet.stencil */,
-				0A22B16724D36FB800EC018E /* OperationQueryParamSnippet.stencil */,
 				F1068F3C24D484A90082793F /* OperationRequestBodySnippet.stencil */,
 				0A22B45A24DB59AA00EC018E /* OperationRequestPatchBodySnippet.stencil */,
 				0A22B0C724D3346A00EC018E /* OperationRequestSnippet.stencil */,
@@ -703,7 +688,6 @@
 				F1DE649F251304FE00B2C864 /* OperationResponseUnixTimeBodySnippet.stencil */,
 				F1068F3D24D484C10082793F /* OperationSendRequestSnippet.stencil */,
 				0A22B09924D20BBA00EC018E /* OperationSnippet.stencil */,
-				F1068F4024D4B96B0082793F /* OperationUrlSnippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package.stencil */,
 				0A22B45C24DB6FD300EC018E /* PatchUtilFile.stencil */,
 				0A22B07524CB71E100EC018E /* README.stencil */,
