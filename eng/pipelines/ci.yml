@@ -13,3 +13,6 @@ jobs:
 
       - script: npm run test
         displayName: Run Tests
+
+      - script: npm run buildChat
+        displayName: Generate Chat SDK and build

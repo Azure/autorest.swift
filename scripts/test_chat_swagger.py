@@ -50,6 +50,9 @@ def setup_repo(repo):
 
     if path.exists(repo):
         print("==Stach any changes and pull from master {repo}==".format(repo=repo))
+        # Work aroud before the restructed generated code of chat sdk is push
+        if repo == "azure-sdk-for-ios":
+            os.system('rm -Rf azure-sdk-for-ios/sdk/communication/AzureCommunicationChat/Source/Generated/')
         os.chdir(repo)
         update_repo()
         os.chdir('..')
@@ -72,17 +75,18 @@ def compile_ios_sdk():
     os.chdir('../../..')
 
 def compile_ios_sdk_with_generated_code(swagger_name):
+    chat_sdk_directory = r'sdk/communication/AzureCommunicationChat/Source/'
     os.chdir('test/integration/azure-sdk-for-ios')
     # Work aroud before the restructed generated code of chat sdk is push
     remove_directories = ["Options" , "Util", "Models"]
     for directory in remove_directories:
-        if path.exists('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=directory)):
-            os.system('rm -Rf sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=directory))
+        if path.exists('{chat_sdk_dir}{name}'.format(chat_sdk_dir= chat_sdk_directory, name=directory)):
+            os.system('rm -Rf {chat_sdk_dir}{name}'.format(chat_sdk_dir= chat_sdk_directory, name=directory))
 
     remove_files = ['AzureCommunicationChatClient.swift', 'AzureCommunicationChatService.swift']
     for file in remove_files:
-        if path.exists('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=file)):
-            os.remove('sdk/communication/AzureCommunicationChat/Source/{name}'.format(name=file))
+        if path.exists('{chat_sdk_dir}{name}'.format(chat_sdk_dir= chat_sdk_directory, name=file)):
+            os.remove('{chat_sdk_dir}{name}'.format(chat_sdk_dir= chat_sdk_directory, name=file))
 
 
     print("==Copy new generated code to azure-sdk-for-ios==")
