@@ -174,9 +174,12 @@ struct BodyParams {
         }
         var virtParams = [VirtualParam]()
         for child in properties ?? [] {
-            guard child.schema as? ConstantSchema == nil else { continue }
             if let virtParam = parameters.virtual.first(where: { $0.name == child.name }) {
-                virtParams.append(VirtualParam(from: virtParam))
+                if let constantSchema = child.schema as? ConstantSchema {
+                    virtParams.append(VirtualParam(from: virtParam, with: constantSchema))
+                } else {
+                    virtParams.append(VirtualParam(from: virtParam))
+                }
             }
         }
         var strategy: BodyParamStrategy = .plain
@@ -210,6 +213,14 @@ struct VirtualParam {
             path = "\(groupBy).\(path)"
         }
         self.path = path
+        self.type = param.schema!.swiftType(optional: !param.required)
+        self.defaultValue = param.required ? "" : " = nil"
+    }
+
+    init(from param: VirtualParameter, with constantSchema: ConstantSchema) {
+        self.name = param.name
+        let constantValue: String = constantSchema.value.value
+        self.path = "\"\(constantValue)\""
         self.type = param.schema!.swiftType(optional: !param.required)
         self.defaultValue = param.required ? "" : " = nil"
     }
