@@ -2,14 +2,13 @@
 do {
     let decoder = JSONDecoder()
 {% if response.strategy == "dateTimeBody" %}
-    let dateFormatter = Date.AzureISO8601DateFormatter()
+    let dateFormatter = Iso8601Date.formatter
     decoder.dateDecodingStrategy = .formatted(dateFormatter)
 {% elif response.strategy == "dateTimeRfc1123Body" %}
-    let dateFormatter = Date.AzureRfc1123DateFormatter()
+    let dateFormatter = Rfc1123Date.formatter
     decoder.dateDecodingStrategy = .formatted(dateFormatter)
 {% elif response.strategy == "dateBody" %}
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let dateFormatter = SimpleDate.formatter
     decoder.dateDecodingStrategy = .formatted(dateFormatter)
 {% endif %}
     let decoded = try decoder.decode({{ response.objectType }}.self, from: data)

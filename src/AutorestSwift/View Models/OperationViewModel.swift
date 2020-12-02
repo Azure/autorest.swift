@@ -30,7 +30,7 @@ struct OperationParameters {
     let all: [ParameterViewModel]
     let signature: [ParameterViewModel]
     let methodDecoding: [ParameterViewModel]
-    let body: BodyParams?
+    var body: BodyParams?
 
     /// Initialize with a list of `ParameterType`.
     init(parameters: [ParameterType], operation: Operation) {
@@ -58,10 +58,11 @@ struct OperationParameters {
                 }
             case .header, .path, .uri:
                 params.append(viewModel)
+
             case .body:
-                if param.required {
-                    params.append(viewModel)
-                }
+                // TODO: Body params are handled differently and shouldn't go into RequestParameters at this time
+                // We may be able to refactor and change this.
+                continue
             default:
                 continue
             }
@@ -82,11 +83,13 @@ struct OperationParameters {
             bodyParamName = operation.request?.bodyParamName(for: operation)
         }
         if let bodyParam = operation.request?.bodyParam,
-            bodyParamName != nil {
+            let bodyParamName = bodyParamName {
             self.body = BodyParams(
                 from: bodyParam,
                 parameters: parameters
             )
+            // update the body param name to fit Swift conventions
+            body?.param.name = bodyParamName
         } else {
             self.body = nil
         }
@@ -117,7 +120,7 @@ enum BodyParamStrategy: String {
 }
 
 struct BodyParams {
-    let param: ParameterViewModel
+    var param: ParameterViewModel
     let strategy: String
     let children: [VirtualParam]
 
