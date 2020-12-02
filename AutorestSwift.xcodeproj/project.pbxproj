@@ -179,6 +179,7 @@
 		0AB80AB8257830BD008506CD /* AutoRestReport in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80AB7257830BD008506CD /* AutoRestReport */; };
 		0AB80ACD25783A84008506CD /* AutoRestIntegerTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80ACC25783A84008506CD /* AutoRestIntegerTest */; };
 		0AB80AD025783DC7008506CD /* AutoRestDateTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80ACF25783DC7008506CD /* AutoRestDateTest */; };
+		0AB80AE125783F7A008506CD /* AutoRestDateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80AE025783F7A008506CD /* AutoRestDateTimeTest */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -564,6 +565,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB80AE125783F7A008506CD /* AutoRestDateTimeTest in Frameworks */,
 				0AB80ACD25783A84008506CD /* AutoRestIntegerTest in Frameworks */,
 				0AB80AD025783DC7008506CD /* AutoRestDateTest in Frameworks */,
 				F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */,
@@ -1019,6 +1021,7 @@
 				0AB80AB7257830BD008506CD /* AutoRestReport */,
 				0AB80ACC25783A84008506CD /* AutoRestIntegerTest */,
 				0AB80ACF25783DC7008506CD /* AutoRestDateTest */,
+				0AB80AE025783F7A008506CD /* AutoRestDateTimeTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1616,6 +1619,10 @@
 		0AB80ACF25783DC7008506CD /* AutoRestDateTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestDateTest;
+		};
+		0AB80AE025783F7A008506CD /* AutoRestDateTimeTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestDateTimeTest;
 		};
 		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
