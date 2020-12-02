@@ -47,7 +47,7 @@ public final class PathItems {
                 .encode
             ), (.path, "localStringPath", localStringPath, .encode),
             (.query, "localStringQuery", options?.localStringQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
             (.header, "accept", "application/json", .encode)
@@ -135,7 +135,7 @@ public final class PathItems {
                 .encode
             ), (.path, "localStringPath", localStringPath, .encode),
             (.query, "localStringQuery", options?.localStringQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
             (.header, "accept", "application/json", .encode)
@@ -223,7 +223,7 @@ public final class PathItems {
                 .encode
             ), (.path, "localStringPath", localStringPath, .encode),
             (.query, "localStringQuery", options?.localStringQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
             (.header, "accept", "application/json", .encode)
@@ -311,7 +311,7 @@ public final class PathItems {
                 .encode
             ), (.path, "localStringPath", localStringPath, .encode),
             (.query, "localStringQuery", options?.localStringQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
             (.header, "accept", "application/json", .encode)

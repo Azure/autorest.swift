@@ -36,7 +36,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/true/{boolPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", String(true), .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", String(true), .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -111,8 +111,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/false/{boolPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "boolPath", String(false), .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", String(false), .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -187,7 +186,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/1000000/{intPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "intPath", String(1_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -262,7 +261,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/-1000000/{intPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "intPath", String(-1_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -337,7 +336,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/long/10000000000/{longPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "longPath", String(10_000_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -412,7 +411,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/long/-10000000000/{longPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "longPath", String(-10_000_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -487,7 +486,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .path,
                 "floatPath",
                 String(Float(103_400_000_000_000_000_000)),
@@ -566,7 +565,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "floatPath", String(Float(-1.034e-20)), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -642,7 +641,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "doublePath", String(Double(9_999_999.999)), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -718,7 +717,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "doublePath", String(Double(-9_999_999.999)), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -794,8 +793,9 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/unicode/{stringPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "stringPath", "啊齄丂狛狜隣郎隣兀﨩", .encode), (.header, "accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "stringPath", "啊齄丂狛狜隣郎隣兀﨩", .encode),
+            (.header, "accept", "application/json", .encode)
         )
 
         // Construct request
@@ -869,7 +869,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "stringPath", "begin!*'();:@ &=+$,/?#[]end", .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -945,7 +945,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .path,
                 "stringPath",
                 "begin!*'();:@&=+$,end".removingPercentEncoding ?? "",
@@ -1024,7 +1024,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/empty/{stringPath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "stringPath", "", .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "stringPath", "", .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1100,7 +1100,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/null/{stringPath}"
         let params = RequestParameters(
-            (.path, "stringPath", stringPath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "stringPath", stringPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1176,7 +1176,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/enum/green%20color/{enumPath}"
         let params = RequestParameters(
-            (.path, "enumPath", enumPath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "enumPath", enumPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1252,7 +1252,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/null/{enumPath}"
         let params = RequestParameters(
-            (.path, "enumPath", enumPath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "enumPath", enumPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1328,7 +1328,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/multibyte/{bytePath}"
         let params = RequestParameters(
-            (.path, "bytePath", bytePath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "bytePath", bytePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1403,7 +1403,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/empty/{bytePath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "bytePath", "", .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "bytePath", "", .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1479,7 +1479,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/byte/null/{bytePath}"
         let params = RequestParameters(
-            (.path, "bytePath", bytePath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "bytePath", bytePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1554,7 +1554,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/date/2012-01-01/{datePath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "datePath", "2012-01-01", .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "datePath", "2012-01-01", .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1623,14 +1623,14 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func dateNull(
-        datePath: Date,
+        datePath: SimpleDate,
         withOptions options: DateNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
         let urlTemplate = "/paths/date/null/{datePath}"
         let params = RequestParameters(
-            (.path, "datePath", datePath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "datePath", datePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1705,7 +1705,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "dateTimePath", "2012-01-01T01:01:01Z", .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -1783,7 +1783,7 @@ public final class Paths {
         let urlTemplate = "/paths/datetime/null/{dateTimePath}"
         let params = RequestParameters(
             (.path, "dateTimePath", dateTimePath, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1860,7 +1860,7 @@ public final class Paths {
         let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
         let params = RequestParameters(
             (.path, "base64UrlPath", base64UrlPath, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1937,7 +1937,7 @@ public final class Paths {
         let urlTemplate =
             "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
         let params = RequestParameters(
-            (.path, "arrayPath", arrayPath, .encode), (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "arrayPath", arrayPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2006,7 +2006,7 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func unixTimeUrl(
-        unixTimeUrlPath: Date,
+        unixTimeUrlPath: UnixTime,
         withOptions options: UnixTimeUrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2014,7 +2014,7 @@ public final class Paths {
         let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
         let params = RequestParameters(
             (.path, "unixTimeUrlPath", unixTimeUrlPath, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 

@@ -426,7 +426,7 @@ class AutoRestUrlPathsTest: XCTestCase {
             return
         }
 
-        client.paths.unixTimeUrl(unixTimeUrlPath: date) { result, httpResponse in
+        client.paths.unixTimeUrl(unixTimeUrlPath: UnixTime(date)!) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)

@@ -36,8 +36,9 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/bool/true"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "boolQuery", String(true), .encode), (.header, "accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.query, "boolQuery", String(true), .encode),
+            (.header, "accept", "application/json", .encode)
         )
 
         // Construct request
@@ -111,7 +112,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/bool/false"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "boolQuery", String(false), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -187,7 +188,7 @@ public final class Queries {
         let urlTemplate = "/queries/bool/null"
         let params = RequestParameters(
             (.query, "boolQuery", options?.boolQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -262,7 +263,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/int/1000000"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "intQuery", String(1_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -337,7 +338,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/int/-1000000"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "intQuery", String(-1_000_000), .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -413,7 +414,7 @@ public final class Queries {
         let urlTemplate = "/queries/int/null"
         let params = RequestParameters(
             (.query, "intQuery", options?.intQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -488,7 +489,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/long/10000000000"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "longQuery", String(10_000_000_000), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -564,7 +565,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/long/-10000000000"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "longQuery", String(-10_000_000_000), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -641,7 +642,7 @@ public final class Queries {
         let urlTemplate = "/queries/long/null"
         let params = RequestParameters(
             (.query, "longQuery", options?.longQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -716,7 +717,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/float/1.034E+20"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
                 "floatQuery",
                 String(Float(103_400_000_000_000_000_000)),
@@ -795,7 +796,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/float/-1.034E-20"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "floatQuery", String(Float(-1.034e-20)), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -872,7 +873,7 @@ public final class Queries {
         let urlTemplate = "/queries/float/null"
         let params = RequestParameters(
             (.query, "floatQuery", options?.floatQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -947,7 +948,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/double/9999999.999"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "doubleQuery", String(Double(9_999_999.999)), .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -1023,7 +1024,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/double/-9999999.999"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
                 "doubleQuery",
                 String(Double(-9_999_999.999)),
@@ -1103,7 +1104,7 @@ public final class Queries {
         let urlTemplate = "/queries/double/null"
         let params = RequestParameters(
             (.query, "doubleQuery", options?.doubleQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1178,7 +1179,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/string/unicode/"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "stringQuery", "啊齄丂狛狜隣郎隣兀﨩", .encode), (.header, "accept", "application/json", .encode)
         )
 
@@ -1253,7 +1254,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "stringQuery", "begin!*'();:@ &=+$,/?#[]end", .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -1329,7 +1330,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/string/empty"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "stringQuery", "", .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "stringQuery", "", .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1405,7 +1406,7 @@ public final class Queries {
         let urlTemplate = "/queries/string/null"
         let params = RequestParameters(
             (.query, "stringQuery", options?.stringQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1481,7 +1482,7 @@ public final class Queries {
         let urlTemplate = "/queries/enum/green%20color"
         let params = RequestParameters(
             (.query, "enumQuery", options?.enumQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1557,7 +1558,7 @@ public final class Queries {
         let urlTemplate = "/queries/enum/null"
         let params = RequestParameters(
             (.query, "enumQuery", options?.enumQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1633,7 +1634,7 @@ public final class Queries {
         let urlTemplate = "/queries/byte/multibyte"
         let params = RequestParameters(
             (.query, "byteQuery", options?.byteQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1708,7 +1709,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/byte/empty"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "byteQuery", "", .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "byteQuery", "", .encode),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1784,7 +1785,7 @@ public final class Queries {
         let urlTemplate = "/queries/byte/null"
         let params = RequestParameters(
             (.query, "byteQuery", options?.byteQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -1859,8 +1860,9 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/date/2012-01-01"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "dateQuery", "2012-01-01", .encode), (.header, "accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.query, "dateQuery", "2012-01-01", .encode),
+            (.header, "accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1935,7 +1937,7 @@ public final class Queries {
         let urlTemplate = "/queries/date/null"
         let params = RequestParameters(
             (.query, "dateQuery", options?.dateQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2010,7 +2012,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/datetime/2012-01-01T01%3A01%3A01Z"
         let params = RequestParameters(
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.query, "dateTimeQuery", "2012-01-01T01:01:01Z", .encode),
             (.header, "accept", "application/json", .encode)
         )
@@ -2087,7 +2089,7 @@ public final class Queries {
         let urlTemplate = "/queries/datetime/null"
         let params = RequestParameters(
             (.query, "dateTimeQuery", options?.dateTimeQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2163,7 +2165,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/csv/string/valid"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2239,7 +2241,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/csv/string/null"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2315,7 +2317,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/csv/string/empty"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2391,7 +2393,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/none/string/empty"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2467,7 +2469,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/ssv/string/valid"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2543,7 +2545,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/tsv/string/valid"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 
@@ -2619,7 +2621,7 @@ public final class Queries {
         let urlTemplate = "/queries/array/pipes/string/valid"
         let params = RequestParameters(
             (.query, "arrayQuery", options?.arrayQuery, .encode),
-            (.path, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "accept", "application/json", .encode)
         )
 

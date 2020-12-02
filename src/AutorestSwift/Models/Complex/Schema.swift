@@ -100,9 +100,7 @@ class Schema: Codable, LanguageShortcut {
                 fatalError("Type mismatch. Expected number type but got \(self)")
             }
             swiftType = numberSchema.swiftType()
-        case .dateTime,
-             .date,
-             .unixTime:
+        case .dateTime:
             if let dateSchema = self as? DateTimeSchema {
                 switch dateSchema.format {
                 case .dateTime:
@@ -111,10 +109,12 @@ class Schema: Codable, LanguageShortcut {
                     swiftType = "Rfc1123Date"
                 }
             } else {
-                // TODO: `Date` is not `RequestStringConvertible` so this
-                // will need additional work.
-                swiftType = "Date"
+                fatalError("Type .dateTime but not schema `DateTimeSchema`")
             }
+        case .date:
+            swiftType = "SimpleDate"
+        case .unixTime:
+            swiftType = "UnixTime"
         case .byteArray:
             swiftType = "Data"
         case .integer:
@@ -143,7 +143,6 @@ class Schema: Codable, LanguageShortcut {
         default:
             fatalError("Type \(type) not implemented")
         }
-
         return optional ? "\(swiftType)?" : swiftType
     }
 

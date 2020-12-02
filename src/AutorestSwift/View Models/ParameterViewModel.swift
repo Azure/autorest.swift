@@ -51,6 +51,9 @@ struct ParameterViewModel {
     /// Swift type annotation, including optionality, if applicable
     var type: String
 
+    /// Describes whether the field is optional
+    var optional: Bool
+
     /// Default value for the parameter
     var defaultValue: ViewModelDefault
 
@@ -70,6 +73,7 @@ struct ParameterViewModel {
         serializedName: String,
         pathOrValue: String,
         type: String,
+        optional: Bool,
         defaultValue: ViewModelDefault,
         comment: ViewModelComment,
         location: String,
@@ -79,6 +83,7 @@ struct ParameterViewModel {
         self.serializedName = serializedName
         self.pathOrValue = pathOrValue
         self.type = type
+        self.optional = optional
         self.defaultValue = defaultValue
         self.comment = comment
         self.location = location
@@ -92,16 +97,12 @@ struct ParameterViewModel {
             serializedName: param.serializedName ?? param.name,
             pathOrValue: "",
             type: param.schema.swiftType(optional: optional),
+            optional: optional,
             defaultValue: ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional),
             comment: ViewModelComment(from: param.description),
             location: param.paramLocation?.rawValue ?? "???",
             encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode"
         )
-
-        // TODO: Need to add `.uri` to AzureCore
-        if location == "uri" {
-            self.location = "path"
-        }
 
         if let constantSchema = param.schema as? ConstantSchema {
             update(withParam: param, andConstantSchema: constantSchema)
