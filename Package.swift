@@ -21,7 +21,7 @@ let package = Package(
 //        ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
-//        .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
+        .package(name: "AutoRestHeadTest", path: "./test/integration/generated/head/"),
 //        .package(name: "AutoRestSwaggerBatFile", path: "./test/integration/generated/body-file/"),
 //        .package(name: "XmsErrorResponseExtensions", path: "./test/integration/generated/xms-error-responses/"),
         .package(name: "AutoRestReport", path: "./test/integration/generated/report/"),
@@ -57,7 +57,7 @@ let package = Package(
             name: "AutorestSwiftTest",
             dependencies: [
                 .product(name: "AzureCore", package: "AzureSDK"),
-//            "AutoRestHeadTest",
+            "AutoRestHeadTest",
 //            "AutoRestSwaggerBatFile",
 //            "XmsErrorResponseExtensions",
             "AutoRestReport",
