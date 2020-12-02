@@ -51,6 +51,9 @@ struct ParameterViewModel {
     /// Swift type annotation, including optionality, if applicable
     var type: String
 
+    /// Swift type annotation used for constructing models
+    let modelName: String
+
     /// Describes whether the field is optional
     var optional: Bool
 
@@ -83,6 +86,7 @@ struct ParameterViewModel {
         self.serializedName = serializedName
         self.pathOrValue = pathOrValue
         self.type = type
+        self.modelName = type.hasSuffix("?") ? String(type.dropLast()) : type
         self.optional = optional
         self.defaultValue = defaultValue
         self.comment = comment

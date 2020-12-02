@@ -50,9 +50,9 @@
         return
     }
 {% elif op.params.body.strategy == "flattened" %}
-    let body = {{ op.params.body.param.typeName }}(
+    let body = {{ op.params.body.param.modelName }}(
         {% for child in op.params.body.children %}
-        {{ child.name }}: {{ child.path }}{% ifnot forloop.last %},{% endif%}
+        {{ child.name }}: {{ child.path }}{% if not forloop.last %},{% endif%}
         {% endfor %}
     )
     guard let requestBody = try? JSONEncoder().encode(body) else {
