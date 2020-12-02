@@ -177,6 +177,7 @@
 		0AB80AB325783094008506CD /* ZZZAutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */; };
 		0AB80AB6257830B5008506CD /* AutoRestRfC1123DateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80AB5257830B5008506CD /* AutoRestRfC1123DateTimeTest */; };
 		0AB80AB8257830BD008506CD /* AutoRestReport in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80AB7257830BD008506CD /* AutoRestReport */; };
+		0AB80ACD25783A84008506CD /* AutoRestIntegerTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80ACC25783A84008506CD /* AutoRestIntegerTest */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -562,6 +563,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB80ACD25783A84008506CD /* AutoRestIntegerTest in Frameworks */,
 				F1BBE510254A7DAE00BF6D9E /* AutoRestUrlTest in Frameworks */,
 				0AB80AB6257830B5008506CD /* AutoRestRfC1123DateTimeTest in Frameworks */,
 				0AB80AB8257830BD008506CD /* AutoRestReport in Frameworks */,
@@ -1013,6 +1015,7 @@
 				F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */,
 				0AB80AB5257830B5008506CD /* AutoRestRfC1123DateTimeTest */,
 				0AB80AB7257830BD008506CD /* AutoRestReport */,
+				0AB80ACC25783A84008506CD /* AutoRestIntegerTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1602,6 +1605,10 @@
 		0AB80AB7257830BD008506CD /* AutoRestReport */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestReport;
+		};
+		0AB80ACC25783A84008506CD /* AutoRestIntegerTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestIntegerTest;
 		};
 		F1BBE50F254A7DAE00BF6D9E /* AutoRestUrlTest */ = {
 			isa = XCSwiftPackageProductDependency;
