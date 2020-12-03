@@ -36,7 +36,7 @@ public struct WrappedProduct: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case value
+        case value = "value"
     }
 
     /// Initialize a `WrappedProduct` structure from decoder

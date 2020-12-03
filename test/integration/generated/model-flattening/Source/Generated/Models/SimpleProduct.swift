@@ -15,75 +15,104 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
+struct Details: Codable {
+    public let maxProductDisplayName: String?
+    public let capacity: String?
+
+    internal let max_product_image: Max_product_image
+
+    enum CodingKeys: String, CodingKey {
+        case maxProductDisplayName = "max_product_display_name"
+        case capacity = "max_product_capacity"
+        case max_product_image = "max_product_image"
+    }
+
+    public init(
+        maxProductDisplayName: String? = nil, capacity: String? = nil, genericValue: String? = nil,
+        odataValue: String? = nil
+    ) {
+        self.maxProductDisplayName = maxProductDisplayName
+        self.capacity = capacity
+        self.max_product_image = Max_product_image(
+            genericValue: genericValue, odataValue: odataValue
+        )
+    }
+}
+
+struct Max_product_image: Codable {
+    public let genericValue: String?
+    public let odataValue: String?
+
+    enum CodingKeys: String, CodingKey {
+        case genericValue = "generic_value"
+        case odataValue = "@odata.value"
+    }
+
+    public init(
+        genericValue: String? = nil, odataValue: String? = nil
+    ) {
+        self.genericValue = genericValue
+        self.odataValue = odataValue
+    }
+}
+
 /// The product documentation.
 public struct SimpleProduct: Codable {
     // MARK: Properties
 
-    /// Display name of product.
-    public let maxProductDisplayName: String?
-    /// Generic URL value.
-    public let genericValue: String?
-    /// URL value.
-    public let odataValue: String?
     /// Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
     public let productId: String
     /// Description of product.
     public let description: String?
 
-    // MARK: Constants
+    internal let details: Details?
+    public var maxProductDisplayName: String? {
+        return details?.maxProductDisplayName
+    }
 
-    /// Capacity of product. For example, 4 people.
-    public let capacity = "Large"
+    public var capacity: String? {
+        return details?.capacity
+    }
 
     // MARK: Initializers
 
     /// Initialize a `SimpleProduct` structure.
     /// - Parameters:
-    ///   - maxProductDisplayName: Display name of product.
-    ///   - genericValue: Generic URL value.
-    ///   - odataValue: URL value.
     ///   - productId: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
     ///   - description: Description of product.
     public init(
-        maxProductDisplayName: String? = nil, genericValue: String? = nil, odataValue: String? = nil, productId: String,
-        description: String? = nil
+        maxProductDisplayName: String? = nil, capacity: String? = nil, genericValue: String? = nil,
+        odataValue: String? = nil, productId: String, description: String? = nil
     ) {
-        self.maxProductDisplayName = maxProductDisplayName
-        self.genericValue = genericValue
-        self.odataValue = odataValue
         self.productId = productId
         self.description = description
+        self.details = Details(
+            maxProductDisplayName: maxProductDisplayName, capacity: capacity, genericValue: genericValue,
+            odataValue: odataValue
+        )
     }
 
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case maxProductDisplayName
-        case genericValue
-        case odataValue
-        case productId
-        case description
-        case capacity = "Capacity"
+        case productId = "base_product_id"
+        case description = "base_product_description"
+        case details
     }
 
     /// Initialize a `SimpleProduct` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.maxProductDisplayName = try? container.decode(String.self, forKey: .maxProductDisplayName)
-        self.genericValue = try? container.decode(String.self, forKey: .genericValue)
-        self.odataValue = try? container.decode(String.self, forKey: .odataValue)
         self.productId = try container.decode(String.self, forKey: .productId)
         self.description = try? container.decode(String.self, forKey: .description)
+        self.details = try? container.decode(Details.self, forKey: .details)
     }
 
     /// Encode a `SimpleProduct` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if maxProductDisplayName != nil { try? container.encode(maxProductDisplayName, forKey: .maxProductDisplayName) }
-        if genericValue != nil { try? container.encode(genericValue, forKey: .genericValue) }
-        if odataValue != nil { try? container.encode(odataValue, forKey: .odataValue) }
         try container.encode(productId, forKey: .productId)
         if description != nil { try? container.encode(description, forKey: .description) }
-        try container.encode(capacity, forKey: .capacity)
+        if details != nil { try container.encode(details, forKey: .details) }
     }
 }

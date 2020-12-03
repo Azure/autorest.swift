@@ -15,39 +15,56 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-/// The wrapped produc.
-public struct ProductWrapper: Codable {
-    // MARK: Properties
-
-    /// the product value
+struct Property: Codable {
     public let value: String?
 
-    // MARK: Initializers
+    enum CodingKeys: String, CodingKey {
+        case value = "value"
+    }
 
-    /// Initialize a `ProductWrapper` structure.
-    /// - Parameters:
-    ///   - value: the product value
     public init(
         value: String? = nil
     ) {
         self.value = value
     }
+}
+
+/// The wrapped produc.
+public struct ProductWrapper: Codable {
+    // MARK: Properties
+
+    internal let property: Property?
+    public var value: String? {
+        return property?.value
+    }
+
+    // MARK: Initializers
+
+    /// Initialize a `ProductWrapper` structure.
+    /// - Parameters:
+    public init(
+        value: String? = nil
+    ) {
+        self.property = Property(
+            value: value
+        )
+    }
 
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case value
+        case property
     }
 
     /// Initialize a `ProductWrapper` structure from decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.value = try? container.decode(String.self, forKey: .value)
+        self.property = try? container.decode(Property.self, forKey: .property)
     }
 
     /// Encode a `ProductWrapper` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if value != nil { try? container.encode(value, forKey: .value) }
+        if property != nil { try container.encode(property, forKey: .property) }
     }
 }

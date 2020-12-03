@@ -57,12 +57,12 @@ public struct FlattenParameterGroup: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case name
-        case productId
-        case description
-        case maxProductDisplayName
-        case genericValue
-        case odataValue
+        case name = "name"
+        case productId = "productId"
+        case description = "description"
+        case maxProductDisplayName = "max_product_display_name"
+        case genericValue = "generic_value"
+        case odataValue = "@odata.value"
     }
 
     /// Initialize a `FlattenParameterGroup` structure from decoder

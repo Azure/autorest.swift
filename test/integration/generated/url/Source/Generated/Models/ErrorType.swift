@@ -38,8 +38,8 @@ public struct ErrorType: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case status
-        case message
+        case status = "status"
+        case message = "message"
     }
 
     /// Initialize a `ErrorType` structure from decoder

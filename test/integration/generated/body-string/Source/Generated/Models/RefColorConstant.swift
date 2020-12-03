@@ -40,7 +40,7 @@ public struct RefColorConstant: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case field1
+        case field1 = "field1"
         case colorConstant = "ColorConstant"
     }
 

@@ -38,8 +38,8 @@ public struct Product: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case integer
-        case string
+        case integer = "integer"
+        case string = "string"
     }
 
     /// Initialize a `Product` structure from decoder

@@ -46,10 +46,10 @@ public struct LinkNotFound: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case whatSubAddress
-        case reason
-        case whatNotFound
-        case someBaseProp
+        case whatSubAddress = "whatSubAddress"
+        case reason = "reason"
+        case whatNotFound = "whatNotFound"
+        case someBaseProp = "someBaseProp"
     }
 
     /// Initialize a `LinkNotFound` structure from decoder

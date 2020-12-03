@@ -34,7 +34,7 @@ public struct ArrayWrapper: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case value
+        case value = "value"
     }
 
     /// Initialize a `ArrayWrapper` structure from decoder
