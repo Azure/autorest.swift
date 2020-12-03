@@ -53,8 +53,26 @@ struct ClientMethodOptionsViewModel {
         }
         var properties = [PropertyViewModel]()
 
-        parameters.forEach {
-            properties.append(PropertyViewModel(from: $0.value))
+        // In generated code stencil, there is already a 'clientRequestId', so do not duplicate by adding anyone with same name
+        // TODO: Revisit how to handle local swagger overrides predefined properties in Autorest swift generated code
+        for parameter in parameters where parameter.value.name != "clientRequestId" {
+            properties.append(PropertyViewModel(from: parameter.value))
+        }
+
+        // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
+        // add all the properties from that group schema except property in path as the properties of the Method Option object
+        if let group = model.schemas.schema(for: groupName + name, withType: .group),
+            group.name.hasSuffix("Options") {
+            for property in group.properties ?? [] {
+                switch property {
+                case let .grouped(groupProperty):
+                    for param in groupProperty.originalParameter where param.paramLocation != .path {
+                        properties.append(PropertyViewModel(from: property.value))
+                    }
+                default:
+                    continue
+                }
+            }
         }
 
         self.properties = properties

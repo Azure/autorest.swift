@@ -28,5 +28,5 @@ import Foundation
 
 /// Protocol that delinates models with a usage property
 protocol UsageSchema {
-    var usage: [SchemaContext] { get }
+    var usage: [SchemaContext]? { get }
 }

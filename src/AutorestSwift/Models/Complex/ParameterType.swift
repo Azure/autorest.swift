@@ -156,8 +156,8 @@ enum ParameterType: Codable {
         return false
     }
 
-    internal func belongsInSignature() -> Bool {
-        return common.belongsInSignature()
+    internal func belongsInSignature(model: CodeModel? = nil) -> Bool {
+        return common.belongsInSignature(model: model)
     }
 
     internal func belongsInOptions() -> Bool {
@@ -264,8 +264,8 @@ extension Array where Element == ParameterType {
     }
 
     /// Returns the required items that should be in the method signature
-    var inSignature: [ParameterType] {
-        return filter { $0.belongsInSignature() }
+    func inSignature(model: CodeModel? = nil) -> [ParameterType] {
+        return filter { $0.belongsInSignature(model: model) }
     }
 
     /// Returns the optional items that should be in the method's Options object
