@@ -26,21 +26,19 @@
 
 import Foundation
 
+// swiftlint:disable cyclomatic_complexity
 struct OperationParameters {
     let all: [ParameterViewModel]
     let signature: [ParameterViewModel]
-    let methodDecoding: [ParameterViewModel]
     var body: BodyParams?
 
     /// Initialize with a list of `ParameterType`.
     init(parameters: [ParameterType], operation: Operation) {
         var params = [ParameterViewModel]()
-        var methodDecoding = [ParameterViewModel]()
 
         for param in parameters {
             guard let paramLocation = param.paramLocation else { continue }
             let viewModel = ParameterViewModel(from: param, with: operation)
-            let kvModel = KeyValueViewModel(from: param, with: operation)
 
             switch paramLocation {
             case .query:
@@ -82,14 +80,13 @@ struct OperationParameters {
         } else {
             bodyParamName = operation.request?.bodyParamName(for: operation)
         }
-        if let bodyParam = operation.request?.bodyParam,
-            let bodyParamName = bodyParamName {
+        if let bodyParam = operation.request?.bodyParam {
             self.body = BodyParams(
                 from: bodyParam,
                 parameters: parameters
             )
             // update the body param name to fit Swift conventions
-            body?.param.name = bodyParamName
+            body?.param.name = bodyParamName ?? "__NONAME__"
         } else {
             self.body = nil
         }
@@ -100,7 +97,10 @@ struct OperationParameters {
         }
         self.all = params
         self.signature = signatureViewModel
-        self.methodDecoding = methodDecoding
+        if operation.name == "PutBigDecimalNegativeDecimal" {
+            let bparam = operation.request?.bodyParam
+            let test = "best"
+        }
     }
 }
 
@@ -147,6 +147,8 @@ struct BodyParams {
             strategy = .flattened
         } else if param.nullable {
             strategy = .plainNullable
+        } else if param.schema is ConstantSchema {
+            strategy = .constant
         } else {
             strategy = param.schema.bodyParamStrategy
         }
