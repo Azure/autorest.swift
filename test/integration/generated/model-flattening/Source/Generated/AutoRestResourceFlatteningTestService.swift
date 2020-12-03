@@ -42,9 +42,13 @@ public final class AutoRestResourceFlatteningTestService {
         )
 
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(array) else {
-            client.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if array != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(array) else {
+                client.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
@@ -203,9 +207,13 @@ public final class AutoRestResourceFlatteningTestService {
         )
 
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(wrappedArray) else {
-            client.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if wrappedArray != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(wrappedArray) else {
+                client.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
@@ -364,9 +372,13 @@ public final class AutoRestResourceFlatteningTestService {
         )
 
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(dictionary) else {
-            client.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if dictionary != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(dictionary) else {
+                client.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
@@ -525,9 +537,13 @@ public final class AutoRestResourceFlatteningTestService {
         )
 
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(resourceCollection) else {
-            client.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if resourceCollection != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(resourceCollection) else {
+                client.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
@@ -686,9 +702,13 @@ public final class AutoRestResourceFlatteningTestService {
         )
 
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(simpleProduct) else {
-            client.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if simpleProduct != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(simpleProduct) else {
+                client.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)

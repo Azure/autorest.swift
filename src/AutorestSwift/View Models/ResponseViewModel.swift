@@ -41,10 +41,10 @@ enum ResponseBodyType: String {
     case unixTimeBody
     /// Service returns a byteArray body
     case byteArrayBody
-
     case dateBody
     case dateTimeBody
     case dateTimeRfc1123Body
+    case timeBody
 
     static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
         let type = schema.type
@@ -56,6 +56,8 @@ enum ResponseBodyType: String {
             switch type {
             case .unixTime:
                 return .unixTimeBody
+            case .time:
+                return .timeBody
             case .date:
                 return .dateBody
             case .dateTime:
@@ -124,12 +126,12 @@ struct ResponseViewModel {
             if let elementType = pagedElementClassName, self.pagingNames != nil {
                 self.objectType = "PagedCollection<\(elementType)>"
             } else {
-                self.objectType = schemaResponse?.schema.swiftType(optional: false) ?? "Void"
+                self.objectType = schemaResponse?.schema.swiftType() ?? "Void"
             }
         } else {
             self.pagingNames = nil
             self.pagedElementClassName = nil
-            if let objectType = schemaResponse?.schema.swiftType(optional: false),
+            if let objectType = schemaResponse?.schema.swiftType(),
                 let schema = schemaResponse?.schema {
                 self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
                 self.objectType = objectType

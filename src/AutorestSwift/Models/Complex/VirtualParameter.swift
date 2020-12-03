@@ -62,7 +62,7 @@ class VirtualParameter: Parameter {
         try super.encode(to: encoder)
     }
 
-    override internal func belongsInSignature() -> Bool {
+    override internal func belongsInSignature(model _: CodeModel? = nil) -> Bool {
         // We track body params in a special way, so always omit them generally from the signature.
         // If they belong in the signature, they will be added in a way to ensure they come first.
         guard paramLocation != .body else { return false }

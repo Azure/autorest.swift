@@ -153,13 +153,11 @@ class ZZZAutoRestReportTest: XCTestCase {
                 print("Total Coverage:")
                 self.printCoverage(for: allTests)
 
-                // Uncomment below to list the nane of the failed test cases in working swagger
-                /*
-                 let workingTests = self.getWorkingTests(with: allTests)
-                 print("\n\nWorking Coverage:")
-                 // set listFailed to True to print out the name of non passesd tests
-                 self.printCoverage(for: workingTests, listFailed: true)
-                 */
+                // Uncomment below to list the failed test cases in working swagger
+//                let workingTests = self.getWorkingTests(with: allTests)
+//                print("\n\nWorking Coverage:")
+//                // set listFailed to True to print out the name of non passesd tests
+//                self.printCoverage(for: workingTests, listFailed: true)
                 expectation.fulfill()
             case let .failure(error):
                 print("test failed. error=\(error.message)")

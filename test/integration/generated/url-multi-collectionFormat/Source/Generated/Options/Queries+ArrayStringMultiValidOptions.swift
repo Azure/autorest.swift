@@ -19,7 +19,7 @@ extension Queries {
     /// User-configurable options for the `AutoRestUrlMutliCollectionFormatTestService.ArrayStringMultiValid` operation.
     public struct ArrayStringMultiValidOptions: RequestOptions {
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the mult-array format
-        public let arrayQuery: [String]?
+        public let arrayQuery: [String?]?
 
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
@@ -42,7 +42,7 @@ extension Queries {
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         ///   - context: A `PipelineContext` object to associate with the request.
         public init(
-            arrayQuery: [String]? = nil,
+            arrayQuery: [String?]? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil,

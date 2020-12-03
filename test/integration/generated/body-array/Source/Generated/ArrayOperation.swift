@@ -2440,7 +2440,7 @@ public final class ArrayOperation {
     ///     success.
     public func getStringWithNull(
         withOptions options: GetStringWithNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String]>
+        completionHandler: @escaping HTTPResultHandler<[String?]>
     ) {
         // Construct URL
         let urlTemplate = "/array/prim/string/foo.null.foo2"
@@ -2486,7 +2486,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String].self, from: data)
+                        let decoded = try decoder.decode([String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4776,7 +4776,7 @@ public final class ArrayOperation {
     ///     success.
     public func getArrayItemNull(
         withOptions options: GetArrayItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String]?]>
     ) {
         // Construct URL
         let urlTemplate = "/array/array/itemnull"
@@ -4822,7 +4822,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String]].self, from: data)
+                        let decoded = try decoder.decode([[String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5097,7 +5097,7 @@ public final class ArrayOperation {
     ///     success.
     public func getDictionaryNull(
         withOptions options: GetDictionaryNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
     ) {
         // Construct URL
         let urlTemplate = "/array/dictionary/null"
@@ -5143,7 +5143,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]].self, from: data)
+                        let decoded = try decoder.decode([[String: String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5257,7 +5257,7 @@ public final class ArrayOperation {
     ///     success.
     public func getDictionaryItemNull(
         withOptions options: GetDictionaryItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
     ) {
         // Construct URL
         let urlTemplate = "/array/dictionary/itemnull"
@@ -5303,7 +5303,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]].self, from: data)
+                        let decoded = try decoder.decode([[String: String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

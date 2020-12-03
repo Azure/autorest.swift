@@ -125,8 +125,21 @@ struct ParameterViewModel {
             update(withParam: param, andConstantSchema: constantSchema)
         } else if let signatureParameter = operation?.signatureParameter(for: param.name) {
             update(withSignatureParameter: signatureParameter)
-        } else if let groupedBy = param.groupedBy?.name {
-            self.pathOrValue = "\(groupedBy).\(param.name)"
+        } else if let groupedBy = param.groupedBy?.name,
+            let operationName = operation?.name {
+            // FIXME: Revisit this and see if it can be simplified
+            // if groupBy name matches with naming convention of x-ms-parameter-grouping with postfix "Options",
+            // the parameter should be in the Options object. But if parameter location is in Path, it  should
+            // always be in signature
+            if groupedBy.lowercased().hasSuffix("\(operationName)Options".lowercased()) {
+                if param.paramLocation == .path {
+                    self.pathOrValue = "\(param.name)"
+                } else {
+                    self.pathOrValue = "options?.\(param.name)"
+                }
+            } else {
+                self.pathOrValue = "\(groupedBy).\(param.name)"
+            }
         } else if param.implementation == .client {
             if ["$host", "endpoint"].contains(name) {
                 self.pathOrValue = "client.endpoint.absoluteString"

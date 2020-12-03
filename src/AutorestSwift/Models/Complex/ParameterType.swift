@@ -156,8 +156,8 @@ enum ParameterType: Codable {
         return false
     }
 
-    internal func belongsInSignature() -> Bool {
-        return common.belongsInSignature()
+    internal func belongsInSignature(model: CodeModel? = nil) -> Bool {
+        return common.belongsInSignature(model: model)
     }
 
     internal func belongsInOptions() -> Bool {
@@ -187,7 +187,12 @@ enum ParameterType: Codable {
             if explode {
                 return "\(value)"
             } else {
-                return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+                var element = "$0"
+                if let arraySchema = schema as? ArraySchema,
+                    arraySchema.nullableItems ?? false {
+                    element = "$0 ?? \"\""
+                }
+                return "\(value).map { String(\(element)) }.joined(separator: \"\(delimiter)\") "
             }
         case .duration:
             return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
@@ -259,8 +264,8 @@ extension Array where Element == ParameterType {
     }
 
     /// Returns the required items that should be in the method signature
-    var inSignature: [ParameterType] {
-        return filter { $0.belongsInSignature() }
+    func inSignature(model: CodeModel? = nil) -> [ParameterType] {
+        return filter { $0.belongsInSignature(model: model) }
     }
 
     /// Returns the optional items that should be in the method's Options object

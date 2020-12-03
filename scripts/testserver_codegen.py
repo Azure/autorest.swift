@@ -5,10 +5,11 @@ import os
 import subprocess
 import os.path
 
-keepChange = False
+keep_change = False
 debug = False
 clean = False
 code_generated = False
+skip_build = False
 
 generated_directory = r'./test/integration/generated/'
 swagger_directory = r'./node_modules/@microsoft.azure/autorest.testserver/swagger/'
@@ -16,26 +17,28 @@ warning_color = '\033[91m'
 end_color = '\033[0m'
 
 working_files = [
-    "head",
-    "body-file",
-    "report",
-    "xms-error-responses",
-    "body-integer",
-    "url",
-    "model-flattening",
-    "custom-baseUrl",
-    "body-string",
-    "body-byte",
-    "body-number",
-    "header",
-    "required-optional",
     "body-array",
+    "body-boolean",
+    "body-byte",
     "body-date",
     "body-datetime",
     "body-datetime-rfc1123",
-    "body-boolean",
+    "body-file",
+    "body-number",
+    "body-integer",
+    "body-string",
+    "body-time",
+    "custom-baseUrl",
     "custom-baseUrl-more-options",
-    "url-multi-collectionFormat"
+    "head",
+    "header",
+    "model-flattening",
+    "paging",
+    "report",
+    "required-optional",
+    "url",
+    "url-multi-collectionFormat",
+    "xms-error-responses"
 ]
 
 def get_all_files():
@@ -80,7 +83,7 @@ def generate_and_build_code(fileList):
     """Generate code and build code"""
  
     global clean
-    global keepChange
+    global keep_change
     global warning_color
     global end_color
     global generated_directory
@@ -105,10 +108,10 @@ def generate_and_build_code(fileList):
         else:
             print(warning_color + "autorest code generation failed." + end_color)
             code_generated = False
-            if keepChange == 0:
+            if keep_change == 0:
                 revert_generated_code(file)
 
-        if code_generated:
+        if code_generated and not skip_build:
             # Build generated code
             os.chdir('{generated_directory}{file}'.format(file=file, generated_directory=generated_directory))
 
@@ -121,39 +124,42 @@ def generate_and_build_code(fileList):
             else:
                 print(warning_color + "swift build failed." +  end_color)
                 os.chdir('../../../..')
-                if keepChange == 0:
+                if keep_change == 0:
                     revert_generated_code(file)
 
 
 def main(argv):
-    allFiles = False
+    all_files = False
     global clean
     global debug
-    global keepChange
-    inputFile = ''
+    global keep_change
+    global skip_build
+    input_file = ''
 
     try:
-        opts, args = getopt.getopt(argv,"acdki:", ["all-files", "clean", "debug", "keep-change", "input-file"])
-    except getopt.GetoptError:
-        print("Wrong option")
+        opts, args = getopt.getopt(argv,"acdksi:", ["all-files", "clean", "debug", "keep-change", "skip-build", "input-file"])
+    except getopt.GetoptError as error:
+        print("Error: {}".format(error))
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-a", "--all-files"):
-            allFiles = True
+            all_files = True
         if opt in ("-c", "--clean"):
             clean = True
         if opt in ("-d", "--debug"):
             debug = True
         if opt in ("-k", "--keep-change"):
-            keepChange = True
+            keep_change = True
         if opt in ("-i", "--input-file"):
-            inputFile = argv[1]
+            input_file = argv[1]
+        if opt in ("-s", "--skip-build"):
+            skip_build = True
 
     print("== make install ==")
     execute_command("make install")
-    if inputFile != '':
-        generate_and_build_code([inputFile])
-    elif allFiles:
+    if input_file != '':
+        generate_and_build_code([input_file])
+    elif all_files:
         generate_and_build_code(get_all_files())
     else:
         generate_and_build_code(working_files)

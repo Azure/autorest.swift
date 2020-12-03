@@ -100,7 +100,7 @@ class Parameter: Value, CustomDebugStringConvertible {
         return debugString() ?? description
     }
 
-    internal func belongsInSignature() -> Bool {
+    internal func belongsInSignature(model: CodeModel? = nil) -> Bool {
         // We track body params in a special way, so always omit them generally from the signature.
         // If they belong in the signature, they will be added in a way to ensure they come first.
         guard paramLocation != .body else { return false }
@@ -110,7 +110,14 @@ class Parameter: Value, CustomDebugStringConvertible {
         let notConstant = schema!.type != .constant
         let notGrouped = groupedBy == nil
         let isRequired = required
-        return isRequired && inMethod && notConstant && notGrouped
+
+        var notInGroupSchemaOptions = true
+        if let group = model?.schemas.schema(for: name, withType: .group),
+            group.name.hasSuffix("Options"),
+            paramLocation != .path {
+            notInGroupSchemaOptions = false
+        }
+        return isRequired && inMethod && notConstant && notGrouped && notInGroupSchemaOptions
     }
 
     internal func belongsInOptions() -> Bool {

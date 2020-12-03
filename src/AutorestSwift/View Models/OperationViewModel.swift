@@ -33,7 +33,7 @@ struct OperationParameters {
     var body: BodyParams?
 
     /// Initialize with a list of `ParameterType`.
-    init(parameters: [ParameterType], operation: Operation) {
+    init(parameters: [ParameterType], operation: Operation, model: CodeModel) {
         var params = [ParameterViewModel]()
 
         for param in parameters {
@@ -72,21 +72,33 @@ struct OperationParameters {
                 parameters: parameters
             )
             // update the body param name to fit Swift conventions
-            body?.param.name = bodyParamName ?? "__NONAME__"
+            body?.param.name = bodyParamName ?? bodyParam.name
         } else {
             self.body = nil
         }
 
         var signatureViewModel = [ParameterViewModel]()
-        for param in parameters.inSignature {
-            signatureViewModel.append(ParameterViewModel(from: param))
+        for param in parameters {
+            // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
+            // look for  all the properties from that group schema which is in 'path' as the signature of the method
+            if let group = model.schemas.schema(for: param.name, withType: .group) as? GroupSchema,
+                group.name.hasSuffix("Options") {
+                for property in group.properties ?? [] {
+                    switch property {
+                    case let .grouped(groupProperty):
+                        for param in groupProperty.originalParameter where param.paramLocation == .path {
+                            signatureViewModel.append(ParameterViewModel(from: param))
+                        }
+                    default:
+                        continue
+                    }
+                }
+            } else if param.belongsInSignature(model: model) {
+                signatureViewModel.append(ParameterViewModel(from: param))
+            }
         }
         self.all = params
         self.signature = signatureViewModel
-        if operation.name == "PutBigDecimalNegativeDecimal" {
-            let bparam = operation.request?.bodyParam
-            let test = "best"
-        }
     }
 }
 
@@ -103,6 +115,7 @@ enum BodyParamStrategy: String {
     case date
     case dateTime
     case dateTimeRfc1123
+    case time
 }
 
 struct BodyParams {
@@ -137,8 +150,10 @@ struct BodyParams {
             strategy = .constant
         } else {
             strategy = param.schema.bodyParamStrategy
+            if strategy == .plain, !param.required {
+                strategy = .plainNullable
+            }
         }
-
         self.strategy = strategy.rawValue
         self.children = virtParams
     }
@@ -242,7 +257,7 @@ struct OperationViewModel {
 
         // create help struct to manage required and optional params in
         // headers/query/path, etc.
-        self.params = OperationParameters(parameters: params, operation: operation)
+        self.params = OperationParameters(parameters: params, operation: operation, model: model)
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
@@ -251,7 +266,7 @@ struct OperationViewModel {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }
-        for param in params.inSignature where param.description != "" {
+        for param in params.inSignature(model: model) where param.description != "" {
             signatureComments.append("   - \(param.name) : \(param.description)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
