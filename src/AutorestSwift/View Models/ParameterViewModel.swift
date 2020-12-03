@@ -69,6 +69,9 @@ struct ParameterViewModel {
     /// Whether to URL encode the parameter or not
     let encode: String
 
+    /// Whether the parameter should be exploded or not. Only applicable for query parameters
+    let explode: Bool
+
     // MARK: Initializers
 
     init(
@@ -80,7 +83,8 @@ struct ParameterViewModel {
         defaultValue: ViewModelDefault,
         comment: ViewModelComment,
         location: String,
-        encode: String
+        encode: String,
+        explode: Bool
     ) {
         self.name = name
         self.serializedName = serializedName
@@ -92,10 +96,12 @@ struct ParameterViewModel {
         self.comment = comment
         self.location = location
         self.encode = encode
+        self.explode = explode
     }
 
     init(from param: ParameterType, with operation: Operation? = nil) {
         let optional = !param.required
+
         self.init(
             name: param.variableName,
             serializedName: param.serializedName ?? param.name,
@@ -105,8 +111,15 @@ struct ParameterViewModel {
             defaultValue: ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional),
             comment: ViewModelComment(from: param.description),
             location: param.paramLocation?.rawValue ?? "???",
-            encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode"
+            encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode",
+            explode: param.explode
         )
+        // TODO: Re-wire up explode logic
+//        {% for param in op.params.explodeQuery.required %}
+//        //    {{ param.value}}.forEach {
+//        //        queryParams.append("{{ param.key }}", $0)
+//        //    }
+//        {% endfor %}
 
         if let constantSchema = param.schema as? ConstantSchema {
             update(withParam: param, andConstantSchema: constantSchema)
@@ -124,7 +137,8 @@ struct ParameterViewModel {
             let bodyParamName = op.request?.bodyParamName(for: op)
             update(withBodySignatureParameter: param, andBodyParamName: bodyParamName)
         } else {
-            // assertionFailure("Unexpected scenario in ParameterViewModel")
+            // Scenario guarantees a compile error if it is actually used in code. Assert could trigger
+            // failure here even if this would never find its way into code.
             self.pathOrValue = "???"
         }
     }

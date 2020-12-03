@@ -38,7 +38,7 @@ let package = Package(
         .package(name: "AutoRestRfC1123DateTimeTest", path: "./test/integration/generated/body-datetime-rfc1123/"),
         .package(name: "AutoRestDateTimeTest", path: "./test/integration/generated/body-datetime/"),
         .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/"),
-//        .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
+        .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
         .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options")
     ],
     targets: [
@@ -64,7 +64,7 @@ let package = Package(
             "AutoRestIntegerTest",
             "AutoRestUrlTest",
             "AutoRestResourceFlatteningTest",
-//            "AutoRestParameterizedHostTest",
+            "AutoRestParameterizedHostTest",
             "AutoRestSwaggerBat",
             "AutoRestSwaggerBatByte",
             "AutoRestNumberTest",
@@ -74,8 +74,8 @@ let package = Package(
             "AutoRestRfC1123DateTimeTest",
             "AutoRestDateTimeTest",
             "AutoRestBoolTest",
-//            "AutoRestUrlMutliCollectionFormatTest",
-//            "AutoRestParameterizedCustomHostTest"
+            "AutoRestUrlMutliCollectionFormatTest",
+            "AutoRestParameterizedCustomHostTest"
             ],
             path: "AutorestSwiftTest"
         )

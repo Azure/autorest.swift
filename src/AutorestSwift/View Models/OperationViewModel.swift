@@ -41,22 +41,8 @@ struct OperationParameters {
             let viewModel = ParameterViewModel(from: param, with: operation)
 
             switch paramLocation {
-            case .query:
-                if param.explode {
-//                    {% for param in op.params.explodeQuery.required %}
-//                    //    {{ param.value}}.forEach {
-//                    //        queryParams.append("{{ param.key }}", $0)
-//                    //    }
-//                    {% endfor %}
-//                    viewModel.optional ? explodeQuery.optional.append(viewModel) : explodeQuery.required
-//                        .append(viewModel)
-                    assertionFailure("Re-enable explode query.")
-                } else {
-                    params.append(viewModel)
-                }
-            case .header, .path, .uri:
+            case .query, .header, .path, .uri:
                 params.append(viewModel)
-
             case .body:
                 // TODO: Body params are handled differently and shouldn't go into RequestParameters at this time
                 // We may be able to refactor and change this.
