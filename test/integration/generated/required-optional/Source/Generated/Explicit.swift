@@ -167,9 +167,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalIntegerParameter) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalIntegerParameter != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalIntegerParameter) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -357,9 +361,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalIntegerProperty) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalIntegerProperty != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalIntegerProperty) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -734,9 +742,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalStringParameter) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalStringParameter != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalStringParameter) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -924,9 +936,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalStringProperty) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalStringProperty != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalStringProperty) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -1301,9 +1317,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalClassParameter) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalClassParameter != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalClassParameter) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -1491,9 +1511,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalClassProperty) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalClassProperty != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalClassProperty) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -1681,9 +1705,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalArrayParameter) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalArrayParameter != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalArrayParameter) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -1871,9 +1899,13 @@ public final class Explicit {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(optionalArrayProperty) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if optionalArrayProperty != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(optionalArrayProperty) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",

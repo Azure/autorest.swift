@@ -45,7 +45,7 @@ struct ParameterViewModel {
         }
         self.optional = !param.required
         self.type = param.schema.swiftType(optional: optional)
-        self.typeName = param.schema.swiftType(optional: false)
+        self.typeName = param.schema.swiftType()
         self.defaultValue = ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional)
         self.comment = ViewModelComment(from: param.description)
     }

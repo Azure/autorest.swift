@@ -39,6 +39,8 @@ let package = Package(
         .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/"),
         .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
         .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options"),
+        .package(name: "AutoRestRequiredOptionalTest", path: "./test/integration/generated/required-optional"),
+        .package(name: "AutoRestTimeTest", path: "./test/integration/generated/body-time"),
         .package(name: "AutoRestPagingTest", path: "./test/integration/generated/paging")
     ],
     targets: [
@@ -76,6 +78,8 @@ let package = Package(
             "AutoRestBoolTest",
             "AutoRestUrlMutliCollectionFormatTest",
             "AutoRestParameterizedCustomHostTest",
+            "AutoRestRequiredOptionalTest",
+            "AutoRestTimeTest",
             "AutoRestPagingTest"],
             path: "AutorestSwiftTest"
         )

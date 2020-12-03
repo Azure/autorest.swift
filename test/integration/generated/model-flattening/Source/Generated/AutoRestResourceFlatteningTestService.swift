@@ -72,9 +72,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(array) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if array != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(array) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -261,9 +265,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(wrappedArray) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if wrappedArray != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(wrappedArray) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -450,9 +458,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(dictionary) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if dictionary != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(dictionary) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -639,9 +651,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(resourceCollection) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if resourceCollection != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(resourceCollection) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",
@@ -828,9 +844,13 @@ public final class AutoRestResourceFlatteningTestService {
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         // Construct request
-        guard let requestBody = try? JSONEncoder().encode(simpleProduct) else {
-            self.options.logger.error("Failed to encode request body as json.")
-            return
+        var requestBody: Data?
+        if simpleProduct != nil {
+            guard let encodedRequestBody = try? JSONEncoder().encode(simpleProduct) else {
+                self.options.logger.error("Failed to encode request body as json.")
+                return
+            }
+            requestBody = encodedRequestBody
         }
         guard let requestUrl = url(
             host: "{$host}",

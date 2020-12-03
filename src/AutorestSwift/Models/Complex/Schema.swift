@@ -93,7 +93,8 @@ class Schema: Codable, LanguageShortcut {
             guard let arraySchema = self as? ArraySchema else {
                 fatalError("Type mismatch. Expected array type but got \(self)")
             }
-            swiftType = "[\(arraySchema.elementType.swiftType())]"
+            let elementSwiftType = arraySchema.elementType.swiftType()
+            swiftType = (arraySchema.nullableItems ?? false) ? "[\(elementSwiftType)?]" : "[\(elementSwiftType)]"
         case .number:
             guard let numberSchema = self as? NumberSchema else {
                 fatalError("Type mismatch. Expected number type but got \(self)")
@@ -101,6 +102,7 @@ class Schema: Codable, LanguageShortcut {
             swiftType = numberSchema.swiftType()
         case .dateTime,
              .date,
+             .time,
              .unixTime:
             swiftType = "Date"
         case .byteArray:
@@ -151,6 +153,8 @@ class Schema: Codable, LanguageShortcut {
             return .byteArray
         case .date:
             return .date
+        case .time:
+            return .time
         case .dateTime:
             if let dateTimeSchema = self as? DateTimeSchema,
                 dateTimeSchema.format == .dateTimeRfc1123 {

@@ -458,17 +458,41 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getStringWithNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getStringWithNull")
+    func test_getStringWithInvalid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getStringWithInvalid")
 
-        client.arrayOperation.getStringWithNull { result, httpResponse in
+        client.arrayOperation.getStringWithInvalid { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTAssertTrue(details.contains("\"foo\", null, \"foo2\""))
+                XCTAssertTrue(details.contains("\"foo\", 123, \"foo2\""))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getStringWithNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getStringWithNull")
+
+        let expectedData = ["foo", nil, "foo2"]
+        client.arrayOperation.getStringWithNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                for i in 0 ..< data.count {
+                    if let item = data[i] {
+                        XCTAssertEqual(item, expectedData[i])
+                    } else {
+                        XCTAssertNil(expectedData[i])
+                    }
+                }
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
             }
             expectation.fulfill()
         }
@@ -735,6 +759,367 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         ]
 
         client.arrayOperation.put(dateValid: expectedDates) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getByteValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.getByteValid")
+
+        let expectedData = [
+            Data([255, 255, 255, 250]),
+            Data([1, 2, 3]),
+            Data([37, 41, 67])
+        ]
+        client.arrayOperation.getByteValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getByteInvalidNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getByteInvalidNull")
+
+        client.arrayOperation.getByteInvalidNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail.")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_puttByteValid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.puttByteValid")
+
+        let data = [
+            Data([255, 255, 255, 250]),
+            Data([1, 2, 3]),
+            Data([37, 41, 67])
+        ]
+        client.arrayOperation.put(byteValid: data) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getArrayValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayValid")
+
+        client.arrayOperation.getArrayValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_putArrayValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.putArrayValid")
+
+        let data = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+
+        client.arrayOperation.put(arrayValid: data) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getArrayEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayEmpty")
+
+        client.arrayOperation.getArrayEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getArrayNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayNull")
+
+        client.arrayOperation.getArrayNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail.")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getArrayItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayItemEmpty")
+
+        client.arrayOperation.getArrayItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [["1", "2", "3"], [], ["7", "8", "9"]])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getArraygetArrayItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call array.getArrayItemNull")
+
+        client.arrayOperation.getArrayItemNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [["1", "2", "3"], nil, ["7", "8", "9"]])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getComplexValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.getComplexValid")
+
+        let expectedData: [Product] = [
+            Product(integer: 1, string: "2"),
+            Product(integer: 3, string: "4"),
+            Product(integer: 5, string: "6")
+        ]
+        client.arrayOperation.getComplexValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+
+                for i in 0 ..< data.count {
+                    XCTAssertEqual(data[i].integer, expectedData[i].integer)
+                }
+
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getComplexEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getComplexEmpty")
+
+        client.arrayOperation.getComplexEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data.count, 0)
+
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_putComplexValid() throws {
+        let expectation = XCTestExpectation(description: "Call array.putComplexValid")
+
+        let data: [Product] = [
+            Product(integer: 1, string: "2"),
+            Product(integer: 3, string: "4"),
+            Product(integer: 5, string: "6")
+        ]
+        client.arrayOperation.put(complexValid: data) { result, httpResponse in
+            switch result {
+            case .success:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getComplexNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getComplexNull")
+
+        client.arrayOperation.getComplexNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail.")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryValid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryValid")
+
+        let expectedData: [[String: String]] = [
+            ["1": "one", "2": "two", "3": "three"],
+            ["4": "four", "5": "five", "6": "six"],
+            ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+        client.arrayOperation.getDictionaryValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryEmpty200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryEmpty")
+
+        client.arrayOperation.getDictionaryEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, [])
+
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryItemEmpty")
+
+        let expectedData: [[String: String]] = [
+            ["1": "one", "2": "two", "3": "three"],
+            [:],
+            ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+        client.arrayOperation.getDictionaryItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryItemNull")
+
+        let expectedData: [[String: String]?] = [
+            ["1": "one", "2": "two", "3": "three"],
+            nil,
+            ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+
+        client.arrayOperation.getDictionaryItemNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(data, expectedData)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_getDictionaryNull200() throws {
+        let expectation = XCTestExpectation(description: "Call array.getDictionaryNull")
+
+        client.arrayOperation.getDictionaryNull { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("\(expectation.description) expected to fail.")
+            case .failure:
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_putDictionaryValid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.putDictionaryValid")
+
+        let data: [[String: String]] = [
+            ["1": "one", "2": "two", "3": "three"],
+            ["4": "four", "5": "five", "6": "six"],
+            ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+        client.arrayOperation.put(dictionaryValid: data) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)

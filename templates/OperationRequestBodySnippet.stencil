@@ -31,11 +31,15 @@
     }
 {% elif op.params.body.strategy == "byteArray" %}
     let requestBody = {{ op.params.body.param.name }}
-{% elif op.params.body.strategy == "date" or op.params.body.strategy == "dateTime"  or  op.params.body.strategy == "dateTimeRfc1123"  or op.params.body.strategy == "unixTime" %}
+{% elif op.params.body.strategy == "date" or op.params.body.strategy == "dateTime"  or  op.params.body.strategy == "dateTimeRfc1123"  or op.params.body.strategy == "unixTime" or op.params.body.strategy == "time" %}
     let encoder = JSONEncoder()
 {% if op.params.body.strategy == "date" %}
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
+    encoder.dateEncodingStrategy = .formatted(dateFormatter)
+{% elif op.params.body.strategy == "time" %}
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm:ss"
     encoder.dateEncodingStrategy = .formatted(dateFormatter)
 {% elif op.params.body.strategy == "dateTime" %}
     let dateFormatter = Date.AzureISO8601DateFormatter()

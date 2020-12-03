@@ -187,7 +187,12 @@ enum ParameterType: Codable {
             if explode {
                 return "\(value)"
             } else {
-                return "\(value).map { String($0) }.joined(separator: \"\(delimiter)\") "
+                var element = "$0"
+                if let arraySchema = schema as? ArraySchema,
+                    arraySchema.nullableItems ?? false {
+                    element = "$0 ?? \"\""
+                }
+                return "\(value).map { String(\(element)) }.joined(separator: \"\(delimiter)\") "
             }
         case .duration:
             return "DateComponentsFormatter().string(from: \(value)) ?? \"\""

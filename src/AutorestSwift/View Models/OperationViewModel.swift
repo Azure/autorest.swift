@@ -171,6 +171,7 @@ enum BodyParamStrategy: String {
     case date
     case dateTime
     case dateTimeRfc1123
+    case time
 }
 
 struct BodyParams {
@@ -203,6 +204,9 @@ struct BodyParams {
             strategy = .plainNullable
         } else {
             strategy = param.schema.bodyParamStrategy
+            if strategy == .plain, !param.required {
+                strategy = .plainNullable
+            }
         }
 
         self.strategy = strategy.rawValue
