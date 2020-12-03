@@ -37,7 +37,7 @@ struct OperationParameters {
     let methodDecoding: [KeyValueViewModel]
 
     /// Build a list of required and optional query params and headers from a list of parameters
-    init(parameters: [ParameterType], operation: Operation) {
+    init(parameters: [ParameterType], operation: Operation, model: CodeModel) {
         var header = Params()
         var query = Params()
         var explodeQuery = Params()
@@ -109,8 +109,25 @@ struct OperationParameters {
         }
 
         var signatureParameterViewModel = [ParameterViewModel]()
-        for param in parameters.inSignature {
-            signatureParameterViewModel.append(ParameterViewModel(from: param))
+        for param in parameters {
+            // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
+            // look for  all the properties from that group schema which is in 'path' as the signature of the method
+            if let group = model.schemas.schema(for: param.name, withType: .group) as? GroupSchema,
+                group.name.hasSuffix("Options") {
+                for property in group.properties ?? [] {
+                    switch property {
+                    case let .grouped(groupProperty):
+                        for param in groupProperty.originalParameter where param.paramLocation == .path {
+                            signatureParameterViewModel
+                                .append(ParameterViewModel(from: param))
+                        }
+                    default:
+                        continue
+                    }
+                }
+            } else if param.belongsInSignature() {
+                signatureParameterViewModel.append(ParameterViewModel(from: param))
+            }
         }
         self.signature = signatureParameterViewModel
 
@@ -291,7 +308,8 @@ struct OperationViewModel {
 
         // create help struct to manage required and optional params in
         // headers/query/path, etc.
-        self.params = OperationParameters(parameters: params, operation: operation)
+        let operationParameters = OperationParameters(parameters: params, operation: operation, model: model)
+        self.params = operationParameters
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
@@ -300,8 +318,8 @@ struct OperationViewModel {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }
-        for param in params.inSignature where param.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.description)")
+        for param in operationParameters.signature where param.comment.description != "" {
+            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
 

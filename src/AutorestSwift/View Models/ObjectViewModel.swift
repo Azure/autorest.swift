@@ -96,7 +96,7 @@ struct ObjectViewModel {
             // the source of flattened parameters should not be included in the view model
 
             // FIXME: This assumption no longer holds for storage and should be revisited
-            assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
+            // assert(property.originalParameter.count <= 1, "Expected, at most, one original parameter.")
             if property.originalParameter.first?.flattened ?? false {
                 continue
             }
@@ -115,7 +115,11 @@ struct ObjectViewModel {
     }
 
     private mutating func checkForErrorType(with schema: UsageSchema) {
-        let isErrorType = (schema.usage.count > 0) ? (schema.usage.first == SchemaContext.exception) : false
+        var isErrorType = false
+        if let usage = schema.usage,
+            usage.count > 0 {
+            isErrorType = usage.first == SchemaContext.exception
+        }
         self.isErrorType = isErrorType
         let parents = isErrorType ? ["Codable", "Swift.Error"] : ["Codable"]
         inheritance = parents.joined(separator: ", ")

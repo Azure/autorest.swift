@@ -72,7 +72,21 @@ struct KeyValueViewModel: Comparable {
         } else if let signatureParameter = operation.signatureParameter(for: param.name) {
             self.init(signatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name {
-            self.init(key: param.name, value: "\(groupedBy).\(param.name)")
+            let operationName = operation.name
+            // if groupBy name matches with naming convention of x-ms-parameter-grouping with postfix "Options" , the parameter should be in the Options object. But if parameter location is in Path, it  should always be in signature
+            var optional: Bool = false
+            var path: String = ""
+            if groupedBy.lowercased().hasSuffix("\(operationName)Options".lowercased()) {
+                if param.paramLocation == .path {
+                    path = ""
+                } else {
+                    optional = true
+                    path = "options?."
+                }
+            } else {
+                path = "\(groupedBy)."
+            }
+            self.init(key: param.name, value: param.formatValue(), optional: optional, path: path)
         } else if param.implementation == .client {
             let name = param.variableName
             self.init(
