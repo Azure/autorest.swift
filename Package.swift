@@ -28,7 +28,7 @@ let package = Package(
         .package(name: "AutoRestIntegerTest", path: "./test/integration/generated/body-integer/"),
         .package(name: "AutoRestUrlTest", path: "./test/integration/generated/url/"),
         .package(name: "AutoRestResourceFlatteningTest", path: "./test/integration/generated/model-flattening/"),
-//        .package(name: "AutoRestParameterizedHostTest", path: "./test/integration/generated/custom-baseUrl/"),
+        .package(name: "AutoRestParameterizedHostTest", path: "./test/integration/generated/custom-baseUrl/"),
         .package(name: "AutoRestSwaggerBat", path: "./test/integration/generated/body-string/"),
         .package(name: "AutoRestSwaggerBatByte", path: "./test/integration/generated/body-byte/"),
         .package(name: "AutoRestNumberTest", path: "./test/integration/generated/body-number/"),
@@ -39,7 +39,7 @@ let package = Package(
         .package(name: "AutoRestDateTimeTest", path: "./test/integration/generated/body-datetime/"),
         .package(name: "AutoRestBoolTest", path: "./test/integration/generated/body-boolean/"),
 //        .package(name: "AutoRestUrlMutliCollectionFormatTest", path: "./test/integration/generated/url-multi-collectionFormat/"),
-//        .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options")
+        .package(name: "AutoRestParameterizedCustomHostTest", path: "./test/integration/generated/custom-baseUrl-more-options")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
