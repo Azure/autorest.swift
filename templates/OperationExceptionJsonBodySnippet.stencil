@@ -1,6 +1,6 @@
 do {
     let decoder = JSONDecoder()
-    let decoded = try decoder.decode({{ exception.objectType }}.self, from: data)
+    let decoded = try decoder.decode({{ exception.type }}.self, from: data)
         dispatchQueue.async {
             completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
         }

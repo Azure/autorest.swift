@@ -37,7 +37,7 @@ public final class Time {
         let urlTemplate = "/time/get"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -77,9 +77,6 @@ public final class Time {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "HH:mm:ss"
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
                         let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -121,7 +118,8 @@ public final class Time {
         let urlTemplate = "/time/put"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

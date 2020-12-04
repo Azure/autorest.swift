@@ -12,7 +12,7 @@ public func {{ op.name }}(
     {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
 {% endfor %}
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
-    completionHandler: @escaping HTTPResultHandler<{{ op.returnType.name }}>
+    completionHandler: @escaping HTTPResultHandler<{{ op.returnType.type }}>
 ) {
 {# for param in op.params.methodDecoding #}
     {# include "OperationDecodingSnippet.stencil" param #}
@@ -22,7 +22,11 @@ public func {{ op.name }}(
     let urlTemplate = "{{ op.request.path }}"
     let params = RequestParameters(
     {% for param in op.params.all %}
+        {% if param.location == "header" %}
+        (.{{ param.location }}, "{{ param.serializedName }}", {{ param.pathOrValue }}, .{{ param.encode }}){% if not forloop.last %},{% endif %}
+        {% else %}
         (.{{ param.location }}, "{{ param.name }}", {{ param.pathOrValue }}, .{{ param.encode }}){% if not forloop.last %},{% endif %}
+        {% endif %}
     {% endfor %}
     )
 

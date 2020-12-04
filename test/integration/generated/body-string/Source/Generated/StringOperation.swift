@@ -37,7 +37,7 @@ public final class StringOperation {
         let urlTemplate = "/string/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -124,7 +124,8 @@ public final class StringOperation {
         let urlTemplate = "/string/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -208,7 +209,7 @@ public final class StringOperation {
         let urlTemplate = "/string/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -287,7 +288,8 @@ public final class StringOperation {
         let urlTemplate = "/string/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -367,7 +369,7 @@ public final class StringOperation {
         let urlTemplate = "/string/mbcs"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -446,7 +448,8 @@ public final class StringOperation {
         let urlTemplate = "/string/mbcs"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -527,7 +530,7 @@ public final class StringOperation {
         let urlTemplate = "/string/whitespace"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -606,7 +609,8 @@ public final class StringOperation {
         let urlTemplate = "/string/whitespace"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -687,7 +691,7 @@ public final class StringOperation {
         let urlTemplate = "/string/notProvided"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -766,7 +770,7 @@ public final class StringOperation {
         let urlTemplate = "/string/base64Encoding"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -838,7 +842,7 @@ public final class StringOperation {
         let urlTemplate = "/string/base64UrlEncoding"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -911,7 +915,8 @@ public final class StringOperation {
         let urlTemplate = "/string/base64UrlEncoding"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -988,7 +993,7 @@ public final class StringOperation {
         let urlTemplate = "/string/nullBase64UrlEncoding"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

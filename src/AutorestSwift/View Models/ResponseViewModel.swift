@@ -86,12 +86,22 @@ enum ResponseBodyType: String {
 
 /// View Model for method response handling.
 struct ResponseViewModel {
+    /// List of allowed response status codes
     let statusCodes: [String]
-    let objectType: String
+
+    /// Swift type annotation, including optionality, if applicable
+    let type: String
+
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
+
+    /// The `PagingNames` struct to use when generating paged objects
     let pagingNames: Language.PagingNames?
-    let pagedElementClassName: String?
+
+    /// The type name that belongs inside the `PagedCollection` generic
+    let pagedElementType: String?
+
+    /// If `true` the response is nullable
     let isNullable: Bool
 
     init(from response: Response, with operation: Operation) {
@@ -121,23 +131,23 @@ struct ResponseViewModel {
             else { fatalError("Did not find exactly one array type for paged collection.") }
             self.strategy = ResponseBodyType.pagedBody.rawValue
             self.pagingNames = pagingNames
-            self.pagedElementClassName = arrayElements.first!.elementType.name
+            self.pagedElementType = arrayElements.first!.elementType.name
 
-            if let elementType = pagedElementClassName, self.pagingNames != nil {
-                self.objectType = "PagedCollection<\(elementType)>"
+            if let elementType = pagedElementType, self.pagingNames != nil {
+                self.type = "PagedCollection<\(elementType)>"
             } else {
-                self.objectType = schemaResponse?.schema.swiftType() ?? "Void"
+                self.type = schemaResponse?.schema.swiftType() ?? "Void"
             }
         } else {
             self.pagingNames = nil
-            self.pagedElementClassName = nil
-            if let objectType = schemaResponse?.schema.swiftType(),
+            self.pagedElementType = nil
+            if let type = schemaResponse?.schema.swiftType(),
                 let schema = schemaResponse?.schema {
-                self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
-                self.objectType = objectType
+                self.strategy = ResponseBodyType.strategy(for: type, and: schema).rawValue
+                self.type = type
             } else {
                 self.strategy = ResponseBodyType.noBody.rawValue
-                self.objectType = "Void"
+                self.type = "Void"
             }
         }
     }

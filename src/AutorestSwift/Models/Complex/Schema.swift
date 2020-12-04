@@ -163,15 +163,6 @@ class Schema: Codable, LanguageShortcut {
             return .unixTime
         case .byteArray:
             return .byteArray
-        case .date:
-            return .date
-        case .dateTime:
-            if let dateTimeSchema = self as? DateTimeSchema,
-                dateTimeSchema.format == .dateTimeRfc1123 {
-                return .dateTimeRfc1123
-            } else {
-                return .dateTime
-            }
         case .array:
             if let arraySchema = self as? ArraySchema,
                 arraySchema.elementType.type == .date || arraySchema.elementType.type == .dateTime {

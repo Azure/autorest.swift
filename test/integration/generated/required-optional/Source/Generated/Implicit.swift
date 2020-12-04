@@ -39,7 +39,7 @@ public final class Implicit {
         let params = RequestParameters(
             (.path, "pathParameter", pathParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -115,7 +115,7 @@ public final class Implicit {
         let params = RequestParameters(
             (.query, "queryParameter", options?.queryParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -191,7 +191,7 @@ public final class Implicit {
         let params = RequestParameters(
             (.header, "queryParameter", options?.queryParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -267,7 +267,8 @@ public final class Implicit {
         let urlTemplate = "/reqopt/implicit/optional/body"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -355,7 +356,7 @@ public final class Implicit {
                 "requiredGlobalPath",
                 client.requiredGlobalPath,
                 .encode
-            ), (.header, "accept", "application/json", .encode)
+            ), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -434,7 +435,7 @@ public final class Implicit {
                 "requiredGlobalQuery",
                 client.requiredGlobalQuery,
                 .encode
-            ), (.header, "accept", "application/json", .encode)
+            ), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -513,7 +514,7 @@ public final class Implicit {
                 "optionalGlobalQuery",
                 client.optionalGlobalQuery,
                 .encode
-            ), (.header, "accept", "application/json", .encode)
+            ), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

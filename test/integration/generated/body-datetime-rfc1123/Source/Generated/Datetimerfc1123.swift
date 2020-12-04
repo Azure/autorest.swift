@@ -37,7 +37,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -124,7 +124,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/invalid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -204,7 +204,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/overflow"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -284,7 +284,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/underflow"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -365,14 +365,12 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/max"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Rfc1123Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMaxDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -448,7 +446,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/max/lowercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -528,7 +526,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/max/uppercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -609,14 +607,12 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/min"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Rfc1123Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMinDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(utcMinDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -692,7 +688,7 @@ public final class Datetimerfc1123 {
         let urlTemplate = "/datetimerfc1123/min"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

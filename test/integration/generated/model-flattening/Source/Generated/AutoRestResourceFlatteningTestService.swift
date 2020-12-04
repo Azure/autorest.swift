@@ -38,7 +38,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/array"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -122,7 +123,7 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/array"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -203,7 +204,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/wrappedarray"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -287,7 +289,7 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/wrappedarray"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -368,7 +370,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/dictionary"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -452,7 +455,7 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/dictionary"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -533,7 +536,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/resourcecollection"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -617,7 +621,7 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/resourcecollection"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -698,7 +702,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/customFlattening"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -796,7 +801,8 @@ public final class AutoRestResourceFlatteningTestService {
         let urlTemplate = "/model-flatten/customFlattening"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -887,7 +893,8 @@ public final class AutoRestResourceFlatteningTestService {
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "name", flattenParameterGroup.name, .encode),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

@@ -1,6 +1,6 @@
 do {
     let decoder = JSONDecoder()
-    let decoded = try decoder.decode({{ op.defaultException.objectType }}.self, from: data)
+    let decoded = try decoder.decode({{ op.defaultException.type }}.self, from: data)
     dispatchQueue.async {
         completionHandler(.failure(AzureError.service("{{ op.defaultException.description }}", decoded)), httpResponse)
     }

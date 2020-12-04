@@ -44,17 +44,23 @@ enum KeyValueDecodeStrategy: String {
 struct KeyValueViewModel: Comparable {
     /// key of the Key-Value pair
     let key: String
+
     /// value of the Key-Value pair
     let value: String
-    // Flag indicates if value is optional
+
+    /// Flag indicates if value is optional
     let optional: Bool
-    // Flag indicates if the key/value pair need decoding code in method to convert the variable into a String
+
+    /// Flag indicates if the key/value pair need decoding code in method to convert the variable into a String
     let needDecodingInMethod: Bool
-    // An enum raw value indicates what kind of decoding strategy will be used in the method implementation
+
+    /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
-    // The full path to the value property
+
+    /// The full path to the value property
     let path: String
-    // The parameter variable name specified in swagger
+
+    /// The parameter variable name specified in swagger
     let variableName: String
 
     /**

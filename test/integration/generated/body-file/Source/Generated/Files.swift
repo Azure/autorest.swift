@@ -37,7 +37,7 @@ public final class Files {
         let urlTemplate = "/files/stream/nonempty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "image/png, application/json", .encode)
+            (.header, "Accept", "image/png, application/json", .encode)
         )
 
         // Construct request
@@ -112,7 +112,7 @@ public final class Files {
         let urlTemplate = "/files/stream/verylarge"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "image/png, application/json", .encode)
+            (.header, "Accept", "image/png, application/json", .encode)
         )
 
         // Construct request
@@ -187,7 +187,7 @@ public final class Files {
         let urlTemplate = "/files/stream/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "image/png, application/json", .encode)
+            (.header, "Accept", "image/png, application/json", .encode)
         )
 
         // Construct request

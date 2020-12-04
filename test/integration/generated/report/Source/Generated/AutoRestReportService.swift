@@ -38,7 +38,7 @@ public final class AutoRestReportService {
         let params = RequestParameters(
             (.query, "qualifier", options?.qualifier, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -119,7 +119,7 @@ public final class AutoRestReportService {
         let params = RequestParameters(
             (.query, "qualifier", options?.qualifier, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

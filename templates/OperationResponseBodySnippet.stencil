@@ -9,7 +9,18 @@
 {% elif response.strategy == "byteArrayBody" %}
     {% include "OperationResponseByteArrayBodySnippet.stencil" response %}
 {% elif response.strategy == "dateTimeBody" or response.strategy == "dateTimeRfc1123Body" or response.strategy == "dateBody" or response.strategy == "jsonBody" or response.strategy == "timeBody" %}
-    {% include "OperationResponseJsonBodySnippet.stencil" response %}
+    {% include "OperationResponseNullableBodySnippet.stencil" %}
+    do {
+        let decoder = JSONDecoder()
+        let decoded = try decoder.decode({{ response.type }}.self, from: data)
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } catch {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+        }
+    }
 {% else %}
 // TODO: Couldn't find template for {{ response.strategy }}
 {% endif %}

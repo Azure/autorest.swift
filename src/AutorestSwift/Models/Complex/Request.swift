@@ -112,6 +112,6 @@ extension Request {
             bodyParamNameComps[index] = comp.capitalized
         }
         let finalName = bodyParamNameComps.joined()
-        return name.isEmpty ? nil : finalName
+        return finalName.isEmpty ? nil : finalName
     }
 }

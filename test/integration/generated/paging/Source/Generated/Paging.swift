@@ -37,7 +37,7 @@ public final class Paging {
         let urlTemplate = "/paging/noitemname"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -121,7 +121,7 @@ public final class Paging {
         let urlTemplate = "/paging/nullnextlink"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -205,7 +205,7 @@ public final class Paging {
         let urlTemplate = "/paging/single"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -289,7 +289,7 @@ public final class Paging {
         let urlTemplate = "/paging/firstResponseEmpty/1"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -372,10 +372,10 @@ public final class Paging {
         // Construct URL
         let urlTemplate = "/paging/multiple"
         let params = RequestParameters(
-            (.header, "clientRequestId", options?.clientRequestId, .encode),
+            (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "maxresults", options?.maxresults, .encode), (.header, "timeout", options?.timeout, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -464,7 +464,7 @@ public final class Paging {
                 "$host",
                 client.endpoint.absoluteString,
                 .skipEncoding
-            ), (.query, "queryConstant", String(true), .encode), (.header, "accept", "application/json", .encode)
+            ), (.query, "queryConstant", String(true), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -548,7 +548,7 @@ public final class Paging {
         let urlTemplate = "/paging/multiple/nextOperationWithQueryParams"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "queryConstant", String(true), .encode), (.header, "accept", "application/json", .encode)
+            (.query, "queryConstant", String(true), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -631,10 +631,10 @@ public final class Paging {
         // Construct URL
         let urlTemplate = "/paging/multiple/odata"
         let params = RequestParameters(
-            (.header, "clientRequestId", options?.clientRequestId, .encode),
+            (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "maxresults", options?.maxresults, .encode), (.header, "timeout", options?.timeout, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -718,10 +718,10 @@ public final class Paging {
         // Construct URL
         let urlTemplate = "/paging/multiple/withpath/{offset}"
         let params = RequestParameters(
-            (.header, "clientRequestId", options?.clientRequestId, .encode),
+            (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "maxresults", options?.maxresults, .encode), (.path, "offset", offset, .encode),
-            (.header, "timeout", options?.timeout, .encode), (.header, "accept", "application/json", .encode)
+            (.header, "timeout", options?.timeout, .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -805,7 +805,7 @@ public final class Paging {
         let urlTemplate = "/paging/multiple/retryfirst"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -889,7 +889,7 @@ public final class Paging {
         let urlTemplate = "/paging/multiple/retrysecond"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -973,7 +973,7 @@ public final class Paging {
         let urlTemplate = "/paging/single/failure"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1057,7 +1057,7 @@ public final class Paging {
         let urlTemplate = "/paging/multiple/failure"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1141,7 +1141,7 @@ public final class Paging {
         let urlTemplate = "/paging/multiple/failureuri"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1229,7 +1229,7 @@ public final class Paging {
         let params = RequestParameters(
             (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1319,7 +1319,7 @@ public final class Paging {
                 customParameterGroup.apiVersion,
                 .encode
             ), (.path, "tenant", customParameterGroup.tenant, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1402,10 +1402,10 @@ public final class Paging {
         // Construct URL
         let urlTemplate = "/paging/multiple/lro"
         let params = RequestParameters(
-            (.header, "clientRequestId", options?.clientRequestId, .encode),
+            (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "maxresults", options?.maxresults, .encode), (.header, "timeout", options?.timeout, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1496,7 +1496,7 @@ public final class Paging {
             (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.path, "nextLink", nextLink, .skipEncoding),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1590,7 +1590,7 @@ public final class Paging {
                 customParameterGroup.apiVersion,
                 .encode
             ), (.path, "tenant", customParameterGroup.tenant, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1674,7 +1674,7 @@ public final class Paging {
         let urlTemplate = "/paging/itemNameWithXMSClientName"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

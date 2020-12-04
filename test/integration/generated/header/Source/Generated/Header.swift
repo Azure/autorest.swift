@@ -37,8 +37,8 @@ public final class Header {
         // Construct URL
         let urlTemplate = "/header/param/existingkey"
         let params = RequestParameters(
-            (.header, "userAgent", userAgent, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "User-Agent", userAgent, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -113,7 +113,7 @@ public final class Header {
         let urlTemplate = "/header/response/existingkey"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -188,9 +188,9 @@ public final class Header {
         // Construct URL
         let urlTemplate = "/header/param/protectedkey"
         let params = RequestParameters(
-            (.header, "contentType", contentType, .encode),
+            (.header, "Content-Type", contentType, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -265,7 +265,7 @@ public final class Header {
         let urlTemplate = "/header/response/protectedkey"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -344,7 +344,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -420,7 +420,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/integer"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -499,7 +499,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -575,7 +575,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/long"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -654,7 +654,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -730,7 +730,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/float"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -809,7 +809,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -885,7 +885,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/double"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -964,7 +964,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1040,7 +1040,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/bool"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1117,7 +1117,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1193,7 +1193,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/string"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1272,7 +1272,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1348,7 +1348,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/date"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1427,7 +1427,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1503,7 +1503,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/datetime"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1580,7 +1580,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1656,7 +1656,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/datetimerfc1123"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1735,7 +1735,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1811,7 +1811,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/duration"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1890,7 +1890,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1966,7 +1966,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/byte"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2043,7 +2043,7 @@ public final class Header {
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2119,7 +2119,7 @@ public final class Header {
         let urlTemplate = "/header/response/prim/enum"
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2194,7 +2194,7 @@ public final class Header {
         let urlTemplate = "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

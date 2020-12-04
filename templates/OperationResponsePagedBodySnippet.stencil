@@ -6,7 +6,7 @@
             items: "{{ response.pagingNames.itemName }}",
             continuationToken: "{{ response.pagingNames.nextLinkName }}"
         )
-        let paged = try {{ response.objectType }}(
+        let paged = try {{ response.type }}(
             client: self.client,
             request: request,
             context: context,

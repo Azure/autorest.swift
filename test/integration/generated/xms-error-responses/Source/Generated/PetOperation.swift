@@ -38,7 +38,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         let params = RequestParameters(
             (.path, "petId", petId, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -158,7 +158,7 @@ public final class PetOperation {
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         let params = RequestParameters(
             (.path, "whatAction", whatAction, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -254,7 +254,7 @@ public final class PetOperation {
         let params = RequestParameters(
             (.query, "models", options?.models, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

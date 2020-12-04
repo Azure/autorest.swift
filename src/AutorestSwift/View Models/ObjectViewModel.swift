@@ -38,7 +38,7 @@ struct ObjectViewModel {
     let hasConstants: Bool
 
     var inheritance = "NSObject"
-    var objectType = "struct"
+    var typeKeywords = "struct"
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
@@ -74,7 +74,7 @@ struct ObjectViewModel {
             type = type.trimmingCharacters(in: .whitespacesAndNewlines)
             let key = name.trimmingCharacters(in: .whitespacesAndNewlines)
             if key == type {
-                objectType = "final class"
+                typeKeywords = "final class"
                 return
             }
         }

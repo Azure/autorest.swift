@@ -50,7 +50,7 @@ public final class PathItems {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -138,7 +138,7 @@ public final class PathItems {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -226,7 +226,7 @@ public final class PathItems {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -314,7 +314,7 @@ public final class PathItems {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "globalStringPath", client.globalStringPath, .encode),
             (.query, "globalStringQuery", client.globalStringQuery, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

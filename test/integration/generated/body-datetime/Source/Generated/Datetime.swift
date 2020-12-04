@@ -37,7 +37,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -124,7 +124,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/invalid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -204,7 +204,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/overflow"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -284,7 +284,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/underflow"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -365,14 +365,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/utc"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMaxDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -449,14 +447,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/utc7ms"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMaxDateTime7Digits) else {
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime7Digits) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -532,7 +528,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/utc/lowercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -612,7 +608,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/utc/uppercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -692,7 +688,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/utc7ms/uppercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -773,14 +769,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localpositiveoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(localPositiveOffsetMaxDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMaxDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -856,7 +850,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localpositiveoffset/lowercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -936,7 +930,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localpositiveoffset/uppercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1017,14 +1011,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localnegativeoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(localNegativeOffsetMaxDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMaxDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1100,7 +1092,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localnegativeoffset/uppercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1180,7 +1172,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/max/localnegativeoffset/lowercase"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1261,14 +1253,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/utc"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMinDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(utcMinDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1344,7 +1334,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/utc"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1425,14 +1415,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/localpositiveoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(localPositiveOffsetMinDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(localPositiveOffsetMinDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1508,7 +1496,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/localpositiveoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1589,14 +1577,12 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/localnegativeoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(localNegativeOffsetMinDateTime) else {
+        guard let requestBody = try? JSONEncoder().encode(localNegativeOffsetMinDateTime) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -1672,7 +1658,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/localnegativeoffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1752,7 +1738,7 @@ public final class Datetime {
         let urlTemplate = "/datetime/min/localnooffset"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

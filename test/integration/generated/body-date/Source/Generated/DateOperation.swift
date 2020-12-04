@@ -37,7 +37,7 @@ public final class DateOperation {
         let urlTemplate = "/date/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -124,7 +124,7 @@ public final class DateOperation {
         let urlTemplate = "/date/invaliddate"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -204,7 +204,7 @@ public final class DateOperation {
         let urlTemplate = "/date/overflowdate"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -284,7 +284,7 @@ public final class DateOperation {
         let urlTemplate = "/date/underflowdate"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -365,14 +365,12 @@ public final class DateOperation {
         let urlTemplate = "/date/max"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = SimpleDate.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(maxDate) else {
+        guard let requestBody = try? JSONEncoder().encode(maxDate) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -448,7 +446,7 @@ public final class DateOperation {
         let urlTemplate = "/date/max"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -529,14 +527,12 @@ public final class DateOperation {
         let urlTemplate = "/date/min"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = SimpleDate.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(minDate) else {
+        guard let requestBody = try? JSONEncoder().encode(minDate) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -612,7 +608,7 @@ public final class DateOperation {
         let urlTemplate = "/date/min"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

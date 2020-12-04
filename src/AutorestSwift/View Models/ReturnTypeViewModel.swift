@@ -30,18 +30,20 @@ import Foundation
 /// Example:
 ///     ... -> ReturnTypeName
 struct ReturnTypeViewModel {
-    let name: String
-    // A flag to indicate in the generated code whether to return nil or void in the NoBody response stencil
-    // If the Return type of the function is nilable, we need to return nil. If the return type is Void, we return ()
+    /// The swift type name to return
+    let type: String
+
+    /// A flag to indicate in the generated code whether to return nil or void in the NoBody response stencil
+    /// If the Return type of the function is nilable, we need to return nil. If the return type is Void, we return ()
     let returnNil: Bool
 
     init(from responses: [ResponseViewModel]?) {
-        var objectTypes = Set<String>()
+        var types = Set<String>()
         var strategies = Set<String>()
         var hasNullableResponse = false
         for response in responses ?? [] {
             if response.strategy != RequestBodyType.noBody.rawValue {
-                objectTypes.insert(response.objectType)
+                types.insert(response.type)
             }
             strategies.insert(response.strategy)
             hasNullableResponse = hasNullableResponse || response.isNullable
@@ -53,12 +55,12 @@ struct ReturnTypeViewModel {
 
         let hasNoBodyStrategies = strategies.contains { $0 == RequestBodyType.noBody.rawValue }
 
-        // since we only support 1 body/pagePage response, only need to take the first item for objectTypes
-        if let name = objectTypes.first {
-            self.name = (hasNoBodyStrategies || hasNullableResponse) ? "\(name)?" : name
+        // since we only support 1 body/pagePage response, only need to take the first item in types
+        if let type = types.first {
+            self.type = (hasNoBodyStrategies || hasNullableResponse) ? "\(type)?" : type
             self.returnNil = hasNoBodyStrategies
         } else {
-            self.name = "Void"
+            self.type = "Void"
             self.returnNil = false
         }
     }

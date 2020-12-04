@@ -45,7 +45,7 @@ public final class Paths {
             (.path, "keyName", keyName, .encode), (.query, "keyVersion", options?.keyVersion, .encode),
             (.uri, "dnsSuffix", client.dnsSuffix, .skipEncoding),
             (.path, "subscriptionId", client.subscriptionId, .encode),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

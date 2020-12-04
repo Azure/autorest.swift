@@ -38,7 +38,7 @@ public final class Paths {
         let urlTemplate = "/customuri"
         let params = RequestParameters(
             (.uri, "accountName", accountName, .skipEncoding), (.uri, "host", client.host, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

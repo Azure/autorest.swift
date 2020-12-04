@@ -7,7 +7,7 @@
 // swiftlint:disable cyclomatic_complexity
 
 {{ model.comment }}
-public {{ model.objectType }} {{ model.name }} : {{ model.inheritance }} {
+public {{ model.typeKeywords }} {{ model.name }} : {{ model.inheritance }} {
     // MARK: Properties
 {% for property in model.properties %}
     {{ property.comment }}

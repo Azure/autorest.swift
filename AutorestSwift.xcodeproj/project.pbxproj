@@ -177,28 +177,6 @@
 		0AB80AB325783094008506CD /* ZZZAutoRestReportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9295254B094D00E2D9C2 /* ZZZAutoRestReportTest.swift */; };
 		0AB80B66257975DF008506CD /* AutoRestRequiredOptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB80B65257975DF008506CD /* AutoRestRequiredOptionalTest.swift */; };
 		0AB80B69257976C2008506CD /* AutoRestSwaggerBatTimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB80B68257976C2008506CD /* AutoRestSwaggerBatTimeTest.swift */; };
-		0AB80BBB257982D8008506CD /* body-datetime-rfc1123 in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BA5257982CF008506CD /* body-datetime-rfc1123 */; };
-		0AB80BBC257982D8008506CD /* body-time in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BA6257982D0008506CD /* body-time */; };
-		0AB80BBD257982D8008506CD /* required-optional in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BA7257982D0008506CD /* required-optional */; };
-		0AB80BBE257982D8008506CD /* body-integer in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BA8257982D0008506CD /* body-integer */; };
-		0AB80BBF257982D8008506CD /* head in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BA9257982D1008506CD /* head */; };
-		0AB80BC0257982D8008506CD /* custom-baseUrl-more-options in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAA257982D1008506CD /* custom-baseUrl-more-options */; };
-		0AB80BC1257982D8008506CD /* body-boolean in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAB257982D2008506CD /* body-boolean */; };
-		0AB80BC2257982D8008506CD /* model-flattening in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAC257982D2008506CD /* model-flattening */; };
-		0AB80BC3257982D8008506CD /* report in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAD257982D3008506CD /* report */; };
-		0AB80BC4257982D8008506CD /* paging in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAE257982D3008506CD /* paging */; };
-		0AB80BC5257982D8008506CD /* body-string in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BAF257982D4008506CD /* body-string */; };
-		0AB80BC6257982D8008506CD /* body-date in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB0257982D4008506CD /* body-date */; };
-		0AB80BC7257982D8008506CD /* body-array in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB1257982D5008506CD /* body-array */; };
-		0AB80BC8257982D8008506CD /* body-datetime in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB2257982D5008506CD /* body-datetime */; };
-		0AB80BC9257982D8008506CD /* url-multi-collectionFormat in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB3257982D5008506CD /* url-multi-collectionFormat */; };
-		0AB80BCA257982D8008506CD /* body-number in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB4257982D5008506CD /* body-number */; };
-		0AB80BCB257982D8008506CD /* header in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB5257982D6008506CD /* header */; };
-		0AB80BCC257982D8008506CD /* body-file in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB6257982D6008506CD /* body-file */; };
-		0AB80BCD257982D8008506CD /* custom-baseUrl in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB7257982D6008506CD /* custom-baseUrl */; };
-		0AB80BCE257982D8008506CD /* body-byte in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB8257982D7008506CD /* body-byte */; };
-		0AB80BCF257982D8008506CD /* url in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BB9257982D7008506CD /* url */; };
-		0AB80BD0257982D8008506CD /* xms-error-responses in Resources */ = {isa = PBXBuildFile; fileRef = 0AB80BBA257982D7008506CD /* xms-error-responses */; };
 		0AB80BF02579836D008506CD /* AutoRestBoolTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80BEF2579836D008506CD /* AutoRestBoolTest */; };
 		0AB80BF22579836D008506CD /* AutoRestDateTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80BF12579836D008506CD /* AutoRestDateTest */; };
 		0AB80BF42579836D008506CD /* AutoRestDateTimeTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AB80BF32579836D008506CD /* AutoRestDateTimeTest */; };
@@ -233,7 +211,6 @@
 		F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B1F6125414556007DA581 /* Dictionary+Extension.swift */; };
 		F14C305D256DEA8C00FC5B54 /* OperationDecodingSnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F16CDAD025688E5600FD0817 /* OperationDecodingSnippet.stencil */; };
 		F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */; };
-		F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */; };
 		F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */; };
 		F15150D52512701C00DF0B9F /* OperationResponseNullableBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */; };
 		F151510825128E2D00DF0B9F /* OperationExceptionIntBodySnippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F151510525128E0B00DF0B9F /* OperationExceptionIntBodySnippet.stencil */; };
@@ -307,7 +284,6 @@
 				F151510C25128E2D00DF0B9F /* OperationExceptionStringBodySnippet.stencil in CopyFiles */,
 				F15150D52512701C00DF0B9F /* OperationResponseNullableBodySnippet.stencil in CopyFiles */,
 				F151506B2511CA8A00DF0B9F /* OperationResponseIntBodySnippet.stencil in CopyFiles */,
-				F151506C2511CA8A00DF0B9F /* OperationResponseJsonBodySnippet.stencil in CopyFiles */,
 				F151506D2511CA8A00DF0B9F /* OperationResponseStringBodySnippet.stencil in CopyFiles */,
 				F19B01E72507F3D300121831 /* OperationResponseStatusCodeSnippet.stencil in CopyFiles */,
 				F1871872250C2B6200318867 /* OperationDefaultExceptionSnippet.stencil in CopyFiles */,
@@ -462,7 +438,6 @@
 		F11CA17E25647D8C009DFACF /* AutoRestSwaggerBatBoolTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatBoolTest.swift; sourceTree = "<group>"; };
 		F13E68E0256722EB006C0F93 /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerCustomerBaseUrlOptionTest.swift; sourceTree = "<group>"; };
 		F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseIntBodySnippet.stencil; sourceTree = "<group>"; };
-		F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseJsonBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150682511CA5600DF0B9F /* OperationResponseStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseStringBodySnippet.stencil; sourceTree = "<group>"; };
 		F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationResponseNullableBodySnippet.stencil; sourceTree = "<group>"; };
 		F151510425128E0B00DF0B9F /* OperationExceptionStringBodySnippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OperationExceptionStringBodySnippet.stencil; sourceTree = "<group>"; };
@@ -711,7 +686,6 @@
 				F18717C7250B184A00318867 /* OperationResponseFailureBodySnippet.stencil */,
 				F18717D0250B184A00318867 /* OperationResponseFailureNoBodySnippet.stencil */,
 				F15150662511CA2E00DF0B9F /* OperationResponseIntBodySnippet.stencil */,
-				F15150672511CA2E00DF0B9F /* OperationResponseJsonBodySnippet.stencil */,
 				0A22B0C624D3343E00EC018E /* OperationResponseNoBodySnippet.stencil */,
 				F15150D32512700D00DF0B9F /* OperationResponseNullableBodySnippet.stencil */,
 				0A22B0C424D333FF00EC018E /* OperationResponsePagedBodySnippet.stencil */,
@@ -1168,28 +1142,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AB80BC4257982D8008506CD /* paging in Resources */,
-				0AB80BC8257982D8008506CD /* body-datetime in Resources */,
-				0AB80BCC257982D8008506CD /* body-file in Resources */,
-				0AB80BBF257982D8008506CD /* head in Resources */,
-				0AB80BCE257982D8008506CD /* body-byte in Resources */,
-				0AB80BC6257982D8008506CD /* body-date in Resources */,
-				0AB80BC9257982D8008506CD /* url-multi-collectionFormat in Resources */,
-				0AB80BC5257982D8008506CD /* body-string in Resources */,
-				0AB80BBB257982D8008506CD /* body-datetime-rfc1123 in Resources */,
-				0AB80BC2257982D8008506CD /* model-flattening in Resources */,
-				0AB80BC0257982D8008506CD /* custom-baseUrl-more-options in Resources */,
-				0AB80BC1257982D8008506CD /* body-boolean in Resources */,
-				0AB80BBE257982D8008506CD /* body-integer in Resources */,
-				0AB80BC3257982D8008506CD /* report in Resources */,
-				0AB80BCB257982D8008506CD /* header in Resources */,
-				0AB80BBD257982D8008506CD /* required-optional in Resources */,
-				0AB80BCD257982D8008506CD /* custom-baseUrl in Resources */,
-				0AB80BBC257982D8008506CD /* body-time in Resources */,
-				0AB80BCF257982D8008506CD /* url in Resources */,
-				0AB80BC7257982D8008506CD /* body-array in Resources */,
-				0AB80BCA257982D8008506CD /* body-number in Resources */,
-				0AB80BD0257982D8008506CD /* xms-error-responses in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

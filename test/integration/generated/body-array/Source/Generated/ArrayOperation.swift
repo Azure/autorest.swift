@@ -37,7 +37,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -117,7 +117,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/invalid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -197,7 +197,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -278,7 +278,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -358,7 +359,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/boolean/tfft"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -439,7 +440,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/boolean/tfft"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -519,7 +521,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/boolean/true.null.false"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -599,7 +601,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/boolean/true.boolean.false"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -679,7 +681,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/integer/1.-1.3.300"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -760,7 +762,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/integer/1.-1.3.300"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -840,7 +843,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/integer/1.null.zero"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -920,7 +923,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/integer/1.integer.0"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1000,7 +1003,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/long/1.-1.3.300"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1081,7 +1084,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/long/1.-1.3.300"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1161,7 +1165,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/long/1.null.zero"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1241,7 +1245,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/long/1.integer.0"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1321,7 +1325,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1402,7 +1406,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1482,7 +1487,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/float/0.0-null-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1562,7 +1567,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/float/1.number.0"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1642,7 +1647,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1723,7 +1728,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1803,7 +1809,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/double/0.0-null-1.2e20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1883,7 +1889,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/double/1.number.0"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1963,7 +1969,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2044,7 +2050,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2124,7 +2131,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2205,7 +2212,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2285,7 +2293,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2366,7 +2374,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2446,7 +2455,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string/foo.null.foo2"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2526,7 +2535,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/string/foo.123.foo2"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2606,7 +2615,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/uuid/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2687,7 +2696,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/uuid/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2767,7 +2777,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/uuid/invalidchars"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2847,7 +2857,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2928,14 +2938,12 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = SimpleDate.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(dateValid) else {
+        guard let requestBody = try? JSONEncoder().encode(dateValid) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -3011,7 +3019,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date/invalidnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3091,7 +3099,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date/invalidchars"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3171,7 +3179,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3252,14 +3260,12 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Iso8601Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(dateTimeValid) else {
+        guard let requestBody = try? JSONEncoder().encode(dateTimeValid) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -3335,7 +3341,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time/invalidnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3415,7 +3421,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time/invalidchars"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3495,7 +3501,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time-rfc1123/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3576,14 +3582,12 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/date-time-rfc1123/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Rfc1123Date.formatter
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(dateTimeRfc1123Valid) else {
+        guard let requestBody = try? JSONEncoder().encode(dateTimeRfc1123Valid) else {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
@@ -3659,7 +3663,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/duration/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3740,7 +3744,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/duration/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3820,7 +3825,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/byte/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3901,7 +3906,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/byte/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3981,7 +3987,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/byte/invalidnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4061,7 +4067,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/prim/base64url/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4141,7 +4147,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4221,7 +4227,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4301,7 +4307,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/itemnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4381,7 +4387,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/itemempty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4461,7 +4467,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4542,7 +4548,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/complex/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4622,7 +4629,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4702,7 +4709,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4782,7 +4789,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/itemnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4862,7 +4869,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/itemempty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4942,7 +4949,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5023,7 +5030,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/array/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5103,7 +5111,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/null"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5183,7 +5191,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/empty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5263,7 +5271,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/itemnull"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5343,7 +5351,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/itemempty"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5423,7 +5431,7 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "accept", "application/json", .encode)
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -5504,7 +5512,8 @@ public final class ArrayOperation {
         let urlTemplate = "/array/dictionary/valid"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "contentType", "application/json", .encode), (.header, "accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

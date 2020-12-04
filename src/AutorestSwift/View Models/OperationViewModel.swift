@@ -52,11 +52,6 @@ struct OperationParameters {
             }
         }
 
-        // TODO: re-evaluate and restore
-//        for param in params where param.needDecodingInMethod {
-//            methodDecoding.append(param)
-//        }
-
         // Set the body param, if applicable
         var bodyParamName: String?
         let bodyParams = params.filter { $0.location == "body" }
@@ -112,17 +107,20 @@ enum BodyParamStrategy: String {
     case decimal
     case data
     case string
-    case date
-    case dateTime
-    case dateTimeRfc1123
     case time
 }
 
 struct BodyParams {
+    /// The `ParameterViewModel` corresponding to the body param
     var param: ParameterViewModel
+
+    /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
+
+    /// A list of `VirtualParam` that correlate to a flattened body parmeter
     let children: [VirtualParam]
 
+    /// Returns `true` if the body parameter is flattened
     var flattened: Bool {
         return !children.isEmpty
     }
@@ -251,7 +249,7 @@ struct OperationViewModel {
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
-        let defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
+        let defaultExceptionHasBody = (defaultException != nil) && defaultException?.type != "Void"
 
         let returnType = ReturnTypeViewModel(from: self.responses)
 
@@ -280,7 +278,7 @@ struct OperationViewModel {
 
         self.returnType = returnType
         self.defaultExceptionHasBody = defaultExceptionHasBody
-        self.needHttpResponseData = exceptions.count > 1 || (returnType.name != "Void") || defaultExceptionHasBody
+        self.needHttpResponseData = exceptions.count > 1 || (returnType.type != "Void") || defaultExceptionHasBody
     }
 }
 
