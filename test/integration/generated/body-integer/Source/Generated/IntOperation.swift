@@ -46,7 +46,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -62,7 +61,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -81,6 +79,7 @@ public final class IntOperation {
                         }
                         return
                     }
+
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
@@ -131,7 +130,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -147,7 +145,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -210,7 +207,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -226,7 +222,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -289,7 +284,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -305,7 +299,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -368,7 +361,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -384,7 +376,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -447,7 +438,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -463,7 +453,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -533,7 +522,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -549,7 +537,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -615,7 +602,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -631,7 +617,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -697,7 +682,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -713,7 +697,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -779,7 +762,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -795,7 +777,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -854,7 +835,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -870,7 +850,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -942,7 +921,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -958,7 +936,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1017,7 +994,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1033,7 +1009,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1097,7 +1072,6 @@ public final class IntOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1113,7 +1087,6 @@ public final class IntOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1132,6 +1105,7 @@ public final class IntOperation {
                         }
                         return
                     }
+
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(UnixTime.self, from: data)

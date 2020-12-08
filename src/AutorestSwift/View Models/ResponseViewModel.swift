@@ -27,6 +27,8 @@
 import Foundation
 
 enum ResponseBodyType: String {
+    /// Returns a deserialized object (most common)
+    case plainBody
     /// Service returns a pageable response
     case pagedBody
     /// Service returns no response data, only a status code
@@ -35,16 +37,10 @@ enum ResponseBodyType: String {
     case stringBody
     /// Service returns an Int
     case intBody
-    /// Service returns a JSON body
-    case jsonBody
     /// Service returns a unixTime body
     case unixTimeBody
     /// Service returns a byteArray body
     case byteArrayBody
-    case dateBody
-    case dateTimeBody
-    case dateTimeRfc1123Body
-    case timeBody
 
     static func strategy(for input: String, and schema: Schema) -> ResponseBodyType {
         let type = schema.type
@@ -56,30 +52,15 @@ enum ResponseBodyType: String {
             switch type {
             case .unixTime:
                 return .unixTimeBody
-            case .time:
-                return .timeBody
-            case .date:
-                return .dateBody
-            case .dateTime:
-                if let dateTimeSchema = schema as? DateTimeSchema,
-                    dateTimeSchema.format == .dateTimeRfc1123 {
-                    return .dateTimeRfc1123Body
-                }
-                return .dateTimeBody
             default:
-                return .dateBody
+                return .plainBody
             }
         } else if type == .byteArray {
             return .byteArrayBody
         } else if input == "[Date]" {
-            if let arraySchema = schema as? ArraySchema,
-                let dateTimeSchema = arraySchema.elementType as? DateTimeSchema {
-                return (dateTimeSchema.format == .dateTimeRfc1123) ? .dateTimeRfc1123Body : .dateTimeBody
-            } else {
-                return .dateBody
-            }
+            return .plainBody
         } else {
-            return .jsonBody
+            return .plainBody
         }
     }
 }

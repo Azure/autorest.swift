@@ -42,6 +42,27 @@ struct PropertyViewModel {
     let optional: Bool
     let className: String
 
+    /// Initialize a `PropertyViewModel` directly
+    init(
+        name: String,
+        type: String,
+        comment: String? = nil,
+        defaultValue: String? = nil,
+        initDefaultValue: String? = nil,
+        isDate: Bool = false,
+        optional: Bool = false,
+        className: String? = nil
+    ) {
+        self.name = name
+        self.type = type
+        self.comment = ViewModelComment(from: comment)
+        self.defaultValue = ViewModelDefault(from: defaultValue, isString: true, isOptional: optional)
+        self.initDefaultValue = initDefaultValue ?? ""
+        self.isDate = isDate
+        self.optional = optional
+        self.className = className ?? type
+    }
+
     /// Initialize from Value type (such as Property or Parameter)
     init(from schema: Value) {
         // The `name` field is preferred.

@@ -229,7 +229,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                let str = String(decoding: data, as: UTF8.self)
+                let str = String(data: data, encoding: .utf8)
                 XCTAssertEqual(str, "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"")
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -261,8 +261,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
     func test_string_putBase64UrlEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putBase64UrlEncoded")
-
-        let data = "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"".data(using: .utf8) ?? Data()
+        let data = Data("\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"".utf8)
         client.stringOperation.put(base64UrlEncoded: data) { result, httpResponse in
             switch result {
             case .success:

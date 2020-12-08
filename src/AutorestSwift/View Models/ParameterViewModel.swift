@@ -121,8 +121,23 @@ struct ParameterViewModel {
 //        //    }
 //        {% endfor %}
 
+        // TODO: imported from KeyValueViewModel
+//        case .array:
+//            if explode {
+//                return "\(value)"
+//            } else {
+//                var element = "$0"
+//                if let arraySchema = schema as? ArraySchema,
+//                    arraySchema.nullableItems ?? false {
+//                    element = "$0 ?? \"\""
+//                }
+//                return "\(value).map { String(\(element)) }.joined(separator: \"\(delimiter)\") "
+//            }
+//        case .duration:
+//            return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
+
         if let constantSchema = param.schema as? ConstantSchema {
-            update(withParam: param, andConstantSchema: constantSchema)
+            update(withConstantSchema: constantSchema)
         } else if let signatureParameter = operation?.signatureParameter(for: param.name) {
             update(withSignatureParameter: signatureParameter)
         } else if let groupedBy = param.groupedBy?.name,
@@ -158,14 +173,34 @@ struct ParameterViewModel {
 
     private mutating func update(withSignatureParameter param: ParameterType) {
         assert(!(param.serializedName?.isEmpty ?? true))
-        pathOrValue = param.belongsInOptions() ? "options?.\(name)" : "\(name)"
+        var pathOrValue = ""
+        if let byteSchema = param.schema as? ByteArraySchema,
+            byteSchema.format == .base64url {
+            pathOrValue = "\(name).base64EncodedString(trimmingEquals: true)"
+        } else {
+            pathOrValue = name
+        }
+        self.pathOrValue = param.belongsInOptions() ? "options?.\(pathOrValue)" : "\(pathOrValue)"
     }
 
-    private mutating func update(withParam param: ParameterType, andConstantSchema constant: ConstantSchema) {
-        pathOrValue = constant.formatValue(
-            skipUrlEncoding: param.value.isSkipUrlEncoding,
-            paramLocation: param.paramLocation
-        )
+    private mutating func update(withConstantSchema constant: ConstantSchema) {
+        let constantValue = constant.value.value
+        switch constant.valueType.type {
+        case .number:
+            let swiftType = constant.valueType.swiftType()
+            pathOrValue = "\(swiftType)(\(constantValue))"
+        case .byteArray:
+            if let byteArraySchema = constant.valueType as? ByteArraySchema,
+                byteArraySchema.format == .base64url {
+                assertionFailure("Unhandled case: base64url byteArray")
+            } else {
+                pathOrValue = "\"\(constantValue)\""
+            }
+        case .boolean:
+            pathOrValue = "\(constantValue)"
+        default:
+            pathOrValue = "\"\(constantValue)\""
+        }
     }
 
     private mutating func update(withBodySignatureParameter param: ParameterType, andBodyParamName name: String?) {

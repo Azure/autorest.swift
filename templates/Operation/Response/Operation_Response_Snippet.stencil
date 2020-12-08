@@ -1,0 +1,30 @@
+{% if op.needHttpResponseData %}
+guard let data = httpResponse?.data else {
+    let noDataError = AzureError.client("Response data expected but not found.")
+    dispatchQueue.async {
+         completionHandler(.failure(noDataError), httpResponse)
+    }
+    return
+}
+{% endif %}
+switch result {
+case .success:
+    guard let statusCode = httpResponse?.statusCode else {
+        let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
+        dispatchQueue.async {
+            completionHandler(.failure(noStatusCodeError), httpResponse)
+        }
+        return
+    }
+{% for response in op.responses %}
+    {% if response.strategy == "pagedBody" %}
+        {% include "Operation_Response_PagedBody_Snippet.stencil" op %}
+    {% elif response.strategy == "noBody" %}
+        {% include "Operation_Response_NoBody_Snippet.stencil" op %}
+    {% else %}
+        {% include "Operation_Response_Body_Snippet.stencil" op %}
+    {% endif %}
+{% endfor %}
+    {% include "Operation_Response_Exception_Snippet.stencil" %}
+{% include "Operation_DefaultException_Snippet.stencil" %}
+}

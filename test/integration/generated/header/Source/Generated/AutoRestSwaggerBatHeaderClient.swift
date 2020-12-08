@@ -65,7 +65,7 @@ public final class AutoRestSwaggerBatHeaderClient: PipelineClient {
         )
     }
 
-    public lazy var header: Header = Header(client: self)
+    public lazy var header = Header(client: self)
 
     // MARK: Public Client Methods
 }

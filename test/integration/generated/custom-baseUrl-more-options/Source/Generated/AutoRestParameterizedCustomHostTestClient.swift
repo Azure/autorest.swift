@@ -73,7 +73,7 @@ public final class AutoRestParameterizedCustomHostTestClient: PipelineClient {
     // /// A string value that is used as a global part of the parameterized host. Default value 'host'.
     public var dnsSuffix: String = "host"
 
-    public lazy var paths: Paths = Paths(client: self)
+    public lazy var paths = Paths(client: self)
 
     // MARK: Public Client Methods
 }

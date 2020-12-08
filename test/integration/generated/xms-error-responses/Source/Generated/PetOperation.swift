@@ -47,7 +47,6 @@ public final class PetOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 202, 400, 404, 501] as AnyObject
@@ -63,7 +62,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -98,17 +96,13 @@ public final class PetOperation {
                         )
                     }
                 }
-                if [
-                    400
-                ].contains(statusCode) {
+                if [400].contains(statusCode) {
                     let decoded = String(data: data, encoding: .utf8)
                     dispatchQueue.async {
                         completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
-                if [
-                    404
-                ].contains(statusCode) {
+                if [404].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
@@ -121,9 +115,7 @@ public final class PetOperation {
                         }
                     }
                 }
-                if [
-                    501
-                ].contains(statusCode) {
+                if [501].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
@@ -167,7 +159,6 @@ public final class PetOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
@@ -183,7 +174,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -208,9 +198,7 @@ public final class PetOperation {
                         }
                     }
                 }
-                if [
-                    500
-                ].contains(statusCode) {
+                if [500].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)
@@ -263,7 +251,6 @@ public final class PetOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
@@ -279,7 +266,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -299,9 +285,7 @@ public final class PetOperation {
                         )
                     }
                 }
-                if [
-                    500
-                ].contains(statusCode) {
+                if [500].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)

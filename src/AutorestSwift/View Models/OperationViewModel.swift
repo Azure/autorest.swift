@@ -99,10 +99,11 @@ struct OperationParameters {
 
 enum BodyParamStrategy: String {
     case plain
+    case plainNullable
     case flattened
     case unixTime
-    case plainNullable
     case byteArray
+    case base64ByteArray
     case constant
     case decimal
     case data
@@ -194,7 +195,7 @@ struct OperationViewModel {
 
     let clientMethodOptions: ClientMethodOptionsViewModel
 
-    let pipelineContext: [KeyValueViewModel]
+    let pipelineContext: PipelineContextViewModel
 
     let request: RequestViewModel
     let responses: [ResponseViewModel]
@@ -239,12 +240,7 @@ struct OperationViewModel {
         }
 
         // Configure PipelineContext
-        var pipelineContext = [KeyValueViewModel]()
-        pipelineContext.append(KeyValueViewModel(
-            key: "ContextKey.allowedStatusCodes.rawValue",
-            value: "[\(statusCodes.joined(separator: ","))]"
-        ))
-        self.pipelineContext = pipelineContext
+        self.pipelineContext = PipelineContextViewModel(allowedStatusCodes: statusCodes)
 
         self.responses = responses
         self.exceptions = exceptions

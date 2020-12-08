@@ -79,8 +79,8 @@ public final class AutoRestRequiredOptionalTestClient: PipelineClient {
     // /// number of items to skip
     public var optionalGlobalQuery: Int32?
 
-    public lazy var explicit: Explicit = Explicit(client: self)
-    public lazy var implicit: Implicit = Implicit(client: self)
+    public lazy var explicit = Explicit(client: self)
+    public lazy var implicit = Implicit(client: self)
 
     // MARK: Public Client Methods
 }

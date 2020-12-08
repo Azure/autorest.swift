@@ -1,0 +1,36 @@
+{% for exception in op.exceptions %}
+if [{% for statusCode in exception.statusCodes %}{{ statusCode }},{% endfor %}].contains(statusCode)
+{
+{% if exception.strategy == "intBody" %}
+    if let decodedstr = String(data: data, encoding: .utf8),
+        let decoded = {{ exception.type }}(decodedstr) {
+            dispatchQueue.async {
+            completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
+        }
+    } else {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+        }
+    }
+{% elif exception.strategy == "stringBody" %}
+    let decoded = String(data: data, encoding: .utf8)
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
+    }
+{% elif exception.strategy == "plainBody" %}
+    do {
+        let decoder = JSONDecoder()
+        let decoded = try decoder.decode({{ exception.type }}.self, from: data)
+            dispatchQueue.async {
+                completionHandler(.failure(AzureError.service("{{ exception.description }}", decoded)), httpResponse)
+            }
+    } catch {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+        }
+    }
+{% else %}
+    // TODO: Couldn't find template for {{ exception.strategy }}
+{% endif %}
+}
+{% endfor %}

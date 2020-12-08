@@ -1,7 +1,0 @@
-{% if op.defaultExceptionHasBody == true %}
-    case .failure:
-        {% include "OperationResponseFailureBodySnippet.stencil" %}
-{% else %}
-    case let .failure(error):
-        {% include "OperationResponseFailureNoBodySnippet.stencil" %}
-{% endif %}

@@ -68,8 +68,7 @@ public final class AutoRestResourceFlatteningTestClient: PipelineClient {
         )
     }
 
-    public lazy var autoRestResourceFlatteningTestService: AutoRestResourceFlatteningTestService =
-        AutoRestResourceFlatteningTestService(client: self)
+    public lazy var autoRestResourceFlatteningTestService = AutoRestResourceFlatteningTestService(client: self)
 
     // MARK: Public Client Methods
 }

@@ -36,7 +36,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/true/{boolPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", String(true), .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", true, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -46,7 +46,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -62,7 +61,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -111,7 +109,7 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/bool/false/{boolPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", String(false), .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", false, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -121,7 +119,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -137,7 +134,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -186,8 +182,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/1000000/{intPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "intPath", String(1_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "intPath", "1000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -196,7 +192,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -212,7 +207,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -261,8 +255,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/int/-1000000/{intPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "intPath", String(-1_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "intPath", "-1000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -271,7 +265,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -287,7 +280,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -336,8 +328,8 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/long/10000000000/{longPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "longPath", String(10_000_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "longPath", "10000000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -346,7 +338,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -362,7 +353,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -412,7 +402,8 @@ public final class Paths {
         let urlTemplate = "/paths/long/-10000000000/{longPath}"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "longPath", String(-10_000_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.path, "longPath", "-10000000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -421,7 +412,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -437,7 +427,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -489,7 +478,7 @@ public final class Paths {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .path,
                 "floatPath",
-                String(Float(103_400_000_000_000_000_000)),
+                Float(103_400_000_000_000_000_000),
                 .encode
             ), (.header, "Accept", "application/json", .encode)
         )
@@ -500,7 +489,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -516,7 +504,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -566,8 +553,7 @@ public final class Paths {
         let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "floatPath", String(Float(-1.034e-20)), .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.path, "floatPath", Float(-1.034e-20), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -576,7 +562,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -592,7 +577,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -642,8 +626,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "doublePath", String(Double(9_999_999.999)), .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.path, "doublePath", Double(9_999_999.999), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -652,7 +635,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -668,7 +650,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -718,7 +699,7 @@ public final class Paths {
         let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "doublePath", String(Double(-9_999_999.999)), .encode),
+            (.path, "doublePath", Double(-9_999_999.999), .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -728,7 +709,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -744,7 +724,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -804,7 +783,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -820,7 +798,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -880,7 +857,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -896,7 +872,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -945,12 +920,9 @@ public final class Paths {
         // Construct URL
         let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
-                .path,
-                "stringPath",
-                "begin!*'();:@&=+$,end".removingPercentEncoding ?? "",
-                .skipEncoding
-            ), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.path, "stringPath", "begin!*'();:@&=+$,end", .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -959,7 +931,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -975,7 +946,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1034,7 +1004,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1050,7 +1019,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1110,7 +1078,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
@@ -1126,7 +1093,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1186,7 +1152,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1202,7 +1167,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1262,7 +1226,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
@@ -1278,7 +1241,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1338,7 +1300,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1354,7 +1315,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1413,7 +1373,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1429,7 +1388,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1489,7 +1447,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
@@ -1505,7 +1462,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1564,7 +1520,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1580,7 +1535,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1640,7 +1594,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
@@ -1656,7 +1609,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1716,7 +1668,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1732,7 +1683,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1793,7 +1743,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [400] as AnyObject
@@ -1809,7 +1758,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1852,14 +1800,14 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func base64Url(
-        base64UrlPath: Base64Data,
+        base64UrlPath: Data,
         withOptions options: Base64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
         // Construct URL
         let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
         let params = RequestParameters(
-            (.path, "base64UrlPath", base64UrlPath, .encode),
+            (.path, "base64UrlPath", base64UrlPath.base64EncodedString(trimmingEquals: true), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -1870,7 +1818,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1886,7 +1833,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1947,7 +1893,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1963,7 +1908,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2024,7 +1968,6 @@ public final class Paths {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2040,7 +1983,6 @@ public final class Paths {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {

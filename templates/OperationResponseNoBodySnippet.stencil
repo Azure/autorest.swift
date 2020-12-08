@@ -1,8 +1,0 @@
-{% include "OperationResponseStatusCodeSnippet.stencil" %}
-{
-    {# TODO: Replace the if-else with binding to ReturnTypeModel. This is a workaround for stencil does not resolve the property value when the value has 'nil' or '()' #}
-    dispatchQueue.async {
-        completionHandler(.success({% if op.returnType.returnNil  %} nil {% else %} () {% endif %})
-        , httpResponse)
-    }
-}

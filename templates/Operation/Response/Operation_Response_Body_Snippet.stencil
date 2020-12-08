@@ -1,0 +1,65 @@
+{% include "Operation_Response_StatusCode_Snippet.stencil" %}
+{
+{% if response.isNullable == true %}
+    if data.count == 0 {
+        dispatchQueue.async {
+            completionHandler(.success(nil), httpResponse)
+        }
+        return
+    }
+{% endif %}
+
+{% if response.strategy == "byteArrayBody" %}
+    dispatchQueue.async {
+        completionHandler(.success(data), httpResponse)
+    }
+{% elif response.strategy == "stringBody" %}
+    if let decoded = String(data: data, encoding: .utf8) {
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } else {
+        let decodedError = AzureError.client("Expected a string in response body.")
+        dispatchQueue.async {
+            completionHandler(.failure(decodedError), httpResponse)
+        }
+    }
+{% elif response.strategy == "intBody" %}
+    if let decodedstr = String(data: data, encoding: .utf8),
+        let decoded = {{ response.type }}(decodedstr) {
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } else {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+        }
+    }
+{% elif response.strategy == "unixTimeBody" %}
+    if let decodedstr = String(data: data, encoding: .utf8),
+        let double = Double(decodedstr) {
+        let decoded = Date(timeIntervalSince1970: double)
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } else {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", nil)), httpResponse)
+        }
+    }
+{% elif response.strategy == "plainBody" %}
+    do {
+        let decoder = JSONDecoder()
+        let decoded = try decoder.decode({{ response.type }}.self, from: data)
+        dispatchQueue.async {
+            completionHandler(.success(decoded), httpResponse)
+        }
+    } catch {
+        dispatchQueue.async {
+            completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+        }
+    }
+{% else %}
+    // TODO: Couldn't find template for {response.strategy}
+{% endif %}
+}

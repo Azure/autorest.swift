@@ -45,7 +45,6 @@ public final class HttpSuccess {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 404] as AnyObject
@@ -54,7 +53,6 @@ public final class HttpSuccess {
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -114,7 +112,6 @@ public final class HttpSuccess {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
@@ -123,7 +120,6 @@ public final class HttpSuccess {
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -183,7 +179,6 @@ public final class HttpSuccess {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [204, 404] as AnyObject
@@ -192,7 +187,6 @@ public final class HttpSuccess {
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
             let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {

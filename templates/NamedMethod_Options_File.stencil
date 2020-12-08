@@ -1,0 +1,12 @@
+{% include "Header_Snippet.stencil" %}
+
+{% include "Import_Snippet.stencil" %}
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable identifier_name
+// swiftlint:disable line_length
+
+extension {{ model.extensionName  }}
+{
+    {% include "Method_Options_Snippet.stencil" %}
+}

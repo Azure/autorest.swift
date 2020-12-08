@@ -68,7 +68,6 @@ struct ExceptionResponseViewModel {
             guard type != "Void"
             else { fatalError("Did not find object type for error response") }
         }
-
         self.hasDefaultException = statusCodes.contains("default")
     }
 }

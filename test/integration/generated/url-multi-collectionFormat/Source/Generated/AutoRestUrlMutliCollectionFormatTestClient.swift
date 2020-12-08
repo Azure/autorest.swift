@@ -68,7 +68,7 @@ public final class AutoRestUrlMutliCollectionFormatTestClient: PipelineClient {
         )
     }
 
-    public lazy var queries: Queries = Queries(client: self)
+    public lazy var queries = Queries(client: self)
 
     // MARK: Public Client Methods
 }

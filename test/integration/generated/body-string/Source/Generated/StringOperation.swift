@@ -46,7 +46,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -62,7 +61,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -81,6 +79,7 @@ public final class StringOperation {
                         }
                         return
                     }
+
                     if let decoded = String(data: data, encoding: .utf8) {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -142,7 +141,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -158,7 +156,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -217,7 +214,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -233,7 +229,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -302,7 +297,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -318,7 +312,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -377,7 +370,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -393,7 +385,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -463,7 +454,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -479,7 +469,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -538,7 +527,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -554,7 +542,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -624,7 +611,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -640,7 +626,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -699,7 +684,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -715,7 +699,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -778,7 +761,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -794,7 +776,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -835,7 +816,7 @@ public final class StringOperation {
     ///     success.
     public func getBase64UrlEncoded(
         withOptions options: GetBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Base64Data>
+        completionHandler: @escaping HTTPResultHandler<Data>
     ) {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
@@ -850,7 +831,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -866,7 +846,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -906,7 +885,7 @@ public final class StringOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        base64UrlEncoded: Base64Data,
+        base64UrlEncoded: Data,
         withOptions options: PutBase64UrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -926,7 +905,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -942,7 +920,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -986,7 +963,7 @@ public final class StringOperation {
     ///     success.
     public func getNullBase64UrlEncoded(
         withOptions options: GetNullBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Base64Data?>
+        completionHandler: @escaping HTTPResultHandler<Data?>
     ) {
         // Construct URL
         let urlTemplate = "/string/nullBase64UrlEncoding"
@@ -1001,7 +978,6 @@ public final class StringOperation {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1017,7 +993,6 @@ public final class StringOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1036,6 +1011,7 @@ public final class StringOperation {
                         }
                         return
                     }
+
                     dispatchQueue.async {
                         completionHandler(.success(data), httpResponse)
                     }

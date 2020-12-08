@@ -36,8 +36,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/bool/true"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "boolQuery", String(true), .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "boolQuery", true, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -47,7 +46,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -63,7 +61,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -112,8 +109,8 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/bool/false"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "boolQuery", String(false), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "boolQuery", false, .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -122,7 +119,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -138,7 +134,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -198,7 +193,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -214,7 +208,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -263,8 +256,8 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/int/1000000"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "intQuery", String(1_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "intQuery", "1000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -273,7 +266,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -289,7 +281,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -338,8 +329,8 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/int/-1000000"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "intQuery", String(-1_000_000), .encode), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "intQuery", "-1000000", .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -348,7 +339,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -364,7 +354,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -424,7 +413,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -440,7 +428,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -490,8 +477,7 @@ public final class Queries {
         let urlTemplate = "/queries/long/10000000000"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "longQuery", String(10_000_000_000), .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.query, "longQuery", "10000000000", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -500,7 +486,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -516,7 +501,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -566,8 +550,7 @@ public final class Queries {
         let urlTemplate = "/queries/long/-10000000000"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "longQuery", String(-10_000_000_000), .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.query, "longQuery", "-10000000000", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -576,7 +559,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -592,7 +574,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -652,7 +633,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -668,7 +648,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -720,7 +699,7 @@ public final class Queries {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
                 "floatQuery",
-                String(Float(103_400_000_000_000_000_000)),
+                Float(103_400_000_000_000_000_000),
                 .encode
             ), (.header, "Accept", "application/json", .encode)
         )
@@ -731,7 +710,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -747,7 +725,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -797,8 +774,7 @@ public final class Queries {
         let urlTemplate = "/queries/float/-1.034E-20"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "floatQuery", String(Float(-1.034e-20)), .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.query, "floatQuery", Float(-1.034e-20), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -807,7 +783,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -823,7 +798,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -883,7 +857,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -899,7 +872,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -949,7 +921,7 @@ public final class Queries {
         let urlTemplate = "/queries/double/9999999.999"
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.query, "doubleQuery", String(Double(9_999_999.999)), .encode),
+            (.query, "doubleQuery", Double(9_999_999.999), .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -959,7 +931,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -975,7 +946,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1024,12 +994,9 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/double/-9999999.999"
         let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
-                .query,
-                "doubleQuery",
-                String(Double(-9_999_999.999)),
-                .encode
-            ), (.header, "Accept", "application/json", .encode)
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.query, "doubleQuery", Double(-9_999_999.999), .encode),
+            (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1038,7 +1005,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1054,7 +1020,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1114,7 +1079,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1130,7 +1094,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1189,7 +1152,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1205,7 +1167,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1265,7 +1226,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1281,7 +1241,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1340,7 +1299,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1356,7 +1314,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1416,7 +1373,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1432,7 +1388,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1492,7 +1447,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1508,7 +1462,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1568,7 +1521,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1584,7 +1536,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1644,7 +1595,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1660,7 +1610,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1719,7 +1668,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1735,7 +1683,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1795,7 +1742,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1811,7 +1757,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1871,7 +1816,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1887,7 +1831,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1947,7 +1890,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1963,7 +1905,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2023,7 +1964,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2039,7 +1979,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2099,7 +2038,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2115,7 +2053,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2175,7 +2112,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2191,7 +2127,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2251,7 +2186,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2267,7 +2201,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2327,7 +2260,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2343,7 +2275,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2403,7 +2334,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2419,7 +2349,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2479,7 +2408,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2495,7 +2423,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2555,7 +2482,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2571,7 +2497,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -2631,7 +2556,6 @@ public final class Queries {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -2647,7 +2571,6 @@ public final class Queries {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
