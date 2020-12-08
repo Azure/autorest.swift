@@ -4061,7 +4061,7 @@ public final class ArrayOperation {
     ///     success.
     public func getBase64Url(
         withOptions options: GetBase64UrlOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[Data]>
+        completionHandler: @escaping HTTPResultHandler<[Base64Data]>
     ) {
         // Construct URL
         let urlTemplate = "/array/prim/base64url/valid"
@@ -4107,7 +4107,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([Data].self, from: data)
+                        let decoded = try decoder.decode([Base64Data].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

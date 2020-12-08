@@ -387,7 +387,7 @@ class AutoRestUrlPathsTest: XCTestCase {
     func test_Paths_base64Url_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.base64Url")
 
-        client.paths.base64Url(base64UrlPath: Data("lorem".utf8)) { result, httpResponse in
+        client.paths.base64Url(base64UrlPath: Base64Data(string: "lorem")!) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)

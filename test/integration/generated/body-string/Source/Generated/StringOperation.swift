@@ -835,7 +835,7 @@ public final class StringOperation {
     ///     success.
     public func getBase64UrlEncoded(
         withOptions options: GetBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Data>
+        completionHandler: @escaping HTTPResultHandler<Base64Data>
     ) {
         // Construct URL
         let urlTemplate = "/string/base64UrlEncoding"
@@ -906,7 +906,7 @@ public final class StringOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        base64UrlEncoded: Data,
+        base64UrlEncoded: Base64Data,
         withOptions options: PutBase64UrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -986,7 +986,7 @@ public final class StringOperation {
     ///     success.
     public func getNullBase64UrlEncoded(
         withOptions options: GetNullBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Data?>
+        completionHandler: @escaping HTTPResultHandler<Base64Data?>
     ) {
         // Construct URL
         let urlTemplate = "/string/nullBase64UrlEncoding"

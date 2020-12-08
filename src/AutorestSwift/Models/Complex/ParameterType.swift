@@ -164,25 +164,13 @@ enum ParameterType: Codable {
         return common.belongsInOptions()
     }
 
+    // FIXME: Shrink and eliminate this.
     /// Convert the type into String format in Swift
     /// - Parameter value: Value of the swift string
     /// - Returns: A swift string in generated code
     public func formatValue(_ valueIn: String? = nil) -> String {
         let value = valueIn ?? name
         switch schema.type {
-        case .integer,
-             .boolean:
-            return "String(\(value))"
-        // For these types, a variable will be created in the method using the naming convention `{key|value}String`
-        case .date,
-             .unixTime,
-             .dateTime,
-             .byteArray,
-             .number:
-            return "\(value)String"
-        case .choice,
-             .sealedChoice:
-            return "\(value).rawValue"
         case .array:
             if explode {
                 return "\(value)"
@@ -201,6 +189,7 @@ enum ParameterType: Codable {
         }
     }
 
+    // FIXME: Get rid of this?
     var keyValueDecodeStrategy: KeyValueDecodeStrategy {
         switch schema.type {
         case .date:
