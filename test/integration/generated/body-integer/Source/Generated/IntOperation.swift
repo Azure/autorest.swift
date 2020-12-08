@@ -81,7 +81,6 @@ public final class IntOperation {
                         }
                         return
                     }
-
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
@@ -1133,7 +1132,6 @@ public final class IntOperation {
                         }
                         return
                     }
-
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(UnixTime.self, from: data)

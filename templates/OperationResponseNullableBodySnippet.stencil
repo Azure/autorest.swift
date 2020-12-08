@@ -6,4 +6,3 @@ if data.count == 0 {
     return
 }
 {% endif %}
-

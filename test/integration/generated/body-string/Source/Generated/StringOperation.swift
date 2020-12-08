@@ -81,7 +81,6 @@ public final class StringOperation {
                         }
                         return
                     }
-
                     if let decoded = String(data: data, encoding: .utf8) {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
@@ -1037,7 +1036,6 @@ public final class StringOperation {
                         }
                         return
                     }
-
                     dispatchQueue.async {
                         completionHandler(.success(data), httpResponse)
                     }

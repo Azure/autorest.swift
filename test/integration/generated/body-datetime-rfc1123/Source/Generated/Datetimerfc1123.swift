@@ -81,7 +81,6 @@ public final class Datetimerfc1123 {
                         }
                         return
                     }
-
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(Rfc1123Date.self, from: data)

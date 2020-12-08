@@ -31,7 +31,7 @@ public final class Time {
     ///     success.
     public func get(
         withOptions options: GetOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<SimpleTime>
     ) {
         // Construct URL
         let urlTemplate = "/time/get"
@@ -77,7 +77,7 @@ public final class Time {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(SimpleTime.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -110,7 +110,7 @@ public final class Time {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        timeBody: Date,
+        timeBody: SimpleTime,
         withOptions options: PutOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<String>
     ) {

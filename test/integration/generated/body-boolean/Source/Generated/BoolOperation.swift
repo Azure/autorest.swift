@@ -403,7 +403,6 @@ public final class BoolOperation {
                         }
                         return
                     }
-
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(Bool.self, from: data)

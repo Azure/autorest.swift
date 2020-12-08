@@ -81,7 +81,6 @@ public final class Datetime {
                         }
                         return
                     }
-
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(Iso8601Date.self, from: data)

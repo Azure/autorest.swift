@@ -81,7 +81,6 @@ public final class DateOperation {
                         }
                         return
                     }
-
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(SimpleDate.self, from: data)

@@ -40,15 +40,7 @@ class AutoRestSwaggerBatTimeTest: XCTestCase {
 
     func test_get200() throws {
         let expectation = XCTestExpectation(description: "Call time.get")
-
-        let timeString = "11:34:56"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        guard let expectedTime = dateFormatter.date(from: timeString) else {
-            XCTFail("Input is not a date")
-            return
-        }
-
+        let expectedTime = SimpleTime(string: "11:34:56")!
         client.time.get { result, httpResponse in
             switch result {
             case let .success(data):
@@ -65,15 +57,7 @@ class AutoRestSwaggerBatTimeTest: XCTestCase {
 
     func test_put200() throws {
         let expectation = XCTestExpectation(description: "Call time.put")
-
-        let timeString = "08:07:56"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        guard let timeInput = dateFormatter.date(from: timeString) else {
-            XCTFail("Input is not a date")
-            return
-        }
-
+        let timeInput = SimpleTime(string: "08:07:56")!
         client.time.put(timeBody: timeInput) { result, httpResponse in
             switch result {
             case .success:

@@ -121,7 +121,7 @@ class Schema: Codable, LanguageShortcut {
         case .integer:
             swiftType = "Int"
         case .time:
-            swiftType = "Date"
+            swiftType = "SimpleTime"
         case .choice,
              .object,
              .sealedChoice,
