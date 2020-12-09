@@ -1647,7 +1647,7 @@ public final class Explicit {
         // Construct URL
         let urlTemplate = "/reqopt/requied/array/header"
         let params = RequestParameters(
-            (.header, "headerParameter", headerParameter, .encode),
+            (.header, "headerParameter", headerParameter.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -1721,7 +1721,7 @@ public final class Explicit {
         // Construct URL
         let urlTemplate = "/reqopt/optional/array/header"
         let params = RequestParameters(
-            (.header, "headerParameter", options?.headerParameter, .encode),
+            (.header, "headerParameter", options?.headerParameter?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )

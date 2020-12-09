@@ -36,7 +36,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/multi/string/null"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -110,7 +110,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/multi/string/empty"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -184,7 +184,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/multi/string/valid"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 ?? "" }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )

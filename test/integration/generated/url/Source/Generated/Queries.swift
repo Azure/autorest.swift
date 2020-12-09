@@ -2101,7 +2101,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/csv/string/valid"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2175,7 +2175,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/csv/string/null"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2249,7 +2249,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/csv/string/empty"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2323,7 +2323,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/none/string/empty"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2397,7 +2397,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/ssv/string/valid"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: " "), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2471,7 +2471,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/tsv/string/valid"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: "\t"), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -2545,7 +2545,7 @@ public final class Queries {
         // Construct URL
         let urlTemplate = "/queries/array/pipes/string/valid"
         let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery, .encode),
+            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: "|"), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )

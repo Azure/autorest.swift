@@ -114,28 +114,7 @@ struct ParameterViewModel {
             encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode",
             explode: param.explode
         )
-        // TODO: Re-wire up explode logic
-//        {% for param in op.params.explodeQuery.required %}
-//        //    {{ param.value}}.forEach {
-//        //        queryParams.append("{{ param.key }}", $0)
-//        //    }
-//        {% endfor %}
-
-        // TODO: imported from KeyValueViewModel
-//        case .array:
-//            if explode {
-//                return "\(value)"
-//            } else {
-//                var element = "$0"
-//                if let arraySchema = schema as? ArraySchema,
-//                    arraySchema.nullableItems ?? false {
-//                    element = "$0 ?? \"\""
-//                }
-//                return "\(value).map { String(\(element)) }.joined(separator: \"\(delimiter)\") "
-//            }
-//        case .duration:
-//            return "DateComponentsFormatter().string(from: \(value)) ?? \"\""
-
+        // Update the `valueOrPath` parameter
         if let constantSchema = param.schema as? ConstantSchema {
             update(withConstantSchema: constantSchema)
         } else if let signatureParameter = operation?.signatureParameter(for: param.name) {
@@ -174,10 +153,32 @@ struct ParameterViewModel {
     private mutating func update(withSignatureParameter param: ParameterType) {
         assert(!(param.serializedName?.isEmpty ?? true))
         var pathOrValue = ""
-        if let byteSchema = param.schema as? ByteArraySchema,
-            byteSchema.format == .base64url {
-            pathOrValue = "\(name).base64EncodedString(trimmingEquals: true)"
-        } else {
+        // TODO: Re-wire up explode logic
+//        {% for param in op.params.explodeQuery.required %}
+//        //    {{ param.value}}.forEach {
+//        //        queryParams.append("{{ param.key }}", $0)
+//        //    }
+//        {% endfor %}
+        switch param.schema.type {
+        case .byteArray:
+            if let byteSchema = param.schema as? ByteArraySchema,
+                byteSchema.format == .base64url {
+                pathOrValue = "\(name).base64EncodedString(trimmingEquals: true)"
+            } else {
+                pathOrValue = name
+            }
+        case .array:
+//            if explode {
+//                pathOrValue = "\(name)"
+//            } else {
+            var element = "$0"
+            if let arraySchema = param.schema as? ArraySchema,
+                arraySchema.nullableItems ?? false {
+                element = "$0 ?? \"\""
+            }
+            let mod = param.belongsInOptions() ? "?" : ""
+            pathOrValue = "\(name)\(mod).map {\(element)}.joined(separator: \"\(param.delimiter)\") "
+        default:
             pathOrValue = name
         }
         self.pathOrValue = param.belongsInOptions() ? "options?.\(pathOrValue)" : "\(pathOrValue)"
