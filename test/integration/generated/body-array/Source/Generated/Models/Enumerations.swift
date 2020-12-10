@@ -11,38 +11,26 @@
 import AzureCore
 import Foundation
 
-public enum Enum0: String, Codable, RequestStringConvertible {
+public enum Enum0: String, Codable {
     case foo1 = "foo1"
 
     case foo2 = "foo2"
 
     case foo3 = "foo3"
-
-    public var requestString: String {
-        return rawValue
-    }
 }
 
-public enum Enum1: String, Codable, RequestStringConvertible {
+public enum Enum1: String, Codable {
     case foo1 = "foo1"
 
     case foo2 = "foo2"
 
     case foo3 = "foo3"
-
-    public var requestString: String {
-        return rawValue
-    }
 }
 
-public enum FooEnum: String, Codable, RequestStringConvertible {
+public enum FooEnum: String, Codable {
     case foo1 = "foo1"
 
     case foo2 = "foo2"
 
     case foo3 = "foo3"
-
-    public var requestString: String {
-        return rawValue
-    }
 }

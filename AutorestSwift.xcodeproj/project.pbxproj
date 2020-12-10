@@ -134,10 +134,6 @@
 		0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */; };
 		0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */; };
 		0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */; };
-		0A4743512582919700CA86E5 /* Model_Decoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */; };
-		0A4743522582919700CA86E5 /* Model_Decoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */; };
-		0A4743532582919700CA86E5 /* Model_Encoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */; };
-		0A4743542582919700CA86E5 /* Model_Encoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */; };
 		0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* Model_File.stencil */; };
 		0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */; };
 		0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */; };
@@ -265,10 +261,6 @@
 				0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */,
 				0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */,
 				0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */,
-				0A4743512582919700CA86E5 /* Model_Decoder_DateProperty.stencil in CopyFiles */,
-				0A4743522582919700CA86E5 /* Model_Decoder_Property.stencil in CopyFiles */,
-				0A4743532582919700CA86E5 /* Model_Encoder_DateProperty.stencil in CopyFiles */,
-				0A4743542582919700CA86E5 /* Model_Encoder_Property.stencil in CopyFiles */,
 				0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */,
 				0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */,
 				0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */,
@@ -429,11 +421,7 @@
 		F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Operation_DefaultException_Snippet.stencil; sourceTree = "<group>"; };
 		F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionResponseViewModel.swift; sourceTree = "<group>"; };
 		F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Operation_Response_StatusCode_Snippet.stencil; sourceTree = "<group>"; };
-		F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Model_Decoder_Property.stencil; sourceTree = "<group>"; };
 		F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Model_Codable_Snippet.stencil; sourceTree = "<group>"; };
-		F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Model_Encoder_DateProperty.stencil; sourceTree = "<group>"; };
-		F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Model_Encoder_Property.stencil; sourceTree = "<group>"; };
-		F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Model_Decoder_DateProperty.stencil; sourceTree = "<group>"; };
 		F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutorestSwiftTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A6719624F5CCCC00C2712C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1D305F02565A86F003EAABB /* AutoRestUrlMultiCollectionFormatTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestUrlMultiCollectionFormatTest.swift; sourceTree = "<group>"; };
@@ -621,10 +609,6 @@
 				0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */,
 				F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */,
 				F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */,
-				F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */,
-				F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */,
-				F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */,
-				F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */,
 				0A22B07324CB71E100EC018E /* Model_File.stencil */,
 				F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */,
 				F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */,

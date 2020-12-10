@@ -702,9 +702,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Call array.getDateTimeValid")
 
         let expectedDates = [
-            iso8601date(from: "2000-12-01t00:00:01z"),
-            iso8601date(from: "1980-01-02T01:11:35+01:00"),
-            iso8601date(from: "1492-10-12T02:15:01-08:00")
+            Iso8601Date(string: "2000-12-01t00:00:01z")!,
+            Iso8601Date(string: "1980-01-02T01:11:35+01:00")!,
+            Iso8601Date(string: "1492-10-12T02:15:01-08:00")!
         ]
 
         client.arrayOperation.getDateTimeValid { result, httpResponse in
@@ -724,9 +724,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     func test_getDateTimeRfc1123Valid200() throws {
         let expectation = XCTestExpectation(description: "Call array.getDateTimeRfc1123Valid")
         let expectedDates = [
-            rfc1123date(from: "Fri, 01 Dec 2000 00:00:01 GMT"),
-            rfc1123date(from: "Wed, 02 Jan 1980 00:11:35 GMT"),
-            rfc1123date(from: "Wed, 12 Oct 1492 10:15:01 GMT")
+            Rfc1123Date(string: "Fri, 01 Dec 2000 00:00:01 GMT")!,
+            Rfc1123Date(string: "Wed, 02 Jan 1980 00:11:35 GMT")!,
+            Rfc1123Date(string: "Wed, 12 Oct 1492 10:15:01 GMT")!
         ]
         client.arrayOperation.getDateTimeRfc1123Valid { result, httpResponse in
             switch result {

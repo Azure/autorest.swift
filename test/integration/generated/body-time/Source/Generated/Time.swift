@@ -19,8 +19,32 @@ import Foundation
 public final class Time {
     public let client: AutoRestTimeTestClient
 
+    public let commonOptions: ClientOptions
+
+    /// Options provided to configure this `AutoRestTimeTestClient`.
+    public let options: AutoRestTimeTestClientOptions
+
     init(client: AutoRestTimeTestClient) {
         self.client = client
+        self.options = client.options
+        self.commonOptions = client.commonOptions
+    }
+
+    public func url(
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
+    }
+
+    public func request(
+        _ request: HTTPRequest,
+        context: PipelineContext?,
+        completionHandler: @escaping HTTPResultHandler<Data?>
+    ) {
+        return client.request(request, context: context, completionHandler: completionHandler)
     }
 
     /// Get time value "11:34:56"
@@ -31,29 +55,44 @@ public final class Time {
     ///     success.
     public func get(
         withOptions options: GetOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<SimpleTime>
+        completionHandler: @escaping HTTPResultHandler<Date>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/time/get"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -61,6 +100,7 @@ public final class Time {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -75,7 +115,10 @@ public final class Time {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode(SimpleTime.self, from: data)
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "HH:mm:ss"
+                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                        let decoded = try decoder.decode(Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -108,41 +151,55 @@ public final class Time {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        timeBody: SimpleTime,
+        timeBody: Date,
         withOptions options: PutOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<String>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/time/put"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let encoder = JSONEncoder()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
         encoder.dateEncodingStrategy = .formatted(dateFormatter)
         guard let requestBody = try? encoder.encode(timeBody) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/time/put"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -150,6 +207,7 @@ public final class Time {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {

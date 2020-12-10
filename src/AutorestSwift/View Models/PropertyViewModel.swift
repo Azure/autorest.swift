@@ -38,7 +38,6 @@ struct PropertyViewModel {
     let defaultValue: ViewModelDefault
     // default value of the property in the init(). Valid values are either nil (for optional property) or "" (i.e. not specfied for required property in init() method.)
     let initDefaultValue: String
-    let isDate: Bool
     let optional: Bool
     let className: String
 
@@ -49,7 +48,6 @@ struct PropertyViewModel {
         comment: String? = nil,
         defaultValue: String? = nil,
         initDefaultValue: String? = nil,
-        isDate: Bool = false,
         optional: Bool = false,
         className: String? = nil
     ) {
@@ -58,7 +56,6 @@ struct PropertyViewModel {
         self.comment = ViewModelComment(from: comment)
         self.defaultValue = ViewModelDefault(from: defaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = initDefaultValue ?? ""
-        self.isDate = isDate
         self.optional = optional
         self.className = className ?? type
     }
@@ -75,7 +72,6 @@ struct PropertyViewModel {
         self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = optional ? "= nil" : ""
-        self.isDate = type.contains("Date")
     }
 
     init(from schema: PropertyType) {

@@ -19,8 +19,32 @@ import Foundation
 public final class Explicit {
     public let client: AutoRestRequiredOptionalTestClient
 
+    public let commonOptions: ClientOptions
+
+    /// Options provided to configure this `AutoRestRequiredOptionalTestClient`.
+    public let options: AutoRestRequiredOptionalTestClientOptions
+
     init(client: AutoRestRequiredOptionalTestClient) {
         self.client = client
+        self.options = client.options
+        self.commonOptions = client.commonOptions
+    }
+
+    public func url(
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
+    }
+
+    public func request(
+        _ request: HTTPRequest,
+        context: PipelineContext?,
+        completionHandler: @escaping HTTPResultHandler<Data?>
+    ) {
+        return client.request(request, context: context, completionHandler: completionHandler)
     }
 
     /// Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -34,33 +58,47 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/integer/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredIntegerParameter) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/integer/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -68,6 +106,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -114,37 +153,51 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/integer/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalIntegerParameter != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalIntegerParameter) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/integer/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -152,6 +205,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -198,33 +252,47 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/integer/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredIntegerProperty) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/integer/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -232,6 +300,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -278,37 +347,51 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/integer/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalIntegerProperty != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalIntegerProperty) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/integer/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -316,6 +399,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -362,28 +446,43 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "headerParameter", headerParameter, .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/requied/integer/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["headerParameter"] = String(headerParameter)
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -391,6 +490,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -436,28 +536,49 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "headerParameter", options?.headerParameter, .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/optional/integer/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Process endpoint options
+        // Query options
+
+        // Header options
+        if let headerParameter = options?.headerParameter {
+            headers["headerParameter"] = String(headerParameter)
+        }
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -465,6 +586,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -511,33 +633,47 @@ public final class Explicit {
         withOptions options: PostRequiredStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/string/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredStringParameter) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/string/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -545,6 +681,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -591,37 +728,51 @@ public final class Explicit {
         withOptions options: PostOptionalStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/string/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalStringParameter != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalStringParameter) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/string/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -629,6 +780,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -675,33 +827,47 @@ public final class Explicit {
         withOptions options: PostRequiredStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/string/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredStringProperty) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/string/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -709,6 +875,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -755,37 +922,51 @@ public final class Explicit {
         withOptions options: PostOptionalStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/string/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalStringProperty != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalStringProperty) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/string/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -793,6 +974,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -839,28 +1021,43 @@ public final class Explicit {
         withOptions options: PostRequiredStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "headerParameter", headerParameter, .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/requied/string/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["headerParameter"] = headerParameter
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -868,6 +1065,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -913,28 +1111,49 @@ public final class Explicit {
         withOptions options: PostOptionalStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "bodyParameter", options?.bodyParameter, .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/optional/string/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Process endpoint options
+        // Query options
+
+        // Header options
+        if let bodyParameter = options?.bodyParameter {
+            headers["bodyParameter"] = bodyParameter
+        }
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -942,6 +1161,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -988,33 +1208,47 @@ public final class Explicit {
         withOptions options: PostRequiredClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/class/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredClassParameter) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/class/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1022,6 +1256,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1068,37 +1303,51 @@ public final class Explicit {
         withOptions options: PostOptionalClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/class/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalClassParameter != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalClassParameter) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/class/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1106,6 +1355,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1152,33 +1402,47 @@ public final class Explicit {
         withOptions options: PostRequiredClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/class/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredClassProperty) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/class/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1186,6 +1450,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1232,37 +1497,51 @@ public final class Explicit {
         withOptions options: PostOptionalClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/class/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalClassProperty != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalClassProperty) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/class/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1270,6 +1549,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1316,33 +1596,47 @@ public final class Explicit {
         withOptions options: PostRequiredArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/array/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredArrayParameter) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/array/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1350,6 +1644,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1396,37 +1691,51 @@ public final class Explicit {
         withOptions options: PostOptionalArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/array/parameter"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalArrayParameter != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalArrayParameter) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/array/parameter"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1434,6 +1743,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1480,33 +1790,47 @@ public final class Explicit {
         withOptions options: PostRequiredArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/requied/array/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         guard let requestBody = try? JSONEncoder().encode(requiredArrayProperty) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/reqopt/requied/array/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1514,6 +1838,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1560,37 +1885,51 @@ public final class Explicit {
         withOptions options: PostOptionalArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/reqopt/optional/array/property"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if optionalArrayProperty != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(optionalArrayProperty) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/reqopt/optional/array/property"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1598,6 +1937,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1644,28 +1984,43 @@ public final class Explicit {
         withOptions options: PostRequiredArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "headerParameter", headerParameter.map { $0 }.joined(separator: ","), .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/requied/array/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["headerParameter"] = headerParameter.map { String($0) }.joined(separator: ",")
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1673,6 +2028,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -1718,28 +2074,49 @@ public final class Explicit {
         withOptions options: PostOptionalArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.header, "headerParameter", options?.headerParameter?.map { $0 }.joined(separator: ","), .encode),
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/reqopt/optional/array/header"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Process endpoint options
+        // Query options
+
+        // Header options
+        if let headerParameter = options?.headerParameter {
+            headers["headerParameter"] = headerParameter.map { String($0) }.joined(separator: ",")
+        }
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1747,6 +2124,7 @@ public final class Explicit {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {

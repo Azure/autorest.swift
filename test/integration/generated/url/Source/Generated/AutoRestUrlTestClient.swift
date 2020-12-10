@@ -16,6 +16,11 @@ import Foundation
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
+extension CharacterSet {
+    static let azureUrlQueryAllowed = urlQueryAllowed.subtracting(.init(charactersIn: "!*'();:@&=+$,/?"))
+    static let azureUrlPathAllowed = urlPathAllowed.subtracting(.init(charactersIn: "!*'()@&=+$,/:"))
+}
+
 public final class AutoRestUrlTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
     public enum ApiVersion: String {
@@ -67,14 +72,61 @@ public final class AutoRestUrlTestClient: PipelineClient {
         )
     }
 
+    public func url(
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        var template = templateIn
+        var hostString = hostIn
+        if template.hasPrefix("/") { template = String(template.dropFirst()) }
+
+        if let pathParams = pathParamsIn {
+            for (key, value) in pathParams {
+                if let encodedPathValue = value.addingPercentEncoding(withAllowedCharacters: .azureUrlPathAllowed) {
+                    template = template.replacingOccurrences(of: "{\(key)}", with: encodedPathValue)
+                }
+                if let host = hostString {
+                    hostString = host.replacingOccurrences(of: "{\(key)}", with: value)
+                }
+            }
+        }
+
+        if let hostUnwrapped = hostString,
+            !hostUnwrapped.hasSuffix("/") {
+            hostString = hostUnwrapped + "/"
+        }
+        let urlString = (hostString ?? endpoint.absoluteString) + template
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+
+        guard !(queryParamsIn?.isEmpty ?? false) else { return url }
+
+        return appendingQueryParameters(url: url, queryParamsIn ?? [])
+    }
+
+    private func appendingQueryParameters(url: URL, _ queryParams: [QueryParameter]) -> URL? {
+        guard !queryParams.isEmpty else { return url }
+        guard var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+        let queryItems = queryParams.map { name, value in URLQueryItem(
+            name: name,
+            value: value?.addingPercentEncoding(withAllowedCharacters: .azureUrlQueryAllowed)
+        ) }
+        urlComps.percentEncodedQueryItems = queryItems
+        return urlComps.url
+    }
+
     // /// A string value 'globalItemStringPath' that appears in the path
     public var globalStringPath: String
     // /// should contain value null
     public var globalStringQuery: String?
 
-    public lazy var pathItems = PathItems(client: self)
-    public lazy var paths = Paths(client: self)
-    public lazy var queries = Queries(client: self)
+    public lazy var pathItems: PathItems = PathItems(client: self)
+    public lazy var paths: Paths = Paths(client: self)
+    public lazy var queries: Queries = Queries(client: self)
 
     // MARK: Public Client Methods
 }

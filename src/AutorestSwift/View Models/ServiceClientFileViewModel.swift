@@ -59,9 +59,10 @@ struct ServiceClientFileViewModel {
         self.operationGroups = operationGroups
         self.namedOperationGroups = namedOperationGroups
         self.apiVersion = model.getApiVersion()
+        /// Swift enums should contain only alphanumeric characters.
         self
             .apiVersionName =
-            "v\(apiVersion.replacingOccurrences(of: "-", with: "_").replacingOccurrences(of: ".", with: "_"))"
+            "v\(apiVersion.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: ".", with: ""))"
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
 

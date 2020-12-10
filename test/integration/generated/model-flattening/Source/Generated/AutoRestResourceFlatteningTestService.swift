@@ -19,8 +19,32 @@ import Foundation
 public final class AutoRestResourceFlatteningTestService {
     public let client: AutoRestResourceFlatteningTestClient
 
+    public let commonOptions: ClientOptions
+
+    /// Options provided to configure this `AutoRestResourceFlatteningTestClient`.
+    public let options: AutoRestResourceFlatteningTestClientOptions
+
     init(client: AutoRestResourceFlatteningTestClient) {
         self.client = client
+        self.options = client.options
+        self.commonOptions = client.commonOptions
+    }
+
+    public func url(
+        host hostIn: String? = nil,
+        template templateIn: String,
+        pathParams pathParamsIn: [String: String]? = nil,
+        queryParams queryParamsIn: [QueryParameter]? = nil
+    ) -> URL? {
+        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
+    }
+
+    public func request(
+        _ request: HTTPRequest,
+        context: PipelineContext?,
+        completionHandler: @escaping HTTPResultHandler<Data?>
+    ) {
+        return client.request(request, context: context, completionHandler: completionHandler)
     }
 
     /// Put External Resource as an Array
@@ -34,37 +58,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/array"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if array != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(array) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/model-flatten/array"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -72,6 +110,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -117,27 +156,42 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FlattenedProduct]>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/model-flatten/array"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -145,6 +199,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -196,37 +251,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/wrappedarray"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if wrappedArray != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(wrappedArray) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/model-flatten/wrappedarray"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -234,6 +303,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -279,27 +349,42 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[ProductWrapper]>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/model-flatten/wrappedarray"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -307,6 +392,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -358,37 +444,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/dictionary"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if dictionary != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(dictionary) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/model-flatten/dictionary"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -396,6 +496,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -441,27 +542,42 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: FlattenedProduct]>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/model-flatten/dictionary"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -469,6 +585,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -520,37 +637,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/resourcecollection"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if resourceCollection != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(resourceCollection) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/model-flatten/resourcecollection"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -558,6 +689,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -603,27 +735,42 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<ResourceCollection>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Accept", "application/json", .encode)
-        )
-
-        // Construct request
+        // Construct URL
         let urlTemplate = "/model-flatten/resourcecollection"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
+
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Accept"] = "application/json"
+        // Construct request
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
+            self.options.logger.error("Failed to construct Http request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -631,6 +778,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -682,37 +830,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/customFlattening"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         var requestBody: Data?
         if simpleProduct != nil {
             guard let encodedRequestBody = try? JSONEncoder().encode(simpleProduct) else {
-                client.options.logger.error("Failed to encode request body as json.")
+                self.options.logger.error("Failed to encode request body as json.")
                 return
             }
             requestBody = encodedRequestBody
         }
-        let urlTemplate = "/model-flatten/customFlattening"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -720,6 +882,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -779,37 +942,51 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PostFlattenedSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/customFlattening"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let body = SimpleProduct(
             maxProductDisplayName: maxProductDisplayName, genericValue: genericValue, odataValue: odataValue,
             productId: productId, description: description
         )
         guard let requestBody = try? JSONEncoder().encode(body) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/model-flatten/customFlattening"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -817,6 +994,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -868,14 +1046,20 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutSimpleProductWithGroupingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Create request parameters
-        let params = RequestParameters(
-            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "name", flattenParameterGroup.name, .encode),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
-        )
+        // Construct URL
+        let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
+        let pathParams = [
+            "$host": client.endpoint.absoluteString,
+            "name": flattenParameterGroup.name
+        ]
+        // Construct query
+        let queryParams: [QueryParameter] = [
+        ]
 
+        // Construct headers
+        var headers = HTTPHeaders()
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
         // Construct request
         let body = SimpleProduct(
             maxProductDisplayName: flattenParameterGroup.maxProductDisplayName,
@@ -883,24 +1067,32 @@ public final class AutoRestResourceFlatteningTestService {
             productId: flattenParameterGroup.productId, description: flattenParameterGroup.description
         )
         guard let requestBody = try? JSONEncoder().encode(body) else {
-            client.options.logger.error("Failed to encode request body as json.")
+            self.options.logger.error("Failed to encode request body as json.")
             return
         }
-        let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
-        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
-        else {
-            client.options.logger.error("Failed to construct HTTP request.")
+        guard let requestUrl = url(
+            host: "{$host}",
+            template: urlTemplate,
+            pathParams: pathParams,
+            queryParams: queryParams
+        ) else {
+            self.options.logger.error("Failed to construct request url")
             return
         }
+
+        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
+            self.options.logger.error("Failed to construct HTTP request")
+            return
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
         context.merge(with: options?.context)
-        client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        self.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -908,6 +1100,7 @@ public final class AutoRestResourceFlatteningTestService {
                 }
                 return
             }
+
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {

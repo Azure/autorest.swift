@@ -1,9 +1,0 @@
-{% if property.isDate %}
-    {% include "Model_Decoder_DateProperty.stencil" %}
-{% else %}
-    {% if property.optional %}
-        self.{{ property.name }} = try? container.decode({{ property.className }}.self, forKey: .{{ property.name }})
-    {% else %}
-        self.{{ property.name }} = try container.decode({{ property.className }}.self, forKey: .{{ property.name }})
-    {% endif %}
-{% endif %}

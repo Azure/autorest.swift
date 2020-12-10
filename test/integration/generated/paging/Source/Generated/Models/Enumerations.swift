@@ -12,7 +12,7 @@ import AzureCore
 import Foundation
 
 /// The status of the request
-public enum OperationResultStatus: String, Codable, RequestStringConvertible {
+public enum OperationResultStatus: String, Codable {
     case succeeded = "Succeeded"
 
     case failed = "Failed"
@@ -34,8 +34,4 @@ public enum OperationResultStatus: String, Codable, RequestStringConvertible {
     case deleted = "Deleted"
 
     case oK = "OK"
-
-    public var requestString: String {
-        return rawValue
-    }
 }

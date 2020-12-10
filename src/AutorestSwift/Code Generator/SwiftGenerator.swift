@@ -195,7 +195,7 @@ class SwiftGenerator: CodeGenerator {
             try render(
                 template: "Custom_File",
                 toSubfolder: .source,
-                withFilename: "Custom_File.swift",
+                withFilename: "Custom.swift",
                 andParams: ["": ""]
             )
         }
@@ -206,7 +206,7 @@ class SwiftGenerator: CodeGenerator {
             try render(
                 template: "Package_File",
                 toSubfolder: .root,
-                withFilename: "Package_File.swift",
+                withFilename: "Package.swift",
                 andParams: ["model": packageViewModel]
             )
 

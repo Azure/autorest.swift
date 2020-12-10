@@ -19,7 +19,7 @@ extension Queries {
     /// User-configurable options for the `AutoRestUrlTestService.DateNull` operation.
     public struct DateNullOptions: RequestOptions {
         /// null as date (no query parameters in uri)
-        public let dateQuery: SimpleDate?
+        public let dateQuery: Date?
 
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
@@ -42,7 +42,7 @@ extension Queries {
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         ///   - context: A `PipelineContext` object to associate with the request.
         public init(
-            dateQuery: SimpleDate? = nil,
+            dateQuery: Date? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil,
