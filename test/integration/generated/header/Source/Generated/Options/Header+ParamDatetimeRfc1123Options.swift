@@ -19,7 +19,7 @@ extension Header {
     /// User-configurable options for the `AutoRestSwaggerBATHeaderService.ParamDatetimeRfc1123` operation.
     public struct ParamDatetimeRfc1123Options: RequestOptions {
         /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
-        public let value: Date?
+        public let value: Rfc1123Date?
 
         /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
         /// Highly recommended for correlating client-side activites with requests received by the server.
@@ -42,7 +42,7 @@ extension Header {
         ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
         ///   - context: A `PipelineContext` object to associate with the request.
         public init(
-            value: Date? = nil,
+            value: Rfc1123Date? = nil,
             clientRequestId: String? = nil,
             cancellationToken: CancellationToken? = nil,
             dispatchQueue: DispatchQueue? = nil,

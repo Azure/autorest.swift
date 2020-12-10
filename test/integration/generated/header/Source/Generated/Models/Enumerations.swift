@@ -11,10 +11,14 @@
 import AzureCore
 import Foundation
 
-public enum GreyscaleColors: String, Codable {
+public enum GreyscaleColors: String, Codable, RequestStringConvertible {
     case white = "White"
 
     case black = "black"
 
     case grey = "GREY"
+
+    public var requestString: String {
+        return rawValue
+    }
 }

@@ -19,32 +19,8 @@ import Foundation
 public final class Datetimerfc1123 {
     public let client: AutoRestRfC1123DateTimeTestClient
 
-    public let commonOptions: ClientOptions
-
-    /// Options provided to configure this `AutoRestRfC1123DateTimeTestClient`.
-    public let options: AutoRestRfC1123DateTimeTestClientOptions
-
     init(client: AutoRestRfC1123DateTimeTestClient) {
         self.client = client
-        self.options = client.options
-        self.commonOptions = client.commonOptions
-    }
-
-    public func url(
-        host hostIn: String? = nil,
-        template templateIn: String,
-        pathParams pathParamsIn: [String: String]? = nil,
-        queryParams queryParamsIn: [QueryParameter]? = nil
-    ) -> URL? {
-        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
-    }
-
-    public func request(
-        _ request: HTTPRequest,
-        context: PipelineContext?,
-        completionHandler: @escaping HTTPResultHandler<Data?>
-    ) {
-        return client.request(request, context: context, completionHandler: completionHandler)
     }
 
     /// Get null datetime value
@@ -55,44 +31,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getNull(
         withOptions options: GetNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date?>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date?>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/null"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/null"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -100,7 +61,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -122,9 +82,7 @@ public final class Datetimerfc1123 {
 
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -158,44 +116,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getInvalid(
         withOptions options: GetInvalidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/invalid"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/invalid"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -203,7 +146,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -218,9 +160,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -254,44 +194,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getOverflow(
         withOptions options: GetOverflowOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/overflow"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/overflow"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -299,7 +224,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -314,9 +238,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -350,44 +272,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getUnderflow(
         withOptions options: GetUnderflowOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/underflow"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/underflow"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -395,7 +302,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -410,9 +316,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -445,54 +349,37 @@ public final class Datetimerfc1123 {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        utcMaxDateTime: Date,
+        utcMaxDateTime: Rfc1123Date,
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Date.AzureRfc1123DateFormatter()
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMaxDateTime) else {
-            self.options.logger.error("Failed to encode request body as json.")
+        guard let requestBody = try? JSONEncoder().encode(utcMaxDateTime) else {
+            client.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/max"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
+        else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct HTTP request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -500,7 +387,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -544,44 +430,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getUtcLowercaseMaxDateTime(
         withOptions options: GetUtcLowercaseMaxDateTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max/lowercase"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/max/lowercase"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -589,7 +460,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -604,9 +474,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -640,44 +508,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getUtcUppercaseMaxDateTime(
         withOptions options: GetUtcUppercaseMaxDateTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max/uppercase"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/max/uppercase"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -685,7 +538,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -700,9 +552,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -735,54 +585,37 @@ public final class Datetimerfc1123 {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        utcMinDateTime: Date,
+        utcMinDateTime: Rfc1123Date,
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/min"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Content-Type", "application/json", .encode),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Content-Type"] = "application/json"
-        headers["Accept"] = "application/json"
         // Construct request
-        let encoder = JSONEncoder()
-        let dateFormatter = Date.AzureRfc1123DateFormatter()
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
-        guard let requestBody = try? encoder.encode(utcMinDateTime) else {
-            self.options.logger.error("Failed to encode request body as json.")
+        guard let requestBody = try? JSONEncoder().encode(utcMinDateTime) else {
+            client.options.logger.error("Failed to encode request body as json.")
             return
         }
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/min"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
+        else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .put, url: requestUrl, headers: headers, data: requestBody) else {
-            self.options.logger.error("Failed to construct HTTP request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -790,7 +623,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -834,44 +666,29 @@ public final class Datetimerfc1123 {
     ///     success.
     public func getUtcMinDateTime(
         withOptions options: GetUtcMinDateTimeOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Date>
+        completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/min"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/datetimerfc1123/min"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -879,7 +696,6 @@ public final class Datetimerfc1123 {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -894,9 +710,7 @@ public final class Datetimerfc1123 {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let dateFormatter = Date.AzureRfc1123DateFormatter()
-                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                        let decoded = try decoder.decode(Date.self, from: data)
+                        let decoded = try decoder.decode(Rfc1123Date.self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
