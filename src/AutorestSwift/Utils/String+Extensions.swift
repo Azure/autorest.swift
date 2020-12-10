@@ -87,6 +87,8 @@ extension String {
 
     var lowercasedFirst: String { return prefix(1).lowercased() + dropFirst() }
 
+    var uppercasedFirst: String { return prefix(1).uppercased() + dropFirst() }
+
     var isReserved: Bool {
         let reserved = [
             "Error",

@@ -253,6 +253,7 @@ public final class Byte {
 
         // Construct request
         let requestBody = nonAscii
+        let urlTemplate = "/byte/nonAscii"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

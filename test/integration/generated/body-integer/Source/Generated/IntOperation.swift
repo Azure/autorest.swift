@@ -515,6 +515,7 @@ public final class IntOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/int/max/32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -594,6 +595,7 @@ public final class IntOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/int/max/64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -673,6 +675,7 @@ public final class IntOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/int/min/32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -752,6 +755,7 @@ public final class IntOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/int/min/64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -910,6 +914,7 @@ public final class IntOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/int/unixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

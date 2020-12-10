@@ -273,6 +273,7 @@ public final class Implicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/implicit/optional/body"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

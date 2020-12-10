@@ -365,6 +365,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/max/utc"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -444,6 +445,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/max/utc7ms"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -757,6 +759,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/max/localpositiveoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -992,6 +995,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/max/localnegativeoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1227,6 +1231,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/min/utc"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1384,6 +1389,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/min/localpositiveoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1541,6 +1547,7 @@ public final class Datetime {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetime/min/localnegativeoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

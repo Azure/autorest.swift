@@ -365,6 +365,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/float/3.402823e+20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -522,6 +523,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/double/2.5976931e+101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -678,6 +680,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/double/99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -834,6 +837,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/double/-99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -991,6 +995,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/decimal/2.5976931e+101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1147,6 +1152,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/decimal/99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1303,6 +1309,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/big/decimal/-99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1460,6 +1467,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/small/float/3.402823e-20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1617,6 +1625,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/small/double/2.5976931e-101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1774,6 +1783,7 @@ public final class Number {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/number/small/decimal/2.5976931e-101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

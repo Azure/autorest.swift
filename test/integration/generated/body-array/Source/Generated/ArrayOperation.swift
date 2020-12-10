@@ -280,6 +280,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -437,6 +438,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/boolean/tfft"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -750,6 +752,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/integer/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1063,6 +1066,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/long/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1376,6 +1380,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1689,6 +1694,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -2002,6 +2008,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -2159,6 +2166,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -2316,6 +2324,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -2629,6 +2638,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/uuid/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -2864,6 +2874,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/date/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -3177,6 +3188,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/date-time/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -3490,6 +3502,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/date-time-rfc1123/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -3647,6 +3660,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/duration/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -3804,6 +3818,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/prim/byte/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -4429,6 +4444,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/complex/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -4898,6 +4914,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/array/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -5367,6 +5384,7 @@ public final class ArrayOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/array/dictionary/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

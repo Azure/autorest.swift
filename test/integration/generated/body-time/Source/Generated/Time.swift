@@ -128,6 +128,7 @@ public final class Time {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/time/put"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

@@ -46,6 +46,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/integer/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -129,6 +130,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/integer/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -208,6 +210,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/integer/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -291,6 +294,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/integer/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -519,6 +523,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/string/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -602,6 +607,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/string/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -681,6 +687,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/string/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -764,6 +771,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/string/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -992,6 +1000,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/class/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1075,6 +1084,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/class/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1154,6 +1164,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/class/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1237,6 +1248,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/class/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1316,6 +1328,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/array/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1399,6 +1412,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/array/parameter"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1478,6 +1492,7 @@ public final class Explicit {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/reqopt/requied/array/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -1561,6 +1576,7 @@ public final class Explicit {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/reqopt/optional/array/property"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {

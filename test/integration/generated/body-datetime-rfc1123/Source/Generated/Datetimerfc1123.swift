@@ -365,6 +365,7 @@ public final class Datetimerfc1123 {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetimerfc1123/max"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -600,6 +601,7 @@ public final class Datetimerfc1123 {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/datetimerfc1123/min"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

@@ -58,6 +58,7 @@
         return
     }
 {% endif %}
+let urlTemplate = "{{ op.request.path }}"
 guard let requestUrl = client.url(host: "{{ op.request.uri }}", template: urlTemplate, params: params),
     let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: params.headers, data: requestBody) else {
     client.options.logger.error("Failed to construct HTTP request.")

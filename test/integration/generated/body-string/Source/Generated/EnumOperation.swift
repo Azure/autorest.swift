@@ -124,6 +124,7 @@ public final class EnumOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/string/enum/notExpandable"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -281,6 +282,7 @@ public final class EnumOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/string/enum/Referenced"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -438,6 +440,7 @@ public final class EnumOperation {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/string/enum/ReferencedConstant"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {

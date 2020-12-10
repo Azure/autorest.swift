@@ -50,6 +50,7 @@ public final class AutoRestResourceFlatteningTestService {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/model-flatten/array"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -211,6 +212,7 @@ public final class AutoRestResourceFlatteningTestService {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/model-flatten/wrappedarray"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -372,6 +374,7 @@ public final class AutoRestResourceFlatteningTestService {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/model-flatten/dictionary"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -533,6 +536,7 @@ public final class AutoRestResourceFlatteningTestService {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/model-flatten/resourcecollection"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -694,6 +698,7 @@ public final class AutoRestResourceFlatteningTestService {
             }
             requestBody = encodedRequestBody
         }
+        let urlTemplate = "/model-flatten/customFlattening"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -790,6 +795,7 @@ public final class AutoRestResourceFlatteningTestService {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/model-flatten/customFlattening"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
@@ -880,6 +886,7 @@ public final class AutoRestResourceFlatteningTestService {
             client.options.logger.error("Failed to encode request body as json.")
             return
         }
+        let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
