@@ -33,13 +33,13 @@ public final class HttpSuccess {
         withOptions options: Head200Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/http/success/200"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding)
         )
 
         // Construct request
+        let urlTemplate = "/http/success/200"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -100,13 +100,13 @@ public final class HttpSuccess {
         withOptions options: Head204Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/http/success/204"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding)
         )
 
         // Construct request
+        let urlTemplate = "/http/success/204"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -167,13 +167,13 @@ public final class HttpSuccess {
         withOptions options: Head404Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/http/success/404"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding)
         )
 
         // Construct request
+        let urlTemplate = "/http/success/404"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

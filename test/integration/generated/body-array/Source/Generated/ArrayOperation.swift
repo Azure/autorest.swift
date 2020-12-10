@@ -33,14 +33,14 @@ public final class ArrayOperation {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -111,14 +111,14 @@ public final class ArrayOperation {
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/invalid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -189,14 +189,14 @@ public final class ArrayOperation {
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/empty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -268,8 +268,7 @@ public final class ArrayOperation {
         withOptions options: PutEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/empty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -347,14 +346,14 @@ public final class ArrayOperation {
         withOptions options: GetBooleanTfftOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/boolean/tfft"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/boolean/tfft"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -426,8 +425,7 @@ public final class ArrayOperation {
         withOptions options: PutBooleanTfftOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/boolean/tfft"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -505,14 +503,14 @@ public final class ArrayOperation {
         withOptions options: GetBooleanInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/boolean/true.null.false"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/boolean/true.null.false"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -583,14 +581,14 @@ public final class ArrayOperation {
         withOptions options: GetBooleanInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/boolean/true.boolean.false"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/boolean/true.boolean.false"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -661,14 +659,14 @@ public final class ArrayOperation {
         withOptions options: GetIntegerValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/integer/1.-1.3.300"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/integer/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -740,8 +738,7 @@ public final class ArrayOperation {
         withOptions options: PutIntegerValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/integer/1.-1.3.300"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -819,14 +816,14 @@ public final class ArrayOperation {
         withOptions options: GetIntInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/integer/1.null.zero"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/integer/1.null.zero"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -897,14 +894,14 @@ public final class ArrayOperation {
         withOptions options: GetIntInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/integer/1.integer.0"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/integer/1.integer.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -975,14 +972,14 @@ public final class ArrayOperation {
         withOptions options: GetLongValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/long/1.-1.3.300"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/long/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1054,8 +1051,7 @@ public final class ArrayOperation {
         withOptions options: PutLongValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/long/1.-1.3.300"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1133,14 +1129,14 @@ public final class ArrayOperation {
         withOptions options: GetLongInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/long/1.null.zero"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/long/1.null.zero"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1211,14 +1207,14 @@ public final class ArrayOperation {
         withOptions options: GetLongInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/long/1.integer.0"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/long/1.integer.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1289,14 +1285,14 @@ public final class ArrayOperation {
         withOptions options: GetFloatValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1368,8 +1364,7 @@ public final class ArrayOperation {
         withOptions options: PutFloatValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/float/0--0.01-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1447,14 +1442,14 @@ public final class ArrayOperation {
         withOptions options: GetFloatInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/float/0.0-null-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/float/0.0-null-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1525,14 +1520,14 @@ public final class ArrayOperation {
         withOptions options: GetFloatInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/float/1.number.0"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/float/1.number.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1603,14 +1598,14 @@ public final class ArrayOperation {
         withOptions options: GetDoubleValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1682,8 +1677,7 @@ public final class ArrayOperation {
         withOptions options: PutDoubleValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/double/0--0.01-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1761,14 +1755,14 @@ public final class ArrayOperation {
         withOptions options: GetDoubleInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/double/0.0-null-1.2e20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/double/0.0-null-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1839,14 +1833,14 @@ public final class ArrayOperation {
         withOptions options: GetDoubleInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/double/1.number.0"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/double/1.number.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1917,14 +1911,14 @@ public final class ArrayOperation {
         withOptions options: GetStringValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1996,8 +1990,7 @@ public final class ArrayOperation {
         withOptions options: PutStringValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -2075,14 +2068,14 @@ public final class ArrayOperation {
         withOptions options: GetEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FooEnum]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2154,8 +2147,7 @@ public final class ArrayOperation {
         withOptions options: PutEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/enum/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -2233,14 +2225,14 @@ public final class ArrayOperation {
         withOptions options: GetStringEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Enum0]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2312,8 +2304,7 @@ public final class ArrayOperation {
         withOptions options: PutStringEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string-enum/foo1.foo2.foo3"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -2391,14 +2382,14 @@ public final class ArrayOperation {
         withOptions options: GetStringWithNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String?]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string/foo.null.foo2"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/string/foo.null.foo2"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2469,14 +2460,14 @@ public final class ArrayOperation {
         withOptions options: GetStringWithInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/string/foo.123.foo2"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/string/foo.123.foo2"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2547,14 +2538,14 @@ public final class ArrayOperation {
         withOptions options: GetUuidValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/uuid/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/uuid/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2626,8 +2617,7 @@ public final class ArrayOperation {
         withOptions options: PutUuidValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/uuid/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -2705,14 +2695,14 @@ public final class ArrayOperation {
         withOptions options: GetUuidInvalidCharsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/uuid/invalidchars"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/uuid/invalidchars"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2783,14 +2773,14 @@ public final class ArrayOperation {
         withOptions options: GetDateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[SimpleDate]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2862,8 +2852,7 @@ public final class ArrayOperation {
         withOptions options: PutDateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -2941,14 +2930,14 @@ public final class ArrayOperation {
         withOptions options: GetDateInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[SimpleDate]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date/invalidnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3019,14 +3008,14 @@ public final class ArrayOperation {
         withOptions options: GetDateInvalidCharsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[SimpleDate]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date/invalidchars"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date/invalidchars"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3097,14 +3086,14 @@ public final class ArrayOperation {
         withOptions options: GetDateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Iso8601Date]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date-time/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3176,8 +3165,7 @@ public final class ArrayOperation {
         withOptions options: PutDateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -3255,14 +3243,14 @@ public final class ArrayOperation {
         withOptions options: GetDateTimeInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Iso8601Date]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time/invalidnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date-time/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3333,14 +3321,14 @@ public final class ArrayOperation {
         withOptions options: GetDateTimeInvalidCharsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Iso8601Date]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time/invalidchars"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date-time/invalidchars"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3411,14 +3399,14 @@ public final class ArrayOperation {
         withOptions options: GetDateTimeRfc1123ValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Rfc1123Date]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time-rfc1123/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/date-time-rfc1123/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3490,8 +3478,7 @@ public final class ArrayOperation {
         withOptions options: PutDateTimeRfc1123ValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/date-time-rfc1123/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -3569,14 +3556,14 @@ public final class ArrayOperation {
         withOptions options: GetDurationValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[DateComponents]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/duration/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/duration/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3648,8 +3635,7 @@ public final class ArrayOperation {
         withOptions options: PutDurationValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/duration/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -3727,14 +3713,14 @@ public final class ArrayOperation {
         withOptions options: GetByteValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/byte/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/byte/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3806,8 +3792,7 @@ public final class ArrayOperation {
         withOptions options: PutByteValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/byte/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -3885,14 +3870,14 @@ public final class ArrayOperation {
         withOptions options: GetByteInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/byte/invalidnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/byte/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -3963,14 +3948,14 @@ public final class ArrayOperation {
         withOptions options: GetBase64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/prim/base64url/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/prim/base64url/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4041,14 +4026,14 @@ public final class ArrayOperation {
         withOptions options: GetComplexNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/complex/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4119,14 +4104,14 @@ public final class ArrayOperation {
         withOptions options: GetComplexEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/empty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/complex/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4197,14 +4182,14 @@ public final class ArrayOperation {
         withOptions options: GetComplexItemNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/itemnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/complex/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4275,14 +4260,14 @@ public final class ArrayOperation {
         withOptions options: GetComplexItemEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/itemempty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/complex/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4353,14 +4338,14 @@ public final class ArrayOperation {
         withOptions options: GetComplexValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/complex/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4432,8 +4417,7 @@ public final class ArrayOperation {
         withOptions options: PutComplexValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/complex/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -4511,14 +4495,14 @@ public final class ArrayOperation {
         withOptions options: GetArrayNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/array/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4589,14 +4573,14 @@ public final class ArrayOperation {
         withOptions options: GetArrayEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/empty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/array/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4667,14 +4651,14 @@ public final class ArrayOperation {
         withOptions options: GetArrayItemNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]?]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/itemnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/array/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4745,14 +4729,14 @@ public final class ArrayOperation {
         withOptions options: GetArrayItemEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/itemempty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/array/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4823,14 +4807,14 @@ public final class ArrayOperation {
         withOptions options: GetArrayValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/array/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -4902,8 +4886,7 @@ public final class ArrayOperation {
         withOptions options: PutArrayValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/array/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -4981,14 +4964,14 @@ public final class ArrayOperation {
         withOptions options: GetDictionaryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/dictionary/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -5059,14 +5042,14 @@ public final class ArrayOperation {
         withOptions options: GetDictionaryEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String: String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/empty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/dictionary/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -5137,14 +5120,14 @@ public final class ArrayOperation {
         withOptions options: GetDictionaryItemNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/itemnull"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/dictionary/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -5215,14 +5198,14 @@ public final class ArrayOperation {
         withOptions options: GetDictionaryItemEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String: String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/itemempty"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/dictionary/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -5293,14 +5276,14 @@ public final class ArrayOperation {
         withOptions options: GetDictionaryValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String: String]]>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/array/dictionary/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -5372,8 +5355,7 @@ public final class ArrayOperation {
         withOptions options: PutDictionaryValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/array/dictionary/valid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),

@@ -34,14 +34,14 @@ public final class Paths {
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/customuri"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "accountName", accountName, .skipEncoding), (.uri, "host", client.host, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/customuri"
         guard let requestUrl = client.url(host: "http://{accountName}{host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

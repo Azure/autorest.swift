@@ -33,8 +33,7 @@ public final class AutoRestReportService {
         withOptions options: GetReportOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/report"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "qualifier", options?.qualifier, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -42,6 +41,7 @@ public final class AutoRestReportService {
         )
 
         // Construct request
+        let urlTemplate = "/report"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -112,8 +112,7 @@ public final class AutoRestReportService {
         withOptions options: GetOptionalReportOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: Int32]>
     ) {
-        // Construct URL
-        let urlTemplate = "/report/optional"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "qualifier", options?.qualifier, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -121,6 +120,7 @@ public final class AutoRestReportService {
         )
 
         // Construct request
+        let urlTemplate = "/report/optional"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

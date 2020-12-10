@@ -33,14 +33,14 @@ public final class Datetime {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date?>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -118,14 +118,14 @@ public final class Datetime {
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/invalid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -196,14 +196,14 @@ public final class Datetime {
         withOptions options: GetOverflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/overflow"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/overflow"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -274,14 +274,14 @@ public final class Datetime {
         withOptions options: GetUnderflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/underflow"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/underflow"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -353,8 +353,7 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/utc"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -433,8 +432,7 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/utc7ms"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -512,14 +510,14 @@ public final class Datetime {
         withOptions options: GetUtcLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/utc/lowercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/utc/lowercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -590,14 +588,14 @@ public final class Datetime {
         withOptions options: GetUtcUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/utc/uppercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/utc/uppercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -668,14 +666,14 @@ public final class Datetime {
         withOptions options: GetUtcUppercaseMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/utc7ms/uppercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/utc7ms/uppercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -747,8 +745,7 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localpositiveoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -826,14 +823,14 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localpositiveoffset/lowercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/localpositiveoffset/lowercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -904,14 +901,14 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localpositiveoffset/uppercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/localpositiveoffset/uppercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -983,8 +980,7 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localnegativeoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1062,14 +1058,14 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localnegativeoffset/uppercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/localnegativeoffset/uppercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1140,14 +1136,14 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/max/localnegativeoffset/lowercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/max/localnegativeoffset/lowercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1219,8 +1215,7 @@ public final class Datetime {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/utc"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1298,14 +1293,14 @@ public final class Datetime {
         withOptions options: GetUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/utc"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/min/utc"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1377,8 +1372,7 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/localpositiveoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1456,14 +1450,14 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/localpositiveoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/min/localpositiveoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1535,8 +1529,7 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/localnegativeoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1614,14 +1607,14 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/localnegativeoffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/min/localnegativeoffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1692,14 +1685,14 @@ public final class Datetime {
         withOptions options: GetLocalNoOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetime/min/localnooffset"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetime/min/localnooffset"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

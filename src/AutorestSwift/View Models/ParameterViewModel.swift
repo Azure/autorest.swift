@@ -153,12 +153,6 @@ struct ParameterViewModel {
     private mutating func update(withSignatureParameter param: ParameterType) {
         assert(!(param.serializedName?.isEmpty ?? true))
         var pathOrValue = ""
-        // TODO: Re-wire up explode logic
-//        {% for param in op.params.explodeQuery.required %}
-//        //    {{ param.value}}.forEach {
-//        //        queryParams.append("{{ param.key }}", $0)
-//        //    }
-//        {% endfor %}
         switch param.schema.type {
         case .byteArray:
             if let byteSchema = param.schema as? ByteArraySchema,
@@ -168,16 +162,18 @@ struct ParameterViewModel {
                 pathOrValue = name
             }
         case .array:
-//            if explode {
-//                pathOrValue = "\(name)"
-//            } else {
-            var element = "$0"
-            if let arraySchema = param.schema as? ArraySchema,
-                arraySchema.nullableItems ?? false {
-                element = "$0 ?? \"\""
+            if param.explode {
+                // explode parameters are inflated in the stencil file
+                pathOrValue = name
+            } else {
+                var element = "$0"
+                if let arraySchema = param.schema as? ArraySchema,
+                    arraySchema.nullableItems ?? false {
+                    element = "$0 ?? \"\""
+                }
+                let mod = param.belongsInOptions() ? "?" : ""
+                pathOrValue = "\(name)\(mod).map {\(element)}.joined(separator: \"\(param.delimiter)\") "
             }
-            let mod = param.belongsInOptions() ? "?" : ""
-            pathOrValue = "\(name)\(mod).map {\(element)}.joined(separator: \"\(param.delimiter)\") "
         default:
             pathOrValue = name
         }

@@ -33,14 +33,14 @@ public final class Number {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Float?>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -118,14 +118,14 @@ public final class Number {
         withOptions options: GetInvalidFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Float>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/invalidfloat"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/invalidfloat"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -196,14 +196,14 @@ public final class Number {
         withOptions options: GetInvalidDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/invaliddouble"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/invaliddouble"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -274,14 +274,14 @@ public final class Number {
         withOptions options: GetInvalidDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/invaliddecimal"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/invaliddecimal"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -353,8 +353,7 @@ public final class Number {
         withOptions options: PutBigFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/float/3.402823e+20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -432,14 +431,14 @@ public final class Number {
         withOptions options: GetBigFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Float>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/float/3.402823e+20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/float/3.402823e+20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -511,8 +510,7 @@ public final class Number {
         withOptions options: PutBigDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/2.5976931e+101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -590,14 +588,14 @@ public final class Number {
         withOptions options: GetBigDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/2.5976931e+101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/double/2.5976931e+101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -668,8 +666,7 @@ public final class Number {
         withOptions options: PutBigDoublePositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -747,14 +744,14 @@ public final class Number {
         withOptions options: GetBigDoublePositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/double/99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -825,8 +822,7 @@ public final class Number {
         withOptions options: PutBigDoubleNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/-99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -904,14 +900,14 @@ public final class Number {
         withOptions options: GetBigDoubleNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/double/-99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/double/-99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -983,8 +979,7 @@ public final class Number {
         withOptions options: PutBigDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/2.5976931e+101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1062,14 +1057,14 @@ public final class Number {
         withOptions options: GetBigDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/2.5976931e+101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/decimal/2.5976931e+101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1140,8 +1135,7 @@ public final class Number {
         withOptions options: PutBigDecimalPositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1219,14 +1213,14 @@ public final class Number {
         withOptions options: GetBigDecimalPositiveDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/decimal/99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1297,8 +1291,7 @@ public final class Number {
         withOptions options: PutBigDecimalNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/-99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1376,14 +1369,14 @@ public final class Number {
         withOptions options: GetBigDecimalNegativeDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/big/decimal/-99999999.99"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/big/decimal/-99999999.99"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1455,8 +1448,7 @@ public final class Number {
         withOptions options: PutSmallFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/float/3.402823e-20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1534,14 +1526,14 @@ public final class Number {
         withOptions options: GetSmallFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/float/3.402823e-20"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/small/float/3.402823e-20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1613,8 +1605,7 @@ public final class Number {
         withOptions options: PutSmallDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/double/2.5976931e-101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1692,14 +1683,14 @@ public final class Number {
         withOptions options: GetSmallDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Double>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/double/2.5976931e-101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/small/double/2.5976931e-101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1771,8 +1762,7 @@ public final class Number {
         withOptions options: PutSmallDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/decimal/2.5976931e-101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1850,14 +1840,14 @@ public final class Number {
         withOptions options: GetSmallDecimalOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Decimal>
     ) {
-        // Construct URL
-        let urlTemplate = "/number/small/decimal/2.5976931e-101"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/number/small/decimal/2.5976931e-101"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

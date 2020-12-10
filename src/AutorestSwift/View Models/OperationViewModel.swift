@@ -30,18 +30,27 @@ import Foundation
 struct OperationParameters {
     let all: [ParameterViewModel]
     let signature: [ParameterViewModel]
+    let explode: [ParameterViewModel]
     var body: BodyParams?
+    var declaration: String
 
     /// Initialize with a list of `ParameterType`.
     init(parameters: [ParameterType], operation: Operation, model: CodeModel) {
         var params = [ParameterViewModel]()
+        var explodeParams = [ParameterViewModel]()
 
         for param in parameters {
             guard let paramLocation = param.paramLocation else { continue }
             let viewModel = ParameterViewModel(from: param, with: operation)
 
             switch paramLocation {
-            case .query, .header, .path, .uri:
+            case .query:
+                if param.explode {
+                    explodeParams.append(viewModel)
+                } else {
+                    params.append(viewModel)
+                }
+            case .header, .path, .uri:
                 params.append(viewModel)
             case .body:
                 // TODO: Body params are handled differently and shouldn't go into RequestParameters at this time
@@ -94,6 +103,8 @@ struct OperationParameters {
         }
         self.all = params
         self.signature = signatureViewModel
+        self.explode = explodeParams
+        self.declaration = explode.isEmpty ? "let" : "var"
     }
 }
 

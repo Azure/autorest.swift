@@ -33,14 +33,14 @@ public final class IntOperation {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Int32?>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -117,14 +117,14 @@ public final class IntOperation {
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/invalid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -194,14 +194,14 @@ public final class IntOperation {
         withOptions options: GetOverflowInt32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/overflowint32"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/overflowint32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -271,14 +271,14 @@ public final class IntOperation {
         withOptions options: GetUnderflowInt32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Int32>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/underflowint32"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/underflowint32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -348,14 +348,14 @@ public final class IntOperation {
         withOptions options: GetOverflowInt64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/overflowint64"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/overflowint64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -425,14 +425,14 @@ public final class IntOperation {
         withOptions options: GetUnderflowInt64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Int64>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/underflowint64"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/underflowint64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -503,8 +503,7 @@ public final class IntOperation {
         withOptions options: PutMax32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/max/32"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -583,8 +582,7 @@ public final class IntOperation {
         withOptions options: PutMax64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/max/64"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -663,8 +661,7 @@ public final class IntOperation {
         withOptions options: PutMin32Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/min/32"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -743,8 +740,7 @@ public final class IntOperation {
         withOptions options: PutMin64Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/min/64"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -822,14 +818,14 @@ public final class IntOperation {
         withOptions options: GetUnixTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<UnixTime>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/unixtime"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/unixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -901,8 +897,7 @@ public final class IntOperation {
         withOptions options: PutUnixTimeDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/unixtime"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -981,14 +976,14 @@ public final class IntOperation {
         withOptions options: GetInvalidUnixTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<UnixTime>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/invalidunixtime"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/invalidunixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1059,14 +1054,14 @@ public final class IntOperation {
         withOptions options: GetNullUnixTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<UnixTime?>
     ) {
-        // Construct URL
-        let urlTemplate = "/int/nullunixtime"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/int/nullunixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

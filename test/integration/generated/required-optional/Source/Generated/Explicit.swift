@@ -34,8 +34,7 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/integer/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -114,8 +113,7 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/integer/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -198,8 +196,7 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/integer/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -278,8 +275,7 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/integer/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -362,8 +358,7 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/integer/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -371,6 +366,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/requied/integer/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -436,8 +432,7 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/integer/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", options?.headerParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -445,6 +440,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/optional/integer/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -511,8 +507,7 @@ public final class Explicit {
         withOptions options: PostRequiredStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/string/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -591,8 +586,7 @@ public final class Explicit {
         withOptions options: PostOptionalStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/string/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -675,8 +669,7 @@ public final class Explicit {
         withOptions options: PostRequiredStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/string/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -755,8 +748,7 @@ public final class Explicit {
         withOptions options: PostOptionalStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/string/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -839,8 +831,7 @@ public final class Explicit {
         withOptions options: PostRequiredStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/string/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -848,6 +839,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/requied/string/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -913,8 +905,7 @@ public final class Explicit {
         withOptions options: PostOptionalStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/string/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "bodyParameter", options?.bodyParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -922,6 +913,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/optional/string/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -988,8 +980,7 @@ public final class Explicit {
         withOptions options: PostRequiredClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/class/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1068,8 +1059,7 @@ public final class Explicit {
         withOptions options: PostOptionalClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/class/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1152,8 +1142,7 @@ public final class Explicit {
         withOptions options: PostRequiredClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/class/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1232,8 +1221,7 @@ public final class Explicit {
         withOptions options: PostOptionalClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/class/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1316,8 +1304,7 @@ public final class Explicit {
         withOptions options: PostRequiredArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/array/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1396,8 +1383,7 @@ public final class Explicit {
         withOptions options: PostOptionalArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/array/parameter"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1480,8 +1466,7 @@ public final class Explicit {
         withOptions options: PostRequiredArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/array/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1560,8 +1545,7 @@ public final class Explicit {
         withOptions options: PostOptionalArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/array/property"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -1644,8 +1628,7 @@ public final class Explicit {
         withOptions options: PostRequiredArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/requied/array/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1653,6 +1636,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/requied/array/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1718,8 +1702,7 @@ public final class Explicit {
         withOptions options: PostOptionalArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/optional/array/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", options?.headerParameter?.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1727,6 +1710,7 @@ public final class Explicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/optional/array/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

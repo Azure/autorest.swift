@@ -34,14 +34,14 @@ public final class Header {
         withOptions options: ParamExistingKeyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/existingkey"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "User-Agent", userAgent, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/param/existingkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -107,14 +107,14 @@ public final class Header {
         withOptions options: ResponseExistingKeyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/existingkey"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/existingkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -181,8 +181,7 @@ public final class Header {
         withOptions options: ParamProtectedKeyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/protectedkey"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "Content-Type", contentType, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -190,6 +189,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/protectedkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -255,14 +255,14 @@ public final class Header {
         withOptions options: ResponseProtectedKeyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/protectedkey"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/protectedkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -331,8 +331,7 @@ public final class Header {
         withOptions options: ParamIntegerOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/integer"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -340,6 +339,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/integer"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -406,14 +406,14 @@ public final class Header {
         withOptions options: ResponseIntegerOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/integer"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/integer"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -482,8 +482,7 @@ public final class Header {
         withOptions options: ParamLongOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/long"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -491,6 +490,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/long"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -557,14 +557,14 @@ public final class Header {
         withOptions options: ResponseLongOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/long"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/long"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -633,8 +633,7 @@ public final class Header {
         withOptions options: ParamFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/float"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -642,6 +641,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/float"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -708,14 +708,14 @@ public final class Header {
         withOptions options: ResponseFloatOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/float"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/float"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -784,8 +784,7 @@ public final class Header {
         withOptions options: ParamDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/double"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -793,6 +792,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/double"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -859,14 +859,14 @@ public final class Header {
         withOptions options: ResponseDoubleOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/double"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/double"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -935,8 +935,7 @@ public final class Header {
         withOptions options: ParamBoolOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/bool"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -944,6 +943,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/bool"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1010,14 +1010,14 @@ public final class Header {
         withOptions options: ResponseBoolOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/bool"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/bool"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1084,8 +1084,7 @@ public final class Header {
         withOptions options: ParamStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/string"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1093,6 +1092,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/string"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1159,14 +1159,14 @@ public final class Header {
         withOptions options: ResponseStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/string"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/string"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1235,8 +1235,7 @@ public final class Header {
         withOptions options: ParamDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/date"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1244,6 +1243,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/date"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1310,14 +1310,14 @@ public final class Header {
         withOptions options: ResponseDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/date"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/date"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1386,8 +1386,7 @@ public final class Header {
         withOptions options: ParamDatetimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/datetime"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1395,6 +1394,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/datetime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1461,14 +1461,14 @@ public final class Header {
         withOptions options: ResponseDatetimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/datetime"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/datetime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1535,8 +1535,7 @@ public final class Header {
         withOptions options: ParamDatetimeRfc1123Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/datetimerfc1123"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1544,6 +1543,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/datetimerfc1123"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1610,14 +1610,14 @@ public final class Header {
         withOptions options: ResponseDatetimeRfc1123Options? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/datetimerfc1123"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/datetimerfc1123"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1686,8 +1686,7 @@ public final class Header {
         withOptions options: ParamDurationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/duration"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1695,6 +1694,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/duration"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1761,14 +1761,14 @@ public final class Header {
         withOptions options: ResponseDurationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/duration"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/duration"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1837,8 +1837,7 @@ public final class Header {
         withOptions options: ParamByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/byte"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1846,6 +1845,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/byte"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1912,14 +1912,14 @@ public final class Header {
         withOptions options: ResponseByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/byte"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/byte"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1986,8 +1986,7 @@ public final class Header {
         withOptions options: ParamEnumOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/param/prim/enum"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.header, "value", options?.value, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1995,6 +1994,7 @@ public final class Header {
         )
 
         // Construct request
+        let urlTemplate = "/header/param/prim/enum"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2061,14 +2061,14 @@ public final class Header {
         withOptions options: ResponseEnumOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/response/prim/enum"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "scenario", scenario, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/response/prim/enum"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -2134,14 +2134,14 @@ public final class Header {
         withOptions options: CustomRequestIdOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

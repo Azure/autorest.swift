@@ -33,15 +33,18 @@ public final class Queries {
         withOptions options: ArrayStringMultiNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/multi/string/null"
-        let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
+        // Create request parameters
+        var params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
+        // Explode query parameters
+        options?.arrayQuery?.forEach {
+            params.add((.query, "arrayQuery", $0, .encode))
+        }
 
         // Construct request
+        let urlTemplate = "/queries/array/multi/string/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -107,15 +110,18 @@ public final class Queries {
         withOptions options: ArrayStringMultiEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/multi/string/empty"
-        let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery?.map { $0 }.joined(separator: ","), .encode),
+        // Create request parameters
+        var params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
+        // Explode query parameters
+        options?.arrayQuery?.forEach {
+            params.add((.query, "arrayQuery", $0, .encode))
+        }
 
         // Construct request
+        let urlTemplate = "/queries/array/multi/string/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -181,15 +187,18 @@ public final class Queries {
         withOptions options: ArrayStringMultiValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/queries/array/multi/string/valid"
-        let params = RequestParameters(
-            (.query, "arrayQuery", options?.arrayQuery?.map { $0 ?? "" }.joined(separator: ","), .encode),
+        // Create request parameters
+        var params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
+        // Explode query parameters
+        options?.arrayQuery?.forEach {
+            params.add((.query, "arrayQuery", $0, .encode))
+        }
 
         // Construct request
+        let urlTemplate = "/queries/array/multi/string/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

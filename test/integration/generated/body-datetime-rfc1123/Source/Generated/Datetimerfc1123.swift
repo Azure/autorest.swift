@@ -33,14 +33,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date?>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -118,14 +118,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/invalid"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -196,14 +196,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetOverflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/overflow"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/overflow"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -274,14 +274,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetUnderflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/underflow"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/underflow"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -353,8 +353,7 @@ public final class Datetimerfc1123 {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -432,14 +431,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetUtcLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max/lowercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/max/lowercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -510,14 +509,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetUtcUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/max/uppercase"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/max/uppercase"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -589,8 +588,7 @@ public final class Datetimerfc1123 {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/min"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -668,14 +666,14 @@ public final class Datetimerfc1123 {
         withOptions options: GetUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Rfc1123Date>
     ) {
-        // Construct URL
-        let urlTemplate = "/datetimerfc1123/min"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/datetimerfc1123/min"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

@@ -33,14 +33,14 @@ public final class Paths {
         withOptions options: GetBooleanTrueOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/bool/true/{boolPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", true, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/bool/true/{boolPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -106,14 +106,14 @@ public final class Paths {
         withOptions options: GetBooleanFalseOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/bool/false/{boolPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "boolPath", false, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/bool/false/{boolPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -179,14 +179,14 @@ public final class Paths {
         withOptions options: GetIntOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/int/1000000/{intPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "intPath", "1000000", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/int/1000000/{intPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -252,14 +252,14 @@ public final class Paths {
         withOptions options: GetIntNegativeOneMillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/int/-1000000/{intPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "intPath", "-1000000", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/int/-1000000/{intPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -325,14 +325,14 @@ public final class Paths {
         withOptions options: GetTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/long/10000000000/{longPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "longPath", "10000000000", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/long/10000000000/{longPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -398,8 +398,7 @@ public final class Paths {
         withOptions options: GetNegativeTenBillionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/long/-10000000000/{longPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "longPath", "-10000000000", .encode),
@@ -407,6 +406,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/long/-10000000000/{longPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -472,8 +472,7 @@ public final class Paths {
         withOptions options: FloatScientificPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .path,
@@ -484,6 +483,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/float/1.034E+20/{floatPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -549,14 +549,14 @@ public final class Paths {
         withOptions options: FloatScientificNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "floatPath", Float(-1.034e-20), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/float/-1.034E-20/{floatPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -622,14 +622,14 @@ public final class Paths {
         withOptions options: DoubleDecimalPositiveOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/double/9999999.999/{doublePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "doublePath", Double(9_999_999.999), .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/double/9999999.999/{doublePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -695,8 +695,7 @@ public final class Paths {
         withOptions options: DoubleDecimalNegativeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "doublePath", Double(-9_999_999.999), .encode),
@@ -704,6 +703,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/double/-9999999.999/{doublePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -769,8 +769,7 @@ public final class Paths {
         withOptions options: StringUnicodeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/unicode/{stringPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "stringPath", "啊齄丂狛狜隣郎隣兀﨩", .encode),
@@ -778,6 +777,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/unicode/{stringPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -843,8 +843,7 @@ public final class Paths {
         withOptions options: StringUrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "stringPath", "begin!*'();:@ &=+$,/?#[]end", .encode),
@@ -852,6 +851,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -917,8 +917,7 @@ public final class Paths {
         withOptions options: StringUrlNonEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "stringPath", "begin!*'();:@&=+$,end", .skipEncoding),
@@ -926,6 +925,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/begin!*'();:@&=+$,end/{stringPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -991,14 +991,14 @@ public final class Paths {
         withOptions options: StringEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/empty/{stringPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "stringPath", "", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/empty/{stringPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1065,14 +1065,14 @@ public final class Paths {
         withOptions options: StringNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/null/{stringPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "stringPath", stringPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/null/{stringPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1139,14 +1139,14 @@ public final class Paths {
         withOptions options: EnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/enum/green%20color/{enumPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "enumPath", enumPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/enum/green%20color/{enumPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1213,14 +1213,14 @@ public final class Paths {
         withOptions options: EnumNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/null/{enumPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "enumPath", enumPath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/null/{enumPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1287,14 +1287,14 @@ public final class Paths {
         withOptions options: ByteMultiByteOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/byte/multibyte/{bytePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "bytePath", bytePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/byte/multibyte/{bytePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1360,14 +1360,14 @@ public final class Paths {
         withOptions options: ByteEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/byte/empty/{bytePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "bytePath", "", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/byte/empty/{bytePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1434,14 +1434,14 @@ public final class Paths {
         withOptions options: ByteNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/byte/null/{bytePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "bytePath", bytePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/byte/null/{bytePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1507,14 +1507,14 @@ public final class Paths {
         withOptions options: DateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/date/2012-01-01/{datePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.path, "datePath", "2012-01-01", .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/date/2012-01-01/{datePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1581,14 +1581,14 @@ public final class Paths {
         withOptions options: DateNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/date/null/{datePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "datePath", datePath, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paths/date/null/{datePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1654,8 +1654,7 @@ public final class Paths {
         withOptions options: DateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "dateTimePath", "2012-01-01T01:01:01Z", .encode),
@@ -1663,6 +1662,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1729,8 +1729,7 @@ public final class Paths {
         withOptions options: DateTimeNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/datetime/null/{dateTimePath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "dateTimePath", dateTimePath, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1738,6 +1737,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/datetime/null/{dateTimePath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1804,8 +1804,7 @@ public final class Paths {
         withOptions options: Base64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "base64UrlPath", base64UrlPath.base64EncodedString(trimmingEquals: true), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1813,6 +1812,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/string/bG9yZW0/{base64UrlPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1879,9 +1879,7 @@ public final class Paths {
         withOptions options: ArrayCsvInPathOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate =
-            "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "arrayPath", arrayPath.map { $0 }.joined(separator: ","), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1889,6 +1887,8 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate =
+            "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1955,8 +1955,7 @@ public final class Paths {
         withOptions options: UnixTimeUrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "unixTimeUrlPath", unixTimeUrlPath, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1964,6 +1963,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/paths/int/1460505600/{unixTimeUrlPath}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

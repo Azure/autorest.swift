@@ -34,14 +34,14 @@ public final class PetOperation {
         withOptions options: GetPetByIdOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "petId", petId, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -146,14 +146,14 @@ public final class PetOperation {
         withOptions options: DoSomethingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "whatAction", whatAction, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -237,8 +237,7 @@ public final class PetOperation {
         withOptions options: HasModelsParamOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/hasModelsParam"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "models", options?.models, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -246,6 +245,7 @@ public final class PetOperation {
         )
 
         // Construct request
+        let urlTemplate = "/errorStatusCodes/Pets/hasModelsParam"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

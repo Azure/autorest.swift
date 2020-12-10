@@ -38,8 +38,7 @@ public final class Paths {
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/customuri/{subscriptionId}/{keyName}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "vault", vault, .skipEncoding), (.uri, "secret", secret, .skipEncoding),
             (.path, "keyName", keyName, .encode), (.query, "keyVersion", options?.keyVersion, .encode),
@@ -49,6 +48,7 @@ public final class Paths {
         )
 
         // Construct request
+        let urlTemplate = "/customuri/{subscriptionId}/{keyName}"
         guard let requestUrl = client.url(host: "{vault}{secret}{dnsSuffix}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

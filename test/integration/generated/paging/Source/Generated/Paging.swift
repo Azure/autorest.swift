@@ -33,14 +33,14 @@ public final class Paging {
         withOptions options: GetNoItemNamePagesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/noitemname"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/noitemname"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -115,14 +115,14 @@ public final class Paging {
         withOptions options: GetNullNextLinkNamePagesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/nullnextlink"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/nullnextlink"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -197,14 +197,14 @@ public final class Paging {
         withOptions options: GetSinglePagesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/single"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/single"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -279,14 +279,14 @@ public final class Paging {
         withOptions options: FirstResponseEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/firstResponseEmpty/1"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/firstResponseEmpty/1"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -361,8 +361,7 @@ public final class Paging {
         withOptions options: GetMultiplePagesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -371,6 +370,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -446,8 +446,7 @@ public final class Paging {
         withOptions options: GetWithQueryParamsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/getWithQueryParams"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "requiredQueryParameter", requiredQueryParameter, .encode), (
                 .uri,
@@ -458,6 +457,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/getWithQueryParams"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -532,14 +532,14 @@ public final class Paging {
         withOptions options: NextOperationWithQueryParamsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/nextOperationWithQueryParams"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (.query, "queryConstant", true, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/nextOperationWithQueryParams"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -614,8 +614,7 @@ public final class Paging {
         withOptions options: GetOdataMultiplePagesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/odata"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -624,6 +623,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/odata"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -699,8 +699,7 @@ public final class Paging {
         withOptions options: GetMultiplePagesWithOffsetOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/withpath/{offset}"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -709,6 +708,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/withpath/{offset}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -783,14 +783,14 @@ public final class Paging {
         withOptions options: GetMultiplePagesRetryFirstOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/retryfirst"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/retryfirst"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -865,14 +865,14 @@ public final class Paging {
         withOptions options: GetMultiplePagesRetrySecondOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/retrysecond"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/retrysecond"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -947,14 +947,14 @@ public final class Paging {
         withOptions options: GetSinglePagesFailureOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/single/failure"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/single/failure"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1029,14 +1029,14 @@ public final class Paging {
         withOptions options: GetMultiplePagesFailureOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/failure"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/failure"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1111,14 +1111,14 @@ public final class Paging {
         withOptions options: GetMultiplePagesFailureUriOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/failureuri"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/failureuri"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1196,8 +1196,7 @@ public final class Paging {
         withOptions options: GetMultiplePagesFragmentNextLinkOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/fragment/{tenant}"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1205,6 +1204,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/fragment/{tenant}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1280,8 +1280,7 @@ public final class Paging {
         withOptions options: GetMultiplePagesFragmentWithGroupingNextLinkOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
@@ -1293,6 +1292,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1367,8 +1367,7 @@ public final class Paging {
         withOptions options: GetMultiplePagesLROOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/lro"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "client-request-id", options?.clientRequestId, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1377,6 +1376,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/lro"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1456,8 +1456,7 @@ public final class Paging {
         withOptions options: NextFragmentOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/fragment/{tenant}/{nextLink}"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.path, "nextLink", nextLink, .skipEncoding),
@@ -1466,6 +1465,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/fragment/{tenant}/{nextLink}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1543,8 +1543,7 @@ public final class Paging {
         withOptions options: NextFragmentWithGroupingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "nextLink", nextLink, .skipEncoding),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1558,6 +1557,7 @@ public final class Paging {
         )
 
         // Construct request
+        let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -1632,14 +1632,14 @@ public final class Paging {
         withOptions options: GetPagingModelWithItemNameWithXMSClientNameOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
-        // Construct URL
-        let urlTemplate = "/paging/itemNameWithXMSClientName"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/paging/itemNameWithXMSClientName"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

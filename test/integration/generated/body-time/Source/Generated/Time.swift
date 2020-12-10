@@ -33,14 +33,14 @@ public final class Time {
         withOptions options: GetOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleTime>
     ) {
-        // Construct URL
-        let urlTemplate = "/time/get"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/time/get"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -112,8 +112,7 @@ public final class Time {
         withOptions options: PutOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<String>
     ) {
-        // Construct URL
-        let urlTemplate = "/time/put"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),

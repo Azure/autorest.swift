@@ -34,8 +34,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/array"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -117,14 +116,14 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FlattenedProduct]>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/array"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/model-flatten/array"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -196,8 +195,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/wrappedarray"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -279,14 +277,14 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[ProductWrapper]>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/wrappedarray"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/model-flatten/wrappedarray"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -358,8 +356,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/dictionary"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -441,14 +438,14 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String: FlattenedProduct]>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/dictionary"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/model-flatten/dictionary"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -520,8 +517,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/resourcecollection"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -603,14 +599,14 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: GetResourceCollectionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<ResourceCollection>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/resourcecollection"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/model-flatten/resourcecollection"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -682,8 +678,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/customFlattening"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -779,8 +774,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PostFlattenedSimpleProductOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/customFlattening"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -868,8 +862,7 @@ public final class AutoRestResourceFlatteningTestService {
         withOptions options: PutSimpleProductWithGroupingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleProduct>
     ) {
-        // Construct URL
-        let urlTemplate = "/model-flatten/customFlattening/parametergrouping/{name}/"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "name", flattenParameterGroup.name, .encode),

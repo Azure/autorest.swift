@@ -36,9 +36,7 @@ public final class PathItems {
         withOptions options: GetAllWithValuesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate =
-            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "pathItemStringPath", pathItemStringPath, .encode), (
                 .query,
@@ -54,6 +52,8 @@ public final class PathItems {
         )
 
         // Construct request
+        let urlTemplate =
+            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -122,9 +122,7 @@ public final class PathItems {
         withOptions options: GetGlobalQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate =
-            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "pathItemStringPath", pathItemStringPath, .encode), (
                 .query,
@@ -140,6 +138,8 @@ public final class PathItems {
         )
 
         // Construct request
+        let urlTemplate =
+            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -208,9 +208,7 @@ public final class PathItems {
         withOptions options: GetGlobalAndLocalQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate =
-            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "pathItemStringPath", pathItemStringPath, .encode), (
                 .query,
@@ -226,6 +224,8 @@ public final class PathItems {
         )
 
         // Construct request
+        let urlTemplate =
+            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -294,9 +294,7 @@ public final class PathItems {
         withOptions options: GetLocalPathItemQueryNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate =
-            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "pathItemStringPath", pathItemStringPath, .encode), (
                 .query,
@@ -312,6 +310,8 @@ public final class PathItems {
         )
 
         // Construct request
+        let urlTemplate =
+            "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

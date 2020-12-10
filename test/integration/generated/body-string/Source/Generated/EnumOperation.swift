@@ -33,14 +33,14 @@ public final class EnumOperation {
         withOptions options: GetNotExpandableOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Colors>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/notExpandable"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/string/enum/notExpandable"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -112,8 +112,7 @@ public final class EnumOperation {
         withOptions options: PutNotExpandableOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/notExpandable"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -191,14 +190,14 @@ public final class EnumOperation {
         withOptions options: GetReferencedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Colors>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/Referenced"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/string/enum/Referenced"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -270,8 +269,7 @@ public final class EnumOperation {
         withOptions options: PutReferencedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/Referenced"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -349,14 +347,14 @@ public final class EnumOperation {
         withOptions options: GetReferencedConstantOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<RefColorConstant>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/ReferencedConstant"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/string/enum/ReferencedConstant"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -428,8 +426,7 @@ public final class EnumOperation {
         withOptions options: PutReferencedConstantOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/string/enum/ReferencedConstant"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),

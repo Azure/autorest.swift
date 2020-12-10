@@ -123,26 +123,39 @@
 		0A22B15024D3671F00EC018E /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */; };
 		0A22B15124D3671F00EC018E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B07B24CB721900EC018E /* URL+Extensions.swift */; };
 		0A22B15224D3671F00EC018E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* main.swift */; };
-		0A22B15324D36F8300EC018E /* Method_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */; };
-		0A22B15524D36F8300EC018E /* Client_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0B324D224F400EC018E /* Client_Options_File.stencil */; };
-		0A22B15624D36F8300EC018E /* Enumeration_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* Enumeration_File.stencil */; };
-		0A22B15724D36F8300EC018E /* Header_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* Header_Snippet.stencil */; };
-		0A22B15824D36F8300EC018E /* Import_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* Import_Snippet.stencil */; };
-		0A22B15924D36F8400EC018E /* Model_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* Model_File.stencil */; };
-		0A22B15D24D36F8400EC018E /* Operation_Request_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* Operation_Request_Snippet.stencil */; };
-		0A22B15E24D36F8400EC018E /* Operation_Response_Body_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C524D3342300EC018E /* Operation_Response_Body_Snippet.stencil */; };
-		0A22B15F24D36F8400EC018E /* Operation_Response_PagedBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C424D333FF00EC018E /* Operation_Response_PagedBody_Snippet.stencil */; };
-		0A22B16024D36F8400EC018E /* Operation_Response_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C824D33F1000EC018E /* Operation_Response_Snippet.stencil */; };
-		0A22B16124D36F8400EC018E /* Operation_Response_NoBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C624D3343E00EC018E /* Operation_Response_NoBody_Snippet.stencil */; };
-		0A22B16224D36F8400EC018E /* Operation_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* Operation_Snippet.stencil */; };
-		0A22B16324D36F8400EC018E /* Package_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package_File.stencil */; };
-		0A22B16424D36F8400EC018E /* README_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README_File.stencil */; };
-		0A22B16524D36F8400EC018E /* Client_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* Client_File.stencil */; };
-		0A22B45B24DB605700EC018E /* Operation_Request_PatchBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* Operation_Request_PatchBody_Snippet.stencil */; };
-		0A22B45D24DB6FE900EC018E /* PatchUtil_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */; };
-		0A22B46224DCE52000EC018E /* Operation_BodyParam_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */; };
-		0A22B46424E1E66F00EC018E /* Jazzy_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* Jazzy_File.stencil */; };
 		0A4742D425814AA600CA86E5 /* PipelineContextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4742D325814AA600CA86E5 /* PipelineContextViewModel.swift */; };
+		0A4743472582919700CA86E5 /* Client_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07124CB71E100EC018E /* Client_File.stencil */; };
+		0A4743482582919700CA86E5 /* Client_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0B324D224F400EC018E /* Client_Options_File.stencil */; };
+		0A4743492582919700CA86E5 /* Custom_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB808CB2576E896008506CD /* Custom_File.stencil */; };
+		0A47434A2582919700CA86E5 /* Enumeration_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07624CB71E100EC018E /* Enumeration_File.stencil */; };
+		0A47434B2582919700CA86E5 /* Header_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07224CB71E100EC018E /* Header_Snippet.stencil */; };
+		0A47434C2582919700CA86E5 /* Import_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* Import_Snippet.stencil */; };
+		0A47434D2582919700CA86E5 /* Jazzy_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* Jazzy_File.stencil */; };
+		0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */; };
+		0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */; };
+		0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */; };
+		0A4743512582919700CA86E5 /* Model_Decoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */; };
+		0A4743522582919700CA86E5 /* Model_Decoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */; };
+		0A4743532582919700CA86E5 /* Model_Encoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */; };
+		0A4743542582919700CA86E5 /* Model_Encoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */; };
+		0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* Model_File.stencil */; };
+		0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */; };
+		0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */; };
+		0A4743582582919700CA86E5 /* Operation_BodyParam_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */; };
+		0A4743592582919700CA86E5 /* Operation_DefaultException_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */; };
+		0A47435A2582919700CA86E5 /* Operation_Request_Body_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */; };
+		0A47435B2582919700CA86E5 /* Operation_Request_PatchBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45A24DB59AA00EC018E /* Operation_Request_PatchBody_Snippet.stencil */; };
+		0A47435C2582919700CA86E5 /* Operation_Request_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C724D3346A00EC018E /* Operation_Request_Snippet.stencil */; };
+		0A47435D2582919700CA86E5 /* Operation_Response_Body_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C524D3342300EC018E /* Operation_Response_Body_Snippet.stencil */; };
+		0A47435E2582919700CA86E5 /* Operation_Response_Exception_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* Operation_Response_Exception_Snippet.stencil */; };
+		0A47435F2582919700CA86E5 /* Operation_Response_NoBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C624D3343E00EC018E /* Operation_Response_NoBody_Snippet.stencil */; };
+		0A4743602582919700CA86E5 /* Operation_Response_PagedBody_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C424D333FF00EC018E /* Operation_Response_PagedBody_Snippet.stencil */; };
+		0A4743612582919700CA86E5 /* Operation_Response_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C824D33F1000EC018E /* Operation_Response_Snippet.stencil */; };
+		0A4743622582919700CA86E5 /* Operation_Response_StatusCode_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */; };
+		0A4743632582919700CA86E5 /* Operation_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B09924D20BBA00EC018E /* Operation_Snippet.stencil */; };
+		0A4743642582919700CA86E5 /* Package_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package_File.stencil */; };
+		0A4743652582919700CA86E5 /* PatchUtil_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */; };
+		0A4743662582919700CA86E5 /* README_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README_File.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
@@ -206,24 +219,12 @@
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
 		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		F1068F3F24D484D70082793F /* Operation_Request_Body_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */; };
 		F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B1F6125414556007DA581 /* Dictionary+Extension.swift */; };
-		F15151272512AA5B00DF0B9F /* Operation_Response_Exception_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F15151262512AA2D00DF0B9F /* Operation_Response_Exception_Snippet.stencil */; };
 		F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */; };
 		F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */; };
 		F15D30F12548F38700265366 /* AutoRestUrlPathsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */; };
 		F170D322253F786800A569A0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F170D321253F786800A569A0 /* Util.swift */; };
-		F1731F322522E531006CDED8 /* Method_Options_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */; };
-		F1731F332522E531006CDED8 /* NamedMethod_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */; };
-		F1871872250C2B6200318867 /* Operation_DefaultException_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */; };
-		F198F975251C570B009CB4E5 /* Named_OperationGroup_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */; };
 		F19B01D52507E21100121831 /* ExceptionResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */; };
-		F19B01E72507F3D300121831 /* Operation_Response_StatusCode_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */; };
-		F1A5FD7E24DCFEE600A5CC6C /* Model_Decoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */; };
-		F1A5FD7F24DCFEE600A5CC6C /* Model_Codable_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */; };
-		F1A5FD8024DCFEE600A5CC6C /* Model_Decoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */; };
-		F1A5FD8124DCFEE600A5CC6C /* Model_Encoder_DateProperty.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */; };
-		F1A5FD8224DCFEE600A5CC6C /* Model_Encoder_Property.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,37 +255,38 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F1731F322522E531006CDED8 /* Method_Options_Snippet.stencil in CopyFiles */,
-				F1731F332522E531006CDED8 /* NamedMethod_Options_File.stencil in CopyFiles */,
-				F198F975251C570B009CB4E5 /* Named_OperationGroup_File.stencil in CopyFiles */,
-				F15151272512AA5B00DF0B9F /* Operation_Response_Exception_Snippet.stencil in CopyFiles */,
-				F19B01E72507F3D300121831 /* Operation_Response_StatusCode_Snippet.stencil in CopyFiles */,
-				F1871872250C2B6200318867 /* Operation_DefaultException_Snippet.stencil in CopyFiles */,
-				0A22B46424E1E66F00EC018E /* Jazzy_File.stencil in CopyFiles */,
-				F1A5FD7E24DCFEE600A5CC6C /* Model_Decoder_DateProperty.stencil in CopyFiles */,
-				F1A5FD7F24DCFEE600A5CC6C /* Model_Codable_Snippet.stencil in CopyFiles */,
-				F1A5FD8024DCFEE600A5CC6C /* Model_Decoder_Property.stencil in CopyFiles */,
-				F1A5FD8124DCFEE600A5CC6C /* Model_Encoder_DateProperty.stencil in CopyFiles */,
-				F1A5FD8224DCFEE600A5CC6C /* Model_Encoder_Property.stencil in CopyFiles */,
-				0A22B46224DCE52000EC018E /* Operation_BodyParam_Snippet.stencil in CopyFiles */,
-				0A22B45D24DB6FE900EC018E /* PatchUtil_File.stencil in CopyFiles */,
-				0A22B45B24DB605700EC018E /* Operation_Request_PatchBody_Snippet.stencil in CopyFiles */,
-				F1068F3F24D484D70082793F /* Operation_Request_Body_Snippet.stencil in CopyFiles */,
-				0A22B15324D36F8300EC018E /* Method_Options_File.stencil in CopyFiles */,
-				0A22B15524D36F8300EC018E /* Client_Options_File.stencil in CopyFiles */,
-				0A22B15624D36F8300EC018E /* Enumeration_File.stencil in CopyFiles */,
-				0A22B15724D36F8300EC018E /* Header_Snippet.stencil in CopyFiles */,
-				0A22B15824D36F8300EC018E /* Import_Snippet.stencil in CopyFiles */,
-				0A22B15924D36F8400EC018E /* Model_File.stencil in CopyFiles */,
-				0A22B15D24D36F8400EC018E /* Operation_Request_Snippet.stencil in CopyFiles */,
-				0A22B15E24D36F8400EC018E /* Operation_Response_Body_Snippet.stencil in CopyFiles */,
-				0A22B15F24D36F8400EC018E /* Operation_Response_PagedBody_Snippet.stencil in CopyFiles */,
-				0A22B16024D36F8400EC018E /* Operation_Response_Snippet.stencil in CopyFiles */,
-				0A22B16124D36F8400EC018E /* Operation_Response_NoBody_Snippet.stencil in CopyFiles */,
-				0A22B16224D36F8400EC018E /* Operation_Snippet.stencil in CopyFiles */,
-				0A22B16324D36F8400EC018E /* Package_File.stencil in CopyFiles */,
-				0A22B16424D36F8400EC018E /* README_File.stencil in CopyFiles */,
-				0A22B16524D36F8400EC018E /* Client_File.stencil in CopyFiles */,
+				0A4743472582919700CA86E5 /* Client_File.stencil in CopyFiles */,
+				0A4743482582919700CA86E5 /* Client_Options_File.stencil in CopyFiles */,
+				0A4743492582919700CA86E5 /* Custom_File.stencil in CopyFiles */,
+				0A47434A2582919700CA86E5 /* Enumeration_File.stencil in CopyFiles */,
+				0A47434B2582919700CA86E5 /* Header_Snippet.stencil in CopyFiles */,
+				0A47434C2582919700CA86E5 /* Import_Snippet.stencil in CopyFiles */,
+				0A47434D2582919700CA86E5 /* Jazzy_File.stencil in CopyFiles */,
+				0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */,
+				0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */,
+				0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */,
+				0A4743512582919700CA86E5 /* Model_Decoder_DateProperty.stencil in CopyFiles */,
+				0A4743522582919700CA86E5 /* Model_Decoder_Property.stencil in CopyFiles */,
+				0A4743532582919700CA86E5 /* Model_Encoder_DateProperty.stencil in CopyFiles */,
+				0A4743542582919700CA86E5 /* Model_Encoder_Property.stencil in CopyFiles */,
+				0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */,
+				0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */,
+				0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */,
+				0A4743582582919700CA86E5 /* Operation_BodyParam_Snippet.stencil in CopyFiles */,
+				0A4743592582919700CA86E5 /* Operation_DefaultException_Snippet.stencil in CopyFiles */,
+				0A47435A2582919700CA86E5 /* Operation_Request_Body_Snippet.stencil in CopyFiles */,
+				0A47435B2582919700CA86E5 /* Operation_Request_PatchBody_Snippet.stencil in CopyFiles */,
+				0A47435C2582919700CA86E5 /* Operation_Request_Snippet.stencil in CopyFiles */,
+				0A47435D2582919700CA86E5 /* Operation_Response_Body_Snippet.stencil in CopyFiles */,
+				0A47435E2582919700CA86E5 /* Operation_Response_Exception_Snippet.stencil in CopyFiles */,
+				0A47435F2582919700CA86E5 /* Operation_Response_NoBody_Snippet.stencil in CopyFiles */,
+				0A4743602582919700CA86E5 /* Operation_Response_PagedBody_Snippet.stencil in CopyFiles */,
+				0A4743612582919700CA86E5 /* Operation_Response_Snippet.stencil in CopyFiles */,
+				0A4743622582919700CA86E5 /* Operation_Response_StatusCode_Snippet.stencil in CopyFiles */,
+				0A4743632582919700CA86E5 /* Operation_Snippet.stencil in CopyFiles */,
+				0A4743642582919700CA86E5 /* Package_File.stencil in CopyFiles */,
+				0A4743652582919700CA86E5 /* PatchUtil_File.stencil in CopyFiles */,
+				0A4743662582919700CA86E5 /* README_File.stencil in CopyFiles */,
 				F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */,
 				F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */,
 			);
@@ -347,6 +349,7 @@
 		0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Operation_BodyParam_Snippet.stencil; sourceTree = "<group>"; };
 		0A22B46324E1E64900EC018E /* Jazzy_File.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Jazzy_File.stencil; sourceTree = "<group>"; };
 		0A4742D325814AA600CA86E5 /* PipelineContextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContextViewModel.swift; sourceTree = "<group>"; };
+		0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Operation_Request_Parameters_Snippet.stencil; sourceTree = "<group>"; };
 		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
 		0A7477222527D15F00819FC9 /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0A747F992534AA1C00819FC9 /* UsageSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSchema.swift; sourceTree = "<group>"; };
@@ -608,8 +611,6 @@
 		0A22B06F24CB71E100EC018E /* templates */ = {
 			isa = PBXGroup;
 			children = (
-				0A47430725816DCE00CA86E5 /* Model */,
-				0A47430625816DB300CA86E5 /* Operation */,
 				0A22B07124CB71E100EC018E /* Client_File.stencil */,
 				0A22B0B324D224F400EC018E /* Client_Options_File.stencil */,
 				0AB808CB2576E896008506CD /* Custom_File.stencil */,
@@ -619,8 +620,27 @@
 				0A22B46324E1E64900EC018E /* Jazzy_File.stencil */,
 				0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */,
 				F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */,
+				F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */,
+				F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */,
+				F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */,
+				F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */,
+				F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */,
+				0A22B07324CB71E100EC018E /* Model_File.stencil */,
 				F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */,
 				F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */,
+				0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */,
+				F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */,
+				F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */,
+				0A22B45A24DB59AA00EC018E /* Operation_Request_PatchBody_Snippet.stencil */,
+				0A22B0C724D3346A00EC018E /* Operation_Request_Snippet.stencil */,
+				0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */,
+				0A22B0C524D3342300EC018E /* Operation_Response_Body_Snippet.stencil */,
+				F15151262512AA2D00DF0B9F /* Operation_Response_Exception_Snippet.stencil */,
+				0A22B0C624D3343E00EC018E /* Operation_Response_NoBody_Snippet.stencil */,
+				0A22B0C424D333FF00EC018E /* Operation_Response_PagedBody_Snippet.stencil */,
+				0A22B0C824D33F1000EC018E /* Operation_Response_Snippet.stencil */,
+				F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */,
+				0A22B09924D20BBA00EC018E /* Operation_Snippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package_File.stencil */,
 				0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */,
 				0A22B07524CB71E100EC018E /* README_File.stencil */,
@@ -637,54 +657,6 @@
 				0A22B07B24CB721900EC018E /* URL+Extensions.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		0A47430625816DB300CA86E5 /* Operation */ = {
-			isa = PBXGroup;
-			children = (
-				0A4743092581833700CA86E5 /* Request */,
-				0A47430A2581833F00CA86E5 /* Response */,
-				0A22B09924D20BBA00EC018E /* Operation_Snippet.stencil */,
-				0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */,
-				F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */,
-			);
-			path = Operation;
-			sourceTree = "<group>";
-		};
-		0A47430725816DCE00CA86E5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */,
-				F1A5FD7D24DCFECB00A5CC6C /* Model_Decoder_DateProperty.stencil */,
-				F1A5FD7924DCFECB00A5CC6C /* Model_Decoder_Property.stencil */,
-				F1A5FD7B24DCFECB00A5CC6C /* Model_Encoder_DateProperty.stencil */,
-				F1A5FD7C24DCFECB00A5CC6C /* Model_Encoder_Property.stencil */,
-				0A22B07324CB71E100EC018E /* Model_File.stencil */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0A4743092581833700CA86E5 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */,
-				0A22B45A24DB59AA00EC018E /* Operation_Request_PatchBody_Snippet.stencil */,
-				0A22B0C724D3346A00EC018E /* Operation_Request_Snippet.stencil */,
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
-		0A47430A2581833F00CA86E5 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				0A22B0C524D3342300EC018E /* Operation_Response_Body_Snippet.stencil */,
-				F15151262512AA2D00DF0B9F /* Operation_Response_Exception_Snippet.stencil */,
-				0A22B0C624D3343E00EC018E /* Operation_Response_NoBody_Snippet.stencil */,
-				0A22B0C424D333FF00EC018E /* Operation_Response_PagedBody_Snippet.stencil */,
-				0A22B0C824D33F1000EC018E /* Operation_Response_Snippet.stencil */,
-				F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */,
-			);
-			path = Response;
 			sourceTree = "<group>";
 		};
 		0A7477232527D15F00819FC9 /* Products */ = {

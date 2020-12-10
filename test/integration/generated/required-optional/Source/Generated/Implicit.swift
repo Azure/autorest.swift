@@ -34,8 +34,7 @@ public final class Implicit {
         withOptions options: GetRequiredPathOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/required/path/{pathParameter}"
+        // Create request parameters
         let params = RequestParameters(
             (.path, "pathParameter", pathParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -43,6 +42,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/implicit/required/path/{pathParameter}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -108,8 +108,7 @@ public final class Implicit {
         withOptions options: PutOptionalQueryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/query"
+        // Create request parameters
         let params = RequestParameters(
             (.query, "queryParameter", options?.queryParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -117,6 +116,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/implicit/optional/query"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -182,8 +182,7 @@ public final class Implicit {
         withOptions options: PutOptionalHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/header"
+        // Create request parameters
         let params = RequestParameters(
             (.header, "queryParameter", options?.queryParameter, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -191,6 +190,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/implicit/optional/header"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -257,8 +257,7 @@ public final class Implicit {
         withOptions options: PutOptionalBodyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/implicit/optional/body"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -340,8 +339,7 @@ public final class Implicit {
         withOptions options: GetRequiredGlobalPathOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/global/required/path/{required-global-path}"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .path,
@@ -352,6 +350,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/global/required/path/{required-global-path}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -417,8 +416,7 @@ public final class Implicit {
         withOptions options: GetRequiredGlobalQueryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/global/required/query"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
@@ -429,6 +427,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/global/required/query"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -494,8 +493,7 @@ public final class Implicit {
         withOptions options: GetOptionalGlobalQueryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/reqopt/global/optional/query"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
@@ -506,6 +504,7 @@ public final class Implicit {
         )
 
         // Construct request
+        let urlTemplate = "/reqopt/global/optional/query"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")

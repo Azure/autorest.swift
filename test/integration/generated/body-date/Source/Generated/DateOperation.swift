@@ -33,14 +33,14 @@ public final class DateOperation {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate?>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/null"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -118,14 +118,14 @@ public final class DateOperation {
         withOptions options: GetInvalidDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/invaliddate"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/invaliddate"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -196,14 +196,14 @@ public final class DateOperation {
         withOptions options: GetOverflowDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/overflowdate"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/overflowdate"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -274,14 +274,14 @@ public final class DateOperation {
         withOptions options: GetUnderflowDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/underflowdate"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/underflowdate"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -353,8 +353,7 @@ public final class DateOperation {
         withOptions options: PutMaxDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/max"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -432,14 +431,14 @@ public final class DateOperation {
         withOptions options: GetMaxDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/max"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/max"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
@@ -511,8 +510,7 @@ public final class DateOperation {
         withOptions options: PutMinDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/min"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Content-Type", "application/json", .encode),
@@ -590,14 +588,14 @@ public final class DateOperation {
         withOptions options: GetMinDateOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SimpleDate>
     ) {
-        // Construct URL
-        let urlTemplate = "/date/min"
+        // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
+        let urlTemplate = "/date/min"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
             let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
             client.options.logger.error("Failed to construct HTTP request.")
