@@ -19,32 +19,8 @@ import Foundation
 public final class PetOperation {
     public let client: XmsErrorResponseExtensionsClient
 
-    public let commonOptions: ClientOptions
-
-    /// Options provided to configure this `XmsErrorResponseExtensionsClient`.
-    public let options: XmsErrorResponseExtensionsClientOptions
-
     init(client: XmsErrorResponseExtensionsClient) {
         self.client = client
-        self.options = client.options
-        self.commonOptions = client.commonOptions
-    }
-
-    public func url(
-        host hostIn: String? = nil,
-        template templateIn: String,
-        pathParams pathParamsIn: [String: String]? = nil,
-        queryParams queryParamsIn: [QueryParameter]? = nil
-    ) -> URL? {
-        return client.url(host: hostIn, template: templateIn, pathParams: pathParamsIn, queryParams: queryParamsIn)
-    }
-
-    public func request(
-        _ request: HTTPRequest,
-        context: PipelineContext?,
-        completionHandler: @escaping HTTPResultHandler<Data?>
-    ) {
-        return client.request(request, context: context, completionHandler: completionHandler)
     }
 
     /// Gets pets by id.
@@ -58,43 +34,27 @@ public final class PetOperation {
         withOptions options: GetPetByIdOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Pet?>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
-        let pathParams = [
-            "petId": petId,
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.path, "petId", petId, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .get, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 202, 400, 404, 501] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -102,7 +62,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -137,17 +96,13 @@ public final class PetOperation {
                         )
                     }
                 }
-                if [
-                    400
-                ].contains(statusCode) {
+                if [400].contains(statusCode) {
                     let decoded = String(data: data, encoding: .utf8)
                     dispatchQueue.async {
                         completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
                     }
                 }
-                if [
-                    404
-                ].contains(statusCode) {
+                if [404].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
@@ -160,9 +115,7 @@ public final class PetOperation {
                         }
                     }
                 }
-                if [
-                    501
-                ].contains(statusCode) {
+                if [501].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
@@ -193,43 +146,27 @@ public final class PetOperation {
         withOptions options: DoSomethingOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PetAction>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
-        let pathParams = [
-            "whatAction": whatAction,
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        let queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.path, "whatAction", whatAction, .encode), (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -237,7 +174,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -262,9 +198,7 @@ public final class PetOperation {
                         }
                     }
                 }
-                if [
-                    500
-                ].contains(statusCode) {
+                if [500].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)
@@ -303,49 +237,28 @@ public final class PetOperation {
         withOptions options: HasModelsParamOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        // Construct URL
-        let urlTemplate = "/errorStatusCodes/Pets/hasModelsParam"
-        let pathParams = [
-            "$host": client.endpoint.absoluteString
-        ]
-        // Construct query
-        var queryParams: [QueryParameter] = [
-        ]
+        // Create request parameters
+        let params = RequestParameters(
+            (.query, "models", options?.models, .encode),
+            (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
+            (.header, "Accept", "application/json", .encode)
+        )
 
-        // Construct headers
-        var headers = HTTPHeaders()
-        headers["Accept"] = "application/json"
-        // Process endpoint options
-        // Query options
-        if let models = options?.models {
-            queryParams.append("models", models)
-        }
-
-        // Header options
         // Construct request
-        guard let requestUrl = url(
-            host: "{$host}",
-            template: urlTemplate,
-            pathParams: pathParams,
-            queryParams: queryParams
-        ) else {
-            self.options.logger.error("Failed to construct request url")
+        let urlTemplate = "/errorStatusCodes/Pets/hasModelsParam"
+        guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            client.options.logger.error("Failed to construct HTTP request.")
             return
         }
-
-        guard let request = try? HTTPRequest(method: .post, url: requestUrl, headers: headers) else {
-            self.options.logger.error("Failed to construct Http request")
-            return
-        }
-
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200, 500] as AnyObject
         ])
-        context.add(cancellationToken: options?.cancellationToken, applying: self.options)
+        context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
-        self.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.commonOptions.dispatchQueue ?? DispatchQueue.main
+        client.request(request, context: context) { result, httpResponse in
+            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -353,7 +266,6 @@ public final class PetOperation {
                 }
                 return
             }
-
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -373,9 +285,7 @@ public final class PetOperation {
                         )
                     }
                 }
-                if [
-                    500
-                ].contains(statusCode) {
+                if [500].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)
