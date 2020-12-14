@@ -57,8 +57,6 @@ enum ResponseBodyType: String {
             }
         } else if type == .byteArray {
             return .byteArrayBody
-        } else if input == "[Date]" {
-            return .plainBody
         } else {
             return .plainBody
         }

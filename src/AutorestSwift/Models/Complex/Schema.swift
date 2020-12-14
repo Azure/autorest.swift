@@ -117,11 +117,7 @@ class Schema: Codable, LanguageShortcut {
         case .unixTime:
             swiftType = "UnixTime"
         case .byteArray:
-            if (self as? ByteArraySchema)?.format == .base64url {
-                swiftType = "Data"
-            } else {
-                swiftType = "Data"
-            }
+            swiftType = "Data"
         case .integer:
             swiftType = "Int"
         case .time:
