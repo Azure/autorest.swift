@@ -37,10 +37,18 @@ enum RequestBodyType: String {
 
 /// View Model for the method request creation.
 struct RequestViewModel {
+    /// The URI portion of the request
     let uri: String?
+
+    /// The path portion of the request
     let path: String
+
+    /// The method name for the request (GET, PUT, etc)
     let method: String
+
+    /// The body parameter associated with this request, if any
     let bodyParam: BodyParamViewModel?
+
     /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 

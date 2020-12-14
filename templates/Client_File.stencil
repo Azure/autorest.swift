@@ -1,0 +1,98 @@
+{% include "Header_Snippet.stencil" %}
+
+{% include "Import_Snippet.stencil" %}
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+
+{{ model.comment }}
+public final class {{ model.name }}: {{ model.protocols }} {
+
+{% if model.paging != nil %}
+    public func continuationUrl(forRequestUrl requestUrl: URL, withContinuationToken token: String) -> URL? {
+        return URL(string: token)
+    }
+{% endif %}
+
+    /// API version of the {{ model.description }} to invoke. Defaults to the latest.
+    public enum ApiVersion: String {
+        /// API version "{{ model.apiVersion }}"
+        case {{ model.apiVersionName }} = "{{ model.apiVersion }}"
+
+        /// The most recent API version of the {{ model.description }}
+        public static var latest: ApiVersion {
+             return .{{ model.apiVersionName }}
+        }
+    }
+
+    /// Options provided to configure this `{{ model.name }}`.
+    public let options: {{ model.name }}Options
+
+    // MARK: Initializers
+    /// Create a {{ model.name }} client.
+    /// - Parameters:
+    ///   - endpoint: Base URL for the {{ model.name }}.
+    ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
+    ///   - options: Options used to configure the client.
+    public init(
+{% for param in model.globalParameters %}
+    {% if param.optional == false %}
+        {{ param.name }} : {{ param.type }},
+    {% endif %}
+{% endfor %}
+    {% if model.host != "" %}
+        url: URL? = nil,
+    {% else %}
+        endpoint: URL,
+    {% endif %}
+        authPolicy: Authenticating,
+        withOptions options: {{ model.name }}Options
+    ) throws {
+    {% if model.host != "" %}
+        let defaultHost = URL(string: {{ model.host }})
+        guard let endpoint = url ?? defaultHost else {
+            fatalError("Unable to determine base URL. ")
+        }
+    {% endif %}
+    {% for param in model.globalParameters %}
+        {% if param.optional == false %}
+            self.{{ param.name }} = {{ param.name }}
+        {% endif %}
+    {% endfor %}
+        self.options = options
+        super.init(
+            endpoint: endpoint,
+            transport: options.transportOptions.transport ?? URLSessionTransport(),
+            policies: [
+                UserAgentPolicy(for: {{ model.name }}.self, telemetryOptions: options.telemetryOptions),
+                RequestIdPolicy(),
+                AddDatePolicy(),
+                authPolicy,
+                ContentDecodePolicy(),
+                LoggingPolicy(),
+                NormalizeETagPolicy()
+            ],
+            logger: options.logger,
+            options: options
+        )
+    }
+
+{% for param in model.globalParameters %}
+    // {{ param.comment }}
+    public var {{ param.name }}: {{ param.type }}{{ param.defaultValue }}
+{% endfor %}
+
+{% for property in model.namedOperationGroupShortcuts %}
+    public lazy var {{ property.name }} = {{ property.type }}(client: self)
+{%endfor %}
+
+    // MARK: Public Client Methods
+{% for group in model.operationGroups %}
+    // MARK: {{ group.name }}
+    {% for op in group.operations %}
+        {% include "Operation_Snippet.stencil" op %}
+    {% endfor %}
+{% endfor %}
+}

@@ -28,11 +28,19 @@ import Foundation
 
 /// View Model for method exception response handling.
 struct ExceptionResponseViewModel {
+    /// List of allowed response status codes
     let statusCodes: [String]
-    let objectType: String
-    /// Identifies the correct snippet to use when rendering the view model
+
+    /// Swift type annotation, including optionality, if applicable
+    let type: String
+
+    /// The comment to use for the return type
     let description: String?
+
+    /// Indicates if the operation has a default exception
     let hasDefaultException: Bool
+
+    /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
 
     init(from response: Response) {
@@ -46,21 +54,20 @@ struct ExceptionResponseViewModel {
         let schemaResponse = response as? SchemaResponse
         self.description = schemaResponse?.description
 
-        if let objectType = schemaResponse?.schema.swiftType(),
+        if let type = schemaResponse?.schema.swiftType(),
             let schema = schemaResponse?.schema {
-            self.strategy = ResponseBodyType.strategy(for: objectType, and: schema).rawValue
-            self.objectType = objectType
+            self.strategy = ResponseBodyType.strategy(for: type, and: schema).rawValue
+            self.type = type
         } else {
             self.strategy = ResponseBodyType.noBody.rawValue
-            self.objectType = "Void"
+            self.type = "Void"
         }
 
         if let errorResponseMetadata = response.extensions?["x-ms-error-response"]?.value as? Bool,
             errorResponseMetadata {
-            guard objectType != "Void"
+            guard type != "Void"
             else { fatalError("Did not find object type for error response") }
         }
-
         self.hasDefaultException = statusCodes.contains("default")
     }
 }

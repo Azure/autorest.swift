@@ -60,7 +60,7 @@ class SwiftGenerator: CodeGenerator {
             }
             let viewModel = ObjectViewModel(from: object)
             try render(
-                template: "ModelFile",
+                template: "Model_File",
                 toSubfolder: .models,
                 withFilename: name,
                 andParams: ["model": viewModel]
@@ -81,7 +81,7 @@ class SwiftGenerator: CodeGenerator {
                     }
                     let viewModel = ObjectViewModel(from: parentSchema)
                     try render(
-                        template: "ModelFile",
+                        template: "Model_File",
                         toSubfolder: .models,
                         withFilename: name,
                         andParams: ["model": viewModel]
@@ -101,7 +101,7 @@ class SwiftGenerator: CodeGenerator {
             }
             let viewModel = ObjectViewModel(from: group)
             try render(
-                template: "ModelFile",
+                template: "Model_File",
                 toSubfolder: .models,
                 withFilename: name,
                 andParams: ["model": viewModel]
@@ -124,16 +124,9 @@ class SwiftGenerator: CodeGenerator {
 
         // Create PatchUtil.swift file
         try render(
-            template: "PatchUtilFile",
+            template: "PatchUtil_File",
             toSubfolder: .util,
             withFilename: "PatchUtil",
-            andParams: [:]
-        )
-        // Create Primitives+Extension.swift file
-        try render(
-            template: "Primitives+ExtensionFile",
-            toSubfolder: .util,
-            withFilename: "Primitives+Extension",
             andParams: [:]
         )
 
@@ -141,7 +134,7 @@ class SwiftGenerator: CodeGenerator {
         let enumViewModel = EnumerationFileViewModel(from: model.schemas)
         if enumViewModel.enums.count > 0 {
             try render(
-                template: "EnumerationFile",
+                template: "Enumeration_File",
                 toSubfolder: .models,
                 withFilename: "Enumerations",
                 andParams: ["models": enumViewModel]
@@ -153,7 +146,7 @@ class SwiftGenerator: CodeGenerator {
         // Create Client.swift file
         let clientViewModel = ServiceClientFileViewModel(from: model)
         try render(
-            template: "ServiceClientFile",
+            template: "Client_File",
             toSubfolder: .generated,
             withFilename: clientViewModel.name,
             andParams: [
@@ -163,23 +156,23 @@ class SwiftGenerator: CodeGenerator {
 
         // Create ClientMethodOptions.swift file
         for operationGroup in clientViewModel.operationGroups {
-            try renderClientMethodOptionsFile(for: operationGroup, using: "ClientMethodOptionsFile")
+            try renderClientMethodOptionsFile(for: operationGroup, using: "Method_Options_File")
         }
 
         // Create ClientOperationGroup.swift file for each operation group with name
         for (groupName, operationGroup) in clientViewModel.namedOperationGroups {
             try render(
-                template: "NamedOperationGroupFile",
+                template: "Named_OperationGroup_File",
                 toSubfolder: .generated,
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethodOptionsFile")
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethod_Options_File")
         }
 
         // Create ClientOptions.swift file
         try render(
-            template: "ClientOptionsFile",
+            template: "Client_Options_File",
             toSubfolder: .options,
             withFilename: "\(clientViewModel.name)Options",
             andParams: ["model": clientViewModel]
@@ -189,10 +182,21 @@ class SwiftGenerator: CodeGenerator {
             // Create README.md file
             let readmeViewModel = ReadmeFileViewModel(from: model)
             try render(
-                template: "README",
+                template: "README_File",
                 toSubfolder: .root,
                 withFilename: "README.md",
                 andParams: ["model": readmeViewModel]
+            )
+        }
+
+        if !exists(filename: "Custom.swift", inSubfolder: .source) {
+            // Create Custom.swift file, which allows us to wipe and
+            // re-generate the Generated folder.
+            try render(
+                template: "Custom_File",
+                toSubfolder: .source,
+                withFilename: "Custom.swift",
+                andParams: ["": ""]
             )
         }
 
@@ -200,7 +204,7 @@ class SwiftGenerator: CodeGenerator {
         if !exists(filename: "Package.swift", inSubfolder: .root) {
             let packageViewModel = PackageFileViewModel(from: model)
             try render(
-                template: "Package",
+                template: "Package_File",
                 toSubfolder: .root,
                 withFilename: "Package.swift",
                 andParams: ["model": packageViewModel]
@@ -208,7 +212,7 @@ class SwiftGenerator: CodeGenerator {
 
             // Create Jazzy config file
             try render(
-                template: "JazzyFile",
+                template: "Jazzy_File",
                 toSubfolder: .jazzy,
                 withFilename: "\(model.packageName).yml",
                 andParams: ["model": packageViewModel]

@@ -111,14 +111,13 @@ class Parameter: Value, CustomDebugStringConvertible {
         let notGrouped = groupedBy == nil
         let isRequired = required
 
-        var isInGroupSchemaOptions = false
+        var notInGroupSchemaOptions = true
         if let group = model?.schemas.schema(for: name, withType: .group),
             group.name.hasSuffix("Options"),
             paramLocation != .path {
-            isInGroupSchemaOptions = true
+            notInGroupSchemaOptions = false
         }
-
-        return isRequired && inMethod && notConstant && notGrouped && !isInGroupSchemaOptions
+        return isRequired && inMethod && notConstant && notGrouped && notInGroupSchemaOptions
     }
 
     internal func belongsInOptions() -> Bool {

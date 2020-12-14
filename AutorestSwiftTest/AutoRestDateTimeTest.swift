@@ -40,7 +40,6 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getNull200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getNull")
-
         client.datetime.getNull { result, httpResponse in
             switch result {
             case let .success(data):
@@ -57,7 +56,6 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getInvalidDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getInvalid")
-
         client.datetime.getInvalid { result, httpResponse in
             switch result {
             case .success:
@@ -72,7 +70,6 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getOverflow200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getOverflow")
-
         client.datetime.getOverflow { result, httpResponse in
             switch result {
             case .success:
@@ -88,7 +85,6 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getUnderflow200() throws {
         let expectation = XCTestExpectation(description: "Call date.getUnderflow")
-
         client.datetime.getUnderflow { result, httpResponse in
             switch result {
             case .success:
@@ -103,15 +99,11 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_putMaxDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.putMaxDate")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let date = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
-        client.datetime.put(utcMaxDateTime: date) { result, httpResponse in
+        let date = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999Z")!
+        let isoDate = Iso8601Date(date)!
+        client.datetime.put(utcMaxDateTime: isoDate) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -126,18 +118,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getUtcUppercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getUtcUppercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999Z")!
         client.datetime.getUtcUppercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -150,15 +137,11 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_putMinDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.putMinDate")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let date = iso8601DateFormatter.date(from: "0001-01-01T00:00:00.000Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
-        client.datetime.put(utcMinDateTime: date) { result, httpResponse in
+        let date = iso8601DateFormatter.date(from: "0001-01-01T00:00:00.000Z")!
+        let isoDate = Iso8601Date(date)!
+        client.datetime.put(utcMinDateTime: isoDate) { result, httpResponse in
             switch result {
             case .success:
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -173,18 +156,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getUtcMinDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getUtcMinDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime]
-        guard let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00Z")!
         client.datetime.getUtcMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -197,18 +175,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalPositiveOffsetUppercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalPositiveOffsetUppercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999+14:00") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999+14:00")!
         client.datetime.getLocalPositiveOffsetUppercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -221,18 +194,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalPositiveOffsetMinDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalPositiveOffsetMinDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime]
-        guard let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00+14:00") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00+14:00")!
         client.datetime.getLocalPositiveOffsetMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -245,18 +213,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalNegativeOffsetUppercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalNegativeOffsetUppercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999-14:00") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31T23:59:59.999-14:00")!
         client.datetime.getLocalNegativeOffsetUppercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -269,18 +232,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalNegativeOffsetLowercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalNegativeOffsetLowercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999-14:00".capitalized) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999-14:00".capitalized)!
         client.datetime.getLocalNegativeOffsetLowercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -293,18 +251,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalPositiveOffsetLowercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalPositiveOffsetLowercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999+14:00".capitalized) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999+14:00".capitalized)!
         client.datetime.getLocalPositiveOffsetLowercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -317,18 +270,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalNoOffsetMinDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalNoOffsetMinDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime]
-        guard let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00Z")!
         client.datetime.getLocalNoOffsetMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -341,18 +289,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getUtcLowercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getUtcLowercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999z".capitalized) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999z".capitalized)!
         client.datetime.getUtcLowercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -365,18 +308,13 @@ class AutoRestDateTimeTest: XCTestCase {
 
     func test_getLocalNegativeOffsetMinDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetime.getLocalNegativeOffsetMinDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime]
-        guard let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00-14:00Z") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = iso8601DateFormatter.date(from: "0001-01-01T00:00:00-14:00Z")!
         client.datetime.getLocalNegativeOffsetMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)

@@ -40,7 +40,6 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getNull200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getNull")
-
         client.datetimerfc1123.getNull { result, httpResponse in
             switch result {
             case let .success(data):
@@ -57,7 +56,6 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getInvalidDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getInvalid")
-
         client.datetimerfc1123.getInvalid { result, httpResponse in
             switch result {
             case .success:
@@ -72,7 +70,6 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getOverflow200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getOverflow")
-
         client.datetimerfc1123.getOverflow { result, httpResponse in
             switch result {
             case .success:
@@ -88,7 +85,6 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getUnderflow200() throws {
         let expectation = XCTestExpectation(description: "Call date.getUnderflow")
-
         client.datetimerfc1123.getUnderflow { result, httpResponse in
             switch result {
             case .success:
@@ -103,12 +99,7 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_putMaxDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.putMaxDate")
-
-        guard let date = Date.Format.rfc1123.formatter.date(from: "Fri, 31 Dec 9999 23:59:59 GMT") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let date = Rfc1123Date(string: "Fri, 31 Dec 9999 23:59:59 GMT")!
         client.datetimerfc1123.put(utcMaxDateTime: date) { result, httpResponse in
             switch result {
             case .success:
@@ -124,13 +115,9 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getUtcUppercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcUppercaseMaxDateTime")
-
         let iso8601DateFormatter = ISO8601DateFormatter()
         iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "Fri, 31 Dec 9999 23:59:59 GMT") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
+        let expectedDate = Rfc1123Date(string: "Fri, 31 Dec 9999 23:59:59 GMT")!
 
         client.datetimerfc1123.getUtcUppercaseMaxDateTime { result, httpResponse in
             switch result {
@@ -148,11 +135,7 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_putUtcMinDate200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.putUtcMinDate")
-
-        guard let date = Date.Format.rfc1123.formatter.date(from: "Mon, 01 Jan 0001 00:00:00 GMT") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
+        let date = Rfc1123Date(string: "Mon, 01 Jan 0001 00:00:00 GMT")!
         client.datetimerfc1123.put(utcMinDateTime: date) { result, httpResponse in
             switch result {
             case .success:
@@ -168,12 +151,7 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getUtcMinDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcMinDateTime")
-
-        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "Mon, 01 Jan 0001 00:00:00 GMT") else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = Rfc1123Date(string: "Mon, 01 Jan 0001 00:00:00 GMT")!
         client.datetimerfc1123.getUtcMinDateTime { result, httpResponse in
             switch result {
             case let .success(data):
@@ -190,13 +168,7 @@ class AutoRestRfC1123DateTimeTest: XCTestCase {
 
     func test_getUtcLowercaseMaxDateTime200() throws {
         let expectation = XCTestExpectation(description: "Call datetimerfc1123.getUtcLowercaseMaxDateTime")
-
-        guard let expectedDate = Date.Format.rfc1123.formatter.date(from: "fri, 31 dec 9999 23:59:59 gmt".capitalized)
-        else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let expectedDate = Rfc1123Date(string: "fri, 31 dec 9999 23:59:59 gmt".capitalized)!
         client.datetimerfc1123.getUtcLowercaseMaxDateTime { result, httpResponse in
             switch result {
             case let .success(data):

@@ -11,7 +11,7 @@
 import AzureCore
 import Foundation
 
-public enum FlattenedProductPropertiesProvisioningStateValues: String, Codable {
+public enum FlattenedProductPropertiesProvisioningStateValues: String, Codable, RequestStringConvertible {
     case succeeded = "Succeeded"
 
     case failed = "Failed"
@@ -33,4 +33,8 @@ public enum FlattenedProductPropertiesProvisioningStateValues: String, Codable {
     case deleted = "Deleted"
 
     case oK = "OK"
+
+    public var requestString: String {
+        return rawValue
+    }
 }

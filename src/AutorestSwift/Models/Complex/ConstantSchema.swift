@@ -112,39 +112,4 @@ class ConstantSchema: Schema {
 
         try super.encode(to: encoder)
     }
-
-    /// Convert the Constant into String format in Swift
-    /// - Parameter skipUrlEncoding: a flag to indicate if the string should skip url encoding
-    /// - Parameter ParameterLocation: location of the parameter with the Constant Schema as value
-    /// - Returns: A swift string in generated code
-    public func formatValue(skipUrlEncoding: Bool, paramLocation: ParameterLocation?) -> String {
-        let constantValue: String = value.value
-        let type = valueType.type
-
-        if type == .string,
-            skipUrlEncoding {
-            return "\"\(constantValue)\".removingPercentEncoding ?? \"\""
-        } else {
-            switch type {
-            case .date,
-                 .unixTime,
-                 .dateTime,
-                 .byteArray,
-                 .string:
-                return "\"\(constantValue)\""
-            case .number:
-                let numberSchema = valueType
-                let swiftType = numberSchema.swiftType()
-                if paramLocation == .body {
-                    return "\(swiftType)(\(constantValue))"
-                } else {
-                    return "String(\(swiftType)(\(constantValue)))"
-                }
-            case .boolean:
-                return (paramLocation == .body) ? "\(constantValue)" : "String(\(constantValue))"
-            default:
-                return "String(\(constantValue))"
-            }
-        }
-    }
 }

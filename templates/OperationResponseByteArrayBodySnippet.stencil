@@ -1,4 +1,0 @@
-{% include "OperationResponseNullableBodySnippet.stencil" %}
-dispatchQueue.async {
-    completionHandler(.success(data), httpResponse)
-}

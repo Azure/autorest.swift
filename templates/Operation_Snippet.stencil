@@ -1,0 +1,39 @@
+{{ op.comment }}
+/// - Parameters:
+{{ op.signatureComment }}
+///    - options: A list of options for the operation
+///    - completionHandler: A completion handler that receives a status code on
+///     success.
+public func {{ op.name }}(
+{% if op.params.body != nil %}
+    {% include "Operation_BodyParam_Snippet.stencil" op %}
+{% endif %}
+{% for param in op.params.signature %}
+    {{ param.name }}: {{ param.type }}{{ param.defaultValue }},
+{% endfor %}
+    withOptions options: {{ op.clientMethodOptions.name }}? = nil,
+    completionHandler: @escaping HTTPResultHandler<{{ op.returnType.type }}>
+) {
+    {% include "Operation_Request_Parameters_Snippet.stencil" op %}
+    {# Handle body parameter #}
+{% if op.request.strategy == "body" %}
+    {% include "Operation_Request_Body_Snippet.stencil" op %}
+{% elif op.request.strategy == "noBody" %}
+    {% include "Operation_Request_Snippet.stencil" op %}
+{% elif op.request.strategy == "patchBody" %}
+    {% include "Operation_Request_PatchBody_Snippet.stencil" op %}
+{% else %}
+    // TODO: Couldn't find template for {{ op.request.strategy }}
+    assertFailure("Autorest generated bad code.")
+{% endif %}
+    // Send request
+    let context = PipelineContext.of(keyValues: [
+        ContextKey.allowedStatusCodes.rawValue: {{ op.pipelineContext.allowedStatusCodes}} as AnyObject
+    ])
+    context.add(cancellationToken: options?.cancellationToken, applying: client.options)
+    context.merge(with: options?.context)
+    client.request(request, context: context) { result, httpResponse in
+        let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+        {% include "Operation_Response_Snippet.stencil" op %}
+    }
+}

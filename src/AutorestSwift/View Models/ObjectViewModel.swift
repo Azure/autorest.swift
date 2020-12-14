@@ -38,7 +38,7 @@ struct ObjectViewModel {
     let hasConstants: Bool
 
     var inheritance = "NSObject"
-    var objectType = "struct"
+    var typeKeywords = "struct"
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
@@ -74,7 +74,7 @@ struct ObjectViewModel {
             type = type.trimmingCharacters(in: .whitespacesAndNewlines)
             let key = name.trimmingCharacters(in: .whitespacesAndNewlines)
             if key == type {
-                objectType = "final class"
+                typeKeywords = "final class"
                 return
             }
         }
@@ -115,6 +115,7 @@ struct ObjectViewModel {
     }
 
     private mutating func checkForErrorType(with schema: UsageSchema) {
+        // FIXME: What if there is more than 1 usage??
         var isErrorType = false
         if let usage = schema.usage,
             usage.count > 0 {

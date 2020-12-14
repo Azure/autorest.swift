@@ -26,89 +26,62 @@
 
 import Foundation
 
+// swiftlint:disable cyclomatic_complexity
 struct OperationParameters {
-    let header: Params
-    let query: Params
-    let explodeQuery: Params
-    let path: [KeyValueViewModel]
-    let body: BodyParams?
+    let all: [ParameterViewModel]
     let signature: [ParameterViewModel]
-    let hasOptionalParams: Bool
-    let methodDecoding: [KeyValueViewModel]
+    let explode: [ParameterViewModel]
+    var body: BodyParams?
+    var declaration: String
 
-    /// Build a list of required and optional query params and headers from a list of parameters
+    /// Initialize with a list of `ParameterType`.
     init(parameters: [ParameterType], operation: Operation, model: CodeModel) {
-        var header = Params()
-        var query = Params()
-        var explodeQuery = Params()
-        var path = [KeyValueViewModel]()
-        var body = [KeyValueViewModel]()
-        var methodDecoding = [KeyValueViewModel]()
+        var params = [ParameterViewModel]()
+        var explodeParams = [ParameterViewModel]()
 
         for param in parameters {
             guard let paramLocation = param.paramLocation else { continue }
-            let viewModel = KeyValueViewModel(from: param, with: operation)
+            let viewModel = ParameterViewModel(from: param, with: operation)
 
             switch paramLocation {
             case .query:
                 if param.explode {
-                    viewModel.optional ? explodeQuery.optional.append(viewModel) : explodeQuery.required
-                        .append(viewModel)
+                    explodeParams.append(viewModel)
                 } else {
-                    viewModel.optional ? query.optional.append(viewModel) : query.required
-                        .append(viewModel)
+                    params.append(viewModel)
                 }
-            case .header:
-                viewModel.optional ? header.optional.append(viewModel) : header.required
-                    .append(viewModel)
-            case .path,
-                 .uri:
-                path.append(viewModel)
+            case .header, .path, .uri:
+                params.append(viewModel)
             case .body:
-                if param.required {
-                    body.append(viewModel)
-                }
+                // TODO: Body params are handled differently and shouldn't go into RequestParameters at this time
+                // We may be able to refactor and change this.
+                continue
             default:
                 continue
             }
         }
 
-        let allParams = query.required + path + body + header.required
-        for param in allParams where param.needDecodingInMethod {
-            methodDecoding.append(param)
-        }
-
-        // Add a blank key,value in order for Stencil generates an empty dictionary for PathParams constructor
-        if path.isEmpty {
-            path.append(KeyValueViewModel(key: "", value: "\"\""))
-        }
-
-        // If there is no optional query params, change query param declaration to 'let'
-        // For header, the declaration is 'let' when both required and optional headers are empty, since the required
-        // header parameters will be initialized out of header initializer
-        query.declaration = query.optional.isEmpty && explodeQuery.optional.isEmpty ? "let" : "var"
-        header.declaration = header.isEmpty ? "let" : "var"
-
         // Set the body param, if applicable
         var bodyParamName: String?
-        assert(body.count <= 1, "Expected, at most, one body parameter.")
-        if body.count > 0 {
-            bodyParamName = body.first?.key
+        let bodyParams = params.filter { $0.location == "body" }
+        assert(bodyParams.count <= 1, "Expected, at most, one body parameter.")
+        if bodyParams.count > 0 {
+            bodyParamName = bodyParams.first?.name
         } else {
             bodyParamName = operation.request?.bodyParamName(for: operation)
         }
-        if let bodyParam = operation.request?.bodyParam,
-            bodyParamName != nil {
+        if let bodyParam = operation.request?.bodyParam {
             self.body = BodyParams(
                 from: bodyParam,
-                withName: bodyParamName!,
                 parameters: parameters
             )
+            // update the body param name to fit Swift conventions
+            body?.param.name = bodyParamName ?? bodyParam.name
         } else {
             self.body = nil
         }
 
-        var signatureParameterViewModel = [ParameterViewModel]()
+        var signatureViewModel = [ParameterViewModel]()
         for param in parameters {
             // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
             // look for  all the properties from that group schema which is in 'path' as the signature of the method
@@ -118,73 +91,54 @@ struct OperationParameters {
                     switch property {
                     case let .grouped(groupProperty):
                         for param in groupProperty.originalParameter where param.paramLocation == .path {
-                            signatureParameterViewModel
-                                .append(ParameterViewModel(from: param))
+                            signatureViewModel.append(ParameterViewModel(from: param))
                         }
                     default:
                         continue
                     }
                 }
-            } else if param.belongsInSignature() {
-                signatureParameterViewModel.append(ParameterViewModel(from: param))
+            } else if param.belongsInSignature(model: model) {
+                signatureViewModel.append(ParameterViewModel(from: param))
             }
         }
-        self.signature = signatureParameterViewModel
-
-        self.methodDecoding = methodDecoding
-        self.header = header
-        self.query = query
-        self.explodeQuery = explodeQuery
-        self.path = path
-        self.hasOptionalParams = !(query.optional.isEmpty && header.optional.isEmpty && explodeQuery.optional.isEmpty)
-    }
-}
-
-struct Params {
-    // Query Params/Header in initializer
-    var required: [KeyValueViewModel]
-    // Query Params/Header need to add Nil check
-    var optional: [KeyValueViewModel]
-    // Whether to 'var' or 'let' in generated code for the param declaration
-    var declaration: String = "var"
-
-    init() {
-        self.required = [KeyValueViewModel]()
-        self.optional = [KeyValueViewModel]()
-    }
-
-    var isEmpty: Bool {
-        return required.isEmpty && optional.isEmpty
+        self.all = params
+        self.signature = signatureViewModel
+        self.explode = explodeParams
+        self.declaration = explode.isEmpty ? "let" : "var"
     }
 }
 
 enum BodyParamStrategy: String {
     case plain
+    case plainNullable
     case flattened
     case unixTime
-    case plainNullable
     case byteArray
+    case base64ByteArray
     case constant
     case decimal
     case data
     case string
-    case date
-    case dateTime
-    case dateTimeRfc1123
     case time
 }
 
 struct BodyParams {
-    let param: ParameterViewModel
+    /// The `ParameterViewModel` corresponding to the body param
+    var param: ParameterViewModel
+
+    /// Identifies the correct snippet to use when rendering the view model
     let strategy: String
+
+    /// A list of `VirtualParam` that correlate to a flattened body parmeter
     let children: [VirtualParam]
 
+    /// Returns `true` if the body parameter is flattened
     var flattened: Bool {
         return !children.isEmpty
     }
 
-    init(from param: ParameterType, withName name: String, parameters: [ParameterType]) {
-        self.param = ParameterViewModel(from: param, withName: name)
+    init(from param: ParameterType, parameters: [ParameterType]) {
+        self.param = ParameterViewModel(from: param)
         var properties = param.schema.properties
         if let objectSchema = param.schema as? ObjectSchema {
             properties = objectSchema.flattenedProperties
@@ -202,13 +156,14 @@ struct BodyParams {
             strategy = .flattened
         } else if param.nullable {
             strategy = .plainNullable
+        } else if param.schema is ConstantSchema {
+            strategy = .constant
         } else {
             strategy = param.schema.bodyParamStrategy
             if strategy == .plain, !param.required {
                 strategy = .plainNullable
             }
         }
-
         self.strategy = strategy.rawValue
         self.children = virtParams
     }
@@ -251,7 +206,7 @@ struct OperationViewModel {
 
     let clientMethodOptions: ClientMethodOptionsViewModel
 
-    let pipelineContext: [KeyValueViewModel]
+    let pipelineContext: PipelineContextViewModel
 
     let request: RequestViewModel
     let responses: [ResponseViewModel]
@@ -296,24 +251,18 @@ struct OperationViewModel {
         }
 
         // Configure PipelineContext
-        var pipelineContext = [KeyValueViewModel]()
-        pipelineContext.append(KeyValueViewModel(
-            key: "ContextKey.allowedStatusCodes.rawValue",
-            value: "[\(statusCodes.joined(separator: ","))]"
-        ))
-        self.pipelineContext = pipelineContext
+        self.pipelineContext = PipelineContextViewModel(allowedStatusCodes: statusCodes)
 
         self.responses = responses
         self.exceptions = exceptions
         self.defaultException = defaultException
-        let defaultExceptionHasBody = (defaultException != nil) && defaultException?.objectType != "Void"
+        let defaultExceptionHasBody = (defaultException != nil) && defaultException?.type != "Void"
 
         let returnType = ReturnTypeViewModel(from: self.responses)
 
         // create help struct to manage required and optional params in
         // headers/query/path, etc.
-        let operationParameters = OperationParameters(parameters: params, operation: operation, model: model)
-        self.params = operationParameters
+        self.params = OperationParameters(parameters: params, operation: operation, model: model)
 
         var signatureComments: [String] = []
         if let bodyParam = self.params.body {
@@ -322,8 +271,8 @@ struct OperationViewModel {
                 signatureComments.append("   - \(bodyParam.param.name) : \(bodyParam.param.comment.withoutPrefix)")
             }
         }
-        for param in operationParameters.signature where param.comment.description != "" {
-            signatureComments.append("   - \(param.name) : \(param.comment.withoutPrefix)")
+        for param in params.inSignature(model: model) where param.description != "" {
+            signatureComments.append("   - \(param.name) : \(param.description)")
         }
         self.signatureComment = ViewModelComment(from: signatureComments.joined(separator: "\n"))
 
@@ -336,7 +285,7 @@ struct OperationViewModel {
 
         self.returnType = returnType
         self.defaultExceptionHasBody = defaultExceptionHasBody
-        self.needHttpResponseData = exceptions.count > 1 || (returnType.name != "Void") || defaultExceptionHasBody
+        self.needHttpResponseData = exceptions.count > 1 || (returnType.type != "Void") || defaultExceptionHasBody
     }
 }
 

@@ -175,8 +175,8 @@ class AutoRestIntegerTest: XCTestCase {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
 
-                let expectedDate = ISO8601DateFormatter().date(from: "2016-04-13T00:00:00Z")
-                XCTAssertEqual(expectedDate, data)
+                let expectedDate = Iso8601Date(string: "2016-04-13T00:00:00Z")!
+                XCTAssertEqual(expectedDate.value, data.value)
             case .failure:
                 XCTFail("Call getUnixTime failed.")
             }
@@ -291,8 +291,7 @@ class AutoRestIntegerTest: XCTestCase {
 
     func test_BodyInteger_putUnixtime_200() throws {
         let expectation = XCTestExpectation(description: "Call putUnixTime")
-
-        let decoded = Date(timeIntervalSince1970: Double(1_460_505_600))
+        let decoded = UnixTime(timeIntervalSince1970: 1_460_505_600.0)
 
         client.intOperation.put(unixTimeDate: decoded) { result, httpResponse in
             switch result {

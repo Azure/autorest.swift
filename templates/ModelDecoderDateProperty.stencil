@@ -1,5 +1,0 @@
-if let dateString = try? container.decode(String.self, forKey: .{{ property.name }}) {
-    self.{{ property.name }} = Date(dateString, format: Date.Format.iso8601)
-} else {
-    self.{{ property.name }} = nil
-}

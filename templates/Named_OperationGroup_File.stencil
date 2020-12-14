@@ -1,0 +1,22 @@
+{% include "Header_Snippet.stencil" %}
+
+{% include "Import_Snippet.stencil" %}
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
+
+{{ group.comment }}
+public final class {{ group.name }} {
+
+    public let client: {{ model.name }}
+
+    init(client: {{ model.name }}) {
+        self.client = client
+    }
+
+    {% for op in group.operations %}
+        {% include "Operation_Snippet.stencil" op %}
+    {% endfor %}
+}

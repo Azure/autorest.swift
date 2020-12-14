@@ -1,0 +1,66 @@
+// Construct request
+{% if op.params.body.strategy == "plain" %}
+    guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name }} ) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "constant" %}
+    guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.pathOrValue }} ) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "string" %}
+    guard let requestBody = try? JSONEncoder().encode( {{ op.params.body.param.name }}String ) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "decimal" %}
+    guard let requestBody = {{ op.params.body.param.name }}.requestString.data(using: .utf8) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "data" %}
+    guard let requestBody = {{ op.params.body.param.name }}.requestString.data(using: .utf8) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "plainNullable" %}
+    var requestBody: Data? = nil
+    if ({{ op.params.body.param.name }} != nil)
+    {
+        guard let encodedRequestBody = try? JSONEncoder().encode( {{ op.params.body.param.name }} ) else {
+            self.client.options.logger.error("Failed to encode request body as json.")
+            return
+        }
+        requestBody = encodedRequestBody
+    }
+{% elif op.params.body.strategy == "byteArray" %}
+    let requestBody = {{ op.params.body.param.name }}
+{% elif op.params.body.strategy == "unixTime" or op.params.body.strategy == "time" %}
+    let encoder = JSONEncoder()
+    {% if op.params.body.strategy == "time" %}
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+    {% endif %}
+    guard let requestBody = try? encoder.encode( {{ op.params.body.param.name }} ) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% elif op.params.body.strategy == "flattened" %}
+    let body = {{ op.params.body.param.modelName }}(
+        {% for child in op.params.body.children %}
+        {{ child.name }}: {{ child.path }}{% if not forloop.last %},{% endif%}
+        {% endfor %}
+    )
+    guard let requestBody = try? JSONEncoder().encode(body) else {
+        self.client.options.logger.error("Failed to encode request body as json.")
+        return
+    }
+{% endif %}
+let urlTemplate = "{{ op.request.path }}"
+guard let requestUrl = client.url(host: "{{ op.request.uri }}", template: urlTemplate, params: params),
+    let request = try? HTTPRequest(method: .{{ op.request.method }}, url: requestUrl, headers: params.headers, data: requestBody) else {
+    client.options.logger.error("Failed to construct HTTP request.")
+    return
+}

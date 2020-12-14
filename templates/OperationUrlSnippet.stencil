@@ -1,7 +1,0 @@
-// Construct URL
-let urlTemplate = "{{ op.request.path }}"
-let pathParams = [
-    {% for param in op.params.path %}
-        "{{ param.key }}" : {{ param.path}}{{ param.value }},
-    {% endfor %}
-]

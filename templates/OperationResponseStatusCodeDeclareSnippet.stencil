@@ -1,7 +1,0 @@
-guard let statusCode = httpResponse?.statusCode else {
-    let noStatusCodeError = AzureError.client("Expected a status code in response but didn't find one.")
-    dispatchQueue.async {
-        completionHandler(.failure(noStatusCodeError), httpResponse)
-    }
-    return
-}

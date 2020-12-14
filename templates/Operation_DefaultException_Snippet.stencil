@@ -1,0 +1,19 @@
+{% if op.defaultExceptionHasBody == true %}
+    case .failure:
+        do {
+            let decoder = JSONDecoder()
+            let decoded = try decoder.decode({{ op.defaultException.type }}.self, from: data)
+            dispatchQueue.async {
+                completionHandler(.failure(AzureError.service("{{ op.defaultException.description }}", decoded)), httpResponse)
+            }
+        } catch {
+             dispatchQueue.async {
+                completionHandler(.failure(AzureError.client("Decoding error.", error)), httpResponse)
+            }
+        }
+{% else %}
+    case let .failure(error):
+        dispatchQueue.async {
+            completionHandler(.failure(error), httpResponse)
+        }
+{% endif %}

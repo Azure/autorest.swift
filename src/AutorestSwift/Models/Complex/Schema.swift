@@ -81,6 +81,7 @@ class Schema: Codable, LanguageShortcut {
         case extensions
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
@@ -100,15 +101,27 @@ class Schema: Codable, LanguageShortcut {
                 fatalError("Type mismatch. Expected number type but got \(self)")
             }
             swiftType = numberSchema.swiftType()
-        case .dateTime,
-             .date,
-             .time,
-             .unixTime:
-            swiftType = "Date"
+        case .dateTime:
+            if let dateSchema = self as? DateTimeSchema {
+                switch dateSchema.format {
+                case .dateTime:
+                    swiftType = "Iso8601Date"
+                case .dateTimeRfc1123:
+                    swiftType = "Rfc1123Date"
+                }
+            } else {
+                fatalError("Type .dateTime but not schema `DateTimeSchema`")
+            }
+        case .date:
+            swiftType = "SimpleDate"
+        case .unixTime:
+            swiftType = "UnixTime"
         case .byteArray:
             swiftType = "Data"
         case .integer:
             swiftType = "Int"
+        case .time:
+            swiftType = "SimpleTime"
         case .choice,
              .object,
              .sealedChoice,
@@ -133,7 +146,6 @@ class Schema: Codable, LanguageShortcut {
         default:
             fatalError("Type \(type) not implemented")
         }
-
         return optional ? "\(swiftType)?" : swiftType
     }
 
@@ -151,17 +163,6 @@ class Schema: Codable, LanguageShortcut {
             return .unixTime
         case .byteArray:
             return .byteArray
-        case .date:
-            return .date
-        case .time:
-            return .time
-        case .dateTime:
-            if let dateTimeSchema = self as? DateTimeSchema,
-                dateTimeSchema.format == .dateTimeRfc1123 {
-                return .dateTimeRfc1123
-            } else {
-                return .dateTime
-            }
         case .array:
             if let arraySchema = self as? ArraySchema,
                 arraySchema.elementType.type == .date || arraySchema.elementType.type == .dateTime {
@@ -169,6 +170,8 @@ class Schema: Codable, LanguageShortcut {
             } else {
                 return .plain
             }
+        case .time:
+            return .time
         case .number:
             return (swiftType() == "Decimal") ? .decimal : .data
         default:

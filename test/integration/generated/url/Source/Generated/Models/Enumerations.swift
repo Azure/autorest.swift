@@ -11,10 +11,14 @@
 import AzureCore
 import Foundation
 
-public enum UriColor: String, Codable {
+public enum UriColor: String, Codable, RequestStringConvertible {
     case redColor = "red color"
 
     case greenColor = "green color"
 
     case blueColor = "blue color"
+
+    public var requestString: String {
+        return rawValue
+    }
 }

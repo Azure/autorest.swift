@@ -102,14 +102,8 @@ class AutoRestDateTest: XCTestCase {
 
     func test_putMaxDate200() throws {
         let expectation = XCTestExpectation(description: "Call date.putMaxDate")
-
         let dateString = "9999-12-31"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
+        let date = SimpleDate(string: dateString)!
         client.dateOperation.put(maxDate: date) { result, httpResponse in
             switch result {
             case .success:
@@ -125,18 +119,12 @@ class AutoRestDateTest: XCTestCase {
 
     func test_getMaxDate200() throws {
         let expectation = XCTestExpectation(description: "Call date.getMaxDate")
-
         let dateString = "9999-12-31"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let expectedDate = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
+        let expectedDate = SimpleDate(string: dateString)!
         client.dateOperation.getMaxDate { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, expectedDate)
+                XCTAssertEqual(data.value, expectedDate.value)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
@@ -149,14 +137,8 @@ class AutoRestDateTest: XCTestCase {
 
     func test_putMinDate200() throws {
         let expectation = XCTestExpectation(description: "Call date.putMinDate")
-
         let dateString = "0001-01-01"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let expectedDate = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
+        let expectedDate = SimpleDate(string: dateString)!
         client.dateOperation.put(minDate: expectedDate) { result, httpResponse in
             switch result {
             case .success:
@@ -172,18 +154,12 @@ class AutoRestDateTest: XCTestCase {
 
     func test_getMinDate200() throws {
         let expectation = XCTestExpectation(description: "Call date.getMinDate")
-
         let dateString = "0001-01-01"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
+        let date = SimpleDate(string: dateString)!
         client.dateOperation.getMinDate { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, date)
+                XCTAssertEqual(data.value, date.value)
                 XCTAssertEqual(httpResponse?.statusCode, 200)
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)

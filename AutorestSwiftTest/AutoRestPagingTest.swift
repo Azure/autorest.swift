@@ -161,33 +161,34 @@ class AutoRestPagingTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_listWithQueryParams200() throws {
-        let expectation = XCTestExpectation(description: "Call paging.listWithQueryParams")
-
-        client.paging.listWithQueryParams(requiredQueryParameter: 100) { result, httpResponse in
-            switch result {
-            case let .success(pagedCollection):
-                XCTAssertEqual(httpResponse?.statusCode, 200)
-
-                var noOfPages = 1
-                pagedCollection.forEachPage { _ in
-                    noOfPages += 1
-
-                    if pagedCollection.isExhausted {
-                        XCTAssertEqual(noOfPages, 2)
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("\(expectation.description). error=\(details)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 5.0)
-    }
+    // FIXME: Causes excessive calls to testserver
+//    func test_listWithQueryParams200() throws {
+//        let expectation = XCTestExpectation(description: "Call paging.listWithQueryParams")
+//
+//        client.paging.listWithQueryParams(requiredQueryParameter: 100) { result, httpResponse in
+//            switch result {
+//            case let .success(pagedCollection):
+//                XCTAssertEqual(httpResponse?.statusCode, 200)
+//
+//                var noOfPages = 1
+//                pagedCollection.forEachPage { _ in
+//                    noOfPages += 1
+//
+//                    if pagedCollection.isExhausted {
+//                        XCTAssertEqual(noOfPages, 2)
+//                        return false
+//                    } else {
+//                        return true
+//                    }
+//                }
+//            case let .failure(error):
+//                let details = errorDetails(for: error, withResponse: httpResponse)
+//                XCTFail("\(expectation.description). error=\(details)")
+//            }
+//            expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: 5.0)
+//    }
 
     func test_getMultiplePagesWithOffset200() throws {
         let expectation = XCTestExpectation(description: "Call paging.getMultiplePagesWithOffset")

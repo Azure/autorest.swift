@@ -1,0 +1,5 @@
+if [
+{% for statusCode in response.statusCodes %}
+    {{ statusCode }},
+{% endfor  %}
+].contains(statusCode)

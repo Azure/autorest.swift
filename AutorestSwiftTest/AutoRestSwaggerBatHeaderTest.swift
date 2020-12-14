@@ -23,7 +23,6 @@
 // IN THE SOFTWARE.
 //
 // --------------------------------------------------------------------------
-
 import AutoRestSwaggerBatHeader
 import AzureCore
 import XCTest
@@ -374,20 +373,10 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
 
     func test_header_paramDate200() throws {
         let expectation = XCTestExpectation(description: "Call header.paramDate")
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-
         let dateString = "2010-01-01"
         let minDateString = "0001-01-01"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
-        guard let minDate = dateFormatter.date(from: minDateString) else {
-            XCTFail("Input is not a date")
-            return
-        }
+        let date = SimpleDate(string: dateString)!
+        let minDate = SimpleDate(string: minDateString)!
         client.header.paramDate(scenario: "valid", value: date) { result, httpResponse in
             switch result {
             case .success:
@@ -442,21 +431,10 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
     func test_header_paramDatetime200() throws {
         let expectation = XCTestExpectation(description: "Call header.paramDatetime")
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-
         let dateString = "2010-01-01T12:34:56Z"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let date = Iso8601Date(string: dateString)!
         let minDateString = "0001-01-01T00:00:00Z"
-        guard let minDate = dateFormatter.date(from: minDateString) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
-
+        let minDate = Iso8601Date(string: minDateString)!
         client.header.paramDatetime(scenario: "valid", value: date) { result, httpResponse in
             switch result {
             case .success:
@@ -515,14 +493,10 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
 
         let dateString = "Wed, 01 Jan 2010 12:34:56 GMT"
-        guard let date = dateFormatter.date(from: dateString) else {
-            XCTFail("Input is not a datetime")
-            return
-        }
+        let date = Rfc1123Date(string: dateString)!
         let options = Header.ParamDatetimeRfc1123Options(
             value: date
         )
-
         client.header.paramDatetimeRfc1123(scenario: "valid", withOptions: options) { result, httpResponse in
             switch result {
             case .success:

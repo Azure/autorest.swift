@@ -111,6 +111,7 @@ extension Request {
         for (index, comp) in bodyParamNameComps.enumerated() where index != 0 {
             bodyParamNameComps[index] = comp.capitalized
         }
-        return bodyParamNameComps.joined()
+        let finalName = bodyParamNameComps.joined()
+        return finalName.isEmpty ? nil : finalName
     }
 }

@@ -17,28 +17,28 @@ warning_color = '\033[91m'
 end_color = '\033[0m'
 
 working_files = [
-    "head",
-    "body-file",
-    "report",
-    "xms-error-responses",
-    "body-integer",
-    "url",
-    "model-flattening",
-    "custom-baseUrl",
-    "body-string",
-    "body-byte",
-    "body-number",
-    "header",
-    "required-optional",
     "body-array",
+    "body-boolean",
+    "body-byte",
     "body-date",
     "body-datetime",
     "body-datetime-rfc1123",
-    "body-boolean",
+    "body-file",
+    "body-number",
+    "body-integer",
+    "body-string",
     "body-time",
+    "custom-baseUrl",
     "custom-baseUrl-more-options",
+    "head",
+    "header",
+    "model-flattening",
+    "paging",
+    "report",
+    "required-optional",
+    "url",
     "url-multi-collectionFormat",
-    "paging"
+    "xms-error-responses"
 ]
 
 def get_all_files():
@@ -92,9 +92,10 @@ def generate_and_build_code(fileList):
         print('== Generate code for test server swagger {file}.json =='.format(file=file))
 
         if clean:
-            print("Remove Package.resolved and .build directory.")
+            print("Remove `Package.resolved` and `.build` and `Generated` directories.")
             os.system('rm {generated_directory}{file}/Package.resolved'.format(file=file, generated_directory=generated_directory))
             os.system('rm -Rf {generated_directory}{file}/.build'.format(file=file, generated_directory=generated_directory))
+            os.system('rm -Rf {generated_directory}{file}/Source/Generated'.format(file=file, generated_directory=generated_directory))
 
         autorest_command = "autorest --input-file={swagger_directory}{file}.json --output-folder={generated_directory}{file} --namespace={file} --use=.".format(file=file, swagger_directory=swagger_directory, generated_directory=generated_directory)
 
@@ -133,12 +134,12 @@ def main(argv):
     global debug
     global keep_change
     global skip_build
-    inputFile = ''
+    input_file = ''
 
     try:
         opts, args = getopt.getopt(argv,"acdksi:", ["all-files", "clean", "debug", "keep-change", "skip-build", "input-file"])
     except getopt.GetoptError as error:
-        print(error)
+        print("Error: {}".format(error))
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-a", "--all-files"):
@@ -150,14 +151,14 @@ def main(argv):
         if opt in ("-k", "--keep-change"):
             keep_change = True
         if opt in ("-i", "--input-file"):
-            inputFile = argv[1]
-        if opt in("-s", "--skip-build"):
+            input_file = argv[1]
+        if opt in ("-s", "--skip-build"):
             skip_build = True
 
     print("== make install ==")
     execute_command("make install")
-    if inputFile != '':
-        generate_and_build_code([inputFile])
+    if input_file != '':
+        generate_and_build_code([input_file])
     elif all_files:
         generate_and_build_code(get_all_files())
     else:
