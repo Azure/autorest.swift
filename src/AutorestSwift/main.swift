@@ -26,21 +26,16 @@
 
 import Foundation
 
-// Drop the first argument as that is the Executable name
-let arguments: [String] = Array(CommandLine.arguments.dropFirst())
+let arguments = CommandLineArguments()
 let logLevel = LogLevel.info
 
-if arguments.count == 0 {
-    // Enable file logging
-    SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"), withLevel: logLevel)
+let yamlFileName = arguments["--input-file"] ?? "code-model-v4.yaml"
+let standalone = arguments["--standalone"] != nil
 
-    let plugin = AutorestPlugin()
-    plugin.start()
-} else if arguments[0] == "--standalone" {
+if standalone {
     guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     else { fatalError("Unable to find Documents directory.") }
 
-    let yamlFileName = arguments.count == 2 ? arguments[1] : "code-model-v4.yaml"
     let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
     do {
         SharedLogger.set(logger: StdoutLogger(), withLevel: logLevel)
@@ -50,4 +45,10 @@ if arguments.count == 0 {
     } catch {
         SharedLogger.error("\(error)")
     }
+} else {
+    // Enable file logging
+    SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"), withLevel: logLevel)
+
+    let plugin = AutorestPlugin()
+    plugin.start()
 }

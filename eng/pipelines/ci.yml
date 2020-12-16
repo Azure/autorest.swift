@@ -14,11 +14,11 @@ jobs:
       - script: npm install
         displayName: "Build"
 
-      - script: npm run buildChat
-        displayName: Generate Chat SDK and build
-
       - script: npm run test
         displayName: "Run Tests"
+
+      - script: npm run build-sdks
+        displayName: Generate Select SDKs and build
 
       - script: |
           npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)

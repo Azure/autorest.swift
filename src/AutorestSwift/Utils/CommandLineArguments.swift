@@ -26,16 +26,42 @@
 
 import Foundation
 
-/// View Model for an the Package.swift file.
-struct PackageFileViewModel {
+class CommandLineArguments {
     let name: String
-    // FIXME: This should come from config?
-    let namespace = "secret"
-    let version = "0.1"
 
-    init(from model: CodeModel) {
-        // FIXME: Blunt-instrument to override the package name from the code model
-        let commandLineArguments = CommandLineArguments()
-        self.name = Manager.packageName ?? commandLineArguments["--package-name"] ?? model.packageName
+    let data: [String: String]
+
+    // MARK: Initializers
+
+    init() {
+        guard let name = CommandLine.arguments.first else {
+            fatalError("Unable to parse command line.")
+        }
+        let args = CommandLine.arguments.dropFirst().flatMap { $0.split(separator: "=", maxSplits: 1) }
+            .map { String($0) }
+        var argsDict = [String: String]()
+        var index = 0
+        while index < args.count {
+            let nextIndex = index + 1
+            let option = String(args[index])
+            guard option.starts(with: "-") else {
+                fatalError("Expected option starting with `-` or `--`.")
+            }
+            if nextIndex == args.count || args[nextIndex].starts(with: "-") {
+                // treat this like a flag
+                argsDict[option] = ""
+                index += 1
+            } else {
+                // treat this like a single-value option
+                argsDict[option] = args[nextIndex]
+                index += 2
+            }
+        }
+        self.name = name
+        self.data = argsDict
+    }
+
+    subscript(index: String) -> String? {
+        return data[index]
     }
 }

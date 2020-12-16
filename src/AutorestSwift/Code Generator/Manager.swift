@@ -47,6 +47,8 @@ class Manager {
 
     let mode: InvocationMode
 
+    static var packageName: String?
+
     // MARK: Initializers
 
     /// Initialize with an input file URL (i.e. running locally).
@@ -67,13 +69,15 @@ class Manager {
     }
 
     /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
-    init(withString string: String) {
+    init(withString string: String, packageName: String? = nil) {
         self.mode = .autorest
         self.inputString = string
         // for autorest mode, create a temp directory using a random Guid as the directory name
         self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
             .appendingPathComponent(UUID().uuidString)
         self.packageUrl = nil
+        // FIXME: Super wonky way of injecting package name...
+        Manager.packageName = packageName
     }
 
     // MARK: Methods

@@ -6,7 +6,7 @@
     "start": "swift run AutorestSwift",
     "test": "npx start-autorest-express swift test",
     "install": "make install",
-    "buildChat": "./scripts/test_chat_swagger.py -c"
+    "build-sdks": "./scripts/test_build_swagger.py -c"
   },
   "repository": {
     "type": "git",
