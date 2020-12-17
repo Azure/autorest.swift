@@ -17,7 +17,9 @@ jobs:
       - script: npm run test
         displayName: "Run Tests"
 
-      - script: npm run build-sdks
+      - script: |
+          npm install -g autorest
+          npm run build-sdks
         displayName: Generate Select SDKs and build
 
       - script: |
