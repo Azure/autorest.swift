@@ -39,44 +39,44 @@ class AutoRestResourceFlatteningTest: XCTestCase {
         )
     }
 
-    // FIXME: Test
-//    func test_resourceFlattening_getArray() throws {
-//        let expectation = XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getArray succeed")
-//
-//        client.autoRestResourceFlatteningTestService.getArray { result, httpResponse in
-//            switch result {
-//            case let .success(products):
-//                XCTAssertEqual(httpResponse?.statusCode, 200)
-//                XCTAssertEqual(products.count, 3)
-//                XCTAssertEqual(products[0].id, "1")
-//                XCTAssertEqual(
-//                    products[0].provisioningStateValues,
-//                    FlattenedProductPropertiesProvisioningStateValues.oK
-//                )
-//                XCTAssertEqual(products[0].typePropertiesType, "Flat")
-//                XCTAssertEqual(products[0].location, "Building 44")
-//                XCTAssertEqual(products[0].name, "Resource1")
-//                XCTAssertEqual(products[0].type, "Microsoft.Web/sites")
-//                XCTAssertEqual(products[0].tags?["tag1"], "value1")
-//                XCTAssertEqual(products[0].tags?["tag2"], "value3")
-//                XCTAssertEqual(
-//                    products[0].provisioningState,
-//                    FlattenedProductPropertiesProvisioningStateValues.succeeded.rawValue
-//                )
-//                XCTAssertEqual(products[1].id, "2")
-//                XCTAssertEqual(products[1].name, "Resource2")
-//                XCTAssertEqual(products[1].location, "Building 44")
-//                XCTAssertEqual(products[2].id, "3")
-//                XCTAssertEqual(products[2].name, "Resource3")
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                print("test failed. error=\(details)")
-//                XCTFail("Call autorestresourceflatteningtestservice.getArray failed")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: 5.0)
-//    }
+    func test_resourceFlattening_getArray() throws {
+        let expectation = XCTestExpectation(description: "Call autorestresourceflatteningtestservice.getArray succeed")
+
+        client.autoRestResourceFlatteningTestService.getArray { result, httpResponse in
+            switch result {
+            case let .success(products):
+                XCTAssertEqual(httpResponse?.statusCode, 200)
+                XCTAssertEqual(products.count, 3)
+
+                let first = products[0]
+                XCTAssertEqual(first.id, "1")
+                XCTAssertEqual(first.provisioningStateValues, .oK)
+                XCTAssertEqual(first.pName, "Product1")
+                XCTAssertEqual(first.typePropertiesType, "Flat")
+                XCTAssertEqual(first.location, "Building 44")
+                XCTAssertEqual(first.name, "Resource1")
+                XCTAssertEqual(first.provisioningState, "Succeeded")
+                XCTAssertEqual(first.type, "Microsoft.Web/sites")
+                XCTAssertEqual(first.tags?["tag1"], "value1")
+                XCTAssertEqual(first.tags?["tag2"], "value3")
+
+                let second = products[1]
+                XCTAssertEqual(second.id, "2")
+                XCTAssertEqual(second.name, "Resource2")
+                XCTAssertEqual(second.location, "Building 44")
+
+                let third = products[2]
+                XCTAssertEqual(third.id, "3")
+                XCTAssertEqual(third.name, "Resource3")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                print("test failed. error=\(details)")
+                XCTFail("Call autorestresourceflatteningtestservice.getArray failed")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 
     func test_resourceFlattening_putArray() throws {
         let expectation =

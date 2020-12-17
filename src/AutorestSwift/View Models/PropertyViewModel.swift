@@ -31,15 +31,21 @@ import Foundation
 ///     // a simple property
 ///     let simple: String = "default"
 struct PropertyViewModel {
+    /// The name of the property
     let name: String
+    /// The property name that the service expects over the wire
     let serializedName: String
+    /// The docstring associated with the property
     let comment: ViewModelComment
+    /// The Swift type for the property (`String`, `MyClass`, etc)
     let type: String
-    // default value of the proeprty
+    /// default value of the property
     let defaultValue: ViewModelDefault
-    // default value of the property in the init(). Valid values are either nil (for optional property) or "" (i.e. not specfied for required property in init() method.)
+    /// default value of the property in the init(). Valid values are either nil (for optional property) or "" (i.e. not specfied for required property in init() method.)
     let initDefaultValue: String
+    /// Whether the property is required or not
     let optional: Bool
+    // FIXME: This is just the type without the ? (if optional). A better way?
     let className: String
 
     /// Initialize a `PropertyViewModel` directly
@@ -69,13 +75,17 @@ struct PropertyViewModel {
         let name = schema.name
         assert(!name.isEmpty)
         self.name = name
-        self.serializedName = schema.serializedName ?? name
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema!.swiftType()
         self.optional = !schema.required
         self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = optional ? "= nil" : ""
+        if let flattenedNames = (schema as? Property)?.flattenedNames {
+            self.serializedName = flattenedNames.joined(separator: ".")
+        } else {
+            self.serializedName = schema.serializedName ?? name
+        }
     }
 
     init(from schema: PropertyType) {
