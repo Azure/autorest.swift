@@ -67,6 +67,10 @@ def generate(item, *, src, dest):
 
 def main(argv):
 
+    # determine Node version
+    out, _ = run_command('node --version')
+    print(f'Node.js version: {out}')
+
     swagger_data = load_swagger_info()
     with tempfile.TemporaryDirectory() as tempdir:
         rest_api_specs_path = f'{tempdir}/azure-rest-api-specs'
