@@ -12,35 +12,118 @@ import AzureCore
 import Foundation
 
 /// Type of Pet
-public enum DaysOfWeekExtensibleEnum: String, Codable, RequestStringConvertible {
-    case monday = "Monday"
+public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable {
 
-    case tuesday = "Tuesday"
-
-    case wednesday = "Wednesday"
-
-    case thursday = "Thursday"
-
-    case friday = "Friday"
-
-    case saturday = "Saturday"
-
-    case sunday = "Sunday"
+    case custom(String)
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    case sunday
 
     public var requestString: String {
-        return rawValue
+        switch self {
+        case let .custom(val):
+            return val
+        case .monday:
+            return "Monday"
+        case .tuesday:
+            return "Tuesday"
+        case .wednesday:
+            return "Wednesday"
+        case .thursday:
+            return "Thursday"
+        case .friday:
+            return "Friday"
+        case .saturday:
+            return "Saturday"
+        case .sunday:
+            return "Sunday"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "monday":
+            self = .monday
+        case "tuesday":
+            self = .tuesday
+        case "wednesday":
+            self = .wednesday
+        case "thursday":
+            self = .thursday
+        case "friday":
+            self = .friday
+        case "saturday":
+            self = .saturday
+        case "sunday":
+            self = .sunday
+        default:
+            self = .custom(val)
+        }
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self.init(value)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(requestString)
     }
 }
 
-public enum IntEnum: String, Codable, RequestStringConvertible {
+public enum IntEnum: RequestStringConvertible, Codable {
+    case custom(String)
     /// one
-    case one = "1"
+    case one
     /// two
-    case two = "2"
+    case two
     /// three
-    case three = "3"
+    case three
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "1":
+            self = .one
+        case "2":
+            self = .two
+        case "3":
+            self = .three
+        default:
+            self = .custom(val)
+        }
+    }
 
     public var requestString: String {
-        return rawValue
+        switch self {
+        case let .custom(val):
+            return val
+        case .one:
+            return "1"
+        case .two:
+            return "2"
+        case .three:
+            return "3"
+        }
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self.init(value)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(requestString)
     }
 }

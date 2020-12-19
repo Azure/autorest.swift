@@ -43,9 +43,9 @@ public struct Pet: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case name
-        case daysOfWeek
-        case intEnum
+        case name = "name"
+        case daysOfWeek = "DaysOfWeek"
+        case intEnum = "IntEnum"
     }
 
     /// Initialize a `Pet` structure from decoder

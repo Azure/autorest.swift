@@ -38,22 +38,27 @@ class AutoRestEnumExtensibleTest: XCTestCase {
         )
     }
 
-//    func test_getLocalPositiveOffsetLowercaseMaxDateTime200() throws {
-//        let expectation = XCTestExpectation(description: "Call datetime.getLocalPositiveOffsetLowercaseMaxDateTime")
-//        let iso8601DateFormatter = ISO8601DateFormatter()
-//        iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-//        let expectedDate = iso8601DateFormatter.date(from: "9999-12-31t23:59:59.999+14:00".capitalized)!
-//        client.datetime.getLocalPositiveOffsetLowercaseMaxDateTime { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data.value, expectedDate)
-//                XCTAssertEqual(httpResponse?.statusCode, 200)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call date.getLocalPositiveOffsetLowercaseMaxDateTime failed. error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: 5.0)
-//    }
+    func test_getByPetId() throws {
+        let testValues = [
+            ("tommy", "Monday", "1"),
+            ("casper", "Weekend", "2"),
+            ("scooby", "Thursday", "2.1")
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        expectation.expectedFulfillmentCount = testValues.count
+        for item in testValues {
+            client.petOperation.getByPetId(petId: item.0) { result, httpResponse in
+                switch result {
+                case let .success(data):
+                    XCTAssertEqual(data.daysOfWeek?.requestString, item.1)
+                    XCTAssertEqual(data.intEnum.requestString, item.2)
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
