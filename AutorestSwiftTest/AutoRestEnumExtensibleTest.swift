@@ -61,4 +61,26 @@ class AutoRestEnumExtensibleTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+
+    func test_addPet() throws {
+        let pet = Pet(
+            name: "Retriever",
+            daysOfWeek: .friday,
+            intEnum: .three
+        )
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.petOperation.add(pet: pet) { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data.daysOfWeek?.requestString, "Friday")
+                XCTAssertEqual(data.intEnum.requestString, "3")
+                XCTAssertEqual(data.name, "Retriever")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }

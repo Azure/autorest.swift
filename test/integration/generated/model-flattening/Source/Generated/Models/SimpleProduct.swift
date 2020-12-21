@@ -58,11 +58,11 @@ public struct SimpleProduct: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case maxProductDisplayName
-        case genericValue
-        case odataValue
-        case productId
-        case description
+        case maxProductDisplayName = "details.max_product_display_name"
+        case genericValue = "details.max_product_image.generic_value"
+        case odataValue = "details.max_product_image.@odata.value"
+        case productId = "base_product_id"
+        case description = "base_product_description"
         case capacity = "Capacity"
     }
 

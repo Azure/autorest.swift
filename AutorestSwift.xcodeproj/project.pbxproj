@@ -211,6 +211,7 @@
 		0AB80C322579940D008506CD /* AutoRestPagingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB80C312579940D008506CD /* AutoRestPagingTest.swift */; };
 		0ADDD101258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */; };
 		0ADDD114258D68F000BD5E58 /* PetStoreInc in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADDD113258D68F000BD5E58 /* PetStoreInc */; };
+		0ADDD1E625914A3500BD5E58 /* Operation_Request_Parameters_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -253,6 +254,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				0ADDD1E625914A3500BD5E58 /* Operation_Request_Parameters_Snippet.stencil in CopyFiles */,
 				0A4743472582919700CA86E5 /* Client_File.stencil in CopyFiles */,
 				0A4743482582919700CA86E5 /* Client_Options_File.stencil in CopyFiles */,
 				0A4743492582919700CA86E5 /* Custom_File.stencil in CopyFiles */,

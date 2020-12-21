@@ -52,11 +52,11 @@ public struct Resource: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case type
-        case tags
-        case location
-        case name
+        case id = "id"
+        case type = "type"
+        case tags = "tags"
+        case location = "location"
+        case name = "name"
     }
 
     /// Initialize a `Resource` structure from decoder

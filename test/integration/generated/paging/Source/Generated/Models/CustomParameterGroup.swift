@@ -40,8 +40,8 @@ public struct CustomParameterGroup: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case apiVersion
-        case tenant
+        case apiVersion = "api_version"
+        case tenant = "tenant"
     }
 
     /// Initialize a `CustomParameterGroup` structure from decoder

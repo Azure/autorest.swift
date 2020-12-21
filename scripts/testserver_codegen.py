@@ -30,7 +30,7 @@ working_files = [
     "body-time",
     "custom-baseUrl",
     "custom-baseUrl-more-options",
-    "extensible-enum-swagger",
+    "extensible-enums-swagger",
     "head",
     "header",
     "model-flattening",

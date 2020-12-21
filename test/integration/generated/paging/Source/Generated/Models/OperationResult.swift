@@ -35,7 +35,7 @@ public struct OperationResult: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case status
+        case status = "status"
     }
 
     /// Initialize a `OperationResult` structure from decoder

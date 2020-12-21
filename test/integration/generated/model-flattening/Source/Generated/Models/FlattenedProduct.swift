@@ -70,15 +70,15 @@ public struct FlattenedProduct: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case pName
-        case typePropertiesType
-        case provisioningStateValues
-        case provisioningState
-        case id
-        case type
-        case tags
-        case location
-        case name
+        case pName = "properties.p.name"
+        case typePropertiesType = "properties.type"
+        case provisioningStateValues = "properties.provisioningStateValues"
+        case provisioningState = "properties.provisioningState"
+        case id = "id"
+        case type = "type"
+        case tags = "tags"
+        case location = "location"
+        case name = "name"
     }
 
     /// Initialize a `FlattenedProduct` structure from decoder

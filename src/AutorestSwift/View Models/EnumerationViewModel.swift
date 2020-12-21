@@ -35,16 +35,19 @@ struct EnumerationViewModel {
     let comment: ViewModelComment
     let type: String
     let choices: [EnumerationChoiceViewModel]
+    let isExtensible: Bool
 
     init(from schema: EnumerableSchema) {
         self.name = schema.name
         self.comment = ViewModelComment(from: schema.description)
         self.type = schema.choiceType.name
-
         var items = [EnumerationChoiceViewModel]()
         for choice in schema.choices {
             items.append(EnumerationChoiceViewModel(from: choice))
         }
         self.choices = items
+        // extensible enums are those with `modelAsString = true` in Swagger.
+        // This translates to a sealedChoice type in the code model.
+        self.isExtensible = schema as? SealedChoiceSchema == nil
     }
 }

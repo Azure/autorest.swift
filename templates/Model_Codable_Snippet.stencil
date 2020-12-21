@@ -1,6 +1,6 @@
 enum CodingKeys: String, CodingKey {
 {% for property in model.properties %}
-       case {{ property.name }}
+       case {{ property.name }} = "{{ property.serializedName }}"
 {% endfor %}
 {% for constant in model.constants %}
     case {{ constant.name }} = "{{ constant.serializedName }}"

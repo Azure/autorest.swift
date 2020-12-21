@@ -31,9 +31,6 @@ class Property: Value {
     // if the property is marked read-only (ie, not intended to be sent to the service)
     let readOnly: Bool?
 
-    // the wire name of this property
-    let serializedName: String
-
     // when a property is flattened, the property will be the set of serialized names to  get to that target property.
     // If flattenedName is present, then this property is a flattened property. (ie, ['properties','name'] )
     let flattenedNames: [String]?
@@ -51,11 +48,15 @@ class Property: Value {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.readOnly = try? container.decode(Bool.self, forKey: .readOnly)
-        self.serializedName = try container.decode(String.self, forKey: .serializedName)
         self.flattenedNames = try? container.decode([String].self, forKey: .flattenedNames)
         self.isDiscriminator = try? container.decode(Bool.self, forKey: .isDiscriminator)
 
         try super.init(from: decoder)
+        if let flattened = flattenedNames {
+            language.swift.serializedName = flattened.joined(separator: ".")
+        } else {
+            language.swift.serializedName = try container.decode(String.self, forKey: .serializedName)
+        }
     }
 
     override public func encode(to encoder: Encoder) throws {

@@ -35,7 +35,7 @@ public struct PetAction: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case actionResponse
+        case actionResponse = "actionResponse"
     }
 
     /// Initialize a `PetAction` structure from decoder

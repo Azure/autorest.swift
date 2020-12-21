@@ -12,15 +12,22 @@ import AzureCore
 import Foundation
 
 /// Type of Pet
-public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable {
-
+public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable, Equatable {
+    // Custom value for unrecognized enum values
     case custom(String)
+
     case monday
+
     case tuesday
+
     case wednesday
+
     case thursday
+
     case friday
+
     case saturday
+
     case sunday
 
     public var requestString: String {
@@ -79,7 +86,8 @@ public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable {
     }
 }
 
-public enum IntEnum: RequestStringConvertible, Codable {
+public enum IntEnum: RequestStringConvertible, Codable, Equatable {
+    // Custom value for unrecognized enum values
     case custom(String)
     /// one
     case one
@@ -87,19 +95,6 @@ public enum IntEnum: RequestStringConvertible, Codable {
     case two
     /// three
     case three
-
-    public init(_ val: String) {
-        switch val.lowercased() {
-        case "1":
-            self = .one
-        case "2":
-            self = .two
-        case "3":
-            self = .three
-        default:
-            self = .custom(val)
-        }
-    }
 
     public var requestString: String {
         switch self {
@@ -111,6 +106,19 @@ public enum IntEnum: RequestStringConvertible, Codable {
             return "2"
         case .three:
             return "3"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "1":
+            self = .one
+        case "2":
+            self = .two
+        case "3":
+            self = .three
+        default:
+            self = .custom(val)
         }
     }
 

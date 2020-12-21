@@ -52,11 +52,11 @@ public struct PetHungryOrThirstyError: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case hungryOrThirsty
-        case reason
-        case errorType
-        case errorMessage
-        case actionResponse
+        case hungryOrThirsty = "hungryOrThirsty"
+        case reason = "reason"
+        case errorType = "errorType"
+        case errorMessage = "errorMessage"
+        case actionResponse = "actionResponse"
     }
 
     /// Initialize a `PetHungryOrThirstyError` structure from decoder

@@ -11,30 +11,100 @@
 import AzureCore
 import Foundation
 
-public enum FlattenedProductPropertiesProvisioningStateValues: String, Codable, RequestStringConvertible {
-    case succeeded = "Succeeded"
+public enum FlattenedProductPropertiesProvisioningStateValues: RequestStringConvertible, Codable, Equatable {
+    // Custom value for unrecognized enum values
+    case custom(String)
 
-    case failed = "Failed"
+    case succeeded
 
-    case canceled = "canceled"
+    case failed
 
-    case accepted = "Accepted"
+    case canceled
 
-    case creating = "Creating"
+    case accepted
 
-    case created = "Created"
+    case creating
 
-    case updating = "Updating"
+    case created
 
-    case updated = "Updated"
+    case updating
 
-    case deleting = "Deleting"
+    case updated
 
-    case deleted = "Deleted"
+    case deleting
 
-    case oK = "OK"
+    case deleted
+
+    case oK
 
     public var requestString: String {
-        return rawValue
+        switch self {
+        case let .custom(val):
+            return val
+        case .succeeded:
+            return "Succeeded"
+        case .failed:
+            return "Failed"
+        case .canceled:
+            return "canceled"
+        case .accepted:
+            return "Accepted"
+        case .creating:
+            return "Creating"
+        case .created:
+            return "Created"
+        case .updating:
+            return "Updating"
+        case .updated:
+            return "Updated"
+        case .deleting:
+            return "Deleting"
+        case .deleted:
+            return "Deleted"
+        case .oK:
+            return "OK"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "succeeded":
+            self = .succeeded
+        case "failed":
+            self = .failed
+        case "canceled":
+            self = .canceled
+        case "accepted":
+            self = .accepted
+        case "creating":
+            self = .creating
+        case "created":
+            self = .created
+        case "updating":
+            self = .updating
+        case "updated":
+            self = .updated
+        case "deleting":
+            self = .deleting
+        case "deleted":
+            self = .deleted
+        case "ok":
+            self = .oK
+        default:
+            self = .custom(val)
+        }
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self.init(value)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(requestString)
     }
 }

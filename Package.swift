@@ -81,6 +81,7 @@ let package = Package(
                 "AutoRestRequiredOptionalTest",
                 "AutoRestTimeTest",
                 "AutoRestPagingTest",
+                "PetStoreInc",
                 "XmsErrorResponseExtensions"
             ],
             path: "AutorestSwiftTest"

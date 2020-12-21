@@ -34,7 +34,7 @@ public struct Animal: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case aniType
+        case aniType = "aniType"
     }
 
     /// Initialize a `Animal` structure from decoder

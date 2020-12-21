@@ -11,27 +11,103 @@
 import AzureCore
 import Foundation
 
-public enum Enum0: String, Codable, RequestStringConvertible {
-    case foo1 = "foo1"
+public enum Enum0: RequestStringConvertible, Codable, Equatable {
+    // Custom value for unrecognized enum values
+    case custom(String)
 
-    case foo2 = "foo2"
+    case foo1
 
-    case foo3 = "foo3"
+    case foo2
+
+    case foo3
 
     public var requestString: String {
-        return rawValue
+        switch self {
+        case let .custom(val):
+            return val
+        case .foo1:
+            return "foo1"
+        case .foo2:
+            return "foo2"
+        case .foo3:
+            return "foo3"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "foo1":
+            self = .foo1
+        case "foo2":
+            self = .foo2
+        case "foo3":
+            self = .foo3
+        default:
+            self = .custom(val)
+        }
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self.init(value)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(requestString)
     }
 }
 
-public enum Enum1: String, Codable, RequestStringConvertible {
-    case foo1 = "foo1"
+public enum Enum1: RequestStringConvertible, Codable, Equatable {
+    // Custom value for unrecognized enum values
+    case custom(String)
 
-    case foo2 = "foo2"
+    case foo1
 
-    case foo3 = "foo3"
+    case foo2
+
+    case foo3
 
     public var requestString: String {
-        return rawValue
+        switch self {
+        case let .custom(val):
+            return val
+        case .foo1:
+            return "foo1"
+        case .foo2:
+            return "foo2"
+        case .foo3:
+            return "foo3"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "foo1":
+            self = .foo1
+        case "foo2":
+            self = .foo2
+        case "foo3":
+            self = .foo3
+        default:
+            self = .custom(val)
+        }
+    }
+
+    // MARK: Codable
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self.init(value)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(requestString)
     }
 }
 
