@@ -212,6 +212,8 @@
 		0ADDD101258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */; };
 		0ADDD114258D68F000BD5E58 /* PetStoreInc in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADDD113258D68F000BD5E58 /* PetStoreInc */; };
 		0ADDD1E625914A3500BD5E58 /* Operation_Request_Parameters_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */; };
+		0ADDD29525915C2F00BD5E58 /* AutoRestValidationTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */; };
+		0ADDD29725915C7500BD5E58 /* AutoRestValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -390,6 +392,8 @@
 		0AB80C312579940D008506CD /* AutoRestPagingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestPagingTest.swift; sourceTree = "<group>"; };
 		0ADDD0FD258D656A00BD5E58 /* extensible-enums-swagger */ = {isa = PBXFileReference; lastKnownFileType = text; name = "extensible-enums-swagger"; path = "test/integration/generated/extensible-enums-swagger"; sourceTree = SOURCE_ROOT; };
 		0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestEnumExtensibleTest.swift; sourceTree = "<group>"; };
+		0ADDD29225915C1300BD5E58 /* validation */ = {isa = PBXFileReference; lastKnownFileType = text; name = validation; path = test/integration/generated/validation; sourceTree = SOURCE_ROOT; };
+		0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestValidationTest.swift; sourceTree = "<group>"; };
 		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
 		0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatTest.swift; sourceTree = "<group>"; };
 		4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -547,6 +551,7 @@
 				0AB80C122579836D008506CD /* AutoRestTimeTest in Frameworks */,
 				0AB80C0C2579836D008506CD /* AutoRestSwaggerBatByte in Frameworks */,
 				0AB80C0E2579836D008506CD /* AutoRestSwaggerBatFile in Frameworks */,
+				0ADDD29525915C2F00BD5E58 /* AutoRestValidationTest in Frameworks */,
 				0AB80BF42579836D008506CD /* AutoRestDateTimeTest in Frameworks */,
 				0AB80BF82579836D008506CD /* AutoRestIntegerTest in Frameworks */,
 				0ADDD114258D68F000BD5E58 /* PetStoreInc in Frameworks */,
@@ -733,6 +738,7 @@
 				0AB80BA7257982D0008506CD /* required-optional */,
 				0AB80BB9257982D7008506CD /* url */,
 				0AB80BB3257982D5008506CD /* url-multi-collectionFormat */,
+				0ADDD29225915C1300BD5E58 /* validation */,
 				0ADDD0FD258D656A00BD5E58 /* extensible-enums-swagger */,
 				0AB80BBA257982D7008506CD /* xms-error-responses */,
 				F1A6719624F5CCCC00C2712C /* Info.plist */,
@@ -759,6 +765,7 @@
 				F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */,
 				F15D30EE2548F38700265366 /* AutoRestUrlPathsTest.swift */,
 				F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */,
+				0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */,
 				F10B1F6125414556007DA581 /* Dictionary+Extension.swift */,
 				F170D321253F786800A569A0 /* Util.swift */,
 				F15A9292254B094700E2D9C2 /* XmsErrorResponseExtensionsTest.swift */,
@@ -1019,6 +1026,7 @@
 				0AB80C18257987CC008506CD /* XmsErrorResponseExtensions */,
 				0AB80C2B2579915D008506CD /* AutoRestPagingTest */,
 				0ADDD113258D68F000BD5E58 /* PetStoreInc */,
+				0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1150,6 +1158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AB80AA225783093008506CD /* AutoRestBodyIntegerTest.swift in Sources */,
+				0ADDD29725915C7500BD5E58 /* AutoRestValidationTest.swift in Sources */,
 				0AB80AA325783093008506CD /* AutoRestDateTest.swift in Sources */,
 				0ADDD101258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift in Sources */,
 				0AB80AA425783093008506CD /* AutoRestDateTimeRfc1123Test.swift in Sources */,
@@ -1696,6 +1705,10 @@
 		0ADDD113258D68F000BD5E58 /* PetStoreInc */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PetStoreInc;
+		};
+		0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestValidationTest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
