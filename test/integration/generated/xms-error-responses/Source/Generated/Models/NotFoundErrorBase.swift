@@ -42,9 +42,9 @@ public struct NotFoundErrorBase: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case reason
-        case whatNotFound
-        case someBaseProp
+        case reason = "reason"
+        case whatNotFound = "whatNotFound"
+        case someBaseProp = "someBaseProp"
     }
 
     /// Initialize a `NotFoundErrorBase` structure from decoder

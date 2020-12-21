@@ -38,8 +38,8 @@ public struct ProductResultValueWithXMSClientName: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case indexes
-        case nextLink
+        case indexes = "values"
+        case nextLink = "nextLink"
     }
 
     /// Initialize a `ProductResultValueWithXMSClientName` structure from decoder

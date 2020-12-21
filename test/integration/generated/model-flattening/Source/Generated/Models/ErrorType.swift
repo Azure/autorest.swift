@@ -42,9 +42,9 @@ public final class ErrorType: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case status
-        case message
-        case parentError
+        case status = "status"
+        case message = "message"
+        case parentError = "parentError"
     }
 
     /// Initialize a `ErrorType` structure from decoder

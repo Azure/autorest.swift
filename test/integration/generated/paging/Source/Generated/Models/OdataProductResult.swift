@@ -38,8 +38,8 @@ public struct OdataProductResult: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case values
-        case odataNextLink
+        case values = "values"
+        case odataNextLink = "odata.nextLink"
     }
 
     /// Initialize a `OdataProductResult` structure from decoder

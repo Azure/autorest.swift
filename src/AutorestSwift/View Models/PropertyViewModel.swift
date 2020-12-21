@@ -32,6 +32,7 @@ import Foundation
 ///     let simple: String = "default"
 struct PropertyViewModel {
     let name: String
+    let serializedName: String
     let comment: ViewModelComment
     let type: String
     // default value of the proeprty
@@ -45,6 +46,7 @@ struct PropertyViewModel {
     init(
         name: String,
         type: String,
+        serializedName: String? = nil,
         comment: String? = nil,
         defaultValue: String? = nil,
         initDefaultValue: String? = nil,
@@ -53,6 +55,7 @@ struct PropertyViewModel {
     ) {
         self.name = name
         self.type = type
+        self.serializedName = serializedName ?? name
         self.comment = ViewModelComment(from: comment)
         self.defaultValue = ViewModelDefault(from: defaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = initDefaultValue ?? ""
@@ -66,6 +69,7 @@ struct PropertyViewModel {
         let name = schema.name
         assert(!name.isEmpty)
         self.name = name
+        self.serializedName = schema.serializedName ?? name
         self.comment = ViewModelComment(from: schema.description)
         self.className = schema.schema!.swiftType()
         self.optional = !schema.required

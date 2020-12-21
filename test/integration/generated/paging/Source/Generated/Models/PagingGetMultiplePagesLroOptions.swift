@@ -40,8 +40,8 @@ public struct PagingGetMultiplePagesLroOptions: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case maxresults
-        case timeout
+        case maxresults = "maxresults"
+        case timeout = "timeout"
     }
 
     /// Initialize a `PagingGetMultiplePagesLroOptions` structure from decoder

@@ -44,9 +44,9 @@ public struct PagingGetMultiplePagesWithOffsetOptions: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case maxresults
-        case offset
-        case timeout
+        case maxresults = "maxresults"
+        case offset = "offset"
+        case timeout = "timeout"
     }
 
     /// Initialize a `PagingGetMultiplePagesWithOffsetOptions` structure from decoder

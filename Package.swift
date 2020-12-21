@@ -41,6 +41,7 @@ let package = Package(
         .package(name: "AutoRestRequiredOptionalTest", path: "./test/integration/generated/required-optional"),
         .package(name: "AutoRestTimeTest", path: "./test/integration/generated/body-time"),
         .package(name: "AutoRestPagingTest", path: "./test/integration/generated/paging"),
+        .package(name: "PetStoreInc", path: "./test/integration/generated/extensible-enums-swagger"),
         .package(name: "XmsErrorResponseExtensions", path: "./test/integration/generated/xms-error-responses/")
     ],
     targets: [
@@ -80,6 +81,7 @@ let package = Package(
                 "AutoRestRequiredOptionalTest",
                 "AutoRestTimeTest",
                 "AutoRestPagingTest",
+                "PetStoreInc",
                 "XmsErrorResponseExtensions"
             ],
             path: "AutorestSwiftTest"

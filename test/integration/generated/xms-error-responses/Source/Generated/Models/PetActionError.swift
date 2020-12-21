@@ -42,9 +42,9 @@ public struct PetActionError: Codable, Swift.Error {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case errorType
-        case errorMessage
-        case actionResponse
+        case errorType = "errorType"
+        case errorMessage = "errorMessage"
+        case actionResponse = "actionResponse"
     }
 
     /// Initialize a `PetActionError` structure from decoder
