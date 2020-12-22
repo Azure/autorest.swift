@@ -6,7 +6,7 @@
     {{ enum.comment }}
 {% if enum.isExtensible %}
     public enum {{ enum.name }}: RequestStringConvertible, Codable, Equatable {
-        // Custom value for unrecognized enum values
+        /// Custom value for unrecognized enum values
         case custom({{ enum.type }})
         {% for choice in enum.choices %}
             {{ choice.comment }}

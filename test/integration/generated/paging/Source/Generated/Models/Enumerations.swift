@@ -13,7 +13,7 @@ import Foundation
 
 /// The status of the request
 public enum OperationResultStatus: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
 
     case succeeded

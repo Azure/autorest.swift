@@ -28,17 +28,18 @@ import AutoRestValidationTest
 import AzureCore
 import XCTest
 
+// swiftlint:disable force_try
 class AutoRestValidationTest: XCTestCase {
-
-    private func getClient(apiVersion: String? = nil) -> AutoRestValidationTestClient {
-        let options = AutoRestValidationTestClientOptions(apiVersion: apiVersion ?? "12-34-5678")
+    private func getClient(apiVersion: AutoRestValidationTestClient.ApiVersion? = nil) -> AutoRestValidationTestClient {
+        let options = AutoRestValidationTestClientOptions(apiVersion: apiVersion ?? .custom("12-34-5678"))
         return try! AutoRestValidationTestClient(
             subscriptionId: "abc123", url: URL(string: "http://localhost:3000")!,
             authPolicy: AnonymousAccessPolicy(),
-            withOptions: AutoRestValidationTestClientOptions())
+            withOptions: options
+        )
     }
 
-    private func getBody(displayNames: [String]? = nil, capacity: Int? = nil) -> Product {
+    private func getBody(displayNames: [String]? = nil, capacity: Int32? = nil) -> Product {
         return Product(
             displayNames: displayNames,
             capacity: capacity,
@@ -84,96 +85,102 @@ class AutoRestValidationTest: XCTestCase {
     func test_minLengthValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "1", id: 100) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "1", id: 100) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_maxLengthValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "1234567890A", id: 100) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "1234567890A", id: 100) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_patternValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "!@#$", id: 100) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "!@#$", id: 100) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_multipleValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "123", id: 105) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "123", id: 105) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_minimumValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "123", id: 0) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "123", id: 0) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_maxmimumValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "123", id: 2000) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "123", id: 2000) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
@@ -181,16 +188,17 @@ class AutoRestValidationTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
         let constantBody = getBody(capacity: 0)
-        client.autoRestValidationTest.validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
@@ -198,16 +206,17 @@ class AutoRestValidationTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
         let constantBody = getBody(capacity: 100)
-        client.autoRestValidationTest.validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
@@ -215,32 +224,34 @@ class AutoRestValidationTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
         let constantBody = getBody(displayNames: ["item1", "item2", "item3", "item4", "item5", "item6", "item7"])
-        client.autoRestValidationTest.validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        client.autoRestValidationTest
+            .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 
     func test_apiVersionValidation() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
-        let client = getClient(apiVersion: "abc")
-        client.autoRestValidationTest.validationOfMethodParameters(resourceGroupName: "123", id: 150) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. error=\(details)")
+        let client = getClient(apiVersion: .custom("abc"))
+        client.autoRestValidationTest
+            .validationOfMethodParameters(resourceGroupName: "123", id: 150) { result, httpResponse in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    let details = errorDetails(for: error, withResponse: httpResponse)
+                    XCTFail("Call \(#function) failed. error=\(details)")
+                }
+                expectation.fulfill()
             }
-            expectation.fulfill()
-        }
         wait(for: [expectation], timeout: 5.0)
     }
 }

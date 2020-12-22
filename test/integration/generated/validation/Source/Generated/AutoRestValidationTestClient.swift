@@ -18,13 +18,33 @@ import Foundation
 
 public final class AutoRestValidationTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
-    public enum ApiVersion: String {
+    public enum ApiVersion: RequestStringConvertible {
+        /// Custom value for unrecognized enum values
+        case custom(String)
         /// API version "1.0.0"
-        case v100 = "1.0.0"
+        case v100
 
         /// The most recent API version of the
         public static var latest: ApiVersion {
             return .v100
+        }
+
+        public var requestString: String {
+            switch self {
+            case let .custom(val):
+                return val
+            case .v100:
+                return "1.0.0"
+            }
+        }
+
+        public init(_ val: String) {
+            switch val.lowercased() {
+            case "1.0.0":
+                self = .v100
+            default:
+                self = .custom(val)
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import AzureCore
 import Foundation
 
 public enum Enum0: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
 
     case foo1
@@ -62,7 +62,7 @@ public enum Enum0: RequestStringConvertible, Codable, Equatable {
 }
 
 public enum Enum1: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
 
     case foo1

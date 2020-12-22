@@ -40,7 +40,8 @@ public final class AutoRestValidationTest {
         let params = RequestParameters(
             (.path, "resourceGroupName", resourceGroupName, .encode), (.path, "id", id, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "subscriptionId", client.subscriptionId, .encode), (.query, "apiVersion", "1.0.0", .encode),
+            (.path, "subscriptionId", client.subscriptionId, .encode),
+            (.query, "apiVersion", client.options.apiVersion, .encode),
             (.header, "Accept", "application/json", .encode)
         )
 
@@ -125,7 +126,8 @@ public final class AutoRestValidationTest {
         let params = RequestParameters(
             (.path, "resourceGroupName", resourceGroupName, .encode), (.path, "id", id, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "subscriptionId", client.subscriptionId, .encode), (.query, "apiVersion", "1.0.0", .encode),
+            (.path, "subscriptionId", client.subscriptionId, .encode),
+            (.query, "apiVersion", client.options.apiVersion, .encode),
             (.header, "Content-Type", "application/json", .encode),
             (.header, "Accept", "application/json", .encode)
         )

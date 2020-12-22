@@ -18,13 +18,33 @@ import Foundation
 
 public final class AutoRestDateTimeTestClient: PipelineClient {
     /// API version of the  to invoke. Defaults to the latest.
-    public enum ApiVersion: String {
+    public enum ApiVersion: RequestStringConvertible {
+        /// Custom value for unrecognized enum values
+        case custom(String)
         /// API version ""
-        case v = ""
+        case v
 
         /// The most recent API version of the
         public static var latest: ApiVersion {
             return .v
+        }
+
+        public var requestString: String {
+            switch self {
+            case let .custom(val):
+                return val
+            case .v:
+                return ""
+            }
+        }
+
+        public init(_ val: String) {
+            switch val.lowercased() {
+            case "":
+                self = .v
+            default:
+                self = .custom(val)
+            }
         }
     }
 
