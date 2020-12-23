@@ -215,6 +215,7 @@ struct OperationViewModel {
     let defaultException: ExceptionResponseViewModel?
     let defaultExceptionHasBody: Bool
     let needHttpResponseData: Bool
+    let hasValidation: Bool
 
     init(from operation: Operation, with model: CodeModel, groupName: String) {
         guard let request = operation.request else { fatalError("Request not found for operation \(operation.name).") }
@@ -286,6 +287,7 @@ struct OperationViewModel {
         self.returnType = returnType
         self.defaultExceptionHasBody = defaultExceptionHasBody
         self.needHttpResponseData = exceptions.count > 1 || (returnType.type != "Void") || defaultExceptionHasBody
+        self.hasValidation = self.params.all.first { $0.validation != nil } != nil
     }
 }
 
