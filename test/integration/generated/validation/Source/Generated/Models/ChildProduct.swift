@@ -42,7 +42,7 @@ public struct ChildProduct: Codable {
 
     enum CodingKeys: String, CodingKey {
         case count = "count"
-        case childProductConstProperty = "ChildProductConstProperty"
+        case childProductConstProperty = "constProperty"
     }
 
     /// Initialize a `ChildProduct` structure from decoder

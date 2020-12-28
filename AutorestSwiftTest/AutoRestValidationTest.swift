@@ -92,7 +92,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: minLength 3"))
+                    XCTAssert(details.contains("resourceGroupName: minLength 3"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -109,7 +109,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: maxLength 10"))
+                    XCTAssert(details.contains("resourceGroupName: maxLength 10"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -126,7 +126,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: pattern"))
+                    XCTAssert(details.contains("resourceGroupName: pattern"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -143,7 +143,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("id: multipleOf 10"))
+                    XCTAssert(details.contains("id: multipleOf 10"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -160,7 +160,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("id: minimum 100"))
+                    XCTAssert(details.contains("id: minimum 100"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -177,7 +177,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("id: maximum 1000"))
+                    XCTAssert(details.contains("id: maximum 1000"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -195,7 +195,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -213,7 +213,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -231,7 +231,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }
@@ -248,7 +248,7 @@ class AutoRestValidationTest: XCTestCase {
                     XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"), "Error: \(details)")
                 }
                 expectation.fulfill()
             }

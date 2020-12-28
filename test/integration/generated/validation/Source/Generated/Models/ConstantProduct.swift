@@ -36,8 +36,8 @@ public struct ConstantProduct: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case constantProductConstProperty = "ConstantProductConstProperty"
-        case constantProductConstProperty2 = "ConstantProductConstProperty2"
+        case constantProductConstProperty = "constProperty"
+        case constantProductConstProperty2 = "constProperty2"
     }
 
     /// Initialize a `ConstantProduct` structure from decoder

@@ -33,9 +33,9 @@ public struct Product: Codable {
     // MARK: Constants
 
     /// Constant int
-    public let constant4 = "0"
+    public let constInt = 0
     /// Constant string
-    public let productConstString = "constant"
+    public let constString = "constant"
     /// Constant string as Enum
     public let enumConst = "constant_string_as_enum"
 
@@ -67,8 +67,8 @@ public struct Product: Codable {
         case image = "image"
         case child = "child"
         case constChild = "constChild"
-        case constant4 = "Constant4"
-        case productConstString = "ProductConstString"
+        case constInt = "constInt"
+        case constString = "constString"
         case enumConst = "EnumConst"
     }
 
@@ -90,8 +90,8 @@ public struct Product: Codable {
         if image != nil { try? container.encode(image, forKey: .image) }
         try container.encode(child, forKey: .child)
         try container.encode(constChild, forKey: .constChild)
-        try container.encode(constant4, forKey: .constant4)
-        try container.encode(productConstString, forKey: .productConstString)
+        try container.encode(constInt, forKey: .constInt)
+        try container.encode(constString, forKey: .constString)
         try container.encode(enumConst, forKey: .enumConst)
     }
 }
