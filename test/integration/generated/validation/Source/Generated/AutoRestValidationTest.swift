@@ -36,6 +36,8 @@ public final class AutoRestValidationTest {
         withOptions options: ValidationOfMethodParametersOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Product>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.path, "resourceGroupName", resourceGroupName, .encode), (.path, "id", id, .encode),
@@ -52,6 +54,42 @@ public final class AutoRestValidationTest {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
+        // Apply client-side validation
+        var validationErrors = [String]()
+        // Validate resourceGroupName
+        let minLength = 3
+        if resourceGroupName.count < minLength {
+            validationErrors.append("resourceGroupName: minLength \(minLength)")
+        }
+        let maxLength = 10
+        if resourceGroupName.count > maxLength {
+            validationErrors.append("resourceGroupName: maxLength \(maxLength)")
+        }
+        let pattern = #"[a-zA-Z0-9']+"#
+        if resourceGroupName.range(of: pattern, options: .regularExpression) == nil {
+            validationErrors.append("resourceGroupName: pattern \(pattern)")
+        }
+        // Validate id
+        let multipleOf: Int32 = 10
+        if id % multipleOf != 0 {
+            validationErrors.append("id: multipleOf \(multipleOf)")
+        }
+        let minimum = 100
+        if id < minimum {
+            validationErrors.append("id: minimum \(minimum)")
+        }
+        let maximum = 1000
+        if id > maximum {
+            validationErrors.append("id: maximum \(maximum)")
+        }
+        if !validationErrors.isEmpty {
+            dispatchQueue.async {
+                let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
+                completionHandler(.failure(error), nil)
+            }
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -59,7 +97,6 @@ public final class AutoRestValidationTest {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -122,6 +159,8 @@ public final class AutoRestValidationTest {
         withOptions options: ValidationOfBodyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Product>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.path, "resourceGroupName", resourceGroupName, .encode), (.path, "id", id, .encode),
@@ -148,6 +187,42 @@ public final class AutoRestValidationTest {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
+        // Apply client-side validation
+        var validationErrors = [String]()
+        // Validate resourceGroupName
+        let minLength = 3
+        if resourceGroupName.count < minLength {
+            validationErrors.append("resourceGroupName: minLength \(minLength)")
+        }
+        let maxLength = 10
+        if resourceGroupName.count > maxLength {
+            validationErrors.append("resourceGroupName: maxLength \(maxLength)")
+        }
+        let pattern = #"[a-zA-Z0-9]+"#
+        if resourceGroupName.range(of: pattern, options: .regularExpression) == nil {
+            validationErrors.append("resourceGroupName: pattern \(pattern)")
+        }
+        // Validate id
+        let multipleOf: Int32 = 10
+        if id % multipleOf != 0 {
+            validationErrors.append("id: multipleOf \(multipleOf)")
+        }
+        let minimum = 100
+        if id < minimum {
+            validationErrors.append("id: minimum \(minimum)")
+        }
+        let maximum = 1000
+        if id > maximum {
+            validationErrors.append("id: maximum \(maximum)")
+        }
+        if !validationErrors.isEmpty {
+            dispatchQueue.async {
+                let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
+                completionHandler(.failure(error), nil)
+            }
+        }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -155,7 +230,6 @@ public final class AutoRestValidationTest {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -212,6 +286,8 @@ public final class AutoRestValidationTest {
         withOptions options: GetWithConstantInPathOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -225,6 +301,7 @@ public final class AutoRestValidationTest {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -232,7 +309,6 @@ public final class AutoRestValidationTest {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             switch result {
             case .success:
                 guard let statusCode = httpResponse?.statusCode else {
@@ -270,6 +346,8 @@ public final class AutoRestValidationTest {
         withOptions options: PostWithConstantInBodyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Product>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -293,6 +371,7 @@ public final class AutoRestValidationTest {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -300,7 +379,6 @@ public final class AutoRestValidationTest {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {

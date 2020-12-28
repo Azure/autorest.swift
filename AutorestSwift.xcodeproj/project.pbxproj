@@ -216,6 +216,7 @@
 		0ADDD29725915C7500BD5E58 /* AutoRestValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */; };
 		0ADDD35D259273EB00BD5E58 /* Client_ApiVersion_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD33F259270E200BD5E58 /* Client_ApiVersion_Snippet.stencil */; };
 		0ADDD3F62592C38B00BD5E58 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD3F52592C38B00BD5E58 /* Validation.swift */; };
+		0ADDD416259A4CC700BD5E58 /* Operation_Validation_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD415259A4CB300BD5E58 /* Operation_Validation_Snippet.stencil */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -258,6 +259,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				0ADDD416259A4CC700BD5E58 /* Operation_Validation_Snippet.stencil in CopyFiles */,
 				0ADDD35D259273EB00BD5E58 /* Client_ApiVersion_Snippet.stencil in CopyFiles */,
 				0ADDD1E625914A3500BD5E58 /* Operation_Request_Parameters_Snippet.stencil in CopyFiles */,
 				0A4743472582919700CA86E5 /* Client_File.stencil in CopyFiles */,
@@ -399,6 +401,7 @@
 		0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestValidationTest.swift; sourceTree = "<group>"; };
 		0ADDD33F259270E200BD5E58 /* Client_ApiVersion_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Client_ApiVersion_Snippet.stencil; sourceTree = "<group>"; };
 		0ADDD3F52592C38B00BD5E58 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		0ADDD415259A4CB300BD5E58 /* Operation_Validation_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Operation_Validation_Snippet.stencil; sourceTree = "<group>"; };
 		0AEFC3412537647A00C6B087 /* PropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
 		0AFA1AE7254C979500DF1CB9 /* AutoRestSwaggerBatTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatTest.swift; sourceTree = "<group>"; };
 		4B8C7552DB3E5F0B459F0295 /* Pods-AutorestSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.debug.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -644,6 +647,7 @@
 				0A22B0C824D33F1000EC018E /* Operation_Response_Snippet.stencil */,
 				F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */,
 				0A22B09924D20BBA00EC018E /* Operation_Snippet.stencil */,
+				0ADDD415259A4CB300BD5E58 /* Operation_Validation_Snippet.stencil */,
 				0A22B07424CB71E100EC018E /* Package_File.stencil */,
 				0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */,
 				0A22B07524CB71E100EC018E /* README_File.stencil */,

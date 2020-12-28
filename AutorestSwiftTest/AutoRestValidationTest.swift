@@ -65,7 +65,7 @@ class AutoRestValidationTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_post_withConstantInPath() throws {
+    func test_post_withConstantInBody() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let client = getClient()
         let constantBody = getBody()
@@ -89,10 +89,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "1", id: 100) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: minLength 3"))
                 }
                 expectation.fulfill()
             }
@@ -106,10 +106,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "1234567890A", id: 100) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: maxLength 10"))
                 }
                 expectation.fulfill()
             }
@@ -123,10 +123,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "!@#$", id: 100) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: pattern"))
                 }
                 expectation.fulfill()
             }
@@ -140,10 +140,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "123", id: 105) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("id: multipleOf 10"))
                 }
                 expectation.fulfill()
             }
@@ -157,10 +157,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "123", id: 0) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("id: minimum 100"))
                 }
                 expectation.fulfill()
             }
@@ -174,10 +174,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "123", id: 2000) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("id: maximum 1000"))
                 }
                 expectation.fulfill()
             }
@@ -192,10 +192,10 @@ class AutoRestValidationTest: XCTestCase {
             .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
                 }
                 expectation.fulfill()
             }
@@ -210,10 +210,10 @@ class AutoRestValidationTest: XCTestCase {
             .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
                 }
                 expectation.fulfill()
             }
@@ -228,10 +228,10 @@ class AutoRestValidationTest: XCTestCase {
             .validation(ofBody: constantBody, resourceGroupName: "123", id: 150) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
                 }
                 expectation.fulfill()
             }
@@ -245,10 +245,10 @@ class AutoRestValidationTest: XCTestCase {
             .validationOfMethodParameters(resourceGroupName: "123", id: 150) { result, httpResponse in
                 switch result {
                 case .success:
-                    break
+                    XCTFail("Call \(#function) succeeded. Expected failure.")
                 case let .failure(error):
                     let details = errorDetails(for: error, withResponse: httpResponse)
-                    XCTFail("Call \(#function) failed. error=\(details)")
+                    XCTAssert(details.contains("resourceGroupName: BLOOT"))
                 }
                 expectation.fulfill()
             }

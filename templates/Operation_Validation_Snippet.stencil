@@ -1,0 +1,61 @@
+// Apply client-side validation
+var validationErrors = [String]()
+{% for param in op.params.all %}
+{% if param.validation %}
+        // Validate {{ param.name }}
+    {% if param.validation.minLength %}
+        let minLength = {{ param.validation.minLength }}
+        if {{ param.name }}.count < minLength {
+            validationErrors.append("{{ param.name }}: minLength \(minLength)")
+        }
+    {% endif %}
+    {% if param.validation.maxLength %}
+        let maxLength = {{ param.validation.maxLength }}
+        if {{ param.name }}.count > maxLength {
+            validationErrors.append("{{ param.name }}: maxLength \(maxLength)")
+        }
+    {% endif %}
+    {% if param.validation.pattern %}
+        let pattern = #"{{ param.validation.pattern }}"#
+        if {{ param.name }}.range(of: pattern, options: .regularExpression) == nil {
+            validationErrors.append("{{ param.name }}: pattern \(pattern)")
+        }
+    {% endif %}
+    {% if param.validation.multipleOf %}
+        let multipleOf: {{ param.type }} = {{ param.validation.multipleOf }}
+        if {{ param.name }} % multipleOf != 0 {
+            validationErrors.append("{{ param.name }}: multipleOf \(multipleOf)")
+        }
+    {% endif %}
+    {% if param.validation.minimum %}
+        let minimum = {{ param.validation.minimum }}
+        {% if param.validation.exclusiveMinimum %}
+            if {{ param.name }} <= minimum {
+                validationErrors.append("{{ param.name }}: minimum (exclusive) \(minimum)")
+            }
+        {% else %}
+            if {{ param.name }} < minimum {
+                validationErrors.append("{{ param.name }}: minimum \(minimum)")
+            }
+        {% endif %}
+    {% endif %}
+    {% if param.validation.maximum %}
+        let maximum = {{ param.validation.maximum }}
+        {% if param.validation.exclusiveMaximum %}
+            if {{ param.name }} >= maximum {
+                validationErrors.append("{{ param.name }}: maximum (exclusive) \(maximum)")
+            }
+        {% else %}
+            if {{ param.name }} > maximum {
+                validationErrors.append("{{ param.name }}: maximum \(maximum)")
+            }
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% endfor %}
+if !validationErrors.isEmpty {
+    dispatchQueue.async {
+        let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
+        completionHandler(.failure(error), nil)
+    }
+}

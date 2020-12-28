@@ -14,6 +14,8 @@ public func {{ op.name }}(
     withOptions options: {{ op.clientMethodOptions.name }}? = nil,
     completionHandler: @escaping HTTPResultHandler<{{ op.returnType.type }}>
 ) {
+    let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
     {% include "Operation_Request_Parameters_Snippet.stencil" op %}
     {# Handle body parameter #}
 {% if op.request.strategy == "body" %}
@@ -26,6 +28,11 @@ public func {{ op.name }}(
     // TODO: Couldn't find template for {{ op.request.strategy }}
     assertFailure("Autorest generated bad code.")
 {% endif %}
+
+{% if op.hasValidation %}
+    {% include "Operation_Validation_Snippet.stencil" op %}
+{% endif %}
+
     // Send request
     let context = PipelineContext.of(keyValues: [
         ContextKey.allowedStatusCodes.rawValue: {{ op.pipelineContext.allowedStatusCodes}} as AnyObject
@@ -33,7 +40,6 @@ public func {{ op.name }}(
     context.add(cancellationToken: options?.cancellationToken, applying: client.options)
     context.merge(with: options?.context)
     client.request(request, context: context) { result, httpResponse in
-        let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
         {% include "Operation_Response_Snippet.stencil" op %}
     }
 }
