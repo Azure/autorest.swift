@@ -37,7 +37,7 @@ public struct Product: Codable {
     /// Constant string
     public let constString = "constant"
     /// Constant string as Enum
-    public let enumConst = "constant_string_as_enum"
+    public let constStringAsEnum = "constant_string_as_enum"
 
     // MARK: Initializers
 
@@ -69,7 +69,7 @@ public struct Product: Codable {
         case constChild = "constChild"
         case constInt = "constInt"
         case constString = "constString"
-        case enumConst = "EnumConst"
+        case constStringAsEnum = "constStringAsEnum"
     }
 
     /// Initialize a `Product` structure from decoder
@@ -92,6 +92,6 @@ public struct Product: Codable {
         try container.encode(constChild, forKey: .constChild)
         try container.encode(constInt, forKey: .constInt)
         try container.encode(constString, forKey: .constString)
-        try container.encode(enumConst, forKey: .enumConst)
+        try container.encode(constStringAsEnum, forKey: .constStringAsEnum)
     }
 }

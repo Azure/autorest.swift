@@ -25,7 +25,7 @@ public struct ChildProduct: Codable {
     // MARK: Constants
 
     /// Constant string
-    public let childProductConstProperty = "constant"
+    public let constProperty = "constant"
 
     // MARK: Initializers
 
@@ -42,7 +42,7 @@ public struct ChildProduct: Codable {
 
     enum CodingKeys: String, CodingKey {
         case count = "count"
-        case childProductConstProperty = "constProperty"
+        case constProperty = "constProperty"
     }
 
     /// Initialize a `ChildProduct` structure from decoder
@@ -55,6 +55,6 @@ public struct ChildProduct: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if count != nil { try? container.encode(count, forKey: .count) }
-        try container.encode(childProductConstProperty, forKey: .childProductConstProperty)
+        try container.encode(constProperty, forKey: .constProperty)
     }
 }

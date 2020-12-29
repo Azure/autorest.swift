@@ -22,9 +22,9 @@ public struct ConstantProduct: Codable {
     // MARK: Constants
 
     /// Constant string
-    public let constantProductConstProperty = "constant"
+    public let constProperty = "constant"
     /// Constant string2
-    public let constantProductConstProperty2 = "constant2"
+    public let constProperty2 = "constant2"
 
     // MARK: Initializers
 
@@ -36,8 +36,8 @@ public struct ConstantProduct: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case constantProductConstProperty = "constProperty"
-        case constantProductConstProperty2 = "constProperty2"
+        case constProperty = "constProperty"
+        case constProperty2 = "constProperty2"
     }
 
     /// Initialize a `ConstantProduct` structure from decoder
@@ -48,7 +48,7 @@ public struct ConstantProduct: Codable {
     /// Encode a `ConstantProduct` structure
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(constantProductConstProperty, forKey: .constantProductConstProperty)
-        try container.encode(constantProductConstProperty2, forKey: .constantProductConstProperty2)
+        try container.encode(constProperty, forKey: .constProperty)
+        try container.encode(constProperty2, forKey: .constProperty2)
     }
 }
