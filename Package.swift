@@ -82,6 +82,7 @@ let package = Package(
                 "AutoRestRequiredOptionalTest",
                 "AutoRestTimeTest",
                 "AutoRestPagingTest",
+                "AutoRestValidationTest",
                 "PetStoreInc",
                 "XmsErrorResponseExtensions"
             ],
