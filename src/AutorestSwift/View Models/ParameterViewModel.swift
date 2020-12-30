@@ -72,9 +72,6 @@ struct ParameterViewModel {
     /// Whether the parameter should be exploded or not. Only applicable for query parameters
     let explode: Bool
 
-    /// Client-side validation to enforce
-    var validation: Validation?
-
     // MARK: Initializers
 
     init(
@@ -87,8 +84,7 @@ struct ParameterViewModel {
         comment: ViewModelComment,
         location: String,
         encode: String,
-        explode: Bool,
-        validation: Validation?
+        explode: Bool
     ) {
         self.name = name
         self.serializedName = serializedName
@@ -101,12 +97,10 @@ struct ParameterViewModel {
         self.location = location
         self.encode = encode
         self.explode = explode
-        self.validation = validation
     }
 
     init(from param: ParameterType, with operation: Operation? = nil) {
         let optional = !param.required
-
         self.init(
             name: param.variableName,
             serializedName: param.serializedName ?? param.name,
@@ -117,8 +111,7 @@ struct ParameterViewModel {
             comment: ViewModelComment(from: param.description),
             location: param.paramLocation?.rawValue ?? "???",
             encode: param.value.isSkipUrlEncoding ? "skipEncoding" : "encode",
-            explode: param.explode,
-            validation: Validation(with: param.schema)
+            explode: param.explode
         )
         // Update the `valueOrPath` parameter
         if param.implementation == .client {

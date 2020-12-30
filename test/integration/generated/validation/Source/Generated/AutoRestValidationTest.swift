@@ -57,37 +57,32 @@ public final class AutoRestValidationTest {
 
         // Apply client-side validation
         var validationErrors = [String]()
-        // Validate resourceGroupName
-        let minLength = 3
-        if resourceGroupName.count < minLength {
-            validationErrors.append("resourceGroupName: minLength \(minLength)")
-        }
-        let maxLength = 10
-        if resourceGroupName.count > maxLength {
-            validationErrors.append("resourceGroupName: maxLength \(maxLength)")
-        }
-        let pattern = #"[a-zA-Z0-9']+"#
-        if resourceGroupName.range(of: pattern, options: .regularExpression) == nil {
-            validationErrors.append("resourceGroupName: pattern \(pattern)")
-        }
         // Validate id
-        let multipleOf: Int32 = 10
-        if id % multipleOf != 0 {
-            validationErrors.append("id: multipleOf \(multipleOf)")
+        if id % (10 as Int32) != 0 {
+            validationErrors.append("id: multipleOf 10")
         }
-        let minimum = 100
-        if id < minimum {
-            validationErrors.append("id: minimum \(minimum)")
+        if id > 1000 {
+            validationErrors.append("id: <= 1000")
         }
-        let maximum = 1000
-        if id > maximum {
-            validationErrors.append("id: maximum \(maximum)")
+        if id < 100 {
+            validationErrors.append("id: >= 100")
+        }
+        // Validate resourceGroupName
+        if resourceGroupName.count > 10 {
+            validationErrors.append("resourceGroupName: maxLength 10")
+        }
+        if resourceGroupName.count < 3 {
+            validationErrors.append("resourceGroupName: minLength 3")
+        }
+        if resourceGroupName.range(of: #"[a-zA-Z0-9']+"#, options: .regularExpression) == nil {
+            validationErrors.append(#"resourceGroupName: pattern [a-zA-Z0-9']+"#)
         }
         if !validationErrors.isEmpty {
             dispatchQueue.async {
                 let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
                 completionHandler(.failure(error), nil)
             }
+            return
         }
 
         // Send request
@@ -190,37 +185,47 @@ public final class AutoRestValidationTest {
 
         // Apply client-side validation
         var validationErrors = [String]()
-        // Validate resourceGroupName
-        let minLength = 3
-        if resourceGroupName.count < minLength {
-            validationErrors.append("resourceGroupName: minLength \(minLength)")
-        }
-        let maxLength = 10
-        if resourceGroupName.count > maxLength {
-            validationErrors.append("resourceGroupName: maxLength \(maxLength)")
-        }
-        let pattern = #"[a-zA-Z0-9]+"#
-        if resourceGroupName.range(of: pattern, options: .regularExpression) == nil {
-            validationErrors.append("resourceGroupName: pattern \(pattern)")
-        }
         // Validate id
-        let multipleOf: Int32 = 10
-        if id % multipleOf != 0 {
-            validationErrors.append("id: multipleOf \(multipleOf)")
+        if id % (10 as Int32) != 0 {
+            validationErrors.append("id: multipleOf 10")
         }
-        let minimum = 100
-        if id < minimum {
-            validationErrors.append("id: minimum \(minimum)")
+        if id > 1000 {
+            validationErrors.append("id: <= 1000")
         }
-        let maximum = 1000
-        if id > maximum {
-            validationErrors.append("id: maximum \(maximum)")
+        if id < 100 {
+            validationErrors.append("id: >= 100")
+        }
+        // Validate ofBody?.capacity
+        if let value = ofBody?.capacity, value >= 100 {
+            validationErrors.append("ofBody?.capacity: < 100")
+        }
+        if let value = ofBody?.capacity, value <= 0 {
+            validationErrors.append("ofBody?.capacity: > 0")
+        }
+        // Validate ofBody?.displayNames
+        if let value = ofBody?.displayNames, value.count > 6 {
+            validationErrors.append("ofBody?.displayNames: maxItems 6")
+        }
+        // Validate ofBody?.image
+        if let value = ofBody?.image, value.range(of: #"http://\w+"#, options: .regularExpression) == nil {
+            validationErrors.append(#"ofBody?.image: pattern http://\w+"#)
+        }
+        // Validate resourceGroupName
+        if resourceGroupName.count > 10 {
+            validationErrors.append("resourceGroupName: maxLength 10")
+        }
+        if resourceGroupName.count < 3 {
+            validationErrors.append("resourceGroupName: minLength 3")
+        }
+        if resourceGroupName.range(of: #"[a-zA-Z0-9]+"#, options: .regularExpression) == nil {
+            validationErrors.append(#"resourceGroupName: pattern [a-zA-Z0-9]+"#)
         }
         if !validationErrors.isEmpty {
             dispatchQueue.async {
                 let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
                 completionHandler(.failure(error), nil)
             }
+            return
         }
 
         // Send request
@@ -369,6 +374,31 @@ public final class AutoRestValidationTest {
             let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers, data: requestBody)
         else {
             client.options.logger.error("Failed to construct HTTP request.")
+            return
+        }
+
+        // Apply client-side validation
+        var validationErrors = [String]()
+        // Validate withConstantInBody?.capacity
+        if let value = withConstantInBody?.capacity, value >= 100 {
+            validationErrors.append("withConstantInBody?.capacity: < 100")
+        }
+        if let value = withConstantInBody?.capacity, value <= 0 {
+            validationErrors.append("withConstantInBody?.capacity: > 0")
+        }
+        // Validate withConstantInBody?.displayNames
+        if let value = withConstantInBody?.displayNames, value.count > 6 {
+            validationErrors.append("withConstantInBody?.displayNames: maxItems 6")
+        }
+        // Validate withConstantInBody?.image
+        if let value = withConstantInBody?.image, value.range(of: #"http://\w+"#, options: .regularExpression) == nil {
+            validationErrors.append(#"withConstantInBody?.image: pattern http://\w+"#)
+        }
+        if !validationErrors.isEmpty {
+            dispatchQueue.async {
+                let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
+                completionHandler(.failure(error), nil)
+            }
             return
         }
 

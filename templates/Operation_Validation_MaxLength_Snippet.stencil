@@ -1,0 +1,9 @@
+{% if validation.hasMaxLength %}
+{% if validation.optional %}
+    if let value = {{ validation.path }}.count, value > {{ validation.maxLength }} {
+{% else %}
+    if {{ validation.path }}.count > {{ validation.maxLength }} {
+{% endif %}
+        validationErrors.append("{{ validation.path }}: maxLength {{ validation.maxLength }}")
+    }
+{% endif %}

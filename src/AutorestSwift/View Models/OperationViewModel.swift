@@ -27,165 +27,6 @@
 import Foundation
 
 // swiftlint:disable cyclomatic_complexity
-struct OperationParameters {
-    let all: [ParameterViewModel]
-    let signature: [ParameterViewModel]
-    let explode: [ParameterViewModel]
-    var body: BodyParams?
-    var declaration: String
-
-    /// Initialize with a list of `ParameterType`.
-    init(parameters: [ParameterType], operation: Operation, model: CodeModel) {
-        var params = [ParameterViewModel]()
-        var explodeParams = [ParameterViewModel]()
-
-        for param in parameters {
-            guard let paramLocation = param.paramLocation else { continue }
-            let viewModel = ParameterViewModel(from: param, with: operation)
-
-            switch paramLocation {
-            case .query:
-                if param.explode {
-                    explodeParams.append(viewModel)
-                } else {
-                    params.append(viewModel)
-                }
-            case .header, .path, .uri:
-                params.append(viewModel)
-            case .body:
-                // TODO: Body params are handled differently and shouldn't go into RequestParameters at this time
-                // We may be able to refactor and change this.
-                continue
-            default:
-                continue
-            }
-        }
-
-        // Set the body param, if applicable
-        var bodyParamName: String?
-        let bodyParams = params.filter { $0.location == "body" }
-        assert(bodyParams.count <= 1, "Expected, at most, one body parameter.")
-        if bodyParams.count > 0 {
-            bodyParamName = bodyParams.first?.name
-        } else {
-            bodyParamName = operation.request?.bodyParamName(for: operation)
-        }
-        if let bodyParam = operation.request?.bodyParam {
-            self.body = BodyParams(
-                from: bodyParam,
-                parameters: parameters
-            )
-            // update the body param name to fit Swift conventions
-            body?.param.name = bodyParamName ?? bodyParam.name
-        } else {
-            self.body = nil
-        }
-
-        var signatureViewModel = [ParameterViewModel]()
-        for param in parameters {
-            // For `Options` Group schema created by "x-ms-parameter-grouping" with postfix: Options,
-            // look for  all the properties from that group schema which is in 'path' as the signature of the method
-            if let group = model.schemas.schema(for: param.name, withType: .group) as? GroupSchema,
-                group.name.hasSuffix("Options") {
-                for property in group.properties ?? [] {
-                    switch property {
-                    case let .grouped(groupProperty):
-                        for param in groupProperty.originalParameter where param.paramLocation == .path {
-                            signatureViewModel.append(ParameterViewModel(from: param))
-                        }
-                    default:
-                        continue
-                    }
-                }
-            } else if param.belongsInSignature(model: model) {
-                signatureViewModel.append(ParameterViewModel(from: param))
-            }
-        }
-        self.all = params
-        self.signature = signatureViewModel
-        self.explode = explodeParams
-        self.declaration = explode.isEmpty ? "let" : "var"
-    }
-}
-
-enum BodyParamStrategy: String {
-    case plain
-    case plainNullable
-    case flattened
-    case unixTime
-    case byteArray
-    case base64ByteArray
-    case constant
-    case decimal
-    case data
-    case string
-    case time
-}
-
-struct BodyParams {
-    /// The `ParameterViewModel` corresponding to the body param
-    var param: ParameterViewModel
-
-    /// Identifies the correct snippet to use when rendering the view model
-    let strategy: String
-
-    /// A list of `VirtualParam` that correlate to a flattened body parmeter
-    let children: [VirtualParam]
-
-    /// Returns `true` if the body parameter is flattened
-    var flattened: Bool {
-        return !children.isEmpty
-    }
-
-    init(from param: ParameterType, parameters: [ParameterType]) {
-        self.param = ParameterViewModel(from: param)
-        var properties = param.schema.properties
-        if let objectSchema = param.schema as? ObjectSchema {
-            properties = objectSchema.flattenedProperties
-        }
-        var virtParams = [VirtualParam]()
-        for child in properties ?? [] {
-            guard child.schema as? ConstantSchema == nil else { continue }
-            if let virtParam = parameters.virtual.first(where: { $0.name == child.name }) {
-                virtParams.append(VirtualParam(from: virtParam))
-            }
-        }
-        var strategy: BodyParamStrategy = .plain
-
-        if param.flattened {
-            strategy = .flattened
-        } else if param.nullable {
-            strategy = .plainNullable
-        } else if param.schema is ConstantSchema {
-            strategy = .constant
-        } else {
-            strategy = param.schema.bodyParamStrategy
-            if strategy == .plain, !param.required {
-                strategy = .plainNullable
-            }
-        }
-        self.strategy = strategy.rawValue
-        self.children = virtParams
-    }
-}
-
-struct VirtualParam {
-    var name: String
-    var type: String
-    var defaultValue: String
-    var path: String
-
-    init(from param: VirtualParameter) {
-        self.name = param.name
-        var path = param.targetProperty.name
-        if let groupBy = param.groupedBy?.name {
-            path = "\(groupBy).\(path)"
-        }
-        self.path = path
-        self.type = param.schema!.swiftType(optional: !param.required)
-        self.defaultValue = param.required ? "" : " = nil"
-    }
-}
 
 /// View Model for an operation.
 /// Example:
@@ -215,6 +56,7 @@ struct OperationViewModel {
     let defaultException: ExceptionResponseViewModel?
     let defaultExceptionHasBody: Bool
     let needHttpResponseData: Bool
+    let validation: [String: Validation]
     let hasValidation: Bool
 
     init(from operation: Operation, with model: CodeModel, groupName: String) {
@@ -287,7 +129,25 @@ struct OperationViewModel {
         self.returnType = returnType
         self.defaultExceptionHasBody = defaultExceptionHasBody
         self.needHttpResponseData = exceptions.count > 1 || (returnType.type != "Void") || defaultExceptionHasBody
-        self.hasValidation = self.params.all.first { $0.validation != nil } != nil
+        var validations = [String: Validation]()
+        for param in params {
+            // determine the appropriate prefix
+            var prefix = param.located(in: .body) ? self.params.body!.param.name : param.variableName
+            if !param.required {
+                prefix = "\(prefix)?"
+            }
+            if let objectSchema = param.schema as? ObjectSchema {
+                if let objectValidation = Validation.from(objectSchema: objectSchema, withPrefix: prefix) {
+                    validations.merge(objectValidation) { current, _ in current }
+                }
+            } else {
+                if let validation = Validation(with: param.schema, path: param.variableName) {
+                    validations[param.variableName] = validation
+                }
+            }
+        }
+        self.validation = validations
+        self.hasValidation = !validations.isEmpty
     }
 }
 

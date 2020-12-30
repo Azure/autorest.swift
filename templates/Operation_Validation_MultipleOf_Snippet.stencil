@@ -1,0 +1,9 @@
+{% if validation.hasMultipleOf %}
+{% if validation.optional %}
+    if let value = {{ validation.path }}, value % ({{ validation.multipleOf }} as {{ validation.paramType }}) != 0 {
+{% else %}
+    if {{ validation.path }} % ({{ validation.multipleOf }} as {{ validation.paramType }}) != 0 {
+{% endif %}
+        validationErrors.append("{{ validation.path }}: multipleOf {{ validation.multipleOf }}")
+    }
+{% endif %}

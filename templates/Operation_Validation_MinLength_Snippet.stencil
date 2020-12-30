@@ -1,0 +1,9 @@
+{% if validation.hasMinLength %}
+{% if validation.optional %}
+    if let value = {{ validation.path }}.count, value < {{ validation.minLength }} {
+{% else %}
+    if {{ validation.path }}.count < {{ validation.minLength }} {
+{% endif %}
+        validationErrors.append("{{ validation.path }}: minLength {{ validation.minLength }}")
+    }
+{% endif %}

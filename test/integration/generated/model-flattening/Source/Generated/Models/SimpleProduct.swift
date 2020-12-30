@@ -63,7 +63,7 @@ public struct SimpleProduct: Codable {
         case odataValue = "details.max_product_image.@odata.value"
         case productId = "base_product_id"
         case description = "base_product_description"
-        case capacity = "Capacity"
+        case capacity = "details.max_product_capacity"
     }
 
     /// Initialize a `SimpleProduct` structure from decoder
