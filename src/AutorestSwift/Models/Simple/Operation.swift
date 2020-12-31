@@ -79,7 +79,7 @@ class Operation: Codable, LanguageShortcut {
         return requests?.first
     }
 
-    /// Returns the combine list of `ParameterType` objects.
+    /// Returns the combined list of `ParameterType` objects.
     var allParams: [ParameterType] {
         let paramList = (signatureParameters ?? []) + (parameters ?? []) + (request?.allParams ?? [])
         var params = [ParameterType]()
@@ -89,6 +89,11 @@ class Operation: Codable, LanguageShortcut {
             }
         }
         return params
+    }
+
+    var returnsList: Bool {
+        for response in responses ?? [] {}
+        return false
     }
 
     // MARK: Codable

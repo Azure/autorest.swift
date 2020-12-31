@@ -23,6 +23,7 @@ working_files = [
     "body-date",
     "body-datetime",
     "body-datetime-rfc1123",
+    "body-dictionary",
     "body-file",
     "body-number",
     "body-integer",

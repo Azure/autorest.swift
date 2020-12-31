@@ -165,21 +165,20 @@ private func filterParams(for params: [ParameterType]?, with allowed: [Parameter
 private func operationName(for operation: Operation) -> String {
     let swaggerName = operation.name
     var operationName = swaggerName
-    let pluralReplacements = [
-        "get": "list"
-    ]
     var nameComps = swaggerName.splitAndJoinAcronyms
 
-    // TODO: Need a more reliable way to know whether the last item is singular or plural
-    let isPlural = nameComps.last?.hasSuffix("s") ?? false
-    for (index, comp) in nameComps.enumerated() {
-        if index == 0 {
-            if isPlural, let replacement = pluralReplacements[comp] {
-                nameComps[index] = replacement
+    // Force the leading verb to be list if returns array type
+    for response in operation.responses ?? [] {
+        if let schemaResponse = response as? SchemaResponse {
+            if schemaResponse.schema is ArraySchema {
+                nameComps[0] = "list"
+                break
             }
-        } else {
-            nameComps[index] = comp.capitalized
         }
+    }
+
+    for (index, comp) in nameComps.enumerated() {
+        nameComps[index] = index == 0 ? comp.lowercased() : comp.capitalized
     }
     operationName = nameComps.joined()
 
