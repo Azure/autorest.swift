@@ -31,7 +31,7 @@ public final class Dictionary {
     ///     success.
     public func getNull(
         withOptions options: GetNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -75,7 +75,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -109,7 +109,7 @@ public final class Dictionary {
     ///     success.
     public func getEmpty(
         withOptions options: GetEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -153,7 +153,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -186,7 +186,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        empty: [String: String],
+        empty: [String: String?],
         withOptions options: PutEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -267,7 +267,7 @@ public final class Dictionary {
     ///     success.
     public func getNullValue(
         withOptions options: GetNullValueOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -311,7 +311,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -345,7 +345,7 @@ public final class Dictionary {
     ///     success.
     public func getNullKey(
         withOptions options: GetNullKeyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -389,7 +389,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -423,7 +423,7 @@ public final class Dictionary {
     ///     success.
     public func getEmptyStringKey(
         withOptions options: GetEmptyStringKeyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -467,7 +467,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -501,7 +501,7 @@ public final class Dictionary {
     ///     success.
     public func getInvalid(
         withOptions options: GetInvalidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -545,7 +545,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -579,7 +579,7 @@ public final class Dictionary {
     ///     success.
     public func getBooleanTfft(
         withOptions options: GetBooleanTfftOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Bool]>
+        completionHandler: @escaping HTTPResultHandler<[String: Bool?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -623,7 +623,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Bool].self, from: data)
+                        let decoded = try decoder.decode([String: Bool?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -656,7 +656,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        booleanTfft: [String: Bool],
+        booleanTfft: [String: Bool?],
         withOptions options: PutBooleanTfftOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -737,7 +737,7 @@ public final class Dictionary {
     ///     success.
     public func getBooleanInvalidNull(
         withOptions options: GetBooleanInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Bool]>
+        completionHandler: @escaping HTTPResultHandler<[String: Bool?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -781,7 +781,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Bool].self, from: data)
+                        let decoded = try decoder.decode([String: Bool?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -815,7 +815,7 @@ public final class Dictionary {
     ///     success.
     public func getBooleanInvalidString(
         withOptions options: GetBooleanInvalidStringOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Bool]>
+        completionHandler: @escaping HTTPResultHandler<[String: Bool?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -859,7 +859,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Bool].self, from: data)
+                        let decoded = try decoder.decode([String: Bool?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -893,7 +893,7 @@ public final class Dictionary {
     ///     success.
     public func getIntegerValid(
         withOptions options: GetIntegerValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -937,7 +937,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -970,7 +970,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        integerValid: [String: Int32],
+        integerValid: [String: Int32?],
         withOptions options: PutIntegerValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1051,7 +1051,7 @@ public final class Dictionary {
     ///     success.
     public func getIntInvalidNull(
         withOptions options: GetIntInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1095,7 +1095,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1129,7 +1129,7 @@ public final class Dictionary {
     ///     success.
     public func getIntInvalidString(
         withOptions options: GetIntInvalidStringOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1173,7 +1173,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1207,7 +1207,7 @@ public final class Dictionary {
     ///     success.
     public func getLongValid(
         withOptions options: GetLongValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int64]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int64?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1251,7 +1251,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int64].self, from: data)
+                        let decoded = try decoder.decode([String: Int64?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1284,7 +1284,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        longValid: [String: Int64],
+        longValid: [String: Int64?],
         withOptions options: PutLongValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1365,7 +1365,7 @@ public final class Dictionary {
     ///     success.
     public func getLongInvalidNull(
         withOptions options: GetLongInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int64]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int64?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1409,7 +1409,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int64].self, from: data)
+                        let decoded = try decoder.decode([String: Int64?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1443,7 +1443,7 @@ public final class Dictionary {
     ///     success.
     public func getLongInvalidString(
         withOptions options: GetLongInvalidStringOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int64]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int64?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1487,7 +1487,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int64].self, from: data)
+                        let decoded = try decoder.decode([String: Int64?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1521,7 +1521,7 @@ public final class Dictionary {
     ///     success.
     public func getFloatValid(
         withOptions options: GetFloatValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Float]>
+        completionHandler: @escaping HTTPResultHandler<[String: Float?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1565,7 +1565,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Float].self, from: data)
+                        let decoded = try decoder.decode([String: Float?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1598,7 +1598,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        floatValid: [String: Float],
+        floatValid: [String: Float?],
         withOptions options: PutFloatValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1679,7 +1679,7 @@ public final class Dictionary {
     ///     success.
     public func getFloatInvalidNull(
         withOptions options: GetFloatInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Float]>
+        completionHandler: @escaping HTTPResultHandler<[String: Float?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1723,7 +1723,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Float].self, from: data)
+                        let decoded = try decoder.decode([String: Float?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1757,7 +1757,7 @@ public final class Dictionary {
     ///     success.
     public func getFloatInvalidString(
         withOptions options: GetFloatInvalidStringOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Float]>
+        completionHandler: @escaping HTTPResultHandler<[String: Float?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1801,7 +1801,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Float].self, from: data)
+                        let decoded = try decoder.decode([String: Float?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1835,7 +1835,7 @@ public final class Dictionary {
     ///     success.
     public func getDoubleValid(
         withOptions options: GetDoubleValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Double]>
+        completionHandler: @escaping HTTPResultHandler<[String: Double?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -1879,7 +1879,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Double].self, from: data)
+                        let decoded = try decoder.decode([String: Double?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -1912,7 +1912,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        doubleValid: [String: Double],
+        doubleValid: [String: Double?],
         withOptions options: PutDoubleValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -1993,7 +1993,7 @@ public final class Dictionary {
     ///     success.
     public func getDoubleInvalidNull(
         withOptions options: GetDoubleInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Double]>
+        completionHandler: @escaping HTTPResultHandler<[String: Double?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2037,7 +2037,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Double].self, from: data)
+                        let decoded = try decoder.decode([String: Double?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2071,7 +2071,7 @@ public final class Dictionary {
     ///     success.
     public func getDoubleInvalidString(
         withOptions options: GetDoubleInvalidStringOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Double]>
+        completionHandler: @escaping HTTPResultHandler<[String: Double?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2115,7 +2115,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Double].self, from: data)
+                        let decoded = try decoder.decode([String: Double?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2149,7 +2149,7 @@ public final class Dictionary {
     ///     success.
     public func getStringValid(
         withOptions options: GetStringValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2193,7 +2193,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2226,7 +2226,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        stringValid: [String: String],
+        stringValid: [String: String?],
         withOptions options: PutStringValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2307,7 +2307,7 @@ public final class Dictionary {
     ///     success.
     public func getStringWithNull(
         withOptions options: GetStringWithNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2351,7 +2351,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2385,7 +2385,7 @@ public final class Dictionary {
     ///     success.
     public func getStringWithInvalid(
         withOptions options: GetStringWithInvalidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: String]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2429,7 +2429,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: String].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2463,7 +2463,7 @@ public final class Dictionary {
     ///     success.
     public func getDateValid(
         withOptions options: GetDateValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate]>
+        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2507,7 +2507,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: SimpleDate].self, from: data)
+                        let decoded = try decoder.decode([String: SimpleDate?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2540,7 +2540,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dateValid: [String: SimpleDate],
+        dateValid: [String: SimpleDate?],
         withOptions options: PutDateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2621,7 +2621,7 @@ public final class Dictionary {
     ///     success.
     public func getDateInvalidNull(
         withOptions options: GetDateInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate]>
+        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2665,7 +2665,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: SimpleDate].self, from: data)
+                        let decoded = try decoder.decode([String: SimpleDate?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2699,7 +2699,7 @@ public final class Dictionary {
     ///     success.
     public func getDateInvalidChars(
         withOptions options: GetDateInvalidCharsOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate]>
+        completionHandler: @escaping HTTPResultHandler<[String: SimpleDate?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2743,7 +2743,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: SimpleDate].self, from: data)
+                        let decoded = try decoder.decode([String: SimpleDate?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2777,7 +2777,7 @@ public final class Dictionary {
     ///     success.
     public func getDateTimeValid(
         withOptions options: GetDateTimeValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date]>
+        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2821,7 +2821,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Iso8601Date].self, from: data)
+                        let decoded = try decoder.decode([String: Iso8601Date?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -2854,7 +2854,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dateTimeValid: [String: Iso8601Date],
+        dateTimeValid: [String: Iso8601Date?],
         withOptions options: PutDateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -2935,7 +2935,7 @@ public final class Dictionary {
     ///     success.
     public func getDateTimeInvalidNull(
         withOptions options: GetDateTimeInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date]>
+        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -2979,7 +2979,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Iso8601Date].self, from: data)
+                        let decoded = try decoder.decode([String: Iso8601Date?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3013,7 +3013,7 @@ public final class Dictionary {
     ///     success.
     public func getDateTimeInvalidChars(
         withOptions options: GetDateTimeInvalidCharsOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date]>
+        completionHandler: @escaping HTTPResultHandler<[String: Iso8601Date?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3057,7 +3057,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Iso8601Date].self, from: data)
+                        let decoded = try decoder.decode([String: Iso8601Date?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3091,7 +3091,7 @@ public final class Dictionary {
     ///     success.
     public func getDateTimeRfc1123Valid(
         withOptions options: GetDateTimeRfc1123ValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Rfc1123Date]>
+        completionHandler: @escaping HTTPResultHandler<[String: Rfc1123Date?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3135,7 +3135,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Rfc1123Date].self, from: data)
+                        let decoded = try decoder.decode([String: Rfc1123Date?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3168,7 +3168,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dateTimeRfc1123Valid: [String: Rfc1123Date],
+        dateTimeRfc1123Valid: [String: Rfc1123Date?],
         withOptions options: PutDateTimeRfc1123ValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -3249,7 +3249,7 @@ public final class Dictionary {
     ///     success.
     public func getDurationValid(
         withOptions options: GetDurationValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: DateComponents]>
+        completionHandler: @escaping HTTPResultHandler<[String: DateComponents?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3293,7 +3293,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: DateComponents].self, from: data)
+                        let decoded = try decoder.decode([String: DateComponents?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3326,7 +3326,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        durationValid: [String: DateComponents],
+        durationValid: [String: DateComponents?],
         withOptions options: PutDurationValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -3407,7 +3407,7 @@ public final class Dictionary {
     ///     success.
     public func getByteValid(
         withOptions options: GetByteValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Data]>
+        completionHandler: @escaping HTTPResultHandler<[String: Data?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3451,7 +3451,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Data].self, from: data)
+                        let decoded = try decoder.decode([String: Data?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3484,7 +3484,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        byteValid: [String: Data],
+        byteValid: [String: Data?],
         withOptions options: PutByteValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -3565,7 +3565,7 @@ public final class Dictionary {
     ///     success.
     public func getByteInvalidNull(
         withOptions options: GetByteInvalidNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Data]>
+        completionHandler: @escaping HTTPResultHandler<[String: Data?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3609,7 +3609,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Data].self, from: data)
+                        let decoded = try decoder.decode([String: Data?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3643,7 +3643,7 @@ public final class Dictionary {
     ///     success.
     public func getBase64Url(
         withOptions options: GetBase64UrlOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Data]>
+        completionHandler: @escaping HTTPResultHandler<[String: Data?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3687,7 +3687,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Data].self, from: data)
+                        let decoded = try decoder.decode([String: Data?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3721,7 +3721,7 @@ public final class Dictionary {
     ///     success.
     public func getComplexNull(
         withOptions options: GetComplexNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Widget]?>
+        completionHandler: @escaping HTTPResultHandler<[String: Widget?]?>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3772,7 +3772,7 @@ public final class Dictionary {
 
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Widget].self, from: data)
+                        let decoded = try decoder.decode([String: Widget?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3806,7 +3806,7 @@ public final class Dictionary {
     ///     success.
     public func getComplexEmpty(
         withOptions options: GetComplexEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Widget]>
+        completionHandler: @escaping HTTPResultHandler<[String: Widget?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3850,7 +3850,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Widget].self, from: data)
+                        let decoded = try decoder.decode([String: Widget?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3884,7 +3884,7 @@ public final class Dictionary {
     ///     success.
     public func getComplexItemNull(
         withOptions options: GetComplexItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Widget]>
+        completionHandler: @escaping HTTPResultHandler<[String: Widget?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -3928,7 +3928,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Widget].self, from: data)
+                        let decoded = try decoder.decode([String: Widget?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3962,7 +3962,7 @@ public final class Dictionary {
     ///     success.
     public func getComplexItemEmpty(
         withOptions options: GetComplexItemEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Widget]>
+        completionHandler: @escaping HTTPResultHandler<[String: Widget?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4006,7 +4006,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Widget].self, from: data)
+                        let decoded = try decoder.decode([String: Widget?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4040,7 +4040,7 @@ public final class Dictionary {
     ///     success.
     public func getComplexValid(
         withOptions options: GetComplexValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Widget]>
+        completionHandler: @escaping HTTPResultHandler<[String: Widget?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4084,7 +4084,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Widget].self, from: data)
+                        let decoded = try decoder.decode([String: Widget?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4117,7 +4117,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        complexValid: [String: Widget],
+        complexValid: [String: Widget?],
         withOptions options: PutComplexValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -4198,7 +4198,7 @@ public final class Dictionary {
     ///     success.
     public func getArrayNull(
         withOptions options: GetArrayNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: [String]]?>
+        completionHandler: @escaping HTTPResultHandler<[String: [String]?]?>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4249,7 +4249,7 @@ public final class Dictionary {
 
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: [String]].self, from: data)
+                        let decoded = try decoder.decode([String: [String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4283,7 +4283,7 @@ public final class Dictionary {
     ///     success.
     public func getArrayEmpty(
         withOptions options: GetArrayEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: [String]]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String]?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4327,7 +4327,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: [String]].self, from: data)
+                        let decoded = try decoder.decode([String: [String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4361,7 +4361,7 @@ public final class Dictionary {
     ///     success.
     public func getArrayItemNull(
         withOptions options: GetArrayItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: [String]]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String]?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4405,7 +4405,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: [String]].self, from: data)
+                        let decoded = try decoder.decode([String: [String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4439,7 +4439,7 @@ public final class Dictionary {
     ///     success.
     public func getArrayItemEmpty(
         withOptions options: GetArrayItemEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: [String]]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String]?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4483,7 +4483,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: [String]].self, from: data)
+                        let decoded = try decoder.decode([String: [String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4517,7 +4517,7 @@ public final class Dictionary {
     ///     success.
     public func getArrayValid(
         withOptions options: GetArrayValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: [String]]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String]?]>
     ) {
         // Create request parameters
         let params = RequestParameters(
@@ -4561,7 +4561,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: [String]].self, from: data)
+                        let decoded = try decoder.decode([String: [String]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4594,7 +4594,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        arrayValid: [String: [String]],
+        arrayValid: [String: [String]?],
         withOptions options: PutArrayValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

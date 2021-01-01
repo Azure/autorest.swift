@@ -86,7 +86,7 @@ class Schema: Codable, LanguageShortcut {
         var swiftType: String
         switch type {
         case .any:
-            swiftType = "AnyCodable?"
+            swiftType = "AnyCodable"
         case .string,
              .uuid:
             swiftType = "String"
@@ -133,7 +133,7 @@ class Schema: Codable, LanguageShortcut {
             guard let dictionarySchema = self as? DictionarySchema else {
                 fatalError("Type mismatch. Expected dictionary type but got \(self)")
             }
-            swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
+            swiftType = "[String:\(dictionarySchema.elementType.swiftType())?]"
         case .constant:
             guard let constant = self as? ConstantSchema else {
                 fatalError("Type mismatch. Expected constant type but got \(self)")

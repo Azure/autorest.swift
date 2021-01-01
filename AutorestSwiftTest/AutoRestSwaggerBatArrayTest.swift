@@ -148,7 +148,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTAssertEqual(details, "[ true, null, false ]")
+                XCTAssertEqual(details.data, "[ true, null, false ]")
             }
             expectation.fulfill()
         }
@@ -165,7 +165,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             case let .failure(error):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTAssertEqual(details, "[true, \"boolean\", false]")
+                XCTAssertEqual(details.data, "[true, \"boolean\", false]")
             }
             expectation.fulfill()
         }

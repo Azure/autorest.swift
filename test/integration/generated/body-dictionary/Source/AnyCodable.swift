@@ -33,7 +33,7 @@ protocol ExtensionStringDecodeKeys {
     var stringDecodedKeys: [String] { get }
 }
 
-public struct AnyCodable: Decodable {
+public struct AnyCodable: Decodable, Encodable, Equatable {
     var value: Any
 
     struct CodingKeys: CodingKey {
@@ -131,9 +131,7 @@ public struct AnyCodable: Decodable {
         }
         self.value = value
     }
-}
 
-extension AnyCodable: Encodable {
     public func encode(to encoder: Encoder) throws {
         if let array = value as? [Any] {
             var container = encoder.unkeyedContainer()
@@ -165,5 +163,11 @@ extension AnyCodable: Encodable {
                 )
             }
         }
+    }
+
+
+    public static func == (_: AnyCodable, _: AnyCodable) -> Bool {
+        // TODO: Complete implementation
+        return false
     }
 }
