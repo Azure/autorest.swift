@@ -1,0 +1,30 @@
+/// API version of the {{ model.description }} to invoke. Defaults to the latest.
+public enum ApiVersion: RequestStringConvertible {
+    /// Custom value for unrecognized enum values
+    case custom(String)
+    /// API version "{{ model.apiVersion }}"
+    case {{ model.apiVersionName }}
+
+    /// The most recent API version of the {{ model.description }}
+    public static var latest: ApiVersion {
+         return .{{ model.apiVersionName }}
+    }
+
+    public var requestString: String {
+        switch self {
+        case let .custom(val):
+            return val
+        case .{{ model.apiVersionName }}:
+            return "{{ model.apiVersion }}"
+        }
+    }
+
+    public init(_ val: String) {
+        switch val.lowercased() {
+        case "{{ model.apiVersion | lowercase }}":
+            self = .{{ model.apiVersionName }}
+        default:
+            self = .custom(val)
+        }
+    }
+}

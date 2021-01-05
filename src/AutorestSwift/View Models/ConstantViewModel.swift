@@ -37,13 +37,27 @@ struct ConstantViewModel {
     let defaultValue: ViewModelDefault
     let serializedName: String
 
-    /// Initialize from Value type (such as Property or Parameter)
-    init(from schema: ConstantSchema) {
-        let name = schema.variableName
+    /// Initialize from Property
+    init(from property: Property) {
+        guard let constSchema = property.schema as? ConstantSchema else { fatalError("Expected constant schema.") }
+        let name = property.name
         assert(!name.isEmpty)
         self.name = name
-        self.serializedName = schema.serializedName ?? schema.name
-        self.comment = ViewModelComment(from: schema.description)
-        self.defaultValue = ViewModelDefault(from: schema.value.value, isString: true, isOptional: false)
+        self.serializedName = property.serializedName ?? property.name
+        self.comment = ViewModelComment(from: property.description)
+        self.defaultValue = ViewModelDefault(
+            from: constSchema.value.value,
+            isString: constSchema.valueType is StringSchema,
+            isOptional: false
+        )
+    }
+
+    init(from schema: PropertyType) {
+        switch schema {
+        case let .regular(reg):
+            self.init(from: reg)
+        case let .grouped(group):
+            self.init(from: group)
+        }
     }
 }

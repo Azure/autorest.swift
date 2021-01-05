@@ -1,0 +1,9 @@
+{% if validation.hasMinItems %}
+{% if validation.optional %}
+    if let value = {{ validation.path }}, value.count < {{ validation.minItems }} {
+{% else %}
+    if {{ validation.path }}.count < {{ validation.minItems }} {
+{% endif %}
+        validationErrors.append("{{ validation.path }}: minItems {{ validation.minItems }}")
+    }
+{% endif %}

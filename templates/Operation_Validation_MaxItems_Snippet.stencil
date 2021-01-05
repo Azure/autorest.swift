@@ -1,0 +1,9 @@
+{% if validation.hasMaxItems %}
+{% if validation.optional %}
+    if let value = {{ validation.path }}, value.count > {{ validation.maxItems }} {
+{% else %}
+    if {{ validation.path }}.count > {{ validation.maxItems }} {
+{% endif %}
+        validationErrors.append("{{ validation.path }}: maxItems {{ validation.maxItems }}")
+    }
+{% endif %}

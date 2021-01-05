@@ -13,7 +13,7 @@ import Foundation
 
 /// Type of Pet
 public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
 
     case monday
@@ -87,7 +87,7 @@ public enum DaysOfWeekExtensibleEnum: RequestStringConvertible, Codable, Equatab
 }
 
 public enum IntEnum: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
     /// one
     case one

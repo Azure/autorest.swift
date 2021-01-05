@@ -33,6 +33,8 @@ public final class Datetime {
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date?>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -46,6 +48,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -53,7 +56,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -118,6 +120,8 @@ public final class Datetime {
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -131,6 +135,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -138,7 +143,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -196,6 +200,8 @@ public final class Datetime {
         withOptions options: GetOverflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -209,6 +215,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -216,7 +223,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -274,6 +280,8 @@ public final class Datetime {
         withOptions options: GetUnderflowOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -287,6 +295,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -294,7 +303,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -353,6 +361,8 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -372,6 +382,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -379,7 +390,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -433,6 +443,8 @@ public final class Datetime {
         withOptions options: PutUtcMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -452,6 +464,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -459,7 +472,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -512,6 +524,8 @@ public final class Datetime {
         withOptions options: GetUtcLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -525,6 +539,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -532,7 +547,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -590,6 +604,8 @@ public final class Datetime {
         withOptions options: GetUtcUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -603,6 +619,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -610,7 +627,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -668,6 +684,8 @@ public final class Datetime {
         withOptions options: GetUtcUppercaseMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -681,6 +699,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -688,7 +707,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -747,6 +765,8 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -766,6 +786,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -773,7 +794,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -826,6 +846,8 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -839,6 +861,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -846,7 +869,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -904,6 +926,8 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -917,6 +941,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -924,7 +949,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -983,6 +1007,8 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1002,6 +1028,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1009,7 +1036,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1062,6 +1088,8 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetUppercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1075,6 +1103,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1082,7 +1111,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1140,6 +1168,8 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetLowercaseMaxDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1153,6 +1183,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1160,7 +1191,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1219,6 +1249,8 @@ public final class Datetime {
         withOptions options: PutUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1238,6 +1270,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1245,7 +1278,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1298,6 +1330,8 @@ public final class Datetime {
         withOptions options: GetUtcMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1311,6 +1345,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1318,7 +1353,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1377,6 +1411,8 @@ public final class Datetime {
         withOptions options: PutLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1396,6 +1432,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1403,7 +1440,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1456,6 +1492,8 @@ public final class Datetime {
         withOptions options: GetLocalPositiveOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1469,6 +1507,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1476,7 +1515,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1535,6 +1573,8 @@ public final class Datetime {
         withOptions options: PutLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1554,6 +1594,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1561,7 +1602,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1614,6 +1654,8 @@ public final class Datetime {
         withOptions options: GetLocalNegativeOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1627,6 +1669,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1634,7 +1677,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1692,6 +1734,8 @@ public final class Datetime {
         withOptions options: GetLocalNoOffsetMinDateTimeOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1705,6 +1749,7 @@ public final class Datetime {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1712,7 +1757,6 @@ public final class Datetime {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {

@@ -1,0 +1,23 @@
+{% if validation.hasMaximum %}
+{% if validation.optional %}
+    {% if validation.exclusiveMaximum %}
+        if let value = {{ validation.path }}, value >= {{ validation.maximum }} {
+            validationErrors.append("{{ validation.path }}: < {{ validation.maximum }}")
+        }
+    {% else %}
+        if let value = {{ validation.path }}, value > {{ validation.maximum }} {
+            validationErrors.append("{{ validation.path }}: <= {{ validation.maximum }}")
+        }
+    {% endif %}
+{% else %}
+    {% if validation.exclusiveMaximum %}
+        if {{ validation.path }} >= {{ validation.maximum }} {
+            validationErrors.append("{{ validation.path }}: < {{ validation.maximum }}")
+        }
+    {% else %}
+        if {{ validation.path }} > {{ validation.maximum }} {
+            validationErrors.append("{{ validation.path }}: <= {{ validation.maximum }}")
+        }
+    {% endif %}
+{% endif %}
+{% endif %}

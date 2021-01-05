@@ -34,6 +34,8 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -53,6 +55,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -60,7 +63,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -114,6 +116,8 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -137,6 +141,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -144,7 +149,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -198,6 +202,8 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -217,6 +223,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -224,7 +231,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -278,6 +284,8 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -301,6 +309,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -308,7 +317,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -362,6 +370,8 @@ public final class Explicit {
         withOptions options: PostRequiredIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter, .encode),
@@ -376,6 +386,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -383,7 +394,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -436,6 +446,8 @@ public final class Explicit {
         withOptions options: PostOptionalIntegerHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", options?.headerParameter, .encode),
@@ -450,6 +462,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -457,7 +470,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -511,6 +523,8 @@ public final class Explicit {
         withOptions options: PostRequiredStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -530,6 +544,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -537,7 +552,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -591,6 +605,8 @@ public final class Explicit {
         withOptions options: PostOptionalStringParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -614,6 +630,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -621,7 +638,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -675,6 +691,8 @@ public final class Explicit {
         withOptions options: PostRequiredStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -694,6 +712,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -701,7 +720,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -755,6 +773,8 @@ public final class Explicit {
         withOptions options: PostOptionalStringPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -778,6 +798,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -785,7 +806,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -839,6 +859,8 @@ public final class Explicit {
         withOptions options: PostRequiredStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter, .encode),
@@ -853,6 +875,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -860,7 +883,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -913,6 +935,8 @@ public final class Explicit {
         withOptions options: PostOptionalStringHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "bodyParameter", options?.bodyParameter, .encode),
@@ -927,6 +951,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -934,7 +959,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -988,6 +1012,8 @@ public final class Explicit {
         withOptions options: PostRequiredClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1007,6 +1033,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1014,7 +1041,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1068,6 +1094,8 @@ public final class Explicit {
         withOptions options: PostOptionalClassParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1091,6 +1119,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1098,7 +1127,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1152,6 +1180,8 @@ public final class Explicit {
         withOptions options: PostRequiredClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1171,6 +1201,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1178,7 +1209,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1232,6 +1262,8 @@ public final class Explicit {
         withOptions options: PostOptionalClassPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1255,6 +1287,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1262,7 +1295,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1316,6 +1348,8 @@ public final class Explicit {
         withOptions options: PostRequiredArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1335,6 +1369,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1342,7 +1377,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1396,6 +1430,8 @@ public final class Explicit {
         withOptions options: PostOptionalArrayParameterOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1419,6 +1455,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1426,7 +1463,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1480,6 +1516,8 @@ public final class Explicit {
         withOptions options: PostRequiredArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1499,6 +1537,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1506,7 +1545,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1560,6 +1598,8 @@ public final class Explicit {
         withOptions options: PostOptionalArrayPropertyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
@@ -1583,6 +1623,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1590,7 +1631,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1644,6 +1684,8 @@ public final class Explicit {
         withOptions options: PostRequiredArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", headerParameter.map { $0 }.joined(separator: ","), .encode),
@@ -1658,6 +1700,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1665,7 +1708,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {
@@ -1718,6 +1760,8 @@ public final class Explicit {
         withOptions options: PostOptionalArrayHeaderOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
+        let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
+
         // Create request parameters
         let params = RequestParameters(
             (.header, "headerParameter", options?.headerParameter?.map { $0 }.joined(separator: ","), .encode),
@@ -1732,6 +1776,7 @@ public final class Explicit {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
+
         // Send request
         let context = PipelineContext.of(keyValues: [
             ContextKey.allowedStatusCodes.rawValue: [200] as AnyObject
@@ -1739,7 +1784,6 @@ public final class Explicit {
         context.add(cancellationToken: options?.cancellationToken, applying: client.options)
         context.merge(with: options?.context)
         client.request(request, context: context) { result, httpResponse in
-            let dispatchQueue = options?.dispatchQueue ?? self.client.commonOptions.dispatchQueue ?? DispatchQueue.main
             guard let data = httpResponse?.data else {
                 let noDataError = AzureError.client("Response data expected but not found.")
                 dispatchQueue.async {

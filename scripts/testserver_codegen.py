@@ -39,6 +39,7 @@ working_files = [
     "required-optional",
     "url",
     "url-multi-collectionFormat",
+    "validation",
     "xms-error-responses"
 ]
 

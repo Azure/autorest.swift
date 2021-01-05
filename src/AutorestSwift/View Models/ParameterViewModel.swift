@@ -101,7 +101,6 @@ struct ParameterViewModel {
 
     init(from param: ParameterType, with operation: Operation? = nil) {
         let optional = !param.required
-
         self.init(
             name: param.variableName,
             serializedName: param.serializedName ?? param.name,
@@ -115,7 +114,15 @@ struct ParameterViewModel {
             explode: param.explode
         )
         // Update the `valueOrPath` parameter
-        if let constantSchema = param.schema as? ConstantSchema {
+        if param.implementation == .client {
+            if ["$host", "endpoint"].contains(name) {
+                self.pathOrValue = "client.endpoint.absoluteString"
+            } else if ["apiversion", "x-ms-version"].contains(name.lowercased()) {
+                self.pathOrValue = "client.options.apiVersion"
+            } else {
+                self.pathOrValue = "client.\(name)"
+            }
+        } else if let constantSchema = param.schema as? ConstantSchema {
             update(withConstantSchema: constantSchema)
         } else if let signatureParameter = operation?.signatureParameter(for: param.name) {
             update(withSignatureParameter: signatureParameter)
@@ -133,12 +140,6 @@ struct ParameterViewModel {
                 }
             } else {
                 self.pathOrValue = "\(groupedBy).\(param.name)"
-            }
-        } else if param.implementation == .client {
-            if ["$host", "endpoint"].contains(name) {
-                self.pathOrValue = "client.endpoint.absoluteString"
-            } else {
-                self.pathOrValue = "client.\(name)"
             }
         } else if let op = operation, param.paramLocation == .body {
             let bodyParamName = op.request?.bodyParamName(for: op)

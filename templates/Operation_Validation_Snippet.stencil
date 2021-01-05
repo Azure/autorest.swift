@@ -1,0 +1,20 @@
+// Apply client-side validation
+var validationErrors = [String]()
+{% for path, validation in op.validation %}
+    // Validate {{ path }}
+    {% include "Operation_Validation_MaxLength_Snippet.stencil" validation %}
+    {% include "Operation_Validation_MinLength_Snippet.stencil" validation %}
+    {% include "Operation_Validation_Pattern_Snippet.stencil" validation %}
+    {% include "Operation_Validation_MultipleOf_Snippet.stencil" validation %}
+    {% include "Operation_Validation_Maximum_Snippet.stencil" validation %}
+    {% include "Operation_Validation_Minimum_Snippet.stencil" validation %}
+    {% include "Operation_Validation_MaxItems_Snippet.stencil" validation %}
+    {% include "Operation_Validation_MinItems_Snippet.stencil" validation %}
+{% endfor %}
+if !validationErrors.isEmpty {
+    dispatchQueue.async {
+        let error = AzureError.client("Validation Errors: \(validationErrors.joined(separator: ", "))")
+        completionHandler(.failure(error), nil)
+    }
+    return
+}

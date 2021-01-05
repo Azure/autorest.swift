@@ -1,0 +1,23 @@
+{% if validation.hasMinimum %}
+{% if validation.optional %}
+    {% if validation.exclusiveMinimum %}
+        if let value = {{ validation.path }}, value <= {{ validation.minimum }} {
+            validationErrors.append("{{ validation.path }}: > {{ validation.minimum }}")
+        }
+    {% else %}
+        if let value = {{ validation.path }}, value < {{ validation.minimum }} {
+            validationErrors.append("{{ validation.path }}: >= {{ validation.minimum }}")
+        }
+    {% endif %}
+{% else %}
+    {% if validation.exclusiveMinimum %}
+        if {{ validation.path }} <= {{ validation.minimum }} {
+            validationErrors.append("{{ validation.path }}: > {{ validation.minimum }}")
+        }
+    {% else %}
+        if {{ validation.path }} < {{ validation.minimum }} {
+            validationErrors.append("{{ validation.path }}: >= {{ validation.minimum }}")
+        }
+    {% endif %}
+{% endif %}
+{% endif %}

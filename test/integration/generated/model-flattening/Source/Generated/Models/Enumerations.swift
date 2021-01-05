@@ -12,7 +12,7 @@ import AzureCore
 import Foundation
 
 public enum FlattenedProductPropertiesProvisioningStateValues: RequestStringConvertible, Codable, Equatable {
-    // Custom value for unrecognized enum values
+    /// Custom value for unrecognized enum values
     case custom(String)
 
     case succeeded
