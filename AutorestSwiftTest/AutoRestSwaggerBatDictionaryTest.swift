@@ -46,7 +46,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         )
     }
 
-    func test_boolean_tfft() throws {
+    func test_getBooleanTFFT() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         client.dictionary.getBooleanTfft { result, httpResponse in
@@ -73,7 +73,23 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getBoolean_invalid() throws {
+    func test_putBooleanTFFT() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let expected = ["0": true, "1": false, "2": false, "3": true]
+        client.dictionary.put(booleanTfft: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getBooleanInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid = ["0": true, "1": nil, "2": false]
 
@@ -81,26 +97,31 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getBooleanInvalidString { result, _ in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = error.errorDescription!
-                        XCTAssert(details.contains("Decoding error."))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_integer_valid() throws {
+    func test_getBooleanInvalidString() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getBooleanInvalidString { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = error.errorDescription!
+                XCTAssert(details.contains("Decoding error."))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getIntegerValid() throws {
         let expected: [String: Int32] = ["0": 1, "1": -1, "2": 3, "3": 300]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -108,26 +129,32 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(integerValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getInteger_invalid() throws {
+    func test_putIntegerValid() throws {
+        let expected: [String: Int32] = ["0": 1, "1": -1, "2": 3, "3": 300]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.put(integerValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getIntegerInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Int32?] = ["0": 1, "1": nil, "2": 0]
 
@@ -135,26 +162,31 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getIntInvalidString { result, _ in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = error.errorDescription!
-                        XCTAssert(details.contains("Decoding error."))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_long_valid() throws {
+    func test_getIntegerInvalidString() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getIntInvalidString { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = error.errorDescription!
+                XCTAssert(details.contains("Decoding error."))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getLongValid() throws {
         let expected: [String: Int64] = ["0": 1, "1": -1, "2": 3, "3": 300]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -162,26 +194,32 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(longValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getLong_invalid() throws {
+    func test_putLongValid() throws {
+        let expected: [String: Int64] = ["0": 1, "1": -1, "2": 3, "3": 300]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.put(longValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getLongInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Int64?] = ["0": 1, "1": nil, "2": 0]
 
@@ -189,26 +227,31 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getLongInvalidString { result, _ in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = error.errorDescription!
-                        XCTAssert(details.contains("Decoding error."))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_float_valid() throws {
+    func test_getLongInvalidString() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getLongInvalidString { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = error.errorDescription!
+                XCTAssert(details.contains("Decoding error."))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getFloatValid() throws {
         let expected: [String: Float?] = ["0": 0, "1": -0.01, "2": -1.2e20]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -216,27 +259,34 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                // FIXME: Float serialization not accepted by server
-                self.client.dictionary.put(floatValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getFloat_invalid() throws {
+    func test_putFloatValid() throws {
+        let expected: [String: Float?] = ["0": 0, "1": -0.01, "2": -1.2e20]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        // FIXME: Float serialization not accepted by server
+        client.dictionary.put(floatValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getFloatInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Float?] = ["0": 0.0, "1": nil, "2": -1.2e20]
 
@@ -244,26 +294,31 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getFloatInvalidString { result, _ in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = error.errorDescription!
-                        XCTAssert(details.contains("Decoding error."))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_double_valid() throws {
+    func test_getFloatInvalidString() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getFloatInvalidString { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = error.errorDescription!
+                XCTAssert(details.contains("Decoding error."))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDoubleValid() throws {
         let expected: [String: Double] = ["0": 0, "1": -0.01, "2": -1.2e20]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -271,26 +326,33 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(doubleValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getDouble_invalid() throws {
+    func test_putDoubleValid() throws {
+        let expected: [String: Double] = ["0": 0, "1": -0.01, "2": -1.2e20]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(doubleValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDoubleInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Double?] = ["0": 0.0, "1": nil, "2": -1.2e20]
 
@@ -298,26 +360,31 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getDoubleInvalidString { result, _ in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = error.errorDescription!
-                        XCTAssert(details.contains("Decoding error."))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_string_valid() throws {
+    func test_getDoubleInvalidString() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getDoubleInvalidString { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = error.errorDescription!
+                XCTAssert(details.contains("Decoding error."))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getStringValid() throws {
         let expected = ["0": "foo1", "1": "foo2", "2": "foo3"]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -325,56 +392,69 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(stringValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getString_nullAndInvalid() throws {
+    func test_putStringValid() throws {
+        let expected = ["0": "foo1", "1": "foo2", "2": "foo3"]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(stringValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getStringNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let stringNullDict = ["0": "foo", "1": nil, "2": "foo2"]
-        let stringInvalidDict = ["0": "foo", "1": "123", "2": "foo2"]
 
         client.dictionary.getStringWithNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, stringNullDict)
-
-                // FIXME: Some crazy workaround behavior where autorest should deserialize non-string values
-                // as strings.
-                self.client.dictionary.getStringWithInvalid { result, httpResponse in
-                    switch result {
-                    case .success:
-                        XCTAssertEqual(data, stringInvalidDict)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_date_valid() throws {
+    func test_getStringInvalid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let stringInvalidDict = ["0": "foo", "1": "123", "2": "foo2"]
+
+        // FIXME: Some crazy workaround behavior where autorest should deserialize non-string values
+        // as strings.
+        client.dictionary.getStringWithInvalid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, stringInvalidDict)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDateValid() throws {
         let expected: [String: SimpleDate] = [
             "0": SimpleDate(string: "2000-12-01")!,
             "1": SimpleDate(string: "1980-01-02")!,
@@ -386,26 +466,37 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(dateValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getDate_invalid() throws {
+    func test_putDateValid() throws {
+        let expected: [String: SimpleDate] = [
+            "0": SimpleDate(string: "2000-12-01")!,
+            "1": SimpleDate(string: "1980-01-02")!,
+            "2": SimpleDate(string: "1492-10-12")!
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(dateValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDateInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: SimpleDate?] = [
             "0": SimpleDate(string: "2012-01-01")!,
@@ -417,16 +508,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getDateInvalidChars { result, httpResponse in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTAssert(details.contains("Deserialization error"))
-                    }
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
@@ -436,7 +517,28 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_dateTime_valid() throws {
+    func test_getDateInvalidChars() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let invalid: [String: SimpleDate?] = [
+            "0": SimpleDate(string: "2012-01-01")!,
+            "1": nil,
+            "2": SimpleDate(string: "1776-07-04")!
+        ]
+
+        client.dictionary.getDateInvalidChars { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssert(details.contains("Deserialization error"))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDateTimeValid() throws {
         let expected: [String: Iso8601Date] = [
             "0": Iso8601Date(string: "2000-12-01T00:00:01Z")!,
             "1": Iso8601Date(string: "1980-01-02T00:11:35+01:00")!,
@@ -448,26 +550,36 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(dateTimeValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getDateTime_invalid() throws {
+    func test_putDateTimeValid() throws {
+        let expected: [String: Iso8601Date] = [
+            "0": Iso8601Date(string: "2000-12-01T00:00:01Z")!,
+            "1": Iso8601Date(string: "1980-01-02T00:11:35+01:00")!,
+            "2": Iso8601Date(string: "1492-10-12T10:15:01-08:00")!
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.put(dateTimeValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDateTimeInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Iso8601Date?] = [
             "0": Iso8601Date(string: "2000-12-01T00:00:01Z")!,
@@ -478,16 +590,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, invalid)
-
-                self.client.dictionary.getDateTimeInvalidChars { result, httpResponse in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTAssert(details.contains("Deserialization error"))
-                    }
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
@@ -497,7 +599,27 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_dateTimeRfc1123_valid() throws {
+    func test_getDateTimeInvalidChars() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let invalid: [String: Iso8601Date?] = [
+            "0": Iso8601Date(string: "2000-12-01T00:00:01Z")!,
+            "1": nil
+        ]
+
+        client.dictionary.getDateTimeInvalidChars { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssert(details.contains("Deserialization error"))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDateTimeRfc1123Valid() throws {
         let expected: [String: Rfc1123Date] = [
             "0": Rfc1123Date(Iso8601Date(string: "2000-12-01T00:00:01Z")!.value)!,
             "1": Rfc1123Date(Iso8601Date(string: "1980-01-02T00:11:35Z")!.value)!,
@@ -509,27 +631,38 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                // FIXME: Server not accepting the datetime serialization
-                self.client.dictionary.put(dateTimeRfc1123Valid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getDuration_valid() throws {
+    func test_putDateTimeRfc1123Valid() throws {
+        let expected: [String: Rfc1123Date] = [
+            "0": Rfc1123Date(Iso8601Date(string: "2000-12-01T00:00:01Z")!.value)!,
+            "1": Rfc1123Date(Iso8601Date(string: "1980-01-02T00:11:35Z")!.value)!,
+            "2": Rfc1123Date(Iso8601Date(string: "1492-10-12T10:15:01Z")!.value)!
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        // FIXME: Server not accepting the datetime serialization
+        client.dictionary.put(dateTimeRfc1123Valid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDurationValid() throws {
         let expected: [String: DateComponents] = [
             "0": DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
             "1": DateComponents(day: 5, hour: 1)
@@ -541,26 +674,37 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(durationValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_bytes_valid() throws {
+    func test_putDurationValid() throws {
+        let expected: [String: DateComponents] = [
+            "0": DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
+            "1": DateComponents(day: 5, hour: 1)
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        // FIXME: Cannot parse ISO8601 duration string into DateComponents
+        client.dictionary.put(durationValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getBytesValid() throws {
         let expected: [String: Data] = [
             "0": Data([0x0FF, 0x0FF, 0x0FF, 0x0FA]),
             "1": Data([0x01, 0x02, 0x03]),
@@ -572,26 +716,37 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(byteValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getByte_invalidNull() throws {
+    func test_putBytesValid() throws {
+        let expected: [String: Data] = [
+            "0": Data([0x0FF, 0x0FF, 0x0FF, 0x0FA]),
+            "1": Data([0x01, 0x02, 0x03]),
+            "2": Data([0x025, 0x029, 0x043])
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(byteValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getByteInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let invalid: [String: Data?] = [
             "0": Data([0x0AB, 0x0AC, 0x0AD]),
@@ -611,7 +766,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_base64Url() throws {
+    func test_getBase64Url() throws {
         let expected: [String: Data] = [
             "0": Data(base64Encoded: "a string that gets encoded with base64url".base64EncodedString())!,
             "1": Data(base64Encoded: "test string".base64EncodedString())!,
@@ -633,7 +788,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_empty() throws {
+    func test_getEmpty() throws {
         let expected = [String: Int32]()
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -641,26 +796,33 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.dictionary.put(empty: [String: String]()) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_get_nullAndInvalid() throws {
+    func test_putEmpty() throws {
+        let expected = [String: Int32]()
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(empty: [String: String]()) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         // FIXME: Not valid JSON. Domain Code=3840 No Value
@@ -668,26 +830,33 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertNil(data)
-
-                self.client.dictionary.getInvalid { result, httpResponse in
-                    switch result {
-                    case .success:
-                        XCTFail("Call \(#function) succeeded but should have failed.")
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTAssert(details.contains("Decode error"))
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_get_nullKeyAndValue() throws {
+    func test_getInvalid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        // FIXME: Not valid JSON. Domain Code=3840 No Value
+        client.dictionary.getInvalid { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssert(details.contains("Decode error"))
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getNullKey() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         client.dictionary.getNullKey { result, httpResponse in
             switch result {
@@ -696,23 +865,28 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTAssert(details.contains("Decoding error"), "\(details)")
-
-                self.client.dictionary.getNullValue { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, ["key1": nil])
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_get_emptyStringKey() throws {
+    func test_getNullValue() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getNullValue { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, ["key1": nil])
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getEmptyStringKey() throws {
         let expected = ["": "val1"]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -729,33 +903,39 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getComplex_nullAndEmpty() throws {
+    func test_getComplexNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         client.dictionary.getComplexNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertNil(data)
-
-                self.client.dictionary.getComplexEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, [String: Widget]())
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_complex_valid() throws {
+    func test_getComplexEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.getComplexEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, [String: Widget]())
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_complexValid() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         client.dictionary.put(complexValid: testDict) { result, httpResponse in
@@ -780,7 +960,28 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_array_valid() throws {
+    func test_getArrayValid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let listDict = [
+            "0": ["1", "2", "3"],
+            "1": ["4", "5", "6"],
+            "2": ["7", "8", "9"]
+        ]
+
+        client.dictionary.getArrayValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, listDict)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_putArrayValid() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let listDict = [
             "0": ["1", "2", "3"],
@@ -791,25 +992,39 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         client.dictionary.put(arrayValid: listDict) { result, httpResponse in
             switch result {
             case .success:
-                self.client.dictionary.getArrayValid { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, listDict)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_dictionary_valid() throws {
+    func test_getDictionaryValid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDict: [String: AnyCodable?] = [
+            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
+            "1": ["4": "four", "5": "five", "6": "six"] as? AnyCodable,
+            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
+        ]
+
+        // FIXME: Cannot serialize the values as AnyCodable...
+        client.dictionary.getDictionaryValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, dictDict)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_putDictionaryValid() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let dictDict: [String: AnyCodable?] = [
             "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
@@ -820,26 +1035,17 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         client.dictionary.put(dictionaryValid: dictDict) { result, httpResponse in
             switch result {
             case .success:
-                // FIXME: Cannot serialize the values as AnyCodable...
-                self.client.dictionary.getDictionaryValid { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, dictDict)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
+                break
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getComplexItem_nullAndEmpty() throws {
+    func test_getComplexItemNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let testDictNull = ["0": testDict["0"], "1": nil, "2": testDict["2"]]
 
@@ -847,53 +1053,63 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, testDictNull)
-
-                let testDictEmpty = ["0": self.testDict["0"], "1": Widget(), "2": self.testDict["2"]]
-                self.client.dictionary.getComplexItemEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, testDictEmpty)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getArray_empty() throws {
+    func test_getComplexItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let testDictEmpty = ["0": testDict["0"], "1": Widget(), "2": testDict["2"]]
+        client.dictionary.getComplexItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, testDictEmpty)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getArrayNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         client.dictionary.getArrayNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertNil(data)
-
-                self.client.dictionary.getArrayEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, [String: [String]]())
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getArrayItem_nullAndEmpty() throws {
+    func test_getArrayEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        client.dictionary.getArrayEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, [String: [String]]())
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getArrayItemNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let listDict = [
             "0": ["1", "2", "3"],
@@ -906,25 +1122,36 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, listDict)
-                self.client.dictionary.getArrayItemEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, listDict)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_dictionary_nullAndEmpty() throws {
+    func test_getArrayItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let listDict = [
+            "0": ["1", "2", "3"],
+            "1": nil,
+            "2": ["7", "8", "9"]
+        ]
+        client.dictionary.getArrayItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, listDict)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getDictionaryNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
         // FIME: Data cannot be decoding due to wrong format.
@@ -932,36 +1159,37 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertNil(data)
-
-                self.client.dictionary.getDictionaryEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, [String: AnyCodable]())
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_dictionaryItem_nullAndEmpty() throws {
+    func test_getDictionaryEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        // FIME: Data cannot be decoding due to wrong format.
+        client.dictionary.getDictionaryEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, [String: AnyCodable]())
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_dictionaryItemNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
         let dictDictNull: [String: AnyCodable?] = [
             "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
             "1": nil,
-            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
-        ]
-
-        let dictDictEmpty: [String: AnyCodable?] = [
-            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
-            "1": [String: AnyCodable?]() as? AnyCodable,
             "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
         ]
 
@@ -970,22 +1198,33 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, dictDictNull)
-
-                // FIXME: Cannot serialize to AnyCodable...
-                self.client.dictionary.getDictionaryItemEmpty { result, httpResponse in
-                    switch result {
-                    case let .success(data):
-                        XCTAssertEqual(data, dictDictEmpty)
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_dictionaryItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDictEmpty: [String: AnyCodable?] = [
+            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
+            "1": [String: AnyCodable?]() as? AnyCodable,
+            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
+        ]
+
+        // FIXME: Cannot serialize to AnyCodable...
+        client.dictionary.getDictionaryItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, dictDictEmpty)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: defaultTimeout)
     }
