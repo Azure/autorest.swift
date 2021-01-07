@@ -1123,7 +1123,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_getDurationValid() throws {
+    func test_listDurationValid() throws {
         let expected: [Iso8601Duration] = [
             Iso8601Duration(string: "P123DT22H14M12.011S")!,
             Iso8601Duration(string: "P5DT1H0M0S")!
@@ -1134,21 +1134,11 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
-
-                self.client.arrayOperation.put(durationValid: expected) { result, httpResponse in
-                    switch result {
-                    case .success:
-                        break
-                    case let .failure(error):
-                        let details = errorDetails(for: error, withResponse: httpResponse)
-                        XCTFail("Call \(#function) failed. Error=\(details)")
-                    }
-                    expectation.fulfill()
-                }
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.0)
     }
@@ -1160,7 +1150,6 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIXME: Cannot parse ISO8601 duration string into DateComponents
         client.arrayOperation.put(durationValid: expected) { result, httpResponse in
             switch result {
             case .success:
