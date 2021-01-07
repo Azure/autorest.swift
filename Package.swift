@@ -45,6 +45,7 @@ let package = Package(
         .package(name: "AutoRestValidationTest", path: "./test/integration/generated/validation"),
         .package(name: "PetStoreInc", path: "./test/integration/generated/extensible-enums-swagger"),
         .package(name: "XmsErrorResponseExtensions", path: "./test/integration/generated/xms-error-responses/")
+        .package(name: "AutoRestDurationTest", path: "./test/integration/generated/body-duration")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -63,6 +64,7 @@ let package = Package(
             dependencies: [
                 .product(name: "AzureCore", package: "AzureSDK"),
                 "AutoRestBoolTest",
+                "AutoRestDurationTest",
                 "AutoRestHeadTest",
                 "AutoRestSwaggerBatFile",
                 "AutoRestSwaggerBatDictionary",

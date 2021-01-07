@@ -166,6 +166,8 @@
 		0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */; };
 		0AA2BA2E24F4788600CEA1D6 /* VirtualParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */; };
 		0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */; };
+		0AA5955125A78A2800E77E33 /* AutoRestDurationTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA5955025A78A2800E77E33 /* AutoRestDurationTest */; };
+		0AA5955325A78ABB00E77E33 /* AutoRestDurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA5955225A78ABB00E77E33 /* AutoRestDurationTest.swift */; };
 		0AB80AA225783093008506CD /* AutoRestBodyIntegerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15A9283254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift */; };
 		0AB80AA325783093008506CD /* AutoRestDateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CDA152568765700FD0817 /* AutoRestDateTest.swift */; };
 		0AB80AA425783093008506CD /* AutoRestDateTimeRfc1123Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */; };
@@ -390,6 +392,8 @@
 		0AA2BA2A24EDB87E00CEA1D6 /* ContentLengthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLengthHeader.swift; sourceTree = "<group>"; };
 		0AA2BA2D24F4788500CEA1D6 /* VirtualParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualParameter.swift; sourceTree = "<group>"; };
 		0AA2BA2F24F57A5B00CEA1D6 /* ParameterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterType.swift; sourceTree = "<group>"; };
+		0AA5954E25A789E300E77E33 /* body-duration */ = {isa = PBXFileReference; lastKnownFileType = text; name = "body-duration"; path = "test/integration/generated/body-duration"; sourceTree = SOURCE_ROOT; };
+		0AA5955225A78ABB00E77E33 /* AutoRestDurationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestDurationTest.swift; sourceTree = "<group>"; };
 		0AB808CB2576E896008506CD /* Custom_File.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Custom_File.stencil; sourceTree = "<group>"; };
 		0AB80B65257975DF008506CD /* AutoRestRequiredOptionalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestRequiredOptionalTest.swift; sourceTree = "<group>"; };
 		0AB80B68257976C2008506CD /* AutoRestSwaggerBatTimeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestSwaggerBatTimeTest.swift; sourceTree = "<group>"; };
@@ -586,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD31340259D257000CD987D /* AutoRestSwaggerBatDictionary in Frameworks */,
+				0AA5955125A78A2800E77E33 /* AutoRestDurationTest in Frameworks */,
 				0AB80BFA2579836D008506CD /* AutoRestNumberTest in Frameworks */,
 				0AB80BFC2579836D008506CD /* AutoRestParameterizedCustomHostTest in Frameworks */,
 				0AB80C002579836D008506CD /* AutoRestReport in Frameworks */,
@@ -779,6 +784,7 @@
 				0AB80BB8257982D7008506CD /* body-byte */,
 				0AB80BB0257982D4008506CD /* body-date */,
 				0AB80BB2257982D5008506CD /* body-datetime */,
+				0AA5954E25A789E300E77E33 /* body-duration */,
 				0AB80BA5257982CF008506CD /* body-datetime-rfc1123 */,
 				0AD3133D259D252D00CD987D /* body-dictionary */,
 				0AB80BB6257982D6008506CD /* body-file */,
@@ -788,7 +794,6 @@
 				0AB80BA6257982D0008506CD /* body-time */,
 				0AB80BB7257982D6008506CD /* custom-baseUrl */,
 				0AB80BAA257982D1008506CD /* custom-baseUrl-more-options */,
-				0ADDD0FD258D656A00BD5E58 /* extensible-enums-swagger */,
 				0AB80BA9257982D1008506CD /* head */,
 				0AB80BB5257982D6008506CD /* header */,
 				0AB80BAC257982D2008506CD /* model-flattening */,
@@ -805,6 +810,7 @@
 				F16CDA152568765700FD0817 /* AutoRestDateTest.swift */,
 				F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */,
 				F16CDA162568765700FD0817 /* AutoRestDateTimeTest.swift */,
+				0AA5955225A78ABB00E77E33 /* AutoRestDurationTest.swift */,
 				0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */,
 				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
 				F1DCAF90255A4B2200A6E425 /* AutoRestNumberTest.swift */,
@@ -1088,6 +1094,7 @@
 				0ADDD113258D68F000BD5E58 /* PetStoreInc */,
 				0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */,
 				0AD3133F259D257000CD987D /* AutoRestSwaggerBatDictionary */,
+				0AA5955025A78A2800E77E33 /* AutoRestDurationTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1234,6 +1241,7 @@
 				0AB80AAA25783093008506CD /* AutoRestSwaggerBatTest.swift in Sources */,
 				0AB80AAB25783093008506CD /* XmsErrorResponseExtensionsTest.swift in Sources */,
 				0AB80AAC25783093008506CD /* AutoRestSwaggerBatByteTest.swift in Sources */,
+				0AA5955325A78ABB00E77E33 /* AutoRestDurationTest.swift in Sources */,
 				0AB80AAD25783093008506CD /* AutoRestSwaggerBatBoolTest.swift in Sources */,
 				0AB80AAE25783094008506CD /* AutoRestSwaggerBatHeaderTest.swift in Sources */,
 				0AB80AAF25783094008506CD /* AutoRestSwaggerBatArrayTest.swift in Sources */,
@@ -1680,6 +1688,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0AA5955025A78A2800E77E33 /* AutoRestDurationTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestDurationTest;
+		};
 		0AB80BEF2579836D008506CD /* AutoRestBoolTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestBoolTest;

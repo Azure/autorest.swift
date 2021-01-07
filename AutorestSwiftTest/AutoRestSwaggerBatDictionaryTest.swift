@@ -669,7 +669,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIXME: Cannot parse ISO8601 duration string into DateComponents
         client.dictionary.getDurationValid { result, httpResponse in
             switch result {
             case let .success(data):
