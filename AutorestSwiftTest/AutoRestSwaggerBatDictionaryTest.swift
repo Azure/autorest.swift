@@ -663,9 +663,9 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
     }
 
     func test_getDurationValid() throws {
-        let expected: [String: DateComponents] = [
-            "0": DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
-            "1": DateComponents(day: 5, hour: 1)
+        let expected: [String: Iso8601Duration] = [
+            "0": Iso8601Duration(string: "P123DT22H14M12.011S")!,
+            "1": Iso8601Duration(string: "P5DT1H")!
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
@@ -684,13 +684,12 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
     }
 
     func test_putDurationValid() throws {
-        let expected: [String: DateComponents] = [
-            "0": DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
-            "1": DateComponents(day: 5, hour: 1)
+        let expected: [String: Iso8601Duration] = [
+            "0": Iso8601Duration(string: "P123DT22H14M12.011S")!,
+            "1": Iso8601Duration(string: "P5DT1H")!
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIXME: Cannot parse ISO8601 duration string into DateComponents
         client.dictionary.put(durationValid: expected) { result, httpResponse in
             switch result {
             case .success:

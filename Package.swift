@@ -16,7 +16,7 @@ let package = Package(
         .package(
             name: "AzureSDK",
             url: "https://github.com/Azure/azure-sdk-for-ios.git",
-            .branch("master")
+            .branch("dev/AzureCore")
         ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),

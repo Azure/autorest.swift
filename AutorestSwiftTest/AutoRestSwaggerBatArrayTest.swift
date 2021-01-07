@@ -43,9 +43,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getNull")
+        let expectation = XCTestExpectation(description: "Call array.listNull")
 
-        client.arrayOperation.getNull { result, httpResponse in
+        client.arrayOperation.listNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to failed.")
@@ -58,9 +58,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getInvalid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getInvalid")
+        let expectation = XCTestExpectation(description: "Call array.listInvalid")
 
-        client.arrayOperation.getInvalid { result, httpResponse in
+        client.arrayOperation.listInvalid { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to failed.")
@@ -73,9 +73,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getEmpty200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listEmpty")
 
-        client.arrayOperation.getEmpty { result, httpResponse in
+        client.arrayOperation.listEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data.count, 0)
@@ -106,9 +106,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getBooleanTfft200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getBooleanTfft")
+        let expectation = XCTestExpectation(description: "Call array.listBooleanTfft")
 
-        client.arrayOperation.getBooleanTfft { result, httpResponse in
+        client.arrayOperation.listBooleanTfft { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [true, false, false, true])
@@ -139,9 +139,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getBooleanInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getBooleanInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listBooleanInvalidNull")
 
-        client.arrayOperation.getBooleanInvalidNull { result, httpResponse in
+        client.arrayOperation.listBooleanInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to failed.")
@@ -156,9 +156,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getBooleanInvalidString200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getBooleanInvalidString")
+        let expectation = XCTestExpectation(description: "Call array.listBooleanInvalidString")
 
-        client.arrayOperation.getBooleanInvalidString { result, httpResponse in
+        client.arrayOperation.listBooleanInvalidString { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to failed.")
@@ -173,9 +173,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getIntegerValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getIntegerValid")
+        let expectation = XCTestExpectation(description: "Call array.listIntegerValid")
 
-        client.arrayOperation.getIntegerValid { result, httpResponse in
+        client.arrayOperation.listIntegerValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [1, -1, 3, 300])
@@ -206,9 +206,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getIntInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getIntInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listIntInvalidNull")
 
-        client.arrayOperation.getIntInvalidNull { result, httpResponse in
+        client.arrayOperation.listIntInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -223,9 +223,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getIntInvalidString200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getFloatWithString")
+        let expectation = XCTestExpectation(description: "Call array.listFloatWithString")
 
-        client.arrayOperation.getIntInvalidString { result, httpResponse in
+        client.arrayOperation.listIntInvalidString { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -240,9 +240,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getLongValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getLongValid")
+        let expectation = XCTestExpectation(description: "Call array.listLongValid")
 
-        client.arrayOperation.getLongValid { result, httpResponse in
+        client.arrayOperation.listLongValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [1, -1, 3, 300])
@@ -273,9 +273,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getLongInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getLongInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listLongInvalidNull")
 
-        client.arrayOperation.getLongInvalidNull { result, httpResponse in
+        client.arrayOperation.listLongInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -290,9 +290,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getLongInvalidString200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getLongInvalidString")
+        let expectation = XCTestExpectation(description: "Call array.listLongInvalidString")
 
-        client.arrayOperation.getLongInvalidString { result, httpResponse in
+        client.arrayOperation.listLongInvalidString { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -307,9 +307,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getFloatValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getFloatValid")
+        let expectation = XCTestExpectation(description: "Call array.listFloatValid")
 
-        client.arrayOperation.getFloatValid { result, httpResponse in
+        client.arrayOperation.listFloatValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [0, -0.01, -1.2e20])
@@ -324,9 +324,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getFloatInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getFloatInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listFloatInvalidNull")
 
-        client.arrayOperation.getFloatInvalidNull { result, httpResponse in
+        client.arrayOperation.listFloatInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -341,9 +341,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getFloatWithString200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getFloatWithString")
+        let expectation = XCTestExpectation(description: "Call array.listFloatWithString")
 
-        client.arrayOperation.getFloatInvalidString { result, httpResponse in
+        client.arrayOperation.listFloatInvalidString { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -358,9 +358,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDoubleValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDoubleValid")
+        let expectation = XCTestExpectation(description: "Call array.listDoubleValid")
 
-        client.arrayOperation.getDoubleValid { result, httpResponse in
+        client.arrayOperation.listDoubleValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [0, -0.01, -1.2e20])
@@ -391,9 +391,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDoubleInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDoubleInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listDoubleInvalidNull")
 
-        client.arrayOperation.getDoubleInvalidNull { result, httpResponse in
+        client.arrayOperation.listDoubleInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -408,9 +408,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDoubleInvalidString200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDoubleInvalidString")
+        let expectation = XCTestExpectation(description: "Call array.listDoubleInvalidString")
 
-        client.arrayOperation.getDoubleInvalidString { result, httpResponse in
+        client.arrayOperation.listDoubleInvalidString { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -425,9 +425,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getStringValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getStringValid")
+        let expectation = XCTestExpectation(description: "Call array.listStringValid")
 
-        client.arrayOperation.getStringValid { result, httpResponse in
+        client.arrayOperation.listStringValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, ["foo1", "foo2", "foo3"])
@@ -458,9 +458,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getStringWithInvalid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getStringWithInvalid")
+        let expectation = XCTestExpectation(description: "Call array.listStringWithInvalid")
 
-        client.arrayOperation.getStringWithInvalid { result, httpResponse in
+        client.arrayOperation.listStringWithInvalid { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -475,10 +475,10 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getStringWithNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getStringWithNull")
+        let expectation = XCTestExpectation(description: "Call array.listStringWithNull")
 
         let expectedData = ["foo", nil, "foo2"]
-        client.arrayOperation.getStringWithNull { result, httpResponse in
+        client.arrayOperation.listStringWithNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -499,9 +499,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getEnumValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getEnumValid")
+        let expectation = XCTestExpectation(description: "Call array.listEnumValid")
 
-        client.arrayOperation.getEnumValid { result, httpResponse in
+        client.arrayOperation.listEnumValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [FooEnum.foo1, FooEnum.foo2, FooEnum.foo3])
@@ -532,9 +532,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getStringEnumValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getStringEnumValid")
+        let expectation = XCTestExpectation(description: "Call array.listStringEnumValid")
 
-        client.arrayOperation.getStringEnumValid { result, httpResponse in
+        client.arrayOperation.listStringEnumValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, [Enum0.foo1, Enum0.foo2, Enum0.foo3])
@@ -565,9 +565,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getUuidValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getUuidValid")
+        let expectation = XCTestExpectation(description: "Call array.listUuidValid")
 
-        client.arrayOperation.getUuidValid { result, httpResponse in
+        client.arrayOperation.listUuidValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(
@@ -609,9 +609,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func getDateInvalidNull() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDateInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listDateInvalidNull")
 
-        client.arrayOperation.getDateInvalidNull { result, httpResponse in
+        client.arrayOperation.listDateInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -643,14 +643,14 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDateValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDateValid")
+        let expectation = XCTestExpectation(description: "Call array.listDateValid")
         let expectedDates = [
             SimpleDate(string: "2000-12-01")!,
             SimpleDate(string: "1980-01-02")!,
             SimpleDate(string: "1492-10-12")!
         ]
 
-        client.arrayOperation.getDateValid { result, httpResponse in
+        client.arrayOperation.listDateValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expectedDates)
@@ -665,9 +665,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDateTimeInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDateTimeInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listDateTimeInvalidNull")
 
-        client.arrayOperation.getDateTimeInvalidNull { result, httpResponse in
+        client.arrayOperation.listDateTimeInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail")
@@ -699,7 +699,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDateTimeValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDateTimeValid")
+        let expectation = XCTestExpectation(description: "Call array.listDateTimeValid")
 
         let expectedDates = [
             Iso8601Date(string: "2000-12-01t00:00:01z")!,
@@ -707,7 +707,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             Iso8601Date(string: "1492-10-12T02:15:01-08:00")!
         ]
 
-        client.arrayOperation.getDateTimeValid { result, httpResponse in
+        client.arrayOperation.listDateTimeValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expectedDates)
@@ -722,13 +722,13 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDateTimeRfc1123Valid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDateTimeRfc1123Valid")
+        let expectation = XCTestExpectation(description: "Call array.listDateTimeRfc1123Valid")
         let expectedDates = [
             Rfc1123Date(string: "Fri, 01 Dec 2000 00:00:01 GMT")!,
             Rfc1123Date(string: "Wed, 02 Jan 1980 00:11:35 GMT")!,
             Rfc1123Date(string: "Wed, 12 Oct 1492 10:15:01 GMT")!
         ]
-        client.arrayOperation.getDateTimeRfc1123Valid { result, httpResponse in
+        client.arrayOperation.listDateTimeRfc1123Valid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expectedDates)
@@ -763,14 +763,14 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getByteValid() throws {
-        let expectation = XCTestExpectation(description: "Call array.getByteValid")
+        let expectation = XCTestExpectation(description: "Call array.listByteValid")
 
         let expectedData = [
             Data([255, 255, 255, 250]),
             Data([1, 2, 3]),
             Data([37, 41, 67])
         ]
-        client.arrayOperation.getByteValid { result, httpResponse in
+        client.arrayOperation.listByteValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -785,9 +785,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getByteInvalidNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getByteInvalidNull")
+        let expectation = XCTestExpectation(description: "Call array.listByteInvalidNull")
 
-        client.arrayOperation.getByteInvalidNull { result, httpResponse in
+        client.arrayOperation.listByteInvalidNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail.")
@@ -821,9 +821,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getArrayValid() throws {
-        let expectation = XCTestExpectation(description: "Call array.getArrayValid")
+        let expectation = XCTestExpectation(description: "Call array.listArrayValid")
 
-        client.arrayOperation.getArrayValid { result, httpResponse in
+        client.arrayOperation.listArrayValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -856,9 +856,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getArrayEmpty() throws {
-        let expectation = XCTestExpectation(description: "Call array.getArrayEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listArrayEmpty")
 
-        client.arrayOperation.getArrayEmpty { result, httpResponse in
+        client.arrayOperation.listArrayEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -873,9 +873,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getArrayNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getArrayNull")
+        let expectation = XCTestExpectation(description: "Call array.listArrayNull")
 
-        client.arrayOperation.getArrayNull { result, httpResponse in
+        client.arrayOperation.listArrayNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail.")
@@ -888,9 +888,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getArrayItemEmpty() throws {
-        let expectation = XCTestExpectation(description: "Call array.getArrayItemEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listArrayItemEmpty")
 
-        client.arrayOperation.getArrayItemEmpty { result, httpResponse in
+        client.arrayOperation.listArrayItemEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -905,9 +905,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getArraygetArrayItemNull() throws {
-        let expectation = XCTestExpectation(description: "Call array.getArrayItemNull")
+        let expectation = XCTestExpectation(description: "Call array.listArrayItemNull")
 
-        client.arrayOperation.getArrayItemNull { result, httpResponse in
+        client.arrayOperation.listArrayItemNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -922,14 +922,14 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getComplexValid() throws {
-        let expectation = XCTestExpectation(description: "Call array.getComplexValid")
+        let expectation = XCTestExpectation(description: "Call array.listComplexValid")
 
         let expectedData: [Product] = [
             Product(integer: 1, string: "2"),
             Product(integer: 3, string: "4"),
             Product(integer: 5, string: "6")
         ]
-        client.arrayOperation.getComplexValid { result, httpResponse in
+        client.arrayOperation.listComplexValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -948,9 +948,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getComplexEmpty200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getComplexEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listComplexEmpty")
 
-        client.arrayOperation.getComplexEmpty { result, httpResponse in
+        client.arrayOperation.listComplexEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -987,9 +987,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getComplexNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getComplexNull")
+        let expectation = XCTestExpectation(description: "Call array.listComplexNull")
 
-        client.arrayOperation.getComplexNull { result, httpResponse in
+        client.arrayOperation.listComplexNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail.")
@@ -1002,14 +1002,14 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDictionaryValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDictionaryValid")
+        let expectation = XCTestExpectation(description: "Call array.listDictionaryValid")
 
         let expectedData: [[String: String]] = [
             ["1": "one", "2": "two", "3": "three"],
             ["4": "four", "5": "five", "6": "six"],
             ["7": "seven", "8": "eight", "9": "nine"]
         ]
-        client.arrayOperation.getDictionaryValid { result, httpResponse in
+        client.arrayOperation.listDictionaryValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -1025,9 +1025,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDictionaryEmpty200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDictionaryEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listDictionaryEmpty")
 
-        client.arrayOperation.getDictionaryEmpty { result, httpResponse in
+        client.arrayOperation.listDictionaryEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -1043,14 +1043,14 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDictionaryItemEmpty() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDictionaryItemEmpty")
+        let expectation = XCTestExpectation(description: "Call array.listDictionaryItemEmpty")
 
         let expectedData: [[String: String]] = [
             ["1": "one", "2": "two", "3": "three"],
             [:],
             ["7": "seven", "8": "eight", "9": "nine"]
         ]
-        client.arrayOperation.getDictionaryItemEmpty { result, httpResponse in
+        client.arrayOperation.listDictionaryItemEmpty { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -1065,7 +1065,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDictionaryItemNull() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDictionaryItemNull")
+        let expectation = XCTestExpectation(description: "Call array.listDictionaryItemNull")
 
         let expectedData: [[String: String]?] = [
             ["1": "one", "2": "two", "3": "three"],
@@ -1073,7 +1073,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             ["7": "seven", "8": "eight", "9": "nine"]
         ]
 
-        client.arrayOperation.getDictionaryItemNull { result, httpResponse in
+        client.arrayOperation.listDictionaryItemNull { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -1088,9 +1088,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDictionaryNull200() throws {
-        let expectation = XCTestExpectation(description: "Call array.getDictionaryNull")
+        let expectation = XCTestExpectation(description: "Call array.listDictionaryNull")
 
-        client.arrayOperation.getDictionaryNull { result, httpResponse in
+        client.arrayOperation.listDictionaryNull { result, httpResponse in
             switch result {
             case .success:
                 XCTFail("\(expectation.description) expected to fail.")
@@ -1124,14 +1124,13 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_getDurationValid() throws {
-        let expected: [DateComponents] = [
-            DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
-            DateComponents(day: 5, hour: 1)
+        let expected: [Iso8601Duration] = [
+            Iso8601Duration(string: "P123DT22H14M12.011S")!,
+            Iso8601Duration(string: "P5DT1H0M0S")!
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIXME: Cannot parse ISO8601 duration string into DateComponents
-        client.arrayOperation.getDurationValid { result, httpResponse in
+        client.arrayOperation.listDurationValid { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(data, expected)
@@ -1155,9 +1154,9 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
     }
 
     func test_putDurationValid() throws {
-        let expected: [DateComponents] = [
-            DateComponents(day: 123, hour: 22, minute: 14, second: 12, nanosecond: 11000),
-            DateComponents(day: 5, hour: 1)
+        let expected: [Iso8601Duration] = [
+            Iso8601Duration(string: "P123DT22H14M12.011S")!,
+            Iso8601Duration(string: "P5DT1H")!
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 

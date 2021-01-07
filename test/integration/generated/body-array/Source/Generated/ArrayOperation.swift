@@ -29,7 +29,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getNull(
+    public func listNull(
         withOptions options: GetNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -109,7 +109,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getInvalid(
+    public func listInvalid(
         withOptions options: GetInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -189,7 +189,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getEmpty(
+    public func listEmpty(
         withOptions options: GetEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -351,7 +351,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanTfft(
+    public func listBooleanTfft(
         withOptions options: GetBooleanTfftOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
@@ -513,7 +513,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanInvalidNull(
+    public func listBooleanInvalidNull(
         withOptions options: GetBooleanInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
@@ -593,7 +593,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBooleanInvalidString(
+    public func listBooleanInvalidString(
         withOptions options: GetBooleanInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Bool]>
     ) {
@@ -673,7 +673,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getIntegerValid(
+    public func listIntegerValid(
         withOptions options: GetIntegerValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -835,7 +835,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getIntInvalidNull(
+    public func listIntInvalidNull(
         withOptions options: GetIntInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -915,7 +915,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getIntInvalidString(
+    public func listIntInvalidString(
         withOptions options: GetIntInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int32]>
     ) {
@@ -995,7 +995,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getLongValid(
+    public func listLongValid(
         withOptions options: GetLongValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
@@ -1157,7 +1157,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getLongInvalidNull(
+    public func listLongInvalidNull(
         withOptions options: GetLongInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
@@ -1237,7 +1237,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getLongInvalidString(
+    public func listLongInvalidString(
         withOptions options: GetLongInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Int64]>
     ) {
@@ -1317,7 +1317,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getFloatValid(
+    public func listFloatValid(
         withOptions options: GetFloatValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
@@ -1479,7 +1479,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getFloatInvalidNull(
+    public func listFloatInvalidNull(
         withOptions options: GetFloatInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
@@ -1559,7 +1559,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getFloatInvalidString(
+    public func listFloatInvalidString(
         withOptions options: GetFloatInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Float]>
     ) {
@@ -1639,7 +1639,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDoubleValid(
+    public func listDoubleValid(
         withOptions options: GetDoubleValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
@@ -1801,7 +1801,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDoubleInvalidNull(
+    public func listDoubleInvalidNull(
         withOptions options: GetDoubleInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
@@ -1881,7 +1881,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDoubleInvalidString(
+    public func listDoubleInvalidString(
         withOptions options: GetDoubleInvalidStringOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Double]>
     ) {
@@ -1961,7 +1961,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getStringValid(
+    public func listStringValid(
         withOptions options: GetStringValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
@@ -2123,7 +2123,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getEnumValid(
+    public func listEnumValid(
         withOptions options: GetEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FooEnum]>
     ) {
@@ -2285,7 +2285,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getStringEnumValid(
+    public func listStringEnumValid(
         withOptions options: GetStringEnumValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Enum0]>
     ) {
@@ -2447,7 +2447,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getStringWithNull(
+    public func listStringWithNull(
         withOptions options: GetStringWithNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String?]>
     ) {
@@ -2527,7 +2527,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getStringWithInvalid(
+    public func listStringWithInvalid(
         withOptions options: GetStringWithInvalidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
@@ -2607,7 +2607,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getUuidValid(
+    public func listUuidValid(
         withOptions options: GetUuidValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
@@ -2849,7 +2849,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDateValid(
+    public func listDateValid(
         withOptions options: GetDateValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[SimpleDate]>
     ) {
@@ -3011,7 +3011,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDateInvalidNull(
+    public func listDateInvalidNull(
         withOptions options: GetDateInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[SimpleDate]>
     ) {
@@ -3171,7 +3171,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDateTimeValid(
+    public func listDateTimeValid(
         withOptions options: GetDateTimeValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Iso8601Date]>
     ) {
@@ -3333,7 +3333,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDateTimeInvalidNull(
+    public func listDateTimeInvalidNull(
         withOptions options: GetDateTimeInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Iso8601Date]>
     ) {
@@ -3493,7 +3493,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDateTimeRfc1123Valid(
+    public func listDateTimeRfc1123Valid(
         withOptions options: GetDateTimeRfc1123ValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Rfc1123Date]>
     ) {
@@ -3655,9 +3655,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDurationValid(
+    public func listDurationValid(
         withOptions options: GetDurationValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[DateComponents]>
+        completionHandler: @escaping HTTPResultHandler<[Iso8601Duration]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -3703,7 +3703,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([DateComponents].self, from: data)
+                        let decoded = try decoder.decode([Iso8601Duration].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -3736,7 +3736,7 @@ public final class ArrayOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        durationValid: [DateComponents],
+        durationValid: [Iso8601Duration],
         withOptions options: PutDurationValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -3817,7 +3817,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getByteValid(
+    public func listByteValid(
         withOptions options: GetByteValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
@@ -3979,7 +3979,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getByteInvalidNull(
+    public func listByteInvalidNull(
         withOptions options: GetByteInvalidNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
@@ -4059,7 +4059,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getBase64Url(
+    public func listBase64Url(
         withOptions options: GetBase64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Data]>
     ) {
@@ -4139,7 +4139,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getComplexNull(
+    public func listComplexNull(
         withOptions options: GetComplexNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
@@ -4219,7 +4219,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getComplexEmpty(
+    public func listComplexEmpty(
         withOptions options: GetComplexEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
@@ -4299,7 +4299,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getComplexItemNull(
+    public func listComplexItemNull(
         withOptions options: GetComplexItemNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
@@ -4379,7 +4379,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getComplexItemEmpty(
+    public func listComplexItemEmpty(
         withOptions options: GetComplexItemEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
@@ -4459,7 +4459,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getComplexValid(
+    public func listComplexValid(
         withOptions options: GetComplexValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[Product]>
     ) {
@@ -4621,7 +4621,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArrayNull(
+    public func listArrayNull(
         withOptions options: GetArrayNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
@@ -4701,7 +4701,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArrayEmpty(
+    public func listArrayEmpty(
         withOptions options: GetArrayEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
@@ -4781,7 +4781,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArrayItemNull(
+    public func listArrayItemNull(
         withOptions options: GetArrayItemNullOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]?]>
     ) {
@@ -4861,7 +4861,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArrayItemEmpty(
+    public func listArrayItemEmpty(
         withOptions options: GetArrayItemEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
@@ -4941,7 +4941,7 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArrayValid(
+    public func listArrayValid(
         withOptions options: GetArrayValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[[String]]>
     ) {
@@ -5103,9 +5103,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDictionaryNull(
+    public func listDictionaryNull(
         withOptions options: GetDictionaryNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5151,7 +5151,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]?].self, from: data)
+                        let decoded = try decoder.decode([[String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5183,9 +5183,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDictionaryEmpty(
+    public func listDictionaryEmpty(
         withOptions options: GetDictionaryEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String?]]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5231,7 +5231,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]].self, from: data)
+                        let decoded = try decoder.decode([[String: String?]].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5263,9 +5263,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDictionaryItemNull(
+    public func listDictionaryItemNull(
         withOptions options: GetDictionaryItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]?]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5311,7 +5311,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]?].self, from: data)
+                        let decoded = try decoder.decode([[String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5343,9 +5343,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDictionaryItemEmpty(
+    public func listDictionaryItemEmpty(
         withOptions options: GetDictionaryItemEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String?]]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5391,7 +5391,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]].self, from: data)
+                        let decoded = try decoder.decode([[String: String?]].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5423,9 +5423,9 @@ public final class ArrayOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getDictionaryValid(
+    public func listDictionaryValid(
         withOptions options: GetDictionaryValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[[String: String]]>
+        completionHandler: @escaping HTTPResultHandler<[[String: String?]]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5471,7 +5471,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([[String: String]].self, from: data)
+                        let decoded = try decoder.decode([[String: String?]].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5504,7 +5504,7 @@ public final class ArrayOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionaryValid: [[String: String]],
+        dictionaryValid: [[String: String?]],
         withOptions options: PutDictionaryValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

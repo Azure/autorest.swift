@@ -140,7 +140,7 @@ class Schema: Codable, LanguageShortcut {
             }
             swiftType = constant.valueType.swiftType()
         case .duration:
-            swiftType = "DateComponents"
+            swiftType = "Iso8601Duration"
         case .binary:
             swiftType = "Data"
         case .uri:
