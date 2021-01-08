@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Resource: Codable {
+public struct Resource: Codable, Equatable {
     // MARK: Properties
 
     /// Resource Id
@@ -23,7 +23,7 @@ public struct Resource: Codable {
     /// Resource Type
     public let type: String?
     /// Dictionary of <string>
-    public let tags: [String: String]?
+    public let tags: [String: String?]?
     /// Resource Location
     public let location: String?
     /// Resource Name
@@ -39,7 +39,7 @@ public struct Resource: Codable {
     ///   - location: Resource Location
     ///   - name: Resource Name
     public init(
-        id: String? = nil, type: String? = nil, tags: [String: String]? = nil, location: String? = nil,
+        id: String? = nil, type: String? = nil, tags: [String: String?]? = nil, location: String? = nil,
         name: String? = nil
     ) {
         self.id = id
@@ -64,7 +64,7 @@ public struct Resource: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try? container.decode(String.self, forKey: .id)
         self.type = try? container.decode(String.self, forKey: .type)
-        self.tags = try? container.decode([String: String].self, forKey: .tags)
+        self.tags = try? container.decode([String: String?].self, forKey: .tags)
         self.location = try? container.decode(String.self, forKey: .location)
         self.name = try? container.decode(String.self, forKey: .name)
     }

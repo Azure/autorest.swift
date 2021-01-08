@@ -361,7 +361,7 @@ public final class StringOperation {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func listMbcs(
+    public func getMbcs(
         withOptions options: GetMbcsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<String>
     ) {
@@ -836,7 +836,7 @@ public final class StringOperation {
     ///     success.
     public func getBase64UrlEncoded(
         withOptions options: GetBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Data>
+        completionHandler: @escaping HTTPResultHandler<String>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -880,8 +880,15 @@ public final class StringOperation {
                 if [
                     200
                 ].contains(statusCode) {
-                    dispatchQueue.async {
-                        completionHandler(.success(data), httpResponse)
+                    if let decoded = String(data: data, encoding: .utf8) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        let decodedError = AzureError.client("Expected a string in response body.")
+                        dispatchQueue.async {
+                            completionHandler(.failure(decodedError), httpResponse)
+                        }
                     }
                 }
             case .failure:
@@ -907,7 +914,7 @@ public final class StringOperation {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        base64UrlEncoded: Data,
+        base64UrlEncoded: String,
         withOptions options: PutBase64UrlEncodedOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -924,7 +931,7 @@ public final class StringOperation {
         let requestBody = base64UrlEncoded
         let urlTemplate = "/string/base64UrlEncoding"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
+              let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: Data(requestBody.utf8))
         else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
@@ -987,7 +994,7 @@ public final class StringOperation {
     ///     success.
     public func getNullBase64UrlEncoded(
         withOptions options: GetNullBase64UrlEncodedOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<Data?>
+        completionHandler: @escaping HTTPResultHandler<String?>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -1038,8 +1045,15 @@ public final class StringOperation {
                         return
                     }
 
-                    dispatchQueue.async {
-                        completionHandler(.success(data), httpResponse)
+                    if let decoded = String(data: data, encoding: .utf8) {
+                        dispatchQueue.async {
+                            completionHandler(.success(decoded), httpResponse)
+                        }
+                    } else {
+                        let decodedError = AzureError.client("Expected a string in response body.")
+                        dispatchQueue.async {
+                            completionHandler(.failure(decodedError), httpResponse)
+                        }
                     }
                 }
             case .failure:

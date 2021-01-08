@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetHungryOrThirstyError: Codable {
+public struct PetHungryOrThirstyError: Codable, Equatable {
     // MARK: Properties
 
     /// is the pet hungry or thirsty or both

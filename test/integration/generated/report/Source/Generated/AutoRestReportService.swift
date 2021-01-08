@@ -31,7 +31,7 @@ public final class AutoRestReportService {
     ///     success.
     public func getReport(
         withOptions options: GetReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -78,7 +78,7 @@ public final class AutoRestReportService {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -112,7 +112,7 @@ public final class AutoRestReportService {
     ///     success.
     public func getOptionalReport(
         withOptions options: GetOptionalReportOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Int32]>
+        completionHandler: @escaping HTTPResultHandler<[String: Int32?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -159,7 +159,7 @@ public final class AutoRestReportService {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Int32].self, from: data)
+                        let decoded = try decoder.decode([String: Int32?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

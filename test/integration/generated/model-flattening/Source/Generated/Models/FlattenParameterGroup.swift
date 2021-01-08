@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// Parameter group
-public struct FlattenParameterGroup: Codable {
+public struct FlattenParameterGroup: Codable, Equatable {
     // MARK: Properties
 
     /// Product name with value 'groupproduct'

@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct ProductResultValue: Codable {
+public struct ProductResultValue: Codable, Equatable {
     // MARK: Properties
 
     public let value: [Product]?

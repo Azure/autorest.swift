@@ -281,7 +281,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func firstResponseEmpty(
+    public func listResponseEmpty(
         withOptions options: FirstResponseEmptyOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -540,7 +540,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func nextOperationWithQueryParams(
+    public func listOperationWithQueryParams(
         withOptions options: NextOperationWithQueryParamsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -710,7 +710,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesWithOffset(
+    public func listMultiplePagesWithOffset(
         offset: Int32,
         withOptions options: GetMultiplePagesWithOffsetOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
@@ -797,7 +797,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesRetryFirst(
+    public func listMultiplePagesRetryFirst(
         withOptions options: GetMultiplePagesRetryFirstOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -881,7 +881,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesRetrySecond(
+    public func listMultiplePagesRetrySecond(
         withOptions options: GetMultiplePagesRetrySecondOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -965,7 +965,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getSinglePagesFailure(
+    public func listSinglePagesFailure(
         withOptions options: GetSinglePagesFailureOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -1049,7 +1049,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesFailure(
+    public func listMultiplePagesFailure(
         withOptions options: GetMultiplePagesFailureOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -1133,7 +1133,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesFailureUri(
+    public func listMultiplePagesFailureUri(
         withOptions options: GetMultiplePagesFailureUriOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -1218,7 +1218,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesFragmentNextLink(
+    public func listMultiplePagesFragmentNextLink(
         apiVersion: String,
         tenant: String,
         withOptions options: GetMultiplePagesFragmentNextLinkOptions? = nil,
@@ -1305,7 +1305,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesFragmentWithGroupingNextLink(
+    public func listMultiplePagesFragmentWithGroupingNextLink(
         customParameterGroup: CustomParameterGroup,
         withOptions options: GetMultiplePagesFragmentWithGroupingNextLinkOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
@@ -1395,7 +1395,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getMultiplePagesLro(
+    public func listMultiplePagesLro(
         withOptions options: GetMultiplePagesLROOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {
@@ -1483,7 +1483,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func nextFragment(
+    public func listFragment(
         apiVersion: String,
         tenant: String,
         nextLink: String,
@@ -1573,7 +1573,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func nextFragmentWithGrouping(
+    public func listFragmentWithGrouping(
         nextLink: String,
         customParameterGroup: CustomParameterGroup,
         withOptions options: NextFragmentWithGroupingOptions? = nil,
@@ -1666,7 +1666,7 @@ public final class Paging {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getPagingModelWithItemNameWithXmsClientName(
+    public func listPagingModelWithItemNameWithXmsClientName(
         withOptions options: GetPagingModelWithItemNameWithXMSClientNameOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<PagedCollection<Product>>
     ) {

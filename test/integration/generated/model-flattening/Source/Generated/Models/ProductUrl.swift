@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The product URL.
-public struct ProductUrl: Codable {
+public struct ProductUrl: Codable, Equatable {
     // MARK: Properties
 
     /// URL value.

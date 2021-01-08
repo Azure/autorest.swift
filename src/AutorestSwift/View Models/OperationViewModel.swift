@@ -173,6 +173,11 @@ private func operationName(for operation: Operation) -> String {
             if schemaResponse.schema is ArraySchema {
                 nameComps[0] = "list"
                 break
+            } else if let objectSchema = schemaResponse.schema as? ObjectSchema {
+                for property in objectSchema.properties ?? [] where property.schema is ArraySchema {
+                    nameComps[0] = "list"
+                    break
+                }
             }
         }
     }

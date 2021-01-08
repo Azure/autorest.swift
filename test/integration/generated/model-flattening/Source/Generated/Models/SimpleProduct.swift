@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The product documentation.
-public struct SimpleProduct: Codable {
+public struct SimpleProduct: Codable, Equatable {
     // MARK: Properties
 
     /// Display name of product.

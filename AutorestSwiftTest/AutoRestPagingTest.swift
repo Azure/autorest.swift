@@ -193,7 +193,7 @@ class AutoRestPagingTest: XCTestCase {
     func test_getMultiplePagesWithOffset200() throws {
         let expectation = XCTestExpectation(description: "Call paging.getMultiplePagesWithOffset")
 
-        client.paging.getMultiplePagesWithOffset(offset: 100) { result, httpResponse in
+        client.paging.listMultiplePagesWithOffset(offset: 100) { result, httpResponse in
             switch result {
             case let .success(pagedCollection):
                 XCTAssertEqual(httpResponse?.statusCode, 200)

@@ -35,6 +35,8 @@ import XCTest
 class AutoRestSwaggerBatArrayTest: XCTestCase {
     var client: AutoRestSwaggerBatArrayClient!
 
+    let defaultTimeout = 5.0
+
     override func setUpWithError() throws {
         client = try AutoRestSwaggerBatArrayClient(
             authPolicy: AnonymousAccessPolicy(),
@@ -54,7 +56,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getInvalid200() throws {
@@ -69,7 +71,28 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getBase64Url200() throws {
+        let expected: [String] = [
+            "a string that gets encoded with base64url".base64EncodedString(trimmingEquals: true),
+            "test string".base64EncodedString(trimmingEquals: true),
+            "Lorem ipsum".base64EncodedString(trimmingEquals: true)
+        ]
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.arrayOperation.listBase64Url { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, expected)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getEmpty200() throws {
@@ -86,7 +109,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putEmpty200() throws {
@@ -102,7 +125,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getBooleanTfft200() throws {
@@ -119,7 +142,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putBooleanTfft200() throws {
@@ -135,7 +158,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getBooleanInvalidNull200() throws {
@@ -152,7 +175,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getBooleanInvalidString200() throws {
@@ -169,7 +192,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getIntegerValid200() throws {
@@ -186,7 +209,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putIntegerValid200() throws {
@@ -202,7 +225,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getIntInvalidNull200() throws {
@@ -219,7 +242,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getIntInvalidString200() throws {
@@ -236,7 +259,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getLongValid200() throws {
@@ -253,7 +276,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putLongValid200() throws {
@@ -269,7 +292,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getLongInvalidNull200() throws {
@@ -286,7 +309,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getLongInvalidString200() throws {
@@ -303,7 +326,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getFloatValid200() throws {
@@ -320,7 +343,23 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_putFloatValid200() throws {
+        let expectation = XCTestExpectation(description: "Call array.listFloatValid")
+        let expected: [Float] = [0, -0.01, -1.2e20]
+        client.arrayOperation.put(floatValid: expected) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("\(expectation.description) failed. error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getFloatInvalidNull200() throws {
@@ -337,7 +376,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getFloatWithString200() throws {
@@ -354,7 +393,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDoubleValid200() throws {
@@ -371,7 +410,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putDoubleValid200() throws {
@@ -387,7 +426,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDoubleInvalidNull200() throws {
@@ -404,7 +443,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDoubleInvalidString200() throws {
@@ -421,7 +460,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getStringValid200() throws {
@@ -438,7 +477,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putStringValid200() throws {
@@ -454,7 +493,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getStringWithInvalid200() throws {
@@ -471,7 +510,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getStringWithNull200() throws {
@@ -495,7 +534,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getEnumValid200() throws {
@@ -512,7 +551,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putEnumValid200() throws {
@@ -528,7 +567,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getStringEnumValid200() throws {
@@ -545,7 +584,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putStringEnumValid200() throws {
@@ -561,7 +600,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getUuidValid200() throws {
@@ -585,7 +624,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putUuidValid200() throws {
@@ -605,7 +644,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func getDateInvalidNull() throws {
@@ -622,7 +661,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_listDateInvalidChars200() throws {
@@ -639,7 +678,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDateValid200() throws {
@@ -661,7 +700,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDateTimeInvalidNull200() throws {
@@ -678,7 +717,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_listDateTimeInvalidChars200() throws {
@@ -695,7 +734,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDateTimeValid200() throws {
@@ -718,7 +757,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDateTimeRfc1123Valid200() throws {
@@ -739,7 +778,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putDateValid() throws {
@@ -759,7 +798,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getByteValid() throws {
@@ -781,7 +820,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getByteInvalidNull200() throws {
@@ -796,7 +835,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_puttByteValid200() throws {
@@ -817,7 +856,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getArrayValid() throws {
@@ -834,7 +873,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putArrayValid() throws {
@@ -852,7 +891,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getArrayEmpty() throws {
@@ -869,7 +908,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getArrayNull200() throws {
@@ -884,7 +923,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getArrayItemEmpty() throws {
@@ -901,7 +940,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getArraygetArrayItemNull() throws {
@@ -918,7 +957,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getComplexValid() throws {
@@ -944,7 +983,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getComplexEmpty200() throws {
@@ -962,7 +1001,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putComplexValid() throws {
@@ -983,7 +1022,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getComplexNull200() throws {
@@ -998,7 +1037,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDictionaryValid200() throws {
@@ -1021,7 +1060,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDictionaryEmpty200() throws {
@@ -1039,7 +1078,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDictionaryItemEmpty() throws {
@@ -1061,7 +1100,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDictionaryItemNull() throws {
@@ -1084,7 +1123,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_getDictionaryNull200() throws {
@@ -1099,7 +1138,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putDictionaryValid200() throws {
@@ -1120,7 +1159,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_listDurationValid() throws {
@@ -1140,7 +1179,7 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 
     func test_putDurationValid() throws {
@@ -1160,6 +1199,6 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: defaultTimeout)
     }
 }

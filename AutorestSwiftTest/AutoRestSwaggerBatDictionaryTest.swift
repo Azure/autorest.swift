@@ -765,14 +765,13 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
     }
 
     func test_getBase64Url() throws {
-        let expected: [String: Data] = [
-            "0": Data(base64Encoded: "a string that gets encoded with base64url".base64EncodedString())!,
-            "1": Data(base64Encoded: "test string".base64EncodedString())!,
-            "2": Data(base64Encoded: "Lorem ipsum".base64EncodedString())!
+        let expected: [String: String] = [
+            "0": "a string that gets encoded with base64url".base64EncodedString(trimmingEquals: true),
+            "1": "test string".base64EncodedString(trimmingEquals: true),
+            "2": "Lorem ipsum".base64EncodedString(trimmingEquals: true)
         ]
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIXME: Data couldn't be read because it's in the wrong format.
         client.dictionary.getBase64Url { result, httpResponse in
             switch result {
             case let .success(data):

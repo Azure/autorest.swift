@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct ResourceCollection: Codable {
+public struct ResourceCollection: Codable, Equatable {
     // MARK: Properties
 
     /// Flattened product.
@@ -23,7 +23,7 @@ public struct ResourceCollection: Codable {
 
     public let arrayofresources: [FlattenedProduct]?
     /// Dictionary of <FlattenedProduct>
-    public let dictionaryofresources: [String: FlattenedProduct]?
+    public let dictionaryofresources: [String: FlattenedProduct?]?
 
     // MARK: Initializers
 
@@ -34,7 +34,7 @@ public struct ResourceCollection: Codable {
     ///   - dictionaryofresources: Dictionary of <FlattenedProduct>
     public init(
         productresource: FlattenedProduct? = nil, arrayofresources: [FlattenedProduct]? = nil,
-        dictionaryofresources: [String: FlattenedProduct]? = nil
+        dictionaryofresources: [String: FlattenedProduct?]? = nil
     ) {
         self.productresource = productresource
         self.arrayofresources = arrayofresources
@@ -55,7 +55,7 @@ public struct ResourceCollection: Codable {
         self.productresource = try? container.decode(FlattenedProduct.self, forKey: .productresource)
         self.arrayofresources = try? container.decode([FlattenedProduct].self, forKey: .arrayofresources)
         self.dictionaryofresources = try? container.decode(
-            [String: FlattenedProduct].self,
+            [String: FlattenedProduct?].self,
             forKey: .dictionaryofresources
         )
     }

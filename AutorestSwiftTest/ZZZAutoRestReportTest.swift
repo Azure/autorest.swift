@@ -83,8 +83,8 @@ class ZZZAutoRestReportTest: XCTestCase {
 
     // Calculate the nobile test coverage & total test coverage
     // List the mobile tests which passed and failed
-    private func printCoverage(for allTests: [String: Int32], listFailed: Bool = false) {
-        let passedTest = allTests.filter { $0.value > 0 }
+    private func printCoverage(for allTests: [String: Int32?], listFailed: Bool = false) {
+        let passedTest = allTests.filter { $0.value ?? 0 > 0 }
         let totalCount = allTests.count
         let passedCount = passedTest.count
 
@@ -114,7 +114,7 @@ class ZZZAutoRestReportTest: XCTestCase {
     }
 
     // Return the list of mobile tests
-    private func getMobileTests(with report: [String: Int32]) -> [String: Int32] {
+    private func getMobileTests(with report: [String: Int32?]) -> [String: Int32?] {
         return report.filter {
             for prefix in mobileTestsPrefix {
                 if $0.key.hasPrefix(prefix),
@@ -127,7 +127,7 @@ class ZZZAutoRestReportTest: XCTestCase {
         }
     }
 
-    private func getWorkingTests(with report: [String: Int32]) -> [String: Int32] {
+    private func getWorkingTests(with report: [String: Int32?]) -> [String: Int32?] {
         return report.filter {
             for prefix in workingTestsPrefix {
                 if $0.key.hasPrefix(prefix) {

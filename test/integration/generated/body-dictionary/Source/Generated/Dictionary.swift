@@ -3735,7 +3735,7 @@ public final class Dictionary {
     ///     success.
     public func getBase64Url(
         withOptions options: GetBase64UrlOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: Data?]>
+        completionHandler: @escaping HTTPResultHandler<[String: String?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -3781,7 +3781,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: Data?].self, from: data)
+                        let decoded = try decoder.decode([String: String?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

@@ -4061,7 +4061,7 @@ public final class ArrayOperation {
     ///     success.
     public func listBase64Url(
         withOptions options: GetBase64UrlOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[Data]>
+        completionHandler: @escaping HTTPResultHandler<[String]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -4107,7 +4107,7 @@ public final class ArrayOperation {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([Data].self, from: data)
+                        let decoded = try decoder.decode([String].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
