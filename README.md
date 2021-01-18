@@ -29,7 +29,7 @@ Please don't edit this section unless you're re-configuring how the Swift extens
 
 version: 3.0.6267
 use-extension:
-  "@autorest/modelerfour": "4.15.410"
+  "@autorest/modelerfour": "4.15.442"
 
 modelerfour:
   # this runs a pre-namer step to clean up names
