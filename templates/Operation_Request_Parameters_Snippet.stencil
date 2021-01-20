@@ -1,11 +1,7 @@
 // Create request parameters
 {{ op.params.declaration }} params = RequestParameters(
 {% for param in op.params.all %}
-    {% if param.location == "header" %}
     (.{{ param.location }}, "{{ param.serializedName }}", {{ param.pathOrValue }}, .{{ param.encode }}){% if not forloop.last %},{% endif %}
-    {% else %}
-    (.{{ param.location }}, "{{ param.name }}", {{ param.pathOrValue }}, .{{ param.encode }}){% if not forloop.last %},{% endif %}
-    {% endif %}
 {% endfor %}
 )
 {% if op.params.explode %}

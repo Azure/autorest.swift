@@ -1228,7 +1228,7 @@ public final class Paging {
 
         // Create request parameters
         let params = RequestParameters(
-            (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
+            (.query, "api_version", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
         )
@@ -1316,7 +1316,7 @@ public final class Paging {
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding), (
                 .query,
-                "apiVersion",
+                "api_version",
                 customParameterGroup.apiVersion,
                 .encode
             ), (.path, "tenant", customParameterGroup.tenant, .encode),
@@ -1494,7 +1494,7 @@ public final class Paging {
 
         // Create request parameters
         let params = RequestParameters(
-            (.query, "apiVersion", apiVersion, .encode), (.path, "tenant", tenant, .encode),
+            (.query, "api_version", apiVersion, .encode), (.path, "tenant", tenant, .encode),
             (.path, "nextLink", nextLink, .skipEncoding),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "Accept", "application/json", .encode)
@@ -1587,7 +1587,7 @@ public final class Paging {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (
                 .query,
-                "apiVersion",
+                "api_version",
                 customParameterGroup.apiVersion,
                 .encode
             ), (.path, "tenant", customParameterGroup.tenant, .encode),

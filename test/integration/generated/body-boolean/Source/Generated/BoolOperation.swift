@@ -92,7 +92,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -173,7 +173,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -253,7 +253,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -334,7 +334,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -421,7 +421,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -501,7 +501,7 @@ public final class BoolOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {

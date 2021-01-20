@@ -67,10 +67,11 @@ struct RequestViewModel {
         }
 
         // Determine which kind of request body snippet to render
+        let plainPatchContentTypes = ["application/json", "application/merge-patch+json"]
         if method == "patch" {
             if let contentTypeParameter = request.parameter(for: "contentType"),
                 let constantSchema = contentTypeParameter.schema as? ConstantSchema,
-                constantSchema.value.value == "application/json" {
+                plainPatchContentTypes.contains(constantSchema.value.value) {
                 self.strategy = RequestBodyType.body.rawValue
             } else {
                 self.strategy = RequestBodyType.patchBody.rawValue
