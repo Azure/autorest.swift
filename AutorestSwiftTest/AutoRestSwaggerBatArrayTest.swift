@@ -346,21 +346,22 @@ class AutoRestSwaggerBatArrayTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_putFloatValid200() throws {
-        let expectation = XCTestExpectation(description: "Call array.listFloatValid")
-        let expected: [Float] = [0, -0.01, -1.2e20]
-        client.arrayOperation.put(floatValid: expected) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("\(expectation.description) failed. error=\(details)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: defaultTimeout)
-    }
+    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
+//    func test_putFloatValid200() throws {
+//        let expectation = XCTestExpectation(description: "Call array.listFloatValid")
+//        let expected: [Float] = [0, -0.01, -1.2e20]
+//        client.arrayOperation.put(floatValid: expected) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                break
+//            case let .failure(error):
+//                let details = errorDetails(for: error, withResponse: httpResponse)
+//                XCTFail("\(expectation.description) failed. error=\(details)")
+//            }
+//            expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: defaultTimeout)
+//    }
 
     func test_getFloatInvalidNull200() throws {
         let expectation = XCTestExpectation(description: "Call array.listFloatInvalidNull")

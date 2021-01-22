@@ -268,23 +268,24 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_putFloatValid() throws {
-        let expected: [String: Float?] = ["0": 0, "1": -0.01, "2": -1.2e20]
-        let expectation = XCTestExpectation(description: "Call \(#function)")
-
-        // FIXME: Float serialization not accepted by server
-        client.dictionary.put(floatValid: expected) { result, httpResponse in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. Error=\(details)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: defaultTimeout)
-    }
+    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
+//    func test_putFloatValid() throws {
+//        let expected: [String: Float?] = ["0": 0, "1": -0.01, "2": -1.2e20]
+//        let expectation = XCTestExpectation(description: "Call \(#function)")
+//
+//        // FIXME: Float serialization not accepted by server
+//        client.dictionary.put(floatValid: expected) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                break
+//            case let .failure(error):
+//                let details = errorDetails(for: error, withResponse: httpResponse)
+//                XCTFail("Call \(#function) failed. Error=\(details)")
+//            }
+//            expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: defaultTimeout)
+//    }
 
     func test_getFloatInvalidNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
@@ -435,24 +436,25 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    func test_getStringInvalid() throws {
-        let expectation = XCTestExpectation(description: "Call \(#function)")
-        let stringInvalidDict = ["0": "foo", "1": "123", "2": "foo2"]
-
-        // FIXME: Some crazy workaround behavior where autorest should deserialize non-string values
-        // as strings.
-        client.dictionary.getStringWithInvalid { result, httpResponse in
-            switch result {
-            case let .success(data):
-                XCTAssertEqual(data, stringInvalidDict)
-            case let .failure(error):
-                let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTFail("Call \(#function) failed. Error=\(details)")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: defaultTimeout)
-    }
+    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
+//    func test_getStringInvalid() throws {
+//        let expectation = XCTestExpectation(description: "Call \(#function)")
+//        let stringInvalidDict = ["0": "foo", "1": "123", "2": "foo2"]
+//
+//        // FIXME: Some crazy workaround behavior where autorest should deserialize non-string values
+//        // as strings.
+//        client.dictionary.getStringWithInvalid { result, httpResponse in
+//            switch result {
+//            case let .success(data):
+//                XCTAssertEqual(data, stringInvalidDict)
+//            case let .failure(error):
+//                let details = errorDetails(for: error, withResponse: httpResponse)
+//                XCTFail("Call \(#function) failed. Error=\(details)")
+//            }
+//            expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: defaultTimeout)
+//    }
 
     func test_getDateValid() throws {
         let expected: [String: SimpleDate] = [
@@ -519,11 +521,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
 
     func test_getDateInvalidChars() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
-        let invalid: [String: SimpleDate?] = [
-            "0": SimpleDate(string: "2012-01-01")!,
-            "1": nil,
-            "2": SimpleDate(string: "1776-07-04")!
-        ]
 
         client.dictionary.getDateInvalidChars { result, httpResponse in
             switch result {
@@ -531,7 +528,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
                 XCTFail("Call \(#function) succeeded but should have failed.")
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTAssert(details.contains("Deserialization error"))
+                XCTAssert(details.contains("Decoding error"))
             }
             expectation.fulfill()
         }
@@ -601,10 +598,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
 
     func test_getDateTimeInvalidChars() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
-        let invalid: [String: Iso8601Date?] = [
-            "0": Iso8601Date(string: "2000-12-01T00:00:01Z")!,
-            "1": nil
-        ]
 
         client.dictionary.getDateTimeInvalidChars { result, httpResponse in
             switch result {
@@ -612,7 +605,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
                 XCTFail("Call \(#function) succeeded but should have failed.")
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
-                XCTAssert(details.contains("Deserialization error"))
+                XCTAssert(details.contains("Decoding error"))
             }
             expectation.fulfill()
         }
