@@ -32,7 +32,6 @@ enum BodyParamStrategy: String {
     case flattened
     case unixTime
     case byteArray
-    case base64ByteArray
     case constant
     case decimal
     case data

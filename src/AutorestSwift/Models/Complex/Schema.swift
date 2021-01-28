@@ -169,6 +169,10 @@ class Schema: Codable, LanguageShortcut {
         case .unixTime:
             return .unixTime
         case .byteArray:
+            if let byteSchema = self as? ByteArraySchema,
+                byteSchema.format == .base64url {
+                return .data
+            }
             return .byteArray
         case .array:
             if let arraySchema = self as? ArraySchema,

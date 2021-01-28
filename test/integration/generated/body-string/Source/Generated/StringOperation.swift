@@ -928,10 +928,13 @@ public final class StringOperation {
         )
 
         // Construct request
-        let requestBody = base64UrlEncoded
+        guard let requestBody = base64UrlEncoded.requestString.data(using: .utf8) else {
+            client.options.logger.error("Failed to encode request body as json.")
+            return
+        }
         let urlTemplate = "/string/base64UrlEncoding"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-              let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: Data(requestBody.utf8))
+            let request = try? HTTPRequest(method: .put, url: requestUrl, headers: params.headers, data: requestBody)
         else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
