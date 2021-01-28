@@ -1168,7 +1168,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         client.dictionary.getDictionaryEmpty { result, httpResponse in
             switch result {
             case let .success(data):
-                XCTAssertEqual(data, [String: AnyCodable]())
+                XCTAssertEqual(data, [String: [String: String]]())
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call \(#function) failed. Error=\(details)")

@@ -92,7 +92,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -172,7 +172,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -254,7 +254,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -334,7 +334,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -414,7 +414,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -494,7 +494,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -574,7 +574,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -654,7 +654,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -736,7 +736,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -816,7 +816,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -896,7 +896,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -976,7 +976,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1058,7 +1058,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1138,7 +1138,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1218,7 +1218,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1298,7 +1298,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1380,7 +1380,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1460,7 +1460,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1540,7 +1540,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1620,7 +1620,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1702,7 +1702,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1782,7 +1782,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1862,7 +1862,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -1942,7 +1942,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2024,7 +2024,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2104,7 +2104,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2184,7 +2184,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2264,7 +2264,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2346,7 +2346,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2426,7 +2426,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2506,7 +2506,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2586,7 +2586,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2668,7 +2668,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2748,7 +2748,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2828,7 +2828,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2908,7 +2908,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -2990,7 +2990,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3070,7 +3070,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3150,7 +3150,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3230,7 +3230,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3312,7 +3312,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3392,7 +3392,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3474,7 +3474,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3554,7 +3554,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3636,7 +3636,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3716,7 +3716,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3796,7 +3796,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3883,7 +3883,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -3963,7 +3963,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4043,7 +4043,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4123,7 +4123,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4203,7 +4203,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4285,7 +4285,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4372,7 +4372,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4452,7 +4452,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4532,7 +4532,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4612,7 +4612,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4692,7 +4692,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4774,7 +4774,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4793,7 +4793,7 @@ public final class Dictionary {
     ///     success.
     public func getDictionaryNull(
         withOptions options: GetDictionaryNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: AnyCodable?]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -4839,7 +4839,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: AnyCodable?].self, from: data)
+                        let decoded = try decoder.decode([String: [String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4854,7 +4854,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4873,7 +4873,7 @@ public final class Dictionary {
     ///     success.
     public func getDictionaryEmpty(
         withOptions options: GetDictionaryEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: AnyCodable?]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -4919,7 +4919,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: AnyCodable?].self, from: data)
+                        let decoded = try decoder.decode([String: [String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -4934,7 +4934,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -4953,7 +4953,7 @@ public final class Dictionary {
     ///     success.
     public func getDictionaryItemNull(
         withOptions options: GetDictionaryItemNullOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: AnyCodable?]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -4999,7 +4999,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: AnyCodable?].self, from: data)
+                        let decoded = try decoder.decode([String: [String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5014,7 +5014,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -5033,7 +5033,7 @@ public final class Dictionary {
     ///     success.
     public func getDictionaryItemEmpty(
         withOptions options: GetDictionaryItemEmptyOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: AnyCodable?]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5079,7 +5079,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: AnyCodable?].self, from: data)
+                        let decoded = try decoder.decode([String: [String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5094,7 +5094,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -5113,7 +5113,7 @@ public final class Dictionary {
     ///     success.
     public func getDictionaryValid(
         withOptions options: GetDictionaryValidOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: AnyCodable?]>
+        completionHandler: @escaping HTTPResultHandler<[String: [String: String?]?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -5159,7 +5159,7 @@ public final class Dictionary {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: AnyCodable?].self, from: data)
+                        let decoded = try decoder.decode([String: [String: String?]?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -5174,7 +5174,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -5192,7 +5192,7 @@ public final class Dictionary {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionaryValid: [String: AnyCodable?],
+        dictionaryValid: [String: [String: String?]?],
         withOptions options: PutDictionaryValidOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -5256,7 +5256,7 @@ public final class Dictionary {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(ErrorType.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Unexpected error", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {

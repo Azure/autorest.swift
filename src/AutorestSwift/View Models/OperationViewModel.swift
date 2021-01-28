@@ -167,19 +167,9 @@ private func operationName(for operation: Operation) -> String {
     var operationName = swaggerName
     var nameComps = swaggerName.splitAndJoinAcronyms
 
-    // Force the leading verb to be list if returns array type
-    for response in operation.responses ?? [] {
-        if let schemaResponse = response as? SchemaResponse {
-            if schemaResponse.schema is ArraySchema {
-                nameComps[0] = "list"
-                break
-            } else if let objectSchema = schemaResponse.schema as? ObjectSchema {
-                for property in objectSchema.properties ?? [] where property.schema is ArraySchema {
-                    nameComps[0] = "list"
-                    break
-                }
-            }
-        }
+    // use `list` name if `x-ms-pageable` is set
+    if operation.extensions?["x-ms-pageable"]?.value as? [String: String] != nil {
+        nameComps[0] = "list"
     }
 
     for (index, comp) in nameComps.enumerated() {

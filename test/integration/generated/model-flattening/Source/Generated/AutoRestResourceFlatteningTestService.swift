@@ -115,7 +115,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func listArray(
+    public func getArray(
         withOptions options: GetArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FlattenedProduct]>
     ) {
@@ -281,7 +281,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func listWrappedArray(
+    public func getWrappedArray(
         withOptions options: GetWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[ProductWrapper]>
     ) {
