@@ -101,7 +101,7 @@ public final class PetOperation {
                 if [400].contains(statusCode) {
                     let decoded = String(data: data, encoding: .utf8)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Bad request", decoded)), httpResponse)
                     }
                 }
                 if [404].contains(statusCode) {
@@ -109,7 +109,7 @@ public final class PetOperation {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(NotFoundErrorBase.self, from: data)
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                            completionHandler(.failure(AzureError.service("Not found", decoded)), httpResponse)
                         }
                     } catch {
                         dispatchQueue.async {
@@ -121,7 +121,10 @@ public final class PetOperation {
                     if let decodedstr = String(data: data, encoding: .utf8),
                         let decoded = Int32(decodedstr) {
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                            completionHandler(
+                                .failure(AzureError.service("Some unexpected error", decoded)),
+                                httpResponse
+                            )
                         }
                     } else {
                         dispatchQueue.async {
@@ -207,7 +210,10 @@ public final class PetOperation {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                            completionHandler(
+                                .failure(AzureError.service("something bad happened", decoded)),
+                                httpResponse
+                            )
                         }
                     } catch {
                         dispatchQueue.async {
@@ -220,7 +226,7 @@ public final class PetOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(PetActionError.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("default stuff", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
@@ -296,7 +302,16 @@ public final class PetOperation {
                         let decoder = JSONDecoder()
                         let decoded = try decoder.decode(PetActionError.self, from: data)
                         dispatchQueue.async {
-                            completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                            completionHandler(
+                                .failure(
+                                    AzureError
+                                        .service(
+                                            "Will return error. Make sure the error can be correctly deserialized",
+                                            decoded
+                                        )
+                                ),
+                                httpResponse
+                            )
                         }
                     } catch {
                         dispatchQueue.async {
@@ -309,7 +324,7 @@ public final class PetOperation {
                     let decoder = JSONDecoder()
                     let decoded = try decoder.decode(PetActionError.self, from: data)
                     dispatchQueue.async {
-                        completionHandler(.failure(AzureError.service("", decoded)), httpResponse)
+                        completionHandler(.failure(AzureError.service("Default", decoded)), httpResponse)
                     }
                 } catch {
                     dispatchQueue.async {
