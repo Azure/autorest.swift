@@ -115,7 +115,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getArray(
+    public func listArray(
         withOptions options: GetArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[FlattenedProduct]>
     ) {
@@ -281,7 +281,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func getWrappedArray(
+    public func listWrappedArray(
         withOptions options: GetWrappedArrayOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[ProductWrapper]>
     ) {
@@ -362,7 +362,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func put(
-        dictionary: [String: FlattenedProduct]?,
+        dictionary: [String: FlattenedProduct?]?,
         withOptions options: PutDictionaryOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
@@ -449,7 +449,7 @@ public final class AutoRestResourceFlatteningTestService {
     ///     success.
     public func getDictionary(
         withOptions options: GetDictionaryOptions? = nil,
-        completionHandler: @escaping HTTPResultHandler<[String: FlattenedProduct]>
+        completionHandler: @escaping HTTPResultHandler<[String: FlattenedProduct?]>
     ) {
         let dispatchQueue = options?.dispatchQueue ?? client.commonOptions.dispatchQueue ?? DispatchQueue.main
 
@@ -495,7 +495,7 @@ public final class AutoRestResourceFlatteningTestService {
                 ].contains(statusCode) {
                     do {
                         let decoder = JSONDecoder()
-                        let decoded = try decoder.decode([String: FlattenedProduct].self, from: data)
+                        let decoded = try decoder.decode([String: FlattenedProduct?].self, from: data)
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }

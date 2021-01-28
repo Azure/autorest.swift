@@ -680,7 +680,7 @@ public final class Datetime {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func listUtcUppercaseMaxDateTime7Digits(
+    public func getUtcUppercaseMaxDateTime7Digits(
         withOptions options: GetUtcUppercaseMaxDateTime7DigitsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Iso8601Date>
     ) {

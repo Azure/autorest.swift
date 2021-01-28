@@ -30,7 +30,7 @@ public final class PathItems {
     ///    - options: A list of options for the operation
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
-    public func listAllWithValues(
+    public func getAllWithValues(
         pathItemStringPath: String,
         localStringPath: String,
         withOptions options: GetAllWithValuesOptions? = nil,

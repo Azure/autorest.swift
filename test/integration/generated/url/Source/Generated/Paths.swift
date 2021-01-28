@@ -1848,7 +1848,7 @@ public final class Paths {
     ///    - completionHandler: A completion handler that receives a status code on
     ///     success.
     public func base64Url(
-        base64UrlPath: Data,
+        base64UrlPath: String,
         withOptions options: Base64UrlOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {

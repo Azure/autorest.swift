@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct RefColorConstant: Codable {
+public struct RefColorConstant: Codable, Equatable {
     // MARK: Properties
 
     /// Sample string.

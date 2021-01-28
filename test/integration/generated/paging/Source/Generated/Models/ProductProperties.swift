@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct ProductProperties: Codable {
+public struct ProductProperties: Codable, Equatable {
     // MARK: Properties
 
     public let id: Int32?

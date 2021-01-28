@@ -110,10 +110,10 @@ class AutoRestSwaggerBatTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
 
-    func test_string_listMbcs_200() throws {
-        let expectation = XCTestExpectation(description: "Call stringOperation.listMbcs")
+    func test_string_getMbcs_200() throws {
+        let expectation = XCTestExpectation(description: "Call stringOperation.getMbcs")
 
-        client.stringOperation.listMbcs { result, httpResponse in
+        client.stringOperation.getMbcs { result, httpResponse in
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
@@ -229,8 +229,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
             switch result {
             case let .success(data):
                 XCTAssertEqual(httpResponse?.statusCode, 200)
-                let str = String(data: data, encoding: .utf8)
-                XCTAssertEqual(str, "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"")
+                XCTAssertEqual(data, "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"")
             case let .failure(error):
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTFail("Call getNotProvided.getBase64UrlEncoded failed error=\(details)")
@@ -261,7 +260,7 @@ class AutoRestSwaggerBatTest: XCTestCase {
 
     func test_string_putBase64UrlEncoded_200() throws {
         let expectation = XCTestExpectation(description: "Call stringOperation.putBase64UrlEncoded")
-        let data = Data("\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"".utf8)
+        let data = "\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\""
         client.stringOperation.put(base64UrlEncoded: data) { result, httpResponse in
             switch result {
             case .success:

@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The product documentation.
-public struct ChildProduct: Codable {
+public struct ChildProduct: Codable, Equatable {
     // MARK: Properties
 
     /// Count

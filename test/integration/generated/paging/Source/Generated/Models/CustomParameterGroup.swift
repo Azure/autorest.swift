@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// Parameter group
-public struct CustomParameterGroup: Codable {
+public struct CustomParameterGroup: Codable, Equatable {
     // MARK: Properties
 
     /// Sets the api version to use.

@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The product documentation.
-public struct Product: Codable {
+public struct Product: Codable, Equatable {
     // MARK: Properties
 
     /// Non required array of unique items from 0 to 6 elements.

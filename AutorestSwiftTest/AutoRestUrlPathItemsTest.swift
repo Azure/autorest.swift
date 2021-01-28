@@ -117,7 +117,7 @@ class AutoRestUrlPathItemsTest: XCTestCase {
             pathItemStringQuery: "pathItemStringQuery",
             localStringQuery: "localStringQuery"
         )
-        client.pathItems.listAllWithValues(
+        client.pathItems.getAllWithValues(
             pathItemStringPath: "pathItemStringPath",
             localStringPath: "localStringPath",
             withOptions: options

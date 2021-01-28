@@ -66,7 +66,7 @@ class AutoRestNumberTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTAssertTrue(error.message.contains("Decoding error."))
-                XCTAssertEqual(details, "2147483656.090096789909j")
+                XCTAssertEqual(details.data, "2147483656.090096789909j")
             }
             expectation.fulfill()
         }
@@ -84,7 +84,7 @@ class AutoRestNumberTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTAssertTrue(error.message.contains("Decoding error."))
-                XCTAssertEqual(details, "9223372036854775910.980089k")
+                XCTAssertEqual(details.data, "9223372036854775910.980089k")
             }
             expectation.fulfill()
         }
@@ -102,7 +102,7 @@ class AutoRestNumberTest: XCTestCase {
                 XCTAssertEqual(httpResponse?.statusCode, 200)
                 let details = errorDetails(for: error, withResponse: httpResponse)
                 XCTAssertTrue(error.message.contains("Decoding error."))
-                XCTAssertEqual(details, "9223372036854775910.980089k")
+                XCTAssertEqual(details.data, "9223372036854775910.980089k")
             }
             expectation.fulfill()
         }

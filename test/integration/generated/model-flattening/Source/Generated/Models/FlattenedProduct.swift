@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// Flattened product.
-public struct FlattenedProduct: Codable {
+public struct FlattenedProduct: Codable, Equatable {
     // MARK: Properties
 
     public let pName: String?
@@ -31,7 +31,7 @@ public struct FlattenedProduct: Codable {
     /// Resource Type
     public let type: String?
     /// Dictionary of <string>
-    public let tags: [String: String]?
+    public let tags: [String: String?]?
     /// Resource Location
     public let location: String?
     /// Resource Name
@@ -53,7 +53,7 @@ public struct FlattenedProduct: Codable {
     public init(
         pName: String? = nil, typePropertiesType: String? = nil,
         provisioningStateValues: FlattenedProductPropertiesProvisioningStateValues? = nil,
-        provisioningState: String? = nil, id: String? = nil, type: String? = nil, tags: [String: String]? = nil,
+        provisioningState: String? = nil, id: String? = nil, type: String? = nil, tags: [String: String?]? = nil,
         location: String? = nil, name: String? = nil
     ) {
         self.pName = pName
@@ -93,7 +93,7 @@ public struct FlattenedProduct: Codable {
         self.provisioningState = try? container.decode(String.self, forKey: .provisioningState)
         self.id = try? container.decode(String.self, forKey: .id)
         self.type = try? container.decode(String.self, forKey: .type)
-        self.tags = try? container.decode([String: String].self, forKey: .tags)
+        self.tags = try? container.decode([String: String?].self, forKey: .tags)
         self.location = try? container.decode(String.self, forKey: .location)
         self.name = try? container.decode(String.self, forKey: .name)
     }

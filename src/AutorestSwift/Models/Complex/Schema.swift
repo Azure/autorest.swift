@@ -85,6 +85,8 @@ class Schema: Codable, LanguageShortcut {
     func swiftType(optional: Bool = false) -> String {
         var swiftType: String
         switch type {
+        case .any:
+            swiftType = "AnyCodable"
         case .string,
              .uuid:
             swiftType = "String"
@@ -117,7 +119,12 @@ class Schema: Codable, LanguageShortcut {
         case .unixTime:
             swiftType = "UnixTime"
         case .byteArray:
-            swiftType = "Data"
+            if let byteArrayScheme = self as? ByteArraySchema,
+                byteArrayScheme.format == .base64url {
+                swiftType = "String"
+            } else {
+                swiftType = "Data"
+            }
         case .integer:
             swiftType = "Int"
         case .time:
@@ -131,14 +138,14 @@ class Schema: Codable, LanguageShortcut {
             guard let dictionarySchema = self as? DictionarySchema else {
                 fatalError("Type mismatch. Expected dictionary type but got \(self)")
             }
-            swiftType = "[String:\(dictionarySchema.elementType.swiftType())]"
+            swiftType = "[String:\(dictionarySchema.elementType.swiftType())?]"
         case .constant:
             guard let constant = self as? ConstantSchema else {
                 fatalError("Type mismatch. Expected constant type but got \(self)")
             }
             swiftType = constant.valueType.swiftType()
         case .duration:
-            swiftType = "DateComponents"
+            swiftType = "Iso8601Duration"
         case .binary:
             swiftType = "Data"
         case .uri:

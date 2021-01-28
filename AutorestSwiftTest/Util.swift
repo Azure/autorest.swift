@@ -32,12 +32,21 @@ private let allFormatOptions: [ISO8601DateFormatter.Options] = [
     [.withInternetDateTime]
 ]
 
-func errorDetails(for error: AzureError, withResponse response: HTTPResponse?) -> String {
-    var details: String
+struct ErrorDetails {
+    let data: String
+    let message: String
+
+    func contains(_ value: String) -> Bool {
+        return data.contains(value) || message.contains(value)
+    }
+}
+
+func errorDetails(for error: AzureError, withResponse response: HTTPResponse?) -> ErrorDetails {
+    var details: ErrorDetails
     if let data = response?.data {
-        details = String(data: data, encoding: .utf8)!
+        details = ErrorDetails(data: String(data: data, encoding: .utf8)!, message: error.message)
     } else {
-        details = error.message
+        details = ErrorDetails(data: "", message: error.message)
     }
     return details
 }
