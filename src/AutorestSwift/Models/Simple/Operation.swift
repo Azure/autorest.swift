@@ -108,10 +108,10 @@ class Operation: Codable, LanguageShortcut {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         var responses = [Response]()
-        var responsesContainer = try container.nestedUnkeyedContainer(forKey: .responses)
-        while !responsesContainer.isAtEnd {
-            if let response = (try? responsesContainer.decode(SchemaResponse.self)) ??
-                (try? responsesContainer.decode(Response.self)) {
+        var responsesContainer = try? container.nestedUnkeyedContainer(forKey: .responses)
+        while !(responsesContainer?.isAtEnd ?? true) {
+            if let response = (try? responsesContainer?.decode(SchemaResponse.self)) ??
+                (try? responsesContainer?.decode(Response.self)) {
                 responses.append(response)
             }
         }

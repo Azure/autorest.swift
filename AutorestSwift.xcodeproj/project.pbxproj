@@ -153,6 +153,8 @@
 		0A4743652582919700CA86E5 /* PatchUtil_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */; };
 		0A4743662582919700CA86E5 /* README_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README_File.stencil */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
+		0A64D7A025C88B86004D3D42 /* AutoRestHttpInfrastructureTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0A64D79F25C88B86004D3D42 /* AutoRestHttpInfrastructureTest */; };
+		0A64D7A225C88BFB004D3D42 /* AutoRestHttpInfrastructureTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A64D7A125C88BFB004D3D42 /* AutoRestHttpInfrastructureTest.swift */; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
 		0AA2BA1824EC866100CEA1D6 /* AutorestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA1724EC866100CEA1D6 /* AutorestPlugin.swift */; };
@@ -377,6 +379,8 @@
 		0A4742D325814AA600CA86E5 /* PipelineContextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContextViewModel.swift; sourceTree = "<group>"; };
 		0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Operation_Request_Parameters_Snippet.stencil; sourceTree = "<group>"; };
 		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
+		0A64D79C25C88B18004D3D42 /* httpInfrastructure */ = {isa = PBXFileReference; lastKnownFileType = text; name = httpInfrastructure; path = test/integration/generated/httpInfrastructure; sourceTree = SOURCE_ROOT; };
+		0A64D7A125C88BFB004D3D42 /* AutoRestHttpInfrastructureTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRestHttpInfrastructureTest.swift; sourceTree = "<group>"; };
 		0A7477222527D15F00819FC9 /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0A747F992534AA1C00819FC9 /* UsageSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSchema.swift; sourceTree = "<group>"; };
 		0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantViewModel.swift; sourceTree = "<group>"; };
@@ -610,6 +614,7 @@
 				0AB80BF22579836D008506CD /* AutoRestDateTest in Frameworks */,
 				0AB80C062579836D008506CD /* AutoRestRfC1123DateTimeTest in Frameworks */,
 				0AB80C0A2579836D008506CD /* AutoRestSwaggerBatArray in Frameworks */,
+				0A64D7A025C88B86004D3D42 /* AutoRestHttpInfrastructureTest in Frameworks */,
 				0AB80C022579836D008506CD /* AutoRestRequiredOptionalTest in Frameworks */,
 				0AB80C142579836D008506CD /* AutoRestUrlMutliCollectionFormatTest in Frameworks */,
 				0AB80BFE2579836D008506CD /* AutoRestParameterizedHostTest in Frameworks */,
@@ -785,6 +790,7 @@
 				0AB80BB0257982D4008506CD /* body-date */,
 				0AB80BB2257982D5008506CD /* body-datetime */,
 				0AA5954E25A789E300E77E33 /* body-duration */,
+				0A64D79C25C88B18004D3D42 /* httpInfrastructure */,
 				0AB80BA5257982CF008506CD /* body-datetime-rfc1123 */,
 				0AD3133D259D252D00CD987D /* body-dictionary */,
 				0AB80BB6257982D6008506CD /* body-file */,
@@ -813,6 +819,7 @@
 				0AA5955225A78ABB00E77E33 /* AutoRestDurationTest.swift */,
 				0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */,
 				F15A9286254B08A400E2D9C2 /* AutoRestHeadTest.swift */,
+				0A64D7A125C88BFB004D3D42 /* AutoRestHttpInfrastructureTest.swift */,
 				F1DCAF90255A4B2200A6E425 /* AutoRestNumberTest.swift */,
 				0AB80C312579940D008506CD /* AutoRestPagingTest.swift */,
 				F1DCAF16255A10A500A6E425 /* AutoRestParameterizedHostTest.swift */,
@@ -1095,6 +1102,7 @@
 				0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */,
 				0AD3133F259D257000CD987D /* AutoRestSwaggerBatDictionary */,
 				0AA5955025A78A2800E77E33 /* AutoRestDurationTest */,
+				0A64D79F25C88B86004D3D42 /* AutoRestHttpInfrastructureTest */,
 			);
 			productName = AutorestSwiftTest;
 			productReference = F1A6719224F5CCCC00C2712C /* AutorestSwiftTest.xctest */;
@@ -1245,6 +1253,7 @@
 				0AB80AAD25783093008506CD /* AutoRestSwaggerBatBoolTest.swift in Sources */,
 				0AB80AAE25783094008506CD /* AutoRestSwaggerBatHeaderTest.swift in Sources */,
 				0AB80AAF25783094008506CD /* AutoRestSwaggerBatArrayTest.swift in Sources */,
+				0A64D7A225C88BFB004D3D42 /* AutoRestHttpInfrastructureTest.swift in Sources */,
 				0AB80AB025783094008506CD /* AutoRestParameterizedHostTest.swift in Sources */,
 				0AB80AB125783094008506CD /* AutoRestSwaggerCustomerBaseUrlOptionTest.swift in Sources */,
 				0AB80AB225783094008506CD /* AutoRestUrlMultiCollectionFormatTest.swift in Sources */,
@@ -1688,6 +1697,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A64D79F25C88B86004D3D42 /* AutoRestHttpInfrastructureTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutoRestHttpInfrastructureTest;
+		};
 		0AA5955025A78A2800E77E33 /* AutoRestDurationTest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AutoRestDurationTest;

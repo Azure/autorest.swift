@@ -35,6 +35,7 @@ working_files = [
     "extensible-enums-swagger",
     "head",
     "header",
+    "httpInfrastructure",
     "model-flattening",
     "paging",
     "report",
