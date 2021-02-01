@@ -38,20 +38,52 @@ class AutoRestHttpInfrastructureTest: XCTestCase {
         )
     }
 
-//    func test_Head_success200() throws {
-//        let expectation = XCTestExpectation(description: "Call head200")
+//    func test_get200_model204() throws {
+//        let expectation = XCTestExpectation(description: "Call \(#function)")
 //
-//        client.httpSuccess.head200 { result, httpResponse in
+//        client.multipleResponses.get200Model204NoModelDefaultError200Valid { result, httpResponse in
 //            switch result {
 //            case .success:
 //                XCTAssertEqual(httpResponse?.statusCode, 200)
 //            case let .failure(error):
 //                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call head200 failed. error=\(details)")
+//                XCTFail("Call \(#function) failed. error=\(details)")
 //            }
 //            expectation.fulfill()
 //        }
 //
 //        wait(for: [expectation], timeout: 5.0)
 //    }
+
+    func test_serverError_statusCodes_head501() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.httpServerFailure.head501 { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssert(details.contains("501"), "Error: \(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func test_serverError_statusCodes_get501() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.httpServerFailure.get501 { result, httpResponse in
+            switch result {
+            case .success:
+                XCTFail("Call \(#function) succeeded but should have failed.")
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTAssert(details.contains("501"), "Error: \(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
