@@ -26,80 +26,80 @@
 
 import Foundation
 
-private let reservedTypes = [
-    "Error": true,
-    "Int": true,
-    "String": true,
-    "Bool": true,
-    "Enum": true,
-    "Array": true,
-    "Date": true,
-    "Self": true,
-    "Any": true
+private let reservedTypes: Set =  [
+    "Error",
+    "Int",
+    "String",
+    "Bool",
+    "Enum",
+    "Array",
+    "Date",
+    "Self",
+    "Any"
 ]
 
-private let reservedKeywords = [
-    "associatedtype": true,
-    "class": true,
-    "deinit": true,
-    "enum": true,
-    "extension": true,
-    "fileprivate": true,
-    "func": true,
-    "import": true,
-    "init": true,
-    "inout": true,
-    "internal": true,
-    "let": true,
-    "open": true,
-    "operator": true,
-    "private": true,
-    "protocol": true,
-    "public": true,
-    "static": true,
-    "struct": true,
-    "subscript": true,
-    "typealias": true,
-    "var": true,
-    "break": true,
-    "case": true,
-    "continue": true,
-    "default": true,
-    "defer": true,
-    "do": true,
-    "else": true,
-    "fallthrough": true,
-    "for": true,
-    "guard": true,
-    "if": true,
-    "in": true,
-    "repeat": true,
-    "return": true,
-    "switch": true,
-    "where": true,
-    "while": true,
-    "as": true,
-    "catch": true,
-    "false": true,
-    "is": true,
-    "nil": true,
-    "rethrows": true,
-    "super": true,
-    "self": true,
-    "throw": true,
-    "throws": true,
-    "true": true,
-    "try": true
+private let reservedKeywords: Set = [
+    "associatedtype",
+    "class",
+    "deinit",
+    "enum",
+    "extension",
+    "fileprivate",
+    "func",
+    "import",
+    "init",
+    "inout",
+    "internal",
+    "let",
+    "open",
+    "operator",
+    "private",
+    "protocol",
+    "public",
+    "static",
+    "struct",
+    "subscript",
+    "typealias",
+    "var",
+    "break",
+    "case",
+    "continue",
+    "default",
+    "defer",
+    "do",
+    "else",
+    "fallthrough",
+    "for",
+    "guard",
+    "if",
+    "in",
+    "repeat",
+    "return",
+    "switch",
+    "where",
+    "while",
+    "as",
+    "catch",
+    "false",
+    "is",
+    "nil",
+    "rethrows",
+    "super",
+    "self",
+    "throw",
+    "throws",
+    "true",
+    "try"
 ]
 
 extension String {
     /// Returns `true` if the string corresponds to a reserved type
     var isReservedType: Bool {
-        return reservedTypes[self] ?? false
+        return reservedTypes.contains(self)
     }
 
     /// Returns `true` if the string corresponds to a reserved Swift keyword
     var isReservedKeyword: Bool {
-        return reservedKeywords[self] ?? false
+        return reservedKeywords.contains(self)
     }
 }
