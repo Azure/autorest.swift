@@ -376,6 +376,7 @@
 		0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = PatchUtil_File.stencil; sourceTree = "<group>"; };
 		0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Operation_BodyParam_Snippet.stencil; sourceTree = "<group>"; };
 		0A22B46324E1E64900EC018E /* Jazzy_File.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Jazzy_File.stencil; sourceTree = "<group>"; };
+		0A37D1F025D5F1ED00D8289C /* CHECKENFORCER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHECKENFORCER; sourceTree = "<group>"; };
 		0A4742D325814AA600CA86E5 /* PipelineContextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContextViewModel.swift; sourceTree = "<group>"; };
 		0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Operation_Request_Parameters_Snippet.stencil; sourceTree = "<group>"; };
 		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
@@ -956,6 +957,7 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				0A37D1F025D5F1ED00D8289C /* CHECKENFORCER */,
 				0AA2B98824E5FD6500CEA1D6 /* package.json */,
 				0A22B09524D09C2900EC018E /* Makefile */,
 				OBJ_6 /* Package.swift */,
