@@ -76,6 +76,7 @@ extension String {
         return components
     }
 
+    /// Returns the substring without any trailing or leading whitespace.
     func trimmed() -> Substring {
         guard let firstElementIndex = firstIndex(where: { !$0.isWhitespace }) else {
             return Substring("")
@@ -85,20 +86,9 @@ extension String {
         return self[firstElementIndex ..< lastElementIndex.base]
     }
 
+    /// Returns the string with the first character lowercased.
     var lowercasedFirst: String { return prefix(1).lowercased() + dropFirst() }
 
+    /// Returns the string with the first character uppercased.
     var uppercasedFirst: String { return prefix(1).uppercased() + dropFirst() }
-
-    var isReserved: Bool {
-        let reserved = [
-            "Error",
-            "Int",
-            "String",
-            "Bool",
-            "Enum",
-            "Array",
-            "Date"
-        ]
-        return reserved.contains(self)
-    }
 }

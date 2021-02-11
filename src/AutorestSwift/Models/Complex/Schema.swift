@@ -157,7 +157,7 @@ class Schema: Codable, LanguageShortcut {
     }
 
     var modelName: String {
-        return name.isReserved ? name + "Type" : name
+        return name.isReservedType ? name + "Type" : name
     }
 
     var bodyParamStrategy: BodyParamStrategy {

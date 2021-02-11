@@ -26,32 +26,80 @@
 
 import Foundation
 
-/// An operation group represents a container around set of operations
-class OperationGroup: Metadata {
-    let key: String
+private let reservedTypes: Set =  [
+    "Error",
+    "Int",
+    "String",
+    "Bool",
+    "Enum",
+    "Array",
+    "Date",
+    "Self",
+    "Any"
+]
 
-    let operations: [Operation]
+private let reservedKeywords: Set = [
+    "associatedtype",
+    "class",
+    "deinit",
+    "enum",
+    "extension",
+    "fileprivate",
+    "func",
+    "import",
+    "init",
+    "inout",
+    "internal",
+    "let",
+    "open",
+    "operator",
+    "private",
+    "protocol",
+    "public",
+    "static",
+    "struct",
+    "subscript",
+    "typealias",
+    "var",
+    "break",
+    "case",
+    "continue",
+    "default",
+    "defer",
+    "do",
+    "else",
+    "fallthrough",
+    "for",
+    "guard",
+    "if",
+    "in",
+    "repeat",
+    "return",
+    "switch",
+    "where",
+    "while",
+    "as",
+    "catch",
+    "false",
+    "is",
+    "nil",
+    "rethrows",
+    "super",
+    "self",
+    "throw",
+    "throws",
+    "true",
+    "try"
+]
 
-    enum CodingKeys: String, CodingKey {
-        case operations
-        case key = "$key"
+extension String {
+    /// Returns `true` if the string corresponds to a reserved type
+    var isReservedType: Bool {
+        return reservedTypes.contains(self)
     }
 
-    var modelName: String {
-        return name.isReservedType ? name + "Operation" : name
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        key = try container.decode(String.self, forKey: .key)
-        operations = try container.decode([Operation].self, forKey: .operations)
-        try super.init(from: decoder)
-    }
-
-    override public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(key, forKey: .key)
-        try container.encode(operations, forKey: .operations)
-        try super.encode(to: encoder)
+    /// Returns `true` if the string corresponds to a reserved Swift keyword
+    var isReservedKeyword: Bool {
+        return reservedKeywords.contains(self)
     }
 }
