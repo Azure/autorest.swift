@@ -26,7 +26,7 @@
 
 import Foundation
 
-private let reservedTypes: Set =  [
+private let reservedTypes: Set = [
     "Error",
     "Int",
     "String",
