@@ -305,3 +305,4 @@ Pods/
 .swiftpm/
 test/integration/generated/**/**/xcuserdata/
 **/Package.resolved
+Podfile.lock

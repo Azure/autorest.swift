@@ -38,7 +38,7 @@ class OperationGroup: Metadata {
     }
 
     var modelName: String {
-        return name.isReserved ? name + "Operation" : name
+        return name.isReservedType ? name + "Operation" : name
     }
 
     public required init(from decoder: Decoder) throws {

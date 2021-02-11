@@ -43,7 +43,12 @@ protocol LanguageShortcut {
 extension LanguageShortcut {
     var name: String {
         get {
-            return language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            let name = language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            // apply backticks to reserved keywords
+            if name.isReservedKeyword {
+                return "`\(name)`"
+            }
+            return name
         }
         set {
             language.swift.name = newValue
@@ -108,7 +113,14 @@ protocol OptionalLanguageShortcut {
 extension OptionalLanguageShortcut {
     var name: String? {
         get {
-            return language?.swift.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            if let name = language?.swift.name.trimmingCharacters(in: .whitespacesAndNewlines) {
+                // apply backticks to reserved keywords
+                if name.isReservedKeyword {
+                    return "`\(name)`"
+                }
+                return name
+            }
+            return nil
         }
         set {
             if let val = newValue {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A10427F25D483C4008E472E /* ReservedKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10427E25D483C4008E472E /* ReservedKeywords.swift */; };
 		0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */; };
 		0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
 		0A22B0DE24D3671D00EC018E /* EnumerationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */; };
@@ -331,6 +332,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A10427E25D483C4008E472E /* ReservedKeywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedKeywords.swift; sourceTree = "<group>"; };
 		0A22B02C24C88EB000EC018E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0A22B03424C8964000EC018E /* LanguageShortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageShortcut.swift; sourceTree = "<group>"; };
 		0A22B03524C8964000EC018E /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				0A22B07924CB721900EC018E /* String+Extensions.swift */,
 				0A22B07A24CB721900EC018E /* Encodable+Extensions.swift */,
 				0A22B07B24CB721900EC018E /* URL+Extensions.swift */,
+				0A10427E25D483C4008E472E /* ReservedKeywords.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1333,6 +1336,7 @@
 				0AA2BA3024F57A5B00CEA1D6 /* ParameterType.swift in Sources */,
 				0A22B11724D3671E00EC018E /* Protocol.swift in Sources */,
 				0A22B11824D3671E00EC018E /* Request.swift in Sources */,
+				0A10427F25D483C4008E472E /* ReservedKeywords.swift in Sources */,
 				0A22B11924D3671E00EC018E /* Response.swift in Sources */,
 				0AA2BA1F24EC958600CEA1D6 /* Model.swift in Sources */,
 				0A22B11A24D3671E00EC018E /* Schema.swift in Sources */,
