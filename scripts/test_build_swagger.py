@@ -60,8 +60,8 @@ def generate(item, *, src, dest):
     print(f'Generating: {item.namespace}.{item.name}...')
     command = f'autorest --input-file={src} --output-folder={dest} --namespace={item.namespace} --use={cwd} --package-name={item.name}CI'
     out, err = run_command(command)
-    if err:
-        log_error_and_quit(err)
+#    if err:
+#        log_error_and_quit(err)
     return out
 
 
