@@ -1,0 +1,3 @@
+variables:
+  OSVmImage: 'macOS-10.15'
+  XcodeVersion: '12.3'
