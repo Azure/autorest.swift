@@ -1,18 +1,21 @@
 jobs:
   - job: CI
 
+    variables:
+      - template: ../variables/globals.yml
+
     pool:
-      vmImage: 'macOS-10.15'
+      vmImage: '$(OSVmImage)'
 
     steps:
-      - script: sudo xcode-select --switch /Applications/Xcode_11.5.app
-        displayName: 'Use Xcode 11.5'
+      - script: sudo xcode-select --switch /Applications/Xcode_$(XcodeVersion).app
+        displayName: 'Use Xcode $(XcodeVersion)'
 
       - script: npm install
-        displayName: Build
+        displayName: "Build"
 
       - script: npm run test
-        displayName: Run Tests
+        displayName: "Run Tests"
 
       - script: |
           npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)

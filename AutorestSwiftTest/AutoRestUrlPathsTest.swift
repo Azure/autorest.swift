@@ -43,21 +43,22 @@ class AutoRestUrlPathsTest: XCTestCase {
         )
     }
 
-    func test_Paths_byteNull_404() throws {
-        let expectation = XCTestExpectation(description: "Call paths.byteNull")
-
-        client.paths.byteNull(bytePath: Data()) { result, httpResponse in
-            switch result {
-            case .success:
-                XCTFail("Call paths.byteNull failed")
-            case .failure:
-                XCTAssertEqual(httpResponse?.statusCode, 404)
-            }
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 5.0)
-    }
+    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
+//    func test_Paths_byteNull_404() throws {
+//        let expectation = XCTestExpectation(description: "Call paths.byteNull")
+//
+//        client.paths.byteNull(bytePath: Data()) { result, httpResponse in
+//            switch result {
+//            case .success:
+//                XCTFail("Call paths.byteNull failed")
+//            case .failure:
+//                XCTAssertEqual(httpResponse?.statusCode, 404)
+//            }
+//            expectation.fulfill()
+//        }
+//
+//        wait(for: [expectation], timeout: 10.0)
+//    }
 
     func test_Paths_byteEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call paths.byteEmpty")
