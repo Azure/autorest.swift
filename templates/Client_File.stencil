@@ -18,6 +18,8 @@ public final class {{ model.name }}: {{ model.protocols }} {
 
     {% include "Client_ApiVersion_Snippet.stencil" model %}
 
+    make_me_fail
+
     /// Options provided to configure this `{{ model.name }}`.
     public let options: {{ model.name }}Options
 
