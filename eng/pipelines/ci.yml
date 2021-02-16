@@ -18,6 +18,11 @@ jobs:
         displayName: "Run Tests"
 
       - script: |
+          npm install -g autorest
+          npm run build-sdks
+        displayName: Generate Select SDKs and build
+
+      - script: |
           npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) $(github-token) $(storage-coverage-user) $(storage-coverage-pass)
         workingDirectory: node_modules/@microsoft.azure/autorest.testserver
         condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
