@@ -56,7 +56,12 @@ extension LanguageShortcut {
     }
 
     var variableName: String {
-        return name.lowercasedFirst
+        let name = language.swift.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercasedFirst
+        // apply backticks to reserved keywords
+        if name.isReservedKeyword {
+            return "`\(name)`"
+        }
+        return name
     }
 
     var description: String {
