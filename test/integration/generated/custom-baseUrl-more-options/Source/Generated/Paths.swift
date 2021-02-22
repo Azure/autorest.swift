@@ -43,16 +43,16 @@ public final class Paths {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "vault", vault, .skipEncoding), (.uri, "secret", secret, .skipEncoding),
-            (.path, "keyName", keyName, .encode), (.query, "keyVersion", options?.keyVersion, .encode),
-            (.uri, "dnsSuffix", client.dnsSuffix, .skipEncoding),
-            (.path, "subscriptionId", client.subscriptionId, .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.path, "keyName", keyName, .encode),
+            (.query, "keyVersion", options?.keyVersion, .encode), (.uri, "dnsSuffix", client.dnsSuffix, .skipEncoding),
+            (.path, "subscriptionId", client.subscriptionId, .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
         let urlTemplate = "/customuri/{subscriptionId}/{keyName}"
         guard let requestUrl = client.url(host: "{vault}{secret}{dnsSuffix}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

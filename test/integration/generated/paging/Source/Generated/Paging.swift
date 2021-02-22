@@ -44,7 +44,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/noitemname"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -128,7 +129,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/nullnextlink"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -212,7 +214,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/single"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -296,7 +299,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/firstResponseEmpty/1"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -382,7 +386,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -471,7 +476,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/getWithQueryParams"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -555,7 +561,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/nextOperationWithQueryParams"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -641,7 +648,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/odata"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -728,7 +736,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/withpath/{offset}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -812,7 +821,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/retryfirst"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -896,7 +906,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/retrysecond"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -980,7 +991,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/single/failure"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1064,7 +1076,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/failure"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1148,7 +1161,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/failureuri"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1236,7 +1250,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/fragment/{tenant}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1319,14 +1334,14 @@ public final class Paging {
                 "api_version",
                 customParameterGroup.apiVersion,
                 .encode
-            ), (.path, "tenant", customParameterGroup.tenant, .encode),
-            (.header, "Accept", "application/json", .encode)
+            ), (.path, "tenant", customParameterGroup.tenant, .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
         let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1412,7 +1427,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/lro"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1503,7 +1519,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/multiple/fragment/{tenant}/{nextLink}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1590,14 +1607,14 @@ public final class Paging {
                 "api_version",
                 customParameterGroup.apiVersion,
                 .encode
-            ), (.path, "tenant", customParameterGroup.tenant, .encode),
-            (.header, "Accept", "application/json", .encode)
+            ), (.path, "tenant", customParameterGroup.tenant, .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
         let urlTemplate = "/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1681,7 +1698,8 @@ public final class Paging {
         // Construct request
         let urlTemplate = "/paging/itemNameWithXMSClientName"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

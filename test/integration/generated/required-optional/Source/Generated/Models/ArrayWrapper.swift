@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct ArrayWrapper: Codable, Equatable {
+public struct ArrayWrapper: Codable {
     // MARK: Properties
 
     public let value: [String]

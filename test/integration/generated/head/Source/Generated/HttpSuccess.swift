@@ -43,7 +43,8 @@ public final class HttpSuccess {
         // Construct request
         let urlTemplate = "/http/success/200"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -112,7 +113,8 @@ public final class HttpSuccess {
         // Construct request
         let urlTemplate = "/http/success/204"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -181,7 +183,8 @@ public final class HttpSuccess {
         // Construct request
         let urlTemplate = "/http/success/404"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .head, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

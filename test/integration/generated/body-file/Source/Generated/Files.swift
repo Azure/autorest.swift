@@ -44,7 +44,8 @@ public final class Files {
         // Construct request
         let urlTemplate = "/files/stream/nonempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -119,7 +120,8 @@ public final class Files {
         // Construct request
         let urlTemplate = "/files/stream/verylarge"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -194,7 +196,8 @@ public final class Files {
         // Construct request
         let urlTemplate = "/files/stream/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

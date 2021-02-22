@@ -44,7 +44,8 @@ public final class Byte {
         // Construct request
         let urlTemplate = "/byte/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -116,7 +117,8 @@ public final class Byte {
         // Construct request
         let urlTemplate = "/byte/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -188,7 +190,8 @@ public final class Byte {
         // Construct request
         let urlTemplate = "/byte/nonAscii"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -255,8 +258,7 @@ public final class Byte {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -339,7 +341,8 @@ public final class Byte {
         // Construct request
         let urlTemplate = "/byte/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

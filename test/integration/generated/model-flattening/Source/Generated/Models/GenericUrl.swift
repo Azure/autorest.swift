@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The Generic URL.
-public struct GenericUrl: Codable, Equatable {
+public struct GenericUrl: Codable {
     // MARK: Properties
 
     /// Generic URL value.

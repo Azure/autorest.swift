@@ -45,7 +45,8 @@ public final class Paths {
         // Construct request
         let urlTemplate = "/customuri"
         guard let requestUrl = client.url(host: "http://{accountName}{host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

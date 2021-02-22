@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct ResourceCollection: Codable, Equatable {
+public struct ResourceCollection: Codable {
     // MARK: Properties
 
     /// Flattened product.

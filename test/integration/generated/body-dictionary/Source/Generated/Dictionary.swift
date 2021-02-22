@@ -44,7 +44,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -124,7 +125,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -199,8 +201,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -286,7 +287,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/nullvalue"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -366,7 +368,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/nullkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -446,7 +449,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/keyemptystring"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -526,7 +530,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -606,7 +611,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/boolean/tfft"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -681,8 +687,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -768,7 +773,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/boolean/true.null.false"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -848,7 +854,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/boolean/true.boolean.false"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -928,7 +935,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/integer/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1003,8 +1011,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1090,7 +1097,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/integer/1.null.zero"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1170,7 +1178,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/integer/1.integer.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1250,7 +1259,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/long/1.-1.3.300"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1325,8 +1335,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1412,7 +1421,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/long/1.null.zero"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1492,7 +1502,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/long/1.integer.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1572,7 +1583,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/float/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1647,8 +1659,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1734,7 +1745,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/float/0.0-null-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1814,7 +1826,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/float/1.number.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1894,7 +1907,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/double/0--0.01-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1969,8 +1983,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2056,7 +2069,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/double/0.0-null-1.2e20"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2136,7 +2150,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/double/1.number.0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2216,7 +2231,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/string/foo1.foo2.foo3"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2291,8 +2307,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2378,7 +2393,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/string/foo.null.foo2"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2458,7 +2474,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/string/foo.123.foo2"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2538,7 +2555,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2613,8 +2631,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -2700,7 +2717,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2780,7 +2798,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date/invalidchars"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2860,7 +2879,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date-time/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2935,8 +2955,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3022,7 +3041,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date-time/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3102,7 +3122,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date-time/invalidchars"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3182,7 +3203,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/date-time-rfc1123/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3257,8 +3279,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3344,7 +3365,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/duration/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3419,8 +3441,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3506,7 +3527,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/byte/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3581,8 +3603,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -3668,7 +3689,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/byte/invalidnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3748,7 +3770,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/prim/base64url/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3828,7 +3851,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/complex/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3915,7 +3939,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/complex/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -3995,7 +4020,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/complex/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4075,7 +4101,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/complex/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4155,7 +4182,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/complex/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4230,8 +4258,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4317,7 +4344,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/array/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4404,7 +4432,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/array/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4484,7 +4513,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/array/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4564,7 +4594,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/array/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4644,7 +4675,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/array/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4719,8 +4751,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -4806,7 +4837,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/dictionary/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4886,7 +4918,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/dictionary/empty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -4966,7 +4999,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/dictionary/itemnull"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -5046,7 +5080,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/dictionary/itemempty"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -5126,7 +5161,8 @@ public final class Dictionary {
         // Construct request
         let urlTemplate = "/dictionary/dictionary/valid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -5201,8 +5237,7 @@ public final class Dictionary {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

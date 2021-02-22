@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The product documentation.
-public struct ConstantProduct: Codable, Equatable {
+public struct ConstantProduct: Codable {
     // MARK: Properties
 
     // MARK: Constants

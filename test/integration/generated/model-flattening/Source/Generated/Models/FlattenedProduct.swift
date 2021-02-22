@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// Flattened product.
-public struct FlattenedProduct: Codable, Equatable {
+public struct FlattenedProduct: Codable {
     // MARK: Properties
 
     public let pName: String?

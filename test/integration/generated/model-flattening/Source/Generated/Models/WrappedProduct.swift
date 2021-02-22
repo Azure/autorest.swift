@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// The wrapped produc.
-public struct WrappedProduct: Codable, Equatable {
+public struct WrappedProduct: Codable {
     // MARK: Properties
 
     /// the product value

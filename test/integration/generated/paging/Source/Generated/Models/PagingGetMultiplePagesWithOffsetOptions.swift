@@ -16,7 +16,7 @@ import Foundation
 // swiftlint:disable cyclomatic_complexity
 
 /// Parameter group
-public struct PagingGetMultiplePagesWithOffsetOptions: Codable, Equatable {
+public struct PagingGetMultiplePagesWithOffsetOptions: Codable {
     // MARK: Properties
 
     /// Sets the maximum number of items to return in the response.

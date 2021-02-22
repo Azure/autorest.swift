@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetAction: Codable, Equatable {
+public struct PetAction: Codable {
     // MARK: Properties
 
     /// action feedback
