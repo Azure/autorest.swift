@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct OperationResult: Codable, Equatable {
+public struct OperationResult: Codable {
     // MARK: Properties
 
     /// The status of the request

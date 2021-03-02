@@ -45,7 +45,8 @@ public final class PetOperation {
         // Construct request
         let urlTemplate = "/errorStatusCodes/Pets/{petId}/GetPet"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -119,7 +120,8 @@ public final class PetOperation {
                 }
                 if [501].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                        let decoded = Int32(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(
                                 .failure(AzureError.service("Some unexpected error", decoded)),
@@ -162,7 +164,8 @@ public final class PetOperation {
         // Construct request
         let urlTemplate = "/errorStatusCodes/Pets/doSomething/{whatAction}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -259,7 +262,8 @@ public final class PetOperation {
         // Construct request
         let urlTemplate = "/errorStatusCodes/Pets/hasModelsParam"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

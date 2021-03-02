@@ -43,14 +43,14 @@ public final class AutoRestValidationTest {
             (.path, "resourceGroupName", resourceGroupName, .encode), (.path, "id", id, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "subscriptionId", client.subscriptionId, .encode),
-            (.query, "apiVersion", client.options.apiVersion, .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.query, "apiVersion", client.options.apiVersion, .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
         let urlTemplate = "/fakepath/{subscriptionId}/{resourceGroupName}/{id}"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -162,8 +162,7 @@ public final class AutoRestValidationTest {
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.path, "subscriptionId", client.subscriptionId, .encode),
             (.query, "apiVersion", client.options.apiVersion, .encode),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -302,7 +301,8 @@ public final class AutoRestValidationTest {
         // Construct request
         let urlTemplate = "/validation/constantsInPath/{constantParam}/value"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -356,8 +356,8 @@ public final class AutoRestValidationTest {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.path, "constantParam", "constant", .encode), (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.path, "constantParam", "constant", .encode),
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request

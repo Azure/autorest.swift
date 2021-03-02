@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Animal: Codable, Equatable {
+public struct Animal: Codable {
     // MARK: Properties
 
     public let aniType: String?

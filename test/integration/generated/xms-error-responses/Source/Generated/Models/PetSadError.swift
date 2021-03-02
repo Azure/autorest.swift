@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct PetSadError: Codable, Equatable {
+public struct PetSadError: Codable {
     // MARK: Properties
 
     /// why is the pet sad

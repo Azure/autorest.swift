@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Pet: Codable, Equatable {
+public struct Pet: Codable {
     // MARK: Properties
 
     /// Gets the Pet by id.

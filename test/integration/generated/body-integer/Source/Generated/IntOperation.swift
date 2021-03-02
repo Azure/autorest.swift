@@ -44,7 +44,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/null"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -83,7 +84,8 @@ public final class IntOperation {
                     }
 
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                        let decoded = Int32(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -130,7 +132,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/invalid"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -162,7 +165,8 @@ public final class IntOperation {
                     200
                 ].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                        let decoded = Int32(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -209,7 +213,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/overflowint32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -241,7 +246,8 @@ public final class IntOperation {
                     200
                 ].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                        let decoded = Int32(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -288,7 +294,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/underflowint32"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -320,7 +327,8 @@ public final class IntOperation {
                     200
                 ].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int32(decodedstr) {
+                        let decoded = Int32(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -367,7 +375,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/overflowint64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -399,7 +408,8 @@ public final class IntOperation {
                     200
                 ].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int64(decodedstr) {
+                        let decoded = Int64(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -446,7 +456,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/underflowint64"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -478,7 +489,8 @@ public final class IntOperation {
                     200
                 ].contains(statusCode) {
                     if let decodedstr = String(data: data, encoding: .utf8),
-                        let decoded = Int64(decodedstr) {
+                        let decoded = Int64(decodedstr)
+                    {
                         dispatchQueue.async {
                             completionHandler(.success(decoded), httpResponse)
                         }
@@ -520,8 +532,7 @@ public final class IntOperation {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -602,8 +613,7 @@ public final class IntOperation {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -684,8 +694,7 @@ public final class IntOperation {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -766,8 +775,7 @@ public final class IntOperation {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -853,7 +861,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/unixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -928,8 +937,7 @@ public final class IntOperation {
         // Create request parameters
         let params = RequestParameters(
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
-            (.header, "Content-Type", "application/json", .encode),
-            (.header, "Accept", "application/json", .encode)
+            (.header, "Content-Type", "application/json", .encode), (.header, "Accept", "application/json", .encode)
         )
 
         // Construct request
@@ -1016,7 +1024,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/invalidunixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1096,7 +1105,8 @@ public final class IntOperation {
         // Construct request
         let urlTemplate = "/int/nullunixtime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .get, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }

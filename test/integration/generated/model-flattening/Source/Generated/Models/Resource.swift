@@ -15,7 +15,7 @@ import Foundation
 // swiftlint:disable line_length
 // swiftlint:disable cyclomatic_complexity
 
-public struct Resource: Codable, Equatable {
+public struct Resource: Codable {
     // MARK: Properties
 
     /// Resource Id

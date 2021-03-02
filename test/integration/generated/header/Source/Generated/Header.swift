@@ -45,7 +45,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/existingkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -120,7 +121,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/existingkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -197,7 +199,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/protectedkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -272,7 +275,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/protectedkey"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -351,7 +355,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/integer"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -427,7 +432,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/integer"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -506,7 +512,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/long"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -582,7 +589,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/long"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -661,7 +669,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/float"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -737,7 +746,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/float"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -816,7 +826,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/double"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -892,7 +903,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/double"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -971,7 +983,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/bool"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1047,7 +1060,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/bool"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1124,7 +1138,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/string"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1200,7 +1215,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/string"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1279,7 +1295,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/date"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1355,7 +1372,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/date"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1434,7 +1452,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/datetime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1510,7 +1529,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/datetime"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1587,7 +1607,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/datetimerfc1123"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1663,7 +1684,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/datetimerfc1123"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1742,7 +1764,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/duration"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1818,7 +1841,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/duration"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1897,7 +1921,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/byte"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -1973,7 +1998,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/byte"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2050,7 +2076,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/param/prim/enum"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2126,7 +2153,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/response/prim/enum"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
@@ -2201,7 +2229,8 @@ public final class Header {
         // Construct request
         let urlTemplate = "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
         guard let requestUrl = client.url(host: "{$host}", template: urlTemplate, params: params),
-            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers) else {
+            let request = try? HTTPRequest(method: .post, url: requestUrl, headers: params.headers)
+        else {
             client.options.logger.error("Failed to construct HTTP request.")
             return
         }
