@@ -29,13 +29,13 @@ import Foundation
 /// View Model for an the Package.swift file.
 struct PackageFileViewModel {
     let name: String
-    // FIXME: This should come from config?
-    let namespace = "secret"
-    let version = "0.1"
+    let namespace: String
+    let version: String
 
     init(from model: CodeModel) {
-        // FIXME: Blunt-instrument to override the package name from the code model
-        let commandLineArguments = CommandLineArguments()
-        self.name = Manager.packageName ?? commandLineArguments["--package-name"] ?? model.packageName
+        let config = Manager.shared.config
+        self.name = config.packageName ?? model.packageName
+        self.namespace = config.namespace
+        self.version = config.packageVersion
     }
 }

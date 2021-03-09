@@ -38,21 +38,25 @@ class Manager {
         case commandLine
     }
 
+    static var shared = Manager()
+
     // MARK: Properties
+//    let mode: InvocationMode
 
     let inputString: String
-
-    let destinationRootUrl: URL
-    var packageUrl: URL?
-
-    let mode: InvocationMode
-
-    static var packageName: String?
+    let config: ManagerConfig
+//    let destinationRootUrl: URL
+//    var packageUrl: URL?
 
     // MARK: Initializers
 
+    init() {
+        self.inputString = ""
+        self.config = ManagerConfig()
+    }
+
     /// Initialize with an input file URL (i.e. running locally).
-    init(withInputUrl input: URL, destinationUrl dest: URL) throws {
+    private init(withInputUrl input: URL, destinationUrl dest: URL) throws {
         self.mode = .commandLine
 
         let yamlString = try String(contentsOf: input)
@@ -66,18 +70,19 @@ class Manager {
         } catch {
             SharedLogger.fail("\(error)")
         }
+        self.config = ManagerConfig()
     }
 
     /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
-    init(withString string: String, packageName: String? = nil) {
+    private init(withString string: String, client: ChannelClient, sessionId: String) {
         self.mode = .autorest
         self.inputString = string
         // for autorest mode, create a temp directory using a random Guid as the directory name
         self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
             .appendingPathComponent(UUID().uuidString)
         self.packageUrl = nil
-        // FIXME: Super wonky way of injecting package name...
-        Manager.packageName = packageName
+        self.config = ManagerConfig()
+        config.update(with: client, sessionId: sessionId)
     }
 
     // MARK: Methods

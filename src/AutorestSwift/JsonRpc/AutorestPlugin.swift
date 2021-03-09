@@ -126,6 +126,8 @@ class AutorestPlugin {
     }
 
     func handleListInputs(response: RPCObject) {
+        // TODO: Gather all params
+
         guard let filename = response.asList?.first?.asString else {
             SharedLogger.fail("handleListInputs filename is nil")
         }
@@ -165,36 +167,21 @@ class AutorestPlugin {
         guard let codeModel = response.asString else {
             SharedLogger.fail("Unable to retrieve code model from Autorest.")
         }
-        // FIXME: Wonky workaround to pass in package name
-        let packageNameRequest: RPCObject = .list([.string(sessionId), .string("package-name")])
-        let getValFuture = client.call(method: "GetValue", params: packageNameRequest)
-        getValFuture.whenSuccess { result in
-            var packageName: String?
-            switch result {
-            case let .success(response):
-                packageName = response.asString
-            case .failure:
-                packageName = nil
-            }
-            let manager = Manager(withString: codeModel, packageName: packageName)
-            do {
-                try manager.run()
+        let manager = Manager(withString: codeModel, client: client, sessionId: sessionId)
+        do {
+            try manager.run()
 
-                guard let packageUrl = manager.packageUrl else {
-                    SharedLogger.fail("Unable to get packageUrl")
-                }
-
-                let generatedFileListQueue = self.iterateDirectory(directory: packageUrl)
-                generatedFileListQueue.forEach {
-                    self.sendWriteFile(fileName: $0, packageUrl: packageUrl)
-                }
-                self.sendProcessResponse()
-            } catch {
-                SharedLogger.fail("Code generation failure: \(error)")
+            guard let packageUrl = manager.packageUrl else {
+                SharedLogger.fail("Unable to get packageUrl")
             }
-        }
-        getValFuture.whenFailure { error in
-            SharedLogger.fail("Call GetValue failure \(error)")
+
+            let generatedFileListQueue = iterateDirectory(directory: packageUrl)
+            generatedFileListQueue.forEach {
+                self.sendWriteFile(fileName: $0, packageUrl: packageUrl)
+            }
+            sendProcessResponse()
+        } catch {
+            SharedLogger.fail("Code generation failure: \(error)")
         }
     }
 

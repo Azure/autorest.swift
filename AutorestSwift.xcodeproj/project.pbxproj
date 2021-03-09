@@ -153,6 +153,7 @@
 		0A4743642582919700CA86E5 /* Package_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07424CB71E100EC018E /* Package_File.stencil */; };
 		0A4743652582919700CA86E5 /* PatchUtil_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B45C24DB6FD300EC018E /* PatchUtil_File.stencil */; };
 		0A4743662582919700CA86E5 /* README_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07524CB71E100EC018E /* README_File.stencil */; };
+		0A5033D525F6F1D9002053F1 /* ManagerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5033D425F6F1D9002053F1 /* ManagerConfig.swift */; };
 		0A5F3F86251A65AD0079C1F0 /* BodyParamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */; };
 		0A747F9A2534AA1C00819FC9 /* UsageSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747F992534AA1C00819FC9 /* UsageSchema.swift */; };
 		0A747FF62534AE7B00819FC9 /* ConstantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */; };
@@ -217,6 +218,7 @@
 		0ADDD101258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD100258D663700BD5E58 /* AutoRestEnumExtensibleTest.swift */; };
 		0ADDD114258D68F000BD5E58 /* PetStoreInc in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADDD113258D68F000BD5E58 /* PetStoreInc */; };
 		0ADDD1E625914A3500BD5E58 /* Operation_Request_Parameters_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */; };
+		0ADDD26A2591592700BD5E58 /* CommandLineArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDCF54258AA76E00BD5E58 /* CommandLineArguments.swift */; };
 		0ADDD29525915C2F00BD5E58 /* AutoRestValidationTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADDD29425915C2F00BD5E58 /* AutoRestValidationTest */; };
 		0ADDD29725915C7500BD5E58 /* AutoRestValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDD29625915C7500BD5E58 /* AutoRestValidationTest.swift */; };
 		0ADDD35D259273EB00BD5E58 /* Client_ApiVersion_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD33F259270E200BD5E58 /* Client_ApiVersion_Snippet.stencil */; };
@@ -233,7 +235,6 @@
 		0ADDD6C1259C04A400BD5E58 /* Operation_Validation_MinLength_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD64C259BEDE100BD5E58 /* Operation_Validation_MinLength_Snippet.stencil */; };
 		0ADDD6C2259C04A400BD5E58 /* Operation_Validation_MultipleOf_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD64E259BEEBA00BD5E58 /* Operation_Validation_MultipleOf_Snippet.stencil */; };
 		0ADDD6C3259C04A400BD5E58 /* Operation_Validation_Pattern_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0ADDD64D259BEE0E00BD5E58 /* Operation_Validation_Pattern_Snippet.stencil */; };
-		0ADDD26A2591592700BD5E58 /* CommandLineArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDCF54258AA76E00BD5E58 /* CommandLineArguments.swift */; };
 		0AEFC3422537647A00C6B087 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFC3412537647A00C6B087 /* PropertyType.swift */; };
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
@@ -380,6 +381,7 @@
 		0A37D1F025D5F1ED00D8289C /* CHECKENFORCER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHECKENFORCER; sourceTree = "<group>"; };
 		0A4742D325814AA600CA86E5 /* PipelineContextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineContextViewModel.swift; sourceTree = "<group>"; };
 		0A4743B3258294D500CA86E5 /* Operation_Request_Parameters_Snippet.stencil */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Operation_Request_Parameters_Snippet.stencil; sourceTree = "<group>"; };
+		0A5033D425F6F1D9002053F1 /* ManagerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerConfig.swift; sourceTree = "<group>"; };
 		0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyParamViewModel.swift; sourceTree = "<group>"; };
 		0A7477222527D15F00819FC9 /* AutoRestUrlTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoRestUrlTest.xcodeproj; path = test/integration/generated/url/AutoRestUrlTest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0A747F992534AA1C00819FC9 /* UsageSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSchema.swift; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 				0A22B03424C8964000EC018E /* LanguageShortcut.swift */,
 				OBJ_13 /* Logger.swift */,
 				OBJ_14 /* Manager.swift */,
+				0A5033D425F6F1D9002053F1 /* ManagerConfig.swift */,
 				OBJ_15 /* SwiftGenerator.swift */,
 				0A747F992534AA1C00819FC9 /* UsageSchema.swift */,
 			);
@@ -1391,6 +1394,7 @@
 				0A22B12624D3671E00EC018E /* ValueSchema.swift in Sources */,
 				0A22B12724D3671E00EC018E /* XmlSerializationFormat.swift in Sources */,
 				0A22B12824D3671E00EC018E /* XorSchema.swift in Sources */,
+				0A5033D525F6F1D9002053F1 /* ManagerConfig.swift in Sources */,
 				0ADDD61C259BDE3F00BD5E58 /* VirtualParam.swift in Sources */,
 				0A22B12924D3671E00EC018E /* AllSchemaTypes.swift in Sources */,
 				0A22B12A24D3671E00EC018E /* CompoundSchemaTypes.swift in Sources */,
