@@ -28,7 +28,7 @@ import Dispatch
 import Foundation
 import NIO
 
-class ManagerConfig {
+class ManagerConfig: Encodable {
     private var client: ChannelClient?
     private var sessionId: String?
 
@@ -50,6 +50,12 @@ class ManagerConfig {
     var packageVersion: String?
     var trace: Bool?
 
+    enum CodingKeys: String, CodingKey {
+        case inputFilename, outputDirectory, clearOutputFolder, projectDirectory, addCredential, credentialScopes,
+            licenseHeader, namespace, tag, azureArm, headAsBoolean, title, description, clientSideValidation,
+            packageName, packageVersion, trace
+    }
+
     /// Initialize from `CommandLineArguments` when running in standalone mode.
     /// - Parameter args: `CommandLineArguments` object.
     init() {
@@ -59,7 +65,7 @@ class ManagerConfig {
         clearOutputFolder = Bool(args["--clear-output-folder"] ?? "False")
         projectDirectory = args["--project-directory"]
         addCredential = Bool(args["--add-credential"] ?? "False")
-        credentialScopes = (args["--credential-scopes"] ?? "").components(separatedBy: " ")
+        credentialScopes = args["--credential-scopes"]?.components(separatedBy: " ")
         licenseHeader = args["--license-header"]
         namespace = args["--namespace"]
         tag = args["--tag"]
@@ -76,30 +82,65 @@ class ManagerConfig {
     /// Initialize with RPC `ChannelClient` when running as an autorest plugin.
     /// - Parameter client: RPC `ChannelClient` object.
     /// - Parameter sessionId: RPC session ID
-    func update(with client: ChannelClient, sessionId: String) {
+    func loadValues(client: ChannelClient, sessionId: String, completion: @escaping () -> Void) {
         self.client = client
         self.sessionId = sessionId
-
-        get(value: "input-filename") { self.inputFilename = $0 }
-        get(value: "output-directory") { self.outputDirectory = $0 }
-        get(value: "clear-output-folder") { self.clearOutputFolder = Bool($0 ?? "False") }
-        get(value: "project-directory") { self.projectDirectory = $0 }
-        get(value: "add-credential") { self.addCredential = Bool($0 ?? "False") }
-        get(value: "credential-scopes") { self.credentialScopes = ($0 ?? "").components(separatedBy: " ") }
-        get(value: "license-header") { self.licenseHeader = $0 }
-        get(value: "namespace") { self.namespace = $0 }
-        get(value: "tag") { self.tag = $0 }
-        get(value: "azure-arm") { self.azureArm = Bool($0 ?? "False") }
-        get(value: "head-as-boolean") { self.headAsBoolean = Bool($0 ?? "False") }
-        get(value: "title") { self.title = $0 }
-        get(value: "description") { self.description = $0 }
-        get(value: "client-side-validation") { self.clientSideValidation = Bool($0 ?? "False") }
-        get(value: "package-name") { self.packageName = $0 }
-        get(value: "package-version") { self.packageVersion = $0 }
-        get(value: "trace") { self.trace = Bool($0 ?? "False") }
+        // FIXME: Clearly, this is garbage, but I can't force these to behave synchronously
+        get(value: "input-filename") {
+            self.inputFilename = $0
+            self.get(value: "output-directory") {
+                self.outputDirectory = $0
+                self.get(value: "clear-output-folder") {
+                    self.clearOutputFolder = Bool($0 ?? "False")
+                    self.get(value: "project-directory") {
+                        self.projectDirectory = $0
+                        self.get(value: "add-credential") {
+                            self.addCredential = Bool($0 ?? "False")
+                            self.get(value: "credential-scopes") {
+                                self.credentialScopes = $0?.components(separatedBy: " ")
+                                self.get(value: "license-header") {
+                                    self.licenseHeader = $0
+                                    self.get(value: "namespace") {
+                                        self.namespace = $0
+                                        self.get(value: "tag") {
+                                            self.tag = $0
+                                            self.get(value: "azure-arm") {
+                                                self.azureArm = Bool($0 ?? "False")
+                                                self.get(value: "head-as-boolean") {
+                                                    self.headAsBoolean = Bool($0 ?? "False")
+                                                    self.get(value: "title") {
+                                                        self.title = $0
+                                                        self.get(value: "description") {
+                                                            self.description = $0
+                                                            self.get(value: "client-side-validation") {
+                                                                self.clientSideValidation = Bool($0 ?? "False")
+                                                                self.get(value: "package-name") {
+                                                                    self.packageName = $0
+                                                                    self.get(value: "package-version") {
+                                                                        self.packageVersion = $0
+                                                                        self.get(value: "trace") {
+                                                                            self.trace = Bool($0 ?? "False")
+                                                                            completion()
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    func get(value: String, completion: @escaping (String?) -> Void) {
+    private func get(value: String, completion: @escaping (String?) -> Void) {
         guard let sessionId = self.sessionId, let client = self.client else {
             SharedLogger.fail("Unable to call GetValue")
         }
@@ -113,7 +154,7 @@ class ManagerConfig {
             }
         }
         future.whenFailure { error in
-            SharedLogger.fail("Call GetValue failure \(error)")
+            SharedLogger.fail("Failure in CallValue: \(error)")
         }
     }
 }

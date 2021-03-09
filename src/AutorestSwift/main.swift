@@ -39,6 +39,7 @@ if standalone {
     let sourceUrl = documentsUrl.appendingPathComponent(yamlFileName)
     do {
         SharedLogger.set(logger: StdoutLogger(), withLevel: logLevel)
+        try Manager.shared.configure(input: sourceUrl, destination: documentsUrl)
         try Manager.shared.run()
     } catch {
         SharedLogger.error("\(error)")
@@ -46,8 +47,6 @@ if standalone {
 } else {
     // Enable file logging
     SharedLogger.set(logger: FileLogger(withFileName: "autorest-swift-debug.log"), withLevel: logLevel)
-
-    SharedLogger.info(arguments.data.description)
     let plugin = AutorestPlugin()
     plugin.start()
 }

@@ -36,8 +36,7 @@ class AutorestPlugin {
     var processRequestId: Int!
 
     // TODO: Increase when working correctly
-    private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    private let group = DispatchGroup()
+    var eventLoop = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
     private enum Signal: Int32 {
         case HUP = 1
@@ -50,19 +49,20 @@ class AutorestPlugin {
     }
 
     func start() {
-        client = ChannelClient(group: eventLoopGroup, processCallback: handleProcess)
+        client = ChannelClient(group: eventLoop, processCallback: handleProcess)
 
         // start up the server
-        server = ChannelServer(group: eventLoopGroup, closure: incomingHandler)
+        server = ChannelServer(group: eventLoop, closure: incomingHandler)
         _ = try! server.start().wait()
 
         // trap
+        let group = DispatchGroup()
         group.enter()
         let signalSource = trap(signal: Signal.INT) { _ in
             // shut down the client and server on a termination signal
             self.client.stop()
             self.server.stop().whenComplete { _ in
-                self.group.leave()
+                group.leave()
             }
         }
         group.wait()
@@ -126,8 +126,6 @@ class AutorestPlugin {
     }
 
     func handleListInputs(response: RPCObject) {
-        // TODO: Gather all params
-
         guard let filename = response.asList?.first?.asString else {
             SharedLogger.fail("handleListInputs filename is nil")
         }
@@ -167,21 +165,27 @@ class AutorestPlugin {
         guard let codeModel = response.asString else {
             SharedLogger.fail("Unable to retrieve code model from Autorest.")
         }
-        let manager = Manager(withString: codeModel, client: client, sessionId: sessionId)
-        do {
-            try manager.run()
+        Manager.shared.configure(input: codeModel, client: client, sessionId: sessionId) {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let encoded = try! encoder.encode(Manager.shared.config)
+            let arguments = String(data: encoded, encoding: .utf8)!
+            SharedLogger.info("Autorest Configuration: \(arguments)")
+            do {
+                try Manager.shared.run()
 
-            guard let packageUrl = manager.packageUrl else {
-                SharedLogger.fail("Unable to get packageUrl")
-            }
+                guard let packageUrl = Manager.shared.packageUrl else {
+                    SharedLogger.fail("Unable to get packageUrl")
+                }
 
-            let generatedFileListQueue = iterateDirectory(directory: packageUrl)
-            generatedFileListQueue.forEach {
-                self.sendWriteFile(fileName: $0, packageUrl: packageUrl)
+                let generatedFileListQueue = self.iterateDirectory(directory: packageUrl)
+                generatedFileListQueue.forEach {
+                    self.sendWriteFile(fileName: $0, packageUrl: packageUrl)
+                }
+                self.sendProcessResponse()
+            } catch {
+                SharedLogger.fail("Code generation failure: \(error)")
             }
-            sendProcessResponse()
-        } catch {
-            SharedLogger.fail("Code generation failure: \(error)")
         }
     }
 

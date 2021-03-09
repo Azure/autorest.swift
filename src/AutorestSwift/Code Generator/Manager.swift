@@ -33,61 +33,68 @@ struct StringDecodeKeys: ExtensionStringDecodeKeys {
 
 /// Handles the configuration and orchestrations of the code generation process
 class Manager {
-    internal enum InvocationMode {
-        case autorest
-        case commandLine
-    }
-
     static var shared = Manager()
 
     // MARK: Properties
-//    let mode: InvocationMode
 
-    let inputString: String
-    let config: ManagerConfig
-//    let destinationRootUrl: URL
-//    var packageUrl: URL?
+    var configured: Bool
+    var config: ManagerConfig
+    var inputString: String
+    var destinationRootUrl: URL!
+    var packageUrl: URL?
 
     // MARK: Initializers
 
     init() {
         self.inputString = ""
         self.config = ManagerConfig()
-    }
-
-    /// Initialize with an input file URL (i.e. running locally).
-    private init(withInputUrl input: URL, destinationUrl dest: URL) throws {
-        self.mode = .commandLine
-
-        let yamlString = try String(contentsOf: input)
-        self.inputString = yamlString
+        self.configured = false
         self.packageUrl = nil
-
-        // TODO: Make this configurable
-        self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
-        do {
-            try destinationRootUrl.ensureExists()
-        } catch {
-            SharedLogger.fail("\(error)")
-        }
-        self.config = ManagerConfig()
-    }
-
-    /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
-    private init(withString string: String, client: ChannelClient, sessionId: String) {
-        self.mode = .autorest
-        self.inputString = string
-        // for autorest mode, create a temp directory using a random Guid as the directory name
-        self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            .appendingPathComponent(UUID().uuidString)
-        self.packageUrl = nil
-        self.config = ManagerConfig()
-        config.update(with: client, sessionId: sessionId)
+        self.destinationRootUrl = nil
     }
 
     // MARK: Methods
 
+    /// Initialize with an input file URL (i.e. running locally).
+    func configure(input: URL, destination: URL) throws {
+        guard configured == false else {
+            SharedLogger.warn("Manager is already configured.")
+            return
+        }
+        let yamlString = try String(contentsOf: input)
+        inputString = yamlString
+
+        // FIXME: Make this configurable
+        let destUrl = destination.appendingPathComponent("generated").appendingPathComponent("sdk")
+        destinationRootUrl = destUrl
+        do {
+            try destUrl.ensureExists()
+        } catch {
+            SharedLogger.fail("\(error)")
+        }
+        configured = true
+    }
+
+    /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
+    func configure(input: String, client: ChannelClient, sessionId: String, completion: @escaping () -> Void) {
+        guard configured == false else {
+            SharedLogger.warn("Manager is already configured.")
+            return
+        }
+        inputString = input
+        // for autorest mode, create a temp directory using a random Guid as the directory name
+        destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent(UUID().uuidString)
+        config.loadValues(client: client, sessionId: sessionId) {
+            self.configured = true
+            completion()
+        }
+    }
+
     func run() throws {
+        guard configured == true else {
+            fatalError("Autorest.Swift is not configured for running.")
+        }
         saveCodeModel()
         let model = try loadModel()
         _ = check(model: model, against: inputString)

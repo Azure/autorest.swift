@@ -30,7 +30,7 @@ import Foundation
 import NIO
 
 public final class ChannelClient {
-    private let group: MultiThreadedEventLoopGroup
+    public let group: MultiThreadedEventLoopGroup
     public let config: Config
     private var context: ChannelHandlerContext?
     private let processCallback: ProcessCallback
@@ -109,13 +109,12 @@ public final class ChannelClient {
             return group.next().makeFailedFuture(ClientError.notReady)
         }
         guard let context = self.context else {
-            SharedLogger.error("Client call failed. Content is nil")
+            SharedLogger.error("Client call failed. Context is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
-
         let promise: EventLoopPromise<JSONResponse> = context.channel.eventLoop.makePromise()
-
         var request: JSONRequest
+
         // WriteFile is a Notification (i.e. a JSONRequest with no id)
         if method == "WriteFile" {
             request = JSONRequest(method: method, params: JSONObject(params))
