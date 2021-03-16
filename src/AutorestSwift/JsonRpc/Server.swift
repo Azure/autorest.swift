@@ -31,14 +31,12 @@ import NIO
 
 public final class ChannelServer {
     private let group: MultiThreadedEventLoopGroup
-    private let config: Config
     private var channel: Channel?
-    private let closure: RPCClosure
+    private let handler: RPCClosure
 
-    public init(group: MultiThreadedEventLoopGroup, config: Config = Config(), closure: @escaping RPCClosure) {
+    public init(group: MultiThreadedEventLoopGroup, handler: @escaping RPCClosure) {
         self.group = group
-        self.config = config
-        self.closure = closure
+        self.handler = handler
         self.state = .initializing
     }
 
@@ -56,7 +54,7 @@ public final class ChannelServer {
                         channel.pipeline.addHandler(CodableCodec<JSONRequest, JSONResponse>(), name: "AutorestServer")
                     }.flatMap {
                         channel.pipeline.addHandler(
-                            Handler(self.closure),
+                            ServerHandler(self.handler),
                             name: "ServerHandler"
                         )
                     }
@@ -67,6 +65,7 @@ public final class ChannelServer {
     }
 
     public func stop() -> EventLoopFuture<Void> {
+        SharedLogger.info("Server stop")
         if state != .started {
             return group.next().makeFailedFuture(ServerError.notReady)
         }
@@ -96,7 +95,7 @@ public final class ChannelServer {
     }
 }
 
-private class Handler: ChannelInboundHandler, RemovableChannelHandler {
+private class ServerHandler: ChannelInboundHandler, RemovableChannelHandler {
     public typealias InboundIn = JSONRequest
     public typealias OutboundOut = JSONResponse
 
@@ -107,6 +106,7 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
+        SharedLogger.info("Server channelRead")
         let request = unwrapInboundIn(data)
         closure(context, request.id, request.method, RPCObject(request.params)) { result in
             let response: JSONResponse
@@ -138,13 +138,5 @@ private class Handler: ChannelInboundHandler, RemovableChannelHandler {
         }
         // close the client connection
         context.close(promise: nil)
-    }
-
-    func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
-        if (event as? IdleStateHandler.IdleStateEvent) == .read {
-            errorCaught(context: context, error: ServerError.timeout)
-        } else {
-            context.fireUserInboundEventTriggered(event)
-        }
     }
 }

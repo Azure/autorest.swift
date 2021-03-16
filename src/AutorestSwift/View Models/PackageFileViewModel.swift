@@ -33,9 +33,9 @@ struct PackageFileViewModel {
     let version: String
 
     init(from model: CodeModel) {
-        let config = Manager.shared.config
-        self.name = config.packageName ?? model.packageName
-        self.namespace = config.namespace ?? ""
-        self.version = config.packageVersion ?? ""
+        let args = Manager.shared.args
+        self.name = args?.packageName ?? model.packageName
+        self.namespace = args?.namespace ?? ""
+        self.version = args?.packageVersion ?? ""
     }
 }

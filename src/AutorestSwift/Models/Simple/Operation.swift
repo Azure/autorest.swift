@@ -92,7 +92,7 @@ class Operation: Codable, LanguageShortcut {
     }
 
     var returnsList: Bool {
-        for response in responses ?? [] {}
+        for _ in responses ?? [] {}
         return false
     }
 

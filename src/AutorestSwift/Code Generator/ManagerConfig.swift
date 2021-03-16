@@ -28,133 +28,17 @@ import Dispatch
 import Foundation
 import NIO
 
-class ManagerConfig: Encodable {
-    private var client: ChannelClient?
-    private var sessionId: String?
+class ManagerConfig {
+    var inputString: String
+    var destinationRootUrl: URL!
+    var packageUrl: URL?
 
-    var inputFilename: String?
-    var outputDirectory: String?
-    var clearOutputFolder: Bool?
-    var projectDirectory: String?
-    var addCredential: Bool?
-    var credentialScopes: [String]?
-    var licenseHeader: String?
-    var namespace: String?
-    var tag: String?
-    var azureArm: Bool?
-    var headAsBoolean: Bool?
-    var title: String?
-    var description: String?
-    var clientSideValidation: Bool?
-    var packageName: String?
-    var packageVersion: String?
-    var trace: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case inputFilename, outputDirectory, clearOutputFolder, projectDirectory, addCredential, credentialScopes,
-            licenseHeader, namespace, tag, azureArm, headAsBoolean, title, description, clientSideValidation,
-            packageName, packageVersion, trace
-    }
-
-    /// Initialize from `CommandLineArguments` when running in standalone mode.
-    /// - Parameter args: `CommandLineArguments` object.
-    init() {
-        let args = CommandLineArguments()
-        inputFilename = args["--input-filename"]
-        outputDirectory = args["--output-directory"]
-        clearOutputFolder = Bool(args["--clear-output-folder"] ?? "False")
-        projectDirectory = args["--project-directory"]
-        addCredential = Bool(args["--add-credential"] ?? "False")
-        credentialScopes = args["--credential-scopes"]?.components(separatedBy: " ")
-        licenseHeader = args["--license-header"]
-        namespace = args["--namespace"]
-        tag = args["--tag"]
-        azureArm = Bool(args["--azure-arm"] ?? "False")
-        headAsBoolean = Bool(args["--head-as-boolean"] ?? "False")
-        title = args["--title"]
-        description = args["--description"]
-        clientSideValidation = Bool(args["--client-side-validation"] ?? "False")
-        packageName = args["--package-name"]
-        packageVersion = args["--package-version"]
-        trace = Bool(args["--trace"] ?? "False")
-    }
-
-    /// Initialize with RPC `ChannelClient` when running as an autorest plugin.
-    /// - Parameter client: RPC `ChannelClient` object.
-    /// - Parameter sessionId: RPC session ID
-    func loadValues(client: ChannelClient, sessionId: String, completion: @escaping () -> Void) {
-        self.client = client
-        self.sessionId = sessionId
-        // FIXME: Clearly, this is garbage, but I can't force these to behave synchronously
-        get(value: "input-filename") {
-            self.inputFilename = $0
-            self.get(value: "output-directory") {
-                self.outputDirectory = $0
-                self.get(value: "clear-output-folder") {
-                    self.clearOutputFolder = Bool($0 ?? "False")
-                    self.get(value: "project-directory") {
-                        self.projectDirectory = $0
-                        self.get(value: "add-credential") {
-                            self.addCredential = Bool($0 ?? "False")
-                            self.get(value: "credential-scopes") {
-                                self.credentialScopes = $0?.components(separatedBy: " ")
-                                self.get(value: "license-header") {
-                                    self.licenseHeader = $0
-                                    self.get(value: "namespace") {
-                                        self.namespace = $0
-                                        self.get(value: "tag") {
-                                            self.tag = $0
-                                            self.get(value: "azure-arm") {
-                                                self.azureArm = Bool($0 ?? "False")
-                                                self.get(value: "head-as-boolean") {
-                                                    self.headAsBoolean = Bool($0 ?? "False")
-                                                    self.get(value: "title") {
-                                                        self.title = $0
-                                                        self.get(value: "description") {
-                                                            self.description = $0
-                                                            self.get(value: "client-side-validation") {
-                                                                self.clientSideValidation = Bool($0 ?? "False")
-                                                                self.get(value: "package-name") {
-                                                                    self.packageName = $0
-                                                                    self.get(value: "package-version") {
-                                                                        self.packageVersion = $0
-                                                                        self.get(value: "trace") {
-                                                                            self.trace = Bool($0 ?? "False")
-                                                                            completion()
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private func get(value: String, completion: @escaping (String?) -> Void) {
-        guard let sessionId = self.sessionId, let client = self.client else {
-            SharedLogger.fail("Unable to call GetValue")
-        }
-        let future = client.call(method: "GetValue", params: .list([.string(sessionId), .string(value)]))
-        future.whenSuccess { result in
-            switch result {
-            case let .success(response):
-                completion(response.asString)
-            case .failure:
-                completion(nil)
-            }
-        }
-        future.whenFailure { error in
-            SharedLogger.fail("Failure in CallValue: \(error)")
-        }
+    /// Initialize Manager configuration
+    /// - Parameters:
+    ///   - input: Input YAML string of the code model.
+    ///   - destinationRootUrl: `URL` for the destination root.
+    init(withInput input: String, destinationRootUrl: URL) {
+        self.inputString = input
+        self.destinationRootUrl = destinationRootUrl
     }
 }

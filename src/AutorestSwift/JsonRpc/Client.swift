@@ -31,19 +31,13 @@ import NIO
 
 public final class ChannelClient {
     public let group: MultiThreadedEventLoopGroup
-    public let config: Config
-    private var context: ChannelHandlerContext?
-    private let processCallback: ProcessCallback
+    public var context: ChannelHandlerContext?
+    private let handler: ProcessCallback
     var id: Int!
 
-    public init(
-        group: MultiThreadedEventLoopGroup,
-        config: Config = Config(),
-        processCallback: @escaping ProcessCallback
-    ) {
+    public init(group: MultiThreadedEventLoopGroup, handler: @escaping ProcessCallback) {
         self.group = group
-        self.config = config
-        self.processCallback = processCallback
+        self.handler = handler
         self.state = .initializing
     }
 
@@ -52,6 +46,7 @@ public final class ChannelClient {
     }
 
     public func start(context: ChannelHandlerContext, id: Int) {
+        SharedLogger.info("Client start")
         assert(state == .initializing)
         self.id = id
 
@@ -75,6 +70,7 @@ public final class ChannelClient {
     }
 
     public func setupHandler(initComplete: InitCompleteCallback?) {
+        SharedLogger.info("Client setupHandler")
         guard let context = self.context else {
             SharedLogger.fail("No context in setupHandler")
         }
@@ -94,12 +90,14 @@ public final class ChannelClient {
     }
 
     private func initalizationComplete(context: ChannelHandlerContext) {
+        SharedLogger.info("Client initializationComplete")
         state = .started
         self.context = context
-        processCallback()
+        handler()
     }
 
     public func stop() {
+        SharedLogger.info("Client stop")
         state = .stopped
     }
 
@@ -112,6 +110,7 @@ public final class ChannelClient {
             SharedLogger.error("Client call failed. Context is nil")
             return group.next().makeFailedFuture(ClientError.notReady)
         }
+        SharedLogger.info("Client call: \(method)")
         let promise: EventLoopPromise<JSONResponse> = context.channel.eventLoop.makePromise()
         var request: JSONRequest
 
@@ -124,7 +123,6 @@ public final class ChannelClient {
         }
 
         let requestWrapper = JSONRequestWrapper(request: request, promise: promise)
-
         let future = context.channel.writeAndFlush(requestWrapper)
         future.cascadeFailure(to: promise) // if write fails
 
@@ -164,6 +162,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // outbound
     public func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
+        SharedLogger.info("Client Handler write")
         let requestWrapper = unwrapOutboundIn(data)
         queue.append((requestWrapper.request.id ?? 0, requestWrapper.promise))
         context.write(wrapOutboundOut(requestWrapper.request), promise: promise)
@@ -171,6 +170,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
 
     // inbound
     public func channelRead(context: ChannelHandlerContext, data: NIOAny) {
+        SharedLogger.info("Client channelRead")
         if queue.isEmpty {
             return context.fireChannelRead(data) // already complete
         }
@@ -180,6 +180,7 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
     }
 
     public func handlerAdded(context: ChannelHandlerContext) {
+        SharedLogger.info("Client handlerAdded")
         initComplete(context)
     }
 
@@ -199,20 +200,6 @@ private class Handler: ChannelInboundHandler, ChannelOutboundHandler, RemovableC
             promise.fail(error)
             // close the connection
             context.close(promise: nil)
-        }
-    }
-
-    public func channelInactive(context: ChannelHandlerContext) {
-        if !queue.isEmpty {
-            errorCaught(context: context, error: ClientError.connectionResetByPeer)
-        }
-    }
-
-    func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
-        if (event as? IdleStateHandler.IdleStateEvent) == .read {
-            errorCaught(context: context, error: ClientError.timeout)
-        } else {
-            context.fireUserInboundEventTriggered(event)
         }
     }
 }
