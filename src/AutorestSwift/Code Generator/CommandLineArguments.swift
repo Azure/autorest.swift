@@ -185,55 +185,23 @@ class CommandLineArguments: Encodable {
     }
 
     private func collectRpcValues(with client: ChannelClient, sessionId: String, completion: @escaping () -> Void) {
-        func get(_ value: String, completion: @escaping () -> Void) {
-            let future = client.call(method: "GetValue", params: .list([.string(sessionId), .string(value)]))
-            future.whenSuccess { result in
-                if case let .success(response) = result {
-                    self.rawArgs[value] = response.asString
+        let futures = supportedKeys
+            .map { client.call(method: "GetValue", params: .list([.string(sessionId), .string($0)])) }
+        let future = EventLoopFuture.whenAllSucceed(futures, on: client.context!.eventLoop)
+        future.whenSuccess { results in
+            for (index, rpcResult) in results.enumerated() {
+                if case let RPCResult.success(response) = rpcResult {
+                    let key = self.supportedKeys[index]
+                    self.rawArgs[key] = response.asString
                 }
-                completion()
             }
-            future.whenFailure { error in
-                SharedLogger.fail("GetValue failed: \(error)")
-            }
+            completion()
         }
-
-        // FIXME: This is a pyramid of doom. If you can figure out SwiftNIO enough to make this
-        // better, have a blast...
-        get("input-filename") {
-            get("output-directory") {
-                get("clear-output-directory") {
-                    get("project-directory") {
-                        get("add-credential") {
-                            get("credential-scopes") {
-                                get("license-header") {
-                                    get("namespace") {
-                                        get("tag") {
-                                            get("head-as-boolean") {
-                                                get("title") {
-                                                    get("description") {
-                                                        get("client-side-validation") {
-                                                            get("package-name") {
-                                                                get("package-version") {
-                                                                    completion()
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        future.whenFailure { error in
+            SharedLogger.fail("GetValue failed: \(error)")
         }
     }
 
-    // channelClient.call(method: "GetValue", params: .list([.string(session), .string($0)]))
     func encode(to encoder: Encoder) throws {
         try rawArgs.encode(to: encoder)
     }

@@ -79,7 +79,6 @@ class Manager {
         config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
         args = CommandLineArguments(client: client, sessionId: sessionId) {
             completion()
-            SharedLogger.info(self.args.debugDescription)
         }
     }
 
