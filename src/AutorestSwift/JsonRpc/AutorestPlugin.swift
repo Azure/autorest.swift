@@ -35,9 +35,7 @@ class AutorestPlugin {
     var sessionId: String!
     var processRequestId: Int!
 
-    // TODO: Increase when working correctly
-    private let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    private let group = DispatchGroup()
+    var eventLoop = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
 
     private enum Signal: Int32 {
         case HUP = 1
@@ -50,29 +48,29 @@ class AutorestPlugin {
     }
 
     func start() {
-        client = ChannelClient(group: eventLoopGroup, processCallback: handleProcess)
-
-        // start up the server
-        server = ChannelServer(group: eventLoopGroup, closure: incomingHandler)
+        // Start up the server. It will switch to client mode later on.
+        server = ChannelServer(group: eventLoop, handler: serverHandler)
         _ = try! server.start().wait()
 
-        // trap
+        // Create the client but do not start it
+        client = ChannelClient(group: eventLoop, handler: clientHandler)
+
+        // Trap to catch an abort signal via CTRL+C
+        let group = DispatchGroup()
         group.enter()
         let signalSource = trap(signal: Signal.INT) { _ in
             // shut down the client and server on a termination signal
             self.client.stop()
             self.server.stop().whenComplete { _ in
-                self.group.leave()
+                group.leave()
             }
         }
         group.wait()
-        // cleanup
         signalSource.cancel()
     }
 
     private func trap(signal sig: Signal, handler: @escaping (Signal) -> Void) -> DispatchSourceSignal {
-        let queue = DispatchQueue(label: "AutorestSwiftServer")
-        let signalSource = DispatchSource.makeSignalSource(signal: sig.rawValue, queue: queue)
+        let signalSource = DispatchSource.makeSignalSource(signal: sig.rawValue)
         signal(sig.rawValue, SIG_IGN)
         signalSource.setEventHandler(handler: {
             signalSource.cancel()
@@ -82,35 +80,38 @@ class AutorestPlugin {
         return signalSource
     }
 
-    /// The handler for incoming messages
-    func incomingHandler(
+    /// The handler for incoming messages in server mode
+    func serverHandler(
         context: ChannelHandlerContext,
         id: Int?,
         method: String,
         params: RPCObject,
         callback: (RPCResult) -> Void
     ) {
+        SharedLogger.info("AutorestPlugin serverHandler method: \(method) id: \(id ?? -1)")
         switch method.lowercased() {
         case "getpluginnames":
             callback(
                 .success(.list([.string("swift")]))
             )
         case "process":
+            // Once a "process" message is received, switch to client mode
             sessionId = params.asList?.last?.asString
             processRequestId = id
-            startChannelClient(context: context)
+            server.stop().whenComplete { _ in
+                self.client.start(context: context, id: self.processRequestId)
+            }
         default:
             callback(.failure(RPCError(kind: .invalidMethod, description: "Incoming Handler get invalid method")))
             SharedLogger.fail("invalid method: \(method)")
         }
     }
 
-    func startChannelClient(context: ChannelHandlerContext) {
-        client.start(context: context, id: processRequestId)
-    }
-
-    func handleProcess() {
+    /// The handler for client mode
+    func clientHandler() {
+        SharedLogger.info("AutorestPlugin clientHandler")
         let listInputsRequest: RPCObject = .list([.string(sessionId), .string("code-model-v4")])
+
         let future = client.call(method: "ListInputs", params: listInputsRequest)
         future.whenSuccess { result in
             switch result {
@@ -165,36 +166,26 @@ class AutorestPlugin {
         guard let codeModel = response.asString else {
             SharedLogger.fail("Unable to retrieve code model from Autorest.")
         }
-        // FIXME: Wonky workaround to pass in package name
-        let packageNameRequest: RPCObject = .list([.string(sessionId), .string("package-name")])
-        let getValFuture = client.call(method: "GetValue", params: packageNameRequest)
-        getValFuture.whenSuccess { result in
-            var packageName: String?
-            switch result {
-            case let .success(response):
-                packageName = response.asString
-            case .failure:
-                packageName = nil
-            }
-            let manager = Manager(withString: codeModel, packageName: packageName)
+        Manager.shared.configure(input: codeModel, client: client, sessionId: sessionId) {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let encoded = try! encoder.encode(Manager.shared.args)
+            let arguments = String(data: encoded, encoding: .utf8)!
+            SharedLogger.info("Autorest Configuration: \(arguments)")
             do {
-                try manager.run()
+                try Manager.shared.run()
 
-                guard let packageUrl = manager.packageUrl else {
+                guard let packageUrl = Manager.shared.config?.packageUrl else {
                     SharedLogger.fail("Unable to get packageUrl")
                 }
-
-                let generatedFileListQueue = self.iterateDirectory(directory: packageUrl)
-                generatedFileListQueue.forEach {
+                let generatedFileList = self.iterateDirectory(directory: packageUrl)
+                generatedFileList.forEach {
                     self.sendWriteFile(fileName: $0, packageUrl: packageUrl)
                 }
                 self.sendProcessResponse()
             } catch {
                 SharedLogger.fail("Code generation failure: \(error)")
             }
-        }
-        getValFuture.whenFailure { error in
-            SharedLogger.fail("Call GetValue failure \(error)")
         }
     }
 
@@ -224,6 +215,7 @@ class AutorestPlugin {
     func sendProcessResponse() {
         // Setup the client to write JSONResponse in output handler.
         // When Handler is setup, write JSONResponse to the handler's channel
+        SharedLogger.info("SendProcessResponse")
         client.setupHandler { context in
             let response: JSONResponse
             response = JSONResponse(id: self.processRequestId, result: JSONObject(.bool(true)))

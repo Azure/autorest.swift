@@ -33,66 +33,69 @@ struct StringDecodeKeys: ExtensionStringDecodeKeys {
 
 /// Handles the configuration and orchestrations of the code generation process
 class Manager {
-    internal enum InvocationMode {
-        case autorest
-        case commandLine
-    }
-
     // MARK: Properties
 
-    let inputString: String
+    static var shared = Manager()
 
-    let destinationRootUrl: URL
-    var packageUrl: URL?
+    var config: ManagerConfig?
+    var args: CommandLineArguments?
 
-    let mode: InvocationMode
-
-    static var packageName: String?
-
-    // MARK: Initializers
+    // MARK: Methods
 
     /// Initialize with an input file URL (i.e. running locally).
-    init(withInputUrl input: URL, destinationUrl dest: URL) throws {
-        self.mode = .commandLine
-
-        let yamlString = try String(contentsOf: input)
-        self.inputString = yamlString
-        self.packageUrl = nil
-
-        // TODO: Make this configurable
-        self.destinationRootUrl = dest.appendingPathComponent("generated").appendingPathComponent("sdk")
+    func configure(input: URL, destination: URL) throws {
+        guard config == nil else {
+            SharedLogger.warn("Manager is already configured.")
+            return
+        }
+        // FIXME: Make this configurable
+        let destUrl = destination.appendingPathComponent("generated").appendingPathComponent("sdk")
+        config?.destinationRootUrl = destUrl
         do {
-            try destinationRootUrl.ensureExists()
+            try destUrl.ensureExists()
         } catch {
             SharedLogger.fail("\(error)")
+        }
+        config = ManagerConfig(withInput: try String(contentsOf: input), destinationRootUrl: destUrl)
+        args = CommandLineArguments(client: nil, sessionId: nil) {
+            SharedLogger.info(self.args.debugDescription)
         }
     }
 
     /// Initialize with a raw YAML string (i.e. the way it is received from Autorest).
-    init(withString string: String, packageName: String? = nil) {
-        self.mode = .autorest
-        self.inputString = string
+    func configure(
+        input: String,
+        client: ChannelClient,
+        sessionId: String,
+        completion: @escaping () -> Void
+    ) {
+        guard config == nil else {
+            SharedLogger.warn("Manager is already configured.")
+            return
+        }
         // for autorest mode, create a temp directory using a random Guid as the directory name
-        self.destinationRootUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let destUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
             .appendingPathComponent(UUID().uuidString)
-        self.packageUrl = nil
-        // FIXME: Super wonky way of injecting package name...
-        Manager.packageName = packageName
+        config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
+        args = CommandLineArguments(client: client, sessionId: sessionId) {
+            completion()
+        }
     }
 
-    // MARK: Methods
-
     func run() throws {
+        guard let config = self.config else {
+            fatalError("Autorest.Swift is not configured for running.")
+        }
         saveCodeModel()
         let model = try loadModel()
-        _ = check(model: model, against: inputString)
+        _ = check(model: model, against: config.inputString)
 
         // Create folder structure
         let packageName = model.packageName
-        let packageUrl = destinationRootUrl.appendingPathComponent(packageName)
+        let packageUrl = config.destinationRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
 
-        self.packageUrl = packageUrl
+        config.packageUrl = packageUrl
 
         // Generate Swift code files
         SharedLogger.info("Generating code at: \(packageUrl.path)")
@@ -109,7 +112,7 @@ class Manager {
         let decoder = YAMLDecoder()
         let model = try decoder.decode(
             CodeModel.self,
-            from: inputString,
+            from: config?.inputString ?? "",
             userInfo: [AnyCodable.extensionStringDecodedKey: StringDecodeKeys()]
         )
         return model
@@ -117,6 +120,7 @@ class Manager {
 
     /// Check model for consistency and save debugging files if inconsistent
     private func check(model: CodeModel, against yamlString: String) -> Bool {
+        guard let config = self.config else { return false }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
@@ -144,8 +148,8 @@ class Manager {
         // If JSON strings don't match, there must be a problem in the modeling.
         // Dump both files so they can be diffed.
         if beforeJsonString != afterJsonString {
-            let beforeJsonUrl = destinationRootUrl.appendingPathComponent("before.json")
-            let afterJsonUrl = destinationRootUrl.appendingPathComponent("after.json")
+            let beforeJsonUrl = config.destinationRootUrl.appendingPathComponent("before.json")
+            let afterJsonUrl = config.destinationRootUrl.appendingPathComponent("after.json")
             SharedLogger.debug("before.json url=\(beforeJsonUrl)")
             SharedLogger.debug("after.json url=\(afterJsonUrl)")
             do {
@@ -223,7 +227,7 @@ class Manager {
             fatalError("Unable to locate Documents directory.")
         }
         let dest = documentsUrl.appendingPathComponent("code-model-v4.yaml")
-        let finalString = inputString.replacingOccurrences(of: "' '", with: "''")
-        try? finalString.write(to: dest, atomically: true, encoding: .utf8)
+        let finalString = config?.inputString.replacingOccurrences(of: "' '", with: "''")
+        try? finalString?.write(to: dest, atomically: true, encoding: .utf8)
     }
 }

@@ -24,44 +24,21 @@
 //
 // --------------------------------------------------------------------------
 
+import Dispatch
 import Foundation
+import NIO
 
-class CommandLineArguments {
-    let name: String
+class ManagerConfig {
+    var inputString: String
+    var destinationRootUrl: URL!
+    var packageUrl: URL?
 
-    let data: [String: String]
-
-    // MARK: Initializers
-
-    init() {
-        guard let name = CommandLine.arguments.first else {
-            fatalError("Unable to parse command line.")
-        }
-        let args = CommandLine.arguments.dropFirst().flatMap { $0.split(separator: "=", maxSplits: 1) }
-            .map { String($0) }
-        var argsDict = [String: String]()
-        var index = 0
-        while index < args.count {
-            let nextIndex = index + 1
-            let option = String(args[index])
-            guard option.starts(with: "-") else {
-                fatalError("Expected option starting with `-` or `--`.")
-            }
-            if nextIndex == args.count || args[nextIndex].starts(with: "-") {
-                // treat this like a flag
-                argsDict[option] = ""
-                index += 1
-            } else {
-                // treat this like a single-value option
-                argsDict[option] = args[nextIndex]
-                index += 2
-            }
-        }
-        self.name = name
-        self.data = argsDict
-    }
-
-    subscript(index: String) -> String? {
-        return data[index]
+    /// Initialize Manager configuration
+    /// - Parameters:
+    ///   - input: Input YAML string of the code model.
+    ///   - destinationRootUrl: `URL` for the destination root.
+    init(withInput input: String, destinationRootUrl: URL) {
+        self.inputString = input
+        self.destinationRootUrl = destinationRootUrl
     }
 }

@@ -34,13 +34,3 @@ enum ChannelState: Equatable {
     case stopping
     case stopped
 }
-
-public struct Config {
-    public let timeout: TimeAmount
-    public let framing: Framing
-
-    public init(timeout: TimeAmount = TimeAmount.seconds(5), framing: Framing = .default) {
-        self.timeout = timeout
-        self.framing = framing
-    }
-}
