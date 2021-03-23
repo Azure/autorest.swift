@@ -5,7 +5,7 @@
 {% for enum in models.enums %}
     {{ enum.comment }}
 {% if enum.isExtensible %}
-    public enum {{ enum.name }}: RequestStringConvertible, Codable, Equatable {
+    {{ enum.visibility }} enum {{ enum.name }}: RequestStringConvertible, Codable, Equatable {
         /// Custom value for unrecognized enum values
         case custom({{ enum.type }})
         {% for choice in enum.choices %}
@@ -13,7 +13,7 @@
             case {{ choice.name }}
         {% endfor %}
 
-        public var requestString: String {
+        {{ enum.visibility }} var requestString: String {
             switch self {
             case let .custom(val):
                 return val
@@ -24,7 +24,7 @@
             }
         }
 
-        public init(_ val: {{ enum.type }}) {
+        {{ enum.visibility }} init(_ val: {{ enum.type }}) {
             switch val.lowercased() {
             {% for choice in enum.choices %}
                 case "{{ choice.value | lowercase }}":
@@ -49,13 +49,13 @@
         }
     }
 {% else %}
-    public enum {{ enum.name }}: {{ enum.type }}, Codable, RequestStringConvertible {
+    {{ enum.visibility }} enum {{ enum.name }}: {{ enum.type }}, Codable, RequestStringConvertible {
         {% for choice in enum.choices %}
             {{ choice.comment }}
             case {{ choice.name }} = "{{choice.value}}"
         {% endfor %}
 
-        public var requestString: String {
+        {{ enum.visibility }} var requestString: String {
             return rawValue
         }
     }

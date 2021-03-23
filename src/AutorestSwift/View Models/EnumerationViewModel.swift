@@ -33,6 +33,7 @@ import Foundation
 struct EnumerationViewModel {
     let name: String
     let comment: ViewModelComment
+    let visibility: String
     let type: String
     let choices: [EnumerationChoiceViewModel]
     let isExtensible: Bool
@@ -40,6 +41,13 @@ struct EnumerationViewModel {
     init(from schema: EnumerableSchema) {
         self.name = schema.name
         self.comment = ViewModelComment(from: schema.description)
+
+        if (Manager.shared.args?.internalModels ?? []).contains(schema.name) {
+            self.visibility = "internal"
+        } else {
+            self.visibility = "public"
+        }
+
         self.type = schema.choiceType.name
         var items = [EnumerationChoiceViewModel]()
         for choice in schema.choices {

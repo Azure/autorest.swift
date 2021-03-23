@@ -7,18 +7,18 @@
 // swiftlint:disable cyclomatic_complexity
 
 {{ model.comment }}
-public {{ model.typeKeywords }} {{ model.name }} : {{ model.inheritance }} {
+{{ model.visibility }} {{ model.typeKeywords }} {{ model.name }} : {{ model.inheritance }} {
     // MARK: Properties
 {% for property in model.properties %}
     {{ property.comment }}
-    public let {{ property.name }}: {{ property.type }}
+    {{ model.visibility }} let {{ property.name }}: {{ property.type }}
 {% endfor %}
 
 {% if model.hasConstants %}
     // MARK: Constants
     {% for constant in model.constants %}
         {{ constant.comment }}
-        public let {{ constant.name }}{{constant.defaultValue}}
+        {{ model.visibility }} let {{ constant.name }}{{constant.defaultValue}}
     {% endfor %}
 {% endif %}
 
@@ -29,7 +29,7 @@ public {{ model.typeKeywords }} {{ model.name }} : {{ model.inheritance }} {
 {% for property in model.properties %}
     ///   - {{ property.name }}: {{ property.comment.withoutPrefix }}
 {% endfor %}
-    public init(
+    {{ model.visibility }} init(
 {% for property in model.properties %}
     {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }}{% if not forloop.last %},{% endif%}
 {% endfor %}

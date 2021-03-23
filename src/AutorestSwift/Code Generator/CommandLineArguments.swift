@@ -46,7 +46,8 @@ class CommandLineArguments: Encodable {
         "description",
         "client-side-validation",
         "package-name",
-        "package-version"
+        "package-version",
+        "internal-models"
     ]
 
     /// Keys which are explicitly unsupported and should throw and error if supplied
@@ -84,7 +85,7 @@ class CommandLineArguments: Encodable {
 
     /// The scopes to use for generated credentials
     var credentialScopes: [String]? {
-        return rawArgs["credential-scopes"]?.components(separatedBy: " ")
+        return split(string: rawArgs["credential-scopes"])
     }
 
     /// Which license header to use for generated files.
@@ -132,6 +133,11 @@ class CommandLineArguments: Encodable {
         return rawArgs["package-version"]
     }
 
+    /// List of model names to treat as internal instead of public
+    var internalModels: [String]? {
+        return split(string: rawArgs["internal-models"])
+    }
+
     // MARK: Initializers
 
     init(client: ChannelClient?, sessionId: String?, completion: @escaping () -> Void) {
@@ -158,6 +164,11 @@ class CommandLineArguments: Encodable {
         } else {
             completion()
         }
+    }
+
+    private func split(string val: String?) -> [String]? {
+        guard let value = val else { return nil }
+        return value.components(separatedBy: .whitespacesAndNewlines).filter { $0.count > 0 }
     }
 
     /// Returns the argument key without the `--` prefix.
