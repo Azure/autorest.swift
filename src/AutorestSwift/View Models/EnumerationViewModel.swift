@@ -39,14 +39,9 @@ struct EnumerationViewModel {
     let isExtensible: Bool
 
     init(from schema: EnumerableSchema) {
-        self.name = schema.name
+        self.name = Manager.shared.args!.remapModels.aliasOrName(for: schema.name)
+        self.visibility = Manager.shared.args!.remapModels.visibility(for: schema.name)
         self.comment = ViewModelComment(from: schema.description)
-
-        if (Manager.shared.args?.internalModels ?? []).contains(schema.name) {
-            self.visibility = "internal"
-        } else {
-            self.visibility = "public"
-        }
 
         self.type = schema.choiceType.name
         var items = [EnumerationChoiceViewModel]()

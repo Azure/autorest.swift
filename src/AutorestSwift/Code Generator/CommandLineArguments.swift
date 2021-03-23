@@ -47,7 +47,7 @@ class CommandLineArguments: Encodable {
         "client-side-validation",
         "package-name",
         "package-version",
-        "internal-models"
+        "remap-models"
     ]
 
     /// Keys which are explicitly unsupported and should throw and error if supplied
@@ -133,9 +133,9 @@ class CommandLineArguments: Encodable {
         return rawArgs["package-version"]
     }
 
-    /// List of model names to treat as internal instead of public
-    var internalModels: [String]? {
-        return split(string: rawArgs["internal-models"])
+    /// Transforms for model types
+    var remapModels: ModelMap {
+        return ModelMap(with: rawArgs["remap-models"])
     }
 
     // MARK: Initializers
@@ -164,11 +164,6 @@ class CommandLineArguments: Encodable {
         } else {
             completion()
         }
-    }
-
-    private func split(string val: String?) -> [String]? {
-        guard let value = val else { return nil }
-        return value.components(separatedBy: .whitespacesAndNewlines).filter { $0.count > 0 }
     }
 
     /// Returns the argument key without the `--` prefix.
@@ -216,4 +211,39 @@ class CommandLineArguments: Encodable {
     func encode(to encoder: Encoder) throws {
         try rawArgs.encode(to: encoder)
     }
+}
+
+internal struct ModelMap {
+    internal var map: [String: String]
+
+    init(with string: String?) {
+        self.map = [String: String]()
+        guard let splitVals = split(string: string) else { return }
+        for item in splitVals {
+            let comps = item.split(separator: "=", maxSplits: 1).map { String($0) }
+            if comps.count != 2 {
+                SharedLogger.fail("Incorrect usage: --remap-models NAME=ALIAS ...")
+            }
+            map[comps[0]] = comps[1]
+        }
+    }
+
+    /// Returns internal for models which are aliased. Otherwise, public.
+    internal func visibility(for name: String) -> String {
+        return map[name] != nil ? "internal" : "public"
+    }
+
+    /// Returns the alias for a model or the original model name if no alias present
+    internal func aliasOrName(for name: String) -> String {
+        if let alias = map[name] {
+            return alias
+        } else {
+            return name
+        }
+    }
+}
+
+private func split(string val: String?) -> [String]? {
+    guard let value = val else { return nil }
+    return value.components(separatedBy: .whitespacesAndNewlines).filter { $0.count > 0 }
 }

@@ -43,14 +43,9 @@ struct ObjectViewModel {
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
-        self.name = schema.modelName
+        self.name = Manager.shared.args!.remapModels.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.remapModels.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
-
-        if (Manager.shared.args?.internalModels ?? []).contains(schema.modelName) {
-            self.visibility = "internal"
-        } else {
-            self.visibility = "public"
-        }
 
         // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
@@ -88,14 +83,9 @@ struct ObjectViewModel {
     }
 
     init(from schema: GroupSchema) {
-        self.name = schema.modelName
+        self.name = Manager.shared.args!.remapModels.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.remapModels.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
-
-        if (Manager.shared.args?.internalModels ?? []).contains(schema.modelName) {
-            self.visibility = "internal"
-        } else {
-            self.visibility = "public"
-        }
 
         // flatten out inheritance hierarchies so we can use structs
         var props = [PropertyViewModel]()
