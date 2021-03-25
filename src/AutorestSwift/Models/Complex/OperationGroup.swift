@@ -29,7 +29,6 @@ import Foundation
 /// An operation group represents a container around set of operations
 class OperationGroup: Metadata {
     let key: String
-
     let operations: [Operation]
 
     enum CodingKeys: String, CodingKey {

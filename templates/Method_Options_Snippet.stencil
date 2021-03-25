@@ -1,23 +1,23 @@
 /// User-configurable options for the `{{ model.clientName }}.{{ model.operationName }}` operation.
-public struct {{ model.name }}: RequestOptions {
+{{ model.visibility }} struct {{ model.name }}: RequestOptions {
 
 {% for property in model.properties %}
     {{ property.comment }}
-    public let {{ property.name }}: {{ property.type }}
+    {{ model.visibility }} let {{ property.name }}: {{ property.type }}
 {% endfor %}
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    public let clientRequestId: String?
+    {{ model.visibility }} let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    public let cancellationToken: CancellationToken?
+    {{ model.visibility }} let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    public var dispatchQueue: DispatchQueue?
+    {{ model.visibility }} var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    public var context: PipelineContext?
+    {{ model.visibility }} var context: PipelineContext?
 
     /// Initialize a `{{ model.name }}` structure.
     /// - Parameters:
@@ -28,7 +28,7 @@ public struct {{ model.name }}: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    public init(
+    {{ model.visibility }} init(
     {% for property in model.properties %}
         {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }},
     {% endfor %}

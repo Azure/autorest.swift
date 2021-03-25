@@ -8,10 +8,10 @@
 // swiftlint:disable type_body_length
 
 {{ model.comment }}
-public final class {{ model.name }}: {{ model.protocols }} {
+{{ model.visibility }} final class {{ model.name }}: {{ model.protocols }} {
 
 {% if model.paging != nil %}
-    public func continuationUrl(forRequestUrl requestUrl: URL, withContinuationToken token: String) -> URL? {
+    {{ model.visibility }} func continuationUrl(forRequestUrl requestUrl: URL, withContinuationToken token: String) -> URL? {
         return URL(string: token)
     }
 {% endif %}
@@ -19,7 +19,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
     {% include "Client_ApiVersion_Snippet.stencil" model %}
 
     /// Options provided to configure this `{{ model.name }}`.
-    public let options: {{ model.name }}Options
+    {{ model.visibility }} let options: {{ model.name }}Options
 
     // MARK: Initializers
     /// Create a {{ model.name }} client.
@@ -27,7 +27,7 @@ public final class {{ model.name }}: {{ model.protocols }} {
     ///   - endpoint: Base URL for the {{ model.name }}.
     ///   - authPolicy: An `Authenticating` policy to use for authenticating client requests.
     ///   - options: Options used to configure the client.
-    public init(
+    {{ model.visibility }} init(
 {% for param in model.globalParameters %}
     {% if param.optional == false %}
         {{ param.name }} : {{ param.type }},
@@ -72,14 +72,14 @@ public final class {{ model.name }}: {{ model.protocols }} {
 
 {% for param in model.globalParameters %}
     // {{ param.comment }}
-    public var {{ param.name }}: {{ param.type }}{{ param.defaultValue }}
+    {{ model.visibility }} var {{ param.name }}: {{ param.type }}{{ param.defaultValue }}
 {% endfor %}
 
 {% for property in model.namedOperationGroupShortcuts %}
-    public lazy var {{ property.name }} = {{ property.type }}(client: self)
+    {{ model.visibility }} lazy var {{ property.name }} = {{ property.type }}(client: self)
 {%endfor %}
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 {% for group in model.operationGroups %}
     // MARK: {{ group.name }}
     {% for op in group.operations %}

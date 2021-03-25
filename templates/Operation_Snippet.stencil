@@ -4,7 +4,7 @@
 ///    - options: A list of options for the operation
 ///    - completionHandler: A completion handler that receives a status code on
 ///     success.
-public func {{ op.name }}(
+{{ model.visibility }} func {{ op.name }}(
 {% if op.params.body != nil %}
     {% include "Operation_BodyParam_Snippet.stencil" op %}
 {% endif %}

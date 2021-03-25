@@ -6,17 +6,17 @@
 // swiftlint:disable line_length
 
 /// User-configurable options for the `{{ model.name }}`.
-public struct {{ model.name }}Options: ClientOptions {
+{{ model.visibility }} struct {{ model.name }}Options: ClientOptions {
     /// The API version of the {{ model.description }} to invoke.
-    public let apiVersion: String
+    {{ model.visibility }} let apiVersion: String
     /// The `ClientLogger` to be used by this `{{ model.name }}`.
-    public let logger: ClientLogger
+    {{ model.visibility }} let logger: ClientLogger
     /// Options for configuring telemetry sent by this `{{ model.name }}`.
-    public let telemetryOptions: TelemetryOptions
+    {{ model.visibility }} let telemetryOptions: TelemetryOptions
     /// Global transport options
-    public let transportOptions: TransportOptions
+    {{ model.visibility }} let transportOptions: TransportOptions
     /// The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
-    public let dispatchQueue: DispatchQueue?
+    {{ model.visibility }} let dispatchQueue: DispatchQueue?
 
     /// Initialize a `{{ model.name }}Options` structure.
     /// - Parameters:
@@ -25,7 +25,7 @@ public struct {{ model.name }}Options: ClientOptions {
     ///   - telemetryOptions: Options for configuring telemetry sent by this `{{ model.name }}`.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
-    public init(
+    {{ model.visibility }} init(
         apiVersion: {{ model.name }}.ApiVersion = .latest,
         logger: ClientLogger = ClientLoggers.default(tag: "{{ model.name }}Client"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
