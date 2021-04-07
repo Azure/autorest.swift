@@ -10,12 +10,16 @@ output: ../build/jazzy/{{ model.name }}
 swift_build_tool: spm
 clean: true
 sdk: iphonesimulator
-swift_build_tool: spm
-build_tool_arguments:
-  - "-Xswiftc"
-  - "-swift-version"
-  - "-Xswiftc"
-  - "5"
+sdk: iphonesimulator
+xcodebuild_arguments:
+  - "-workspace"
+  - "AzureSDK.xcworkspace"
+  - "-scheme"
+  - "{{ model.name }}"
+  - "-sdk"
+  - "iphonesimulator"
+  - "-arch"
+  - "x86_64"
 exclude:
   - "*/Source/ObjectiveCCompatibility/*"
   - "*/Tests/*"
