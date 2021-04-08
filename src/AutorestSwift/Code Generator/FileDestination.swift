@@ -60,7 +60,7 @@ enum FileDestination {
             return baseUrl.appendingPathComponent("Source").appendingPathComponent("Generated")
                 .appendingPathComponent("Util")
         case .jazzy:
-            return baseUrl.appendingPathComponent(".jazzy")
+            return baseUrl.appendingPathComponent("jazzy")
         }
     }
 }
