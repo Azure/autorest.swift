@@ -14,9 +14,9 @@ let package = Package(
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(
-            name: "AzureSDK",
-            url: "https://github.com/Azure/azure-sdk-for-ios.git",
-            .branch("dev/AzureCore")
+            name: "AzureCore",
+            url: "https://github.com/Azure/SwiftPM-AzureCore.git",
+            .branch("master")
         ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
@@ -62,7 +62,7 @@ let package = Package(
         .testTarget(
             name: "AutorestSwiftTest",
             dependencies: [
-                .product(name: "AzureCore", package: "AzureSDK"),
+                .product(name: "AzureCore", package: "AzureCore"),
                 "AutoRestBoolTest",
                 "AutoRestDurationTest",
                 "AutoRestHeadTest",
