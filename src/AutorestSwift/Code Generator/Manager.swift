@@ -42,7 +42,7 @@ class Manager {
 
     // MARK: Methods
 
-    /// Initialize with an input file URL (i.e. running locally).
+    /// Initialize with an input file URL (i.e. running from Xcode).
     func configure(input: URL, destination: URL) throws {
         guard config == nil else {
             SharedLogger.warn("Manager is already configured.")
@@ -73,11 +73,16 @@ class Manager {
             SharedLogger.warn("Manager is already configured.")
             return
         }
-        // for autorest mode, create a temp directory using a random Guid as the directory name
-        let destUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            .appendingPathComponent(UUID().uuidString)
-        config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
         args = CommandLineArguments(client: client, sessionId: sessionId) {
+            let destUrl: URL
+            if let outputFolder = self.args?.outputFolder {
+                destUrl = URL(fileURLWithPath: outputFolder, isDirectory: true)
+            } else {
+                // if output-directory not supplied, use temporary directory
+                destUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                    .appendingPathComponent(UUID().uuidString)
+            }
+            self.config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
             completion()
         }
     }

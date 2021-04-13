@@ -33,9 +33,9 @@ class CommandLineArguments: Encodable {
     /// Keys which are supported by Autorest.Swift
     private let supportedKeys: [String] = [
         "input-filename",
-        "output-directory",
+        "output-folder",
         "clear-output-folder",
-        "project-directory",
+        "project-folder",
         "add-credential",
         "credential-scopes",
         "license-header",
@@ -63,9 +63,9 @@ class CommandLineArguments: Encodable {
         return rawArgs["input-filename"]
     }
 
-    /// The desired output directory for code
-    var outputDirectory: String? {
-        return rawArgs["output-directory"]
+    /// The desired output folder for code
+    var outputFolder: String? {
+        return rawArgs["output-folder"]
     }
 
     /// Whether the output folder should be cleared before generating code.
@@ -74,8 +74,8 @@ class CommandLineArguments: Encodable {
     }
 
     /// The root of the project if the code will be generated in a subfolder
-    var projectDirectory: String? {
-        return rawArgs["project-directory"]
+    var projectFolder: String? {
+        return rawArgs["project-folder"]
     }
 
     /// Whether to include a credential object in the generated code
