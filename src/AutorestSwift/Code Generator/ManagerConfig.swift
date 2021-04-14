@@ -29,9 +29,16 @@ import Foundation
 import NIO
 
 class ManagerConfig {
+    /// The YAML input string from Modeler4
     var inputString: String
-    var destinationRootUrl: URL!
-    var packageUrl: URL?
+
+    /// The local root URL for where files will be written before being sent to autorest
+    /// to be written in their final destination
+    var tempRootUrl: URL!
+
+    /// The local URL to the package where files will be written before being sent to
+    /// autorest to be written in their final destination
+    var tempPackageUrl: URL?
 
     /// Initialize Manager configuration
     /// - Parameters:
@@ -39,6 +46,6 @@ class ManagerConfig {
     ///   - destinationRootUrl: `URL` for the destination root.
     init(withInput input: String, destinationRootUrl: URL) {
         self.inputString = input
-        self.destinationRootUrl = destinationRootUrl
+        self.tempRootUrl = destinationRootUrl
     }
 }

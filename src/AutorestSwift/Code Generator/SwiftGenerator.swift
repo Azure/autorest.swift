@@ -221,9 +221,18 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func exists(filename: String, inSubfolder subfolder: FileDestination) -> Bool {
+        let destRoot: URL
+        // When using autorest, we must check the output folder for existence of the file, not
+        // the temp directory (which will obviously never contain the file!).
+        if let outputFolder = Manager.shared.args?.outputFolder {
+            destRoot = URL(fileURLWithPath: outputFolder)
+        } else {
+            destRoot = baseUrl
+        }
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
-        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
-        return FileManager.default.fileExists(atPath: fileUrl.path)
+        let fileUrl = destRoot.with(subfolder: subfolder).appendingPathComponent(fname)
+        let result = FileManager.default.fileExists(atPath: fileUrl.path)
+        return result
     }
 
     private func render(

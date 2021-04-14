@@ -175,7 +175,7 @@ class AutorestPlugin {
             do {
                 try Manager.shared.run()
 
-                guard let packageUrl = Manager.shared.config?.packageUrl else {
+                guard let packageUrl = Manager.shared.config?.tempPackageUrl else {
                     SharedLogger.fail("Unable to get packageUrl")
                 }
                 let generatedFileList = self.iterateDirectory(directory: packageUrl)
