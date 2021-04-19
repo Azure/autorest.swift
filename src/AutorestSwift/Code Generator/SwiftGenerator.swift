@@ -116,6 +116,13 @@ class SwiftGenerator: CodeGenerator {
         let optionsUrl = baseUrl.with(subfolder: .options)
         let utilUrl = baseUrl.with(subfolder: .util)
         let jazzyUrl = baseUrl.with(subfolder: .jazzy)
+
+        // clear the generated folder to ensure renames are caught
+        if let outputFolder = Manager.shared.args?.outputFolder {
+            let generatedUrl = URL(fileURLWithPath: outputFolder).with(subfolder: .generated)
+            try? FileManager.default.removeItem(at: generatedUrl)
+        }
+
         try modelUrl.ensureExists()
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
@@ -167,7 +174,8 @@ class SwiftGenerator: CodeGenerator {
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethod_Options_File")
+            // TODO: Find alternative to resolve naming conflicts
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "Method_Options_File")
         }
 
         // Create ClientOptions.swift file
@@ -250,16 +258,12 @@ class SwiftGenerator: CodeGenerator {
 
     private func renderClientMethodOptionsFile(
         for operationGroup: OperationGroupViewModel,
-        with groupName: String? = nil,
+        with _: String? = nil,
         using template: String
     ) throws {
         for operation in operationGroup.operations {
             let clientMethodOptions = operation.clientMethodOptions
             var fileName = ""
-            if let groupName = groupName {
-                fileName = "\(groupName + "+")"
-            }
-
             fileName += "\(clientMethodOptions.name).swift"
 
             try render(
