@@ -56,7 +56,8 @@ struct ReturnTypeViewModel {
         let hasNoBodyStrategies = strategies.contains { $0 == RequestBodyType.noBody.rawValue }
 
         // since we only support 1 body/pagePage response, only need to take the first item in types
-        if let type = types.first {
+        if var type = types.first {
+            type = Manager.shared.args!.remapModels.aliasOrName(for: type)
             self.type = (hasNoBodyStrategies || hasNullableResponse) ? "\(type)?" : type
             self.returnNil = hasNoBodyStrategies
         } else {
