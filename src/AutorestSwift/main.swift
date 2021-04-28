@@ -27,7 +27,7 @@
 import Foundation
 
 // Should be set to `.warning` normally
-let logLevel = LogLevel.warning
+let logLevel = LogLevel.info
 let standalone = CommandLine.arguments.first!.contains("DerivedData")
 
 if standalone {

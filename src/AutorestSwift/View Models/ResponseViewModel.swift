@@ -112,7 +112,8 @@ struct ResponseViewModel {
             self.pagingNames = pagingNames
             self.pagedElementType = arrayElements.first!.elementType.name
 
-            if let elementType = pagedElementType, self.pagingNames != nil {
+            if var elementType = pagedElementType, self.pagingNames != nil {
+                elementType = Manager.shared.args!.remapModels.aliasOrName(for: elementType)
                 self.type = "PagedCollection<\(elementType)>"
             } else {
                 self.type = schemaResponse?.schema.swiftType() ?? "Void"
