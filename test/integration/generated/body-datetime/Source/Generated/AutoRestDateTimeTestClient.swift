@@ -87,5 +87,5 @@ public final class AutoRestDateTimeTestClient: PipelineClient {
 
     public lazy var datetime = Datetime(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

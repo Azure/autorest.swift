@@ -88,5 +88,5 @@ public final class AutoRestSwaggerBatClient: PipelineClient {
     public lazy var enumOperation = EnumOperation(client: self)
     public lazy var stringOperation = StringOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

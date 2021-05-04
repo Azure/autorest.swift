@@ -87,5 +87,5 @@ public final class AutoRestTimeTestClient: PipelineClient {
 
     public lazy var time = Time(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

@@ -87,5 +87,5 @@ public final class AutoRestHeadTestClient: PipelineClient {
 
     public lazy var httpSuccess = HttpSuccess(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

@@ -87,5 +87,5 @@ public final class AutoRestIntegerTestClient: PipelineClient {
 
     public lazy var intOperation = IntOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

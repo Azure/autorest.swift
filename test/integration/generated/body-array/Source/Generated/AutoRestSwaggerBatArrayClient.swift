@@ -87,5 +87,5 @@ public final class AutoRestSwaggerBatArrayClient: PipelineClient {
 
     public lazy var arrayOperation = ArrayOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

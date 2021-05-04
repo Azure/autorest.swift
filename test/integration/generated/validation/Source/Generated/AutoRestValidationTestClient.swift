@@ -92,5 +92,5 @@ public final class AutoRestValidationTestClient: PipelineClient {
 
     public lazy var autoRestValidationTest = AutoRestValidationTest(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

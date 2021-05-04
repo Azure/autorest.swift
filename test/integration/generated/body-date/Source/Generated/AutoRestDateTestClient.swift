@@ -87,5 +87,5 @@ public final class AutoRestDateTestClient: PipelineClient {
 
     public lazy var dateOperation = DateOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

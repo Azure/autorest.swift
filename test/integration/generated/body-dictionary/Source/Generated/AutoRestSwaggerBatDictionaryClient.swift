@@ -90,5 +90,5 @@ public final class AutoRestSwaggerBatDictionaryClient: PipelineClient {
 
     public lazy var dictionary = Dictionary(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

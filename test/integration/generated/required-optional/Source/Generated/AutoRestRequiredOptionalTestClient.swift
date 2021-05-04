@@ -102,5 +102,5 @@ public final class AutoRestRequiredOptionalTestClient: PipelineClient {
     public lazy var explicit = Explicit(client: self)
     public lazy var implicit = Implicit(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

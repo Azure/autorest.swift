@@ -91,5 +91,5 @@ public final class AutoRestParameterizedHostTestClient: PipelineClient {
 
     public lazy var paths = Paths(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

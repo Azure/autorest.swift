@@ -91,5 +91,5 @@ public final class AutoRestPagingTestClient: PipelineClient, PageableClient {
 
     public lazy var paging = Paging(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }
