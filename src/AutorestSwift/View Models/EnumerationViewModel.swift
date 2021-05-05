@@ -33,13 +33,16 @@ import Foundation
 struct EnumerationViewModel {
     let name: String
     let comment: ViewModelComment
+    let visibility: String
     let type: String
     let choices: [EnumerationChoiceViewModel]
     let isExtensible: Bool
 
     init(from schema: EnumerableSchema) {
-        self.name = schema.name
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.name)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.name)
         self.comment = ViewModelComment(from: schema.description)
+
         self.type = schema.choiceType.name
         var items = [EnumerationChoiceViewModel]()
         for choice in schema.choices {

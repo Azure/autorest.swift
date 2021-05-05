@@ -6,4 +6,51 @@
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
-{% include "Method_Options_Snippet.stencil" %}
+/// User-configurable options for the `{{ model.operationName }}` operation.
+{{ model.visibility }} struct {{ model.name }}: RequestOptions {
+
+{% for property in model.properties %}
+    {{ property.comment }}
+    {{ model.visibility }} let {{ property.name }}: {{ property.type }}
+{% endfor %}
+
+    /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
+    /// Highly recommended for correlating client-side activites with requests received by the server.
+    {{ model.visibility }} let clientRequestId: String?
+
+    /// A token used to make a best-effort attempt at canceling a request.
+    {{ model.visibility }} let cancellationToken: CancellationToken?
+
+    /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+    {{ model.visibility }} var dispatchQueue: DispatchQueue?
+
+    /// A `PipelineContext` object to associate with the request.
+    {{ model.visibility }} var context: PipelineContext?
+
+    /// Initialize a `{{ model.name }}` structure.
+    /// - Parameters:
+{% for property in model.properties %}
+    ///   - {{ property.name }}: {{ property.comment.withoutPrefix }}
+{% endfor %}
+    ///   - clientRequestId: A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
+    ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
+    ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
+    ///   - context: A `PipelineContext` object to associate with the request.
+    {{ model.visibility }} init(
+    {% for property in model.properties %}
+        {{ property.name }}: {{ property.type }} {{ property.initDefaultValue }},
+    {% endfor %}
+        clientRequestId: String? = nil,
+        cancellationToken: CancellationToken? = nil,
+        dispatchQueue: DispatchQueue? = nil,
+        context: PipelineContext? = nil
+    ) {
+    {% for property in model.properties %}
+        self.{{ property.name }} = {{ property.name }}
+    {% endfor %}
+        self.clientRequestId = clientRequestId
+        self.cancellationToken = cancellationToken
+        self.dispatchQueue = dispatchQueue
+        self.context = context
+    }
+}

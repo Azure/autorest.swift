@@ -47,7 +47,7 @@ class AutoRestParameterizedCustomHostTest: XCTestCase {
     func test_getEmpty200() throws {
         let expectation = XCTestExpectation(description: "Call paths.getEmpty")
 
-        let options = Paths.GetEmptyOptions(
+        let options = GetEmptyOptions(
             keyVersion: "v1"
         )
 

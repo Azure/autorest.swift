@@ -87,5 +87,5 @@ public final class AutoRestReportClient: PipelineClient {
 
     public lazy var autoRestReportService = AutoRestReportService(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

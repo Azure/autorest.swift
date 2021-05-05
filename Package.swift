@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,8 +14,8 @@ let package = Package(
         .package(url: "https://github.com/stencilproject/Stencil.git", .branch("trim_whitespace")),
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(
-            name: "AzureSDK",
-            url: "https://github.com/Azure/azure-sdk-for-ios.git",
+            name: "AzureCore",
+            url: "https://github.com/Azure/SwiftPM-AzureCore.git",
             .branch("dev/AzureCore")
         ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
@@ -62,7 +62,7 @@ let package = Package(
         .testTarget(
             name: "AutorestSwiftTest",
             dependencies: [
-                .product(name: "AzureCore", package: "AzureSDK"),
+                .product(name: "AzureCore", package: "AzureCore"),
                 "AutoRestBoolTest",
                 "AutoRestDurationTest",
                 "AutoRestHeadTest",

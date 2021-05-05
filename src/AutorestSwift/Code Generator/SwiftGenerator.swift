@@ -51,7 +51,7 @@ class SwiftGenerator: CodeGenerator {
 
         // Create model files
         for object in model.schemas.objects ?? [] {
-            let name = object.modelName
+            let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: object.modelName)
 
             guard modelsWritten[name] == nil else {
                 SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
@@ -70,7 +70,7 @@ class SwiftGenerator: CodeGenerator {
             if let immediates = object.parents?.immediate {
                 // render any immediate parents of the object schema
                 for parent in immediates {
-                    let name = object.name
+                    let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: object.name)
                     guard modelsWritten[name] == nil else {
                         SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
                         modelsWritten[name]! += 1
@@ -93,7 +93,7 @@ class SwiftGenerator: CodeGenerator {
 
         // Create group model files
         for group in model.schemas.groups ?? [] {
-            let name = group.name
+            let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: group.name)
             guard modelsWritten[name] == nil else {
                 SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
                 modelsWritten[name]! += 1
@@ -116,6 +116,13 @@ class SwiftGenerator: CodeGenerator {
         let optionsUrl = baseUrl.with(subfolder: .options)
         let utilUrl = baseUrl.with(subfolder: .util)
         let jazzyUrl = baseUrl.with(subfolder: .jazzy)
+
+        // clear the generated folder to ensure renames are caught
+        if let outputFolder = Manager.shared.args?.outputFolder {
+            let generatedUrl = URL(fileURLWithPath: outputFolder).with(subfolder: .generated)
+            try? FileManager.default.removeItem(at: generatedUrl)
+        }
+
         try modelUrl.ensureExists()
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
@@ -167,7 +174,8 @@ class SwiftGenerator: CodeGenerator {
                 withFilename: "\(groupName)",
                 andParams: ["model": clientViewModel, "group": operationGroup]
             )
-            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "NamedMethod_Options_File")
+            // TODO: Find alternative to resolve naming conflicts
+            try renderClientMethodOptionsFile(for: operationGroup, with: groupName, using: "Method_Options_File")
         }
 
         // Create ClientOptions.swift file
@@ -221,9 +229,18 @@ class SwiftGenerator: CodeGenerator {
     }
 
     private func exists(filename: String, inSubfolder subfolder: FileDestination) -> Bool {
+        let destRoot: URL
+        // When using autorest, we must check the output folder for existence of the file, not
+        // the temp directory (which will obviously never contain the file!).
+        if let outputFolder = Manager.shared.args?.outputFolder {
+            destRoot = URL(fileURLWithPath: outputFolder)
+        } else {
+            destRoot = baseUrl
+        }
         let fname = filename.lowercased().contains(".") ? filename : "\(filename).swift"
-        let fileUrl = baseUrl.with(subfolder: subfolder).appendingPathComponent(fname)
-        return FileManager.default.fileExists(atPath: fileUrl.path)
+        let fileUrl = destRoot.with(subfolder: subfolder).appendingPathComponent(fname)
+        let result = FileManager.default.fileExists(atPath: fileUrl.path)
+        return result
     }
 
     private func render(
@@ -241,16 +258,12 @@ class SwiftGenerator: CodeGenerator {
 
     private func renderClientMethodOptionsFile(
         for operationGroup: OperationGroupViewModel,
-        with groupName: String? = nil,
+        with _: String? = nil,
         using template: String
     ) throws {
         for operation in operationGroup.operations {
             let clientMethodOptions = operation.clientMethodOptions
             var fileName = ""
-            if let groupName = groupName {
-                fileName = "\(groupName + "+")"
-            }
-
             fileName += "\(clientMethodOptions.name).swift"
 
             try render(

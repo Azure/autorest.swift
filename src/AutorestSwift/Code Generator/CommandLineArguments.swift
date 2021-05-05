@@ -33,9 +33,9 @@ class CommandLineArguments: Encodable {
     /// Keys which are supported by Autorest.Swift
     private let supportedKeys: [String] = [
         "input-filename",
-        "output-directory",
+        "output-folder",
         "clear-output-folder",
-        "project-directory",
+        "project-folder",
         "add-credential",
         "credential-scopes",
         "license-header",
@@ -46,7 +46,8 @@ class CommandLineArguments: Encodable {
         "description",
         "client-side-validation",
         "package-name",
-        "package-version"
+        "package-version",
+        "generate-as-internal"
     ]
 
     /// Keys which are explicitly unsupported and should throw and error if supplied
@@ -62,9 +63,9 @@ class CommandLineArguments: Encodable {
         return rawArgs["input-filename"]
     }
 
-    /// The desired output directory for code
-    var outputDirectory: String? {
-        return rawArgs["output-directory"]
+    /// The desired output folder for code
+    var outputFolder: String? {
+        return rawArgs["output-folder"]
     }
 
     /// Whether the output folder should be cleared before generating code.
@@ -73,8 +74,8 @@ class CommandLineArguments: Encodable {
     }
 
     /// The root of the project if the code will be generated in a subfolder
-    var projectDirectory: String? {
-        return rawArgs["project-directory"]
+    var projectFolder: String? {
+        return rawArgs["project-folder"]
     }
 
     /// Whether to include a credential object in the generated code
@@ -84,7 +85,7 @@ class CommandLineArguments: Encodable {
 
     /// The scopes to use for generated credentials
     var credentialScopes: [String]? {
-        return rawArgs["credential-scopes"]?.components(separatedBy: " ")
+        return split(string: rawArgs["credential-scopes"])
     }
 
     /// Which license header to use for generated files.
@@ -130,6 +131,11 @@ class CommandLineArguments: Encodable {
     /// The package version to use for generated code
     var packageVersion: String? {
         return rawArgs["package-version"]
+    }
+
+    /// Transforms for model types
+    var generateAsInternal: ModelMap {
+        return ModelMap(with: rawArgs["generate-as-internal"])
     }
 
     // MARK: Initializers
@@ -205,4 +211,39 @@ class CommandLineArguments: Encodable {
     func encode(to encoder: Encoder) throws {
         try rawArgs.encode(to: encoder)
     }
+}
+
+internal struct ModelMap {
+    internal var map: [String: String]
+
+    init(with string: String?) {
+        self.map = [String: String]()
+        guard let splitVals = split(string: string) else { return }
+        for item in splitVals {
+            let comps = item.split(separator: "=", maxSplits: 1).map { String($0) }
+            if comps.count != 2 {
+                SharedLogger.fail("Incorrect usage: --generate-as-internal NAME=ALIAS ...")
+            }
+            map[comps[0]] = comps[1]
+        }
+    }
+
+    /// Returns internal for models which are aliased. Otherwise, public.
+    internal func visibility(for name: String) -> String {
+        return map[name] != nil ? "internal" : "public"
+    }
+
+    /// Returns the alias for a model or the original model name if no alias present
+    internal func aliasOrName(for name: String) -> String {
+        if let alias = map[name] {
+            return alias
+        } else {
+            return name
+        }
+    }
+}
+
+private func split(string val: String?) -> [String]? {
+    guard let value = val else { return nil }
+    return value.components(separatedBy: .whitespacesAndNewlines).filter { $0.count > 0 }
 }

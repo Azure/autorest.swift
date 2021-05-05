@@ -90,5 +90,5 @@ public final class AutoRestRfC1123DateTimeTestClient: PipelineClient {
 
     public lazy var datetimerfc1123 = Datetimerfc1123(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

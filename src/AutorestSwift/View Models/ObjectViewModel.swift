@@ -36,13 +36,15 @@ struct ObjectViewModel {
     let properties: [PropertyViewModel]
     let constants: [ConstantViewModel]
     let hasConstants: Bool
+    let visibility: String
 
     var inheritance = "NSObject"
     var typeKeywords = "struct"
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
-        self.name = schema.modelName
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs
@@ -81,7 +83,8 @@ struct ObjectViewModel {
     }
 
     init(from schema: GroupSchema) {
-        self.name = schema.modelName
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs

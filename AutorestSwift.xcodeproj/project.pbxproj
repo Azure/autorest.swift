@@ -133,11 +133,9 @@
 		0A47434C2582919700CA86E5 /* Import_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07024CB71E100EC018E /* Import_Snippet.stencil */; };
 		0A47434D2582919700CA86E5 /* Jazzy_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46324E1E64900EC018E /* Jazzy_File.stencil */; };
 		0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */; };
-		0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */; };
 		0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */; };
 		0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B07324CB71E100EC018E /* Model_File.stencil */; };
 		0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */; };
-		0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */; };
 		0A4743582582919700CA86E5 /* Operation_BodyParam_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */; };
 		0A4743592582919700CA86E5 /* Operation_DefaultException_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */; };
 		0A47435A2582919700CA86E5 /* Operation_Request_Body_Snippet.stencil in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */; };
@@ -239,8 +237,6 @@
 		61408633D6F295F6BEB082F0 /* libPods-AutorestSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3FDFDBC61B301CB1982C7A8 /* libPods-AutorestSwift.a */; };
 		F106826D24CF5B9C007EB4D5 /* .swiftlint.yml in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */; };
 		F106826E24CF5B9C007EB4D5 /* .swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106826B24CF5B71007EB4D5 /* .swiftformat */; };
-		F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830324CF9244007EB4D5 /* swiftformat */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */ = {isa = PBXBuildFile; fileRef = F106830124CF9220007EB4D5 /* swiftlint */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F10B1F6325414556007DA581 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10B1F6125414556007DA581 /* Dictionary+Extension.swift */; };
 		F15D30EF2548F38700265366 /* AutoRestUrlPathItemsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30EC2548F38700265366 /* AutoRestUrlPathItemsTest.swift */; };
 		F15D30F02548F38700265366 /* AutoRestUrlQueriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15D30ED2548F38700265366 /* AutoRestUrlQueriesTest.swift */; };
@@ -266,8 +262,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				F106830524CF93CD007EB4D5 /* swiftlint in CopyFiles */,
-				F106830424CF93C5007EB4D5 /* swiftformat in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,11 +290,9 @@
 				0A47434C2582919700CA86E5 /* Import_Snippet.stencil in CopyFiles */,
 				0A47434D2582919700CA86E5 /* Jazzy_File.stencil in CopyFiles */,
 				0A47434E2582919700CA86E5 /* Method_Options_File.stencil in CopyFiles */,
-				0A47434F2582919700CA86E5 /* Method_Options_Snippet.stencil in CopyFiles */,
 				0A4743502582919700CA86E5 /* Model_Codable_Snippet.stencil in CopyFiles */,
 				0A4743552582919700CA86E5 /* Model_File.stencil in CopyFiles */,
 				0A4743562582919700CA86E5 /* Named_OperationGroup_File.stencil in CopyFiles */,
-				0A4743572582919700CA86E5 /* NamedMethod_Options_File.stencil in CopyFiles */,
 				0A4743582582919700CA86E5 /* Operation_BodyParam_Snippet.stencil in CopyFiles */,
 				0A4743592582919700CA86E5 /* Operation_DefaultException_Snippet.stencil in CopyFiles */,
 				0A47435A2582919700CA86E5 /* Operation_Request_Body_Snippet.stencil in CopyFiles */,
@@ -458,8 +450,6 @@
 		BE64E2670A1CB8357C872FB4 /* Pods-AutorestSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutorestSwift.release.xcconfig"; path = "Target Support Files/Pods-AutorestSwift/Pods-AutorestSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F106826B24CF5B71007EB4D5 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = SOURCE_ROOT; };
 		F106826C24CF5B7C007EB4D5 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
-		F106830124CF9220007EB4D5 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftlint; path = ../Pods/SwiftLint/swiftlint; sourceTree = "<group>"; };
-		F106830324CF9244007EB4D5 /* swiftformat */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = swiftformat; path = ../Pods/SwiftFormat/CommandLineTool/swiftformat; sourceTree = "<group>"; };
 		F106830624CF9E0A007EB4D5 /* PackageFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageFileViewModel.swift; sourceTree = "<group>"; };
 		F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Operation_Request_Body_Snippet.stencil; sourceTree = "<group>"; };
 		F10B1F6125414556007DA581 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
@@ -482,8 +472,6 @@
 		F16CDA162568765700FD0817 /* AutoRestDateTimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestDateTimeTest.swift; sourceTree = "<group>"; };
 		F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRestDateTimeRfc1123Test.swift; sourceTree = "<group>"; };
 		F170D321253F786800A569A0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Method_Options_Snippet.stencil; sourceTree = "<group>"; };
-		F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NamedMethod_Options_File.stencil; sourceTree = "<group>"; };
 		F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Operation_DefaultException_Snippet.stencil; sourceTree = "<group>"; };
 		F19B01D02507E21100121831 /* ExceptionResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionResponseViewModel.swift; sourceTree = "<group>"; };
 		F19B01D62507EA1300121831 /* Operation_Response_StatusCode_Snippet.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Operation_Response_StatusCode_Snippet.stencil; sourceTree = "<group>"; };
@@ -682,11 +670,9 @@
 				0A22B07024CB71E100EC018E /* Import_Snippet.stencil */,
 				0A22B46324E1E64900EC018E /* Jazzy_File.stencil */,
 				0A22B0C024D32F2E00EC018E /* Method_Options_File.stencil */,
-				F1731F2E2522E4D8006CDED8 /* Method_Options_Snippet.stencil */,
 				F1A5FD7A24DCFECB00A5CC6C /* Model_Codable_Snippet.stencil */,
 				0A22B07324CB71E100EC018E /* Model_File.stencil */,
 				F1587DA8251A965900A89B98 /* Named_OperationGroup_File.stencil */,
-				F1731F2F2522E4F0006CDED8 /* NamedMethod_Options_File.stencil */,
 				0A22B46124DCE50400EC018E /* Operation_BodyParam_Snippet.stencil */,
 				F187186C250C2B3F00318867 /* Operation_DefaultException_Snippet.stencil */,
 				F1068F3C24D484A90082793F /* Operation_Request_Body_Snippet.stencil */,
@@ -804,15 +790,6 @@
 			path = configs;
 			sourceTree = "<group>";
 		};
-		F106830224CF9226007EB4D5 /* tools */ = {
-			isa = PBXGroup;
-			children = (
-				F106830324CF9244007EB4D5 /* swiftformat */,
-				F106830124CF9220007EB4D5 /* swiftlint */,
-			);
-			path = tools;
-			sourceTree = "<group>";
-		};
 		F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,7 +819,6 @@
 				0ADDD29225915C1300BD5E58 /* validation */,
 				0ADDD0FD258D656A00BD5E58 /* extensible-enums-swagger */,
 				0AB80BBA257982D7008506CD /* xms-error-responses */,
-				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				F15A9283254B089700E2D9C2 /* AutoRestBodyIntegerTest.swift */,
 				F16CDA152568765700FD0817 /* AutoRestDateTest.swift */,
 				F16CDA172568765800FD0817 /* AutoRestDateTimeRfc1123Test.swift */,
@@ -965,13 +941,13 @@
 				0AA2B98824E5FD6500CEA1D6 /* package.json */,
 				0A22B09524D09C2900EC018E /* Makefile */,
 				OBJ_6 /* Package.swift */,
+				F1A6719624F5CCCC00C2712C /* Info.plist */,
 				OBJ_7 /* Sources */,
 				F1A6719324F5CCCC00C2712C /* AutorestSwiftTest */,
 				OBJ_114 /* Products */,
 				0A97DC5025D5BE7D00E38BF8 /* eng */,
 				OBJ_120 /* scripts */,
 				0A22B06F24CB71E100EC018E /* templates */,
-				F106830224CF9226007EB4D5 /* tools */,
 				F106826A24CF5AB9007EB4D5 /* configs */,
 				OBJ_122 /* LICENSE */,
 				OBJ_124 /* README.md */,
@@ -1497,7 +1473,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AutorestSwiftTest/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1562,7 +1538,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AutorestSwiftTest/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1593,7 +1569,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AutorestSwift.xcodeproj/AutorestSwift_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1604,6 +1580,7 @@
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
 				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
@@ -1626,7 +1603,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AutorestSwift.xcodeproj/AutorestSwift_Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1637,6 +1614,7 @@
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
 				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
@@ -1667,7 +1645,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USE_HEADERMAP = NO;
@@ -1691,7 +1669,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

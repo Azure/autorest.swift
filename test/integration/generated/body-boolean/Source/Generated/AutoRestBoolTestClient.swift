@@ -87,5 +87,5 @@ public final class AutoRestBoolTestClient: PipelineClient {
 
     public lazy var boolOperation = BoolOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

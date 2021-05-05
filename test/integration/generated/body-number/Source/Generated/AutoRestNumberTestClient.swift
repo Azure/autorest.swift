@@ -87,5 +87,5 @@ public final class AutoRestNumberTestClient: PipelineClient {
 
     public lazy var number = Number(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

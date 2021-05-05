@@ -87,5 +87,5 @@ public final class XmsErrorResponseExtensionsClient: PipelineClient {
 
     public lazy var petOperation = PetOperation(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

@@ -42,15 +42,15 @@ class Manager {
 
     // MARK: Methods
 
-    /// Initialize with an input file URL (i.e. running locally).
+    /// Initialize with an input file URL (i.e. running from Xcode).
     func configure(input: URL, destination: URL) throws {
         guard config == nil else {
             SharedLogger.warn("Manager is already configured.")
             return
         }
-        // FIXME: Make this configurable
+        // TODO: Make this configurable?
         let destUrl = destination.appendingPathComponent("generated").appendingPathComponent("sdk")
-        config?.destinationRootUrl = destUrl
+        config?.tempRootUrl = destUrl
         do {
             try destUrl.ensureExists()
         } catch {
@@ -73,11 +73,12 @@ class Manager {
             SharedLogger.warn("Manager is already configured.")
             return
         }
-        // for autorest mode, create a temp directory using a random Guid as the directory name
-        let destUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            .appendingPathComponent(UUID().uuidString)
-        config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
         args = CommandLineArguments(client: client, sessionId: sessionId) {
+            let destUrl: URL
+            // generate to a temp directory
+            destUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                .appendingPathComponent(UUID().uuidString)
+            self.config = ManagerConfig(withInput: input, destinationRootUrl: destUrl)
             completion()
         }
     }
@@ -92,10 +93,10 @@ class Manager {
 
         // Create folder structure
         let packageName = model.packageName
-        let packageUrl = config.destinationRootUrl.appendingPathComponent(packageName)
+        let packageUrl = config.tempRootUrl.appendingPathComponent(packageName)
         try packageUrl.ensureExists()
 
-        config.packageUrl = packageUrl
+        config.tempPackageUrl = packageUrl
 
         // Generate Swift code files
         SharedLogger.info("Generating code at: \(packageUrl.path)")
@@ -148,8 +149,8 @@ class Manager {
         // If JSON strings don't match, there must be a problem in the modeling.
         // Dump both files so they can be diffed.
         if beforeJsonString != afterJsonString {
-            let beforeJsonUrl = config.destinationRootUrl.appendingPathComponent("before.json")
-            let afterJsonUrl = config.destinationRootUrl.appendingPathComponent("after.json")
+            let beforeJsonUrl = config.tempRootUrl.appendingPathComponent("before.json")
+            let afterJsonUrl = config.tempRootUrl.appendingPathComponent("after.json")
             SharedLogger.debug("before.json url=\(beforeJsonUrl)")
             SharedLogger.debug("after.json url=\(afterJsonUrl)")
             do {

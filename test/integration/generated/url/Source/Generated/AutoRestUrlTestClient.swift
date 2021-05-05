@@ -96,5 +96,5 @@ public final class AutoRestUrlTestClient: PipelineClient {
     public lazy var paths = Paths(client: self)
     public lazy var queries = Queries(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }

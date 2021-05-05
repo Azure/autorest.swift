@@ -30,6 +30,7 @@ import Foundation
 struct ServiceClientFileViewModel {
     let name: String
     let comment: ViewModelComment
+    let visibility: String
     let operationGroups: [OperationGroupViewModel]
     let apiVersion: String
     let apiVersionName: String
@@ -43,7 +44,9 @@ struct ServiceClientFileViewModel {
     let host: String
 
     init(from model: CodeModel) {
-        self.name = "\(model.packageName)Client"
+        let name = "\(model.packageName)Client"
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: name)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: name)
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
         var namedOperationGroups = [String: OperationGroupViewModel]()

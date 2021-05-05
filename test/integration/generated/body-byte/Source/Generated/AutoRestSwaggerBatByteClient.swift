@@ -87,5 +87,5 @@ public final class AutoRestSwaggerBatByteClient: PipelineClient {
 
     public lazy var byte = Byte(client: self)
 
-    // MARK: Public Client Methods
+    // MARK: Client Methods
 }
