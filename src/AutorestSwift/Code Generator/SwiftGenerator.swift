@@ -51,7 +51,7 @@ class SwiftGenerator: CodeGenerator {
 
         // Create model files
         for object in model.schemas.objects ?? [] {
-            let name = Manager.shared.args!.remapModels.aliasOrName(for: object.modelName)
+            let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: object.modelName)
 
             guard modelsWritten[name] == nil else {
                 SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
@@ -70,7 +70,7 @@ class SwiftGenerator: CodeGenerator {
             if let immediates = object.parents?.immediate {
                 // render any immediate parents of the object schema
                 for parent in immediates {
-                    let name = Manager.shared.args!.remapModels.aliasOrName(for: object.name)
+                    let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: object.name)
                     guard modelsWritten[name] == nil else {
                         SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
                         modelsWritten[name]! += 1
@@ -93,7 +93,7 @@ class SwiftGenerator: CodeGenerator {
 
         // Create group model files
         for group in model.schemas.groups ?? [] {
-            let name = Manager.shared.args!.remapModels.aliasOrName(for: group.name)
+            let name = Manager.shared.args!.generateAsInternal.aliasOrName(for: group.name)
             guard modelsWritten[name] == nil else {
                 SharedLogger.warn("\(name) has already been generated once this run. Skipping...")
                 modelsWritten[name]! += 1

@@ -43,8 +43,8 @@ struct ObjectViewModel {
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
-        self.name = Manager.shared.args!.remapModels.aliasOrName(for: schema.modelName)
-        self.visibility = Manager.shared.args!.remapModels.visibility(for: schema.modelName)
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs
@@ -83,8 +83,8 @@ struct ObjectViewModel {
     }
 
     init(from schema: GroupSchema) {
-        self.name = Manager.shared.args!.remapModels.aliasOrName(for: schema.modelName)
-        self.visibility = Manager.shared.args!.remapModels.visibility(for: schema.modelName)
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
         // flatten out inheritance hierarchies so we can use structs

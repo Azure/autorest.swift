@@ -47,7 +47,7 @@ class CommandLineArguments: Encodable {
         "client-side-validation",
         "package-name",
         "package-version",
-        "remap-models"
+        "generate-as-internal"
     ]
 
     /// Keys which are explicitly unsupported and should throw and error if supplied
@@ -134,8 +134,8 @@ class CommandLineArguments: Encodable {
     }
 
     /// Transforms for model types
-    var remapModels: ModelMap {
-        return ModelMap(with: rawArgs["remap-models"])
+    var generateAsInternal: ModelMap {
+        return ModelMap(with: rawArgs["generate-as-internal"])
     }
 
     // MARK: Initializers
@@ -222,7 +222,7 @@ internal struct ModelMap {
         for item in splitVals {
             let comps = item.split(separator: "=", maxSplits: 1).map { String($0) }
             if comps.count != 2 {
-                SharedLogger.fail("Incorrect usage: --remap-models NAME=ALIAS ...")
+                SharedLogger.fail("Incorrect usage: --generate-as-internal NAME=ALIAS ...")
             }
             map[comps[0]] = comps[1]
         }

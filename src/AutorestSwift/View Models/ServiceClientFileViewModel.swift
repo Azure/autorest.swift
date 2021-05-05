@@ -45,8 +45,8 @@ struct ServiceClientFileViewModel {
 
     init(from model: CodeModel) {
         let name = "\(model.packageName)Client"
-        self.name = Manager.shared.args!.remapModels.aliasOrName(for: name)
-        self.visibility = Manager.shared.args!.remapModels.visibility(for: name)
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: name)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: name)
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
         var namedOperationGroups = [String: OperationGroupViewModel]()

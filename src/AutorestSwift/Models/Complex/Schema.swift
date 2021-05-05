@@ -157,7 +157,7 @@ class Schema: Codable, LanguageShortcut {
     }
 
     var modelName: String {
-        let rawName = Manager.shared.args!.remapModels.aliasOrName(for: name)
+        let rawName = Manager.shared.args!.generateAsInternal.aliasOrName(for: name)
         return rawName.isReservedType ? rawName + "Type" : rawName
     }
 

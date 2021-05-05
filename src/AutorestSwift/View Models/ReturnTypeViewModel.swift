@@ -57,7 +57,7 @@ struct ReturnTypeViewModel {
 
         // since we only support 1 body/pagePage response, only need to take the first item in types
         if var type = types.first {
-            type = Manager.shared.args!.remapModels.aliasOrName(for: type)
+            type = Manager.shared.args!.generateAsInternal.aliasOrName(for: type)
             self.type = (hasNoBodyStrategies || hasNullableResponse) ? "\(type)?" : type
             self.returnNil = hasNoBodyStrategies
         } else {

@@ -46,7 +46,7 @@ struct ClientMethodOptionsViewModel {
 
     init(from operation: Operation, with model: CodeModel, parameters: [ParameterType], groupName: String) {
         self.clientName = model.name
-        self.visibility = Manager.shared.args!.remapModels.visibility(for: clientName)
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: clientName)
         self.operationName = operation.name
         self.name = "\(operation.name)Options"
         if model.object(for: groupName) != nil {

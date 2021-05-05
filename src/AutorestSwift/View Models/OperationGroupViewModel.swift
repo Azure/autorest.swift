@@ -47,8 +47,8 @@ struct OperationGroupViewModel {
         }
 
         // Operation group visibility should match that of the client
-        let clientName = Manager.shared.args!.remapModels.aliasOrName(for: "\(model.packageName)Client")
-        self.visibility = Manager.shared.args!.remapModels.visibility(for: clientName)
+        let clientName = Manager.shared.args!.generateAsInternal.aliasOrName(for: "\(model.packageName)Client")
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: clientName)
 
         self.name = groupName
         self.comment = ViewModelComment(from: group.description)
