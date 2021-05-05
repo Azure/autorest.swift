@@ -60,7 +60,7 @@ class AutoRestUrlMutliCollectionFormatTest: XCTestCase {
     func test_queries_arrayStringMultiEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringMultiEmpty")
 
-        let options = Queries.ArrayStringMultiEmptyOptions(
+        let options = ArrayStringMultiEmptyOptions(
             arrayQuery: []
         )
 
@@ -81,7 +81,7 @@ class AutoRestUrlMutliCollectionFormatTest: XCTestCase {
     func test_queries_arrayStringMultiValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringMultiValid")
 
-        let options = Queries.ArrayStringMultiValidOptions(
+        let options = ArrayStringMultiValidOptions(
             arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
         )
 

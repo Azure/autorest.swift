@@ -311,7 +311,7 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
     func test_header_paramString200() throws {
         let expectation = XCTestExpectation(description: "Call header.paramString")
 
-        let options = Header.ParamStringOptions(
+        let options = ParamStringOptions(
             value: "The quick brown fox jumps over the lazy dog"
         )
 
@@ -326,7 +326,7 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
             expectation.fulfill()
         }
 
-        let emptyOptions = Header.ParamStringOptions(
+        let emptyOptions = ParamStringOptions(
             value: ""
         )
         client.header.paramString(scenario: "empty", withOptions: emptyOptions) { result, httpResponse in
@@ -494,7 +494,7 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
 
         let dateString = "Wed, 01 Jan 2010 12:34:56 GMT"
         let date = Rfc1123Date(string: dateString)!
-        let options = Header.ParamDatetimeRfc1123Options(
+        let options = ParamDatetimeRfc1123Options(
             value: date
         )
         client.header.paramDatetimeRfc1123(scenario: "valid", withOptions: options) { result, httpResponse in
@@ -541,7 +541,7 @@ class AutoRestSwaggerBatHeaderTest: XCTestCase {
     func test_header_paramEnum200() throws {
         let expectation = XCTestExpectation(description: "Call header.paramEnum")
 
-        let options = Header.ParamEnumOptions(
+        let options = ParamEnumOptions(
             value: .grey
         )
 

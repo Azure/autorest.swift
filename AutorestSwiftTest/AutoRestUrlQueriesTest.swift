@@ -81,7 +81,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
         guard let byteQuery = "啊齄丂狛狜隣郎隣兀﨩".data(using: .utf8)?.base64EncodedData() else {
             return
         }
-        let options = Queries.ByteMultiByteOptions(byteQuery: byteQuery)
+        let options = ByteMultiByteOptions(byteQuery: byteQuery)
         client.queries.byteMultiByte(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
@@ -148,7 +148,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_enumValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.enumValid")
 
-        let options = Queries.EnumValidOptions(enumQuery: .greenColor)
+        let options = EnumValidOptions(enumQuery: .greenColor)
         client.queries.enumValid(withOptions: options) { result, httpResponse in
             switch result {
             case .success:
@@ -472,7 +472,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringCsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvValid")
 
-        let options = Queries.ArrayStringCsvValidOptions(
+        let options = ArrayStringCsvValidOptions(
             arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
         )
 
@@ -493,7 +493,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringPipesValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringPipesValid")
 
-        let options = Queries.ArrayStringPipesValidOptions(
+        let options = ArrayStringPipesValidOptions(
             arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
         )
 
@@ -514,7 +514,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringSsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringSsvValid")
 
-        let options = Queries.ArrayStringSsvValidOptions(
+        let options = ArrayStringSsvValidOptions(
             arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
         )
 
@@ -535,7 +535,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringTsvValid_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringTsvValid")
 
-        let options = Queries.ArrayStringTsvValidOptions(
+        let options = ArrayStringTsvValidOptions(
             arrayQuery: ["ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""]
         )
 
@@ -556,7 +556,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringNoCollectionFormatEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringNoCollectionFormatEmpty")
 
-        let options = Queries.ArrayStringNoCollectionFormatEmptyOptions(
+        let options = ArrayStringNoCollectionFormatEmptyOptions(
             arrayQuery: ["hello", "nihao", "bonjour"]
         )
 
@@ -577,7 +577,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringCsvEmpty_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvEmpty")
 
-        let options = Queries.ArrayStringCsvEmptyOptions(
+        let options = ArrayStringCsvEmptyOptions(
             arrayQuery: []
         )
 
@@ -598,7 +598,7 @@ class AutoRestUrlQuriesTest: XCTestCase {
     func test_Queries_arrayStringCsvNull_200() throws {
         let expectation = XCTestExpectation(description: "Call queries.arrayStringCsvNull")
 
-        let options = Queries.ArrayStringCsvNullOptions(
+        let options = ArrayStringCsvNullOptions(
             arrayQuery: nil
         )
 
