@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.0
 //  The swift-tools-version declares the minimum version of Swift required to build this package.
 //
 // --------------------------------------------------------------------------
@@ -16,7 +16,7 @@ import PackageDescription
 let package = Package(
     name: "AutoRestHeadTest",
     platforms: [
-        .macOS(.v10_15), .iOS(.v12), .tvOS(.v12)
+        .macOS(.v10_14), .iOS(.v12), .tvOS(.v12)
     ],
     products: [
         .library(name: "AutoRestHeadTest", type: .static, targets: ["AutoRestHeadTest"])
