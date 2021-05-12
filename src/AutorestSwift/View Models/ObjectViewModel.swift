@@ -43,7 +43,7 @@ struct ObjectViewModel {
     var isErrorType = false
 
     init(from schema: ObjectSchema) {
-        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.name = schema.modelName
         self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
@@ -83,7 +83,7 @@ struct ObjectViewModel {
     }
 
     init(from schema: GroupSchema) {
-        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.modelName)
+        self.name = schema.modelName
         self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.modelName)
         self.comment = ViewModelComment(from: schema.description)
 
