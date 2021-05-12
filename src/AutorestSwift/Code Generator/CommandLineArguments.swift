@@ -215,9 +215,11 @@ class CommandLineArguments: Encodable {
 
 internal struct ModelMap {
     internal var map: [String: String]
+    internal var reverseMap: [String: String]
 
     init(with string: String?) {
         self.map = [String: String]()
+        self.reverseMap = [String: String]()
         guard let splitVals = split(string: string) else { return }
         for item in splitVals {
             let comps = item.split(separator: "=", maxSplits: 1).map { String($0) }
@@ -225,12 +227,15 @@ internal struct ModelMap {
                 SharedLogger.fail("Incorrect usage: --generate-as-internal NAME=ALIAS ...")
             }
             map[comps[0]] = comps[1]
+            reverseMap[comps[1]] = comps[0]
         }
     }
 
     /// Returns internal for models which are aliased. Otherwise, public.
     internal func visibility(for name: String) -> String {
-        return map[name] != nil ? "internal" : "public"
+        // if the name is in the map or reverse map, the visibility should be internal
+        let test = map[name] ?? reverseMap[name]
+        return test != nil ? "internal" : "public"
     }
 
     /// Returns the alias for a model or the original model name if no alias present

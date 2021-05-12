@@ -39,7 +39,7 @@ struct EnumerationViewModel {
     let isExtensible: Bool
 
     init(from schema: EnumerableSchema) {
-        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: schema.name)
+        self.name = schema.name
         self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: schema.name)
         self.comment = ViewModelComment(from: schema.description)
 
