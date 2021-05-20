@@ -82,7 +82,7 @@ class Schema: Codable, LanguageShortcut {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func swiftType(optional: Bool = false) -> String {
+    func swiftType(parentName: String? = nil) -> String {
         var swiftType: String
         switch type {
         case .any:
@@ -96,7 +96,7 @@ class Schema: Codable, LanguageShortcut {
             guard let arraySchema = self as? ArraySchema else {
                 fatalError("Type mismatch. Expected array type but got \(self)")
             }
-            let elementSwiftType = arraySchema.elementType.swiftType()
+            let elementSwiftType = arraySchema.elementType.swiftType(parentName: parentName)
             swiftType = (arraySchema.nullableItems ?? false) ? "[\(elementSwiftType)?]" : "[\(elementSwiftType)]"
         case .number:
             guard let numberSchema = self as? NumberSchema else {
@@ -133,12 +133,20 @@ class Schema: Codable, LanguageShortcut {
              .object,
              .sealedChoice,
              .group:
-            swiftType = modelName
+            let rawName: String
+            // use the containing object's visibility, if provided
+            let visibility = Manager.shared.args!.generateAsInternal.visibility(for: parentName ?? name)
+            if visibility == "public" {
+                rawName = Manager.shared.args!.generateAsInternal.name(for: name) ?? name
+            } else {
+                rawName = Manager.shared.args!.generateAsInternal.alias(for: name) ?? name
+            }
+            swiftType = rawName.isReservedType ? rawName + "Type" : rawName
         case .dictionary:
             guard let dictionarySchema = self as? DictionarySchema else {
                 fatalError("Type mismatch. Expected dictionary type but got \(self)")
             }
-            swiftType = "[String:\(dictionarySchema.elementType.swiftType())?]"
+            swiftType = "[String:\(dictionarySchema.elementType.swiftType(parentName: parentName))?]"
         case .constant:
             guard let constant = self as? ConstantSchema else {
                 fatalError("Type mismatch. Expected constant type but got \(self)")
@@ -153,7 +161,8 @@ class Schema: Codable, LanguageShortcut {
         default:
             fatalError("Type \(type) not implemented")
         }
-        return optional ? "\(swiftType)?" : swiftType
+        // return optional ? "\(swiftType)?" : swiftType
+        return swiftType
     }
 
     var modelName: String {

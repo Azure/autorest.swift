@@ -246,6 +246,16 @@ internal struct ModelMap {
             return name
         }
     }
+
+    /// Returns the alias for a given name or nil if no alias is present
+    internal func alias(for name: String) -> String? {
+        return map[name]
+    }
+
+    /// Returns the name for a given alias or nil if no name is present
+    internal func name(for alias: String) -> String? {
+        return reverseMap[alias]
+    }
 }
 
 private func split(string val: String?) -> [String]? {

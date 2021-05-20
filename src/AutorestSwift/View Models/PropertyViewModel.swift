@@ -64,26 +64,26 @@ struct PropertyViewModel {
     }
 
     /// Initialize from Value type (such as Property or Parameter)
-    init(from schema: Value) {
+    init(from schema: Value, parentName: String? = nil) {
         // The `name` field is preferred.
         let name = schema.name
         assert(!name.isEmpty)
         self.name = name
         self.serializedName = schema.serializedName ?? name
         self.comment = ViewModelComment(from: schema.description)
-        self.className = schema.schema!.swiftType()
+        self.className = schema.schema!.swiftType(parentName: parentName)
         self.optional = !schema.required
         self.type = optional ? "\(className)?" : className
         self.defaultValue = ViewModelDefault(from: schema.clientDefaultValue, isString: true, isOptional: optional)
         self.initDefaultValue = optional ? "= nil" : ""
     }
 
-    init(from schema: PropertyType) {
+    init(from schema: PropertyType, parentName: String? = nil) {
         switch schema {
         case let .regular(reg):
-            self.init(from: reg)
+            self.init(from: reg, parentName: parentName)
         case let .grouped(group):
-            self.init(from: group)
+            self.init(from: group, parentName: parentName)
         }
     }
 }

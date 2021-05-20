@@ -101,11 +101,12 @@ struct ParameterViewModel {
 
     init(from param: ParameterType, with operation: Operation? = nil) {
         let optional = !param.required
+        let swiftType = param.schema.swiftType()
         self.init(
             name: param.variableName,
             serializedName: param.serializedName ?? param.name,
             pathOrValue: "",
-            type: param.schema.swiftType(optional: optional),
+            type: optional ? "\(swiftType)?" : swiftType,
             optional: optional,
             defaultValue: ViewModelDefault(from: param.clientDefaultValue, isString: true, isOptional: optional),
             comment: ViewModelComment(from: param.description),

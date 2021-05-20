@@ -39,7 +39,9 @@ struct VirtualParam {
             path = "\(groupBy).\(path)"
         }
         self.path = path
-        self.type = param.schema!.swiftType(optional: !param.required)
+        let optional = !param.required
+        let swiftType = param.schema!.swiftType()
+        self.type = optional ? "\(swiftType)?" : swiftType
         self.defaultValue = param.required ? "" : " = nil"
     }
 }

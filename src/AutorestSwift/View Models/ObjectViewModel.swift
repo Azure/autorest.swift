@@ -54,7 +54,8 @@ struct ObjectViewModel {
             if property.schema as? ConstantSchema != nil {
                 consts.append(ConstantViewModel(from: property))
             } else {
-                props.append(PropertyViewModel(from: property))
+                // properties should inherit the visibility of their parent
+                props.append(PropertyViewModel(from: property, parentName: self.name))
             }
         }
         self.properties = props
