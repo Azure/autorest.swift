@@ -14,29 +14,60 @@ import Foundation
 // swiftlint:disable identifier_name
 // swiftlint:disable line_length
 
-/// User-configurable options for the `AutoRestDateTestClient`.
+/// User-configurable client options.
 public struct AutoRestDateTestClientOptions: ClientOptions {
-    /// The API version of the  to invoke.
+    /// The API version of the client to invoke.
     public let apiVersion: String
-    /// The `ClientLogger` to be used by this `AutoRestDateTestClient`.
+    /// The `ClientLogger` to be used by this client.
     public let logger: ClientLogger
-    /// Options for configuring telemetry sent by this `AutoRestDateTestClient`.
+    /// Options for configuring telemetry sent by this client.
     public let telemetryOptions: TelemetryOptions
     /// Global transport options
     public let transportOptions: TransportOptions
     /// The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
     public let dispatchQueue: DispatchQueue?
 
+    /// API version of the  to invoke. Defaults to the latest.
+    public enum ApiVersion: RequestStringConvertible {
+        /// Custom value for unrecognized enum values
+        case custom(String)
+        /// API version ""
+        case v
+
+        /// The most recent API version of the
+        public static var latest: ApiVersion {
+            return .v
+        }
+
+        public var requestString: String {
+            switch self {
+            case let .custom(val):
+                return val
+            case .v:
+                return ""
+            }
+        }
+
+        public init(_ val: String) {
+            switch val.lowercased() {
+            case "":
+                self = .v
+            default:
+                self = .custom(val)
+            }
+        }
+    }
+
     /// Initialize a `AutoRestDateTestClientOptions` structure.
     /// - Parameters:
-    ///   - apiVersion: The API version of the  to invoke.
-    ///   - logger: The `ClientLogger` to be used by this `AutoRestDateTestClient`.
-    ///   - telemetryOptions: Options for configuring telemetry sent by this `AutoRestDateTestClient`.
+    ///   - apiVersion: The API version of the client to invoke.
+    ///   - logger: The `ClientLogger` to be used by this client.
+    ///   - telemetryOptions: Options for configuring telemetry sent by this client.
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: The default dispatch queue on which to call all completion handler. Defaults to `DispatchQueue.main`.
     public init(
-        apiVersion: AutoRestDateTestClient.ApiVersion = .latest,
-        logger: ClientLogger = ClientLoggers.default(tag: "AutoRestDateTestClientClient"),
+        apiVersion: AutoRestDateTestClientOptions.ApiVersion = .latest,
+        logger: ClientLogger = ClientLoggers.default(tag: "AutoRestDateTest"),
         telemetryOptions: TelemetryOptions = TelemetryOptions(),
         transportOptions: TransportOptions? = nil,
         dispatchQueue: DispatchQueue? = nil

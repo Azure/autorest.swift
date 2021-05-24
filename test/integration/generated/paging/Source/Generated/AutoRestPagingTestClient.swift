@@ -21,37 +21,6 @@ public final class AutoRestPagingTestClient: PipelineClient, PageableClient {
         return URL(string: token)
     }
 
-    /// API version of the  to invoke. Defaults to the latest.
-    public enum ApiVersion: RequestStringConvertible {
-        /// Custom value for unrecognized enum values
-        case custom(String)
-        /// API version ""
-        case v
-
-        /// The most recent API version of the
-        public static var latest: ApiVersion {
-            return .v
-        }
-
-        public var requestString: String {
-            switch self {
-            case let .custom(val):
-                return val
-            case .v:
-                return ""
-            }
-        }
-
-        public init(_ val: String) {
-            switch val.lowercased() {
-            case "":
-                self = .v
-            default:
-                self = .custom(val)
-            }
-        }
-    }
-
     /// Options provided to configure this `AutoRestPagingTestClient`.
     public let options: AutoRestPagingTestClientOptions
 
