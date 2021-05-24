@@ -30,7 +30,7 @@ import XCTest
 
 // swiftlint:disable force_try
 class AutoRestValidationTest: XCTestCase {
-    private func getClient(apiVersion: AutoRestValidationTestClient.ApiVersion? = nil) -> AutoRestValidationTestClient {
+    private func getClient(apiVersion: AutoRestValidationTestClientOptions.ApiVersion? = nil) -> AutoRestValidationTestClient {
         let options = AutoRestValidationTestClientOptions(apiVersion: apiVersion ?? .custom("12-34-5678"))
         return try! AutoRestValidationTestClient(
             subscriptionId: "abc123", url: URL(string: "http://localhost:3000")!,

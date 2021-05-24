@@ -179,11 +179,12 @@ class SwiftGenerator: CodeGenerator {
         }
 
         // Create ClientOptions.swift file
+        let optionsFileViewModel = ClientOptionsFileViewModel(from: model)
         try render(
             template: "Client_Options_File",
             toSubfolder: .options,
-            withFilename: "\(clientViewModel.name)Options",
-            andParams: ["model": clientViewModel]
+            withFilename: optionsFileViewModel.name,
+            andParams: ["model": optionsFileViewModel]
         )
 
         if !exists(filename: "README.md", inSubfolder: .root) {

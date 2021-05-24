@@ -83,7 +83,7 @@ class NumberSchema: PrimitiveSchema {
         try super.encode(to: encoder)
     }
 
-    override func swiftType(optional: Bool = false) -> String {
+    override func swiftType(parentName _: String? = nil) -> String {
         var swiftType: String
         switch precision {
         case 32:
@@ -95,6 +95,6 @@ class NumberSchema: PrimitiveSchema {
         default:
             swiftType = (type == .integer) ? "Int" : "Double"
         }
-        return optional ? "\(swiftType)?" : swiftType
+        return swiftType
     }
 }

@@ -26,22 +26,23 @@
 
 import Foundation
 
-struct VirtualParam {
-    var name: String
-    var type: String
-    var defaultValue: String
-    var path: String
+/// View Model for the service client file.
+struct ClientOptionsFileViewModel {
+    let name: String
+    let packageName: String
+    let visibility: String
+    let apiVersion: String
+    let apiVersionName: String
 
-    init(from param: VirtualParameter) {
-        self.name = param.name
-        var path = param.targetProperty.name
-        if let groupBy = param.groupedBy?.name {
-            path = "\(groupBy).\(path)"
-        }
-        self.path = path
-        let optional = !param.required
-        let swiftType = param.schema!.swiftType()
-        self.type = optional ? "\(swiftType)?" : swiftType
-        self.defaultValue = param.required ? "" : " = nil"
+    init(from model: CodeModel) {
+        let baseName = "\(model.packageName)Client"
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: "\(baseName)Options")
+        self.packageName = model.packageName
+        self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: name)
+        self.apiVersion = model.getApiVersion()
+        /// Swift enums should contain only alphanumeric characters.
+        self
+            .apiVersionName =
+            "v\(apiVersion.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: ".", with: ""))"
     }
 }
