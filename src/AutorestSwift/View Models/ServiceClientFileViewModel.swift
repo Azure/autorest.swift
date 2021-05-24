@@ -32,8 +32,7 @@ struct ServiceClientFileViewModel {
     let comment: ViewModelComment
     let visibility: String
     let operationGroups: [OperationGroupViewModel]
-    let apiVersion: String
-    let apiVersionName: String
+    let optionsName: String
     let protocols: String
     let paging: Language.PagingNames?
     let globalParameters: [ParameterViewModel]
@@ -44,8 +43,9 @@ struct ServiceClientFileViewModel {
     let host: String
 
     init(from model: CodeModel) {
-        let name = "\(model.packageName)Client"
-        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: name)
+        let baseName = "\(model.packageName)Client"
+        self.optionsName = Manager.shared.args!.generateAsInternal.aliasOrName(for: "\(baseName)Options")
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: baseName)
         self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: name)
         self.comment = ViewModelComment(from: model.description)
         var operationGroups = [OperationGroupViewModel]()
@@ -61,11 +61,7 @@ struct ServiceClientFileViewModel {
         }
         self.operationGroups = operationGroups
         self.namedOperationGroups = namedOperationGroups
-        self.apiVersion = model.getApiVersion()
-        /// Swift enums should contain only alphanumeric characters.
-        self
-            .apiVersionName =
-            "v\(apiVersion.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: ".", with: ""))"
+
         self.paging = model.pagingNames
         self.protocols = paging != nil ? "PipelineClient, PageableClient" : "PipelineClient"
 

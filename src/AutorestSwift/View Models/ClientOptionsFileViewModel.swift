@@ -29,12 +29,20 @@ import Foundation
 /// View Model for the service client file.
 struct ClientOptionsFileViewModel {
     let name: String
-    let clientName: String
+    let packageName: String
     let visibility: String
+    let apiVersion: String
+    let apiVersionName: String
 
     init(from model: CodeModel) {
-        self.name = "\(model.packageName)ClientOptions"
-        self.clientName = Manager.shared.args!.generateAsInternal.aliasOrName(for: "\(model.packageName)Client")
+        let baseName = "\(model.packageName)Client"
+        self.name = Manager.shared.args!.generateAsInternal.aliasOrName(for: "\(baseName)Options")
+        self.packageName = model.packageName
         self.visibility = Manager.shared.args!.generateAsInternal.visibility(for: name)
+        self.apiVersion = model.getApiVersion()
+        /// Swift enums should contain only alphanumeric characters.
+        self
+            .apiVersionName =
+            "v\(apiVersion.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: ".", with: ""))"
     }
 }

@@ -55,7 +55,7 @@ struct ObjectViewModel {
                 consts.append(ConstantViewModel(from: property))
             } else {
                 // properties should inherit the visibility of their parent
-                props.append(PropertyViewModel(from: property, parentName: self.name))
+                props.append(PropertyViewModel(from: property, parentName: name))
             }
         }
         self.properties = props
