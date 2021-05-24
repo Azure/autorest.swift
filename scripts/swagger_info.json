@@ -1,6 +1,6 @@
 [
     {
-        "path": "specification/communication/data-plane/Microsoft.CommunicationServicesChat/preview/2020-09-21-preview2/communicationserviceschat.json",
+        "path": "specification/communication/data-plane/Chat/stable/2021-03-07/communicationserviceschat.json",
         "namespace": "communication",
         "name": "AzureCommunciationChat"
     }
