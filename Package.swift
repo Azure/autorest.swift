@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio", from: "2.0.0"),
         .package(
             name: "AzureCore",
-            url: "https://github.com/Azure/SwiftPM-AzureCore.git",
+            url: "https://github.com/Azure/SwiftPM-AzureCore",
             .branch("dev/AzureCore")
         ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),

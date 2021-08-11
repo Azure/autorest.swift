@@ -86,7 +86,7 @@ class Schema: Codable, LanguageShortcut {
         var swiftType: String
         switch type {
         case .any:
-            swiftType = "AnyCodable"
+            swiftType = "AnyObject"
         case .string,
              .uuid:
             swiftType = "String"
