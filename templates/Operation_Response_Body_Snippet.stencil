@@ -62,4 +62,8 @@
 {% else %}
     // TODO: Couldn't find template for {response.strategy}
 {% endif %}
+} else {
+    dispatchQueue.async {
+        completionHandler(.failure(AzureError.service(httpResponse?.statusMessage ?? "")), httpResponse)
+    }
 }
