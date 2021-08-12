@@ -926,31 +926,30 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_complexValid() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//
-//        client.dictionary.put(complexValid: testDict) { result, httpResponse in
-//            switch result {
-//            case .success:
-//
-//                self.client.dictionary.getComplexValid { result, httpResponse in
-//                    switch result {
-//                    case let .success(data):
-//                        XCTAssertEqual(data.requestString, self.testDict.requestString)
-//                    case let .failure(error):
-//                        let details = errorDetails(for: error, withResponse: httpResponse)
-//                        XCTFail("Call \(#function) failed. Error=\(details)")
-//                    }
-//                    expectation.fulfill()
-//                }
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+    func test_complexValid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+
+        client.dictionary.put(complexValid: testDict) { result, httpResponse in
+            switch result {
+            case .success:
+
+                self.client.dictionary.getComplexValid { result, httpResponse in
+                    switch result {
+                    case let .success(data):
+                        XCTAssertEqual(data.requestString, self.testDict.requestString)
+                    case let .failure(error):
+                        let details = errorDetails(for: error, withResponse: httpResponse)
+                        XCTFail("Call \(#function) failed. Error=\(details)")
+                    }
+                    expectation.fulfill()
+                }
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
 
     func test_getArrayValid() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
@@ -994,85 +993,80 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_getDictionaryValid() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let dictDict: [String: AnyCodable?] = [
-//            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
-//            "1": ["4": "four", "5": "five", "6": "six"] as? AnyCodable,
-//            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
-//        ]
-//
-//        // FIXME: Cannot serialize the values as AnyCodable...
-//        client.dictionary.getDictionaryValid { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data, dictDict)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+    func test_getDictionaryValid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDict: [String: [String: String?]?] = [
+            "0": ["1": "one", "2": "two", "3": "three"],
+            "1": ["4": "four", "5": "five", "6": "six"],
+            "2": ["7": "seven", "8": "eight", "9": "nine"]
+        ]
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_putDictionaryValid() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let dictDict: [String: AnyCodable?] = [
-//            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
-//            "1": ["4": "four", "5": "five", "6": "six"] as? AnyCodable,
-//            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
-//        ]
-//
-//        client.dictionary.put(dictionaryValid: dictDict) { result, httpResponse in
-//            switch result {
-//            case .success:
-//                break
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+        client.dictionary.getDictionaryValid { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, dictDict)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_getComplexItemNull() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let testDictNull = ["0": testDict["0"], "1": nil, "2": testDict["2"]]
-//
-//        client.dictionary.getComplexItemNull { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data.requestString, testDictNull.requestString)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+    func test_putDictionaryValid() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDict: [String: [String: String?]?] = [
+            "0": ["1": "one", "2": "two", "3": "three"],
+            "1": ["4": "four", "5": "five", "6": "six"],
+            "2": ["7": "seven", "8": "eight", "9": "nine"]
+        ]
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_getComplexItemEmpty() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let testDictEmpty = ["0": testDict["0"], "1": Widget(), "2": testDict["2"]]
-//        client.dictionary.getComplexItemEmpty { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data.requestString, testDictEmpty.requestString)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+        client.dictionary.put(dictionaryValid: dictDict) { result, httpResponse in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getComplexItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let testDictNull = ["0": testDict["0"], "1": nil, "2": testDict["2"]]
+
+        client.dictionary.getComplexItemNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data.requestString, testDictNull.requestString)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_getComplexItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let testDictEmpty = ["0": testDict["0"], "1": Widget(), "2": testDict["2"]]
+        client.dictionary.getComplexItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data.requestString, testDictEmpty.requestString)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
 
     func test_getArrayNull() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
@@ -1137,7 +1131,7 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
 //        client.dictionary.getArrayItemEmpty { result, httpResponse in
 //            switch result {
 //            case let .success(data):
-//                XCTAssertEqual(data, listDict)
+//                XCTAssertEqual(data.requestString, listDict.requestString)
 //            case let .failure(error):
 //                let details = errorDetails(for: error, withResponse: httpResponse)
 //                XCTFail("Call \(#function) failed. Error=\(details)")
@@ -1167,7 +1161,6 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
     func test_getDictionaryEmpty() throws {
         let expectation = XCTestExpectation(description: "Call \(#function)")
 
-        // FIME: Data cannot be decoding due to wrong format.
         client.dictionary.getDictionaryEmpty { result, httpResponse in
             switch result {
             case let .success(data):
@@ -1181,47 +1174,45 @@ class AutoRestSwaggerBatDictionaryTest: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_dictionaryItemNull() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let dictDictNull: [String: AnyCodable?] = [
-//            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
-//            "1": nil,
-//            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
-//        ]
-//
-//        client.dictionary.getDictionaryItemNull { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data, dictDictNull)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+    func test_dictionaryItemNull() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDictNull: [String: [String: String?]?] = [
+            "0": ["1": "one", "2": "two", "3": "three"],
+            "1": nil,
+            "2": ["7": "seven", "8": "eight", "9": "nine"]
+        ]
 
-    // FIXME: See https://github.com/Azure/autorest.swift/issues/291
-//    func test_dictionaryItemEmpty() throws {
-//        let expectation = XCTestExpectation(description: "Call \(#function)")
-//        let dictDictEmpty: [String: AnyCodable?] = [
-//            "0": ["1": "one", "2": "two", "3": "three"] as? AnyCodable,
-//            "1": [String: AnyCodable?]() as? AnyCodable,
-//            "2": ["7": "seven", "8": "eight", "9": "nine"] as? AnyCodable
-//        ]
-//
-//        client.dictionary.getDictionaryItemEmpty { result, httpResponse in
-//            switch result {
-//            case let .success(data):
-//                XCTAssertEqual(data, dictDictEmpty)
-//            case let .failure(error):
-//                let details = errorDetails(for: error, withResponse: httpResponse)
-//                XCTFail("Call \(#function) failed. Error=\(details)")
-//            }
-//            expectation.fulfill()
-//        }
-//        wait(for: [expectation], timeout: defaultTimeout)
-//    }
+        client.dictionary.getDictionaryItemNull { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data.requestString, dictDictNull.requestString)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+
+    func test_dictionaryItemEmpty() throws {
+        let expectation = XCTestExpectation(description: "Call \(#function)")
+        let dictDictEmpty: [String: [String: String?]?] = [
+            "0": ["1": "one", "2": "two", "3": "three"],
+            "1": [String: String?](),
+            "2": ["7": "seven", "8": "eight", "9": "nine"]
+        ]
+
+        client.dictionary.getDictionaryItemEmpty { result, httpResponse in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, dictDictEmpty)
+            case let .failure(error):
+                let details = errorDetails(for: error, withResponse: httpResponse)
+                XCTFail("Call \(#function) failed. Error=\(details)")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
 }
