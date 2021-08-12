@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "AutorestSwift",
     platforms: [
-        .macOS(.v10_14)
+        .macOS(.v10_15)
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
