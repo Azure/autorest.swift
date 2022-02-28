@@ -16,7 +16,7 @@ let package = Package(
         .package(
             name: "AzureCore",
             url: "https://github.com/Azure/SwiftPM-AzureCore",
-            .branch("dev/AzureCore")
+            .exact("1.0.0-beta.14")
         ),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.45.6"),
         .package(url: "https://github.com/realm/SwiftLint.git", from: "0.40.1"),
