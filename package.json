@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/Azure/autorest.swift/"
   },
-  "readme": "https://github.com/Azure/autorest.swift/blob/master/README.md",
+  "readme": "https://github.com/Azure/autorest.swift/blob/main/README.md",
   "keywords": [
     "autorest",
     "swift"
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest.swift/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.swift/blob/master/README.md",
+  "homepage": "https://github.com/Azure/autorest.swift/blob/main/README.md",
   "dependencies": {
     "@azure-tools/extension": "^3.0.263"
   },

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A006E7A27CD6FEF009A72B5 /* ClientOptionsFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A006E7927CD6FEF009A72B5 /* ClientOptionsFileViewModel.swift */; };
 		0A10427F25D483C4008E472E /* ReservedKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10427E25D483C4008E472E /* ReservedKeywords.swift */; };
 		0A22B0DC24D3671D00EC018E /* ClientMethodOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */; };
 		0A22B0DD24D3671D00EC018E /* EnumerationChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */; };
@@ -326,6 +327,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A006E7927CD6FEF009A72B5 /* ClientOptionsFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOptionsFileViewModel.swift; sourceTree = "<group>"; };
 		0A10427E25D483C4008E472E /* ReservedKeywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedKeywords.swift; sourceTree = "<group>"; };
 		0A22B02C24C88EB000EC018E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0A22B03424C8964000EC018E /* LanguageShortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageShortcut.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 				0ADDD617259BDE0A00BD5E58 /* BodyParams.swift */,
 				0A5F3F85251A65AD0079C1F0 /* BodyParamViewModel.swift */,
 				0A22B0C224D3301100EC018E /* ClientMethodOptionsViewModel.swift */,
+				0A006E7927CD6FEF009A72B5 /* ClientOptionsFileViewModel.swift */,
 				0A747FF52534AE7B00819FC9 /* ConstantViewModel.swift */,
 				0A22B0AC24D2198D00EC018E /* EnumerationChoiceViewModel.swift */,
 				0A22B05B24CA4CA400EC018E /* EnumerationFileViewModel.swift */,
@@ -1380,6 +1383,7 @@
 				0A22B12D24D3671E00EC018E /* KnownMediaType.swift in Sources */,
 				0A22B12E24D3671E00EC018E /* ObjectSchemaTypes.swift in Sources */,
 				0A22B12F24D3671E00EC018E /* ParameterLocation.swift in Sources */,
+				0A006E7A27CD6FEF009A72B5 /* ClientOptionsFileViewModel.swift in Sources */,
 				0A22B13024D3671E00EC018E /* PathEncodingStyle.swift in Sources */,
 				0A22B13124D3671E00EC018E /* PrimitiveSchemaTypes.swift in Sources */,
 				0AA2BA2B24EDB87E00CEA1D6 /* ContentLengthHeader.swift in Sources */,
