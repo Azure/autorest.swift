@@ -127,7 +127,7 @@ class SwiftGenerator: CodeGenerator {
         try optionsUrl.ensureExists()
         try utilUrl.ensureExists()
         try jazzyUrl.ensureExists()
-        SharedLogger.info("Base URL: \(baseUrl.path)")
+        SharedLogger.info("Base URL: \(self.baseUrl.path)")
 
         // Create PatchUtil.swift file
         try render(

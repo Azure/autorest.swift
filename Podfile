@@ -8,7 +8,7 @@ target 'AutorestSwift' do
 
   # Pods for AutorestSwift
   pod 'Yams', :git => 'https://github.com/tjprescott/Yams.git', :branch => 'CircularReferences'
-  pod 'Stencil', :git => 'https://github.com/stencilproject/Stencil.git', :branch => 'trim_whitespace'
+  pod 'Stencil', :git => 'https://github.com/stencilproject/Stencil.git', :branch => 'master'
   pod 'SwiftFormat/CLI'
   pod 'SwiftLint'
   pod 'SwiftNIO'

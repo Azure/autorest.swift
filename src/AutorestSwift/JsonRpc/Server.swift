@@ -58,7 +58,7 @@ public final class ChannelServer {
                             name: "ServerHandler"
                         )
                     }
-            }.withPipes(inputDescriptor: STDIN_FILENO, outputDescriptor: STDOUT_FILENO)
+            }.takingOwnershipOfDescriptors(input: STDIN_FILENO, output: STDOUT_FILENO)
 
         state = .starting
         return bootstrap.eventLoop.makeSucceededFuture(self)
